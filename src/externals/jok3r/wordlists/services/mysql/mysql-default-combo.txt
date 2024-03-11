@@ -1,0 +1,14 @@
+root:
+root:root
+root:toor
+root:password
+root:admin
+root:mysql
+admin:
+admin:root
+admin:toor
+admin:password
+admin:admin
+admin:mysql
+:
+:password
