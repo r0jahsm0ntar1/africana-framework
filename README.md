@@ -1,4 +1,4 @@
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/85d83b3c-5d60-4eff-ad0a-23200a7c2c00)
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/29e4c734-43d0-4ede-969b-2d8756b0a6c4)
 
 # 🌐 The africana-framework. Made simple but Lethal! 🌐
 
@@ -59,7 +59,8 @@ python3 installer.py
 ```bash
 sudo python3 africana.py
 ```
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0a60c641-41ae-48d6-b84e-f83b5fd5b4d6)
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
+
 ## About the Author
                        __                 _____ _____     _     _ 
                     __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
@@ -76,17 +77,17 @@ sudo python3 africana.py
     +------------------------------------------------------------------------------+                                                                                                                                 
     
 ## Youtube [ please subscribe ]
- ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/885d8618-f3f1-4784-93ca-313e1f08bcd1) 
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/bdc012a1-be87-43b1-bc51-e0a96ed983b3)
  - https://youtube.com/@RojahsMontari
 
 ## Contact
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/5dd0a17b-f44d-4acd-a73f-c24b45a38c7e)
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/25488d08-dd35-4585-9541-f73a4465dec9)
 - RojahsMontari@gmail.com.
 
 ## Twiter
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/67ca6bb0-86bd-426f-8d3f-0908a2bab171)
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/85612c98-0198-4720-8666-9c3218026e4c)
 - https://twitter.com/r0jahsm0ntar1
 
 ## Facebook
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/36976608-115c-422b-a1d6-d69dae172c7a)
+![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/fb288e21-1f57-4de9-ac43-381de11e8dc7)
 - https://web.facebook.com/RojahMontari
