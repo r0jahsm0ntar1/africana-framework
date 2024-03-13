@@ -18,45 +18,45 @@ class Interna_Attack(object):
         print("\n")
 
     def nmap_pscanner(self, host):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Performing port scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Performing port scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('nmap -v -p- {0}'.format(host), shell = True).wait()
         return process
         print("\n")
 
     def nmap_vulnscanner(self, host):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Performing vuln scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Performing vuln scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('nmap --open -T4 -Pn -n -sSV -p- --script=vulners.nse --stats-every 10s {0}'.format(host), shell = True).wait()
         return process
         print("\n")
 
     def smb_enumuration(self, host):
-        #print(bcolors.BLUE + "   -{ " + bcolors.RED + "performing smb recon on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        #print(bcolors.BLUE + "   ~{ " + bcolors.RED + "performing smb recon on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         #process = subprocess.Popen('enum4linux -a {0}'.format(host), shell = True).wait()
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Trying smb null user & pass connect on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Trying smb null user & pass connect on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('smbmap -H {0} -u null -p null -r --depth 5'.format(host), shell = True).wait()
         return process
         print("\n")
 
     def smb_exploit(self, host):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Eternal-blue nmap vuln scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Eternal-blue nmap vuln scan on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('nmap -sT -sV -Pn -p 445 --script=smb-vuln* --stats-every 10s {0}'.format(host), shell = True).wait()
         print("\n")
 
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Performing smb pass bruteforce on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Performing smb pass bruteforce on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('nmap -sV -v -p 445 --script=smb-brute.nse --stats-every 10s {0}'.format(host), shell = True).wait()
         #process = os.system("crackmapexec smb {0} -u Administrator -p '(mp64 Pass@wor?l?a)'").format(host)
         print("\n")
 
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Trying rpcclient null user & pass connect on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   ~{ " + bcolors.RED + "Trying rpcclient null user & pass connect on" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
         process = subprocess.Popen('rpcclient -U "" -N {0}'.format(host), shell = True).wait()
         print("\n")
         while True:
             try:
                 scriptures.verses()
-                print(bcolors.BLUE + "\n            -[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]-\n" + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 1.           Launch Eternalblue Exploit                 ] " + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 0.             Exit & Go To Main Menu                   ] \n" + bcolors.ENDC)
-                print(bcolors.BLUE + "          -{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n         ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 1.           Launch Eternalblue Exploit                 ] " + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 0.             Exit & Go To Main Menu                   ] \n" + bcolors.ENDC)
+                print(bcolors.BLUE + "     ~{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
                 choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 if choice == '1':
                     try:
@@ -84,11 +84,11 @@ class Interna_Attack(object):
         while True:
             try:
                 beauty.graphics(), scriptures.verses()
-                print(bcolors.BLUE + "\n            -[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]-\n" + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 1.       for Inital Target (All Traffick Sniff)         ] " + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 2.     All Internall IPS (Sniff All Local Subnet)       ] " + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
-                print(bcolors.BLUE + "             -{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n         ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 1.       for Inital Target (All Traffick Sniff)         ] " + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 2.     All Internall IPS (Sniff All Local Subnet)       ] " + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
+                print(bcolors.BLUE + "          ~{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
                 choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 if choice == '1':
                     os.system('clear')
@@ -121,11 +121,11 @@ class Interna_Attack(object):
         while True:
             try:
                 beauty.graphics(), scriptures.verses()
-                print(bcolors.BLUE + "\n            -[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]-\n" + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 1.       for Inital Target (All Traffick Sniff)         ] " + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 2.     All Internall IPS (Sniff All Local Subnet)       ] " + bcolors.ENDC)
-                print(bcolors.BLUE + "   [ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
-                print(bcolors.BLUE + "             -{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n         ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 1.       for Inital Target (All Traffick Sniff)         ] " + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 2.     All Internall IPS (Sniff All Local Subnet)       ] " + bcolors.ENDC)
+                print(bcolors.BLUE + "[ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
+                print(bcolors.BLUE + "          ~{ " + bcolors.RED + "ready to attack" + bcolors.BLUE + " }" + bcolors.BLUE + " => " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " }~\n" + bcolors.ENDC)
                 choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 if choice == '1':
                     os.system('clear')

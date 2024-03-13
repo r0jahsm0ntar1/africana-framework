@@ -76,9 +76,6 @@ def check_os():
         operating_system = "posix"
     return operating_system
 
-#
-# Class for colors
-#
 if check_os() == "posix":
     class bcolors:
         PURPLE = '\033[95m'
@@ -120,7 +117,6 @@ if check_os() == "posix":
             self.backWhite = ''
             self.DARKCYAN = ''
 
-# if we are windows or something like that then define colors as nothing
 else:
     class bcolors:
         PURPLE = ''
@@ -162,6 +158,19 @@ else:
             self.backWhite = ''
             self.DARKCYAN = ''
 
+color_taken = []
+
+def color(*args):
+    colors = [bcolors.BLUE, bcolors.PURPLE, bcolors.CYAN, bcolors.DARKCYAN, bcolors.GREEN,
+            bcolors.YELLOW, bcolors.RED]
+    if args:
+        args, = args
+        return args
+    else:
+        if not color_taken: return random.choice(colors)
+        else:
+            return random.choice(list(set(colors).difference(color_taken)))
+
 # this will be the home for the set menus
 
 
@@ -172,7 +181,7 @@ def setprompt(category, text):
     # if the loop is here, either category or text was positive
     # if it's the category that is blank...return prompt with only the text
     if category == '0':
-        return bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC
+        return bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + " Do you want to start the listener now [yes/no]: " + bcolors.GREEN + ")# " + bcolors.ENDC
     # category is NOT blank
     else:
         # initialize the base 'set' prompt
@@ -201,7 +210,7 @@ def setprompt(category, text):
 def yesno_prompt(category, text):
     valid_response = False
     while not valid_response:
-        response = raw_input(setprompt(category, text))
+        response = input(setprompt(category, text))
         response = str.lower(response)
         if response == "no" or response == "n":
             response = "NO"
@@ -855,22 +864,8 @@ def show_banner(define_version, graphic):
         show_graphic()
     else:
         os.system("clear")
-
-    print(bcolors.BLUE + """
-[---]        The Social-Engineer Toolkit (""" + bcolors.YELLOW + """SET""" + bcolors.BLUE + """)         [---]
-[---]        Created by:""" + bcolors.RED + """ David Kennedy """ + bcolors.BLUE + """(""" + bcolors.YELLOW + """ReL1K""" + bcolors.BLUE + """)         [---]
-                      Version: """ + bcolors.RED + """%s""" % (define_version) + bcolors.BLUE + """
-                    Codename: '""" + bcolors.YELLOW + """Maverick""" + bcolors.ENDC + bcolors.BLUE + """'
-[---]        Follow us on Twitter: """ + bcolors.PURPLE + """@TrustedSec""" + bcolors.BLUE + """         [---]
-[---]        Follow me on Twitter: """ + bcolors.PURPLE + """@HackingDave""" + bcolors.BLUE + """        [---]
-[---]       Homepage: """ + bcolors.YELLOW + """https://www.trustedsec.com""" + bcolors.BLUE + """       [---]
-""" + bcolors.GREEN + """        Welcome to the Social-Engineer Toolkit (SET).
-         The one stop shop for all of your SE needs.
-""")
-    print(bcolors.BOLD + """   The Social-Engineer Toolkit is a product of TrustedSec.\n\n           Visit: """ +
-          bcolors.GREEN + """https://www.trustedsec.com\n""" + bcolors.ENDC)
-    print(bcolors.BLUE + """   It's easy to update using the PenTesters Framework! (PTF)\nVisit """ + bcolors.YELLOW +
-          """https://github.com/trustedsec/ptf""" + bcolors.BLUE + """ to update all your tools!\n\n""" + bcolors.ENDC)
+    print(bcolors.ENDC + """ The Social-Engineer Toolkit is a product of TrustedSec\n\n            Visit: """ + bcolors.YELLOW +
+          """https://www.trustedsec.com\n""" + bcolors.ENDC)
 
     # here we check if  there is a new version of SET - if there is, then
     # display a banner
@@ -925,202 +920,145 @@ def show_banner(define_version, graphic):
 
 
 def show_graphic():
-    menu = random.randrange(2, 15)
-    if menu == 2:
-        print(bcolors.YELLOW + r"""
-                                     _,._
-                                 __.'   _)
-                                <_,)'.-"a\
-                                  /' (    \
-                      _.-----..,-'   (`"--^
-                     //              |
-                    (|   `;      ,   |
-                      \   ;.----/  ,/
-                       ) // /   | |\ \
-                       \ \\`\   | |/ /    Jesus Christ
-                        \ \\ \  | |\/ Lamb that was slain.
-                         `" `"  `"`
+    menu = random.randrange(1, 7)
+    if menu == 1:
+        print(color() + r"""
+                 _,._
+             __.'   _)
+            <_,)'.-"a\
+              /' (    \
+  _.-----..,-'   (`"--^
+ //              |
+(|   `;      ,   |
+  \   ;.----/  ,/
+   ) // /   | |\ \
+   \ \\`\   | |/ /      Jesus Christ
+    \ \\ \  | |\/  The Lamb that was slain
+     `" `"  `"`         for our sins.
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """ + bcolors.ENDC)
-        return
+
+    if menu == 2:
+        print(color() + r"""
+             _      xxxx      _
+            /_;-.__ / _\  _.-;_\
+               `-._`'`_/'`.-'
+                   `\   /`
+                    |  /
+                   /-.(
+                   \_._\
+                    \ \`;
+                     > |/
+                    / //      Jesus Christ
+                    |//   The Lamb that was slain
+                    \(\       for our sins.
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+""" + bcolors.ENDC)
 
     if menu == 3:
-        print(bcolors.GREEN + r"""
-                     _      xxxx      _
-                    /_;-.__ / _\  _.-;_\
-                       `-._`'`_/'`.-'
-                           `\   /`
-                            |  /
-                           /-.(
-                           \_._\
-                            \ \`;
-                             > |/
-                            / //
-                            |//
-                            \(\
+        print(color() + r"""
+                           .--,
+                       ,.-( (o)\
+                      /   .)/\ ')
+                    .',./'/   )/
+                ()=///=))))==()
+                  /
+                  wake up, Christian
+          Lord God Jesus Christ L❤️.VE'S you
+              follow the white Pigeon.
+                knock, knock, knock,
+                      Man Of God.
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """ + bcolors.ENDC)
-        return
 
     if menu == 4:
-        print(bcolors.BLUE + r"""
-                             ,   ,
-                            /////|
-                           ///// |
-                          /////  |
-                         |~~~| | |
-                         |===| |/|
-                         | B |/| |
-                         | I | | |
-                         | B | | |
-                         | L |  / 
-                         | E | /
-                         |===|/
-                         '---'
-
-                      Jesus love's u.
+        print(color() + r"""
+                                   ___
+         _______                  /__/
+        |.-----.|            ,---[___]*
+        ||     ||           /    printer
+        ||_____||    _____ /        ____
+        |o_____*|   [o_+_+]--------[=i==]
+         |     ________|           drive
+         |  __|_
+         '-/_==_\       Jesus Christ is
+          /_____\\  The Lamb that was slain
+                         for our sins.
+                           John 3:16
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """ + bcolors.ENDC)
 
     if menu == 5:
-        print(bcolors.RED + r"""
-                __                 _____ _____     _     _ 
-             __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
-            |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-            |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-  """ + bcolors.ENDC)
-        return
+        print(color() + r"""
+       __________   __________ __________
+      |          |\|          |          |\
+      |  *    *  |||  *  *  * |        * ||
+      |  *    *  |||          |     *    ||
+      |  *    *  |||  *  *  * |  *       ||
+      |__________|||__________|__________||
+      |          || `---------------------`
+      |  *    *  ||       Jesus Christ
+      |          ||  The Lamb that was slain
+      |  *    *  ||       for our sins.
+      |__________||         John 3:16
+       `----------`
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+""" + bcolors.ENDC)
 
     if menu == 6:
-        print(bcolors.PURPLE + r"""
-                               |
-                           \       /
-                             .---. 
-                        '-.  |   |  .-'
-                          ___|   |___
-                     -=  [           ]  =-
-                         `---.   .---' 
-                      __||__ |   | __||__
-                      '-..-' |   | '-..-'
-                        ||   |   |   ||
-                        ||_.-|   |-,_||
-                      .-"`   `"`'`   `"-.
-                    .'                   '.
+        print(color() + r"""
+               _,.---.---.---.--.._ 
+           _.-' '--.'---.'---'-. _,'--.._
+          /'--._ .'.     '.     ','-.'-._\
+         ||   \  '.'---.__'__..-'. ,''-._/
+    _  ,'\ '-._\   \    '.    '_.-'-._,''-.
+ ,'   '-_ \/ '-.'--.\    _\_.-'\__.-'-.'-._'.
+(_.o> ,--. '._/'--.-',--'  \_.-'       \'-._ \
+ '---'    '._ '---._/__,----'           '-. '-\
+           /_, ,  _..-'                    '-._\
+           \_, \/ ._(       God is L❤️.VE
+            '._// ./'-._      John 3:16
+              '-._-_-_.-'
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """ + bcolors.ENDC)
-        return
 
     if menu == 7:
-        print(bcolors.YELLOW + r"""⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⢀⡈⠛⢿⣿⣶⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀
-                    ⠀⠸⢿⣿⣶⣾⣿⣿⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣾⠇⠀
-                    ⠀⠀⢤⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⠀⠀⣠⣤⣴⣶⣶⣾⣿⡿⠟⠋⣁⡀⠀
-                    ⠀⠀⠘⢉⣩⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⣿⣿⣿⣿⣿⣟⠛⠛⠁⠀
-                    ⠀⠀⠀⠈⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣿⣿⣿⣿⣿⣿⣿⣟⠿⣿⠃⠀⠀
-                    ⠀⠀⠀⠀⠀⠈⠻⠟⣿⣿⣿⣿⣿⣿⣿⣿⣄⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⣉⣽⣿⣿⣿⣿⡿⢻⣿⣿⣿⢿⣿⠎⠉⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⢀⣤⣴⣶⣾⣿⣿⣿⣿⣿⣿⣿⣦⡀⠈⠉⠉⠁⠁⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⣉⣭⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⠙⠋⣽⣿⣟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⠀⠘⠿⠋⣸⣿⡟⢸⣿⣿⠉⣿⣿⡘⢿⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠀⢸⣿⡏⠀⠸⠿⠃⠀
+        print(color() + r"""
+                   _/﹋\_
+                   (҂`_´)
+                  <,︻╦╤─ ҉- [ John 3:16  ]
+                   _/﹋\_                ]
+                  [ Jesus Christ said;   ]
+                  [ Defeat the devil by  ]
+                  [ fasting and praying. ]
+
+
+
+
+     ~>[ Salvation is free. Get it for free. ]<~
+      __                 _____ _____     _     _
+   __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+  |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+  |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """ + bcolors.ENDC)
-        return
-
-    if menu == 8:
-        print(bcolors.RED + r"""
-                     .========.        .========.
-                    // I .'..' \      // VI.'.,".\
-                    || II .'..'|      || VII..'..|
-                    || III .'."|      || VIII,'.'|
-                    || IV ,','.|      || IX.'".'.|
-                    || V '..'.'|      || X .'..',|
-                    .\_________/      .\_________/⠀
-""" + bcolors.ENDC)
-
-    if menu == 9:
-        print(bcolors.YELLOW + r"""
-                                               ___
-                     _______                  /__/
-                    |.-----.|            ,---[___]*
-                    ||     ||           /    printer
-                    ||_____||    _____ /        ____
-                    |o_____*|   [o_+_+]--------[=i==]
-                     |     ________| 850        drive
-                     |  __|_ 
-                     '-/_==_\
-                      /_____\\ 
-""" + bcolors.ENDC)
-
-    if menu == 10:
-        print(bcolors.GREEN + r"""
-                 __________   __________ __________
-                |          |\|          |          |\
-                |  *    *  |||  *  *  * |        * ||
-                |  *    *  |||          |     *    ||
-                |  *    *  |||  *  *  * |  *       ||
-                |__________|||__________|__________||
-                |          || `---------------------`
-                |  *    *  ||
-                |          ||
-                |  *    *  ||
-                |__________||
-                 `----------`
-""" + bcolors.ENDC)
-
-    if menu == 11:
-        print(bcolors.backBlue + r"""
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣿⡆⠀⠙⢿⣿⣒⠦⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⣿⣿⣿⠿⠟⠛⠒⠒⠒⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠠⠔⠛⠉⠙⠛⢿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣍⣀⣀⠀⠀⠀⠀⡰⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣎⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⡠⠴⠿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠄⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⠎⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣀⠀⠀⠀⠀⢀⣠⣾⠕⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⡠⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡉⠉⠉⠙⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣅⡒⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⢀⣾⣿⠟⢻⠟⠁⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠊
-⢀⡾⠋⠀⠀⠀⠀⠀⠀⢀⡨⣻⠋⠸⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⡤⠤⢄⡒⠯⠖⠁
-⠘⠁⠀⠀⠀⠀⠀⠀⠴⢫⠞⠁⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⣿⣿⣿⠿⣿⣿⢿⣿⣿⢿⣿⣿⣿⣿⡿⢿⣿⣿⢿⣿⣟⢻⣿⣿⡛⠻⠷⠬⠉⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠁⠀⠉⠀⠈⠉⠀⠈⠉⠀⠉⠉⠀⠉⠉⠀⠉⠛⠢⠈⠉⠙⠂
-""" + bcolors.ENDC)
-
-    if menu == 12:
-        print(bcolors.YELLOW + r"""
-                             _.-;;-._
-                      '-..-'|   ||   |
-                      '-..-'|_.-;;-._|
-                      '-..-'|   ||   |
-                      '-..-'|_.-''-._|⠀⠀
-
-    """)
-
-    if menu == 13:
-        print(bcolors.RED + r"""
-                          .---------.
-                          |.-------.|
-                          ||>run#  ||
-                          ||       ||
-                          |"-------'|
-                        .-^---------^-.
-                        | ---~   AFRIC|
-                        "-------------'
-""" + bcolors.ENDC)
-
-    if menu == 14:
-        print(bcolors.GREEN + r"""
-                                      .----.
-                          .---------. | == |
-                          |.-"'''"-.| |----|
-                          ||       || | == |
-                          ||       || |----|
-                          |'-.....-'| |::::|
-                          `"")---(""` |___.|
-                         /:::::::::::\" _  "
-                        /:::=======:::\`\`\
-                        `'''''''''''''`  '-'
-""" + bcolors.ENDC)
-
 #
 # identify if set interactive shells are disabled
 #
@@ -1552,8 +1490,8 @@ def shellcode_replace(ipaddr, port, shellcode):
 
 def exit_set():
     cleanup_routine()
-    print("\n\n Thank you for " + bcolors.RED + "shopping" + bcolors.ENDC +
-          " with the Social-Engineer Toolkit.\n\n Hack the Gibson...and remember...hugs are worth more than handshakes.\n")
+    #print("\n\n Thank you for " + bcolors.RED + "shopping" + bcolors.ENDC +
+    #      " with the Social-Engineer Toolkit.\n\n Hack the Gibson...and remember...hugs are worth more than handshakes.\n")
     sys.exit()
 
 

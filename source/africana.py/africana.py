@@ -196,12 +196,12 @@ class scanners(main):
 class Options():
     def menu(self):
         print(bcolors.BLUE + bcolors.BOLD +"""
-[---]       Choose what to do from the menu below      [---]"""+ bcolors.ENDC)
+           Choose what to do from the menu below        """+ bcolors.ENDC)
         print(bcolors.BLUE + """
-1) Port Scanning                      5) Start Nikto Scaning
-2) Dns Reconning                      6) Fero File Searching
-3) Web Technologies                   7) Automation Scanning
-4) Nuclei Vuln Scanning               8) Exit Africana Tool."""+ bcolors.ENDC)
+1. Port Scanning                      5. Start Nikto Scaning
+2. Dns Reconning                      6. Fero File Searching
+3. Web Technologies                   7. Automation Scanning
+4. Nuclei Vuln Scanning               8. Exit Africana Tool."""+ bcolors.ENDC)
 
 os.system('clear')
 shamura = main()

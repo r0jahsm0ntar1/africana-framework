@@ -12,7 +12,7 @@ class update(object):
     def update_system(self):
         os.system('clear')
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n          ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n          ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1.                      KaliLinux        " + bcolors.RED + "(It is Stable) " + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2.                     UbuntuLinux                      ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3.         ArchLinux/ BlackArchLinux/ ManjaroLinux      ] " + bcolors.ENDC)

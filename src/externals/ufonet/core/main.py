@@ -9,6 +9,7 @@ You should have received a copy of the GNU General Public License along
 with UFONet; if not, write to the Free Software Foundation, Inc., 51
 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
+
 import os, sys, re, traceback, random, time, threading, base64, string, math
 import io, socket, ssl, cgi, json, gzip
 from Crypto.Cipher import AES
@@ -49,6 +50,108 @@ from core.mods.overlap import OVERLAP
 from core.mods.pinger import PINGER
 from core.mods.ufoudp import UFOUDP
 from core.mods.fraggle import FRAGGLE
+
+def check_os():
+    if os.name == "nt":
+        operating_system = "windows"
+    if os.name == "posix":
+        operating_system = "posix"
+    return operating_system
+
+if check_os() == "posix":
+    class bcolors:
+        PURPLE = '\033[95m'
+        CYAN = '\033[96m'
+        DARKCYAN = '\033[36m'
+        BLUE = '\033[94m'
+        GREEN = '\033[92m'
+        YELLOW = '\033[93m'
+        RED = '\033[91m'
+        BOLD = '\033[1m'
+        UNDERL = '\033[4m'
+        ENDC = '\033[0m'
+        backBlack = '\033[40m'
+        backRed = '\033[41m'
+        backGreen = '\033[42m'
+        backYellow = '\033[43m'
+        backBlue = '\033[44m'
+        backMagenta = '\033[45m'
+        backCyan = '\033[46m'
+        backWhite = '\033[47m'
+
+        def disable(self):
+            self.PURPLE = ''
+            self.CYAN = ''
+            self.BLUE = ''
+            self.GREEN = ''
+            self.YELLOW = ''
+            self.RED = ''
+            self.ENDC = ''
+            self.BOLD = ''
+            self.UNDERL = ''
+            self.backBlack = ''
+            self.backRed = ''
+            self.backGreen = ''
+            self.backYellow = ''
+            self.backBlue = ''
+            self.backMagenta = ''
+            self.backCyan = ''
+            self.backWhite = ''
+            self.DARKCYAN = ''
+
+else:
+    class bcolors:
+        PURPLE = ''
+        CYAN = ''
+        DARKCYAN = ''
+        BLUE = ''
+        GREEN = ''
+        YELLOW = ''
+        RED = ''
+        BOLD = ''
+        UNDERL = ''
+        ENDC = ''
+        backBlack = ''
+        backRed = ''
+        backGreen = ''
+        backYellow = ''
+        backBlue = ''
+        backMagenta = ''
+        backCyan = ''
+        backWhite = ''
+
+        def disable(self):
+            self.PURPLE = ''
+            self.CYAN = ''
+            self.BLUE = ''
+            self.GREEN = ''
+            self.YELLOW = ''
+            self.RED = ''
+            self.ENDC = ''
+            self.BOLD = ''
+            self.UNDERL = ''
+            self.backBlack = ''
+            self.backRed = ''
+            self.backGreen = ''
+            self.backYellow = ''
+            self.backBlue = ''
+            self.backMagenta = ''
+            self.backCyan = ''
+            self.backWhite = ''
+            self.DARKCYAN = ''
+
+color_taken = []
+
+def color(*args):
+    colors = [bcolors.BLUE, bcolors.PURPLE, bcolors.CYAN, bcolors.DARKCYAN, bcolors.GREEN,
+            bcolors.YELLOW, bcolors.RED]
+    if args:
+        args, = args
+        return args
+    else:
+        if not color_taken: return random.choice(colors)
+        else:
+            return random.choice(list(set(colors).difference(color_taken)))
 
 DEBUG = False # use 'True' for detailed traceback
 
@@ -212,43 +315,35 @@ class UFONet(object):
         return self.options
 
     def banner_welcome(self):
-        print("                     ____                                                                        ")
-        print("          ||        / /\ \      ||              #===============================================#")
-        print("        -(00)-     + (XX) +   -(00)-            ||                                             ||")
-        print("   ||     ||   O ==*~~~~~~*== 0 ||        ||    ||  > Botnet [DDoS]   #  > Close Combat [DoS]  ||")
-        print(" -(00)-          (0)  XX  (0)           -(00)-  ||                                             ||")
-        print("   ||    _     _  \| (00) |/  _     _     ||    ||     |-> ZOMBIES    #     |-> LOIC           ||")
-        print("        (O)_  (O)  0'----'0  (O)  _(O)          ||     |-> DROIDS     #     |-> LORIS          ||")   
-        print("            |  |.''.( xx ).''.|  |              ||     |-> ALIENS     #     |-> UFOSYN         ||")
-        print("            .'.'  +X|'..'|X+  '.'.              ||     |-> UCAVs      #     |-> XMAS           ||")
-        print("     .-.  .' /'--.__|_00_|__.--'\ '.  .-.       ||     |-> X-RPCs     #     |-> NUKE           ||")
-        print("   +(O).)-|0|  \   x| ## |x   /  |0|-(.(O)+     ||     |-> DBSTRESS   #     |-> UFOACK         ||")
-        print("     `-'  '-'-._'-./ -00- \.-'_.-'-'  `-'       ||     |-> SPRAY      #     |-> UFORST         ||")
-        print("        _ | ||  '-.___||___.-'  || | _          ||     |-> SMURF      #     |-> DROPER         ||")
-        print("     .' _ | ||==O |   __   | O==|| | _ '.       ||     |-> TACHYON    #     |-> OVERLAP        ||")
-        print("    / .' ''.|  || | /_00_\ | ||  |.'' '. \      ||     |-> MONLIST    #     |-> PINGER         ||")
-        print(" _  | '###  |  =| | ###### | |=  |' ###  |  _   ||     |-> FRAGGLE    #     |-> UFOUDP         ||")
-        print("(0)-| |(0)| '.  0\||__**_ ||/0  .' |(0)| |-(0)  ||     |-> SNIPER     #                        ||")
-        print(" *  \ '._.'   '.  | \_##_/ |  .'   '._.' /  *   ||                                             ||")
-        print("     '.__ ____0_'.|__'--'__|.'_0____ __.'       #|=============================================|#")
-        print("    .'_.-|            YY            |-._'.      ||                                             ||")
-        print("                                                ||  -> [ UFONet: https://ufonet.03c8.net ] <-  ||") 
-        print("   + Class: PSYoPs / "+str(self.mothership_model)+" +     ||                                             ||")
-        print("                                                #|=============================================|#") 
-        print("")
+        print(color() + r"""
+                     _,._
+                 __.'   _)
+                <_,)'.-"a\
+                  /' (    \
+      _.-----..,-'   (`"--^
+     //              |
+    (|   `;      ,   |
+      \   ;.----/  ,/
+       ) // /   | |\ \
+       \ \\`\   | |/ /      Jesus Christ
+        \ \\ \  | |\/  The Lamb that was slain
+         `" `"  `"`         for our sins.
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+""" + bcolors.ENDC)
 
     def banner(self):
-        print('='*75, "\n")
-        print("888     888 8888888888 .d88888b.  888b    888          888    ")   
-        print("888     888 888        d88P Y888b 8888b   888          888    ")
-        print("888     888 888       888     888 88888b  888          888    ")
-        print("888     888 8888888   888     888 888Y88b 888  .d88b.  888888 ")
-        print("888     888 888       888     888 888 Y88b888 d8P  Y8b 888    ")
-        print("888     888 888       888     888 888  Y88888 88888888 888    ")
-        print("Y88b. .d88P 888       Y88b. .d88P 888   Y8888 Y8b.     Y88b.  ")
-        print(" 'Y88888P'  888        'Y88888P'  888    Y888  'Y8888   'Y8888")       
-        print(self.optionParser.description, "\n")
-        print('='*75)
+        print(bcolors.GREEN + "888     888 8888888888 .d88888b.  888b    888          888    " + bcolors.ENDC)
+        print(bcolors.GREEN + "888     888 888        d88P Y888b 8888b   888          888    " + bcolors.ENDC)
+        print(bcolors.GREEN + "888     888 888       888     888 88888b  888          888    " + bcolors.ENDC)
+        print(bcolors.GREEN + "888     888 8888888   888     888 888Y88b 888  .d88b.  888888 " + bcolors.ENDC)
+        print(bcolors.GREEN + "888     888 888       888     888 888 Y88b888 d8P  Y8b 888    " + bcolors.ENDC)
+        print(bcolors.GREEN + "888     888 888       888     888 888  Y88888 88888888 888    " + bcolors.ENDC)
+        print(bcolors.GREEN + "Y88b. .d88P 888       Y88b. .d88P 888   Y8888 Y8b.     Y88b.  " + bcolors.ENDC)
+        print(bcolors.GREEN + " 'Y88888P'  888        'Y88888P'  888    Y888  'Y8888   'Y8888" + bcolors.ENDC)
+        print(color() + self.optionParser.description, "\n")
 
     def generate_exit_msg(self):
         self.exit_msg = "Generating random exit... \n\n"
