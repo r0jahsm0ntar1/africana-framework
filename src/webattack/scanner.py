@@ -7,17 +7,8 @@ class scanners(object):
     def __init__(self, host):
         self.host = host
 
-    def nmap(self, host):
-        return subprocess.Popen('nmap -p- %s' %(host), shell = True).wait()
-        return process
-
-    def harvester(self, host):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Harvesting emails and accounts " + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
-        process = subprocess.Popen('theHarvester -r "1.1.1.1" -d %s' %(host), shell = True).wait()
-        return process
-
     def wafw00f(self, host):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Rnning waf detection on" + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Running waf detection on" + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
         process = subprocess.Popen('wafw00f -v -a %s' %(host), shell = True).wait()
         print("\n")
         return process
@@ -28,10 +19,21 @@ class scanners(object):
         print("\n")
         return process
 
+    def seeker(self, host):
+        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Running seekolver reconing on" + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        process = subprocess.Popen('cd ../src/externals/seekolver/; python3 seekolver.py -te %s -v -r -k -cn -p 80 443' %(host), shell = True).wait()
+        print("\n")
+        return process
+
     def whatweb(self, host):
         print(bcolors.BLUE + "   -{ " + bcolors.RED + "Reconning running softs on" + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
         process = subprocess.Popen('whatweb -a 3 -v %s' %(host), shell = True).wait()
         print("\n")
+        return process
+
+    def harvester(self, host):
+        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Harvesting emails and accounts " + bcolors.BLUE + " }" + bcolors.BLUE + " -> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        process = subprocess.Popen('theHarvester -r "1.1.1.1" -d %s' %(host), shell = True).wait()
         return process
 
     def param_spider(self, host):
@@ -211,13 +213,13 @@ class scanners(object):
         return process
 
     def ufonet_1(self):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Downloading Updates from Community server" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --update', shell = True).wait()
+        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Downloading list of bots from C.S" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --download-zombies', shell = True).wait()
         print("\n")
         return process
     def ufonet_2(self):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Downloading list of Zombies from Community server" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --blackhole', shell = True).wait()
+        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Testing If bots are alive" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet -t ./botnet/zombies.txt', shell = True).wait()
         print("\n")
         return process
     def ufonet_3(self, host):
@@ -241,10 +243,14 @@ class scanners(object):
         print("\n")
         return process
     def ufonet_7(self):
-        print(bcolors.BLUE + "   -{ " + bcolors.RED + "Launched ufonet gui" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --gui', shell = True).wait()
-        print("\n")
-        return process
+        while True:
+            try:
+                print(bcolors.BLUE + "   -{ " + bcolors.RED + "Launched ufonet gui on http://localhost:9999" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+                process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --gui', shell = True).wait()
+                print("\n")
+                return process
+            except:
+                ddos(self)
     def ufonet_8(self):
         print(bcolors.BLUE + "   -{ " + bcolors.RED + "Started Grider (python3 ufonet --grider &)" + bcolors.BLUE + " }" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
         process = subprocess.Popen('cd ../src/externals/ufonet/; python3 ufonet --grider', shell = True).wait()

@@ -113,7 +113,7 @@ func dnsr() {
     }
 }
 
-func main() {
+func africs() {
     clear()
     banner()
     menu()
@@ -122,13 +122,21 @@ func main() {
     fmt.Scan(&choice)
     switch choice {
     case "1":
+        draw := func() {
+        main()
+        }
         fmt.Print("\n"); nmap()
+        draw()
     case "2":
-        fmt.Print("\n"); dnsr()
+        fmt.Print("\n"); dnsr(); africs()
     case "0":
         clear(); exit()
         break
     default:
         fmt.Println(bcolors.ENDC + " ~{ " + bcolors.RED + "Poor choice of selection!. Please select int -> " + bcolors.DARKCYAN + " from 0. to 9. " + bcolors.ENDC +  "}~" + bcolors.ENDC)
     }
+}
+
+func main() {
+    africs()
 }
