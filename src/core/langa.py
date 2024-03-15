@@ -152,7 +152,7 @@ class main_menu(object):
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Start Open Ports Discovery & Subdomain Enumration    ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Recon for Wafs & Running Web Technologies            ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Gather e-mails & subdomain namesfrom public sources ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Gather e-mails & subdomain namesfrom public sources  ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. Start Bruteforcing Host's Root Files                 ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5. Start SQL, XSS & SSRF Detection & Eploitation        ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu     ] " + bcolors.ENDC)
@@ -180,7 +180,7 @@ class main_menu(object):
         print(bcolors.BLUE + "[ 5. Run only recon & vulnscansecurity checks             ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. Run all & intense security checks against an URL     ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. View the full resultsfrom the security checks       ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. View the full resultsfrom the security checks        ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9. Clean database & delete results                      ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit & Go To Main Menu                               ] \n" + bcolors.ENDC)
 
