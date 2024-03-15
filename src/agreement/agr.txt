@@ -1,0 +1,1 @@
+# This file is to show if the user agreed to the terms of using the softawre.
