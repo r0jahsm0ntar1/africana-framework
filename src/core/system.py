@@ -94,7 +94,6 @@ class update(object):
                     else:
                         print("\n")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
-                        print(installer.definepath())
                         spinner.run_subprocess('mkdir -p /usr/local/opt; cp -r %s /usr/local/opt/africana-framework; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana' %(installer.definepath()))
                         print("\n")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
