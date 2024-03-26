@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #
-# Author: Panagiotis Chartas (r0jahsm0ntar1) 
+# Author: Rojahs Montari (r0jahsm0ntar1) 
 #
-# This script is part of the blackjack framework: 
-# https://github.com/r0jahsm0ntar1/blackjack
+# This script is part of the Blackjack framework: 
+# https://github.com/r0jahsm0ntar1/africana-framework
 
 
 import os
@@ -16,10 +16,12 @@ class Threading_params:
     MAX_THREADS = 100
     thread_limiter = BoundedSemaphore(MAX_THREADS)
 
+
+
 class Core_Server_Settings:
     
     bind_address = '0.0.0.0'
-    bind_port = 6501
+    bind_port = 6501    
     
     # How long to sleep between echo requests to check if siblings are alive.
     ping_siblings_sleep_time = 4
@@ -27,11 +29,13 @@ class Core_Server_Settings:
     # Seconds to wait for cmd output when executing commands against shell sessions of sibling servers.
     timeout_for_command_output = 30
 
-    # Allows any blackjack client (sibling server) to connect to your instance without prompting you for verification.
+    # Allows any Blackjack client (sibling server) to connect to your instance without prompting you for verification.
     # You can configure it on start-up with the --insecure option.
     insecure = False
+    
 
-class blackjack_Settings:
+
+class Blackjack_Settings:
     
     bind_address = '0.0.0.0'
     bind_port = 8080
@@ -46,8 +50,7 @@ class blackjack_Settings:
     _header = 'Authorization'
     
     # Generate self signed cert:
-    #openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
-    #openssl req -x509 -newkey rsa:4096 -keyout /tmp/k.pem -out /tmp/c.pem -days 365 -nodes -subj "/C=US/ST=*/L=*/O=*/CN=cloudflare-dns.com"
+    # openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
     certfile = False # Add path to cert.pem here for SSL or parse it with -c
     keyfile = False  # Add path to priv_key.pem here for SSL or parse it with -k
     
@@ -56,11 +59,15 @@ class blackjack_Settings:
 class File_Smuggler_Settings:
     
     bind_address = '0.0.0.0'
-    bind_port = 8888
+    bind_port = 8888    
+
+
 
 class Sessions_manager_settings:
     
     shell_state_change_after = 2.0 
+
+
 
 class TCP_Sock_Handler_Settings:
     
@@ -81,15 +88,21 @@ class TCP_Sock_Handler_Settings:
     hostname_filter = False
     hostname_filter_warning_delivered = False
 
+
+
 class Payload_Generator_Settings:
     
     # Set to false in order to parse domains as LHOST when generating commands
     validate_lhost_as_ip = True    
 
+
+
 class Logging_Settings:
 
-    main_meta_folder_unix = f'{os.path.expanduser("~")}/.local/blackjack_meta'
-    main_meta_folder_windows = f'{os.path.expanduser("~")}/.local/blackjack_meta'
+    main_meta_folder_unix = f'{os.path.expanduser("~")}/.local/Blackjack_meta'
+    main_meta_folder_windows = f'{os.path.expanduser("~")}/.local/Blackjack_meta'
+
+
 
 class Loading:
 
@@ -114,6 +127,7 @@ class Loading:
             return
 
 
+    
     @staticmethod
     def stop(print_nl = False):
 

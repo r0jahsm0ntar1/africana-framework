@@ -1,10 +1,10 @@
-# This module is part of the blackjack framework
+# This module is part of the Blackjack framework
 
 class Payload:
 
     info = {
         'Title' : 'PHP proc_open reverse TCP',
-        'Author' : 'Unknown',
+        'Author' : 'r0jahsm0ntar1',
         'Description' : 'PHP proc_open reverse TCP',
         'References' : ['https://revshells.com']
     }

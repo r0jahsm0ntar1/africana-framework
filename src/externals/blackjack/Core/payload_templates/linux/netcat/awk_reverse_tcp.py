@@ -1,10 +1,10 @@
-# This module is part of the blackjack framework
+# This module is part of the Blackjack framework
 
 class Payload:
 
     info = {
         'Title' : 'Awk reverse TCP',
-        'Author' : 'Unknown',
+        'Author' : 'r0jahsm0ntar1',
         'Description' : 'Awk reverse TCP',
         'References' : ['https://revshells.com']
     }

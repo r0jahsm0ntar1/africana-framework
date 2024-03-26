@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #
-# Author: Panagiotis Chartas (r0jahsm0ntar1) 
+# Author: Rojahs Montari (r0jahsm0ntar1) 
 #
-# This script is part of the blackjack framework: 
-# https://github.com/r0jahsm0ntar1/blackjack
+# This script is part of the Blackjack framework: 
+# https://github.com/r0jahsm0ntar1/africana-framework
 
 
 import sys, string, base64, os, re, traceback
@@ -12,7 +12,7 @@ from random import randint, choice, randrange
 from threading import Thread, enumerate as enumerate_threads
 from subprocess import check_output
 from platform import system as get_system_type
-from Cryptodome.Cipher import AES
+from Crypto.Cipher import AES
 from uuid import UUID, uuid4
 from ipaddress import ip_address
 from copy import deepcopy
@@ -27,7 +27,6 @@ system_type = get_system_type()
 #     import gnureadline as global_readline
 # else:
 import readline as global_readline
-
 
 ''' Colors '''
 MAIN = '\001\033[38;5;85m\002'
@@ -45,8 +44,6 @@ UNDERLINE = '\001\033[4m\002'
 DARKCYAN = '\033[36m'
 UNSTABLE = '\001\033[5m\002'
 END = '\001\033[0m\002'
-
-
 
 ''' MSG Prefixes '''
 INFO = f'{MAIN}Info{END}'
@@ -66,7 +63,7 @@ cwd = os.path.dirname(os.path.abspath(__file__))
 
 class Main_prompt:
     
-    original_prompt = prompt = f"{GREEN}({END}africana:{END}{DARKCYAN}framework{END}{GREEN})# {END}{DARKCYAN}"
+    original_prompt = prompt = f"{GREEN}({END}africana:{END}{DARKCYAN}framework{END}{GREEN})# {END}{DARKCYAN}{END}"
     ready = True
     SPACE = '#>SPACE$<#'
     exec_active = False

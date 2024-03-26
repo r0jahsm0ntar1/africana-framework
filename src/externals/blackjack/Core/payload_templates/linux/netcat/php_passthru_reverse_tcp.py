@@ -1,10 +1,10 @@
-# This module is part of the blackjack framework
+# This module is part of the Blackjack framework
 
 class Payload:
 
     info = {
         'Title' : 'PHP passthru reverse TCP',
-        'Author' : 'Panagiotis Chartas (r0jahsm0ntar1)',
+        'Author' : 'Rojahs Montari (r0jahsm0ntar1)',
         'Description' : 'PHP popen reverse TCP',
         'References' : ['https://revshells.com']
     }

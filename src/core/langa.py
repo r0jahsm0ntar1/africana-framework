@@ -77,8 +77,8 @@ class main_menu(object):
     def menu_four(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. ShellzGen               ~>       " + bcolors.DARKCYAN + "(All Distro   R.A.T)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Blackjack               ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Blackjack               ~>       " + bcolors.DARKCYAN + "(All Distro   R.A.T)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. ShellzGen               ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. PowerJoker              ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. MeterPeter              ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5. Havoc C2                ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
@@ -514,13 +514,13 @@ class neo_start(object):
                         break
                     elif choice == '1':
                         try:
-                            return rat.shellz(), neo.rat_kitchen()
+                            return rat.blackjack(), neo.rat_kitchen()
                         except:
                             neo.rat_kitchen()
                             break
                     elif choice == '2':
                         try:
-                            return rat.blackjack(), neo.rat_kitchen()
+                            return rat.shellz(), neo.rat_kitchen()
                         except:
                             neo.rat_kitchen()
                             break

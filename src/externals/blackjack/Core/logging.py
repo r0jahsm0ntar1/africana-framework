@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #
-# Author: Panagiotis Chartas (r0jahsm0ntar1) 
+# Author: Rojahs Montari (r0jahsm0ntar1) 
 #
-# This script is part of the blackjack framework: 
-# https://github.com/r0jahsm0ntar1/blackjack
+# This script is part of the Blackjack framework: 
+# https://github.com/r0jahsm0ntar1/africana-framework
 
 import os
 from .common import system_type
@@ -12,7 +12,7 @@ from .settings import Logging_Settings
 main_meta_folder = Logging_Settings.main_meta_folder_unix if system_type in ['Linux', 'Darwin'] else Logging_Settings.main_meta_folder_windows
 
 
-class blackjack_Implants_Logger:
+class BlackJack_Implants_Logger:
 
     generated_implants_file = f'{main_meta_folder}/blackjack_generated_implants.txt'
     generated_implants_file_open = False
@@ -23,15 +23,15 @@ class blackjack_Implants_Logger:
 
         try:
 
-            while blackjack_Implants_Logger.generated_implants_file_open:
+            while BlackJack_Implants_Logger.generated_implants_file_open:
                 pass
 
             else:
-                blackjack_Implants_Logger.generated_implants_file_open = True
-                blackjack_generated_implants = open(blackjack_Implants_Logger.generated_implants_file, 'a')
+                BlackJack_Implants_Logger.generated_implants_file_open = True
+                blackjack_generated_implants = open(BlackJack_Implants_Logger.generated_implants_file, 'a')
                 blackjack_generated_implants.write(f'"{id}" : {str(session_meta)}' + ',\n')
                 blackjack_generated_implants.close()
-                blackjack_Implants_Logger.generated_implants_file_open = False
+                BlackJack_Implants_Logger.generated_implants_file_open = False
 
         except:
             pass
@@ -41,19 +41,19 @@ class blackjack_Implants_Logger:
     @staticmethod
     def retrieve_past_sessions_data():
 
-        if os.path.exists(blackjack_Implants_Logger.generated_implants_file):
+        if os.path.exists(BlackJack_Implants_Logger.generated_implants_file):
 
             try:
 
-                while blackjack_Implants_Logger.generated_implants_file_open:
+                while BlackJack_Implants_Logger.generated_implants_file_open:
                     pass
 
                 else:
-                    blackjack_Implants_Logger.generated_implants_file_open = True
-                    blackjack_generated_implants = open(blackjack_Implants_Logger.generated_implants_file, 'r')
+                    BlackJack_Implants_Logger.generated_implants_file_open = True
+                    blackjack_generated_implants = open(BlackJack_Implants_Logger.generated_implants_file, 'r')
                     session_data = blackjack_generated_implants.read()
                     blackjack_generated_implants.close()
-                    blackjack_Implants_Logger.generated_implants_file_open = False
+                    BlackJack_Implants_Logger.generated_implants_file_open = False
                     return '{' + session_data.strip(',\n') + '}'
 
             except Exception as e:
@@ -67,8 +67,8 @@ class blackjack_Implants_Logger:
 def clear_metadata():
 
     try:
-        if os.path.exists(blackjack_Implants_Logger.generated_implants_file):
-            os.remove(blackjack_Implants_Logger.generated_implants_file)
+        if os.path.exists(BlackJack_Implants_Logger.generated_implants_file):
+            os.remove(BlackJack_Implants_Logger.generated_implants_file)
     except:
         return False
     

