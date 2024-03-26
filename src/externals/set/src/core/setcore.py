@@ -526,13 +526,13 @@ def update_set():
     # if we aren't running Kali or BackBox :(
     else:
         print_info("Kali or BackBox Linux not detected, manually updating..")
-        print_info("Updating the Social-Engineer Toolkit, be patient...")
-        print_info("Performing cleanup first...")
-        subprocess.Popen("git clean -fd", shell=True).wait()
-        print_info("Updating... This could take a little bit...")
-        subprocess.Popen("git pull", shell=True).wait()
-        print_status("The updating has finished, returning to main menu..")
-        time.sleep(2)
+        #print_info("Updating the Social-Engineer Toolkit, be patient...")
+        #print_info("Performing cleanup first...")
+        #subprocess.Popen("git clean -fd", shell=True).wait()
+        #print_info("Updating... This could take a little bit...")
+        #subprocess.Popen("git pull", shell=True).wait()
+        #print_status("The updating has finished, returning to main menu..")
+        #time.sleep(2)
 
 #
 # Pull the help menu here

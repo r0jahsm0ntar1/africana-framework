@@ -1,0 +1,42 @@
+info:
+  name: server_version_vuln
+  author: OWASP Nettacker Team
+  severity: 3
+  description:
+  reference:
+  profiles:
+    - vuln
+    - vulnerability
+    - http
+    - low_severity
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        allow_redirects: false
+        ssl: false
+        url:
+          nettacker_fuzzer:
+            input_format: "{{schema}}://{target}:{{ports}}/"
+            prefix: ""
+            suffix: ""
+            interceptors:
+            data:
+              schema:
+                - "http"
+                - "https"
+              ports:
+                - 80
+                - 443
+        response:
+          condition_type: or
+          conditions:
+            headers:
+              server:
+                regex: .+\d*\.?\d\S+
+                reverse: false
+          log: "response_dependent['headers']['server']"

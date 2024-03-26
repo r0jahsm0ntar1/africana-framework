@@ -26,27 +26,24 @@ class main_menu(object):
         pass
 
     def menu_zero(self):
-        print(bcolors.RED + "+---------------------------------------------------------+ " + bcolors.ENDC)
-        print(bcolors.RED + "[ DEALINGS IN THE SOFTWARE.                               ] " + bcolors.ENDC)
-        print(bcolors.RED + "[ The Africana-Framework is designed purely for Good  and ] " + bcolors.ENDC)
+        print(bcolors.RED + "\n[ The Africana-Framework is designed purely for Good  and ] " + bcolors.ENDC)
         print(bcolors.RED + "[ not evil. If you are planning on using this tool for    ] " + bcolors.ENDC)
         print(bcolors.RED + "[ malicious purposes that are not authorized by the       ] " + bcolors.ENDC)
         print(bcolors.RED + "[ company you are performing assessments for, you are     ] " + bcolors.ENDC)
         print(bcolors.RED + "[ violating the terms of service and license of this      ] " + bcolors.ENDC)
         print(bcolors.RED + "[ toolset. By hitting yes (only one time), you agree to   ] " + bcolors.ENDC)
         print(bcolors.RED + "[ the terms of service and that you will only use this    ] " + bcolors.ENDC)
-        print(bcolors.RED + "[ tool for lawful purposes only.                          ] " + bcolors.ENDC)
-        print(bcolors.RED + "+---------------------------------------------------------+ \n" + bcolors.ENDC)
+        print(bcolors.RED + "[ tool for lawful purposes only.                          ] \n" + bcolors.ENDC)
 
     def menu_one(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Install or update africana-framework ~> " + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. System Security Configuration        ~> " + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Local Network Attack Vectors         ~> " + bcolors.DARKCYAN + "(Mitm, sniff)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. Generate Undetectable Malware        ~> " + bcolors.DARKCYAN + "(C2 & shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5. WiFi Attack Vectors                  ~> " + bcolors.DARKCYAN + "(Wifite, air)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Crack .Pcap & BruteForce Passwords   ~> " + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords   ~> " + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. Social-Engineering Attacks           ~> " + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8. Website Attack Vectors               ~> " + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About      ~> " + bcolors.BLUE + "   💡99. " + bcolors.BLUE + "    ] " + bcolors.ENDC)
@@ -55,8 +52,8 @@ class main_menu(object):
 
     def menu_two(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.                 Install & Setup Tor      " + bcolors.RED + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.                 Install & Setup Tor🎭    " + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2.            Start anonymizing through tor             ]" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3.            Stop tor & restore all iptables           ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4.   Chains (local ~> squid ~> privoxy ~> tor ~> net)   ] " + bcolors.ENDC)
@@ -65,7 +62,7 @@ class main_menu(object):
 
     def menu_three(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1.                 🐹Discover Targets                  ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2.            Port discovery on the target             ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3.                Vuln' Scann the Target               ] " + bcolors.ENDC)
@@ -73,75 +70,82 @@ class main_menu(object):
         print(bcolors.BLUE + "[ 5.               Exploit S.M.B on target               ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6.                Sniff Internal Packets               ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7.           Lunch Responder with IPv6 Support         ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8.        Start Beefxss & Bettercap For (M.I.B)        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9.         Bruteforce Password on given services       ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8.         Start Beefxss & Bettercap For (M.I.B)       ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9.         Kick people out of the network (DDOS)       ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0.                Exit & Go to main menu               ] \n" + bcolors.ENDC)
-
-    def menu_three_nine(self):
-        beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.                    Bruteforce SMB                    ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2.                    Bruteforce SSH                    ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3.                    Bruteforce FTP                    ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9.                    Bruteforce HTTP                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 0.                 Exit & Go To Main Menu               ] \n" + bcolors.ENDC)
 
     def menu_four(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Shellz                  ~>       " + bcolors.RED + "(All Distro R.A.T  )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Shakamura               ~>       " + bcolors.RED + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. PowerJoker              ~>       " + bcolors.RED + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. MeterPeter              ~>       " + bcolors.RED + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Havoc C2                ~>       " + bcolors.RED + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Teardroid               ~>       " + bcolors.RED + "(Android 4 > 13 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7. AndroRAT                ~>       " + bcolors.RED + "(Android 4 > 10 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. ShellzGen               ~>       " + bcolors.DARKCYAN + "(All Distro   R.A.T)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Blackjack               ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. PowerJoker              ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. MeterPeter              ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Havoc C2                ~>       " + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Teardroid               ~>       " + bcolors.DARKCYAN + "(Android 4 > 13 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. AndroRAT                ~>       " + bcolors.DARKCYAN + "(Android 4 > 10 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0.                Exit & Go To Main Menu                ] \n" + bcolors.ENDC)
 
     def menu_five(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.                       Wifite              " + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2.                      Bettercap            " + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.                       Wifite              " + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.                      Bettercap            " + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3.                    Wifipumpkin3  " + bcolors.RED + "(Automated Phishing)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5.                       To Add                         ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6.                     Airgeddon                " + bcolors.RED + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7.                    wifiPumpkin3              " + bcolors.RED + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6.                     Airgeddon                " + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7.                    wifiPumpkin3              " + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0.               Exit & Go To Main Menu                 ] \n" + bcolors.ENDC)
 
     def menu_six(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.                     Air-Crackng  (offline)" + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2.                        John      (offline)" + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.        online (automated/ manual/ Bruteforce)        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.          offline (automated/ maunal/ Hashes)         ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0.               Exit & Go To Main Menu                 ] \n" + bcolors.ENDC)
+
+    def menu_six_one(self):
+        beauty.graphics(), scriptures.verses()
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.                    Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "                    ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.                    Bruteforce " + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "                    ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3.                    Bruteforce " + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "                    ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4.                    Bruteforce " + bcolors.DARKCYAN + "RDP" + bcolors.BLUE + "                    ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5.                    Bruteforce " + bcolors.DARKCYAN + "LDAP" + bcolors.BLUE + "                   ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6.                    Bruteforce " + bcolors.DARKCYAN + "SMTP" + bcolors.BLUE + "                   ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7.                    Bruteforce " + bcolors.DARKCYAN + "Telnet" + bcolors.BLUE + "                 ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8.                    Bruteforce " + bcolors.DARKCYAN + "HTTP/S" + bcolors.BLUE + "                 ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9.                    Bruteforce " + bcolors.DARKCYAN + "All/SS" + bcolors.BLUE + "                 ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0.                 Exit & Go To Main Menu               ] \n" + bcolors.ENDC)
+
+    def menu_six_two(self):
+        beauty.graphics(), scriptures.verses()
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.                     Aircrack_ng  (offline)" + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.                        John      (offline)" + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7.                       To Add                         ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8.                       To Add                         ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8.                     Hash-Buster  (offline)           ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0.               Exit & Go To Main Menu                 ] \n" + bcolors.ENDC)
 
     def menu_seven(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.                Gophish(Browser Gui)  " + bcolors.RED + "(All Templetes )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2.                Good Ginx (Advanced)  " + bcolors.RED + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3.                    AdvPhishing       " + bcolors.RED + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4.                     Setoolkit        " + bcolors.RED + "(Clones Website)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5.                    Anonphisher       " + bcolors.RED + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6.                       To Add                         ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.                Gophish(Browser Gui)  " + bcolors.DARKCYAN + "(All Templetes )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.                Good Ginx (Advanced)  " + bcolors.DARKCYAN + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3.                    AdvPhishing       " + bcolors.DARKCYAN + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4.                     Setoolkit        " + bcolors.DARKCYAN + "(Clones Website)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5.                    Anonphisher       " + bcolors.DARKCYAN + "(OTP Bypass    )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6.                     Cyberphish " + bcolors.DARKCYAN + "(Gene phishing temps) " + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8.                       To Add                         ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9.                       To Add                         ] " + bcolors.ENDC)
@@ -149,30 +153,44 @@ class main_menu(object):
 
     def menu_eight(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Start Open Ports Discovery & Subdomain Enumration    ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Recon for Wafs & Running Web Technologies            ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Gather e-mails & subdomain namesfrom public sources  ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. Start Bruteforcing Host's Root Files                 ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Start SQL, XSS & SSRF Detection & Eploitation        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Start Passive Web recon & Subdomain Enumration       ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources  ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Start Bruteforcing Host's Root Files                 ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Start SQL, XSS & SSRF Detection & Eploitation        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Launch OWASP Nettacker project MainMenu              ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu     ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. Osmedeus Next Generation A Workflow Engine Main Menu ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu           ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9. Launch Insane & Heavy Automation Attacks On The Host ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit Web Scanner & Go To Main Menu                   ] \n" + bcolors.ENDC)
 
+    def menu_eight_four(self):
+        beauty.graphics(), scriptures.verses()
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1.             Sql injection with sqlmap     " + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2.  Xss injection with Commix, Dalfox, Xsser " + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3.             Sql injection with Sqlmap        " + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4.             Xss injection with Xsser         " + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
+
     def menu_eight_five(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1.             Sql injection with sqlmap     " + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2.  Xss injection with Commix, Dalfox, Xsser " + bcolors.RED + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3.             Sql injection with Sqlmap        " + bcolors.RED + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4.             Xss injection with Xsser         " + bcolors.RED + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 0.              Exit & Go To Main Menu                  ] \n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Start Nettacker port & web content discovery         ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Recon, find and scan subdomains                      ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel                ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Start insane information gathering on host           ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Run only recon & vulnscansecurity checks             ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Run CVE scans on the target host                     ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. Automate all modules & security checks on target     ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9. View scanned Nettacker report list                   ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0. Exit & Go To Main Menu                               ] \n" + bcolors.ENDC)
 
     def menu_eight_six(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Install all jok3r tools ~> " + bcolors.RED + "(Pleas start here if not )" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Update all the tools in the toolbox                  ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Show all the tools in the toolbox                    ] " + bcolors.ENDC)
@@ -186,7 +204,7 @@ class main_menu(object):
 
     def menu_eight_seven(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Update Osmedeus & Run diagnostics to check config.   ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Start a simple scan with other flow                  ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Directly run on vuln scan & directory scan on domains] " + bcolors.ENDC)
@@ -200,51 +218,53 @@ class main_menu(object):
 
     def menu_eight_eight(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a numberfrom the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + " ~>      " + bcolors.BLUE+ "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server ]" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Test if bots are alive ~>                            ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Launch palantir        ~>         " + bcolors.RED + "(palantir 3.14    )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. Launch socking_waves   ~>         " + bcolors.RED + "(instant-knockout!)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Launch xcom-1          ~>         " + bcolors.RED + "(only DDoS        )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Launch xcom-2          ~>         " + bcolors.RED + "(only DoS         )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7. Launch ufonet-gui      ~>         " + bcolors.RED + "(gui on browser   )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. Start Grider           ~> " + bcolors.RED + "(python3 ufonet --grider &)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9. Launch Armageddon!     ~> " + bcolors.RED + "(with ALL!)    (Take care.)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Launch palantir        ~>         " + bcolors.DARKCYAN + "(palantir 3.14    )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Launch socking_waves   ~>         " + bcolors.DARKCYAN + "(instant-knockout!)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Launch xcom-1          ~>         " + bcolors.DARKCYAN + "(only DDoS        )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Launch xcom-2          ~>         " + bcolors.DARKCYAN + "(only DoS         )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. Launch ufonet-gui      ~>         " + bcolors.DARKCYAN + "(gui on browser   )" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. Start Grider           ~> " + bcolors.DARKCYAN + "(python3 ufonet --grider &)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9. Launch Armageddon!     ~> " + bcolors.DARKCYAN + "(with ALL!)    (Take care.)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0.               Exit & Go To Main Menu                 ] \n" + bcolors.ENDC)
 
     def menu_nine(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n+---------------------------------------------------------+ " + bcolors.ENDC)
-        print(bcolors.BLUE + "| I am Rojahs Montari a Devoted Christian & Pentester     | " + bcolors.ENDC)
-        print(bcolors.BLUE + "+---------------------------------------------------------+ " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ A    F    R    I    C    A    N    A     [  Framework.  ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ *    *    *    *    *    *    *    *     *              ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    |    |    |    |    |  0. Exit & Back ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    |    |    |    |    +- 1. Install or U] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    |    |    |    +------ 2. System Sec. ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    |    |    +----------- 3. Local Networ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    |    +---------------- 4. C2 & shells ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    |    +--------------------- 5. Wifi Attack ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    |    + ------------------------- 6. Password Cra] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    |    + ------------------------------ 7. Social Engee] " + bcolors.ENDC)
-        print(bcolors.BLUE + "|    +------------------------------------ 8. Website Atta] " + bcolors.ENDC)
-        print(bcolors.BLUE + "+----------------------------------------- 9. About Author] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ Gmail  : rojahsmontari@gmail.com                        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ YouTube: https://youtube.com/@RojahsMontari             ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ Tip    : Defeat the devil by fasting & praying.         ] " + bcolors.ENDC)
-        print(bcolors.BLUE +  "[                                ¯\_(ツ)_/¯               ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "(Press)(Enter)(To go BACK)+-------------------------------+ \n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[   I am Rojahs Montari a Devoted Christian & Pentester   ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[                                                         ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ Email       ~>: rojahsmontari@gmail.com                 ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ YouTube     ~>: https://youtube.com/@RojahsMontari      ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ Life Tip    ~>: Defeat the devil by fasting & praying   ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[                               ¯\_(ツ)_/ ¯               ]  " + bcolors.ENDC)
+        print(bcolors.BLUE + "+(Press Enter To go BACK)---------------------------------+ \n" + bcolors.ENDC)
 
     def menu_nine_tisa(self):
-        beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n(Genesis)+------------------------------------+(Revelation) " + bcolors.ENDC)
-        print(bcolors.BLUE + "| I am Rojahs Montari a Devoted Christian & Pentester     | " + bcolors.ENDC)
-        print(bcolors.BLUE + "+---------------------------------------------------------+ " + bcolors.ENDC)
-        print(bcolors.BLUE + "[   J    E    S    U    S    C    H    R     I    S   T   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[   *    *    *    *    *    *    *    *    *     *   *   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[       Tip: Defeat the devil by fasting & praying.       ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[                       ¯\_(ツ)_/¯                        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "+---------------------------------------------------------+ \n" + bcolors.ENDC)
+        print(color() + """
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|""" + bcolors.ENDC)
+        print(bcolors.PURPLE + "\n     J    E    S    U    S    C    H    R     I    S   T     " + bcolors.ENDC)
+        print(bcolors.BOLD + color() + "     *    *    *    *    *    *    *    *    *     *   *     \n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n                ~>[ " + bcolors.ENDC + bcolors.BOLD + "The Ten Commandments." + bcolors.ENDC + bcolors.BLUE + " ]<~        " + bcolors.ENDC)
+        print(bcolors.BLUE + "+----------------------------------------------------------+ " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 1. You shall have no other gods before Me.               | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+ 2. You shall make no idols.                              + " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 3. You shall not take the name of the Lord your God in   | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+    vein.                                                 + " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 4. Keep the Sabbath day holy.                            | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+ 5. Honor your father and your mother.                    + " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 6. You shall not murder.                                 | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+ 7. You shall not commit adultery.                        + " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 8. You shall not steal.                                  | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+ 9. You shall not bear false witness against your eighbor.+ " + bcolors.ENDC)
+        print(bcolors.BLUE + "| 10 You shall not covet.                                  | " + bcolors.ENDC)
+        print(bcolors.BLUE + "+----------------------------------------------------------+ " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n     ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Tip: Defeat the devil by fasting & praying." + bcolors.ENDC + bcolors.BLUE + " ]<~        " + bcolors.ENDC)
+        print(bcolors.GREEN + "                         ¯\_(ツ)_/¯                       \n" + bcolors.ENDC)
 
 mega_menu = main_menu()
 
@@ -263,7 +283,7 @@ class neo_start(object):
         while True:
             try:
                 os.system('clear')
-                if not os.path.isfile("src/agreement/covenant"):
+                if not os.path.isfile("src/agreement/covenant.txt"):
                     with open("readme/LICENSE") as fileopen:
                         for line in fileopen:
                             print((bcolors.ENDC + line.rstrip()))
@@ -271,7 +291,7 @@ class neo_start(object):
                     covenant = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana: " + bcolors.DARKCYAN + "Do you agree to the terms of service [y/n]:" + bcolors.GREEN + ")# " + bcolors.ENDC)
                     covenant += " "
                     if covenant[0].lower() == "y":
-                        with open("src/agreement/covenant", "w") as filewrite:
+                        with open("src/agreement/covenant.txt", "w") as filewrite:
                             filewrite.write("user accepted")
                         os.chdir("reports")
                         neo.one()
@@ -281,8 +301,8 @@ class neo_start(object):
                         beauty.graphics(), scriptures.verses()
                         break
                 else:
-                    os.chdir("reports")
                     neo.one()
+                    break
             except:
                 os.system('clear')
                 beauty.graphics(), scriptures.verses()
@@ -347,7 +367,7 @@ class neo_start(object):
                             else:
                                 try:
                                     print("\n")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0. to 5. " + bcolors.ENDC +  " ]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 5 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -380,7 +400,7 @@ class neo_start(object):
             try:
                 os.system('clear')
                 neo.scann_internal()
-                print(bcolors.ENDC + "\n~>[" + bcolors.BLUE + " Select a targetfrom the table above to be" + bcolors.RED + " Attacked! " + bcolors.ENDC + "]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n~>[ Select a target from the table above to be" + bcolors.RED + " Attacked! " + bcolors.BLUE + "]<~\n" + bcolors.ENDC)
                 try:
                     host = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 except:
@@ -391,7 +411,7 @@ class neo_start(object):
                     while True:
                         try:
                             mega_menu.menu_three()
-                            print(bcolors.BLUE + "         ~>[ " + bcolors.RED + "ready to attack " + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                            print(bcolors.BLUE + "~>[ " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
                             choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                         except:
                             neo.one()
@@ -408,35 +428,30 @@ class neo_start(object):
                                     break
                             elif choice == '2':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.nmap_pscanner(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '3':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.nmap_vulnscanner(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '4':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.smb_enumuration(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '5':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.smb_exploit(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '6':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.packets_sniffer(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
@@ -445,86 +460,24 @@ class neo_start(object):
                                 try:
                                     return internal_scanner.packets_responder(), attack_internal.neo_attack()
                                 except:
-                                    os.system('clear')
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '8':
                                 try:
-                                    os.system('clear')
                                     return internal_scanner.beefxss_bettercap(host), attack_internal.neo_attack()
                                 except:
                                     attack_internal.neo_attack()
                                     break
                             elif choice == '9':
                                 try:
-                                    os.system('clear')
-                                    def bruteforce(self):
-                                        mega_menu.menu_three_nine()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Password Bruteforce attacks againist" + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-                                        while True:
-                                            try:
-                                                choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-                                            except:
-                                                os.system('clear')
-                                                return user_nuke(self)
-                                                break
-                                            if choice == '0':
-                                                os.system('clear')
-                                                return user_nuke(self)
-                                                break
-                                            elif choice == '1':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '2':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '3':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '4':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '4':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '5':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '6':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '7':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '8':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            elif choice == '9':
-                                                os.system('clear')
-                                                return bruteforce(self)
-                                            else:
-                                                try:
-                                                    print("\n")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.ENDC +  " ]<~" + bcolors.ENDC
-                                                    for w in warn:
-                                                        sys.stdout.write(w)
-                                                        sys.stdout.flush()
-                                                        time.sleep(0.09)
-                                                    bruteforce(self)
-                                                    break
-                                                except:
-                                                    os.system('clear')
-                                                    bruteforce(self)
-                                                    break
-                                    bruteforce(self)
-                                    break
+                                    return internal_scanner.kickthemout_dos(), attack_internal.neo_attack()
                                 except:
-                                    return user_nuke(self)
+                                    attack_internal.neo_attack()
                                     break
                             else:
                                 try:
                                     print("\n")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.ENDC +  " ]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -532,7 +485,6 @@ class neo_start(object):
                                     attack_internal.neo_attack()
                                     break
                                 except:
-                                    os.system('clear')
                                     attack_internal.neo_attack()
                                     break
                         except:
@@ -568,7 +520,7 @@ class neo_start(object):
                             break
                     elif choice == '2':
                         try:
-                            return rat.shakamura(), neo.rat_kitchen()
+                            return rat.blackjack(), neo.rat_kitchen()
                         except:
                             neo.rat_kitchen()
                             break
@@ -605,7 +557,7 @@ class neo_start(object):
                     else:
                         try:
                             print("\n")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -702,7 +654,7 @@ class neo_start(object):
                     else:
                         try:
                             print("\n")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -736,20 +688,109 @@ class neo_start(object):
                         break
                     elif choice == '1':
                         try:
-                            return pass_cracker.aircracking_password(), neo.crack_passwords()
+                            os.system('clear')
+                            def automated_online():
+                                mega_menu.menu_six_one()
+                                while True:
+                                    try:
+                                        choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                                    except:
+                                        neo.crack_passwords()
+                                        break
+                                    if choice == '0':
+                                        return neo.crack_passwords()
+                                    elif choice == '1':
+                                        return pass_cracker.hydra_ssh(), automated_online()
+                                    elif choice == '2':
+                                        return pass_cracker.hydra_ftp(), automated_online()
+                                    elif choice == '3':
+                                        return pass_cracker.hydra_smb(), automated_online()
+                                    elif choice == '4':
+                                        return pass_cracker.hydra_rdp(), automated_online()
+                                    elif choice == '5':
+                                        return pass_cracker.hydra_ldap(), automated_online()
+                                    elif choice == '6':
+                                        return pass_cracker.hydra_smtp(), automated_online()
+                                    elif choice == '7':
+                                        return pass_cracker.hydra_telnet(), automated_online()
+                                    elif choice == '8':
+                                        return pass_cracker.hydra_https(), automated_online()
+                                    elif choice == '9':
+                                        return pass_cracker.cyberbrute_all(), automated_online()
+                                    else:
+                                        try:
+                                            print("\n")
+                                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                            for w in warn:
+                                                sys.stdout.write(w)
+                                                sys.stdout.flush()
+                                                time.sleep(0.09)
+                                            automated_online()
+                                            break
+                                        except:
+                                            os.system('clear')
+                                            automated_online()
+                                            break
+                            automated_online()
+                            break
                         except:
                             neo.crack_passwords()
                             break
                     elif choice == '2':
                         try:
-                            return pass_cracker.john_password(), neo.crack_passwords()
+                            os.system('clear')
+                            def automated_offline():
+                                mega_menu.menu_six_two()
+                                while True:
+                                    try:
+                                        choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                                    except:
+                                        neo.crack_passwords()
+                                        break
+                                    if choice == '0':
+                                        return neo.crack_passwords()
+                                    elif choice == '1':
+                                        return pass_cracker.aircrack_ng(), automated_offline()
+                                    elif choice == '2':
+                                        return pass_cracker.john_cracker(), automated_offline()
+                                    elif choice == '3':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '4':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '5':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '6':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '7':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '8':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    elif choice == '9':
+                                        return pass_cracker.hash_buster(), automated_offline()
+                                    else:
+                                        try:
+                                            print("\n")
+                                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                            for w in warn:
+                                                sys.stdout.write(w)
+                                                sys.stdout.flush()
+                                                time.sleep(0.09)
+                                            os.system('clear')
+                                            automated_offline()
+                                            break
+                                        except:
+                                            os.system('clear')
+                                            automated_offline()
+                                            break
+                            automated_offline()
+                            break
                         except:
                             neo.crack_passwords()
                             break
                     else:
                         try:
                             print("\n")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.ENDC + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 2 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -783,38 +824,50 @@ class neo_start(object):
                         break
                     elif choice == '1':
                         try:
+                            os.system('clear')
                             return cred_phisher.phish_gophish(), neo.phish_creds()
                         except:
                             neo.phish_creds()
                             break
                     elif choice == '2':
                         try:
+                            os.system('clear')
                             return cred_phisher.phish_goodginx(), neo.phish_creds()
                         except:
                             neo.phish_creds()
                             break
                     elif choice == '3':
                         try:
+                            os.system('clear')
                             return cred_phisher.phish_zphisher(), neo.phish_creds()
                         except:
                             neo.phish_creds()
                             break
                     elif choice == '4':
                         try:
+                            os.system('clear')
                             return cred_phisher.phish_setoolkit(), neo.phish_creds()
                         except:
                             neo.phish_creds()
                             break
                     elif choice == '5':
                         try:
+                            os.system('clear')
                             return cred_phisher.phish_anonphisher(), neo.phish_creds()
+                        except:
+                            neo.phish_creds()
+                            break
+                    elif choice == '6':
+                        try:
+                            os.system('clear')
+                            return cred_phisher.phish_cyberphish(), neo.phish_creds()
                         except:
                             neo.phish_creds()
                             break
                     else:
                         try:
                             print("\n")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 6 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -837,7 +890,7 @@ class neo_start(object):
             try:
                 os.system('clear')
                 beauty.graphics(), scriptures.verses()
-                print(bcolors.ENDC + "\n~{ " + bcolors.BLUE + "Enter Your Target ( " + bcolors.RED + "Either HTTP(S)//: HostName OR IP" + bcolors.BLUE + " ) " + bcolors.ENDC + "]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n  Enter Your Target: ~> " + bcolors.RED + "Either HTTP(S)//: HOSTNAME or IP \n" + bcolors.ENDC)
                 try:
                     url = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 except:
@@ -856,7 +909,7 @@ class neo_start(object):
                 os.system('clear')
                 def user_nuke(self):
                     mega_menu.menu_eight()
-                    print(bcolors.BLUE + "         ~>[ " + bcolors.RED + "ready to attack " + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                    print(bcolors.BLUE + "~>[ " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
                     while True:
                         try:
                             choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -867,36 +920,28 @@ class neo_start(object):
                             if choice == '0':
                                 neo.one()
                                 break
-                            #Start Open Ports Discovery & Subdomain Enumration
+                            #Start passive web enumeration
                             elif choice == '1':
                                 try:
                                     os.system('clear')
                                     url = host
                                     xhost = url.replace("https://", "").replace("http://", "").replace("www.", "")
-                                    return spiders.seeker(xhost), attack_websites.user_nuke(self)
+                                    return spiders.wafw00f(host), spiders.whatweb(host), spiders.dnsrecon(xhost), spiders.nuclei(xhost), attack_websites.user_nuke(self)
                                 except:
                                     user_nuke(self)
                                     break
-                            # Recon for Waf & Running Web Technology Detection
+                            #Gather e-mails & subdomain namesfrom public sources
                             elif choice == '2':
                                 try:
                                     os.system('clear')
                                     url = host
                                     xhost = url.replace("https://", "").replace("http://", "").replace("www.", "")
-                                    return spiders.wafw00f(host), attack_websites.user_nuke(self)
-                                except:
-                                    user_nuke(self)
-                                    break
-                            #Gather e-mails & subdomain namesfrom public sources
-                            elif choice == '3':
-                                try:
-                                    os.system('clear')
-                                    return spiders.harvester(host), attack_websites.user_nuke(self)
+                                    return spiders.harvester(xhost), attack_websites.user_nuke(self)
                                 except:
                                     user_nuke(self)
                                     break
                             #Start Host Root File Bruteforcer
-                            elif choice == '4':
+                            elif choice == '3':
                                 try:
                                     os.system('clear')
                                     return spiders.gobuster(host), attack_websites.user_nuke(self)
@@ -904,12 +949,12 @@ class neo_start(object):
                                     user_nuke(self)
                                     break
                             #Start SQL, XSS & SSRF Detection & Eploitation
-                            elif choice == '5':
+                            elif choice == '4':
                                 try:
                                     os.system('clear')
                                     def web_injector(self):
-                                        mega_menu.menu_eight_five()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Sql injection attacks againist" + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        mega_menu.menu_eight_four()
+                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Launch Injection againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
                                         while True:
                                             try:
                                                 choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -936,7 +981,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("\n")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 4 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -953,13 +998,79 @@ class neo_start(object):
                                 except:
                                     return user_nuke(self)
                                     break
+                            #Netattacker Insane Web Reconing Next Generation Engine
+                            elif choice == '5':
+                                try:
+                                    os.system('clear')
+                                    def owasp(self):
+                                        mega_menu.menu_eight_five()
+                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Netattacker againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+
+                                        while True:
+                                            try:
+                                                choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                                            except:
+                                                os.system('clear')
+                                                return user_nuke(self)
+                                                break
+                                            if choice == '0':
+                                                os.system('clear')
+                                                return user_nuke(self)
+                                                break
+                                            elif choice == '1':
+                                                os.system('clear')
+                                                return spiders.owasp_1(host), owasp(self)
+                                            elif choice == '2':
+                                                os.system('clear')
+                                                return spiders.owasp_2(host), owasp(self)
+                                            elif choice == '3':
+                                                os.system('clear')
+                                                return spiders.owasp_3(host), owasp(self)
+                                            elif choice == '4':
+                                                os.system('clear')
+                                                return spiders.owasp_4(host), owasp(self)
+                                            elif choice == '5':
+                                                os.system('clear')
+                                                return spiders.owasp_5(host), owasp(self)
+                                            elif choice == '6':
+                                                os.system('clear')
+                                                return spiders.owasp_6(host), owasp(self)
+                                            elif choice == '7':
+                                                os.system('clear')
+                                                return spiders.owasp_7(host), owasp(self)
+                                            elif choice == '8':
+                                                os.system('clear')
+                                                return spiders.owasp_8(host), owasp(self)
+                                            elif choice == '9':
+                                                os.system('clear')
+                                                return spiders.owasp_9(host), owasp(self)
+                                            else:
+                                                try:
+                                                    print("\n")
+                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    for w in warn:
+                                                        sys.stdout.write(w)
+                                                        sys.stdout.flush()
+                                                        time.sleep(0.09)
+                                                    os.system('clear')
+                                                    owasp(self)
+                                                    break
+                                                except:
+                                                    os.system('clear')
+                                                    owasp(self)
+                                                    break
+                                    owasp(self)
+                                    break
+                                except:
+                                    return owasp(self)
+                                    break
                             #Jok3r v3.5 Insane Reconing Next Generation Engine
                             elif choice == '6':
                                 try:
                                     os.system('clear')
                                     def jok3r(self):
                                         mega_menu.menu_eight_six()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Launch an attack againist" + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Jok3r againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -1002,7 +1113,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("\n")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -1025,7 +1136,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def osmedeus(self):
                                         mega_menu.menu_eight_seven()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Launch Osmedeus tool againist" + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Osmedeus on" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -1066,7 +1177,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("\n")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -1089,7 +1200,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def ddos(self):
                                         mega_menu.menu_eight_eight()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Launch DDOS attacks againist" + bcolors.BLUE + " }" + bcolors.BLUE + " ~> " + bcolors.BLUE + "{ " + bcolors.YELLOW + "{0}".format(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch DDOS againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -1132,7 +1243,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("\n")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -1156,14 +1267,14 @@ class neo_start(object):
                                     url = host
                                     zhost = url.replace("http://", "https://").replace("www.", "")
                                     xhost = url.replace("https://", "").replace("http://", "").replace("www.", "")
-                                    return spiders.wafw00f(host), spiders.seeker(xhost), spiders.whatweb(host), spiders.gobuster(host), spiders.osmedeus_3(host), spiders.param_spider(host), spiders.ssl_scan(zhost), spiders.nuclei(host), spiders.sqli_auto_sqlmap(host), spiders.xss_auto_commix(host), spiders.xss_auto_katana(host), spiders.xss_auto_xsser(host), spiders.bbot(host), spiders.nikto(host), spiders.uniscan(host), attack_websites.user_nuke(self)
+                                    return spiders.dnsrecon(xhost), spiders.wafw00f(host), spiders.whatweb(host), spiders.nuclei(xhost), spiders.seeker(xhost), spiders.gobuster(host), spiders.osmedeus_3(host), spiders.param_spider(host), spiders.ssl_scan(zhost), spiders.nuclei(host), spiders.sqli_auto_sqlmap(host), spiders.xss_auto_commix(host), spiders.xss_auto_katana(host), spiders.xss_auto_xsser(host), spiders.bbot(host), spiders.nikto(host), spiders.uniscan(host), attack_websites.user_nuke(self)
                                 except:
                                     user_nuke(self)
                                     break
                             else:
                                 try:
                                     print("\n")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + " ]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -1189,7 +1300,7 @@ class neo_start(object):
             try:
                 os.system('clear')
                 guide_info.guide(), mega_menu.menu_nine()
-                salvation =  bcolors.DARKCYAN + " For God so loved the world, that He gave." + bcolors.ENDC + color() + bcolors.BOLD + " <~[ John 3:16" + bcolors.ENDC
+                salvation =  bcolors.DARKCYAN + " For God so loved the world, that He gave." + bcolors.ENDC + color() + "  <~[ John 3:16 ]" + bcolors.ENDC
                 for s in salvation:
                     sys.stdout.write(s)
                     sys.stdout.flush()
@@ -1239,7 +1350,7 @@ class neo_start(object):
                 os.system('clear')
                 mega_menu.menu_one()
                 try:
-                    choice = input(bcolors.GREEN + "(" + bcolors.ENDC + bcolors.BOLD + "africana:" + bcolors.ENDC + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                    choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.ENDC + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 except:
                     os.system('clear')
                     beauty.graphics(), scriptures.verses()

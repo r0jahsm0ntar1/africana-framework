@@ -1,0 +1,41 @@
+info:
+  name: x_xss_protection_vuln
+  author: OWASP Nettacker Team
+  severity: 3
+  description:
+  reference:
+  profiles:
+    - vuln
+    - vulnerability
+    - http
+    - low_severity
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        allow_redirects: false
+        ssl: false
+        url:
+          nettacker_fuzzer:
+            input_format: "{{schema}}://{target}:{{ports}}/"
+            prefix: ""
+            suffix: ""
+            interceptors:
+            data:
+              schema:
+                - "http"
+                - "https"
+              ports:
+                - 80
+                - 443
+        response:
+          condition_type: or
+          conditions:
+            headers:
+              x-xss-protection:
+                regex: ^((?!1; mode=block).)+$
+                reverse: false

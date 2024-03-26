@@ -16,7 +16,7 @@ class wifi_hack(object):
     def wifi_auto_attack_wifite(self):
         print("\n")
         subprocess.Popen("ip addr", shell = True).wait()
-        print(bcolors.BLUE + "\n   -{ " + bcolors.RED + "What wireless card would you like to use?" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n~>[ " + bcolors.RED + "What wireless card would you like to use?" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         iface = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC) 
         os.system('clear')
         process = os.system("wifite -i %s --ignore-locks --keep-ivs -p 1337 -mac --random-mac -v -inf --bully --pmkid --dic /usr/share/wordlists/rockyou.txt --require-fakeauth --nodeauth --pmkid-timeout 120" %(iface))
@@ -27,7 +27,7 @@ class wifi_hack(object):
             try:
                 print("\n")
                 subprocess.Popen("ip addr", shell = True).wait()
-                print(bcolors.BLUE + "\n   -{ " + bcolors.RED + "What wireless card would you like to use? " + bcolors.BLUE + "{ex. wlan0" + bcolors.BLUE + "}-\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n~>[ " + bcolors.RED + "What wireless card would you like to use? " + bcolors.BLUE + "{ex. wlan0" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
                 iface = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 os.system('clear')
                 subprocess.Popen('airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start' %(iface, iface, iface, iface), shell = True).wait()
@@ -40,9 +40,9 @@ class wifi_hack(object):
     def wifi_auto_attack_wifipumpkin3(self):
         print("\n")
         subprocess.Popen("ip addr", shell = True).wait()
-        print(bcolors.BLUE + "\n   -{ " + bcolors.RED + "What wireless card would you like to use?" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n~>[ " + bcolors.RED + "What wireless card would you like to use?" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         iface = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-        print(bcolors.BLUE + "\n   -{ " + bcolors.RED + "What wifi name would you like to use?" + bcolors.BLUE + " }-\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n~>[ " + bcolors.RED + "What wifi name would you like to use?" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         name = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
         os.system('clear')
         process = os.system("wifipumpkin3 --xpulp 'set interface %s; set ssid %s; set proxy noproxy; start'" %(iface, name))

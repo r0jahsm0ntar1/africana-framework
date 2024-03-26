@@ -7,7 +7,7 @@ class pproxy_mon(object):
 
     def pproxy(self):
         print(bcolors.RED + "\n                     Part of africana-framework" + bcolors.ENDC)
-        print(bcolors.RED + "               Your internet proxy connections routes\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "               Your internet proxy connections routes\n" + bcolors.ENDC)
         print(bcolors.BLUE + "  Running command " + bcolors.RED + "-> " + bcolors.YELLOW + "tail -vf /var/log/privoxy/logfile " + bcolors.BLUE + "To see Your Logs" + bcolors.ENDC)
         print(bcolors.BLUE + " Launch attack using port 3129 " + bcolors.RED + "ex. " + bcolors.GREEN + "sqlmap --proxy=http://127.0.0.1:3129" + bcolors.ENDC)
         print(bcolors.BLUE + "\n                     -[ Your Proxy Chains ]-\n" + bcolors.ENDC)

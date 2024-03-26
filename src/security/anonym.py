@@ -13,13 +13,12 @@ class anonym(object):
     def vanish_install(self):
         os.system('clear')
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n                 ~>[" + bcolors.ENDC + bcolors.UNDERL + " Installing & Configuring " + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "   [             Tor (Install tor & set proxies)             ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "   [        Iptables (Install Iptables for firewalls)        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "   [        Squid (Install Squid set through Privoxy)        ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "   [       Privoxy (Install Privoxy & set through tor)       ] " + bcolors.ENDC)
-        print(bcolors.ENDC + "\n         {" + bcolors.RED + bcolors.UNDERL + " apt-get install -y tor squid privoxy iptables." + bcolors.ENDC + "}\n" + bcolors.ENDC)
-        africana = bcolors.ENDC + " ~>[" + bcolors.YELLOW + " Installing tor, privoxy, squid, dnsmasq & configing them " + bcolors.ENDC + "]<~" + bcolors.ENDC
+        print(bcolors.BLUE + "\n              ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[             Tor (Install tor & set proxies)             ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[        Iptables (Install Iptables for firewalls)        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[        Squid (Install Squid set through Privoxy)        ] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[       Privoxy (Install Privoxy & set through tor)       ] \n" + bcolors.ENDC)
+        africana = bcolors.BLUE + "~>[" + bcolors.YELLOW + " Installing tor, privoxy, squid, dnsmasq & configing " + bcolors.BLUE + "]<~" + bcolors.ENDC
         for a in africana:
             sys.stdout.write(a)
             sys.stdout.flush()

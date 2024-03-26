@@ -1,0 +1,50 @@
+info:
+  name: novnc_cve_2021_3654_vuln
+  author: OWASP Nettacker Team
+  severity: 3
+  description: A user-controlled input redirects noVNC users to an external website.
+  reference: 
+    - https://seclists.org/oss-sec/2021/q3/188
+    - http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3654
+  profiles:
+    - vuln
+    - vulnerability
+    - http
+    - low_severity
+    - cve2021
+    - cve
+    - novnc
+    - open_redirect
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        ssl: false
+        url:
+          nettacker_fuzzer:
+            input_format: "{{schema}}://{target}:{{ports}}//example.com/%2f.."
+            prefix: ""
+            suffix: ""
+            interceptors:
+            data:
+              schema:
+                - "http"
+                - "https"
+              ports:
+                - 80
+                - 443
+
+        response:
+          condition_type: and
+          conditions:
+            status_code:
+              regex: '301|302'
+              reverse: false
+            headers:
+              Location:
+                regex: (?:https?:\/\/|\/\/)(?:[a-zA-Z0-9\-_\.@]*)example\.com.*$
+                reverse: false
