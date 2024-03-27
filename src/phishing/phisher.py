@@ -18,20 +18,20 @@ class phish_hack(object):
         return process
 
     def phish_setoolkit(self):
-        process = os.system('cd ./src/externals/set/; python3 setoolkit')
+        process = os.system('cd src/externals/set/; python3 setoolkit')
         return process
 
     def phish_anonphisher(self):
-        process = subprocess.Popen("cd ./src/externals/anonphisher; bash anonphisher.sh", shell = True).wait()
+        process = subprocess.Popen("cd src/externals/anonphisher; bash anonphisher.sh", shell = True).wait()
         return process
 
     def phish_zphisher(self):
-        process = subprocess.Popen("cd ./src/externals/AdvPhishing; bash AdvPhishing.sh", shell = True).wait()
+        process = subprocess.Popen("cd src/externals/AdvPhishing; bash AdvPhishing.sh", shell = True).wait()
         time.sleep(0.03)
         return process
 
     def phish_cyberphish(self):
-        process = subprocess.Popen("cd ./src/externals/cyberphish; python3 cyberphish.py", shell = True).wait()
+        process = subprocess.Popen("cd src/externals/cyberphish; python3 cyberphish.py", shell = True).wait()
         time.sleep(0.03)
         return process
 

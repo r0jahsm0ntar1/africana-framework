@@ -7,7 +7,7 @@ class guide_inf(object):
         pass
 
     def guide(self):
-        with open('./src/guide/guide.txt', 'r') as guide:
+        with open('src/guide/guide.txt', 'r') as guide:
             for line in guide:
                 sys.stdout.write(line)
                 sys.stdout.flush()

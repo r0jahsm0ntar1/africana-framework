@@ -106,7 +106,7 @@ class pass_killer(object):
         host = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "target" + bcolors.GREEN + ")# " + bcolors.ENDC)
         os.system('clear')
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Bruteforcing all services" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/cyberbrute; bash ./cyberbrute.sh %s' %(host), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/cyberbrute; bash cyberbrute.sh %s' %(host), shell = True).wait()
         print("\n")
         return process
 
@@ -115,7 +115,7 @@ class pass_killer(object):
         hashes = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "hashes" + bcolors.GREEN + ")# " + bcolors.ENDC)
         os.system('clear')
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Bruteforcing Hashes" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(hashes) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('cd ./src/externals/hash-buster; python3 ./cracker.py -t 10 %s' %(hashes), shell = True).wait()
+        process = subprocess.Popen('cd src/externals/hash-buster; python3 cracker.py -t 10 %s' %(hashes), shell = True).wait()
         print("\n")
         return process
 

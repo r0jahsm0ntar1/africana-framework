@@ -293,7 +293,6 @@ class neo_start(object):
                     if covenant[0].lower() == "y":
                         with open("src/agreement/covenant.txt", "w") as filewrite:
                             filewrite.write("user accepted")
-                        os.chdir("reports")
                         neo.one()
                         break
                     else:
