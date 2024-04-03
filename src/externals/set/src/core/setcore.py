@@ -461,7 +461,7 @@ def grab_ipaddress():
         while 1:
             choice = raw_input(setprompt(["2"], "This is not an IP address. Are you using a hostname? [y/n] "))
             if choice == "" or choice.lower() == "y":
-                print_status("Roger that ghostrider. Using hostnames moving forward (hostnames are 1337, nice job)..")
+                print_status("Roger that soldier. Using hostnames moving forward (hostnames are 1337, nice job)..")
                 break
             else:
                 rhost = raw_input(setprompt(["2"], "IP address for the reverse connection [" + rhost + "]"))
@@ -469,7 +469,7 @@ def grab_ipaddress():
                 else:
                     choice = raw_input(setprompt(["2"], "This is not an IP address. Are you using a hostname? [y/n] "))
                     if choice == "" or choice.lower() == "y":
-                        print_status("Roger that ghostrider. Using hostnames moving forward (hostnames are 1337, nice job)..")
+                        print_status("Roger that soldier. Using hostnames moving forward (hostnames are 1337, nice job)..")
                         break
 
     # rhost return when verified

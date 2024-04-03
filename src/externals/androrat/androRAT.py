@@ -13,15 +13,22 @@ except ImportError as e:
     exit()
     
 clearDirec()
-
-#                     _           _____         _______
-#     /\             | |         |  __ \     /\|__   __|
-#    /  \   _ __   __| |_ __ ___ | |__) |   /  \  | |   
-#   / /\ \ | '_ \ / _` | '__/ _ \|  _  /   / /\ \ | |   
-#  / ____ \| | | | (_| | | | (_) | | \ \  / ____ \| |   
-# /_/    \_\_| |_|\__,_|_|  \___/|_|  \_\/_/    \_\_|   
-#                                        - By karma9874
-
+#                       _/﹋\_
+#                       (҂`_´)
+#                      <,︻╦╤─ ҉- [ John 3:16  ]
+#                       _/﹋\_                ]
+#                      [ Jesus Christ said;   ]
+#                      [ Defeat the devil by  ]
+#                      [ fasting and praying. ]
+#
+#
+#
+#
+#         ~>[ Salvation is free. Get it for free. ]<~
+#          __                 _____ _____     _     _
+#       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+#      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+#      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 
 parser = argparse.ArgumentParser(usage="%(prog)s [--build] [--shell] [-i <IP> -p <PORT> -o <apk name>]")
 parser.add_argument('--build',help='For Building the apk',action='store_true')

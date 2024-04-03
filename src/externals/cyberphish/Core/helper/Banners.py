@@ -3,9 +3,9 @@ import time
 import os
 
 def PlanetBanner():
-	os.system("clear")
-	
-	Planet = ("""
+    os.system("clear")
+    
+    Planet = ("""
                                                      ___
                                                   ,o88888
                                                ,o8888888'
@@ -25,10 +25,10 @@ def PlanetBanner():
             ...:.'.:.::::"'    . . . . .'
            .. . ....:."' `   .  . . ''
          . . . ...."'
-         .. . ."'     
+         .. . ."'
         .
-	""")
-	for line in Planet:                   
-			print(line, end='')    
-			sys.stdout.flush()  
-			time.sleep(0.001)          
+    """)
+    for line in Planet:
+            print(line, end='')
+            sys.stdout.flush()
+            time.sleep(0.001)

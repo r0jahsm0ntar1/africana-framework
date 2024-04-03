@@ -1,7 +1,9 @@
 import platform
 import sys
+import os
 from sys import version_info
 
+os.chdir('/root/.africana')
 if version_info < (3, 0, 0):
     print('[!] Please use Python 3. $ python3 CyberPhish.py')
     sys.exit()
@@ -38,13 +40,12 @@ green = Fore.GREEN
 white = Fore.WHITE
 blue = Fore.CYAN
 
-os.system("clear")
+#os.system("clear")
 
 
 def CurrentDir():
-    path = os.getcwd()
-    print(
-        green + "[" + white + "+" + green + "]" + white + " Your Templates Will Be Saved Here " + path + '/"TemplateName.html"')
+    path = '/root/.africana'
+    print(green + "[" + white + "+" + green + "]" + white + " Ur Temp Will be Saved @ " + path + '"/TempName.html"\n')
 
 
 no = ["n", "no"]
@@ -58,7 +59,7 @@ while cont not in no:
 
         CurrentDir()
 
-        mailPick = int(input(green + "root@CyberPhish ~> " + white))
+        mailPick = int(input(green + "(" + white+ "africana:" + blue + "framework" + green + ")# " + white))
 
         try:
 
@@ -128,10 +129,10 @@ while cont not in no:
             elif mailPick == 69:
                 RedirectionMain()
 
-            elif mailPick == 00:
-                os.system("cls") if 'Windows' in platform.platform() else os.system('clear')
-                print("- Hope I See You Soon")
-                print("- Happy Phishing")
+            elif mailPick == 0:
+                #os.system("cls") if 'Windows' in platform.platform() else os.system('clear')
+                #print("- Hope I See You Soon")
+                #print("- Happy Phishing")
                 sys.exit()
 
             else:

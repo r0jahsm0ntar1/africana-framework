@@ -86,19 +86,20 @@ def print_banner():
     print('\r')
 def print_banner():
     os.system('clear')
-    print(fr'''{GREEN}
-                                   ___
-         _______                  /__/
-        |.-----.|            ,---[___]*
-        ||     ||           /    printer
-        ||_____||    _____ /        ____
-        |o_____*|   [o_+_+]--------[=i==]
-         |     ________|           drive
-         |  __|_
-         '-/_==_\       Jesus Christ is
-          /_____\\  The Lamb that was slain
-                         for our sins.
-                           John 3:16
+    print(fr'''{YELLOW}
+                       ____
+                    ,dP9CGG88@b,
+                  ,IP  _   Y888@@b,
+                 dIi  (_)   G8888@b
+                dCII  (_)   G8888@@b
+                GCCIi     ,GG8888@@@
+                GGCCCCCCCGGG88888@@@
+                GGGGCCCGGGG88888@@@@...
+                Y8GGGGGG8888888@@@@P.....
+                 Y88888888888@@@@@P......
+                 `Y8888888@@@@@@@P'......
+                    `@@@@@@@@@P'.......
+                       '""'........
       __                 _____ _____     _     _
    __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
   |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|

@@ -11,15 +11,16 @@ class update(object):
         pass
     def definepath(self):
         return os.getcwd()
+
     def update_system(self):
         os.system('clear')
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Kali-Linux                             " + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Ubuntu-Linux                                         ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Arch-Linux/ Black-Arch-Linux/ Manjaro-Linux          ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. Uninstall-Africana                                   ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 0. Exit                                                 ] \n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Kali-Linux............................." + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Ubuntu-Linux.........................................] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Arch-Linux/ Black-Arch-Linux/ Manjaro-Linux..........] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Uninstall-Africana...................................] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0. Exit.................................................] \n" + bcolors.ENDC)
         try:
             choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
         except:
@@ -31,79 +32,71 @@ class update(object):
                     break
                 elif choice == '1':
                     os.system('clear')
-                    print(bcolors.BLUE + bcolors.BOLD + "\n[            Installing africana on kali-linux            ] " + bcolors.ENDC)
-                    print(bcolors.BLUE + bcolors.BOLD + "[                    Pleas be patient                     ] " + bcolors.ENDC)
-                    print(bcolors.BLUE + bcolors.BOLD + "[      Installer will copy core files to your system      ] " + bcolors.ENDC)
-                    print(bcolors.BLUE + bcolors.BOLD + "[                            &                            ] " + bcolors.ENDC)
-                    print(bcolors.BLUE + bcolors.BOLD + "[              All necessary foundation tools             ] " + bcolors.ENDC)
+                    scriptures.verses()
+                    print(bcolors.BLUE + "\n[            Installing africana on kali-linux            ] " + bcolors.ENDC)
+                    print(bcolors.BLUE + "[                    Pleas be patient                     ] " + bcolors.ENDC)
+                    print(bcolors.BLUE + "[      Installer will copy core files to your system      ] " + bcolors.ENDC)
+                    print(bcolors.BLUE + "[                            &                            ] " + bcolors.ENDC)
+                    print(bcolors.BLUE + "[              All necessary foundation tools             ] " + bcolors.ENDC)
 
-                    afric = '/usr/local/opt/africana-framework'
-                    if os.path.exists(afric):
+                    africs = '/usr/local/opt/africana-framework'
+                    if os.path.exists(africs):
                         os.system('clear')
+                        beauty.graphics(), scriptures.verses()
                         print(bcolors.BLUE + "[              Africana detected in your system           ] " + bcolors.ENDC)
                         print(bcolors.BLUE + "[                   Pleas be patient as the               ] " + bcolors.ENDC)
                         print(bcolors.BLUE + "[                 Installer runs full updates             ] " + bcolors.ENDC)
                         print(bcolors.BLUE + "[                              &                          ] " + bcolors.ENDC)
-                        print(bcolors.BLUE + "[       Upgrades for all necessary foundation tools       ] \n" + bcolors.ENDC)
-                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Africana-fri already installed in Ur system. Update It?" + bcolors.ENDC)
-                        print("\n")
-                        choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.RED + "[y/n]" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                        print(bcolors.BLUE + "[       Upgrades for all necessary foundation tools       ] " + bcolors.ENDC)
+                        print(bcolors.BLUE + "\n[" + bcolors.GREEN + "✔" + bcolors.BLUE + "] " + bcolors.GREEN + "Africana-fri already installed in Ur system. " + bcolors.RED + "Update It?" + bcolors.ENDC)
+                        choice = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "[y/n]" + bcolors.GREEN + ")# " + bcolors.ENDC)
                         choice += " "
                         if choice[0].lower() == "y":
                             try:
-                                print("\n")
-                                spinner.run_subprocess('apt-get update -y')
-                                print("\n")
-                                spinner.run_subprocess('cd /usr/local/opt/africana-framework; git pull; cd src/externals/Teardroid-phprat; git pull; cd ../AdvPhishing; git pull; cd ../anonphisher; git pull')
+                                print(bcolors.BLUE + "\n[" + bcolors.GREEN + "✔" + bcolors.BLUE + "] " + bcolors.GREEN + "Updating all Project Discovery tools & testing them 4U" + bcolors.ENDC)
+                                spinner.run_subprocesu('apt-get update -y')
+                                spinner.run_subprocesux('cd /usr/local/opt/africana-framework; git pull; cd src/externals/Teardroid-phprat; git pull; cd ../AdvPhishing; git pull; cd ../anonphisher; git pull')
                                 time.sleep(0.09)
-                                print("\n")
-                                print(bcolors.BLUE + "[              Setting up project discovery tools         ] " + bcolors.ENDC)
-                                print(bcolors.BLUE + "[                   Pleas be patient as the               ] " + bcolors.ENDC)
-                                print(bcolors.BLUE + "[                         Installer                       ] " + bcolors.ENDC)
-                                print(bcolors.BLUE + "[                          Configs                        ] " + bcolors.ENDC)
-                                print(bcolors.BLUE + "[                  All golang necessary tools             ] \n" + bcolors.ENDC)
-                                print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Updating all Project Discovery tools & testing them 4U" + bcolors.ENDC)
-                                print("\n")
-                                afric = '/root/go'
-                                if os.path.exists(afric):
+                                africs = '/root/go'
+                                if os.path.exists(africs):
                                     spinner.run_subprocesx('cd ~/go/bin; ./pdtm -ia; source ~/.zshrc')
                                 else:
                                     pass
-
                                 print(bcolors.BLUE + "[                 Necessary tools updateded               ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[      Anonymous tools updateded (Tor, privoxy, squid)    ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[          Wifi pentesting tools updateded (wifite)       ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[        Local pentesting tools updateded (bettercap)     ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[  Web pentest tools updateded (nuclei, nikto, osmedeus)  ] \n" + bcolors.ENDC)
-                                africana = bcolors.BLUE + "[ " + bcolors.GREEN + "Everything is set. Type 'africana' to start africana-fr " + bcolors.BLUE + "]" + bcolors.ENDC
+                                africana = bcolors.BLUE + "\n[" + bcolors.GREEN + "✔" + bcolors.BLUE + "] " + bcolors.GREEN + "Everything is set. Type 'africana' to start africana-fr " + bcolors.BLUE + "]" + bcolors.ENDC
                                 for a in africana:
                                     sys.stdout.write(a)
                                     sys.stdout.flush()
                                     time.sleep(0.09)
                                 break
                             except:
-                                africana = bcolors.BLUE + "\n[ " + bcolors.GREEN + "An Error detected pleas run the setup again " + bcolors.BLUE + "]" + bcolors.ENDC
+                                africana = print(bcolors.BLUE + "\n[" + bcolors.GREEN + "✘" + bcolors.BLUE + "] " + bcolors.GREEN + "▄︻̷̿┻̿═━一 An Error detected pleas run the setup again" + bcolors.ENDC)
                                 for a in africana:
                                     sys.stdout.write(a)
                                     sys.stdout.flush()
                                     time.sleep(0.09)
                                 break
                         else:
+                            neo.one()
                             break
 
                     else:
-                        print("\n")
+                        print("")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
                         spinner.run_subprocess('mkdir -p /usr/local/opt; cp -r %s /usr/local/opt/africana-framework; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana' %(installer.definepath()))
-                        print("\n")
+                        print("")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
-                        spinner.run_subprocesx('apt-get update -y; apt-get install zsh git curl -y; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg;apt-get install curl wget git zip -y; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables tmux openssh-client openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser villain set playit libssl-dev gcc hydra wine32:i386')
+                        spinner.run_subprocesx('apt-get update -y; apt-get install zsh git curl -y; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg;apt-get install curl wget git zip -y; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux set playit libssl-dev gcc hydra wine32:i386; npm install -g kickthemout')
                         time.sleep(0.3)
 
                         if os.path.exists('~/.zshrc.bak_africana'):
                             pass
                         elif not os.path.exists('~/.zshrc.bak_africana'):
-                            print("\n")
+                            print("")
                             print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Configuring python3 environment at ~/.africs/bin/activate" + bcolors.ENDC)
                             spinner.run_subprocesx('cd ~/; cp .zshrc .zshrc.bak_africana; pip3 install --upgrade setuptools; pip3 install virtualenv; python3 -m virtualenv .africs --system-site-packages; echo -n "\n# Generated by africana-framework. Delete at your own risk!\nsource ~/.africs/bin/activate" >> ~/.zshrc')
                         else:
@@ -202,30 +195,30 @@ class update(object):
                         git = '/usr/local/opt/africana-framework/'
                         if os.path.exists(git):
                             try:
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring python3 necessary requirements" + bcolors.ENDC)
                                 spinner.run_subprocesx('zsh -c "source ~/.zshrc; cd /usr/local/opt/africana-framework; pip3 install -r requirements.txt"')
 
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring some github third party tools" + bcolors.ENDC)
                                 try:
                                     spinner.run_subprocesx('cd /usr/local/opt/africana-framework/src/externals/androrat; apt install ./zipalign_*_amd64.deb; cd ..; git clone https://github.com/ScRiPt1337/Teardroid-phprat; cd ./Teardroid-phprat; pip3 install -r requirements.txt; wget https://github.com/ScRiPt1337/Teardroidv4_api/archive/refs/heads/main.zip; unzip main.zip; rm -rf main.zip; git clone https://github.com/devanshbatham/paramspider; cd paramspider; pip3 install .; cd ..; git clone https://github.com/Ignitetch/AdvPhishing.git; cd AdvPhishing/; chmod 777 *; ./Linux-Setup.sh; cd ..;git clone https://github.com/TermuxHackz/anonphisher; cd ./anonphisher; chmod 777 *; bash anonphisher.sh')
                                 except:
                                     pass
 
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Project Discovery tools & testing them" + bcolors.ENDC)
                                 spinner.run_subprocesx('go install github.com/projectdiscovery/pdtm/cmd/pdtm@latest; go install github.com/j3ssie/osmedeus@latest; go install github.com/hahwul/dalfox/v2@latest; bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)')
-                                afric = '/root/go'
-                                if os.path.exists(afric):
+                                africs = '/root/go'
+                                if os.path.exists(africs):
                                     os.system('cd ~/go/bin; ./pdtm -ia; source ~/.zshrc; update-grub2')
                                 else:
-                                    print("\n")
+                                    print("")
                                     print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.RED + "'./pdtm -ia; source ~/.zshrc'. Command failed to execute" + bcolors.ENDC)
                                     time.sleep(0.3)
                                     spinner.run_subprocess('update-grub2')
 
-                                    print("\n")
+                                    print("")
                                     print(bcolors.BLUE + "[                Necessary tools installed                ] " + bcolors.ENDC)
                                     print(bcolors.BLUE + "[     Anonymous tools installed (Tor, privoxy, squid )    ] " + bcolors.ENDC)
                                     print(bcolors.BLUE + "[          Wifi pentesting tools installed (wifite)       ] " + bcolors.ENDC)
@@ -234,12 +227,12 @@ class update(object):
                                     print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Everything is set. Type 'africana' to launch africana" + bcolors.ENDC)
                                     break
                             except:
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Setup failed. Pleas retrie again and check your internet connection." + bcolors.ENDC)
-                                print("\n")
+                                print("")
                                 break
                         else:
-                            print("\n")
+                            print("")
                             print(bcolors.BLUE + "[                Necessary tools installed                ] " + bcolors.ENDC)
                             print(bcolors.BLUE + "[     Anonymous tools installed (Tor, privoxy, squid )    ] " + bcolors.ENDC)
                             print(bcolors.BLUE + "[          Wifi pentesting tools installed (wifite)       ] " + bcolors.ENDC)
@@ -257,8 +250,8 @@ class update(object):
                     print(bcolors.BLUE + bcolors.BOLD + "[                            &                            ] " + bcolors.ENDC)
                     print(bcolors.BLUE + bcolors.BOLD + "[              All necessary foundation tools             ] " + bcolors.ENDC)
 
-                    afric = '/usr/local/opt/africana-framework'
-                    if os.path.exists(afric):
+                    africs = '/usr/local/opt/africana-framework'
+                    if os.path.exists(africs):
                         os.system('clear')
                         print(bcolors.BLUE + "[              Africana detected in your system           ] " + bcolors.ENDC)
                         print(bcolors.BLUE + "[                   Pleas be patient as the               ] " + bcolors.ENDC)
@@ -266,26 +259,26 @@ class update(object):
                         print(bcolors.BLUE + "[                              &                          ] " + bcolors.ENDC)
                         print(bcolors.BLUE + "[       Upgrades for all necessary foundation tools       ] \n" + bcolors.ENDC)
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Africana-fri already installed in Ur system. Update It?" + bcolors.ENDC)
-                        print("\n")
+                        print("")
                         choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.RED + "[y/n]" + bcolors.GREEN + ")# " + bcolors.ENDC)
                         choice += " "
                         if choice[0].lower() == "y":
                             try:
-                                print("\n")
+                                print("")
                                 spinner.run_subprocess('apt-get update -y')
-                                print("\n")
+                                print("")
                                 spinner.run_subprocess('cd /usr/local/opt/africana-framework; git pull; cd src/externals/Teardroid-phprat; git pull; cd ../AdvPhishing; git pull; cd ../anonphisher; git pull')
                                 time.sleep(0.09)
-                                print("\n")
+                                print("")
                                 print(bcolors.BLUE + "[              Setting up project discovery tools         ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[                   Pleas be patient as the               ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[                         Installer                       ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[                          Configs                        ] " + bcolors.ENDC)
                                 print(bcolors.BLUE + "[                  All golang necessary tools             ] \n" + bcolors.ENDC)
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Updating all Project Discovery tools & testing them 4U" + bcolors.ENDC)
-                                print("\n")
-                                afric = '/root/go'
-                                if os.path.exists(afric):
+                                print("")
+                                africs = '/root/go'
+                                if os.path.exists(africs):
                                     spinner.run_subprocesx('cd ~/go/bin; ./pdtm -ia; source ~/.zshrc')
                                 else:
                                     pass
@@ -312,18 +305,18 @@ class update(object):
                             break
 
                     else:
-                        print("\n")
+                        print("")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
                         spinner.run_subprocess('mkdir -p /usr/local/opt; cp -r %s /usr/local/opt/africana-framework; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana' %(installer.definepath()))
-                        print("\n")
+                        print("")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
-                        spinner.run_subprocesx('mkdir -p /usr/local/opt; cp -rf ../../africana-framework /usr/local/opt/; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana; echo -n "deb https://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list.d/kali.list; apt-get update -y; apt-get install wget zip tmux zsh git curl -y; wget "https://archive.kali.org/archive-key.asc"; apt-key add ./archive-key.asc; rm -rf ./archive-key.asc; echo -n "Package: *" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin: release a=kali-rolling" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin-Priority: 50" >> /etc/apt/preferences.d/kali.pref; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables openssh-client openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser villain set playit hydra libssl-dev gcc wine32:i386')
+                        spinner.run_subprocesx('mkdir -p /usr/local/opt; cp -rf ../../africana-framework /usr/local/opt/; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana; echo -n "deb https://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list.d/kali.list; apt-get update -y; apt-get install wget zip tmux zsh git curl -y; wget "https://archive.kali.org/archive-key.asc"; apt-key add ./archive-key.asc; rm -rf ./archive-key.asc; echo -n "Package: *" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin: release a=kali-rolling" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin-Priority: 50" >> /etc/apt/preferences.d/kali.pref; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables openssh-client openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libpcap-dev npm libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser set util-linux playit hydra libssl-dev gcc wine32:i386; npm install -g kickthemout')
                         time.sleep(0.3)
 
                         if os.path.exists('~/.zshrc.bak_africana'):
                             pass
                         elif not os.path.exists('~/.zshrc.bak_africana'):
-                            print("\n")
+                            print("")
                             print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Configuring python3 environment at ~/.africs/bin/activate" + bcolors.ENDC)
                             spinner.run_subprocesx('cd ~/; cp .zshrc .zshrc.bak_africana; pip3 install --upgrade setuptools; pip3 install virtualenv; python3 -m virtualenv .africs --system-site-packages; echo -n "\n# Generated by africana-framework. Delete at your own risk!\nsource ~/.africs/bin/activate" >> ~/.zshrc')
                         else:
@@ -422,30 +415,30 @@ class update(object):
                         git = '/usr/local/opt/africana-framework/'
                         if os.path.exists(git):
                             try:
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring python3 necessary requirements" + bcolors.ENDC)
                                 spinner.run_subprocesx('zsh -c "source ~/.zshrc; cd /usr/local/opt/africana-framework; pip3 install -r requirements.txt"')
 
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring some github third party tools" + bcolors.ENDC)
                                 try:
                                     spinner.run_subprocesx('cd /usr/local/opt/africana-framework/src/externals/androrat; apt install ./zipalign_*_amd64.deb; cd ..; git clone https://github.com/ScRiPt1337/Teardroid-phprat; cd ./Teardroid-phprat; pip3 install -r requirements.txt; wget https://github.com/ScRiPt1337/Teardroidv4_api/archive/refs/heads/main.zip; unzip main.zip; rm -rf main.zip; git clone https://github.com/devanshbatham/paramspider; cd paramspider; pip3 install .; cd ..; git clone https://github.com/Ignitetch/AdvPhishing.git; cd AdvPhishing/; chmod 777 *; ./Linux-Setup.sh; cd ..;git clone https://github.com/TermuxHackz/anonphisher; cd ./anonphisher; chmod 777 *; bash anonphisher.sh')
                                 except:
                                     pass
 
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Project Discovery tools & testing them" + bcolors.ENDC)
                                 spinner.run_subprocesx('go install github.com/projectdiscovery/pdtm/cmd/pdtm@latest; go install github.com/j3ssie/osmedeus@latest; go install github.com/hahwul/dalfox/v2@latest; bash <(curl -fsSL https://raw.githubusercontent.com/osmedeus/osmedeus-base/master/install.sh)')
-                                afric = '/root/go'
-                                if os.path.exists(afric):
+                                africs = '/root/go'
+                                if os.path.exists(africs):
                                     os.system('cd ~/go/bin; ./pdtm -ia; source ~/.zshrc; update-grub2')
                                 else:
-                                    print("\n")
+                                    print("")
                                     print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.RED + "'./pdtm -ia; source ~/.zshrc'. Command failed to execute" + bcolors.ENDC)
                                     time.sleep(0.3)
                                     spinner.run_subprocess('update-grub2')
 
-                                    print("\n")
+                                    print("")
                                     print(bcolors.BLUE + "[                Necessary tools installed                ] " + bcolors.ENDC)
                                     print(bcolors.BLUE + "[     Anonymous tools installed (Tor, privoxy, squid )    ] " + bcolors.ENDC)
                                     print(bcolors.BLUE + "[          Wifi pentesting tools installed (wifite)       ] " + bcolors.ENDC)
@@ -454,12 +447,12 @@ class update(object):
                                     print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Everything is set. Type 'africana' to launch africana" + bcolors.ENDC)
                                     break
                             except:
-                                print("\n")
+                                print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Setup failed. Pleas retrie again and check your internet connection." + bcolors.ENDC)
-                                print("\n")
+                                print("")
                                 break
                         else:
-                            print("\n")
+                            print("")
                             print(bcolors.BLUE + "[                Necessary tools installed                ] " + bcolors.ENDC)
                             print(bcolors.BLUE + "[     Anonymous tools installed (Tor, privoxy, squid )    ] " + bcolors.ENDC)
                             print(bcolors.BLUE + "[          Wifi pentesting tools installed (wifite)       ] " + bcolors.ENDC)
@@ -473,15 +466,15 @@ class update(object):
                     try:
                         os.system('clear')
                         beauty.graphics(), scriptures.verses()
-                        print("\n")
-                        print(bcolors.BLUE + "[ Incase of any bug email me @: " + bcolors.YELLOW + "rojahsmontari@gmail.com" + bcolors.BLUE + "   ] " + bcolors.ENDC)
-                        print(bcolors.BLUE + "[ Are U sure you want to completely uninstall africana?   ]\n" + bcolors.ENDC)
-                        print(bcolors.BLUE + "~>[     " + bcolors.BLUE + "Type: " + bcolors.RED + "1. " + bcolors.GREEN + "Accept " + bcolors.RED + "0. " + bcolors.GREEN + "Reject " + bcolors.YELLOW + "& " + bcolors.BLUE + "Go Back To Menu.    ]<~\n" + bcolors.ENDC)
-
-                        choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-                        if choice == '1':
+                        print("")
+                        print(bcolors.BLUE + "[ ..............Just Incase of any bug....................] " + bcolors.ENDC)
+                        print(bcolors.BLUE + "[........Pleas email me @:rojahsmontari@gmail.com ........] " + bcolors.ENDC)
+                        print(bcolors.BLUE + "[..Are U sure you want to completely uninstall africana?..]\n" + bcolors.ENDC)
+                        choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana: " + bcolors.DARKCYAN + "Do you agree to the terms of service [y/n]:" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                        choice += " "
+                        if choice[0].lower() == "y":
                             spinner.run_subprocess('systemctl --no-pager status privoxy.service tor@default.service dnsmasq.service squid.service changemac@eth0.service -l')
-                            print("\n")
+                            print("")
                             spinner.run_subprocess('systemctl stop privoxy.service tor@default.service dnsmasq.service squid.service changemac@eth0.service; systemctl disable privoxy.service tor@default.service dnsmasq.service squid.service changemac@eth0.service')
                             if os.path.exists('~/.zshrc.bak_africana'):
                                 spinner.run_subprocess('cd ~/; rm -rf .zshrc; mv .zshrc.bak_africana .zshrc')
@@ -535,8 +528,8 @@ class update(object):
                                 spinner.run_subprocess('cd /etc/default/grub.d/; rm -rf 06_dark_theme; mv 06_dark_theme.bak_africana 06_dark_theme')
                             else:
                                 pass
-                            afric = '/usr/local/opt/africana-framework'
-                            if os.path.exists(afric):
+                            africs = '/usr/local/opt/africana-framework'
+                            if os.path.exists(africs):
                                 spinner.run_subprocess('rm -rf /usr/local/opt/africana-framework; rm -rf /usr/local/bin/africana')
                             else:
                                 pass
@@ -546,11 +539,11 @@ class update(object):
                                 sys.stdout.flush()
                                 time.sleep(0.03)
                             break
-                        elif choice == '0':
+                        elif choice[0].lower() == "n":
                             installer.update_system()
                             break
                         else:
-                            print("\n")
+                            print("")
                             warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 1 " + bcolors.BLUE +  " ]<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
@@ -559,20 +552,23 @@ class update(object):
                             installer.update_system()
                             break
                     except:
+                        neo.one()
                         break
                 else:
                     try:
-                        print("\n")
-                        warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 4 " + bcolors.BLUE +  " ]<~" + bcolors.ENDC
+                        print("")
+                        warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 4 " + bcolors.BLUE +  "]<~" + bcolors.ENDC
                         for w in warn:
                             sys.stdout.write(w)
                             sys.stdout.flush()
                             time.sleep(0.09)
-                        update_system()
+                        installer.update_system()
                         pass
                     except:
+                        neo.one()
                         break
             except:
+                neo.one()
                 break
 
 installer = update()

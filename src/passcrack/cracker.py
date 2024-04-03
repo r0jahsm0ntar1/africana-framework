@@ -16,10 +16,9 @@ class pass_killer(object):
 
 #Offline crackers
     def aircrack_ng(self):
-        print(bcolors.BLUE + "\n~>[ " + bcolors.UNDERL + bcolors.CYAN + "Give full path for your .pcap and wordlist to be used" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        pcap = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" +  bcolors.GREEN + ")# " + bcolors.ENDC)
-        print(bcolors.RED + "(Path = %s)".format(pcap) + bcolors.ENDC)
-        wordlist = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" +  bcolors.GREEN + ")# " + bcolors.ENDC)
+        pcap = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .pcap" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        print(bcolors.RED + "(Path = %s)" %(pcap) + bcolors.ENDC)
+        wordlist = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your wordlist" + bcolors.GREEN + ")# " + bcolors.ENDC)
         print(bcolors.RED + "(wordlist = %s)" %(wordlist) + bcolors.ENDC)
         time.sleep(3)
         os.system('clear')
@@ -27,10 +26,9 @@ class pass_killer(object):
         return process
 
     def john_cracker(self):
-        print(bcolors.BLUE + "\n~>[ " + bcolors.UNDERL + bcolors.CYAN + " Give full path for your .pcap and wordlist to be used" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        pcap = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" +  bcolors.GREEN + ")# " + bcolors.ENDC)
+        pcap = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .pcap" + bcolors.GREEN + ")# " + bcolors.ENDC)
         print(bcolors.RED + "(Path = %s)" %(pcap) + bcolors.ENDC)
-        wordlist = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" +  bcolors.GREEN + ")# " + bcolors.ENDC)
+        wordlist = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your wordlist" + bcolors.GREEN + ")# " + bcolors.ENDC)
         print(bcolors.RED + "(wordlist = %s)" %(wordlist) + bcolors.ENDC)
         time.sleep(3)
         os.system('clear')
@@ -107,7 +105,7 @@ class pass_killer(object):
         os.system('clear')
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Bruteforcing all services" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         process = subprocess.Popen('cd src/externals/cyberbrute; bash cyberbrute.sh %s' %(host), shell = True).wait()
-        print("\n")
+        print("")
         return process
 
 #Hashes cracking
@@ -116,7 +114,7 @@ class pass_killer(object):
         os.system('clear')
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Bruteforcing Hashes" + bcolors.BLUE + " ]" + bcolors.BLUE + " -> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(hashes) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         process = subprocess.Popen('cd src/externals/hash-buster; python3 cracker.py -t 10 %s' %(hashes), shell = True).wait()
-        print("\n")
+        print("")
         return process
 
 pass_cracker = pass_killer()

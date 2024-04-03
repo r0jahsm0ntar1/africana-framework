@@ -37,8 +37,8 @@ class configure(object):
 #tor service
         if os.system("which tor > /dev/null") == 0:
             if os.path.exists('/etc/tor/torrc.bak_africana'):
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "           Torrc file already configured          " + bcolors.BLUE + "]" + bcolors.ENDC)
-                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                             [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n[" + bcolors.YELLOW + "              Torrc file already configured             " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
                 pass
             elif not os.path.exists('/etc/tor/torrc'):
                     print(bcolors.BLUE + "[" + bcolors.YELLOW + "             Torrc file is configured               " + bcolors.BLUE + "]" + bcolors.ENDC)
@@ -83,14 +83,14 @@ class configure(object):
                         print(bcolors.BLUE + "[" + bcolors.RED + "         Failed to write the tor@default.service file             " + bcolors.BLUE + "]" + bcolors.ENDC)
                         pass
             else:
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "          Configuring tor@default.service         " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "             Configuring tor@default.service            " + bcolors.BLUE + "]" + bcolors.ENDC)
                 time.sleep(0.4)
                 subprocess.Popen(["cp", "/lib/systemd/system/tor@default.service", "/lib/systemd/system/tor@.default.service.bak_africana"], stdout=subprocess.PIPE).communicate()
                 tordefault = open('/lib/systemd/system/tor@default.service', 'w')
                 for elements in tordefaults:
                     tordefault.write("%s\n" % elements)
                 tordefault.close()
-                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                           [ ✔ ] " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
 
         else:
             print(bcolors.BLUE + "[" + bcolors.RED + "    No! tordefaults try 'apt install tor'        " + bcolors.BLUE + "]\n" + bcolors.ENDC)
@@ -100,7 +100,8 @@ class configure(object):
 #privoxy service
         if os.system("which privoxy > /dev/null") == 0:
             if os.path.exists('/etc/privoxy/privoxy.bak_africana'):
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "         Privoxy file already configured          " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "           Privoxy file already configured              " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
                 pass
             elif not os.path.exists('/etc/privoxy/config'):
                     print(bcolors.BLUE + "[" + bcolors.YELLOW + "           No privoxy/config file is configured         " + bcolors.BLUE + "]\n" + bcolors.ENDC)
@@ -131,7 +132,8 @@ class configure(object):
 #squid service
         if os.system("which squid > /dev/null") == 0:
             if os.path.exists('/etc/squid/squid.conf.bak_africana'):
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "          Squid file already configured           " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "               Squid file already configured            " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
                 pass
             elif not os.path.exists('/etc/squid/squid.conf'):
                     print(bcolors.BLUE + "[" + bcolors.RED + "         No squid/config file is configured.   " + bcolors.BLUE + "]\n" + bcolors.ENDC)
@@ -162,7 +164,8 @@ class configure(object):
 #dhclient service
         if os.system("which dhclient > /dev/null") == 0:
             if os.path.exists('/etc/dhcp/dhclient.conf.bak_africana'):
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "         Dhclient file already configured         " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "             Dhclient file already configured           " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
                 pass
             elif not os.path.exists('/etc/dhcp/dhclient.conf'):
                     print(bcolors.BLUE + "[" + bcolors.YELLOW + " No dhclient.conf file is configured.   " + bcolors.BLUE + "]\n" + bcolors.ENDC)
@@ -193,7 +196,8 @@ class configure(object):
 #macchanger service
         if os.system("which macchanger > /dev/null") == 0:
             if os.path.exists('/etc/systemd/system/changemac@.bak_africana'):
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "       Changemac@ file already configured         " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "           Changemac@ file already configured           " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]" + bcolors.ENDC)
                 pass
             elif not os.path.exists('/etc/systemd/system/changemac@.service'):
                     print(bcolors.BLUE + "[" + bcolors.RED + "         No changemac@.service file is configured. Configuring:) " + bcolors.BLUE + "           ]\n" + bcolors.ENDC)
@@ -245,7 +249,7 @@ class configure(object):
                     print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ x ] " + bcolors.BLUE + "]\n" + bcolors.ENDC)
                     pass
             else:
-                print(bcolors.BLUE + "[" + bcolors.YELLOW + "                  Configuring dnsmasq.conf             " + bcolors.BLUE + "]" + bcolors.ENDC)
+                print(bcolors.BLUE + "[" + bcolors.YELLOW + "               Configuring dnsmasq.conf                 " + bcolors.BLUE + "]" + bcolors.ENDC)
                 time.sleep(0.4)
                 try:
                     infile = "/etc/dnsmasq.conf"
@@ -260,9 +264,9 @@ class configure(object):
                         fout.write(line)
                     fin.close()
                     fout.close()
-                    print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                [ ✔ ] " + bcolors.BLUE + "]\n" + bcolors.ENDC)
+                    print(bcolors.BLUE + "[" + bcolors.GREEN + "                                                  [ ✔ ] " + bcolors.BLUE + "]\n" + bcolors.ENDC)
                 except:
-                    print(bcolors.BLUE + "[" + bcolors.RED + "             Failed to write the dnsmasq.conf file      " + bcolors.BLUE + "]" + bcolors.ENDC)
+                    print(bcolors.BLUE + "[" + bcolors.RED + "              Failed to write the dnsmasq.conf file        " + bcolors.BLUE + "]" + bcolors.ENDC)
                     pass
         else:
             print(bcolors.BLUE + "[" + bcolors.RED + "              Dnsmasq isn't installed, install with 'sudo apt install dnsmasq      " + bcolors.BLUE + "] " + bcolors.ENDC)

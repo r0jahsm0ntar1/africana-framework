@@ -1668,9 +1668,64 @@ start %USERPROFILE%\AppData\Local\Microsoft\OneDrive\OneDrive.exe
 
 @powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Win10.ps1" -include "%~dp0Win10.psm1" -preset "%~dpn0.preset"
 
-+------------------------------------------------------------------------------+
-|                             Malware DigiSpark                                |
-+------------------------------------------------------------------------------+
+
++---------------------------------------------------------+
+    Windows Version                        Product Key    |
+|:------------------------|:------------------------------|
+| Windows 8               | 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH |
+| Windows 8 Professional  | V7C3N-3W6CM-PDKR2-KW8DQ-RJMRD |
+| Windows 8 N             | 7QNT4-HJDDR-T672J-FBFP4-2J8X9 |
+| Windows 8 Professional N| 4NX4X-C98R3-KBR22-MGBWC-D667X |
+| Windows 8 Single Languag| NH7GX-2BPDT-FDPBD-WD893-RJMQ4 |
+| Windows 8.1 Preview     | NTTX3-RV7VB-T7X7F-WQYYY-9Y92  |
+|:------------------------|:------------------------------|
+| Windows 10 Home         | 37GNV-YCQVD-38XP9-T848R-FC2HD |
+| Windows 10 Home N       | 33CY4-NPKCC-V98JP-42G8W-VH636 |
+| Windows 10 Pro          | NF6HC-QH89W-F8WYV-WWXV4-WFG6P |
+| Windows 10 Pro N        | NH7W7-BMC3R-4W9XT-94B6D-TCQG3 |
+| Windows 10 SL           | NTRHT-XTHTG-GBWCG-4MTMP-HH64C |
+| Windows 10 CHN SL       | 7B6NC-V3438-TRQG7-8TCCX-H6DDY |
+|:------------------------|:------------------------------|
+| Windows 11 Home         | TX9XD-98N7V-6WMQ6-BX7FG-H8Q99 |
+| Windows 11 Home N       | 3KHY7-WNT83-DGQKR-F7HPR-844BM |
+| Windows 11 Home Home Sin| 7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH |
+| Windows 11 Home Country | PVMJN-6DFY6-9CCP6-7BKTT-D3WVR |
+| Windows 11 Pro          | W269N-WFGWX-YVC9B-4J6C9-T83GX |
+| Windows 11 Pro N        | MH37W-N47XK-V7XM9-C7227-GCQG9 |
+| Windows 11 Pro for Works| NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J |
+| Windows 11 Pro for Works| 9FNHH-K3HBT-3W4TD-6383H-6XYWF |
+| Windows 11 Pro Education| 6TP4R-GNPTD-KYYHQ-7B7DP-J447Y |
+| Windows 11 Pro Education| YVWGF-BXNMC-HTQYQ-CPQ99-66QFC |
+| Windows 11 Education    | NW6C2-QMPVW-D7KKK-3GKT6-VCFB2 |
+| Windows 11 Education N  | 2WH4N-8QGBV-H22JP-CT43Q-MDWWJ |
+| Windows 11 Enterprise   | NPPR9-FWDCX-D2C8J-H872K-2YT43 |
+| Windows 11 Enterprise N | DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4 |
+| Windows 11 Enterprise G | YYVX9-NTFWV-6MDM3-9PT4T-4M68B |
+| Windows 11 Enterprise G | 44RPN-FTY23-9VTTB-MP9BX-T84FV |
+| Windows 11 Enterprise LT| M7XTQ-FN8P6-TTKYV-9D4CC-J462D |
+| Windows 11 Enterprise N | 92NFX-8DJQP-P6BBQ-THF9C-7CG2H |
++---------------------------------------------------------+
+VMWare Workstation PRO 17                Product Key      |
++-------------------------:-------------------------------+
+| Professional            | MC60H-DWHD5-H80U9-6V85M-8280D |
+|                         | 4A4RR-813DK-M81A9-4U35H-06KND |
+| Enterprise              | NZ4RR-FTK5H-H81C1-Q30QH-1V2LA |
+|                         | JU090-6039P-08409-8J0QH-2YR7F |
+|                         | 4Y09U-AJK97-089Z0-A3054-83KLA |
+|                         | 4C21U-2KK9Q-M8130-4V2QH-CF810 |
++---------------------------------------------------------+
+
+Visual Studio  2017                        Product Key
++-------------------------:-------------------------------+
+| Professional            | KBJFW-NXHK6-W4WJM-CRMQB-G3CDH |
+|                         | 4F3PR-NFKDB-8HFP7-9WXGY-K77T7 |
+| Enterprise              | NJVYC-BMHX2-G77MM-4XJMR-6Q8QF |
+|                         | N2VYX-9VR2K-T733M-MWD9X-KQCDF |
+|                         | 2XNFG-KFHR8-QV3CP-3W6HT-683CH |
++---------------------------------------------------------+
++---------------------------------------------------------+
+|                    Malware DigiSpark                    |
++---------------------------------------------------------+
 #include "DigiKeyboard.h"
 void setup() {
 }
@@ -1805,62 +1860,16 @@ if(-not $isAdmin) {
     return
 }
 
+[Africana-framework is written purely for Good & not evil ]
+
+                Install Africana-Framework
+
+[git clone https://github.com/r0jahsm0ntar1/africana-frame]
+[work.....................................................]
+[cd Africana-Framework....................................]
+[python3 installer.py.....................................]
 +---------------------------------------------------------+
-    Windows Version                        Product Key    |
-|:------------------------|:------------------------------|
-| Windows 8               | 46V6N-VCBYR-KT9KT-6Y4YF-QGJYH |
-| Windows 8 Professional  | V7C3N-3W6CM-PDKR2-KW8DQ-RJMRD |
-| Windows 8 N             | 7QNT4-HJDDR-T672J-FBFP4-2J8X9 |
-| Windows 8 Professional N| 4NX4X-C98R3-KBR22-MGBWC-D667X |
-| Windows 8 Single Languag| NH7GX-2BPDT-FDPBD-WD893-RJMQ4 |
-| Windows 8.1 Preview     | NTTX3-RV7VB-T7X7F-WQYYY-9Y92  |
-|:------------------------|:------------------------------|
-| Windows 10 Home         | 37GNV-YCQVD-38XP9-T848R-FC2HD |
-| Windows 10 Home N       | 33CY4-NPKCC-V98JP-42G8W-VH636 |
-| Windows 10 Pro          | NF6HC-QH89W-F8WYV-WWXV4-WFG6P |
-| Windows 10 Pro N        | NH7W7-BMC3R-4W9XT-94B6D-TCQG3 |
-| Windows 10 SL           | NTRHT-XTHTG-GBWCG-4MTMP-HH64C |
-| Windows 10 CHN SL       | 7B6NC-V3438-TRQG7-8TCCX-H6DDY |
-|:------------------------|:------------------------------|
-| Windows 11 Home         | TX9XD-98N7V-6WMQ6-BX7FG-H8Q99 |
-| Windows 11 Home N       | 3KHY7-WNT83-DGQKR-F7HPR-844BM |
-| Windows 11 Home Home Sin| 7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH |
-| Windows 11 Home Country | PVMJN-6DFY6-9CCP6-7BKTT-D3WVR |
-| Windows 11 Pro          | W269N-WFGWX-YVC9B-4J6C9-T83GX |
-| Windows 11 Pro N        | MH37W-N47XK-V7XM9-C7227-GCQG9 |
-| Windows 11 Pro for Works| NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J |
-| Windows 11 Pro for Works| 9FNHH-K3HBT-3W4TD-6383H-6XYWF |
-| Windows 11 Pro Education| 6TP4R-GNPTD-KYYHQ-7B7DP-J447Y |
-| Windows 11 Pro Education| YVWGF-BXNMC-HTQYQ-CPQ99-66QFC |
-| Windows 11 Education    | NW6C2-QMPVW-D7KKK-3GKT6-VCFB2 |
-| Windows 11 Education N  | 2WH4N-8QGBV-H22JP-CT43Q-MDWWJ |
-| Windows 11 Enterprise   | NPPR9-FWDCX-D2C8J-H872K-2YT43 |
-| Windows 11 Enterprise N | DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4 |
-| Windows 11 Enterprise G | YYVX9-NTFWV-6MDM3-9PT4T-4M68B |
-| Windows 11 Enterprise G | 44RPN-FTY23-9VTTB-MP9BX-T84FV |
-| Windows 11 Enterprise LT| M7XTQ-FN8P6-TTKYV-9D4CC-J462D |
-| Windows 11 Enterprise N | 92NFX-8DJQP-P6BBQ-THF9C-7CG2H |
-+---------------------------------------------------------+
-VMWare Workstation PRO 17                Product Key      |
-+-------------------------:-------------------------------+
-| Professional            | MC60H-DWHD5-H80U9-6V85M-8280D |
-|                         | 4A4RR-813DK-M81A9-4U35H-06KND |
-| Enterprise              | NZ4RR-FTK5H-H81C1-Q30QH-1V2LA |
-|                         | JU090-6039P-08409-8J0QH-2YR7F |
-|                         | 4Y09U-AJK97-089Z0-A3054-83KLA |
-|                         | 4C21U-2KK9Q-M8130-4V2QH-CF810 |
+| What is there 4 U 2 gain the whole world & loose your...|
+| soul? Be smart your Creator has good plans for you......|
 +---------------------------------------------------------+
 
-Visual Studio  2017                        Product Key
-+-------------------------:-------------------------------+
-| Professional            | KBJFW-NXHK6-W4WJM-CRMQB-G3CDH |
-|                         | 4F3PR-NFKDB-8HFP7-9WXGY-K77T7 |
-| Enterprise              | NJVYC-BMHX2-G77MM-4XJMR-6Q8QF |
-|                         | N2VYX-9VR2K-T733M-MWD9X-KQCDF |
-|                         | 2XNFG-KFHR8-QV3CP-3W6HT-683CH |
-+---------------------------------------------------------+
-               Install Africana-Framework.
-
-git clone https://github.com/r0jahsm0ntar1/Africana-Framework
-cd Africana-Framework
-python3 installer.py

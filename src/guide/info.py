@@ -11,7 +11,12 @@ class guide_inf(object):
             for line in guide:
                 sys.stdout.write(line)
                 sys.stdout.flush()
-                time.sleep(0.00003)
+                time.sleep(0.0003)
+        with open('readme/CREDITS', 'r') as guide:
+            for line in guide:
+                sys.stdout.write(bcolors.DARKCYAN + line)
+                sys.stdout.flush()
+                time.sleep(0.03)
 
 guide_info = guide_inf()
 if ' __name__' == '__main__':

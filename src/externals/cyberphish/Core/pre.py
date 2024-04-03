@@ -17,19 +17,32 @@ white = purple
 Version = "2.2"
 yellow = ("\033[1;33;40m")
 
-banner = f"""
-	   ______      __                 ____  __    _      __  
-	  / ____/_  __/ /_  ___  _____   / __ \/ /_  (_)____/ /_ 
-	 / /   / / / / __ \/ _ \/ ___/  / /_/ / __ \/ / ___/ __ \\
-	/ /___/ /_/ / /_/ /  __/ /     / ____/ / / / (__  ) / / /
-	\____/\__, /_.___/\___/_/     /_/   /_/ /_/_/____/_/ /_/ 
-		 /____/      \n
-			</> Author: Saad Khan | Cyber Dioxide
-
-	===========================================================
-			Telegram @coding_memz
-	===========================================================
-"""
+banner = r"""
+                                                     ___
+                                                  ,o88888
+                                               ,o8888888'
+                         ,:o:o:oooo.        ,8O88Pd8888"
+                     ,.::.::o:ooooOoOoO. ,oO8O8Pd888'"
+                   ,.:.::o:ooOoOoOO8O8OOo.8OOPd8O8O"
+                  , ..:.::o:ooOoOOOO8OOOOo.FdO8O8"
+                 , ..:.::o:ooOoOO8O888O8O,COCOO"
+                , . ..:.::o:ooOoOOOO8OOOOCOCO"
+                 . ..:.::o:ooOoOoOO8O8OCCCC"o
+                    . ..:.::o:ooooOoCoCCC"o:o
+                    . ..:.::o:o:,cooooCo"oo:o:
+                 `   . . ..:.:cocoooo"'o:o:::'
+                 .`   . ..::ccccoc"'o:o:o:::'
+                :.:.    ,c:cccc"':.:.:.:.:.'
+              ..:.:"'`::::c:"'..:.:.:.:.:.'
+            ...:.'.:.::::"'    . . . . .'
+           .. . ....:."' `   .  . . ''
+         . . . ...."'
+         .. . ."'
+        .
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|"""
 
 
 def connected(host='http://duckduckgo.com'):
@@ -50,34 +63,22 @@ ran = random.choice(all_col)
 def menu():
 
     gradient_print(banner, start_color='yellow' , end_color='magenta')
-    print(alert + " More Versions Will Come Soon Stay Updated, Follow My Github\n")
-    print(white + "options:")
-    print(
-        green + "[" + white + "1" + green + "]" + white + " Instagram" + green + "			[" + white + "12" + green + "]" + white + " Paypal")
-    print(
-        green + "[" + white + "2" + green + "]" + white + " Facebook" + green + "			[" + white + "13" + green + "]" + white + " Discord")
-    print(
-        green + "[" + white + "3" + green + "]" + white + " Gmail" + green + "			[" + white + "14" + green + "]" + white + " Spotify")
-    print(
-        green + "[" + white + "4" + green + "]" + white + " Gmail (simple)" + green + "		[" + white + "15" + green + "]" + white + " Blockchain")
-    print(
-        green + "[" + white + "5" + green + "]" + white + " Twitter" + green + "			[" + white + "16" + green + "]" + white + " RiotGames")
-    print(
-        green + "[" + white + "6" + green + "]" + white + " Snapchat" + green + "			[" + white + "17" + green + "]" + white + " Rockstar")
-    print(
-        green + "[" + white + "7" + green + "]" + white + " Snapchat (simple)" + green + "		[" + white + "18" + green + "]" + white + " AskFM")
-    print(
-        green + "[" + white + "8" + green + "]" + white + " Steam" + green + "			[" + white + "19" + green + "]" + white + " 000Webhost")
-    print(green + "[" + white + "9" + green + "]" + white + " Dropbox" + green)
-    print(
-        green + "[" + white + "10" + green + "]" + white + " Linkedin" + green + "			[" + white + "21" + green + "]" + white + " Gamehag")
-    print(
-        green + "[" + white + "11" + green + "]" + white + " Playstation" + green + "	        [" + white + "22" + green + "]" + white + " Mega")
-    print(green + "-----------------------------------------------------------------------")
-    print(green + "[" + white + "00" + green + "]" + red + " EXIT")
-
+    print(white + "\n        ~>[ Select a number from the table below ]<~\n"   )
+    print(blue + "[ 1. Instagram................12...................Paypal]")
+    print(blue + "[ 2. Facebook.................13..................Discord]")
+    print(blue + "[ 3. Gmail....................14..................Spotify]")
+    print(blue + "[ 4. Gmail(Si)................15...............Blockchain]")
+    print(blue + "[ 5. Twitter..................16................RiotGames]")
+    print(blue + "[ 6. Snapchat.................17.................Rockstar]")
+    print(blue + "[ 7. SnapchatS................18....................AskFM]")
+    print(blue + "[ 8. Steam....................19.............. 000Webhost]")
+    print(blue + "[ 9. Dropbox..................21..................Gamehag]")
+    print(blue + "[ 10. Linkedin................22....................Mega ]")
+    print(blue + "[ 11. Playstation........................................]")
+    print(blue + "[ 0. .EXIT and go back to menu...........................]")
 
 def Welcome():
     os.system("clear")
 
 menu()
+
