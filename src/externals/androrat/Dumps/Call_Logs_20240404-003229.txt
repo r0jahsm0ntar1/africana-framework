@@ -1,0 +1,163 @@
+null#0
+Number : 0701361966
+Name : null
+Date : Thu Apr 04 16:53:41 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#1
+Number : 0701361966
+Name : null
+Date : Thu Apr 04 15:57:40 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#2
+Number : 0729989578
+Name : Mum In Law
+Date : Thu Apr 04 15:51:21 GMT+03:00 2024
+Duration : 13
+Type : 1
+
+#3
+Number : 0780158299
+Name : null
+Date : Thu Apr 04 14:24:37 GMT+03:00 2024
+Duration : 30
+Type : 1
+
+#4
+Number : 0700383167
+Name : Ma Eunice
+Date : Thu Apr 04 13:06:24 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#5
+Number : 0729989578
+Name : Mum In Law
+Date : Thu Apr 04 09:50:20 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#6
+Number : 0796562713
+Name : Brian
+Date : Wed Apr 03 18:01:39 GMT+03:00 2024
+Duration : 31
+Type : 2
+
+#7
+Number : 0740756424
+Name : null
+Date : Tue Apr 02 13:20:53 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#8
+Number : #0729989578
+Name : Mum In Law
+Date : Mon Apr 01 18:38:44 GMT+03:00 2024
+Duration : 5
+Type : 2
+
+#9
+Number : 0729989578
+Name : Mum In Law
+Date : Mon Apr 01 18:38:33 GMT+03:00 2024
+Duration : 2
+Type : 2
+
+#10
+Number : #0729909870
+Name : null
+Date : Mon Apr 01 18:38:18 GMT+03:00 2024
+Duration : 0
+Type : 2
+
+#11
+Number : 0729989578
+Name : Mum In Law
+Date : Mon Apr 01 18:02:22 GMT+03:00 2024
+Duration : 12
+Type : 1
+
+#12
+Number : #0729989578
+Name : Mum In Law
+Date : Sun Mar 31 15:20:14 GMT+03:00 2024
+Duration : 0
+Type : 2
+
+#13
+Number : 0796562713
+Name : Brian
+Date : Sat Mar 30 10:06:19 GMT+03:00 2024
+Duration : 0
+Type : 5
+
+#14
+Number : 0718072024
+Name : Daddy In Law
+Date : Sat Mar 30 05:53:22 GMT+03:00 2024
+Duration : 24
+Type : 1
+
+#15
+Number : 0743424997
+Name : null
+Date : Thu Mar 28 19:04:38 GMT+03:00 2024
+Duration : 0
+Type : 3
+
+#16
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 07:04:35 GMT+03:00 2024
+Duration : 17
+Type : 1
+
+#17
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 07:03:50 GMT+03:00 2024
+Duration : 5
+Type : 2
+
+#18
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 07:02:57 GMT+03:00 2024
+Duration : 0
+Type : 2
+
+#19
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 07:02:30 GMT+03:00 2024
+Duration : 0
+Type : 2
+
+#20
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 07:01:59 GMT+03:00 2024
+Duration : 0
+Type : 2
+
+#21
+Number : 0727496513
+Name : Agnesaunty
+Date : Thu Mar 28 06:55:00 GMT+03:00 2024
+Duration : 17
+Type : 1
+
+#22
+Number : 0718072024
+Name : Daddy In Law
+Date : Wed Mar 27 20:35:17 GMT+03:00 2024
+Duration : 20
+Type : 1
+
+
+END123

@@ -1,4 +1,0 @@
-termcolor
-readline
-pynput
-pyOpenSSL

@@ -28,73 +28,73 @@ class main_menu(object):
 
     def menu_zero(self):
         print(bcolors.RED + "\n[ The Africana-Framework is designed purely for Good..and.] " + bcolors.ENDC)
-        print(bcolors.RED + "[ not evil. If you are planning on using this tool for....] " + bcolors.ENDC)
+        print(bcolors.RED + "[ not evil. If you are planning on using this tool for..☘️] " + bcolors.ENDC)
         print(bcolors.RED + "[ malicious purposes that are not authorized by the.......] " + bcolors.ENDC)
         print(bcolors.RED + "[ company you are performing assessments for, you are.....] " + bcolors.ENDC)
         print(bcolors.RED + "[ violating the terms of service and license of this......] " + bcolors.ENDC)
         print(bcolors.RED + "[ toolset. By hitting yes (only one time), you agree to...] " + bcolors.ENDC)
         print(bcolors.RED + "[ the terms of service and that you will only use this....] " + bcolors.ENDC)
-        print(bcolors.RED + "[ tool for lawful purposes only...........................] \n" + bcolors.ENDC)
+        print(bcolors.RED + "[ tool for lawful purposes only.........................🥥] \n" + bcolors.ENDC)
 
     def menu_one(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Install or update africana-framework...." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. System Security Configuration..........." + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Local Network Attack Vectors............" + bcolors.DARKCYAN + "(Mitm, sniff)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. Generate Undetectable Malware..........." + bcolors.DARKCYAN + "(C2 & shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. WiFi Attack Vectors....................." + bcolors.DARKCYAN + "(Wifite, air)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords......" + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7. Social-Engineering Attacks.............." + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. Website Attack Vectors.................." + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About........." + bcolors.DARKCYAN + "(...🚀99....)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 0. Exit africana-framework................." + bcolors.DARKCYAN + "(Inspiration)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.GREEN + "                                              ¯\_(ツ)_/¯ " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here 🐧)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. System Security Configuration........." + bcolors.DARKCYAN + "(Setup tor &🐈)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Local Network Attack Vectors.........," + bcolors.DARKCYAN + "(Mitm, sniff🐹)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors......." + bcolors.DARKCYAN + "(C2 & shells🐭)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. WiFi Attack Vectors..................." + bcolors.DARKCYAN + "(Wifite, air🦝)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords...." + bcolors.DARKCYAN + "(Hashcat, jo🐙)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. Social-Engineering Attacks............" + bcolors.DARKCYAN + "(Gophish, gi🧪)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. Website Attack Vectors................" + bcolors.DARKCYAN + "(Osmedeus, j🌍)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About......." + bcolors.DARKCYAN + "(🕊️ ︻╦╤─ " + bcolors.RED + "JC❤️sU" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(Try option " + bcolors.YELLOW + "99" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "                                              ¯\_(ツ)_/¯                                                 " + bcolors.ENDC)
 
     def menu_two(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Install & Setup Tor🎭...................." + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Start anonymizing through tor........................]" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Stop tor & restore all iptables......................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. Chains (local ~> squid ~> privoxy ~> tor ~> net).....] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Check if using tor...................................] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Install & Setup Tor...................." + bcolors.DARKCYAN + "(start here🎭)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅]" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Stop tor & restore all iptables....................🐝] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. Chains (local ~> squid ~> privoxy ~> tor ~> net)...🐾] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Check if using tor.................................🦨] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit and go back fo main menu........................] \n" + bcolors.ENDC)
 
     def menu_three(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. 🐹Discover Targets..................................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Port discovery on the target........................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. Vuln' Scann the Target..............................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. S.M.B enumration on the target......................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Exploit S.M.B on target.............................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Sniff Internal Packets..............................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7. Lunch Responder with IPv6 Support...................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For (M.I.B)...............] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9. Get Reverse shell through snifing (XSS Injection)...] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Discover Targets..................................🐹] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Port discovery on the target......................🐾] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. Vuln' Scann the Target............................🦉] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. S.M.B enumration on the target....................🪳] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Exploit S.M.B on target...........................🕷️] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Sniff Internal Packets............................🪰] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. Lunch Responder with IPv6 Support.................🍈] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For (M.I.B).............🐝] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9. Get Reverse shell through snifing (XSS Injection).🍇] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit & Go to main menu..............................] \n" + bcolors.ENDC)
 
     def menu_four(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Blackjack........................" + bcolors.DARKCYAN + "(All Distro...R.A.T)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. ShellzGen........................" + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. Havoc C2........................." + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. Teardroid........................" + bcolors.DARKCYAN + "(Android 4 > 13 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 7. AndroidRAT......................." + bcolors.DARKCYAN + "(Android 4 > 10 Rat)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. Chameleon........................" + bcolors.DARKCYAN + "(Obfuscation .Ps1 S)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 9. Gh0x0st.........................." + bcolors.DARKCYAN + "(Obfuscation .Ps1 S)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Blackjack......................" + bcolors.DARKCYAN + "(All Distro...R.A.T🍇)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. ShellzGen......................" + bcolors.DARKCYAN + "(Windows Rev Shells🦐)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. PowerJoker....................." + bcolors.DARKCYAN + "(Windows Rev Shells🍐)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 4. MeterPeter....................." + bcolors.DARKCYAN + "(Windows Rev Shells🥝)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. Havoc C2......................." + bcolors.DARKCYAN + "(Windows Rev Shells🍵)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. Teardroid......................" + bcolors.DARKCYAN + "(Android 4 > 13 Rat🥙)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 7. AndroidRAT....................." + bcolors.DARKCYAN + "(Android 4 > 10 Rat🐭)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. Chameleon......................" + bcolors.DARKCYAN + "(Obfuscation .Ps1 S🍤)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 9. Gh0x0st........................" + bcolors.DARKCYAN + "(Obfuscation .Ps1 S🍈)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 
     def menu_five(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ......................Wifite.............." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. ....................Bettercap............." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 3. ...................Wifipumpkin3.." + bcolors.DARKCYAN + "(Automated Phishing)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. ....................Bettercap..........." + bcolors.DARKCYAN + "(Automated🧄)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 3. ...................Wifipumpkin3" + bcolors.DARKCYAN + "(Automated Phishing🍍)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. ....................Airgeddon................" + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "] " + bcolors.ENDC)
@@ -113,7 +113,7 @@ class main_menu(object):
     def menu_six_one(self):
         beauty.graphics(), scriptures.verses()
         print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. ...................Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "....................] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. ...................Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "..................🫑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. ...................Bruteforce " + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "....................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ...................Bruteforce " + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "....................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. ...................Bruteforce " + bcolors.DARKCYAN + "RDP" + bcolors.BLUE + "....................] " + bcolors.ENDC)
@@ -134,7 +134,7 @@ class main_menu(object):
         print(bcolors.BLUE + "[ 5. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. ......................To Add.........................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 8. ....................Hash-Buster..(offline)...........] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 8. ....................Hash-Buster..(offline).........🫑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. ..............Exit & Go To Main Menu.................] \n" + bcolors.ENDC)
 
@@ -146,7 +146,7 @@ class main_menu(object):
         print(bcolors.BLUE + "[ 3. ................... AdvPhishing......" + bcolors.DARKCYAN + "(OTP Bypass....)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. ....................Setoolkit........" + bcolors.DARKCYAN + "(Clones Website)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 5. ....................Anonphisher......" + bcolors.DARKCYAN + "(OTP Bypass....)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 6. ....................Cyberphish......." + bcolors.DARKCYAN + "(phishing temps)" + bcolors.BLUE + "] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 6. ....................Cyberphish....." + bcolors.DARKCYAN + "(phishing temps🫑)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
@@ -233,37 +233,28 @@ class main_menu(object):
 
     def menu_nine(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "[                                                         ] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ ..I am Rojahs Montari a Devoted Christian & Pentester...] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ ........................................................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ Email.........:rojahsmontari@gmail.com..................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ YouTube.......:https://youtube.com/@RojahsMontari.......] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ Life Tip......:Defeat the devil by fasting & praying....] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ ........................." + bcolors.YELLOW + "¯" + bcolors.BLUE + "\_(" + bcolors.ENDC + "ツ" + bcolors.BLUE + ")_/" + bcolors.YELLOW + "¯" + bcolors.BLUE + ".....................]  " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ ..................." + bcolors.DARKCYAN + "Press Enter To go BACK." + bcolors.BLUE + "..............] \n" + bcolors.ENDC)
+        print(bcolors.ENDC + "\n[ I am Rojahs Montari a Devoted Christian & Pentester.....] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ One might describe me as an erudite.....................] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ & perspicacious individual, a connoisseur of cybernetic ] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ security and digital fortification. My acumen in........] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ devising the africana-framework bespeaks a sagacious....] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ approach to ethological hacking and vulnerability.......] " + bcolors.ENDC)
+        print(bcolors.ENDC + "[ reconnaissance. As a virtuoso of cryptographic endeavors] \n" + bcolors.ENDC)
+        print(bcolors.RED  + "[ My pedagogical content disseminates esoteric knowledge,.] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ fostering a coterie of aspirant ethical hackers. My.....] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ prolific contributions to the technological milieu......] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ underscore a quintessential commitment to advancing.....] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ cybersecurity paradigms.................................] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ Email.......💬: rojahsmontari@gmail.com........,,.......] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ YouTube.....💎: https://youtube.com/@RojahsMontari......] " + bcolors.ENDC)
+        print(bcolors.RED  + "[ Life Tip....📚: " + bcolors.BLUE + "Defeat the devil by " + bcolors.YELLOW + "fasting & praying" + bcolors.RED  + "...] " + bcolors.ENDC)
+        print(bcolors.GREEN + "                                         ¯\_(ツ)_/¯"          + bcolors.ENDC)
+        print(bcolors.BLUE + "[ ................." + bcolors.DARKCYAN + "Press Enter To go BACK." + bcolors.BLUE + "................] \n" + bcolors.ENDC)
 
     def menu_nine_tisa(self):
-        print(color() + """
-                              ____
-                      __,-~~/~    `---.
-                    _/_,---(      ,    )
-                __ /        <    /   )  \___
- - ------===;;;'====------------------===;;;===----- -  -
-                   \/  ~"~"~"~"~"~\~"~)~"/
-                   (_ (   \  (     >    \)
-                    \_( _ <         >_>'
-                       ~ `-i' ::>|--"
-                           I;|.|.|
-                          <|i::|i|`.
-                         (` ^'"`-' ")
-          __                 _____ _____     _     _
-       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-      |_____|___|___|___|___|_____|__|__|_| |_|___|_|""" + bcolors.ENDC)
-        print(bcolors.GREEN + "\n     J    E    S    U    S    C    H    R     I    S   T     " + bcolors.ENDC)
-        print(bcolors.YELLOW + "     *    *    *    *    *    *    *    *    *     *   *     \n" + bcolors.ENDC)
+        beauty.graphics()
         print(bcolors.BLUE + "\n                 ~>[ " + bcolors.ENDC + "The Ten Commandments." + bcolors.ENDC + bcolors.BLUE + " ]<~        " + bcolors.ENDC)
-        print(bcolors.DARKCYAN + "\n[ 1. You.shall.have.no.other.gods.before Me................] " + bcolors.ENDC)
+        print(bcolors.DARKCYAN + "\n[ 1. You.shall.have.no.other.gods.before.Me................] " + bcolors.ENDC)
         print(bcolors.DARKCYAN + "[ 2. You.shall.make.no.idols...............................] " + bcolors.ENDC)
         print(bcolors.DARKCYAN + "[ 3. You.shall.not.take.the.name.of.the.Lord.your.God.in...] " + bcolors.ENDC)
         print(bcolors.DARKCYAN + "[  . vein..................................................] " + bcolors.ENDC)
@@ -274,8 +265,7 @@ class main_menu(object):
         print(bcolors.DARKCYAN + "[ 8. You.shall.not.steal...................................] " + bcolors.ENDC)
         print(bcolors.DARKCYAN + "[ 9. You.shall.not.bear.false.witness.against.your.eighbor.] " + bcolors.ENDC)
         print(bcolors.DARKCYAN + "[ 10 You.shall.not.covet...................................] " + bcolors.ENDC)
-        print(bcolors.BLUE + "\n      ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Tip: Defeat the devil by fasting & praying." + bcolors.ENDC + bcolors.BLUE + " ]<~        " + bcolors.ENDC)
-        print(bcolors.GREEN + "                            ¯\_(ツ)_/¯                       \n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n     ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Tip: Defeat the devil by fasting & praying." + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
 
 mega_menu = main_menu()
 
@@ -298,6 +288,10 @@ class neo_start(object):
                     with open("readme/LICENSE") as fileopen:
                         for line in fileopen:
                             print((bcolors.ENDC + line.rstrip()))
+                    if os.path.exists('/root/.africana/'):
+                        pass
+                    elif not os.path.exists('/root/.africana/'):
+                        os.system('mkdir -p /root/.africana/')
                     mega_menu.menu_zero()
                     covenant = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana: " + bcolors.DARKCYAN + "Do you agree to the terms of service [y/n]:" + bcolors.GREEN + ")# " + bcolors.ENDC)
                     covenant += " "

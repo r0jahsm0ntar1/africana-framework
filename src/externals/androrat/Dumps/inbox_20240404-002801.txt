@@ -1,0 +1,38 @@
+#0
+Number : MPESA
+Person : null
+Date : Fri Oct 26 10:15:52 GMT+03:00 56227
+Body : SD473M8KB3 confirmed.You bought Ksh5.00 of airtime on 4/4/24 at 9:14 AM.New M-PESA balance is Ksh1.43. Transaction cost, Ksh0.00. Amount you can transact within the day is 499,995.00. Reverse erroneously purchased airtime using M-PESA by sending the M-PESA SMS to 456
+
+#1
+Number : MPESA
+Person : null
+Date : Tue May 17 14:56:08 GMT+03:00 56225
+Body : SD33ZFVQ6F confirmed.You bought Ksh20.00 of airtime on 3/4/24 at 11:50 AM.New M-PESA balance is Ksh6.43. Transaction cost, Ksh0.00. Amount you can transact within the day is 499,960.00. Reverse erroneously purchased airtime using M-PESA by sending the M-PESA SMS to 456
+
+#2
+Number : MPESA
+Person : null
+Date : Tue May 17 06:01:42 GMT+03:00 56225
+Body : Failed, you have entered the wrong PIN. If forgotten please dial *334#, select My Account, select M-PESA PIN Manager then M-PESA Forgot PIN and follow the prompts.
+
+#3
+Number : MPESA
+Person : null
+Date : Sat Mar 19 00:38:28 GMT+03:00 56225
+Body : SD35Z5NWGT confirmed.You bought Ksh20.00 of airtime on 3/4/24 at 10:24 AM.New M-PESA balance is Ksh26.43. Transaction cost, Ksh0.00. Amount you can transact within the day is 499,980.00. Reverse erroneously purchased airtime using M-PESA by sending the M-PESA SMS to 456
+
+#4
+Number : MPESA
+Person : null
+Date : Tue Jul 09 16:35:23 GMT+03:00 56222
+Body : SD27VIDU05 Confirmed. Ksh10.00 sent to ROSALIA  GUTTO 0729989578 on 2/4/24 at 10:48 AM. New M-PESA balance is Ksh46.43. Transaction cost, Ksh0.00. Amount you can transact within the day is 499,990.00. Use a unique M-PESA PIN to keep your money safe - don't use your date of birth as your PIN.
+
+#5
+Number : MPESA
+Person : null
+Date : Mon Jul 08 05:37:11 GMT+03:00 56222
+Body : Failed.  You cannot transfer money to your  own M-PESA working account
+
+
+END123

@@ -6,7 +6,7 @@ class Payload:
         'Title' : 'Python3 Reverse TCP',
         'Author' : 'r0jahsm0ntar1',
         'Description' : 'Python3 Reverse TCP',
-        'References' : ['https://github.com/swisskyrepo/PayloadsAllTheThings']
+        'References' : ['https://github.com/r0jahsm0ntar1/africana-framework']
     }
 
     meta = {

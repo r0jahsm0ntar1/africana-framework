@@ -1,0 +1,30 @@
+# Compiled python files
+*.pyc
+
+#ignore IDE settings
+*.idea*
+*.vscode*
+*.code-workspace
+
+#setup
+build/*
+dist/*
+*egg-info*
+
+#tmp files
+*.py~
+user.txt
+pass.txt
+logs.txt
+*.log
+results.*
+.owasp-nettacker*
+.data*
+*.DS_Store
+*.swp
+
+#codacy
+.coverage
+coverage.xml
+
+venv/*

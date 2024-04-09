@@ -737,10 +737,10 @@ print_delimiter
 
 # -----------------------------------------------------------------------------
 
-print_blue "[~] Install Python3 libraries required by Jok3r (if missing)"
-pip3 install -r requirements.txt
-pip3 install --upgrade requests
-print_delimiter
+#print_blue "[~] Install Python3 libraries required by Jok3r (if missing)"
+#pip3 install -r requirements.txt
+#pip3 install --upgrade requests
+#print_delimiter
 
 # -----------------------------------------------------------------------------
 

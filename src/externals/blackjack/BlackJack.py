@@ -359,14 +359,11 @@ conptyshell <IP or INTERFACE> <PORT> <SESSION ID or ALIAS>''',
         \r  Commands with [+] may require additional arguments.
         \r  For details use: {ORANGE}help <COMMAND>{END}
         ''')
-            
-
 
     @staticmethod
-    def print_detailed(cmd):            
+    def print_detailed(cmd):
         PrompHelp.print_justified(PrompHelp.commands[cmd]['details'].strip()) if cmd in PrompHelp.commands.keys() \
         else print(f'No details for command "{cmd}".')
-
 
     @staticmethod
     def print_justified(text):
@@ -462,20 +459,17 @@ def alias_sanitizer(word, _min = 2, _max = 26):
 
 
     
-# Tab Auto-Completer          
+# Tab Auto-Completer
 class Completer(object):
     
     def __init__(self):
-        
-        self.tab_counter = 0        
+        self.tab_counter = 0 
         self.main_prompt_commands = clone_dict_keys(PrompHelp.commands)
         self.generate_arguments = ['payload', 'lhost', 'obfuscate', 'encode', 'constraint_mode', \
         'exec_outfile', 'domain']
         self.payload_templates_root = os.path.dirname(os.path.abspath(__file__)) + f'{os.sep}Core{os.sep}payload_templates'
-    
-    
-    
-    def reset_counter(self):    
+
+    def reset_counter(self):
         sleep(0.4)
         self.tab_counter = 0
         
@@ -734,8 +728,8 @@ def main():
         try:
             local_files_path = current_wd + os.sep
             branch = 'main' 
-            url = f'https://api.github.com/repos/r0jahsm0ntar1/Blackjack/git/trees/{branch}?recursive=1'
-            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/Blackjack/{branch}/'        
+            url = f'https://api.github.com/repos/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/git/trees/{branch}?recursive=1'
+            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/{branch}/'
             Loading.active = True
             loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Checking for updates',), name = 'loading_animation', daemon = True).start()
 
