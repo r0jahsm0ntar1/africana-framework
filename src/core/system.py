@@ -15,9 +15,9 @@ class update(object):
     def update_system(self):
         os.system('clear')
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 1. Kali-Linux............................." + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 2. Ubuntu-Linux.........................................] " + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>[ 🍄" + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 1. Kali-Linux..........................." + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 2. Ubuntu-Linux.......................................🥝] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Arch-Linux/ Black-Arch-Linux/ Manjaro-Linux..........] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. Uninstall-Africana...................................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit.................................................] \n" + bcolors.ENDC)
@@ -33,7 +33,7 @@ class update(object):
                 elif choice == '1':
                     os.system('clear')
                     scriptures.verses()
-                    print(bcolors.BLUE + "\n[            Installing africana on kali-linux            ] " + bcolors.ENDC)
+                    print(bcolors.BLUE + "\n[          🍄Installing africana on kali-linux            ] " + bcolors.ENDC)
                     print(bcolors.BLUE + "[                    Pleas be patient                     ] " + bcolors.ENDC)
                     print(bcolors.BLUE + "[      Installer will copy core files to your system      ] " + bcolors.ENDC)
                     print(bcolors.BLUE + "[                            &                            ] " + bcolors.ENDC)

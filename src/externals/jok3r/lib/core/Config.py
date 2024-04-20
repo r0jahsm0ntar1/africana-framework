@@ -3,62 +3,36 @@
 ###
 ### Core > Config
 ###
-import colored
 import os
-
+from lib.core.Bcolors import *
 from lib.core.Constants import *
 from lib._version import __version__
 
 #----------------------------------------------------------------------------------------
 # Banner/Help
 
-BANNER = colored.stylize("""
-                     .` 
-                   /dMMs`
-                `oNMMMMMN+
-              -yMMMMMMMMMMm/""", colored.attr('bold')) + colored.stylize("""
-            :hMMMMMMMMMMMMMMd:""", colored.attr('bold')) + colored.stylize("""
-         `+mMMMMho:sNMMMMMMMMMh.""", colored.attr('bold')) + colored.stylize("""
-       .sNMMdo:     `/dMMMMMMMMMy`""", colored.attr('bold')) + colored.stylize("""
-     -yMms/`           -sNMMMMMMMNo`""", colored.attr('bold')) + colored.stylize("""
-    /y/.                 `+mMMMMMMMN+""", colored.attr('bold')) + colored.stylize("""
-                            -yMMMMMMMm/
-             """, colored.attr('bold')) + \
-colored.stylize("..", colored.fg('light_green')+colored.attr('bold')) + colored.stylize(
-  """               `+mMMMMMMd-
-             """, colored.attr('bold')) + \
-colored.stylize("-s+-`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""               :yMMMMMMh.
-             """, colored.attr('bold')) + \
-colored.stylize(".ssso/-`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize(
-  """              `omMMMMMs`             """, colored.attr('bold')) + \
-colored.stylize(  """                 
-              """, colored.attr('bold')) + \
-colored.stylize("ossssso/-`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""              :hMMMMNo`
-              """, colored.attr('bold')) + \
-colored.stylize("/ssssss/.::-.", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""             .oNMMMN/
-              """, colored.attr('bold')) + \
-colored.stylize("`sssssso-   -:/:.", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""            /hMMMm:
-               """, colored.attr('bold')) + \
-colored.stylize("/ssssss+    :/sso+/-`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""         .sNMMdsss:
-               """, colored.attr('bold')) + \
-colored.stylize("`ossssss-  : +ssssssso+/:.`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""      /dMNs.
-                 """, colored.attr('bold')) + \
-colored.stylize("`.-:/++:/ .ossssssssssssso+/:-.`", colored.fg('light_green')+colored.attr('bold')) + colored.stylize(""" .`
-                       """, colored.attr('bold')) + \
-colored.stylize("oyso+-::://////:::--..``", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""
-                       -MMMd
-                        sMMN
-                         dMM.
-                         `mMo
-                          `dN
-                           `ho
-                             o-
+BANNER = bcolors.GREEN + r"""
+                       .--.       .--.
+                   _  `    \     /    `  _
+                    `\.===. \.^./ .===./`
+                           \/`"`\/
+                        ,  |     |  ,
+                       / `\|`-.-'|/` \
+                      /    |  \  |    \
+                   .-' ,-'`|   ; |`'-, '-.
+                       |   |    \|   | 
+                       |   |    ;|   |
+                       |   \    //   |
+                       |    `._//'   |  John 3:16
+                      .'             `.   Agape
+                   _,'                 `,_
+                   `%s
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 
-                 Rojahs Montari (c) 2024
-             https://www.jok3r-framework.com
-    https://github.com/r0jahsm0ntar1/africana-framework
-
-[ """, colored.attr('bold')) + colored.stylize("      Network & Web Pentest Automation Framework", colored.fg('light_green')+colored.attr('bold')) + colored.stylize("""        ]""".format(version=__version__), colored.attr('bold'))
+%s""" %(bcolors.YELLOW, "          " + bcolors.BLUE + bcolors.UNDERL + "Network & Web Pentest Automation Framework" + bcolors.ENDC)
 
 USAGE = """
 python3 jok3r.py <command> [<args>]
@@ -70,7 +44,8 @@ Supported commands:
    attack     Run security checks against targets
 """
 
-ATTACK_EXAMPLES = colored.stylize('Examples:', colored.attr('bold')) + """
+ATTACK_EXAMPLES = bcolors.YELLOW + 'Examples:' + bcolors.GREEN + """
+
   - Run all security checks against an URL in interactive mode (break before each check):
   python3 jok3r.py attack -t http://www.example.com/ 
 
@@ -87,12 +62,12 @@ ATTACK_EXAMPLES = colored.stylize('Examples:', colored.attr('bold')) + """
   python3 jok3r.py attack -m mayhem --profile red-team --fast
 """
 
-DB_INTRO = """[                                                         ]
+DB_INTRO = bcolors.DARKCYAN + """
 [ The local database stores the missions, targets info &  ]
 [ attacks results.This shell allows for easy access to    ]
 [ this database. New missions can be added and scopes can ]
 [ be defined by importing new targets.                    ]
-"""
+""" + bcolors.ENDC
 
 #----------------------------------------------------------------------------------------
 # Arguments Parsing Settings

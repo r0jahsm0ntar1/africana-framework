@@ -1,14 +1,41 @@
 package main
 
-import(
+import (
     "os"
     "fmt"
+    "bufio"
     "os/exec"
-    "syscall"
+    "strings"
     "bcolors"
+    "internals/RunNmap"
 )
 
-func banner() {
+func main() {
+    screenClear(); printBanner()
+    scanner := bufio.NewScanner(os.Stdin)
+    for {
+        printMenu()
+        fmt.Print("Enter your choice: ")
+        scanner.Scan()
+        userInput := scanner.Text()
+
+        switch strings.ToLower(userInput) {
+        case "1":
+            screenClear(); RunNmap()
+        case "2":
+            screenClear(); runDnsRecon()
+        case "3":
+            runBoth()
+        case "0":
+            screenClear(); exitBanner()
+            return
+        default:
+            fmt.Println("Invalid choice. Please select 'nmap', 'dnsrecon', 'both', or 'exit'.")
+        }
+    }
+}
+
+func printBanner() {
     fmt.Println(bcolors.BLUE + `                     _,._                         ` + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + `                 __.'   _)                        ` + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + `                <_,)'.-'a\                        ` + bcolors.ENDC)
@@ -28,7 +55,7 @@ func banner() {
     fmt.Println("                                                                                  \n")
 }
 
-func exit() {
+func exitBanner() {
     fmt.Print(`
                    _,.---.---.---.--.._ 
                _.-' '--.'---.'---'-. _,'--.._
@@ -52,7 +79,7 @@ func exit() {
     fmt.Println(bcolors.GREEN + "                       Man Of God.               \n" + bcolors.ENDC)
 }
 
-func menu() {
+func printMenu() {
     fmt.Println(bcolors.RED + bcolors.BOLD +"        ~>[ Choose what to do from the menu below ]<~ \n" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 1. Port Scanning                 6. Start Nikto Scaning ]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Dns Reconning                 7. Fero File Searching ]" + bcolors.ENDC)
@@ -61,82 +88,17 @@ func menu() {
     fmt.Println(bcolors.BLUE + "[ 5. Nuclei Vuln Scanning          0. Exit Africana Tool  ]\n" + bcolors.ENDC)
 }
 
-func clear() {
-    Cmd := exec.Command("clear")
-    Out, err := Cmd.Output()
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println(string(Out))
-    _, err = exec.Command("clear").Output()
-    if err != nil {
-        switch e := err.(type) {
-        case *exec.Error:
-            fmt.Println("failed executing:", err)
-        case *exec.ExitError:
-            fmt.Println("command exit rc =", e.ExitCode())
-        default:
-            panic(err)
-        }
+func screenClear() {
+    cmd := exec.Command("clear")
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+    if err := cmd.Run(); err != nil {
+        fmt.Println("Error running creenClear:", err)
     }
 }
 
-func nmap() {
-    binary, lookErr := exec.LookPath("nmap")
-    if lookErr != nil {
-        panic(lookErr)
-    }
-    var host string
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.RED + " type > host" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Scan(&host)
-    args := []string{"nmap", "-p-", "-vv", host}
-    env  := os.Environ()
-    execErr:= syscall.Exec(binary, args, env)
-    if execErr != nil {
-        panic(execErr)
-    }
-}
-
-func dnsr() {
-    binary, lookErr := exec.LookPath("dnsrecon")
-    if lookErr != nil {
-        panic(lookErr)
-    }
-    var host string
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.RED + " type > host" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Scan(&host)
-    args := []string{"dnsrecon", "-a", "-d", host}
-    env  := os.Environ()
-    execErr:= syscall.Exec(binary, args, env)
-    if execErr != nil {
-        panic(execErr)
-    }
-}
-
-func africs() {
-    clear()
-    banner()
-    menu()
-    var choice string
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Scan(&choice)
-    switch choice {
-    case "1":
-        draw := func() {
-        main()
-        }
-        fmt.Print("\n"); nmap()
-        draw()
-    case "2":
-        fmt.Print("\n"); dnsr(); africs()
-    case "0":
-        clear(); exit()
-        break
-    default:
-        fmt.Println(bcolors.ENDC + " ~{ " + bcolors.RED + "Poor choice of selection!. Please select int -> " + bcolors.DARKCYAN + " from 0. to 9. " + bcolors.ENDC +  "}~" + bcolors.ENDC)
-    }
-}
-
-func main() {
-    africs()
+func runBoth() {
+    fmt.Println("Running both nmap and dnsrecon...")
+    runNmap()
+    runDnsRecon()
 }

@@ -9,6 +9,7 @@ import cmd2
 import argparse
 from glob import glob
 
+from lib.core.Bcolors import *
 from lib.controller.Controller import Controller
 from lib.core.Config import *
 from lib.core.Constants import *
@@ -84,9 +85,7 @@ class DbController(cmd2.Cmd):
             logger.error('No mission with this name')
         else:
             self.current_mission = name
-            self.prompt = Output.colored('\nafricana', color='light_green', attrs='bold')+ \
-                Output.colored('[{}]'.format(name), color='light_blue', attrs='bold') + \
-                Output.colored('# ', color='light_green', attrs='bold')
+            self.prompt = bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "%s" %(name) +  bcolors.GREEN + ")# " + bcolors.ENDC
 
             if verbose: 
                 logger.info('Selected mission is now {name}'.format(name=name))

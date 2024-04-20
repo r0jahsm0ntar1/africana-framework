@@ -15,7 +15,7 @@ class progress(object):
         self.current_step += 1
         progress = (self.current_step / self.total_steps) * 100
         print(bcolors.GREEN + f"\n("+ bcolors.RED + f"Installing:" + bcolors.DARKCYAN + "africana" + bcolors.GREEN + ")# " + bcolors.ENDC + f"[{int(progress)}%]" + bcolors.GREEN + f" {'▒▓' * (int(progress) // 1)}", end="" + bcolors.ENDC)
-        time.sleep(0.9)
+        time.sleep(3.0)
 
     def spinner_setups(self):
         self.current_step += 1
@@ -27,13 +27,13 @@ class progress(object):
         self.current_step += 1
         progress = (self.current_step / self.total_steps) * 100
         print(bcolors.GREEN + f"\n("+ bcolors.RED + f"Updating:" + bcolors.DARKCYAN + "africana" + bcolors.GREEN + ")# " + bcolors.ENDC + f"[{int(progress)}%]" + bcolors.GREEN + f" {'▒▓' * (int(progress) // 1)}", end="" + bcolors.ENDC)
-        time.sleep(0.9)
+        time.sleep(9.0)
 
     def spinner_setupus(self):
         self.current_step += 1
         progress = (self.current_step / self.total_steps) * 100
         print(bcolors.GREEN + f"\n("+ bcolors.RED + f"Updating:" + bcolors.DARKCYAN + "africana" + bcolors.GREEN + ")# " + bcolors.ENDC + f"[{int(progress)}%]" + bcolors.GREEN + f" {'▒▓' * (int(progress) // 1)}", end="" + bcolors.ENDC)
-        time.sleep(9)
+        time.sleep(9.0)
 
     def run_subprocess(self, command):
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)

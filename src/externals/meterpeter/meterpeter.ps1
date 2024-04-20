@@ -17,89 +17,6 @@ $Dropper_Name = "Update-KB5005101"  # Payload-dropp`er filename (optional)
 $Acdst = "rem#ote ac#ce#ss" -replace '#',''
 $Acdts = "ob#fus#cat#ed" -replace '#',''
 
-$EndBanner = @"
-                               .--,
-                           ,.-( (o)\
-                          /   .)/\ ')
-                        .',./'/   )/
-                    ()=///=))))==()
-                      /
-                      wake up, Christian
-              Lord God Jesus Christ L❤️.VE'S you
-                  follow the white Pigeon.
-                    knock, knock, knock,
-                          Man Of God.
-         __                 _____ _____     _     _
-      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-     |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-__  __  ____  _____  ____  ____  ____  ____  _____  ____
-|  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|
-|_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____|R
-"@;
-
-$StartBanner = @"
-                                   ___
-         _______                  /__/
-        |.-----.|            ,---[___]*
-        ||     ||           /    printer
-        ||_____||    _____ /        ____
-        |o_____*|   [o_+_+]--------[=i==]
-         |     ________|           drive
-         |  __|_
-         '-/_==_\       Jesus Christ is
-          /_____\\  The Lamb that was slain
-                         for our sins.
-                           John 3:16
-         __                 _____ _____     _     _
-      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-     |_____|___|___|___|___|_____|__|__|_| |_|___|_|
- __  __  ____  _____  ____  ____  ____  ____  _____  ____
-|  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|
-|_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____|R
-
-[ Meterpeter its a command & control (C2) (rat)           ]
-[ written in pure powershell released to windows (python3 ]
-[ required) or to linux (powershell and apache2 required) ]
-[ distros. It creates reverse_tcp_shell payloads          ]
-[ (pure PWSH + SOC) obfuscated in BXOR using a secret key ]
-[ and also creates one dropper file that allow users to   ]
-[ fast deliver the payload on LAN networks for tests.     ]
-"@;
-
-$Modules = @"
-                  _/﹋\_
-                  (҂`_´)
-                 <,︻╦╤─ ҉- [ John 3:16  ]
-                  _/﹋\_                ]
-                 [ Jesus Christ said;   ]
-                 [ Defeat the devil by  ]
-                 [ fasting and praying. ]
-
-        ~>[ Salvation is free. Get it for free. ]<~
-         __                 _____ _____     _     _
-      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-     |_____|___|___|___|___|_____|__|__|_| |_|___|_|
- __  __  ____  _____  ____  ____  ____  ____  _____  ____ 
-|  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|
-|_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____|R
-
-[ Command      Description                                ]
-[ Info         Remote host system information             ]
-[ Session      Meterpeter C2 connection status            ]
-[ AdvInfo      Advanced system information sub-menu       ]
-[ Upload       Upload from local host to remote host      ]
-[ Download     Download from remote host to local host    ]
-[ Screenshot   Capture remote host desktop screenshots    ]
-[ keylogger    Install remote host keyloggers sub-menu    ]
-[ PostExploit  Post Exploitation modules sub-menu         ]
-[ NetScanner   Local LAN network scanner sub-menu         ]
-[ Pranks       Prank remote host modules sub-menu         ]
-[ exit         Exit rev_tcp_shell [server+client]         ]
-"@;
-
 try{#Check http.server
    $MyServer = python -V
    If(-not($MyServer) -or $MyServer -eq $null)
@@ -198,7 +115,37 @@ function NetworkStats($IP,$Port,$Base64_Key){
 }
 
 Clear-Host;
-Write-Host $StartBanner
+Write-Host "                     _,._                                        " -ForegroundColor Blue
+Write-Host "                 __.'   _)                                       " -ForegroundColor Blue
+Write-Host "                <_,)'.-'a\                                       " -ForegroundColor Blue
+Write-Host "                  /' (    \                                      " -ForegroundColor Blue
+Write-Host "      _.-----..,-'   (`'--^                                      " -ForegroundColor Blue
+Write-Host "     //              |                                           " -ForegroundColor Blue
+Write-Host "    (|   `;      ,   |                                           " -ForegroundColor Blue
+Write-Host "      \   ;.----/  ,/                                            " -ForegroundColor Blue
+Write-Host "       ) // /   | |\ \                                           " -ForegroundColor Blue
+Write-Host "       \ \\ `\   | |/ /      Jesus Christ                         " -ForegroundColor Blue
+Write-Host "        \ \\ \  | |\/  The Lamb that was slain                   " -ForegroundColor Blue
+Write-Host "         `''  `'' `''`         for our sins.                       " -ForegroundColor Blue
+
+Write-Host "          __                 _____ _____     _     _             " -ForegroundColor Yellow
+Write-Host "       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_           " -ForegroundColor Yellow
+Write-Host "      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|          " -ForegroundColor Yellow
+Write-Host "      |_____|___|___|___|___|_____|__|__|_| |_|___|_|            " -ForegroundColor Yellow
+
+Write-Host "`n  Command      Description                                  `n" -ForegroundColor Green
+Write-Host "[ Info         Remote host system information             ]     " -ForegroundColor Blue
+Write-Host "[ Session      Meterpeter C2 connection status            ]     " -ForegroundColor Blue
+Write-Host "[ AdvInfo      Advanced system information sub-menu       ]     " -ForegroundColor Blue
+Write-Host "[ Upload       Upload from local host to remote host      ]     " -ForegroundColor Blue
+Write-Host "[ Download     Download from remote host to local host    ]     " -ForegroundColor Blue
+Write-Host "[ Screenshot   Capture remote host desktop screenshots    ]     " -ForegroundColor Blue
+Write-Host "[ keylogger    Install remote host keyloggers sub-menu    ]     " -ForegroundColor Blue
+Write-Host "[ PostExploit  Post Exploitation modules sub-menu         ]     " -ForegroundColor Blue
+Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
+Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
+Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
+
 write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Green
 $DISTRO_OS = pwd|Select-String -Pattern "/" -SimpleMatch; # <-- (check IF windows|Linux Separator)
 If($DISTRO_OS)
@@ -271,7 +218,30 @@ Write-Host "[*] Obfuscation Type: BXOR ✔"
 $deskmondll = msaudite($deskmondll);
 
 Clear-Host;
-Write-Host $StartBanner
+Write-Host "                                   ___                          " -ForegroundColor Blue
+Write-Host "         _______                  /__/                          " -ForegroundColor Blue
+Write-Host "        |.-----.|            ,---[___]*                         " -ForegroundColor Blue
+Write-Host "        ||     ||           /    printer                        " -ForegroundColor Blue
+Write-Host "        ||_____||    _____ /        ____                        " -ForegroundColor Blue
+Write-Host "        |o_____*|   [o_+_+]--------[=i==]                       " -ForegroundColor Blue
+Write-Host "         |     ________|           drive                        " -ForegroundColor Blue
+Write-Host "         |  __|_                                                " -ForegroundColor Blue
+Write-Host "         '-/_==_\       Jesus Christ is                         " -ForegroundColor Blue
+Write-Host "          /_____\\  The Lamb that was slain                     " -ForegroundColor Blue
+Write-Host "                         for our sins.                          " -ForegroundColor Blue
+Write-Host "                           John 3:16                            " -ForegroundColor Blue
+
+Write-Host "`n         __                 _____ _____     _     _             " -ForegroundColor Yellow
+Write-Host "      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_           " -ForegroundColor Yellow
+Write-Host "     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|          " -ForegroundColor Yellow
+Write-Host "     |_____|___|___|___|___|_____|__|__|_| |_|___|_|            " -ForegroundColor Yellow
+Write-Host "`n[ Meterpeter its a command & control (C2) (rat)           ]     " -ForegroundColor Blue
+Write-Host "[ written in pure powershell released to windows (python3 ]     " -ForegroundColor Blue
+Write-Host "[ required) or to linux (powershell and apache2 required) ]     " -ForegroundColor Blue
+Write-Host "[ distros. It creates reverse_tcp_shell payloads          ]     " -ForegroundColor Blue
+Write-Host "[ (pure PWSH + SOC) obfuscated in BXOR using a secret key ]     " -ForegroundColor Blue
+Write-Host "[ and also creates one dropper file that allow users to   ]     " -ForegroundColor Blue
+Write-Host "[ fast deliver the payload on LAN networks for tests.     ]     " -ForegroundColor Blue
 write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Green
 Write-Host " - Payload    : $payload_name.ps1"
 Write-Host " - Local Host : $Local_Host"
@@ -838,7 +808,36 @@ While($Client.Connected)
       Write-Host "`n - press 'Enter' to continue .." -NoNewline;
       $continue = Read-Host;
       Clear-Host;
-      Write-Host $Modules;
+      Write-Host "                     _,._                                        " -ForegroundColor Blue
+      Write-Host "                 __.'   _)                                       " -ForegroundColor Blue
+      Write-Host "                <_,)'.-'a\                                       " -ForegroundColor Blue
+      Write-Host "                  /' (    \                                      " -ForegroundColor Blue
+      Write-Host "      _.-----..,-'   (`'--^                                      " -ForegroundColor Blue
+      Write-Host "     //              |                                           " -ForegroundColor Blue
+      Write-Host "    (|   `;      ,   |                                           " -ForegroundColor Blue
+      Write-Host "      \   ;.----/  ,/                                            " -ForegroundColor Blue
+      Write-Host "       ) // /   | |\ \                                           " -ForegroundColor Blue
+      Write-Host "       \ \\`\    | |/ /      Jesus Christ                        " -ForegroundColor Blue
+      Write-Host "        \ \\ \  | |\/  The Lamb that was slain                   " -ForegroundColor Blue
+      Write-Host "         `''`'' `''`         for our sins.                       " -ForegroundColor Blue
+
+      Write-Host "          __                 _____ _____     _     _             " -ForegroundColor Yellow
+      Write-Host "       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_           " -ForegroundColor Yellow
+      Write-Host "      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|          " -ForegroundColor Yellow
+      Write-Host "      |_____|___|___|___|___|_____|__|__|_| |_|___|_|            " -ForegroundColor Yellow
+
+      Write-Host "`n  Command      Description                                  `n" -ForegroundColor Green
+      Write-Host "[ Info         Remote host system information             ]     " -ForegroundColor Blue
+      Write-Host "[ Session      Meterpeter C2 connection status            ]     " -ForegroundColor Blue
+      Write-Host "[ AdvInfo      Advanced system information sub-menu       ]     " -ForegroundColor Blue
+      Write-Host "[ Upload       Upload from local host to remote host      ]     " -ForegroundColor Blue
+      Write-Host "[ Download     Download from remote host to local host    ]     " -ForegroundColor Blue
+      Write-Host "[ Screenshot   Capture remote host desktop screenshots    ]     " -ForegroundColor Blue
+      Write-Host "[ keylogger    Install remote host keyloggers sub-menu    ]     " -ForegroundColor Blue
+      Write-Host "[ PostExploit  Post Exploitation modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
       Write-Host "`n(africana:framework)# " -NoNewline -ForeGroundColor Green;
       $Command = Read-Host;
     }
@@ -847,7 +846,36 @@ While($Client.Connected)
     If($Command -ieq "Modules")
     {
       Clear-Host;
-      Write-Host "`n$Modules";
+      Write-Host "                     _,._                                        " -ForegroundColor Blue
+      Write-Host "                 __.'   _)                                       " -ForegroundColor Blue
+      Write-Host "                <_,)'.-'a\                                       " -ForegroundColor Blue
+      Write-Host "                  /' (    \                                      " -ForegroundColor Blue
+      Write-Host "      _.-----..,-'   (`'--^                                      " -ForegroundColor Blue
+      Write-Host "     //              |                                           " -ForegroundColor Blue
+      Write-Host "    (|   `;      ,   |                                           " -ForegroundColor Blue
+      Write-Host "      \   ;.----/  ,/                                            " -ForegroundColor Blue
+      Write-Host "       ) // /   | |\ \                                           " -ForegroundColor Blue
+      Write-Host "       \ \\`\    | |/ /      Jesus Christ                        " -ForegroundColor Blue
+      Write-Host "        \ \\ \  | |\/  The Lamb that was slain                   " -ForegroundColor Blue
+      Write-Host "         `''`'' `''`         for our sins.                       " -ForegroundColor Blue
+
+      Write-Host "          __                 _____ _____     _     _             " -ForegroundColor Yellow
+      Write-Host "       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_           " -ForegroundColor Yellow
+      Write-Host "      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|          " -ForegroundColor Yellow
+      Write-Host "      |_____|___|___|___|___|_____|__|__|_| |_|___|_|            " -ForegroundColor Yellow
+
+      Write-Host "`n  Command      Description                                  `n" -ForegroundColor Green
+      Write-Host "[ Info         Remote host system information             ]     " -ForegroundColor Blue
+      Write-Host "[ Session      Meterpeter C2 connection status            ]     " -ForegroundColor Blue
+      Write-Host "[ AdvInfo      Advanced system information sub-menu       ]     " -ForegroundColor Blue
+      Write-Host "[ Upload       Upload from local host to remote host      ]     " -ForegroundColor Blue
+      Write-Host "[ Download     Download from remote host to local host    ]     " -ForegroundColor Blue
+      Write-Host "[ Screenshot   Capture remote host desktop screenshots    ]     " -ForegroundColor Blue
+      Write-Host "[ keylogger    Install remote host keyloggers sub-menu    ]     " -ForegroundColor Blue
+      Write-Host "[ PostExploit  Post Exploitation modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
       $Command = $Null;
     }
 
@@ -2253,7 +2281,7 @@ While($Client.Connected)
        }
        If($choise -ieq "SocialMedia")
        {
-          write-host "`n   👁‍🗨 Module description 👁‍🗨" -ForegroundColor Yellow
+          write-host "`n   🍄 Module description 🍄" -ForegroundColor Yellow
           write-host "   This module starts recording keystr`okes if facebook or twitter"
           write-host "   is active on browser tab, and it stops\resumes capture if user"
           write-host "   switchs from social media to another website or closes browser.`n"
@@ -2291,18 +2319,18 @@ While($Client.Connected)
                    ## meterpeter module output
                    write-host "`n`n   [" -ForegroundColor Green -NoNewline
                    write-host "$CurrentTime" -NoNewline
-                   write-host "] 👁‍🗨 Social media key`logger 👁‍🗨" -ForegroundColor Green
+                   write-host "] 🍄 Social media key`logger 🍄" -ForegroundColor Green
 
-                   write-host "   💀 Starting key`logger in background!"
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🥝 Starting key`logger in background!"
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "SendToPasteBin  : " -NoNewline
                    write-host "$SetMeUp" -ForegroundColor Green
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "IsBrowserActive : " -NoNewline
                    write-host "by`pass" -ForegroundColor Green
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "LoopDelayTime   : " -NoNewline
                    write-host "1200`n" -ForegroundColor Green
 
@@ -2336,22 +2364,22 @@ While($Client.Connected)
                    ## meterpeter module output
                    write-host "`n`n   [" -ForegroundColor Green -NoNewline
                    write-host "$CurrentTime" -NoNewline
-                   write-host "] 👁‍🗨 Social media key`logger 👁‍🗨" -ForegroundColor Green
+                   write-host "] 🍄 Social media key`logger 🍄" -ForegroundColor Green
 
-                   write-host "   💀 Starting key`logger in background!"
+                   write-host "   🥝 Starting key`logger in background!"
                    write-host "   ⛑️ Schedule capture to: " -NoNewline
                    write-host "$ForceOrNot" -ForegroundColor Green -NoNewline
                    write-host " hours."
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "SendToPasteBin  : " -NoNewline
                    write-host "$SetMeUp" -ForegroundColor Green
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "IsBrowserActive : " -NoNewline
                    write-host "byp`ass" -ForegroundColor Green
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "LoopDelayTime   : " -NoNewline
                    write-host "$LoopDelayTime`n" -ForegroundColor $ColorChoise
 
@@ -2370,18 +2398,18 @@ While($Client.Connected)
                    ## meterpeter module output
                    write-host "`n`n   [" -ForegroundColor Green -NoNewline
                    write-host "$CurrentTime" -NoNewline
-                   write-host "] 👁‍🗨 Social media key`logger 👁‍🗨" -ForegroundColor Green
+                   write-host "] 🍄 Social media key`logger 🍄" -ForegroundColor Green
 
-                   write-host "   💀 Starting key`logger in background!"
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🥝 Starting key`logger in background!"
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "SendToPasteBin  : " -NoNewline
                    write-host "$SetMeUp" -ForegroundColor Red
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "IsBrowserActive : " -NoNewline
                    write-host "check" -ForegroundColor Red
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "LoopDelayTime   : " -NoNewline
                    write-host "1200`n" -ForegroundColor Green
 
@@ -2399,22 +2427,22 @@ While($Client.Connected)
                    ## meterpeter module output
                    write-host "`n`n   [" -ForegroundColor Green -NoNewline
                    write-host "$CurrentTime" -NoNewline
-                   write-host "] 👁‍🗨 Social media key`logger 👁‍🗨" -ForegroundColor Green
+                   write-host "] 🍄 Social media key`logger 🍄" -ForegroundColor Green
 
-                   write-host "   💀 Starting key`logger in background!"
+                   write-host "   🥝 Starting key`logger in background!"
                    write-host "   ⛑️ Schedule capture to: " -NoNewline
                    write-host "$ForceOrNot" -ForegroundColor Green -NoNewline
                    write-host " hours."
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "SendToPasteBin  : " -NoNewline
                    write-host "$SetMeUp" -ForegroundColor Red
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "IsBrowserActive : " -NoNewline
                    write-host "check" -ForegroundColor Red
 
-                   write-host "   👁️ " -ForegroundColor Green -NoNewline
+                   write-host "   🍄 " -ForegroundColor Green -NoNewline
                    write-host "LoopDelayTime   : " -NoNewline
                    write-host "1200`n" -ForegroundColor Green
 
@@ -3346,15 +3374,23 @@ While($Client.Connected)
 
                #Anwsome Banner
                $AnwsomeBanner = @"
-                  '-.
-                     '-. _____    
-              .-._      |     '.  
-             :  ..      |      :  
-             '-._'      |    .-'
-              /  \     .'i--i
-             /    \ .-'_/____\___
-                 .-'  :          :Stream_Desktop_Live ..
----------------------------------------------------------------------
+                 _      xxxx      _
+                /_;-.__ / _\  _.-;_\
+                   `-._`'`_/'`.-'
+                       `\   /`
+                        |  /
+                       /-.(
+                       \_._\
+                        \ \`;
+                         > |/
+                        / //      Jesus Christ
+                        |//   The Lamb that was slain
+                        \(\       for our sins.
+          __                 _____ _____     _     _
+       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+Stream_Desktop_Live ..
 "@;Write-Host $AnwsomeBanner
                Write-Host "* Start firefox on: '" -ForegroundColor Red -BackgroundColor Black -NoNewline;
                Write-host "http://${RemoteHost}:${BindPort}" -ForegroundColor Green -BackgroundColor Black -NoNewline;
@@ -4368,8 +4404,24 @@ While($Client.Connected)
       Start-Sleep -Seconds 3
 
       Clear-Host
-      write-host $EndBanner
-      write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Green
+      Write-Host ""
+      Write-Host "                               .--,                   " -ForegroundColor Blue
+      Write-Host "                           ,.-( (o)\                  " -ForegroundColor Blue
+      Write-Host "                          /   .)/\ ')                 " -ForegroundColor Blue
+      Write-Host "                        .',./'/   )/                  " -ForegroundColor Blue
+      Write-Host "                    ()=///=))))==()                   " -ForegroundColor Blue
+      Write-Host "                      /                               " -ForegroundColor Blue
+      Write-Host "                      wake up, Christian              " -ForegroundColor Green
+      Write-Host "              Lord God Jesus Christ L❤️.VE'S you      " -ForegroundColor Green
+      Write-Host "                  follow the white Pigeon.            " -ForegroundColor Green
+      Write-Host "                    knock, knock, knock,              " -ForegroundColor Green
+      Write-Host "                          Man Of God.                 " -ForegroundColor Green
+      Write-Host "         __                 _____ _____     _     _   " -ForegroundColor Yellow
+      Write-Host "      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ " -ForegroundColor Yellow
+      Write-Host "     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|" -ForegroundColor Yellow
+      Write-Host "     |_____|___|___|___|___|_____|__|__|_| |_|___|_|  " -ForegroundColor Yellow
+      Write-Host ""
+      write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Blue
 
       $Socket.Stop();
       $Client.Close();
@@ -4380,7 +4432,37 @@ While($Client.Connected)
     If($Command -ieq "Clear" -or $Command -ieq "Cls" -or $Command -ieq "Clear-Host" -or $Command -ieq "return" -or $Command -ieq "modules")
     {
       Clear-Host;
-      #Write-Host "`n$Modules";
+      Write-Host "                     _,._                                        " -ForegroundColor Blue
+      Write-Host "                 __.'   _)                                       " -ForegroundColor Blue
+      Write-Host "                <_,)'.-'a\                                       " -ForegroundColor Blue
+      Write-Host "                  /' (    \                                      " -ForegroundColor Blue
+      Write-Host "      _.-----..,-'   (`'--^                                      " -ForegroundColor Blue
+      Write-Host "     //              |                                           " -ForegroundColor Blue
+      Write-Host "    (|   `;      ,   |                                           " -ForegroundColor Blue
+      Write-Host "      \   ;.----/  ,/                                            " -ForegroundColor Blue
+      Write-Host "       ) // /   | |\ \                                           " -ForegroundColor Blue
+      Write-Host "       \ \\`\   | |/ /      Jesus Christ                         " -ForegroundColor Blue
+      Write-Host "        \ \\ \  | |\/  The Lamb that was slain                   " -ForegroundColor Blue
+      Write-Host "         `''`'' `''`         for our sins.                       " -ForegroundColor Blue
+
+      Write-Host "          __                 _____ _____     _     _             " -ForegroundColor Yellow
+      Write-Host "       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_           " -ForegroundColor Yellow
+      Write-Host "      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|          " -ForegroundColor Yellow
+      Write-Host "      |_____|___|___|___|___|_____|__|__|_| |_|___|_|            " -ForegroundColor Yellow
+
+      Write-Host "`n  Command      Description                                  `n" -ForegroundColor Green
+      Write-Host "[ Info         Remote host system information             ]     " -ForegroundColor Blue
+      Write-Host "[ Session      Meterpeter C2 connection status            ]     " -ForegroundColor Blue
+      Write-Host "[ AdvInfo      Advanced system information sub-menu       ]     " -ForegroundColor Blue
+      Write-Host "[ Upload       Upload from local host to remote host      ]     " -ForegroundColor Blue
+      Write-Host "[ Download     Download from remote host to local host    ]     " -ForegroundColor Blue
+      Write-Host "[ Screenshot   Capture remote host desktop screenshots    ]     " -ForegroundColor Blue
+      Write-Host "[ keylogger    Install remote host keyloggers sub-menu    ]     " -ForegroundColor Blue
+      Write-Host "[ PostExploit  Post Exploitation modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
+      Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
+       write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Blue
     }
     $Command = $Null;
   }

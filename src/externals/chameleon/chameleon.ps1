@@ -475,8 +475,8 @@ function Find-Variable() {
             
             # Variables    
             $Occurrences | ? { $_.SideIndicator -eq '=>' } | % {
-                $NewValue = Get-ObfuscatedVariable               
-                $ToReplace = $($_.InputObject)              
+                $NewValue = Get-ObfuscatedVariable
+                $ToReplace = $($_.InputObject)
                 $Pattern = '\{0}\b' -f $ToReplace
                 $Payload = $Payload -replace $Pattern, $NewValue 
 

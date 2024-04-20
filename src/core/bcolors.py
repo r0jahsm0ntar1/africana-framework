@@ -1,5 +1,9 @@
 import os
 import random
+try:
+    from rgbprint import gradient_print
+except:
+    pass
 
 def check_os():
     if os.name == "nt":

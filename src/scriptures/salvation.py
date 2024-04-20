@@ -10,7 +10,7 @@ class word(object):
         while True:
             try:
                 with open('src/scriptures/kjv.txt', 'r') as verses:
-                    words = color() + verses.read()
+                    words = bcolors.DARKCYAN + verses.read()
                     for w in words:
                         sys.stdout.write(w)
                         sys.stdout.flush()

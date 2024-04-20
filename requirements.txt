@@ -8,7 +8,9 @@ tqdm
 flask
 regex
 numpy
+scapy
 updog
+pycurl
 ipaddr
 flake8
 py3DNS
@@ -27,7 +29,6 @@ urllib3
 netaddr
 PySocks
 ipython
-readline
 paramiko
 rgbprint
 requests
@@ -44,7 +45,9 @@ GitPython
 ansi2html
 validators
 SQLAlchemy
+gnureadline
 prettytable
+pyreadline3
 pycryptodome
 humanfriendly
 python-libnmap
