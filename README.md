@@ -66,15 +66,15 @@ sudo python3 africana.py
                     __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
                     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
         Addicted to |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-    +------------------------------------------------------------------------------+                                                                                                                                 
-    |               With great power comes great responsibility.                   |                                                                                                                                 
-    +------------------------------------------------------------------------------+                                                                                                                                 
-    |        I am Rojahs Montari. A devoted Christian Studied Education In         |                                                                                                                                 
-    |         Kenyatta University Kenya. Got Persionate In Cybersecurity           |                                                                                                                                 
-    |        I Then Furthered My Skills By Research, Practice & Expirience.        |                                                                                                                                 
-    |                      Thanks To Ippsec Hack TheBox.                           |                                                                                                                                 
-    |   I Am Working As A Teacher, Cybersecurity Consoltant, Software Engineer.    |                                                                                                                                 
-    +------------------------------------------------------------------------------+                                                                                                                                 
+    +------------------------------------------------------------------------------+
+    |               With great power comes great responsibility.                   |
+    +------------------------------------------------------------------------------+
+    |        I am Rojahs Montari. A devoted Christian Studied Education In         |
+    |         Kenyatta University Kenya. Got Persionate In Cybersecurity           |
+    |        I Then Furthered My Skills By Research, Practice & Expirience.        |
+    |                      Thanks To Ippsec Hack TheBox.                           |
+    |   I Am Working As A Teacher, Cybersecurity Consoltant, Software Engineer.    |
+    +------------------------------------------------------------------------------+
     
 ## Youtube [ please subscribe ]
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/bdc012a1-be87-43b1-bc51-e0a96ed983b3)

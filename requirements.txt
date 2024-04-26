@@ -29,6 +29,7 @@ urllib3
 netaddr
 PySocks
 ipython
+impacket
 paramiko
 rgbprint
 requests

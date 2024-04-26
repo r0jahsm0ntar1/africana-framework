@@ -93,7 +93,7 @@ class TCP_Sock_Handler_Settings:
 class Payload_Generator_Settings:
     
     # Set to false in order to parse domains as LHOST when generating commands
-    validate_lhost_as_ip = True    
+    validate_lhost_as_ip = False
 
 
 

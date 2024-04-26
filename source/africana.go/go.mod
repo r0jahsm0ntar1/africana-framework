@@ -2,11 +2,10 @@ module main.go
 
 replace bcolors => ./bcolors
 
-replace internals => ./scanners
+replace internals => ./internals
 
-go 1.21.6
+go 1.22.2
 
-require (
-	bcolors v0.0.0-00010101000000-000000000000 // indirect
-	internals v0.0.0-00010101000000-000000000000 // indirect
-)
+require bcolors v0.0.0-00010101000000-000000000000
+
+require internals v0.0.0-00010101000000-000000000000 // indirect

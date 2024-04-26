@@ -85,11 +85,9 @@ class update(object):
                             break
 
                     else:
-                        print("")
-                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
+                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
                         spinner.run_subprocess('mkdir -p /usr/local/opt; cp -r %s /usr/local/opt/africana-framework; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana' %(installer.definepath()))
-                        print("")
-                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
+                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
                         spinner.run_subprocesx('apt-get update -y; apt-get install zsh git curl -y; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg;apt-get install curl wget git zip -y; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux aha set playit libssl-dev gcc hydra wine32:i386; npm install -g kickthemout')
                         time.sleep(0.3)
 
@@ -305,11 +303,9 @@ class update(object):
                             break
 
                     else:
-                        print("")
                         print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Making Necessary dirs & Copying africana to your system" + bcolors.ENDC)
                         spinner.run_subprocess('mkdir -p /usr/local/opt; cp -r %s /usr/local/opt/africana-framework; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana' %(installer.definepath()))
-                        print("")
-                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
+                        print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Installing Essential tools: nc, zsh, wget, curl, python3" + bcolors.ENDC)
                         spinner.run_subprocesx('mkdir -p /usr/local/opt; cp -rf ../../africana-framework /usr/local/opt/; ln -s /usr/local/opt/africana-framework/src/modules/kenyan.py /usr/local/bin/africana; chmod +x /usr/local/bin/africana; echo -n "deb https://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list.d/kali.list; apt-get update -y; apt-get install wget zip tmux zsh git curl -y; wget "https://archive.kali.org/archive-key.asc"; apt-key add ./archive-key.asc; rm -rf ./archive-key.asc; echo -n "Package: *" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin: release a=kali-rolling" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin-Priority: 50" >> /etc/apt/preferences.d/kali.pref; mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/; curl -SL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg; curl -SL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list; dpkg --add-architecture i386; apt-get update -y; apt-get install -y tor squid privoxy iptables openssh-client openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libpcap-dev npm libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser set util-linux playit hydra libssl-dev aha gcc wine32:i386; npm install -g kickthemout')
                         time.sleep(0.3)
 
