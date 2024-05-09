@@ -1,7 +1,8 @@
 #!/bin/bash
+#https://github.com/r0jahsm0ntar1/africana-framework
 
 DIR="$1"
-version="2.0"
+version="0.0.1"
 
 ### Colors ##
 ESC=$(printf '\033') RESET="${ESC}[0m" BLACK="${ESC}[30m" RED="${ESC}[31m"
@@ -21,31 +22,25 @@ fn_fail() { echo "That is just not an option!"; mainmenu; }
 #Header
 function header () {
 clear
-greenprint "
-                    [ John 3:16 ]
-     ~>[ Salvation is free. Get it for free. ]<~
-       __                 _____ _____     _     _
-    __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-   |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-   |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-                      ¯\_(ツ)_/¯
-"
-}
-function banner () {
-clear
-greenprint "
+blueprint "
+                               __
+                           ___( o)>
+                           \ <_. )
+                            '---'"
 
+greenprint "
                       wake up, Christian
-               Lord God Jesus Christ L❤️.VE'S you
-                   follow the white Pigeon.
-                     knock, knock, knock,
-                         Man Of God.
-
+              Lord God Jesus Christ L❤.VE'S you
+                  follow the white Pigeon.
+                    knock, knock, knock,
+                          Man Of God."
+yellowprint "
           __                 _____ _____     _     _
        __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
       |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-"
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_|"
+magentaprint "
+      v.$version"
 
 if [ ! -z "$DIR" ]
 then
@@ -127,18 +122,18 @@ else
     
 fi
 
- if [[ ! $OS == "Darwin" ]]
-      then
-            xclipinstalled=$(which xclip)
-            if [ "$?" == 1 ]
-            then
-                cyanprint "$0 are using xclip for copying revshells to clipboard. You don't seem to have xclip installed."
-                sleep 2
-    
-            fi
- 
-    
-fi
+ #if [[ ! $OS == "Darwin" ]]
+ #     then
+ #           xclipinstalled=$(which xclip)
+ #           if [ "$?" == 1 ]
+ #           then
+ #               cyanprint "$0 are using xclip for copying revshells to clipboard. You don't seem to have xclip installed."
+ #               sleep 2
+ #   
+ #           fi
+ # 
+ #   
+ #fi
 
 usingngrok=0
 usingupdog=0
@@ -3434,7 +3429,7 @@ Choose an option:  "
 
 
 mainmenu() {
-banner
+header
 
 poshproto=""
 if [[ $ngrok_installed == 1 ]]
@@ -3443,7 +3438,7 @@ then
 fi
 
     echo -ne "
-$(magentaprint 'MAIN MENU')
+$(magentaprint 'Main menu')
 $(greenprint '1)')  Powershell
 $(greenprint '2)')  Netcat
 $(greenprint '3)')  Bash

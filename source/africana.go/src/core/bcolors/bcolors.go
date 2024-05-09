@@ -1,6 +1,11 @@
 package bcolors
 
-import "runtime"
+import (
+    "fmt"
+    "runtime"
+    "math/rand"
+    "time"
+)
 
 var PURPLE = "\033[95m"
 var CYAN = "\033[96m"
@@ -42,4 +47,12 @@ func init() {
         backWhite = ""
         DARKCYAN = ""
     }
+}
+
+func Colors(word string) {
+    colors := []string{ BLUE, PURPLE, CYAN, DARKCYAN, GREEN, YELLOW, RED,
+    }
+    rand.Seed(time.Now().UnixNano())
+    randomIndex := rand.Intn(len(colors))
+    fmt.Printf("%s%s%s\n", colors[randomIndex], word, "\033[0m")
 }
