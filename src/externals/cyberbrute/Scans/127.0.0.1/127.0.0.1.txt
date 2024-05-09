@@ -1,3 +1,0 @@
-# Nmap 7.94SVN scan initiated Fri Mar 22 08:32:30 2024 as: nmap -T4 -Pn -v --open -p 21,22,23,25,53,80,110,139,162,389,443,445,512,513,514,993,1433,1521,3306,3389,5432,5900,5901,6667,8000,8080 -oN Scans/127.0.0.1/127.0.0.1.txt 127.0.0.1
-Read data files from: /usr/bin/../share/nmap
-# Nmap done at Fri Mar 22 08:32:30 2024 -- 1 IP address (1 host up) scanned in 0.21 seconds
