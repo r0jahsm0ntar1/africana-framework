@@ -1,0 +1,32 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+*.egg-info/
+.installed.cfg
+*.egg
+build/
+dist/
+
+# Toolbox
+toolbox/*
+
+# Tools install status
+settings/_install_status.conf
+
+# Local database
+local.db
+
+# History of commands in db
+.dbhistory
+
+# Firefox/geckodriver files
+core
+geckodriver.log
+
+# API keys file
+apikeys.py
+
+# Junk files
+shodan

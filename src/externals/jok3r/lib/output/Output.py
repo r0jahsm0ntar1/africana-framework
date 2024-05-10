@@ -60,9 +60,9 @@ class Output(object):
     def title1(title):
         """Print title level 1"""
         msg  = '\n'
-        #msg += '-'*80 + '\n'
-        msg += '{title}'.format(title=title)
-        #msg += '-'*80 + '\n'
+        msg += '-'*80 + '\n'
+        msg += ' {title}\n'.format(title=title)
+        msg += '-'*80 + '\n'
         Output.print(msg, color='light_green', attrs='bold')
 
 
@@ -90,7 +90,7 @@ class Output(object):
                 os.popen("stty size 2>/dev/null", "r").read().split()
             )
         except Exception as e:
-            col = col if col is not None else 0
+            col = col if col is not None else 80
         msg = "\n"
         msg += " " * col + "\n"
         msg += "cmd> {cmd}".format(cmd=cmd) + " " * (col - (len(cmd) + 5) % col) + "\n"
@@ -105,7 +105,7 @@ class Output(object):
                 os.popen("stty size 2>/dev/null", "r").read().split()
             )
         except Exception as e:
-            col = col if col is not None else 0
+            col = col if col is not None else 80
         msg = "\n"
         msg += " " * col + "\n"
         Output.print(msg, color="white", highlight="grey_19", attrs="bold")

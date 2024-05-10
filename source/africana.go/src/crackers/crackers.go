@@ -68,7 +68,7 @@ func HydraRdp() {
     subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrardp_outfile.txt -u rdp://%s`, userWordlists, userTarget)
 }
 
-func HydraLdp() {
+func HydraLdap() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to wordlist" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -82,7 +82,7 @@ func HydraLdp() {
     subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydraldap_outfile.txt -u ldap://%s`, userWordlists, userTarget)
 }
 
-func HydraSmp() {
+func HydraSmtp() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to wordlist" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -110,7 +110,7 @@ func HydraSnmtp() {
     subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrasnmtp_outfile.txt -u snmtp://%s`, userWordlists, userTarget)
 }
 
-func HydraTnt() {
+func HydraTelnet() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to wordlist" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -124,7 +124,7 @@ func HydraTnt() {
     subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydratelnet_outfile.txt -u telnet://%s`, userWordlists, userTarget)
 }
 
-func HydraHtp() {
+func HydraHttps() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to wordlist" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)

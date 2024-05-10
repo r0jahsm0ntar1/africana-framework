@@ -1,7 +1,10 @@
 package webattackers
 
 import (
+    "os"
     "fmt"
+    "bufio"
+    "strings"
     "bcolors"
     "subprocess"
 )
@@ -137,7 +140,7 @@ func NetTacker8(userTarget string) {
 }
 
 func NetTacker9() {
-    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Launched WebUI (key: africana)" + bcolors.BLUE + ")" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Launched WebUI (key: africana)" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.Popen(`cd ~/.africana/externals/nettacker/; python3 nettacker.py --start-api --api-access-key africana`)
 }
 
@@ -152,7 +155,7 @@ func Jok3r2() {
 }
 
 func Jok3r3() {
-    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Showing all the tools in the toolbox " + bcolors.BLUE + ")" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Showing all the tools in the toolbox " + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.Popen(`cd ~/.africana/externals/jok3r/; python3 jok3r.py toolbox --show-all`)
 }
 
@@ -187,7 +190,7 @@ func Jok3r9() {
 }
 
 func Osmedeus1() {
-    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Updating Osmedeus & Runing diagnostics to check config." + bcolors.BLUE + ")" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Updating Osmedeus & Runing diagnostics to check config." + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.Popen(`osmedeus version --json; osmedeus update; osmedeus update --vuln; osmedeus update --force --clean`)
 }
 
@@ -225,9 +228,15 @@ func Osmedeus7(userTarget string) {
 }
 
 func Osmedeus8() {
-    fmt.Printf(bcolors.BLUE + "\n( " + bcolors.RED + "Select a Port to start your server on" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "port" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n( " + bcolors.RED + "Start Osmedeusweb UI server on localhost:%s", userPort + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "( " + bcolors.RED + "Select a Port to start your server on" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Port:" + bcolors.BLUE + "Default:" + bcolors.BLUE + "3333" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    reader := bufio.NewReader(os.Stdin)
+    userPort, _ := reader.ReadString('\n')
+    userPort = strings.TrimSpace(userPort)
+    if userPort == "" {
+        userPort = "3333"
+    }
+    fmt.Printf(bcolors.BLUE + "\n( " + bcolors.RED + "Started Osmedeusweb UI server on " + bcolors.GREEN + "localhost:%s", userPort + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`osmedeus server --port %s`, userPort)
 }
 

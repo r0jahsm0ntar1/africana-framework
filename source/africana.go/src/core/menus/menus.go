@@ -209,39 +209,3 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
-
-func MenuNine() {
-        fmt.Println(bcolors.ENDC + "\n[ I am Rojahs Montari a Devoted Christian & Pentester.....] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ One might describe me as an erudite.....................] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ & perspicacious individual, a connoisseur of cybernetic ] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ security and digital fortification. My acumen in........] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ devising the 🦠 africana-framework bespeaks a sagacious.] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ approach to ethological hacking and vulnerability.......] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ reconnaissance. As a virtuoso of cryptographic endeavors] \n" + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ My pedagogical content disseminates esoteric knowledge,.] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ fostering a coterie of aspirant ethical hackers. My.....] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ prolific contributions to the technological milieu......] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ underscore a quintessential commitment to advancing.....] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ cybersecurity paradigms.................................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ Email.......💬: rojahsmontari@gmail.com.................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ YouTube.....💎: https://youtube.com/@RojahsMontari......] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED  + "[ Life Tip....📚: " + bcolors.BLUE + "Defeat the devil by " + bcolors.YELLOW + "fasting & praying" + bcolors.RED  + "...] " + bcolors.ENDC)
-        fmt.Println(bcolors.GREEN + `                                         ¯\_(ツ)_/¯`          + bcolors.ENDC)
-        fmt.Println(bcolors.BLUE + "[ ................." + bcolors.DARKCYAN + "Press Enter To go BACK." + bcolors.BLUE + "................] " + bcolors.ENDC)
-}
-
-func MenuNineNine() {
-        fmt.Println(bcolors.BLUE + "\n               ~>[ 📜" + bcolors.ENDC + "The Ten Commandments." + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ 1. You shall have no other gods before Me................] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ 2. You shall make no idols...............................] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ 3. You shall not take the name of the Lord your God in...] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[  . vein..................................................] " + bcolors.ENDC)
-        fmt.Println(bcolors.ENDC + "[ 4. Keep the Sabbath day holy.............................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "\n[ 5. Honor your father and your mother.....................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "[ 6. You shall not murder..................................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "[ 7. You shall not commit adultery.........................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "[ 8. You shall not steal...................................] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "[ 9. You shall not bear false witness against your eighbor.] " + bcolors.ENDC)
-        fmt.Println(bcolors.RED + "[ 10 You shall not covet...................................] \n" + bcolors.ENDC)
-        fmt.Println(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Tip:🕊️ " + bcolors.RED + "︻╦╤─ " + bcolors.DARKCYAN + "Defeat the devil by fasting & praying" + bcolors.GREEN + ") " + bcolors.ENDC)
-}

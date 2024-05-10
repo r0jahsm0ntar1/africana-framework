@@ -4,6 +4,7 @@ import (
     "os"
     "fmt"
     "utils"
+    "guides"
     //"os/signal"
     "io/ioutil"
     //"syscall"
@@ -17,6 +18,7 @@ import (
     "wireless"
     "crackers"
     "phishers"
+    "scriptures"
     "webattackers"
 )
 
@@ -88,26 +90,27 @@ func internalAttackers() {
             africanaFramework()
             return
         case "1":
-            internalUserTarget(); internalAttackers()
+            internalUserTarget          (          )
+            internalAttackers           (          )
         case "2":
-            internals.NmapPortscan    (userTarget)
+            internals.NmapPortscan      (userTarget)
         case "3":
-            internals.NmapVulnscan    (userTarget)
+            internals.NmapVulnscan      (userTarget)
         case "4":
-            internals.SmbVulnscan     (userTarget)
-            internals.SmbMapscan      (userTarget)
-            internals.RpcEnumscan     (userTarget)
+            internals.SmbVulnscan       (userTarget)
+            internals.SmbMapscan        (userTarget)
+            internals.RpcEnumscan       (userTarget)
         case "5":
-            internals.SmbVulnscan     (userTarget)
-            internals.SmbExploit      (userTarget)
+            internals.SmbVulnscan       (userTarget)
+            internals.SmbExploit        (userTarget)
         case "6":
-            internals.PacketSniffer   (userTarget)
+            internals.PacketSniffer     (userTarget)
         case "7":
-            internals.PacketsResponder()
+            internals.PacketsResponder  (          )
         case "8":
-            internals.BeefBettercap   (userTarget)
+            internals.BeefBettercap     (userTarget)
         case "9":
-            internals.RpcEnumscan     (userTarget)
+            internals.RpcEnumscan       (userTarget)
         default:
             fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -126,23 +129,23 @@ func malwareGenerators() {
             africanaFramework()
             return
         case "1":
-            butchers. BlackJack()
+            butchers.BlackJack  (          )
         case "2":
-            butchers.    Shellz()
+            butchers.Shellz     (          )
         case "3":
-            butchers.PowerJoker()
+            butchers.PowerJoker (          )
         case "4":
-            butchers.MeterPeter()
+            butchers.MeterPeter (          )
         case "5":
-             butchers.    Havoc()
+             butchers.Havoc     (          )
         case "6":
-            butchers. TearDroid()
+            butchers.TearDroid  (          )
         case "7":
-            butchers.  AndroRat()
+            butchers.AndroRat   (          )
         case "8":
-            butchers. Chameleon()
+            butchers.Chameleon  (          )
         case "9":
-            butchers. ChameLeon()
+            butchers.ChameLeon  (          )
         default:
             fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -161,23 +164,23 @@ func wirelesAttackers() {
             africanaFramework()
             return
         case "1":
-            wireless.WifiteAuto()
+            wireless.WifiteAuto         (          )
         case "2":
-            wireless.BettercapAuto()
+            wireless.BettercapAuto      (          )
         case "3":
-            wireless.WifiPumpkin3Auto()
+            wireless.WifiPumpkin3Auto   (          )
         case "4":
-            wireless.AirGeddon()
+            wireless.AirGeddon          (          )
         case "5":
-            wireless.AirGeddon()
+            wireless.AirGeddon          (          )
         case "6":
-            wireless.AirGeddon()
+            wireless.AirGeddon          (          )
         case "7":
-            wireless.WifiPumpkin3()
+            wireless.WifiPumpkin3       (          )
         case "8":
-            wireless.AirGeddon()
+            wireless.AirGeddon          (          )
         case "9":
-            wireless.AirGeddon()
+            wireless.AirGeddon          (          )
         default:
             fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -207,23 +210,23 @@ func passwordsCrackers() {
                     passwordsCrackers()
                     return
                 case "1":
-                    crackers.HydraSsh()
+                    crackers.HydraSsh   (          )
                 case "2":
-                    crackers.HydraFtp()
+                    crackers.HydraFtp   (          )
                 case "3":
-                    crackers.HydraSmb()
+                    crackers.HydraSmb   (          )
                 case "4":
-                    crackers.HydraRdp()
+                    crackers.HydraRdp   (          )
                 case "5":
-                    crackers.HydraLdp()
+                    crackers.HydraLdap  (          )
                 case "6":
-                    crackers.HydraSmp()
+                    crackers.HydraSmtp  (          )
                 case "7":
-                    crackers.HydraTnt()
+                    crackers.HydraTelnet(          )
                 case "8":
-                    crackers.HydraHtp()
+                    crackers.HydraHttps (          )
                 case "9":
-                    crackers.CyberBrute()
+                    crackers.CyberBrute (          )
                 default:
                     fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
@@ -237,14 +240,14 @@ func passwordsCrackers() {
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
-                    passwordsCrackers()
+                    passwordsCrackers   (          )
                     return
                 case "1":
-                    crackers.AirCrackng()
+                    crackers.AirCrackng (          )
                 case "2":
-                    crackers.JohnCrackng()
+                    crackers.JohnCrackng(          )
                 case "8":
-                    crackers.HashBuster()
+                    crackers.HashBuster (          )
                 default:
                     fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
@@ -267,23 +270,23 @@ func credsPhishers() {
             africanaFramework()
             return
         case "1":
-            phishers.    GoPhish()
+            phishers.GoPhish    (          )
         case "2":
-            phishers.   GoodGinx()
+            phishers.GoodGinx   (          )
         case "3":
-            phishers.   ZPhisher()
+            phishers.ZPhisher   (          )
         case "4":
-            phishers.  SetoolKit()
+            phishers.SetoolKit  (          )
         case "5":
-            phishers.AnonPhisher()
+            phishers.AnonPhisher(          )
         case "6":
-            phishers. CyberPhish()
+            phishers.CyberPhish (          )
         case "7":
-            phishers. UpsenTools()
+            phishers.UpsenTools (          )
         case "8":
-            phishers. UpsenTools()
+            phishers.UpsenTools (          )
         case "9":
-            phishers. UpsenTools()
+            phishers.UpsenTools (          )
         default:
             fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -331,18 +334,21 @@ func websitesAttackers() {
                 case "1":
                     webattackers.SqlmapAuto(userTarget)
                 case "2":
-                    webattackers.CommixAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.KatanaAuto(userTarget)
+                    webattackers.CommixAuto(userTarget)
+                    webattackers.XsserAuto (userTarget)
+                    webattackers.KatanaAuto(userTarget)
                 case "3":
-                    webattackers.SqlmapMan()
+                    webattackers.SqlmapMan (          )
                 case "4":
-                    webattackers.CommixMan(); webattackers.XsserMan()
+                    webattackers.CommixMan (          )
+                    webattackers.XsserMan  (          )
                 default:
                     fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 4 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //5. Launch OWASP Nettacker project MainMenu............🦣
         case "5": 
-            screenClear(); banners.Banner();  menus. MenuEightFive()
+            screenClear(); banners.Banner(); menus. MenuEightFive()
             for {
                 fmt.Printf(bcolors.GREEN + `¯\_(ツ)_/¯ Attacking!! ` + bcolors.RED + "︻╦╤─ ─ 🎯 " + bcolors.YELLOW + "%s\n" , userTarget + bcolors.ENDC)
                 fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -352,25 +358,25 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.SqlmapAuto(userTarget)
+                    webattackers.NetTacker1(userTarget)
                 case "2":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.NetTacker2(userTarget)
                 case "3":
-                    webattackers.SqlmapMan()
+                    webattackers.NetTacker3(userTarget)
                 case "4":
-                    webattackers.CommixMan()
+                    webattackers.NetTacker4(userTarget)
                 case "5":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.NetTacker5(userTarget)
                 case "6":
-                    webattackers.SqlmapMan()
+                    webattackers.NetTacker6(userTarget)
                 case "7":
-                    webattackers.CommixMan()
+                    webattackers.NetTacker7(userTarget)
                 case "8":
-                    webattackers.SqlmapMan()
+                    webattackers.NetTacker8(userTarget)
                 case "9":
-                    webattackers.CommixMan()
+                    webattackers.NetTacker9(          )
                 default:
-                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 4 " + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...👊
@@ -385,25 +391,25 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.SqlmapAuto(userTarget)
+                    webattackers.Jok3r1(          )
                 case "2":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Jok3r2(          )
                 case "3":
-                    webattackers.SqlmapMan()
+                    webattackers.Jok3r3(          )
                 case "4":
-                    webattackers.CommixMan()
+                    webattackers.Jok3r4(          )
                 case "5":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Jok3r5(userTarget)
                 case "6":
-                    webattackers.SqlmapMan()
+                    webattackers.Jok3r6(userTarget)
                 case "7":
-                    webattackers.CommixMan()
+                    webattackers.Jok3r7(userTarget)
                 case "8":
-                    webattackers.SqlmapMan()
+                    webattackers.Jok3r8(          )
                 case "9":
-                    webattackers.CommixMan()
+                    webattackers.Jok3r9(          )
                 default:
-                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 4 " + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //7. Osmedeus Next Generation Workflow Engine Main Menu.🍈
@@ -418,25 +424,25 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.SqlmapAuto(userTarget)
+                    webattackers.Osmedeus1(          )
                 case "2":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Osmedeus2(userTarget)
                 case "3":
-                    webattackers.SqlmapMan()
+                    webattackers.Osmedeus3(userTarget)
                 case "4":
-                    webattackers.CommixMan()
+                    webattackers.Osmedeus4(userTarget)
                 case "5":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Osmedeus5(userTarget)
                 case "6":
-                    webattackers.SqlmapMan()
+                    webattackers.Osmedeus6(userTarget)
                 case "7":
-                    webattackers.CommixMan()
+                    webattackers.Osmedeus7(userTarget)
                 case "8":
-                    webattackers.SqlmapMan()
+                    webattackers.Osmedeus8(          )
                 case "9":
-                    webattackers.CommixMan()
+                    webattackers.Osmedeus9(          )
                 default:
-                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 4 " + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //8. Ufonet Next Generation DDOS Tool Main Menu.........🦠
@@ -451,25 +457,25 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.SqlmapAuto(userTarget)
+                    webattackers.Ufonet1(          )
                 case "2":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Ufonet2(          )
                 case "3":
-                    webattackers.SqlmapMan()
+                    webattackers.Ufonet3(userTarget)
                 case "4":
-                    webattackers.CommixMan()
+                    webattackers.Ufonet4(userTarget)
                 case "5":
-                    webattackers.CommixAuto(userTarget)
+                    webattackers.Ufonet5(userTarget)
                 case "6":
-                    webattackers.SqlmapMan()
+                    webattackers.Ufonet6(userTarget)
                 case "7":
-                    webattackers.CommixMan()
+                    webattackers.Ufonet7(          )
                 case "8":
-                    webattackers.SqlmapMan()
+                    webattackers.Ufonet8(          )
                 case "9":
-                    webattackers.CommixMan()
+                    webattackers.Ufonet9(userTarget)
                 default:
-                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 4 " + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //9. Launch Heavy Automation Attacks On The Host........🍄
@@ -483,12 +489,34 @@ func websitesAttackers() {
 
 //9. Help, Credits, Tricks and About.......(🕊  ︻╦╤─JC❤sU)
 func creditsGivers() {
-    screenClear(); menus.MenuNine()
+    screenClear(); guides.Credits(); guides.Developer()
+    for {
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Scan(&userInput)
+    switch userInput {
+    case "0":
+        africanaFramework()
+        return
+    default:
+        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
+    }
+    }
 }
 
 //0. Exit africana-framework...............(Try option 99)
 func scriptureNarators() {
-    screenClear(); menus.MenuNineNine()
+    screenClear(); scriptures.TheScriptures(); scriptures.CommandMents()
+    for {
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Scan(&userInput)
+    switch userInput {
+    case "0":
+        africanaFramework()
+        return
+    default:
+        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
+    }
+    }
 }
 
 //Africana-Framework ......................(The rolling 9)
@@ -499,37 +527,39 @@ func africanaFramework() {
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
-            screenClear(); banners.Banner()
+            screenClear();  banners.Banner()
             return
         case "1":
-            africanaSetups()
+            africanaSetups      (          )
             return
         case "2":
-            anonymitySetups()
+            anonymitySetups     (          )
             return
         case "3":
-            internalUserTarget(); internalAttackers()
+            internalUserTarget  (          )
+            internalAttackers   (          )
             return
         case "4":
-            malwareGenerators()
+            malwareGenerators   (          )
             return
         case "5":
-            wirelesAttackers()
+            wirelesAttackers    (          )
             return
         case "6":
-            passwordsCrackers()
+            passwordsCrackers   (          )
             return
         case "7":
-            credsPhishers()
+            credsPhishers       (          )
             return
         case "8":
-            websiteUserTarget(); websitesAttackers()
+            websiteUserTarget   (          )
+            websitesAttackers   (          )
             return
         case "9":
-            creditsGivers()
+            creditsGivers       (          )
             return
         case "99":
-            scriptureNarators()
+            scriptureNarators   (          )
             return
         default:
             fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 9 " + bcolors.BLUE + ")" + bcolors.ENDC)

