@@ -1,6 +1,0 @@
-:admin
-:railo
-:
-:password
-:passw0rd
-:Passw0rd
