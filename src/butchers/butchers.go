@@ -17,7 +17,7 @@ func Havoc() {
 }
 
 func Shellz() {
-    subprocess.Popen(`cd ~/.africana/externals/shells/; bash shells.sh`)
+    subprocess.Popen(`cd ~/.africana/externals/shells/; bash shells`)
 }
 
 func MeterPeter() {
@@ -25,7 +25,7 @@ func MeterPeter() {
 }
 
 func TearDroid() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Output" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "africana.apk" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Output:" + bcolors.BLUE + "Deafult:" + bcolors.YELLOW + "africana.apk" + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userMalware, _ := reader.ReadString('\n')
     userMalware = strings.TrimSpace(userMalware)
@@ -36,10 +36,10 @@ func TearDroid() {
 }
 
 func Chameleon() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .Ps1" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.DARKCYAN + "Full path to your .Ps1" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userScript)
     fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.RED + "Script: " + bcolors.YELLOW + "%s", userScript + bcolors.GREEN + ")\n" + bcolors.ENDC)
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to output" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + " ~/.africana/output/chameleon.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to output" + bcolors.GREEN + ")" + bcolors.RED + "Default:" + bcolors.YELLOW + " ~/.africana/output/chameleon.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
@@ -50,10 +50,10 @@ func Chameleon() {
 }
 
 func ChameLeon() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .Ps1" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.DARKCYAN + "Full path to your .Ps1" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userScript)
     fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.RED + "Script: " + bcolors.YELLOW + "%s", userScript + bcolors.GREEN + ")\n" + bcolors.ENDC)
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to output" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + " ~/.africana/output/chameleon.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to output" + bcolors.GREEN + ")" + bcolors.RED + "Default:" + bcolors.YELLOW + " ~/.africana/output/chameleon.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
@@ -64,7 +64,7 @@ func ChameLeon() {
 }
 
 func BlackJack() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Use" + bcolors.ENDC + ": " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + "Go back" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Use" + bcolors.ENDC + ": " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + "Go back" + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userInput, _ := reader.ReadString('\n')
     userInput = strings.TrimSpace(userInput)
@@ -75,7 +75,7 @@ func BlackJack() {
     case "0":
         return
     case "1":
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lport" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
@@ -84,14 +84,14 @@ func BlackJack() {
         }
         subprocess.PopenTwo(`cd ~/.africana/externals/blackjack/; python3 BlackJack.py -i -s -n %s`, userLport)
     case "2":
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lport" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
         if userLport == "" {
             userLport = "9999"
         }
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Hport" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "3333" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Hport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "3333" + bcolors.GREEN + ")# " + bcolors.ENDC)
         userHport, _ := reader.ReadString('\n')
         userHport = strings.TrimSpace(userHport)
         if userHport == "" {
@@ -111,14 +111,14 @@ func PowerJoker() {
     }
     fmt.Println("")
     subprocess.Popen(`ip address`)
-    fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userLhost, _ := reader.ReadString('\n')
     userLhost = strings.TrimSpace(userLhost)
     if userLhost == "" {
         userLhost = userLhostIp
     }
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lport" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
     userLport, _ := reader.ReadString('\n')
     userLport = strings.TrimSpace(userLport)
     if userLport == "" {
@@ -139,20 +139,20 @@ func AndroRat() {
     }
     fmt.Println("")
     subprocess.Popen(`ip address`)
-    fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userLhost, _ := reader.ReadString('\n')
     userLhost = strings.TrimSpace(userLhost)
     if userLhost == "" {
         userLhost = userLhostIp
     }
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lport" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
     userLport, _ := reader.ReadString('\n')
     userLport = strings.TrimSpace(userLport)
     if userLport == "" {
         userLport = "9999"
     }
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Output" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "africana.apk" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Output:" + bcolors.BLUE + "Deafult:" + bcolors.YELLOW + "africana.apk" + bcolors.GREEN + ")# " + bcolors.ENDC)
     userMalware, _ := reader.ReadString('\n')
     userMalware = strings.TrimSpace(userMalware)
     if userMalware == "" {
