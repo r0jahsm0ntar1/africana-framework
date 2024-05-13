@@ -42,22 +42,22 @@ Before you begin, ensure you have met the following requirements:
 
 ```bash
 sudo apt update -y
-sudo apt install python3 -y
+sudo apt install golang -y
 ```
 ## Installation
 
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework
+git clone https://github.com/r0jahsm0ntar1/africana-framework -b dev
 ```
 ```bash
 cd africana-framework
 ```
 ```bash
-python3 installer.py
+go build main.go
 ```
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
-sudo python3 africana.py
+sudo main
 ```
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
