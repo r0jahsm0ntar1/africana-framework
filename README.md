@@ -16,7 +16,7 @@
     +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
 
 
-* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Python3. 
+* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Golang & Some Python3. 
 * It aims to make penetration testing easier for testers by covering a wide range of attack vectors including;
  web exploitation, WiFi attacks, phishing, malware generation, social engineering attacks, password cracking, and internal network attacks.
 
