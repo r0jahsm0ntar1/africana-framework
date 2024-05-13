@@ -1,0 +1,43 @@
+info:
+  name: wordpress_version_scan
+  author: OWASP Nettacker Team
+  severity: 3
+  description: WordPress Version Scan - extracts WP version number from /wp-admin/install.php
+  reference:
+  profiles:
+    - scan
+    - http
+    - backup
+    - low_severity
+    - wp
+    - wordpress
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        allow_redirects: false
+        ssl: false
+        url:
+          nettacker_fuzzer:
+            input_format: "{{schema}}://{target}:{{ports}}/wp-admin/install.php"
+            prefix: ""
+            suffix: ""
+            interceptors:
+            data:
+              schema:
+                - "http"
+                - "https"
+              ports:
+                - 80
+                - 443
+        response:
+          condition_type: or
+          conditions:              
+            content:
+              regex: \.css\?ver=(\d.\d.\d+)
+              reverse: false
+          log: "response_dependent['content']"

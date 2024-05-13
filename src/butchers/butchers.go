@@ -75,7 +75,7 @@ func BlackJack() {
     case "0":
         return
     case "1":
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)

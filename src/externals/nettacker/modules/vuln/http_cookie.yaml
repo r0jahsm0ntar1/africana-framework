@@ -1,0 +1,43 @@
+info:
+  name: http_cookie_vuln
+  author: OWASP Nettacker Team
+  severity: 3
+  description: This module check for Set-Cookie header best practices.
+  reference:
+    - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes
+    - https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+  profiles:
+    - vuln
+    - vulnerability
+    - http
+    - low_severity
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        allow_redirects: false
+        ssl: false
+        url:
+          nettacker_fuzzer:
+            input_format: "{{schema}}://{target}:{{ports}}/"
+            prefix: ""
+            suffix: ""
+            interceptors:
+            data:
+              schema:
+                - "http"
+                - "https"
+              ports:
+                - 80
+                - 443
+        response:
+          condition_type: or
+          conditions:
+            headers:
+              Set-Cookie:
+                regex: ^((?!SameSite).)+$|^((?!secure).)+$|^((?!HttpOnly).)+$|^((?!Max-Age).)+$
+                reverse: false

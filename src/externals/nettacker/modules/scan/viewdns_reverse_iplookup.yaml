@@ -1,0 +1,29 @@
+info:
+  name: viewdns_reverse_iplookup_scan
+  author: OWASP Nettacker Team
+  severity: 3
+  description: reverse lookup for target ip
+  reference:
+  profiles:
+    - scan
+    - http
+    - backup
+    - low_severity
+    - reverse_lookup
+
+payloads:
+  - library: http
+    steps:
+      - method: get
+        timeout: 3
+        headers:
+          User-Agent: "{user_agent}"
+        ssl: false
+        url:
+          - https://viewdns.info/reverseip/?host={target}&t=1
+        response:
+          condition_type: or
+          conditions:
+            content:
+              regex: <td>[a-z0-9]{{1,}}\.[a-z]{{2,}}</td>
+              reverse: false
