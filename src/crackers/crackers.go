@@ -141,13 +141,13 @@ func HydraHttps() {
 func CyberBrute() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
-    subprocess.PopenTwo(`cd ~/.africana/externals/cyberbrute; bash cyberbrute %s`, userTarget)
+    subprocess.PopenTwo(`cd ~/.africana/africana-base/cyberbrute; bash cyberbrute %s`, userTarget)
 }
 
 func HashBuster() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .pcap" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userHashes)
-    subprocess.PopenTwo(`cd ~/.africana/externals/hash-buster; python3 cracker.py -t 10 %s`, userHashes)
+    subprocess.PopenTwo(`cd ~/.africana/africana-base/hash-buster; python3 cracker.py -t 10 %s`, userHashes)
 }
 
 func AirCrackng() {

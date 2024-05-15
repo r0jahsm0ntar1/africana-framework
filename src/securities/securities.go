@@ -10,17 +10,17 @@ func VanishSetups() {
 }
 
 func Vanishstart() {
-    subprocess.Popen(`cd ~/.africana/externals/tor-vanish/; python3 vanisher.py -m`)
+    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -m`)
     fmt.Println()
 }
 
 func Vanishstop() {
-    subprocess.Popen(`cd ~/.africana/externals/tor-vanish/; python3 vanisher.py -e`)
+    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -e`)
     fmt.Println()
 }
 
 func ChecktorStatus() {
-    subprocess.Popen(`cd ~/.africana/externals/tor-vanish/; python3 vanisher.py -w`)
+    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -w`)
     fmt.Println()
 }
 

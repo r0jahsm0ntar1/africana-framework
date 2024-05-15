@@ -1,7 +1,0 @@
-.. _wordlists:
-
-=========
-Wordlists
-=========
-
-TODO

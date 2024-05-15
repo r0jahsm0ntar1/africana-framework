@@ -1,7 +1,0 @@
-manager
-system
-root
-admin
-websphere
-wasadmin
-wsadmin
