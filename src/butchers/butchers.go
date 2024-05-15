@@ -109,7 +109,7 @@ func PowerJoker() {
         fmt.Println("Error getting default userLhostIp:", err)
         os.Exit(1)
     }
-    fmt.Println("")
+    fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
@@ -137,7 +137,7 @@ func AndroRat() {
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`mv /usr/bin/zipalign /usr/bin/zipalign.bak_africana; cd ~/.africana/externals/androrat; apt install ./zipalign_8.1.0.deb --allow-downgrades -y`)
     }
-    fmt.Println("")
+    fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)

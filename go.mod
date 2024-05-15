@@ -16,15 +16,19 @@ replace crackers => ./src/crackers/
 
 replace phishers => ./src/phishers/
 
+replace setups => ./src/core/setups/
+
 replace internals => ./src/internals/
 
 replace bcolors => ./src/core/bcolors/
 
 replace banners => ./src/core/banners/
 
+replace agreements => ./src/agreements/
+
 replace scriptures => ./src/scriptures/
 
-replace agreements => ./src/agreements/
+replace securities => ./src/securities/
 
 replace webattackers => ./src/webattackers/
 
@@ -41,6 +45,8 @@ require (
 	menus v0.0.0-00010101000000-000000000000 // indirect
 	phishers v0.0.0-00010101000000-000000000000 // indirect
 	scriptures v0.0.0-00010101000000-000000000000 // indirect
+	securities v0.0.0-00010101000000-000000000000 // indirect
+	setups v0.0.0-00010101000000-000000000000 // indirect
 	subprocess v0.0.0-00010101000000-000000000000 // indirect
 	utils v0.0.0-00010101000000-000000000000 // indirect
 	webattackers v0.0.0-00010101000000-000000000000 // indirect

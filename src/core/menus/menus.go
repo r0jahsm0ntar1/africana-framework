@@ -15,7 +15,7 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords...." + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "🐙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks............" + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "🧪] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors................" + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About......." + bcolors.DARKCYAN + "(🕊️  " + bcolors.RED + "︻╦╤─" + bcolors.GREEN + "JC❤️sU" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About......." + bcolors.DARKCYAN + "(🕊️ " + bcolors.RED + "︻╦╤─ " + bcolors.GREEN + "JC❤️sU" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(Try option " + bcolors.YELLOW + "99" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + `                                              ¯\_(ツ)_/¯                                                 ` + bcolors.ENDC)
 }
@@ -29,14 +29,88 @@ func MenuOne() {
     println(bcolors.BLUE + "[ 0. Exit.................................................]\n " + bcolors.ENDC)
 }
 
+func MenuOneOne() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "[..........🍄Installing africana on kali-linux..........🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........................to your system...................]\n " + bcolors.ENDC)
+}
+
+func MenuOneTwo() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "[..........🍄Installing africana on ubuntu-linux..........🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........................to your system...................]\n " + bcolors.ENDC)
+}
+
+func MenuOneThree() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "[..........🍄Installing africana on arch-linux..........🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[........................to your system...................]\n " + bcolors.ENDC)
+}
+
+func MenuOneFour() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "[..........🍄Africana detected in your system...........🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[......................Pleas be patient...................] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[.............As theInstaller runs full updates...........] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[.....................Of installed tools..................]\n " + bcolors.ENDC)
+}
+
+func MenuOneFive() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "[................🍄Necessary tools updateded............🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[....Anonymous tools updateded (Tor, privoxy, squid)......] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[..........Wifi pentesting tools updateded (wifite).......] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[...................& All foundation tools................]\n " + bcolors.ENDC)
+}
+
+func MenuOneSix() {
+    fmt.Println(bcolors.BLUE + "\n[................Necessary tools installed................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[.....Anonymous tools installed (Tor, privoxy, squid )....] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[..........Wifi pentesting tools installed (wifite).......] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[........Local pentesting tools installed (bettercap).....] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[..Web pentest tools installed (nuclei, nikto, osmedeus)..] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[" + bcolors.ENDC + "+" + bcolors.BLUE + "] " + bcolors.GREEN + "Everything is set. Type 'africana' to launch The framework" + bcolors.ENDC)
+}
+
+func MenuOneSeven() {
+    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Ready to uninstall africana from your system.." + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ ..............Just Incase of any bug....................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[........Pleas email me @:rojahsmontari@gmail.com ........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[..Are U sure you want to completely uninstall africana?..]\n" + bcolors.ENDC)
+}
+
 func MenuTwo() {
     fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "......................" + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Stop tor & restore all iptables....................🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Chains....." + bcolors.GREEN + "local 🐌 " + bcolors.GREEN + "squid 🐙 " + bcolors.GREEN + "privoxy 🎭 " + bcolors.GREEN + "tor 🧄 " + bcolors.GREEN + "WEB 🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Check if using " + bcolors.GREEN + "tor 🧄 " + bcolors.BLUE + ".............................🦨] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. Check if using " + bcolors.GREEN + "tor 🧄 " + bcolors.BLUE + ".............................🦨] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. Chains....." + bcolors.GREEN + "local 🐌 " + bcolors.GREEN + "squid 🐙 " + bcolors.GREEN + "privoxy 🎭 " + bcolors.GREEN + "tor 🧄 " + bcolors.GREEN + "WEB 🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit and go back fo main menu........................]\n " + bcolors.ENDC)
+}
+
+func MenuTwoOne() {
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[.............Tor (Install tor & set proxies).............] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[........Iptables (Install Iptables for firewalls)........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[........Squid (Install Squid set through Privoxy)........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[.......Privoxy (Install Privoxy & set through tor).......] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing tor, privoxy, squid, dnsmasq & setting things." + bcolors.ENDC)
+}
+
+func MenuTwoTwo() {
+    fmt.Println(bcolors.BLUE + "\n  ~>( " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[.........Your internet proxy connections routes.........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[...................Running command......................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[...Launch ex. sqlmap --proxy=http://127.0.0.1:3129......] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[...............Your Proxy Chains Route..................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[Local " + bcolors.RED + "~>" + bcolors.GREEN + "Squid " + bcolors.RED + "~>" + bcolors.YELLOW + "3129 " + bcolors.RED + "~>" + bcolors.GREEN + "Privoxy " + bcolors.RED + "~>" + bcolors.YELLOW + "8118 " + bcolors.RED + "~>" + bcolors.GREEN + "Tor " + bcolors.RED + "~>" + bcolors.YELLOW + "9050 " + bcolors.RED + "~>" + bcolors.BLUE + "web]\n" + bcolors.ENDC)
 }
 
 func MenuThree() {
@@ -51,6 +125,26 @@ func MenuThree() {
     fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For (M.I.B).............🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing (XSS Injection).🍇] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go to main menu..............................]\n " + bcolors.ENDC)
+}
+
+func MenuThreeOne() {
+    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1..............Launch Eternalblue Exploit..............] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0................Exit & Go To Main Menu................] " + bcolors.ENDC)
+}
+
+func MenuThreeTwo() {
+    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
+}
+
+func MenuThreeThree() {
+    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
 }
 
 func MenuFour() {

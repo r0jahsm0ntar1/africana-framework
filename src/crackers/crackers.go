@@ -141,7 +141,7 @@ func HydraHttps() {
 func CyberBrute() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
-    subprocess.PopenTwo(`cd ~/.africana/externals/cyberbrute; bash cyberbrute.sh %s`, userTarget)
+    subprocess.PopenTwo(`cd ~/.africana/externals/cyberbrute; bash cyberbrute %s`, userTarget)
 }
 
 func HashBuster() {

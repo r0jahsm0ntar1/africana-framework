@@ -1,6 +1,6 @@
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/29e4c734-43d0-4ede-969b-2d8756b0a6c4)
 
-# 🌐 The africana-framework. Made simple but Lethal! 🌐
+# 🌐 africana-framework. Made simple but Lethal! 🌐
 
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
@@ -16,7 +16,7 @@
     +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
 
 
-* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Golang & Some Python3. 
+* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Go lang & some Python3. 
 * It aims to make penetration testing easier for testers by covering a wide range of attack vectors including;
  web exploitation, WiFi attacks, phishing, malware generation, social engineering attacks, password cracking, and internal network attacks.
 
@@ -42,28 +42,28 @@ Before you begin, ensure you have met the following requirements:
 
 ```bash
 sudo apt update -y
-sudo apt install golang -y
+sudo apt install Golang -y
 ```
 ## Installation
 
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework -b dev
+git clone https://github.com/r0jahsm0ntar1/africana-framework
 ```
 ```bash
 cd africana-framework
 ```
 ```bash
-go build main.go
+go build ./africana.go; mv africana /usr/local/bin
 ```
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
-sudo main
+sudo africana
 ```
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
 ## About the Author
-                       __                 _____ _____     _     _ 
-                    __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
+                        __                 _____ _____     _     _ 
+                     __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
                     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
         Addicted to |_____|___|___|___|___|_____|__|__|_| |_|___|_|
     +------------------------------------------------------------------------------+

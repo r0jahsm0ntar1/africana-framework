@@ -124,35 +124,7 @@ if __name__ == '__main__':
 
 def logo(*args):
     global color_taken
-    print(bcolors.BLUE + r"""
-          ███████▓█████▓▓╬╬╬╬╬╬╬╬▓███▓╬╬╬╬╬╬╬▓╬╬▓█
-          ████▓▓▓▓╬╬▓█████╬╬╬╬╬╬███▓╬╬╬╬╬╬╬╬╬╬╬╬╬█
-          ███▓▓▓▓╬╬╬╬╬╬▓██╬╬╬╬╬╬▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          ████▓▓▓╬╬╬╬╬╬╬▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          ███▓█▓███████▓▓███▓╬╬╬╬╬╬▓███████▓╬╬╬╬▓█
-          ████████████████▓█▓╬╬╬╬╬▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬█
-          ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          ████▓▓▓▓▓▓▓▓▓▓▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          ███▓█▓▓▓▓▓▓▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          █████▓▓▓▓▓▓▓▓█▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█
-          █████▓▓▓▓▓▓▓██▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██
-          █████▓▓▓▓▓████▓▓▓█▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██
-          ████▓█▓▓▓▓██▓▓▓▓██╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬██
-          ████▓▓███▓▓▓▓▓▓▓██▓╬╬╬╬╬╬╬╬╬╬╬╬█▓╬▓╬╬▓██
-          █████▓███▓▓▓▓▓▓▓▓████▓▓╬╬╬╬╬╬╬█▓╬╬╬╬╬▓██
-          █████▓▓█▓███▓▓▓████╬▓█▓▓╬╬╬▓▓█▓╬╬╬╬╬╬███
-          ██████▓██▓███████▓╬╬╬▓▓╬▓▓██▓╬╬╬╬╬╬╬▓███
-          ███████▓██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬████
-          ███████▓▓██▓▓▓▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓████
-          ████████▓▓▓█████▓▓╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬╬▓█████
-          █████████▓▓▓█▓▓▓▓▓███▓╬╬╬╬╬╬╬╬╬╬╬▓██████
-          ██████████▓▓▓█▓▓▓▓▓██╬╬╬╬╬╬╬╬╬╬╬▓███████
-          ███████████▓▓█▓▓▓▓███▓╬╬╬╬╬╬╬╬╬▓████████
-          ██████████████▓▓▓███▓▓╬╬╬╬╬╬╬╬██████████
-          ███████████████▓▓▓██▓▓╬╬╬╬╬╬▓███████████
-""" + bcolors.ENDC)
-    print(bcolors.BLUE + "~>[ " + color() + "Be strong and of a good courage, fear not, nor be af" + bcolors.BLUE + " ]<~" + color() + "\n\n                   " + bcolors.YELLOW + "~>[   " + color() + "Deut.31:6" + bcolors.YELLOW + "   ]<~" + bcolors.ENDC)
-
+    print(bcolors.BLUE + "\n(" + color() + "Be strong and of a good courage, fear not, nor be afraid" + bcolors.BLUE + ")" + bcolors.ENDC)
 def mask():
     try:
         mask0 = requests.get('https://icanhazip.com/').text
@@ -332,9 +304,9 @@ def tor_stat(e_langa):
     except:
         e_langa += 1
         if e_langa > 2:
-            print(bcolors.BLUE + "\n[" + bcolors.RED + " Unable to get the network-details, Check your Internet " + bcolors.BLUE + "]" + bcolors.ENDC)
+            print(bcolors.BLUE + "[" + bcolors.RED + " Unable to get the network-details, Check your Internet " + bcolors.BLUE + "]" + bcolors.ENDC)
             sys.exit(1)
-        print(bcolors.BLUE + "\n[" + bcolors.GREEN + " Having trouble fetching exit-node details, " + bcolors.CYAN + "retrying..." + bcolors.BLUE + " ]" + bcolors.ENDC)
+        print(bcolors.BLUE + "[" + bcolors.GREEN + " Having trouble fetching exit-node details, " + bcolors.CYAN + "retrying..." + bcolors.BLUE + " ]" + bcolors.ENDC)
         time.sleep(1.2)
         return tor_stat(e_langa)
     status = re.search(r'<title[^>]*>([^<]+)</title>', resp.text).group(1)
@@ -558,7 +530,7 @@ def usage():
        __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
       |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
       |_____|___|___|___|___|_____|__|__|_| |_|___|_|""" + bcolors.ENDC)
-    print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select an option from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    print(bcolors.BLUE + "\n        ~>(" + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Select an option from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
     print(bcolors.BLUE + "[ -h          show this help message and exit             ] " + bcolors.ENDC)
     print(bcolors.BLUE + "[ -m                 start anonymizing                    ] " + bcolors.ENDC)
     print(bcolors.BLUE + "[ -e            get back to the surface-web               ] " + bcolors.ENDC)
