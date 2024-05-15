@@ -11,7 +11,7 @@ if ((Test-Admin) -eq $false)  {
     if ($elevated) {
         # tried to elevate, did not work, aborting
     } else {
-        Start-Process $env:Syst??r??t\\SYSW?W6?\??ndowsPowerShe??\v1.0\powershe??.exe -Verb RunAs -ArgumentList ('-noprofile -WindowStyle hidden -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
+        Start-Process $env:Sys???r???\\SYSW????\??ndowsPowerShe??\v1.0\powershe??.exe -Verb RunAs -ArgumentList ('-noprofile -WindowStyle hidden -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
     }
     exit
 }
