@@ -37,11 +37,11 @@ func GetDefaultIP() (string, error) {
         }
         for _, addr := range addrs {
             var ip net.IP
-            switch v := addr.(type) {
+            switch neo := addr.(type) {
             case *net.IPNet:
-                ip = v.IP
+                ip = neo.IP
             case *net.IPAddr:
-                ip = v.IP
+                ip = neo.IP
             }
             if ip == nil || ip.IsLoopback() {
                 continue
@@ -136,9 +136,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error replacing strings in file %s: %v\n" + bcolors.ENDC, fileName, err)
+            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error replacing strings in file %s: %v\n" + bcolors.ENDC, fileName, err)
         } else {
-            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.GREEN + "Replacements completed successfully in file %s!\n" + bcolors.ENDC, fileName,)
+            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Replacements completed successfully in file %s!\n" + bcolors.ENDC, fileName,)
         }
     }
 }
@@ -149,7 +149,7 @@ func ClearScreen() {
     } else if runtime.GOOS == "windows" {
         subprocess.PopenCmd("cls")
     } else {
-        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.GREEN + "Unsupported operating system.\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Unsupported operating system.\n" + bcolors.ENDC)
     }
 }
 

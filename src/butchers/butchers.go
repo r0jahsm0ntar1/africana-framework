@@ -106,7 +106,7 @@ func BlackJack() {
 func PowerJoker() {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {
-        fmt.Println("Error getting default userLhostIp:", err)
+        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
         os.Exit(1)
     }
     fmt.Println()
