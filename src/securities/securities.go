@@ -2,20 +2,23 @@ package securities
 
 import (
     "fmt"
+    "configures"
     "subprocess"
 )
 
 func VanishSetups() {
-    subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy iptables isc-dhcp-client isc-dhcp-server; systemctl daemon-reload; systemctl enable tor@default.service privoxy.service squid.service dnsmasq.service changemac@eth0.service; systemctl restart tor@default.service privoxy.service squid.service dnsmasq.service changemac@eth0.service`)
+    subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`)
 }
 
 func Vanishstart() {
-    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -m`)
+    configures.Clean()
+    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -m; systemctl restart tor@default.service privoxy.service squid.service dnsmasq.service changemac@eth0.service`)
     fmt.Println()
 }
 
 func Vanishstop() {
-    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -e`)
+    subprocess.Popen(`cd ~/.africana/africana-base/tor-vanish/; python3 vanisher.py -e; systemctl stop tor@default.service privoxy.service squid.service dnsmasq.service changemac@eth0.service`)
+    configures.Restore()
     fmt.Println()
 }
 

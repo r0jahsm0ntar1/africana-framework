@@ -3,10 +3,12 @@ package menus
 import (
     "fmt"
     "bcolors"
+    "scriptures"
 )
 
 func MenuZero() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration........." + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "🐈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors.........." + bcolors.DARKCYAN + "(Mitm, sniff)" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
@@ -21,7 +23,8 @@ func MenuZero() {
 }
 
 func MenuOne() {
-    println(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[ 1. Kali-Linux..........................." + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 2. Ubuntu-Linux.......................................🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 3. Arch-Linux/ Black-Arch-Linux/ Manjaro-Linux..........] " + bcolors.ENDC)
@@ -30,7 +33,8 @@ func MenuOne() {
 }
 
 func MenuOneOne() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[..........🍄Installing africana on kali-linux..........🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
     println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
@@ -38,7 +42,8 @@ func MenuOneOne() {
 }
 
 func MenuOneTwo() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[..........🍄Installing africana on ubuntu-linux..........🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
     println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
@@ -46,7 +51,8 @@ func MenuOneTwo() {
 }
 
 func MenuOneThree() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[..........🍄Installing africana on arch-linux..........🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
     println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
@@ -54,7 +60,8 @@ func MenuOneThree() {
 }
 
 func MenuOneFour() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[..........🍄Africana detected in your system...........🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[......................Pleas be patient...................] " + bcolors.ENDC)
     println(bcolors.BLUE + "[.............As theInstaller runs full updates...........] " + bcolors.ENDC)
@@ -62,7 +69,8 @@ func MenuOneFour() {
 }
 
 func MenuOneFive() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[................🍄Necessary tools updateded............🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[....Anonymous tools updateded (Tor, privoxy, squid)......] " + bcolors.ENDC)
     println(bcolors.BLUE + "[..........Wifi pentesting tools updateded (wifite).......] " + bcolors.ENDC)
@@ -79,14 +87,15 @@ func MenuOneSix() {
 }
 
 func MenuOneSeven() {
-    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Ready to uninstall africana from your system.." + bcolors.ENDC)
+    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Ready to uninstall africana from your system.." + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ ..............Just Incase of any bug....................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[........Pleas email me @:rojahsmontari@gmail.com ........] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[..Are U sure you want to completely uninstall africana?..]\n" + bcolors.ENDC)
 }
 
 func MenuTwo() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "......................" + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Stop tor & restore all iptables....................🐝] " + bcolors.ENDC)
@@ -96,16 +105,18 @@ func MenuTwo() {
 }
 
 func MenuTwoOne() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[.............Tor (Install tor & set proxies).............] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[........Iptables (Install Iptables for firewalls)........] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[........Squid (Install Squid set through Privoxy)........] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[.......Privoxy (Install Privoxy & set through tor).......] \n" + bcolors.ENDC)
-    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing tor, privoxy, squid, dnsmasq & setting things." + bcolors.ENDC)
+    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Installing tor, privoxy, squid, dnsmasq & setting things." + bcolors.ENDC)
 }
 
 func MenuTwoTwo() {
-    fmt.Println(bcolors.BLUE + "\n  ~>( " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n  ~>( " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[.........Your internet proxy connections routes.........] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[...................Running command......................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[...Launch ex. sqlmap --proxy=http://127.0.0.1:3129......] " + bcolors.ENDC)
@@ -114,7 +125,8 @@ func MenuTwoTwo() {
 }
 
 func MenuThree() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Discover Targets..................................🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Port discovery on the target......................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Vuln' Scann the Target............................🦉] " + bcolors.ENDC)
@@ -128,27 +140,25 @@ func MenuThree() {
 }
 
 func MenuThreeOne() {
-    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1..............Launch Eternalblue Exploit..............] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0................Exit & Go To Main Menu................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. Launch Eternalblue Exploit..........................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu..............................] " + bcolors.ENDC)
 }
 
 func MenuThreeTwo() {
-    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. Sniff tcp/http(s) traffick to early selected target.] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s) traffick to all Connected devices.]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu..............................] " + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
-    fmt.Println(bcolors.BLUE + "\n           ~>( " + bcolors.GREEN + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 1........for Inital Target (All Traffick Sniff)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2......All Internall IPS (Sniff All Local Subnet)......]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0...............Exit & Go To Main Menu.................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. Inject beef-xss.js to early selected target.........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js to All Connected devices.........] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu..............................] " + bcolors.ENDC)
 }
 
 func MenuFour() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Blackjack......................" + bcolors.DARKCYAN + "(All Distro...R.A.T)" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ShellzGen......................" + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. PowerJoker....................." + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
@@ -162,7 +172,8 @@ func MenuFour() {
 }
 
 func MenuFive() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 📶" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 📶" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ......................Wifite............" + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ....................Bettercap..........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ...................Wifipumpkin3" + bcolors.DARKCYAN + "(Automated Phishing)" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
@@ -176,14 +187,16 @@ func MenuFive() {
 }
 
 func MenuSix() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Online......................." + bcolors.DARKCYAN + "(automated_Bruteforce)" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Offline................." + bcolors.DARKCYAN + "(automated/ maunal/ Hashes)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................]\n " + bcolors.ENDC)
 }
 
 func MenuSixOne() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ...................Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "..................🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ...................Bruteforce " + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "..................🔑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ...................Bruteforce " + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "..................🥝] " + bcolors.ENDC)
@@ -197,7 +210,8 @@ func MenuSixOne() {
 }
 
 func MenuSixTwo() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ....................Aircrack_ng........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. .......................John............." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ......................To Add.........................] " + bcolors.ENDC)
@@ -211,7 +225,8 @@ func MenuSixTwo() {
 }
 
 func MenuSeven() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🍄" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🍄" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ..............Gophish.(Browser Gui)." + bcolors.DARKCYAN + "(All Templetes)" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ...............Good Ginx (Advanced)." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ...................AdvPhishing......" + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
@@ -225,7 +240,8 @@ func MenuSeven() {
 }
 
 func MenuEight() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🦟" + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🦟" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources🪰] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Start Bruteforcing Host's Root Files...............🚀] " + bcolors.ENDC)
@@ -239,7 +255,8 @@ func MenuEight() {
 }
 
 func MenuEightFour() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( " + bcolors.ENDC + "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ............Sql injection with sqlmap..." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. .......Xss injection with Dalfox, Xsser." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🪰] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ............Sql injection with Sqlmap......" + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
@@ -248,7 +265,8 @@ func MenuEightFour() {
 }
 
 func MenuEightFive() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
@@ -262,7 +280,8 @@ func MenuEightFive() {
 }
 
 func MenuEightSix() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install all jok3r tools..." + bcolors.DARKCYAN + "(Pleas start here if not)" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Show all the tools in the toolbox..................🍒] " + bcolors.ENDC)
@@ -276,7 +295,8 @@ func MenuEightSix() {
 }
 
 func MenuEightSeven() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🧭] " + bcolors.ENDC)
@@ -290,7 +310,8 @@ func MenuEightSeven() {
 }
 
 func MenuEightEight() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + bcolors.BOLD +  "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server.......🍄.]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Test if bots are alive............................📡.] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch palantir..................." + bcolors.DARKCYAN + "(Palantir 3.14..)" + bcolors.BLUE + "🧭] " + bcolors.ENDC)
