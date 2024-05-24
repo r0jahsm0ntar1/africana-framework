@@ -122,3 +122,20 @@ func PopenSix(one, two, three, four, five, six string) {
         fmt.Fprintln(os.Stderr, "process finished with error:", err)
     }
 }
+
+func PopenSeven(one, two, three, four, five, six, seven string) {
+    process := fmt.Sprintf(one, two, three, four, five, six, seven)
+    sh := exec.Command("bash", "-c", process)
+    sh.Stdin = os.Stdin
+    sh.Stdout = os.Stdout
+    sh.Stderr = os.Stderr
+
+    if err := sh.Start(); err != nil {
+        fmt.Fprintln(os.Stderr, "Error starting process:", err)
+        return
+    }
+
+    if err := sh.Wait(); err != nil {
+        fmt.Fprintln(os.Stderr, "process finished with error:", err)
+    }
+}

@@ -55,7 +55,7 @@ func SslScan(userTarget string) {
 
 func Gobuster(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.GREEN + "Mining root files on" + bcolors.BLUE + ")" + bcolors.BLUE + " 🎯 ~> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenTwo(`gobuster dir vhost --debug --no-error --random-agent -w ~/.africana/wordlists/content/big.txt -e -u %s`, userTarget)
+    subprocess.PopenTwo(`gobuster dir vhost --debug --no-error --random-agent -w /root/.africana/africana-base/wordlists/content/big.txt -e -u %s`, userTarget)
     fmt.Println()
 }
 
@@ -98,7 +98,7 @@ func CommixAuto(userTarget string) {
 }
 
 func CommixMan() {
-    subprocess.Popen(`commix  --all --tamper=between,luanginx,xforwardedfor --random-agent --level=5 --wizard`)
+    subprocess.Popen(`commix --all --tamper=between,luanginx,xforwardedfor --random-agent --level=5 --wizard`)
 }
 
 func KatanaAuto(userTarget string) {
