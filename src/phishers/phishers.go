@@ -16,19 +16,19 @@ func GoodGinx() {
 }
 
 func ZPhisher() {
-    subprocess.Popen(`cd ~/.africana/africana-base/AdvPhishing; bash AdvPhishing.sh`)
+    subprocess.Popen(`cd /root/.africana/africana-base/AdvPhishing; bash AdvPhishing.sh`)
 }
 
 func SetoolKit() {
-    subprocess.Popen(`cd ~/.africana/africana-base/set/; python3 setoolkit`)
+    subprocess.Popen(`cd /root/.africana/africana-base/set/; python3 setoolkit`)
 }
 
 func AnonPhisher() {
-    subprocess.Popen(`cd ~/.africana/africana-base/anonphisher; bash anonphisher.sh`)
+    subprocess.Popen(`cd /root/.africana/africana-base/anonphisher; bash anonphisher.sh`)
 }
 
 func CyberPhish() {
-    subprocess.Popen(`cd ~/.africana/africana-base/cyberphish; python3 cyberphish.py`)
+    subprocess.Popen(`cd /root/.africana/africana-base/cyberphish; python3 cyberphish.py`)
 }
 
 func UpsenTools() {

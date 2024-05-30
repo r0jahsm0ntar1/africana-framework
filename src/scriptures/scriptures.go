@@ -1086,9 +1086,9 @@ func CommandMents() {
 
 func (b *Scriptures) TheWord() {
     rand.Seed(time.Now().UnixNano())
-    menu := rand.Intn(1006) + 1
+    verses := rand.Intn(1006) + 1
 
-    switch menu {
+    switch verses {
     case 1:
         fmt.Println(bcolors.BLUE + `(` + bcolors.GREEN + `In the beginning God created the heaven & the..` + bcolors.YELLOW + `(Gen.1:1📜)` + bcolors.ENDC)
     case 2:

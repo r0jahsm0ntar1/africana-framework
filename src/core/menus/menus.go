@@ -17,11 +17,24 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords...." + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "🐙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks............" + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors................" + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "🪳] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Help, Credits, Tricks and About......." + bcolors.DARKCYAN + "(🕊️ " + bcolors.RED + "︻╦╤─ " + bcolors.GREEN + "JC❤️sU" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(Try option " + bcolors.YELLOW + "99" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + `                                              ¯\_(ツ)_/¯                                                 ` + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Credits, Tricks and About............." + bcolors.DARKCYAN + "(🕊️ " + bcolors.RED + "︻╦╤─ " + bcolors.GREEN + "JC❤️sU" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "For Guide)" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + `                              ¯\_(ツ)_/¯...` + bcolors.DARKCYAN + "(" + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "For Help!)" + bcolors.BLUE + "]" + bcolors.ENDC)
 }
 
+func HelpMenuZero() {
+    fmt.Println(bcolors.YELLOW + "\n1. Install or update " + bcolors.ENDC + ": It is an inbuild self mentainace code to update and install africana with its standard dependencies in all systems." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. System Security Configuration " + bcolors.ENDC + ": This choice enables you to secure your system by keenly installing, setting privoxy, squid, tor & dnsmasq." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Local Network Attack Vectors " + bcolors.ENDC + ": It is aplace where you are guided through pentesting internal network devices with their open services." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. Generate Undetectable Backdoors " + bcolors.ENDC + ": Here africana offers variety of insane C2s and malware generation engines that work despite hightly monitored environments." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. WiFi Attack Vectors " + bcolors.ENDC + ": Wireless networks penetration menu with advanced tools configured to give you desirerable outcomes." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Crack Hash, Pcap & Brute Passwords " + bcolors.ENDC + ": Africana gives you options to crack passwords easly using most and advanced tools.Crack ntlms, hashes & passwords." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. Social-Engineering Attacks " + bcolors.ENDC + ": To get credentials from companies or individuals, africana gives you a room to phish them with legendary opensource tools." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. Website Attack Vectors " + bcolors.ENDC + ": A collection of almost all insane and brutal frameworks configured and mentained set together in a redteam manner to enable you archive all goals as intended within a short time. A free a utomation is intergrated with proxy support for lazy pentesters." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. Credits, Tricks and About" + bcolors.ENDC + ": It is good to grow both mentally, phisically, emotionally & spiritually. Africana comes with a great way to develop your relation ship with your Creator through Bible verses displayed for you in all menus." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
 func MenuOne() {
     println(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
@@ -93,6 +106,16 @@ func MenuOneSeven() {
     fmt.Println(bcolors.BLUE + "[..Are U sure you want to completely uninstall africana?..]\n" + bcolors.ENDC)
 }
 
+func HelpMenuOne() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Kali-linux " + bcolors.ENDC + ": It is a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Ubuntu-Linux " + bcolors.ENDC + ": Is a good distor but has alot of problems while installing kali-linux packages to avoid issues like dependencies problems, use docker image or install kali-linux in Ubuntu docker then install africana." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Arch-linux " + bcolors.ENDC + ": It is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported.. africana can run well in arch-linux distros." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu" + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
+
 func MenuTwo() {
     fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
@@ -122,6 +145,18 @@ func MenuTwoTwo() {
     fmt.Println(bcolors.BLUE + "[...Launch ex. sqlmap --proxy=http://127.0.0.1:3129.......] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[...............Your Proxy Chains Route...................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[.Local " + bcolors.RED + "~>" + bcolors.GREEN + "Squid " + bcolors.RED + "~>" + bcolors.YELLOW + "3129 " + bcolors.RED + "~>" + bcolors.GREEN + "Privoxy " + bcolors.RED + "~>" + bcolors.YELLOW + "8118 " + bcolors.RED + "~>" + bcolors.GREEN + "Tor " + bcolors.RED + "~>" + bcolors.YELLOW + "9050 " + bcolors.RED + "~>" + bcolors.BLUE + "web]\n" + bcolors.ENDC)
+}
+
+func HelpMenuTwo() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Installing " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Start anonymizing through tor " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Stop tor & restore all iptables " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. Check if using tor network " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. Chains " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
 }
 
 func MenuThree() {
@@ -156,6 +191,22 @@ func MenuThreeThree() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
+func HelpMenuThree() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Discover Targets " + bcolors.ENDC + ": Africana will scan all subnet for connected devices and list them in a table form for you to select a target for further penetration testing againist it." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Port discovery on the target " + bcolors.ENDC + ": This option Africana will scan the initial selected target for open ports and services to give you vivid info on how to to tackle your target and enable you to choose a working exploit againist the revealed services." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Vuln' Scann the Target " + bcolors.ENDC + ": In this stage africana will try to scann for known vulnerbility that may be an easy win on all open ports." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. S.M.B enumration on the target " + bcolors.ENDC + " Africana will try to reconn smb ports, scanning them and check if there are vulnerbilities and shares that could be exploited further." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. Exploit S.M.B on target " + bcolors.ENDC + ": Africana will launch some tools that will scout the target smb services give you more vivid info and try to automate each connection trial by rppc null user and password, smbmap to show all shares and dirs also launch metasploit eternalblue exploit on the target." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Sniff Internal Packets " + bcolors.ENDC + ": Here africana sniffs all traffic communication from the connected devices to the router showing you on terminal. From tcp, udp, http and https." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. Lunch Responder with IPv6 Support " + bcolors.ENDC + ": Africana will launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. Start Beefxss & Bettercap For (M.I.B) " + bcolors.ENDC + ": Africana will combine both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you even bugs fixed in beef enjoy." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. Get Reverse shell through snifing (XSS Injection) " + bcolors.ENDC + ": Working on this." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
+
 func MenuFour() {
     fmt.Println(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
@@ -171,6 +222,22 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................]\n " + bcolors.ENDC)
 }
 
+func HelpMenuFour() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Blackjack " + bcolors.ENDC + ": It is a tool derived from villain framework. It supports both tcp, hhtp & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. ShellzGen " + bcolors.ENDC + ": It is anice tool. Supports all distro reverse shell generation that supports both tcp, https & https connection. Genarates almost all languages reverseshells from powershell, python etc.. I also launches variety of listeners." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. PowerJoker " + bcolors.ENDC + ": A simple but lethal c2 that generates obfsicated powershell malwares and handles variety of reverse connection." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. MeterPeter " + bcolors.ENDC + ": I a powershell rich c2 written in pure powershell. Has a lot of in build modules to enable you in post exploitation. It is just like metasploit but with powerfull obfsication techniques." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. Havoc C2 " + bcolors.ENDC + ": It is agiant c2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users like me. heehehehee.." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Teardroid " + bcolors.ENDC + ": It is agiant c2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users like me. heehehehee.." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. AndroidRAT " + bcolors.ENDC + ": It is agiant c2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users like me. heehehehee.." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. Chameleon " + bcolors.ENDC + ": It is agiant c2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users like me. heehehehee.." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. Gh0x0st " + bcolors.ENDC + ": It is agiant c2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users like me. heehehehee.." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Gh0x0st " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
+
 func MenuFive() {
     fmt.Println(bcolors.BLUE + "\n        ~>( 📶" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
@@ -184,6 +251,22 @@ func MenuFive() {
     fmt.Println(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. ..............Exit & Go To Main Menu.................]\n " + bcolors.ENDC)
+}
+
+func HelpMenuFive() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Wifite " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Bettercap " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Wifipumpkin3 " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Airgeddon " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. wifiPumpkin3 " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
 }
 
 func MenuSix() {
@@ -224,6 +307,15 @@ func MenuSixTwo() {
     fmt.Println(bcolors.BLUE + "[ 0. ..............Exit & Go To Main Menu.................]\n " + bcolors.ENDC)
 }
 
+func HelpMenuSix() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Online " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Offline " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
+
 func MenuSeven() {
     fmt.Println(bcolors.BLUE + "\n      ~>( 🍄" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
@@ -237,6 +329,22 @@ func MenuSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. ...............Exit & Go To Main Menu................]\n " + bcolors.ENDC)
+}
+
+func HelpMenuSeven() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Wifite " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Bettercap " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Wifipumpkin3 " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Airgeddon " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. wifiPumpkin3 " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
 }
 
 func MenuEight() {
@@ -324,3 +432,18 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................]\n " + bcolors.ENDC)
 }
 
+func HelpMenuEight() {
+    fmt.Println(
+    bcolors.YELLOW + "\n1. Wifite " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "2. Bettercap " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "3. Wifipumpkin3 " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "4. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "5. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "6. Airgeddon " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "7. wifiPumpkin3 " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "8. To Add " + bcolors.ENDC + " Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "9. To Add " + bcolors.ENDC + ": Africana will querry privoxy service and display its logs showing you each and every traffick living your system through the sated chains." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "0. Exit & Go to main menu " + bcolors.ENDC + ": Self explanatory." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "99. Menu" + bcolors.ENDC + ": Get guidence. I strongly advice you to check on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "00. Help" + bcolors.ENDC + ": For this help menu that is found in all faces of africana. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}

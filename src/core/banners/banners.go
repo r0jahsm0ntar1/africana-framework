@@ -1,9 +1,9 @@
 package banners
 
 import (
-    "math/rand"
     "time"
     "bcolors"
+    "math/rand"
 )
 
 type Banners struct{}
