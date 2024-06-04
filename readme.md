@@ -59,9 +59,9 @@ go build ./africana.go; mv africana /usr/local/bin
 ```bash
 sudo africana
 ```
-#Python user setup
+## Python user setup
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework -b v2.0.0
+git clone https://github.com/r0jahsm0ntar1/africana-framework -b olds
 ```
 ```bash
 cd africana-framework
