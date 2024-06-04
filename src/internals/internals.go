@@ -17,6 +17,7 @@ var userInput, userTarget, userLhost, userLPort, userName, userPass string
 
 func InternalScanner() {
     subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`)
+    fmt.Println()
 }
 
 func NmapPortscan(userTarget string) {
@@ -56,13 +57,15 @@ func SmbExploit(userTarget string) {
         return
     }
     menus.MenuThreeOne()
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
         return
     case "1":
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
@@ -71,7 +74,9 @@ func SmbExploit(userTarget string) {
         }
         fmt.Println()
         subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Println()
+        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
         if userLhost == "" {
@@ -87,7 +92,8 @@ func SmbExploit(userTarget string) {
 
 func PacketSniffer(userTarget string) {
     menus.MenuThreeTwo()
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -112,7 +118,9 @@ func PacketsResponder() {
     if _, err := os.Stat(backUp); os.IsNotExist(err) {
         fmt.Println()
         subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Println()
+        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
@@ -148,7 +156,8 @@ func BeefBettercap(userTarget string) {
         os.Exit(1)
     }
     menus.MenuThreeThree()
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -181,7 +190,9 @@ func BeefBettercap(userTarget string) {
             subprocess.Popen(`systemctl daemon-reload`)
         fmt.Println()
         subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Println()
+        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
@@ -221,7 +232,9 @@ func BeefBettercap(userTarget string) {
             subprocess.Popen(`systemctl daemon-reload`)
         fmt.Println()
         subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Println()
+        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
