@@ -14,8 +14,8 @@ func Credits() {
                   /' (    \
       _.-----..,-'   ('"--^
      //              |
-    (|   ';      ,   :
-      \   ;.----/  , /
+    (|   ';      ,   |
+      \   ;.----/  ,/
        ) // /   | |\ \
        \ \\'\   | |/ /      %sJesus Christ%s
         \ \\ \  | |\/  %sThe Lamb that was slain%s
@@ -39,7 +39,7 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
  Africana name        Developer's name       Original_name
     ` + bcolors.ENDC)
 
-    credits := bcolors.ENDC + `
+    credits := bcolors.DARKCYAN + `
 1. africana-framework..Rojahs montari..africana-framework ]
 
                2.    Tor system setup
@@ -137,25 +137,23 @@ func Developer() {
 [ cyberafrics a cybersecurity organisation in Africa Kenya]
 [ Special thanks to the following people whose third party]
 [ tools have been used to contribute to the creation of...]
+[.........................................................]
+[ What is there 4 U 2 gain the whole world & loose your...]
+[ soul? Be smart your Creator has good plans for you......]
+[.....Life Tip.: Defeat the devil by fasting & praying....]
+[---------------------------------------------------------]
 ` + bcolors.ENDC
     for _, d := range developer {
         fmt.Print(string(d))
         time.Sleep(03 * time.Millisecond)
     }
-    fmt.Print(bcolors.YELLOW + `
-[ What is there 4 U 2 gain the whole world & loose your...]
-[ soul? Be smart your Creator has good plans for you......]
-[ Life Tip.: Defeat the 😈 devil by fasting & praying.....]
-` + bcolors.ENDC)
-
-    fmt.Print(bcolors.DARKCYAN + `
+    fmt.Print(bcolors.RED + `
 [ Email....: rojahsmontari@gmail.com......................]
 [ YouTube..: https://youtube.com/@RojahsMontari...........]
-` + bcolors.ENDC)
-    fmt.Printf(`
-             %sTo. %sExit %s& Go To Main Menu%s %sType %s0.
+    ` + bcolors.ENDC)
+    fmt.Printf(bcolors.GREEN + `
+             Type 0. To.Exit & Go To Main Menu
 
-`, bcolors.YELLOW, bcolors.RED, bcolors.DARKCYAN, bcolors.YELLOW, 
-            bcolors.ENDC, bcolors.ENDC)
+` + bcolors.ENDC)
 
 }

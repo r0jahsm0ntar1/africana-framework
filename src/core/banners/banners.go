@@ -2,7 +2,6 @@ package banners
 
 import (
     "time"
-    "fmt"
     "bcolors"
     "math/rand"
 )
@@ -15,62 +14,54 @@ func Graphics() {
 
     switch menu {
     case 1:
-        fmt.Printf(`%s
+        bcolors.Colors(`
                      _,._
                  __.'   _)
                 <_,)'.-"a\
                   /' (    \
       _.-----..,-'   ('"--^
      //              |
-    (|   ';      ,   :
+    (|   ';      ,   |
       \   ;.----/  , /
-       ) // /   | |\ \
-       \ \\'\   | |/ /      %sJesus Christ%s
-        \ \\ \  | |\/  %sThe Lamb that was slain%s
-         '" '"  '""         %sfor our sins.%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-                         bcolors.ENDC)
+       ) // /   | |\ \       John 3:16
+       \ \\'\   | |/ /      Jesus Christ
+        \ \\ \  | |\/  The Lamb that was slain
+         '" '"   '"         for our sins.
+` + bcolors.ENDC)
 
     case 2:
-        fmt.Printf(`%s
-         _      xxxx      _
-        /_;-.__ / _\  _.-;_\
-           '-._ ''_/''.-'
-               '\   /'
-                |  /
-               /-.(
-               \_._\
-                \ \';
-                 > |/        %sJesus Christ %s
-                / //      %sL❤️.VE'S U. He is%s
-                |//    %sThe Lamb that was slain%s
-                \(\         %sfor our sins.%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-           bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+        bcolors.Colors(`
+                 _      xxxx      _
+                /_;-.__ / _\  _.-;_\
+                   '-._ ' _/''.-'
+                       '\   /'
+                        |  /
+                       /-.(
+                       \_._\
+                        \ \';
+                         > |/       John 3:16
+                        / //      Jesus Christ
+                        |//   The Lamb that was slain
+                        \(\       for our sins.
+` + bcolors.ENDC)
 
     case 3:
-        fmt.Printf(`%s
+        bcolors.Colors(`
                                .--,
                            ,.-( (o)\
                           /   .)/\ ')
                         .',./'/   )/
                     ()=///=))))==()
                       /
-                      %swake up, Christian%s
-              %sLord God Jesus Christ L❤️.VE'S you
-                    follow the white Pigeon.
-                     knock, knock, knock,
-                          Man Of God.%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.GREEN, bcolors.GREEN, bcolors.ENDC)
+                      wake up, Christian
+              Lord God Jesus Christ L❤️.VE'S you
+                  follow the white Pigeon.
+                    knock, knock, knock,
+                          Man Of God.
+` + bcolors.ENDC)
 
     case 4:
-        fmt.Printf(`%s
+        bcolors.Colors(`
                                        ___
              _______                  /__/
             |.-----.|            ,---[___]*
@@ -79,17 +70,14 @@ func Graphics() {
             |o_____*|   [o_+_+]--------[=i==]
              |     ________|           drive
              |  __|_
-             '-/_==_\       %sJesus Christ is%s
-              /_____\\  %sThe Lamb that was slain%s
-                             %sfor our sins.%s
-                               %sJohn 3:16%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-         bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+             '-/_==_\       Jesus Christ is
+              /_____\\  The Lamb that was slain
+                             for our sins.
+                               John 3:16
+` + bcolors.ENDC)
 
     case 5:
-        fmt.Printf(`%s
+        bcolors.Colors(`
            __________   __________ __________
           |          |\|          |          |\
           |  *    *  |||  *  *  * |        * ||
@@ -97,58 +85,49 @@ func Graphics() {
           |  *    *  |||  *  *  * |  *       ||
           |__________|||__________|__________||
           |          || '---------------------'
-          |  *    *  ||      %sJesus Christ%s
-          |          || %sThe Lamb that was slain%s
-          |  *    *  ||      %sfor our sins.%s
-          |__________||       %sJohn 3:16%s
-           '----------'%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-        bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.ENDC)
+          |  *    *  ||       Jesus Christ
+          |          ||  The Lamb that was slain
+          |  *    *  ||       for our sins.
+          |__________||         John 3:16
+           '----------'
+` + bcolors.ENDC)
 
     case 6:
-        fmt.Printf(`%s
-                         ____
-                  __,-~~/~   '---.
-                _/_,---(      ,   )_
-              _/        <    /   )  \_
- - -----==;;;'==--------------------==';;;==----- -
-              \/  ~"~"~"~"~"~\~"~)~"/
-              (_ (   \  (     >    \)
-                \_( _ <         >_>'
-                   ~ '-i' ::>|--"    %sJesus Christ is%s
-                       I;|.|.|   %sThe Lamb that was slain%s
-                      <|i::|i|'.      %sfor our sins.%s
-                     (' ^'"'-' ")       %sJohn 3:16%s 
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-         bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+        bcolors.Colors(`
+                              ____
+                       __,-~~/~   '---.
+                     _/_,---(      ,   )_
+                 ___/        <    /   )  \___
+   - -----===;;;'===----------------------===';;;===----- -
+                    \/  ~"~"~"~"~"~\~"~)~"/
+                    (_ (   \  (     >    \)
+                      \_( _ <         >_>'
+     Jesus Christ is    ~ '-i' ::>|--"
+ The Lamb that was slain    I;|.|.|
+       for our sins.       <|i::|i|'.
+        John 3:16         (' ^'"'-' ")
+` + bcolors.ENDC)
 
     case 7:
-        fmt.Printf(`%s
-               .--.       .--.
-           _  '    \     /    '  _
-            '\.===. \.^./ .===./'
-                   \/'"'\/
-                ,  |     |  ,
-               / '\|'-.-'|/' \
-              /    |  \  |    \
-           .-' ,-''|   ; |''-, '-.
-               |   |    \|   |
-               |   |    ;|   |
-               |   \    //   |      %sJesus Christ is%s
-               |    '._//'   |  %sThe Lamb that was slain%s
-              .'             '.     %sfor our sins.%s
-           _,'                 ',_     %sJohn 3:16%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
-        bcolors.BLUE, bcolors.YELLOW, bcolors.ENDC)
+        bcolors.Colors(`
+                       .--.       .--.
+                   _  '    \     /    '  _
+                    '\.===. \.^./ .===./'
+                           \/'"'\/
+                        ,  |     |  ,
+                       / '\|'-.-'|/' \
+                      /    |  \  |    \
+                   .-' ,-''|   ; |''-, '-.
+                       |   |    \|   |
+                       |   |    ;|   |
+     Jesus Christ is   |   \    //   |
+The Lamb that was slain|    '._//'   |
+     for our sins.    .'             '.
+       John 3:16   _,'                 ',_
+` + bcolors.ENDC)
 
     case 8:
-        fmt.Printf(`%s
+        bcolors.Colors(`
                    _,.---.---.---.--.._ 
                _.-' '--.'---.'---'-. _,'--.._
               /'--._ .'.     '.     ','-.'-._\
@@ -158,15 +137,12 @@ func Graphics() {
     (_.o> ,--. '._/'--.-',--'  \_.-'       \'-._ \
      '---'    '._ '---._/__,----'           '-. '-\
                /_, ,  _..-'                    '-._\
-               \_, \/ ._(      %sJesus Christ is%s
-                \_, \/ ._\ %sThe Lamb that was slain%s
-                 '._,\/ ._\     %sfor our sins.%s
+               \_, \/ ._(      Jesus Christ is
+                \_, \/ ._\ The Lamb that was slain
+                 '._,\/ ._\     for our sins.
                    '._// ./'-._
-                     '-._-_-_.-'%s
-
-`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
-  bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE,
-                         bcolors.ENDC)
+                     '-._-_-_.-'
+` + bcolors.ENDC)
     }
 }
 
