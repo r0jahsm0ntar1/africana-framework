@@ -2,59 +2,75 @@ package banners
 
 import (
     "time"
-    "math/rand"
+    "fmt"
     "bcolors"
+    "math/rand"
 )
 
-func BannerZero() {
-    bcolors.Colors(`
+type Banners struct{}
+
+func Graphics() {
+    rand.Seed(time.Now().UnixNano())
+    menu := rand.Intn(8) + 1
+
+    switch menu {
+    case 1:
+        fmt.Printf(`%s
                      _,._
                  __.'   _)
                 <_,)'.-"a\
                   /' (    \
       _.-----..,-'   ('"--^
      //              |
-    (|   ';      ,   |
-      \   ;.----/  ,/
+    (|   ';      ,   :
+      \   ;.----/  , /
        ) // /   | |\ \
-       \ \\'\   | |/ /      Jesus Christ
-        \ \\ \  | |\/  The Lamb that was slain
-         '" '"  '""         for our sins.`)
-}
+       \ \\'\   | |/ /      %sJesus Christ%s
+        \ \\ \  | |\/  %sThe Lamb that was slain%s
+         '" '"  '""         %sfor our sins.%s
 
-func BannerOne() {
-    bcolors.Colors(`
-                 _      xxxx      _
-                /_;-.__ / _\  _.-;_\
-                   '-._ ' _/''.-'
-                       '\   /'
-                        |  /
-                       /-.(
-                       \_._\
-                        \ \';
-                         > |/
-                        / //      Jesus Christ
-                        |//   The Lamb that was slain
-                        \(\       for our sins.`)
-}
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+                         bcolors.ENDC)
 
-func BannerTwo() {
-    bcolors.Colors(`
+    case 2:
+        fmt.Printf(`%s
+         _      xxxx      _
+        /_;-.__ / _\  _.-;_\
+           '-._ ''_/''.-'
+               '\   /'
+                |  /
+               /-.(
+               \_._\
+                \ \';
+                 > |/        %sJesus Christ %s
+                / //      %sL❤️.VE'S U. He is%s
+                |//    %sThe Lamb that was slain%s
+                \(\         %sfor our sins.%s
+
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+           bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+
+    case 3:
+        fmt.Printf(`%s
                                .--,
                            ,.-( (o)\
                           /   .)/\ ')
                         .',./'/   )/
                     ()=///=))))==()
                       /
-                      wake up, Christian
-              Lord God Jesus Christ L❤️.VE'S you
-                  follow the white Pigeon.
-                    knock, knock, knock,
-                          Man Of God.`)
-}
+                      %swake up, Christian%s
+              %sLord God Jesus Christ L❤️.VE'S you
+                    follow the white Pigeon.
+                     knock, knock, knock,
+                          Man Of God.%s
 
-func BannerThree() {
-    bcolors.Colors(`
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.GREEN, bcolors.GREEN, bcolors.ENDC)
+
+    case 4:
+        fmt.Printf(`%s
                                        ___
              _______                  /__/
             |.-----.|            ,---[___]*
@@ -63,14 +79,17 @@ func BannerThree() {
             |o_____*|   [o_+_+]--------[=i==]
              |     ________|           drive
              |  __|_
-             '-/_==_\       Jesus Christ is
-              /_____\\  The Lamb that was slain
-                             for our sins.
-                               John 3:16`)
-}
+             '-/_==_\       %sJesus Christ is%s
+              /_____\\  %sThe Lamb that was slain%s
+                             %sfor our sins.%s
+                               %sJohn 3:16%s
 
-func BannerFour() {
-    bcolors.Colors(`
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+         bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+
+    case 5:
+        fmt.Printf(`%s
            __________   __________ __________
           |          |\|          |          |\
           |  *    *  |||  *  *  * |        * ||
@@ -78,49 +97,58 @@ func BannerFour() {
           |  *    *  |||  *  *  * |  *       ||
           |__________|||__________|__________||
           |          || '---------------------'
-          |  *    *  ||       Jesus Christ
-          |          ||  The Lamb that was slain
-          |  *    *  ||       for our sins.
-          |__________||         John 3:16
-           '----------'`)
-}
+          |  *    *  ||      %sJesus Christ%s
+          |          || %sThe Lamb that was slain%s
+          |  *    *  ||      %sfor our sins.%s
+          |__________||       %sJohn 3:16%s
+           '----------'%s
 
-func BannerFive() {
-    bcolors.Colors(`
-                                ____
-                        __,-~~/~    '---.
-                      _/_,---(      ,    )
-                    _/        <    /   )  \___
-   - ------===;;;'===----------------------===';;;===----- -
-                     \/  ~"~"~"~"~"~\~"~)~"/
-                     (_ (   \  (     >    \)
-                      \_( _ <         >_>'
-                         ~ '-i' ::>|--"
-                             I;|.|.|
-                            <|i::|i|'.
-                           (' ^'"'-' ")`)
-}
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+        bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.ENDC)
 
-func BannerSix() {
-    bcolors.Colors(`
-                       .--.       .--.
-                   _  '    \     /    '  _
-                    '\.===. \.^./ .===./'
-                           \/'"'\/
-                        ,  |     |  ,
-                       / '\|'-.-'|/' \
-                      /    |  \  |    \
-                   .-' ,-''|   ; |''-, '-.
-                       |   |    \|   | 
-                       |   |    ;|   |
-                       |   \    //   |
-                       |    '._//'   |  John 3:16
-                      .'             '.   Agape
-                   _,'                 ',_`)
-}
+    case 6:
+        fmt.Printf(`%s
+                         ____
+                  __,-~~/~   '---.
+                _/_,---(      ,   )_
+              _/        <    /   )  \_
+ - -----==;;;'==--------------------==';;;==----- -
+              \/  ~"~"~"~"~"~\~"~)~"/
+              (_ (   \  (     >    \)
+                \_( _ <         >_>'
+                   ~ '-i' ::>|--"    %sJesus Christ is%s
+                       I;|.|.|   %sThe Lamb that was slain%s
+                      <|i::|i|'.      %sfor our sins.%s
+                     (' ^'"'-' ")       %sJohn 3:16%s 
 
-func BannerSeven() {
-    bcolors.Colors(`
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+         bcolors.BLUE, bcolors.GREEN, bcolors.ENDC)
+
+    case 7:
+        fmt.Printf(`%s
+               .--.       .--.
+           _  '    \     /    '  _
+            '\.===. \.^./ .===./'
+                   \/'"'\/
+                ,  |     |  ,
+               / '\|'-.-'|/' \
+              /    |  \  |    \
+           .-' ,-''|   ; |''-, '-.
+               |   |    \|   |
+               |   |    ;|   |
+               |   \    //   |      %sJesus Christ is%s
+               |    '._//'   |  %sThe Lamb that was slain%s
+              .'             '.     %sfor our sins.%s
+           _,'                 ',_     %sJohn 3:16%s
+
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+   bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
+        bcolors.BLUE, bcolors.YELLOW, bcolors.ENDC)
+
+    case 8:
+        fmt.Printf(`%s
                    _,.---.---.---.--.._ 
                _.-' '--.'---.'---'-. _,'--.._
               /'--._ .'.     '.     ','-.'-._\
@@ -130,32 +158,20 @@ func BannerSeven() {
     (_.o> ,--. '._/'--.-',--'  \_.-'       \'-._ \
      '---'    '._ '---._/__,----'           '-. '-\
                /_, ,  _..-'                    '-._\
-               \_, \/ ._(      Jesus Christ is
-                \_, \/ ._\ The Lamb that was slain
-                 '._,\/ ._\     for our sins.
+               \_, \/ ._(      %sJesus Christ is%s
+                \_, \/ ._\ %sThe Lamb that was slain%s
+                 '._,\/ ._\     %sfor our sins.%s
                    '._// ./'-._
-                     '-._-_-_.-'`)
-}
+                     '-._-_-_.-'%s
 
-
-func BannerEight() {
-    bcolors.Colors(`
-          __                 _____ _____     _     _
-       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-      |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-      |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-`)
+`, bcolors.BLUE, bcolors.YELLOW + bcolors.YELLOW, 
+  bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE,
+                         bcolors.ENDC)
+    }
 }
 
 func Banner() {
-    bannersFunc := []func(){
-    BannerZero, BannerOne,    BannerTwo,
-    BannerThree, BannerFour, BannerFive,
-    BannerSix, BannerSeven,
-    }
-
-    rand.Seed(time.Now().UnixNano())
-    selectedIndex := rand.Intn(len(bannersFunc))
-    selectedFuncs := bannersFunc[selectedIndex]
-    selectedFuncs()
+    Graphics()
 }
+
+

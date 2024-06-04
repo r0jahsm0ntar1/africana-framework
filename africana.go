@@ -4,24 +4,43 @@ import (
     "os"
     "fmt"
     "utils"
-    "guides"
-    "setups"
-    "io/ioutil"
-    "bcolors"
-    "agreements"
-    "banners"
     "menus"
-    "internals"
+    "guides"
+    "strings"
+    "bufio"
+    "setups"
+    "banners"
+    "net/url"
+    "bcolors"
     "butchers"
     "wireless"
     "crackers"
     "phishers"
+    "io/ioutil"
+    "internals"
+    "agreements"
     "scriptures"
-    "webattackers"
     "securities"
+    "webattackers"
 )
 
-var userInput, userTarget string
+var (
+    userInput   string
+    userTarget  string
+    userTargetx string
+    proxyURL    string
+)
+
+func sudo() {
+    if os.Geteuid() != 0 {
+        utils.ClearScreen(); banners.Banner(); scriptures.Verse()
+        fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.RED + "Africana-framework must be run as root. Try sudo africana" + bcolors.ENDC)
+        return
+    }else{
+    userAgreements()
+    return
+    }
+}
 
 func userAgreements() {
     filePath := "/root/.africana/agreements/"
@@ -29,10 +48,11 @@ func userAgreements() {
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         utils.ClearScreen(); agreements.Covenant()
         for {
-            fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana: " + bcolors.DARKCYAN + "Do you agree to the terms of service [y/n]:" + bcolors.GREEN + ")# " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
-                case "y", "Y", "yes", "YES":
+                case "y", "Y", "yes", "Yes", "YES":
                     if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
                         fmt.Println("Error creating file:", err)
                         return
@@ -42,16 +62,16 @@ func userAgreements() {
                         fmt.Println("Error writing to file:", err)
                         return
                     }
-                    utils.Certs(); utils.WordLists(); africanaFramework()
+                    utils.InitiLize(); africanaFramework()
                     return
-                case "n", "N", "no", "NO":
+                case "n", "N", "no", "No", "NO":
                     os.Exit(0)
                 default:
-                    fmt.Print(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
                 }
             }
     } else {
-        africanaFramework()
+        utils.InitiLize(); africanaFramework()
         return
     }
 }
@@ -60,7 +80,8 @@ func userAgreements() {
 func systemSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuOne()
     for {
-        fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -77,8 +98,12 @@ func systemSetups() {
         case "4":
             utils.ClearScreen(); banners.Banner(); menus.MenuOneSeven(); setups.UninstallSetups(); banners.Banner()
             return
+        case "99":
+            menus.MenuOne()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuOne()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -87,7 +112,8 @@ func systemSetups() {
 func anonymitySetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuTwo()
     for {
-        fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -105,31 +131,35 @@ func anonymitySetups() {
             securities.ChainsStatus    (          )
         case "99":
             menus.MenuTwo()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuTwo()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 5" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
 
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
+func internaltargetInput() {
+    utils.ClearScreen(); banners.Banner(); internals.InternalScanner()
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.PURPLE + "(҂`_´)Select your 🎯" + bcolors.RED + "target!!!" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Scan(&userTarget)
+}
+
 func internalAttackers() {
-    targetInput := func() {
-        utils.ClearScreen(); banners.BannerEight(); internals.InternalScanner()
-        fmt.Printf(bcolors.BLUE + "\n" + bcolors.YELLOW + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Select target🎯 " + bcolors.GREEN + "IP to be " + bcolors.RED + "Attacked!! \n" + bcolors.ENDC)
-        fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-        fmt.Scan(&userTarget)
-    }
-    targetInput()
-    utils.ClearScreen(); banners.Banner(); menus.MenuThree()
+    banners.Banner(); menus.MenuThree()
     for {
-        fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
             africanaFramework()
             return
         case "1":
-            targetInput(); utils.ClearScreen    (  )
+            internaltargetInput         (          )
+            utils.ClearScreen()
             banners.Banner(); menus.MenuThree   (  )
         case "2":
             internals.NmapPortscan      (userTarget)
@@ -144,6 +174,8 @@ func internalAttackers() {
             internals.SmbExploit        (userTarget)
         case "6":
             internals.PacketSniffer     (userTarget)
+            internalAttackers()
+            return
         case "7":
             internals.PacketsResponder  (          )
         case "8":
@@ -152,8 +184,10 @@ func internalAttackers() {
             internals.RpcEnumscan       (userTarget)
         case "99":
             menus.MenuThree()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuThree()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -162,7 +196,8 @@ func internalAttackers() {
 func malwareGenerators() {
     utils.ClearScreen(); banners.Banner(); menus.MenuFour()
     for {
-        fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -188,8 +223,10 @@ func malwareGenerators() {
             butchers.ChameLeon  (          )
         case "99":
             menus.MenuFour()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuFour()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -198,7 +235,8 @@ func malwareGenerators() {
 func wirelesAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuFive()
     for {
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -222,8 +260,12 @@ func wirelesAttackers() {
             wireless.AirGeddon          (          )
         case "9":
             wireless.AirGeddon          (          )
+        case "99":
+            menus.MenuFive()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuFive()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -232,7 +274,8 @@ func wirelesAttackers() {
 func passwordsCrackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSix()
     for {
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -242,7 +285,8 @@ func passwordsCrackers() {
         case "1":
             utils.ClearScreen(); banners.Banner(); menus.MenuSixOne()
             for {
-                fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -266,15 +310,20 @@ func passwordsCrackers() {
                     crackers.HydraHttps (          )
                 case "9":
                     crackers.CyberBrute (          )
+                case "99":
+                    menus.MenuSixOne()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuSixOne()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //Offline crackers
         case "2":
             utils.ClearScreen(); banners.Banner(); menus.MenuSixTwo()
             for {
-                fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework ▄︻̷̿┻̿═━一 " + bcolors.GREEN + ")# " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -286,12 +335,18 @@ func passwordsCrackers() {
                     crackers.JohnCrackng(          )
                 case "8":
                     crackers.HashBuster (          )
+                case "99":
+                    menus.MenuSixOne()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuSixTwo()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuSix()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 2" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -300,7 +355,8 @@ func passwordsCrackers() {
 func credsPhishers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSeven()
     for {
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -324,24 +380,85 @@ func credsPhishers() {
             phishers.UpsenTools (          )
         case "9":
             phishers.UpsenTools (          )
+        case "99":
+            menus.MenuSeven()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuSeven()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
 
 //8. Website Attack Vectors................(Osmedeus, j)🌍
+
+func askForProxy() (*url.URL) {
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL: Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    proxyStr, _ := reader.ReadString('\n')
+    proxyStr = strings.TrimSpace(proxyStr)
+
+    proxyURL, err := url.Parse(proxyStr)
+    if err != nil {
+        return nil
+    }
+
+    if proxyURL.Scheme != "http" && proxyURL.Scheme != "https" && proxyURL.Scheme != "socks5" && proxyURL.Scheme != "socks4" {
+        askForProxy()
+    }
+
+    return proxyURL
+}
+
+func setProxyEnv(proxyURL *url.URL) error {
+    if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
+        return err
+    }
+    if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
+        return err
+    }
+    // SOCKS5 proxy is not directly supported by environment variables in all tools,
+    // but you can use tools like `proxychains` to enable SOCKS5 support.
+    return nil
+}
+
 func websiteUserTarget() {
     utils.ClearScreen(); banners.Banner()
-    fmt.Println("\n" + bcolors.YELLOW + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Enter Target: " + bcolors.RED + "Either HTTP(S)//: HOSTNAME or IP 🎯\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
+    for {
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "y", "yes", "Y", "Yes", "YES":
+            proxyURL := askForProxy()
+
+            if err := setProxyEnv(proxyURL); err != nil {
+                fmt.Println("Error setting proxy environment variables:", err)
+                return
+            }
+            return
+        case "n", "no", "N", "No", "NO":
+            return
+        default:
+            fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
+        }
+    }
 }
 
 func websitesAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuEight()
+    userTargetx = strings.TrimSpace(userTarget)
+    userTargetx = strings.TrimPrefix(userTargetx, "http://")
+    userTargetx = strings.TrimPrefix(userTargetx, "https://")
+    userTargetx = strings.TrimPrefix(userTargetx, "www.")
+
     for {
-        fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -349,7 +466,7 @@ func websitesAttackers() {
             return
         //1. Start Passive Web recon & Subdomain Enumration.....🌍
         case "1":
-            webattackers.WafW00f(userTarget); webattackers.DnsRecon(userTarget); webattackers.WhatWeb(userTarget); webattackers.Nuclei(userTarget)
+            webattackers.WafW00f(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.Nuclei(userTargetx)
         //2. Gather e-mails & subdomain namesfrom public sources🪰
         case "2":
             webattackers.Harvester(userTarget)
@@ -360,7 +477,8 @@ func websitesAttackers() {
         case "4":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFour()
             for {
-                fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -378,16 +496,19 @@ func websitesAttackers() {
                     webattackers.CommixMan (          )
                     webattackers.XsserMan  (          )
                 case "99":
-                   menus.MenuEightFour()
+                    menus.MenuEightFour()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuEightFour()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //5. Launch OWASP Nettacker project MainMenu............🦣
         case "5": 
-            utils.ClearScreen(); banners.Banner(); menus. MenuEightFive()
+            utils.ClearScreen(); banners.Banner(); menus.MenuEightFive()
             for {
-                fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -412,16 +533,19 @@ func websitesAttackers() {
                 case "9":
                     webattackers.NetTacker9(          )
                 case "99":
-                   menus.MenuEightFive()
+                    menus.MenuEightFive()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuEightFive()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...👊
         case "6":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSix()
             for {
-                fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -446,16 +570,19 @@ func websitesAttackers() {
                 case "9":
                     webattackers.Jok3r9(          )
                 case "99":
-                   menus.MenuEightSix()
+                    menus.MenuEightSix()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuEightSix()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //7. Osmedeus Next Generation Workflow Engine Main Menu.🍈
         case "7":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSeven()
             for {
-                fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -480,16 +607,19 @@ func websitesAttackers() {
                 case "9":
                     webattackers.Osmedeus9(          )
                 case "99":
-                   menus.MenuEightSeven()
+                    menus.MenuEightSeven()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuEightSeven()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //8. Ufonet Next Generation DDOS Tool Main Menu.........🦠
         case "8":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightEight()
             for {
-                fmt.Printf(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.BLUE + "🥝99." + bcolors.GREEN + "_help:" + bcolors.YELLOW + "🎯%s" + bcolors.GREEN + ")# " + bcolors.ENDC , userTarget)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0":
@@ -514,19 +644,22 @@ func websitesAttackers() {
                 case "9":
                     webattackers.Ufonet9(userTarget)
                 case "99":
-                   menus.MenuEightEight()
+                    menus.MenuEightEight()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuEightEight()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
         //9. Launch Heavy Automation Attacks On The Host........🍄
         case "9":
-            utils.ClearScreen(); banners.Banner()
-            webattackers.WafW00f(userTarget); webattackers.WhatWeb(userTarget); webattackers.DnsRecon(userTarget); webattackers.Nuclei(userTarget); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3(userTarget); webattackers.ParamSpider(userTarget); webattackers.SqlmapAuto(userTarget); webattackers.CommixAuto(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
+            webattackers.WafW00f(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.Nuclei(userTargetx); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3(userTarget); webattackers.ParamSpider(userTarget); webattackers.SqlmapAuto(userTarget); webattackers.CommixAuto(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
         case "99":
-           menus.MenuEight()
+            menus.MenuEight()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuEight()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -535,31 +668,33 @@ func websitesAttackers() {
 func creditsGivers() {
     utils.ClearScreen(); guides.Credits(); guides.Developer()
     for {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0":
-        africanaFramework()
-        return
-    default:
-        fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝99. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
-    }
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "0":
+            africanaFramework()
+            return
+        default:
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to Go to menu" + bcolors.BLUE + ")" + bcolors.ENDC)
+        }
     }
 }
 
-//0. Exit africana-framework...............(Try option 99)
+//0. Exit africana-framework...............(Try option 00)
 func scriptureNarators() {
     utils.ClearScreen(); scriptures.TheScriptures(); scriptures.CommandMents()
     for {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0":
-        africanaFramework()
-        return
-    default:
-        fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝99. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
-    }
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "0":
+            africanaFramework()
+            return
+        default:
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
+        }
     }
 }
 
@@ -567,11 +702,14 @@ func scriptureNarators() {
 func africanaFramework() {
     utils.ClearScreen(); banners.Banner(); menus.MenuZero()
     for {
-        fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
-            utils.ClearScreen();  banners.Banner()
+            utils.ClearScreen   (          )
+            banners.Banner      (          )
+            scriptures.Verse    (          )
             return
         case "1":
             systemSetups        (          )
@@ -580,6 +718,7 @@ func africanaFramework() {
             anonymitySetups     (          )
             return
         case "3":
+            internaltargetInput (          )
             internalAttackers   (          )
             return
         case "4":
@@ -603,15 +742,16 @@ func africanaFramework() {
             return
         case "99":
             scriptureNarators   (          )
-            return
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuZero()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "99 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
 
-// ¯\_(ツ)_/¯..............................(Main runner..)
+//           ...........................(Main runner..)
 func main(){
-    userAgreements()
+    sudo()
     return
 }

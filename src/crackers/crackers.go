@@ -9,7 +9,15 @@ import (
     "subprocess"
 )
 
-var userInput, userTarget, userScript, userOutput, userPcap, userHashes, userWordlists string
+var(
+    userInput       string
+    userTarget      string
+    userScript      string
+    userOutput      string
+    userPcap        string
+    userHashes      string
+    userWordlists   string
+)
 
 //Online crackers
 func HydraSsh() {
@@ -23,7 +31,7 @@ func HydraSsh() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing SSH password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrassh_outfile.txt -u ssh://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrassh_outfile.txt -u ssh://%s`, userWordlists, userTarget)
 }
 
 func HydraFtp() {
@@ -37,7 +45,7 @@ func HydraFtp() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing FTP password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydraftp_outfile.txt -u ftp://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydraftp_outfile.txt -u ftp://%s`, userWordlists, userTarget)
 }
 
 func HydraSmb() {
@@ -51,7 +59,7 @@ func HydraSmb() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing SMB password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrasmb_outfile.txt -u smb://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrasmb_outfile.txt -u smb://%s`, userWordlists, userTarget)
 }
 
 func HydraRdp() {
@@ -65,7 +73,7 @@ func HydraRdp() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing RDP password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrardp_outfile.txt -u rdp://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrardp_outfile.txt -u rdp://%s`, userWordlists, userTarget)
 }
 
 func HydraLdap() {
@@ -79,7 +87,7 @@ func HydraLdap() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing LDAP password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydraldap_outfile.txt -u ldap://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydraldap_outfile.txt -u ldap://%s`, userWordlists, userTarget)
 }
 
 func HydraSmtp() {
@@ -93,7 +101,7 @@ func HydraSmtp() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing SMTP password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrasmtp_outfile.txt -u smtp://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrasmtp_outfile.txt -u smtp://%s`, userWordlists, userTarget)
 }
 
 func HydraSnmtp() {
@@ -107,7 +115,7 @@ func HydraSnmtp() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing SNMTP password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrasnmtp_outfile.txt -u snmtp://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrasnmtp_outfile.txt -u snmtp://%s`, userWordlists, userTarget)
 }
 
 func HydraTelnet() {
@@ -121,7 +129,7 @@ func HydraTelnet() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing TELNET password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydratelnet_outfile.txt -u telnet://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydratelnet_outfile.txt -u telnet://%s`, userWordlists, userTarget)
 }
 
 func HydraHttps() {
@@ -135,19 +143,19 @@ func HydraHttps() {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
     fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing HTTP/S password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o ~/.africana/output/Hydrahttps_outfile.txt -u https://%s`, userWordlists, userTarget)
+    subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrahttps_outfile.txt -u https://%s`, userWordlists, userTarget)
 }
 
 func CyberBrute() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userTarget)
-    subprocess.PopenTwo(`cd ~/.africana/africana-base/cyberbrute; bash cyberbrute %s`, userTarget)
+    subprocess.PopenTwo(`cd /root/.africana/africana-base/cyberbrute; bash cyberbrute %s`, userTarget)
 }
 
 func HashBuster() {
     fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Full path to your .pcap" + bcolors.GREEN + ")# " + bcolors.ENDC)
     fmt.Scan(&userHashes)
-    subprocess.PopenTwo(`cd ~/.africana/africana-base/hash-buster; python3 cracker.py -t 10 %s`, userHashes)
+    subprocess.PopenTwo(`cd /root/.africana/africana-base/hash-buster; python3 cracker.py -t 10 %s`, userHashes)
 }
 
 func AirCrackng() {

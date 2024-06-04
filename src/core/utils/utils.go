@@ -147,7 +147,7 @@ func ClearScreen() {
     if runtime.GOOS == "linux" {
         subprocess.Popen("clear")
     } else if runtime.GOOS == "windows" {
-        subprocess.PopenCmd("cls")
+        subprocess.Popen("cls")
     } else {
         fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Unsupported operating system.\n" + bcolors.ENDC)
     }
@@ -168,4 +168,16 @@ func WordLists() {
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
     }
+}
+
+func LogDir() {
+    filePath := "/root/.africana/logs/"
+    if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
+        fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
+        return
+    }
+}
+
+func InitiLize() {
+    Certs(); LogDir(); WordLists()
 }

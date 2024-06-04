@@ -63,7 +63,11 @@ func WifiPumpkin3Auto() {
     userSsid, _ := reader.ReadString('\n')
     userSsid = strings.TrimSpace(userSsid)
     if userIface == "" {
-        userIface = "9G Free Wifi"
+        userIface = "Africana Free Wifi"
+    }
+    filePath := "/root/.config/wifipumpkin3/"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        subprocess.Popen(`wifipumpkin3; clear`)
     }
     subprocess.PopenThree(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, userIface, userSsid)
 }

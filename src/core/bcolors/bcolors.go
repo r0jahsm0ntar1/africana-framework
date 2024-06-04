@@ -54,5 +54,5 @@ func Colors(word string) {
     }
     rand.Seed(time.Now().UnixNano())
     randomIndex := rand.Intn(len(colors))
-    fmt.Printf("%s%s%s\n", colors[randomIndex], word, "\033[0m")
+    fmt.Printf("%s%s\n", colors[randomIndex], word)
 }
