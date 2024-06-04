@@ -61,7 +61,7 @@ sudo africana
 ```
 ## Python user setup
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework -b afric
+git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs
 ```
 ```bash
 cd africana-framework
