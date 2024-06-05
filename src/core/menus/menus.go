@@ -9,15 +9,15 @@ import (
 func MenuZero() {
     fmt.Println(bcolors.BLUE + "\n        ~>( 🧬" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "📀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration........." + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "🐈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors.........." + bcolors.DARKCYAN + "(Mitm, sniff)" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors......." + bcolors.DARKCYAN + "(C2 & shells)" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. WiFi Attack Vectors..................." + bcolors.DARKCYAN + "(Wifite, air)" + bcolors.BLUE + "🦝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. WiFi Attack Vectors..................." + bcolors.DARKCYAN + "(Wifite, air)" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords...." + bcolors.DARKCYAN + "(Hashcat, jo)" + bcolors.BLUE + "🐙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks............" + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors................" + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "🪳] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Credits, Tricks and About............." + bcolors.DARKCYAN + "(About, auth)" + bcolors.BLUE + "📀] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Credits, Tricks and About............." + bcolors.DARKCYAN + "(About, auth)" + bcolors.BLUE + "📜] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(" + bcolors.RED + "JC❤️sU " + bcolors.GREEN + "︻╦╤─" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "💻] " + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + `                       ¯\_(ツ)_/¯.🧬` + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
@@ -48,74 +48,13 @@ func MenuOne() {
     fmt.Println(bcolors.ENDC + `                       ¯\_(ツ)_/¯.🧬` + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
-func MenuOneOne() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[..........🍄Installing africana on kali-linux..........🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] \n" + bcolors.ENDC)
-}
-
-func MenuOneTwo() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[..........🧬Installing africana on ubuntu-linux..........🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[........................to your system...................] \n" + bcolors.ENDC)
-}
-
-func MenuOneThree() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[..........🍄Installing africana on arch-linux..........💻] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[......................Pleas be patient as................] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[........The Installer copies core files necessary........] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[........................to your system...................] \n" + bcolors.ENDC)
-}
-
-func MenuOneFour() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[..........🍄Africana detected in your system...........🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[......................Pleas be patient...................] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[.............As theInstaller runs full updates...........] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[.....................Of installed tools..................] \n" + bcolors.ENDC)
-}
-
-func MenuOneFive() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[................🍄Necessary tools updateded............🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[....Anonymous tools updateded (Tor, privoxy, squid)......] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[..........Wifi pentesting tools updateded (wifite).......] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[...................& All foundation tools................] \n" + bcolors.ENDC)
-}
-
-func MenuOneSix() {
-    fmt.Println(bcolors.BLUE + "\n[................Necessary tools installed................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[.....Anonymous tools installed (Tor, privoxy, squid )....] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[..........Wifi pentesting tools installed (wifite).......] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[........Local pentesting tools installed (bettercap).....] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[..Web pentest tools installed (nuclei, nikto, osmedeus)..] \n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[" + bcolors.ENDC + "+" + bcolors.BLUE + "] " + bcolors.GREEN + "Everything is set. Type 'africana' to launch The framework\n" + bcolors.ENDC)
-}
-
-func MenuOneSeven() {
-    fmt.Println(bcolors.BOLD + "\n[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Ready to uninstall africana from your system.." + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ ..............Just Incase of any bug🪳..................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[........Pleas email me @:rojahsmontari@gmail.com ........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[..Are U sure you want to completely uninstall africana?..] \n" + bcolors.ENDC)
-}
-
 func HelpMenuOne() {
     fmt.Println(
     bcolors.YELLOW + "\n             Kali Linux " + bcolors.ENDC + ": 1. It is a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Ubuntu Linux " + bcolors.ENDC + ": 2. Is a good distor but has alot of problems while installing kali-linux packages to avoid issues like dependencies problems, use docker image or install kali-linux in Ubuntu docker then install africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Arch Linux " + bcolors.ENDC + ": 3. It is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "         Windows System " + bcolors.ENDC + ": 4. Under development. But can run if tools well installed. Just give me time." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Un Install " + bcolors.ENDC + ": 5. Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me rojahsmontari@gmail.com" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "              UnInstall " + bcolors.ENDC + ": 5. Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me rojahsmontari@gmail.com" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
@@ -131,26 +70,6 @@ func MenuTwo() {
     fmt.Println(bcolors.BLUE + "[ 5. Chains....." + bcolors.DARKCYAN + "local.🐌." + bcolors.DARKCYAN + "squid.🐙." + bcolors.DARKCYAN + "privoxy.🎭." + bcolors.DARKCYAN + "tor.🧄." + bcolors.DARKCYAN + "WEB.🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + `                       ¯\_(ツ)_/¯.🧬` + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-}
-
-func MenuTwoOne() {
-    fmt.Println(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[.............Tor (Install tor & set proxies).............] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[........Iptables (Install Iptables for firewalls)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[........Squid (Install Squid set through Privoxy)........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[.......Privoxy (Install Privoxy & set through tor).......] \n" + bcolors.ENDC)
-    fmt.Println(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + "] " + bcolors.GREEN + "Installing tor, privoxy, squid, dnsmasq & setting things." + bcolors.ENDC)
-}
-
-func MenuTwoTwo() {
-    fmt.Println(bcolors.BLUE + "\n  ~>( " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[.........Your internet proxy connections routes..........] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[...................Running command.......................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[...Launch ex. sqlmap --proxy=http://127.0.0.1:3129.......] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[...............Your Proxy Chains Route...................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[.Local " + bcolors.RED + "~>" + bcolors.GREEN + "Squid " + bcolors.RED + "~>" + bcolors.YELLOW + "3129 " + bcolors.RED + "~>" + bcolors.GREEN + "Privoxy " + bcolors.RED + "~>" + bcolors.YELLOW + "8118 " + bcolors.RED + "~>" + bcolors.GREEN + "Tor " + bcolors.RED + "~>" + bcolors.YELLOW + "9050 " + bcolors.RED + "~>" + bcolors.BLUE + "web]\n" + bcolors.ENDC)
 }
 
 func HelpMenuTwo() {

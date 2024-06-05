@@ -164,20 +164,31 @@ func Certs() {
 }
 
 func WordLists() {
-    filePath := "/usr/share/wordlists/rockyou.txt"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
+    if runtime.GOOS == "linux" {
+        filePath := "/usr/share/wordlists/rockyou.txt"
+        if _, err := os.Stat(filePath); os.IsNotExist(err) {
+            subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
+        }
     }
 }
 
-func LogDir() {
-    filePath := "/root/.africana/logs/"
-    if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
+func Foundations() {
+    fileLogs := "/root/.africana/logs/"
+    if err := os.MkdirAll(fileLogs, os.ModePerm); err != nil {
+        fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
+        return
+    }
+    fileOuts := "/root/.africana/output"
+    if err := os.MkdirAll(fileOuts, os.ModePerm); err != nil {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
 }
 
+func UpsentTools() {
+    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯` + bcolors.RED + "Choice selected not yet implimented, " + bcolors.YELLOW + "comming soon!\n" + bcolors.ENDC)
+}
+
 func InitiLize() {
-    Certs(); LogDir(); WordLists()
+    Certs(); Foundations(); WordLists()
 }

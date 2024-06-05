@@ -26,7 +26,9 @@ func WifiPumpkin3() {
 func WifiteAuto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.RED + "Wireless card to use?" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "wlan0" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println()
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Wireless card to use?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "wlan0" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
@@ -39,7 +41,9 @@ func WifiteAuto() {
 func BettercapAuto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.RED + "Wireless card to use?" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "wlan0" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println()
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Wireless card to use?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "wlan0" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
@@ -52,14 +56,17 @@ func BettercapAuto() {
 func WifiPumpkin3Auto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
-    fmt.Print(bcolors.GREEN + "\n(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.RED + "Wireless card to use?" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "wlan0" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Println()
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Wireless card to use?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "wlan0" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
     if userIface == "" {
         userIface = "wlan0"
     }
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.RED + "Name to set your wifi?" + bcolors.ENDC + ":" + bcolors.BLUE + "Deafult" + bcolors.ENDC + ":" + bcolors.YELLOW + "(9G Free Wifi)" + bcolors.GREEN + "# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Name to set your wifi?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "Calvary Free Wifi" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userSsid, _ := reader.ReadString('\n')
     userSsid = strings.TrimSpace(userSsid)
     if userIface == "" {

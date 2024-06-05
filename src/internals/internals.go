@@ -13,7 +13,14 @@ import (
     "subprocess"
 )
 
-var userInput, userTarget, userLhost, userLPort, userName, userPass string
+var (
+    userInput   string
+    userTarget  string
+    userLhost   string
+    userLPort   string
+    userName    string
+    userPass    string
+)
 
 func InternalScanner() {
     subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`)
@@ -21,31 +28,31 @@ func InternalScanner() {
 }
 
 func NmapPortscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full port scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "Full-Port scan: " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
     Logs := fmt.Sprintf("/root/.africana/logs/nmap_full_ports_log_%s.txt", time.Now().Format("20060102_150405"))
     subprocess.PopenThree(`script -q -c 'nmap -v -p- %s' -O %s`, userTarget, Logs)
     fmt.Println()
 }
 
 func NmapVulnscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full vuln scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "Full-Vuln scan: " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
     subprocess.PopenTwo(`nmap --open -T4 -Pn -n -sSV -p- --script=vulners.nse --stats-every 10s %s`, userTarget)
     fmt.Println()
 }
 
 func SmbVulnscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing SMB vuln scan on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "F.SMB-Vuln scan: " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
     subprocess.PopenTwo(`nmap -sT -sV -Pn -p 445 --script=smb-vuln* --stats-every 10s %s`, userTarget)
 }
 
 func SmbMapscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing full SMB maping on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    subprocess.PopenTwo(`smbmap -H %s -u null -p null -r --depth 5`, userTarget)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "F.SMBRecon scan: " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
+    subprocess.PopenTwo(`smbmap -q -H %s -u null -p null -r --depth 5`, userTarget)
     fmt.Println()
 }
 
 func RpcEnumscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[+] " + bcolors.GREEN + "Performing null RPC connectin on Target 🎯" + bcolors.BLUE + "(" + bcolors.YELLOW + "%s" , userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "F.RPCRecon scan: " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
     subprocess.PopenTwo(`rpcclient -U "" -N %s`, userTarget)
     fmt.Println()
 }
@@ -57,15 +64,15 @@ func SmbExploit(userTarget string) {
         return
     }
     menus.MenuThreeOne()
-    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
         return
     case "1":
-        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
@@ -75,8 +82,8 @@ func SmbExploit(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
         if userLhost == "" {
@@ -92,8 +99,8 @@ func SmbExploit(userTarget string) {
 
 func PacketSniffer(userTarget string) {
     menus.MenuThreeTwo()
-    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -119,8 +126,8 @@ func PacketsResponder() {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
@@ -156,8 +163,8 @@ func BeefBettercap(userTarget string) {
         os.Exit(1)
     }
     menus.MenuThreeThree()
-    fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -191,8 +198,8 @@ func BeefBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
@@ -233,8 +240,8 @@ func BeefBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Println(bcolors.BLUE + "╭─────(" + bcolors.RED + "rats_menu" + bcolors.BLUE + ")────────────(" + bcolors.YELLOW + "99. " + bcolors.DARKCYAN + "GetGuide! " + bcolors.YELLOW + "00. " + bcolors.DARKCYAN + "GetHelp!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.ENDC + ":" + bcolors.GREEN + "(" + bcolors.RED + "Lhost" + bcolors.ENDC + ":" + bcolors.BLUE + "Default" + bcolors.ENDC + ":" + bcolors.YELLOW + "%s", userLhostIp + bcolors.GREEN + ")# " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)

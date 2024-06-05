@@ -1,8 +1,6 @@
 package phishers
 
 import (
-    "fmt"
-    "bcolors"
     "subprocess"
 )
 
@@ -31,6 +29,3 @@ func CyberPhish() {
     subprocess.Popen(`cd /root/.africana/africana-base/cyberphish; python3 cyberphish.py`)
 }
 
-func UpsenTools() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.DARKCYAN + "Not yet implimented but comming soon" + bcolors.GREEN + ")" + bcolors.ENDC)
-}

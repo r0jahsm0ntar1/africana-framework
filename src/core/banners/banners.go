@@ -61,6 +61,7 @@ func Graphics() {
                     ()=///=))))==()
                       /
                       %swake up, Christian%s
+
               %sLord God Jesus Christ L❤️.VE'S you
                     follow the white Pigeon.
                      knock, knock, knock,
@@ -97,7 +98,7 @@ func Graphics() {
           |  *    *  |||  *  *  * |  *       ||
           |__________|||__________|__________||
           |          || '---------------------'
-          |  *    *  ||      %sJesus Christ%s
+          |  *    *  ||      %sJesus Christ is%s
           |          || %sThe Lamb that was slain%s
           |  *    *  ||      %sfor our sins.%s
           |__________||       %sJohn 3:16%s
