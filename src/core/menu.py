@@ -18,7 +18,7 @@ class main_menu(object):
 
     def menu_one(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ 🍄" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( 🍄" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. System Security Configuration........." + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "🐈] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Local Network Attack Vectors.........." + bcolors.DARKCYAN + "(Mitm, sniff)" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
@@ -33,7 +33,7 @@ class main_menu(object):
 
     def menu_two(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ 🎭" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "......................" + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅]" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Stop tor & restore all iptables....................🐝] " + bcolors.ENDC)
@@ -43,7 +43,7 @@ class main_menu(object):
 
     def menu_three(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Discover Targets..................................🐹] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Port discovery on the target......................🐾] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Vuln' Scann the Target............................🦉] " + bcolors.ENDC)
@@ -57,7 +57,7 @@ class main_menu(object):
 
     def menu_four(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Blackjack......................" + bcolors.DARKCYAN + "(All Distro...R.A.T)" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. ShellzGen......................" + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. PowerJoker....................." + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
@@ -71,7 +71,7 @@ class main_menu(object):
 
     def menu_five(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ 📶" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( 📶" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ......................Wifite............" + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. ....................Bettercap..........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ...................Wifipumpkin3" + bcolors.DARKCYAN + "(Automated Phishing)" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
@@ -85,14 +85,14 @@ class main_menu(object):
 
     def menu_six(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Online......................." + bcolors.DARKCYAN + "(automated_Bruteforce)" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Offline................." + bcolors.DARKCYAN + "(automated/ maunal/ Hashes)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 
     def menu_six_one(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n      ~>[ 🔐" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ...................Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "..................🫑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. ...................Bruteforce " + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "..................🔑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ...................Bruteforce " + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "..................🥝] " + bcolors.ENDC)
@@ -106,7 +106,7 @@ class main_menu(object):
 
     def menu_six_two(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n      ~>[ 🔐" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ....................Aircrack_ng........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. .......................John............." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ......................To Add.........................] " + bcolors.ENDC)
@@ -120,7 +120,7 @@ class main_menu(object):
 
     def menu_seven(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n      ~>[ 🍄" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n      ~>( 🍄" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ..............Gophish.(Browser Gui)." + bcolors.DARKCYAN + "(All Templetes)" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. ...............Good Ginx (Advanced)." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ...................AdvPhishing......" + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
@@ -134,7 +134,7 @@ class main_menu(object):
 
     def menu_eight(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ 🦟" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( 🦟" + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources🪰] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Start Bruteforcing Host's Root Files...............🚀] " + bcolors.ENDC)
@@ -148,7 +148,7 @@ class main_menu(object):
 
     def menu_eight_four(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n      ~>[ " + bcolors.ENDC + bcolors.UNDERL + "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n      ~>( " + bcolors.ENDC + bcolors.UNDERL + "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. ............Sql injection with sqlmap..." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. .......Xss injection with Dalfox, Xsser." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🪰] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ............Sql injection with Sqlmap......" + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
@@ -157,7 +157,7 @@ class main_menu(object):
 
     def menu_eight_five(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
@@ -171,7 +171,7 @@ class main_menu(object):
 
     def menu_eight_six(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Install all jok3r tools..." + bcolors.DARKCYAN + "(Pleas start here if not)" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Show all the tools in the toolbox..................🍒] " + bcolors.ENDC)
@@ -185,7 +185,7 @@ class main_menu(object):
 
     def menu_eight_seven(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🧭] " + bcolors.ENDC)
@@ -199,7 +199,7 @@ class main_menu(object):
 
     def menu_eight_eight(self):
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n        ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n        ~>( " + bcolors.ENDC + bcolors.UNDERL + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server.......🍄.]" + bcolors.ENDC)
         print(bcolors.BLUE + "[ 2. Test if bots are alive............................📡.] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. Launch palantir..................." + bcolors.DARKCYAN + "(Palantir 3.14..)" + bcolors.BLUE + "🧭] " + bcolors.ENDC)
@@ -238,7 +238,7 @@ class main_menu(object):
         |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
         |_____|___|___|___|___|_____|__|__|_| |_|___|_| 🕊
 """ + bcolors.ENDC)
-        print(bcolors.BLUE + "                ~>[ 📜" + bcolors.ENDC + "The Ten Commandments." + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "                ~>( 📜" + bcolors.ENDC + "The Ten Commandments." + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.YELLOW + "[ 1. You shall have no other gods before Me................] " + bcolors.ENDC)
         print(bcolors.YELLOW + "[ 2. You shall make no idols...............................] " + bcolors.ENDC)
         print(bcolors.YELLOW + "[ 3. You shall not take the name of the Lord your God in...] " + bcolors.ENDC)

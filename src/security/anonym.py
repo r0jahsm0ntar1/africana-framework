@@ -14,7 +14,7 @@ class anonym(object):
     def vanish_install(self):
         os.system('clear')
         beauty.graphics(), scriptures.verses()
-        print(bcolors.BLUE + "\n              ~>[ " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n              ~>( " + bcolors.ENDC + bcolors.BOLD + bcolors.UNDERL + "Installing & Configuring" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[             Tor (Install tor & set proxies)             ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[        Iptables (Install Iptables for firewalls)        ] " + bcolors.ENDC)
         print(bcolors.BLUE + "[        Squid (Install Squid set through Privoxy)        ] " + bcolors.ENDC)

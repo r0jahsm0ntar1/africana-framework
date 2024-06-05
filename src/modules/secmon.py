@@ -6,7 +6,7 @@ class pproxy_mon(object):
         pass
 
     def pproxy(self):
-        print(bcolors.BLUE + "\n  ~>[ " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+        print(bcolors.BLUE + "\n  ~>( " + bcolors.ENDC + bcolors.UNDERL + "Monitoring traffic through squid, privoxy, tor" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
         print(bcolors.BLUE + "[.........Your internet proxy connections routes.........] " + bcolors.ENDC)
         print(bcolors.BLUE + "[...................Running command......................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[...Launch ex. sqlmap --proxy=http://127.0.0.1:3129......] " + bcolors.ENDC)

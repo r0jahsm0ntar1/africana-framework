@@ -125,7 +125,7 @@ class neo_start(object):
                             else:
                                 try:
                                     print("")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 5 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 5 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -158,7 +158,7 @@ class neo_start(object):
             try:
                 os.system('clear')
                 neo.scann_internal()
-                print(bcolors.BLUE + "\n~>[ " + bcolors.DARKCYAN + "Select a target from the table to be " + bcolors.RED + "Attacked! 🎯" + bcolors.BLUE + "]<~\n" + bcolors.ENDC)
+                print(bcolors.BLUE + "\n~>( " + bcolors.DARKCYAN + "Select a target from the table to be " + bcolors.RED + "Attacked! 🎯" + bcolors.BLUE + ")<~\n" + bcolors.ENDC)
                 try:
                     host = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 except:
@@ -169,7 +169,7 @@ class neo_start(object):
                     while True:
                         try:
                             mega_menu.menu_three()
-                            print(bcolors.BLUE + "~>[ " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                            print(bcolors.BLUE + "~>( " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
                             choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                         except:
                             neo.one()
@@ -235,7 +235,7 @@ class neo_start(object):
                             else:
                                 try:
                                     print("")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -328,7 +328,7 @@ class neo_start(object):
                     else:
                         try:
                             print("")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -425,7 +425,7 @@ class neo_start(object):
                     else:
                         try:
                             print("")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -491,7 +491,7 @@ class neo_start(object):
                                     else:
                                         try:
                                             print("")
-                                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                             for w in warn:
                                                 sys.stdout.write(w)
                                                 sys.stdout.flush()
@@ -542,7 +542,7 @@ class neo_start(object):
                                     else:
                                         try:
                                             print("")
-                                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                             for w in warn:
                                                 sys.stdout.write(w)
                                                 sys.stdout.flush()
@@ -562,7 +562,7 @@ class neo_start(object):
                     else:
                         try:
                             print("")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 2 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 2 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -639,7 +639,7 @@ class neo_start(object):
                     else:
                         try:
                             print("")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 6 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 6 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()
@@ -703,7 +703,7 @@ class neo_start(object):
                 os.system('clear')
                 def user_nuke(self):
                     mega_menu.menu_eight()
-                    print(bcolors.BLUE + "~>[ " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                    print(bcolors.BLUE + "~>( " + bcolors.RED + "Ready to attack " + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
                     while True:
                         try:
                             choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -748,7 +748,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def web_injector(self):
                                         mega_menu.menu_eight_four()
-                                        print(bcolors.BLUE + "  ~>[ " + bcolors.RED + "Launch Injection againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "  ~>( " + bcolors.RED + "Launch Injection againist" + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
                                         while True:
                                             try:
                                                 choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
@@ -775,7 +775,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 4 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 4 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -798,7 +798,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def owasp(self):
                                         mega_menu.menu_eight_five()
-                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Netattacker againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>( " + bcolors.RED + "Launch Netattacker againist" + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -841,7 +841,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -864,7 +864,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def jok3r(self):
                                         mega_menu.menu_eight_six()
-                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Jok3r againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>( " + bcolors.RED + "Launch Jok3r againist" + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -907,7 +907,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -930,7 +930,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def osmedeus(self):
                                         mega_menu.menu_eight_seven()
-                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch Osmedeus on" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>( " + bcolors.RED + "Launch Osmedeus on" + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -971,7 +971,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -994,7 +994,7 @@ class neo_start(object):
                                     os.system('clear')
                                     def ddos(self):
                                         mega_menu.menu_eight_eight()
-                                        print(bcolors.BLUE + "~>[ " + bcolors.RED + "Launch DDOS againist" + bcolors.BLUE + " ]" + bcolors.BLUE + " ~> " + bcolors.BLUE + "[ " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " ]<~\n" + bcolors.ENDC)
+                                        print(bcolors.BLUE + "~>( " + bcolors.RED + "Launch DDOS againist" + bcolors.BLUE + " )" + bcolors.BLUE + " ~> " + bcolors.BLUE + "( " + bcolors.YELLOW + "%s" %(host) + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
 
                                         while True:
                                             try:
@@ -1037,7 +1037,7 @@ class neo_start(object):
                                             else:
                                                 try:
                                                     print("")
-                                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                                     for w in warn:
                                                         sys.stdout.write(w)
                                                         sys.stdout.flush()
@@ -1068,7 +1068,7 @@ class neo_start(object):
                             else:
                                 try:
                                     print("")
-                                    warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                                    warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                                     for w in warn:
                                         sys.stdout.write(w)
                                         sys.stdout.flush()
@@ -1207,7 +1207,7 @@ class neo_start(object):
                     else:
                         try:
                             print("")
-                            warn = bcolors.BLUE + "~>[ " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + "]<~" + bcolors.ENDC
+                            warn = bcolors.BLUE + "~>( " + bcolors.RED + "Poor choice of selection. Please select ~> " + bcolors.DARKCYAN + "from 0 to 9 " + bcolors.BLUE + ")<~" + bcolors.ENDC
                             for w in warn:
                                 sys.stdout.write(w)
                                 sys.stdout.flush()

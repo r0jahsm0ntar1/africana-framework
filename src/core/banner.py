@@ -16,7 +16,7 @@ class banners(object):
       _.-----..,-'   (`"--^
      //              |
     (|   `;      ,   |
-      \   ;.----/  ,/
+      \   ;.----/   ,/
        ) // /   | |\ \
        \ \\`\   | |/ /      Jesus Christ
         \ \\ \  | |\/  The Lamb that was slain
