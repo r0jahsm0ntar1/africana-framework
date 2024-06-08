@@ -83,12 +83,12 @@ func userAgreements() {
     }
 }
 
-//1. Install or update africana-framework..(Start here )📀
+//1. Install or update africana-framework..(Start here )🩺
 func systemSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuOne()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─📀" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -117,12 +117,12 @@ func systemSetups() {
     }
 }
 
-//2. System Security Configuration.........(Setup tor &)🐈
+//2. System Security Configuration.........(Setup tor &)🎭
 func anonymitySetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuTwo()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐈" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -295,7 +295,7 @@ func passwordsCrackers() {
             utils.ClearScreen(); banners.Banner(); menus.MenuSixOne()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐙" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -360,12 +360,12 @@ func passwordsCrackers() {
     }
 }
 
-//7. Social-Engineering Attacks............(Gophish, gi)🧪
+//7. Social-Engineering Attacks............(Gophish, gi)🪝
 func credsPhishers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSeven()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🧪" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🪝" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -403,7 +403,7 @@ func credsPhishers() {
 
 func askForProxy() (*url.URL) {
     reader := bufio.NewReader(os.Stdin)
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL: Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL🛰️ Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     proxyStr, _ := reader.ReadString('\n')
     proxyStr = strings.TrimSpace(proxyStr)
@@ -434,12 +434,12 @@ func setProxyEnv(proxyURL *url.URL) error {
 
 func websiteUserTarget() {
     utils.ClearScreen(); banners.Banner()
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🎯" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "y", "yes", "Y", "Yes", "YES":
@@ -482,12 +482,12 @@ func websitesAttackers() {
         //3. Start Bruteforcing Host's Root Files...............🚀
         case "3":
             webattackers. Gobuster(userTarget)
-        //4. Start SQL, XSS & SSRF Detection & Eploitation......🐌
+        //4. Start SQL, XSS & SSRF Detection & Eploitation......💉
         case "4":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFour()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -517,7 +517,7 @@ func websitesAttackers() {
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFive()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🦣" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -549,12 +549,12 @@ func websitesAttackers() {
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
-        //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...👊
+        //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...🃏
         case "6":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSix()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🃏" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -586,12 +586,12 @@ func websitesAttackers() {
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
-        //7. Osmedeus Next Generation Workflow Engine Main Menu.🍈
+        //7. Osmedeus Next Generation Workflow Engine Main Menu.🦑
         case "7":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSeven()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🦑" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -678,7 +678,7 @@ func creditsGivers() {
     utils.ClearScreen(); guides.Credits(); guides.Developer()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -712,7 +712,7 @@ func africanaFramework() {
     utils.ClearScreen(); banners.Banner(); menus.MenuZero()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🦝" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
