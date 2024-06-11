@@ -33,7 +33,7 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
                          ¯\_(ツ)_/¯
 ` + bcolors.ENDC)
     fmt.Printf(bcolors.GREEN + `
-             The Bible verses to guide you home. 
+             📜 The Bible verses to guide you home. 
     ` + bcolors.ENDC)
     scriptures := bcolors.ENDC + `(In the beginning God created the heaven & the earth.(Gen.1:1)
 (& God saw the light, that it was good: & God divided the light from the darkness..(Gen.1:4)

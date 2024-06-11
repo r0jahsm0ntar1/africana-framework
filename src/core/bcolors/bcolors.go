@@ -49,10 +49,10 @@ func init() {
     }
 }
 
-func Colors(word string) {
+func Colors(words string) {
     colors := []string{ BLUE, PURPLE, CYAN, DARKCYAN, GREEN, YELLOW, RED,
     }
     rand.Seed(time.Now().UnixNano())
     randomIndex := rand.Intn(len(colors))
-    fmt.Printf("%s%s\n", colors[randomIndex], word)
+    fmt.Printf("%s%s\n", colors[randomIndex], words)
 }

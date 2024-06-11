@@ -5,10 +5,10 @@ import (
     "fmt"
     "utils"
     "menus"
-    "guides"
-    "strings"
     "bufio"
     "setups"
+    "credits"
+    "strings"
     "banners"
     "net/url"
     "runtime"
@@ -40,7 +40,7 @@ func sudo() {
     default:
         if os.Geteuid() != 0 {
             utils.ClearScreen(); banners.Banner(); scriptures.Verse()
-            fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬africana must be run as root. Try " + bcolors.RED + "sudo africana\n" + bcolors.ENDC)
+            fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🦊africana must be run as root. Try " + bcolors.RED + "sudo africana\n" + bcolors.ENDC)
             return
         }else{
         userAgreements()
@@ -56,7 +56,7 @@ func userAgreements() {
         utils.ClearScreen(); agreements.Covenant()
         for {
             fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─📜" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
                 case "y", "Y", "yes", "Yes", "YES":
@@ -279,12 +279,12 @@ func wirelesAttackers() {
     }
 }
 
-//6. Crack Hash, Pcap & Brute Passwords....(Hashcat, jo)🐙
+//6. Crack Hash, Pcap & Brute Passwords....(Hashcat, jo)🔐
 func passwordsCrackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSix()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐙" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -295,7 +295,7 @@ func passwordsCrackers() {
             utils.ClearScreen(); banners.Banner(); menus.MenuSixOne()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🐙" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -332,7 +332,7 @@ func passwordsCrackers() {
             utils.ClearScreen(); banners.Banner(); menus.MenuSixTwo()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🐙" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -352,6 +352,8 @@ func passwordsCrackers() {
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
+        case "99", "m", "M", "menu", "Menu", "MENU":
+            menus.HelpMenuSixTwo()
         case "00", "h", "H", "help", "Help", "HELP":
             menus.HelpMenuSix()
         default:
@@ -399,12 +401,12 @@ func credsPhishers() {
     }
 }
 
-//8. Website Attack Vectors................(Osmedeus, j)🌍
+//8. Website Attack Vectors................(Proxy, Conf)🎭
 
 func askForProxy() (*url.URL) {
     reader := bufio.NewReader(os.Stdin)
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL🛰️ Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     proxyStr, _ := reader.ReadString('\n')
     proxyStr = strings.TrimSpace(proxyStr)
 
@@ -432,6 +434,7 @@ func setProxyEnv(proxyURL *url.URL) error {
     return nil
 }
 
+//8. Website Attack Vectors................(userTarget, set)🎭
 func websiteUserTarget() {
     utils.ClearScreen(); banners.Banner()
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -458,6 +461,7 @@ func websiteUserTarget() {
     }
 }
 
+//8. Website Attack Vectors................(Attack, Phase)🌍
 func websitesAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuEight()
     userTargetx = strings.TrimSpace(userTarget)
@@ -467,7 +471,7 @@ func websitesAttackers() {
 
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🌍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🪲" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -479,7 +483,7 @@ func websitesAttackers() {
         //2. Gather e-mails & subdomain namesfrom public sources🪰
         case "2":
             webattackers.Harvester(userTarget)
-        //3. Start Bruteforcing Host's Root Files...............🚀
+        //3. Start Bruteforcing Host's Root Files...............🦑
         case "3":
             webattackers. Gobuster(userTarget)
         //4. Start SQL, XSS & SSRF Detection & Eploitation......💉
@@ -586,12 +590,12 @@ func websitesAttackers() {
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
-        //7. Osmedeus Next Generation Workflow Engine Main Menu.🦑
+        //7. Osmedeus Next Generation Workflow Engine Main Menu.🐨
         case "7":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSeven()
             for {
                 fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "╰─🦑" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -660,7 +664,7 @@ func websitesAttackers() {
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
-        //9. Launch Heavy Automation Attacks On The Host........🍄
+        //9. Launch Heavy Automation Attacks On The Host........🤖
         case "9":
             webattackers.WafW00f(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.Nuclei(userTargetx); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3(userTarget); webattackers.ParamSpider(userTarget); webattackers.SqlmapAuto(userTarget); webattackers.CommixAuto(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -675,7 +679,7 @@ func websitesAttackers() {
 
 //9. Help, Credits, Tricks and About.......(🕊  ︻╦╤─JC❤sU)
 func creditsGivers() {
-    utils.ClearScreen(); guides.Credits(); guides.Developer()
+    utils.ClearScreen(); credits.Contributors(); credits.Developer()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)

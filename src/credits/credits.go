@@ -1,4 +1,4 @@
-package guides
+package credits
 
 import (
     "fmt"
@@ -6,7 +6,7 @@ import (
     "bcolors"
 )
 
-func Credits() {
+func Contributors() {
     fmt.Printf(`%s
                      _,._
                  __.'   _)
@@ -32,7 +32,7 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
     ` + bcolors.ENDC)
 
     fmt.Printf(bcolors.GREEN + `
-                🛰️   Africana-Framework
+                 🛰️ Africana-Framework
     ` + bcolors.ENDC)
 
     fmt.Printf(bcolors.BLUE + `

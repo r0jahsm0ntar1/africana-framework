@@ -17,7 +17,7 @@ func Covenant() {
 [ the Software, and to permit persons to whom the Software]
 [ is furnished to do so, subject to the following.........]
 
-[ Conditions:.............................................]
+[ Conditions🍄:...........................................]
 [ The above copyright notice and this permission notice...]
 [ shall be included in all copies or substantial portions.]
 [ of the Software.........................................]
@@ -32,15 +32,15 @@ func Covenant() {
 [ IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER.....]
 [ DEALINGS IN THE SOFTWARE................................]
 %s
-[ The 🍄Africana-Framework is designed purely for Good &..]
+[ The 🦊Africana-Framework is designed purely for Good &..]
 [ not evil. If you are planning on using this tool for..🐝]
 [ malicious purposes that are not authorized by the.......]
 [ 🥝company you are performing assessments for, you are...]
 [ violating the terms of service and license of this......]
 [ toolset. By hitting yes (only one time), you agree to...]
 [ the terms of service and that you will only use this....]
-[ tool for lawful purposes only.........................🥥]
+[ tool for lawful purposes only.........................🎲]
 %s`, bcolors.GREEN, bcolors.RED, bcolors.ENDC)
     fmt.Println(bcolors.ENDC + `
-¯\_(ツ)_/¯ ` + bcolors.DARKCYAN + "🧬Do you agree to the terms of service... " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
+¯\_(ツ)_/¯ ` + bcolors.DARKCYAN + "🥥Do you agree to the terms of service... " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
 }
