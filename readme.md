@@ -47,13 +47,13 @@ sudo apt install Golang -y
 ## Installation
 
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework
 ```
 ```bash
 cd africana-framework
 ```
 ```bash
-go build ./africana.go; mv africana /usr/local/bin
+sudo go build ./africana.go; sudo mv africana /usr/local/bin
 ```
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
