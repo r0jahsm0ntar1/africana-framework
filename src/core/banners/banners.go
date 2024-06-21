@@ -7,7 +7,7 @@ import (
     "math/rand"
 )
 var (
-    version = "v2.0.2"
+    version = "v2.0.4"
 )
 
 type Banners struct{}
@@ -32,6 +32,7 @@ func Graphics() {
         \ \\ \  | |\/  %sThe Lamb that was slain%s
          '" '"  '""         %sfor our sins.%s
                              %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -50,6 +51,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
             |//    %sThe Lamb that was slain%s
             \(\          %sfor our sins.%s
                            %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.PURPLE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -67,6 +69,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors
                     %sfollow the white Pigeon.%s
                      %sknock, knock, knock,%s
                           %sMan Of God.%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcolors.GREEN, bcolors.PURPLE, bcolors.ENDC)
 
@@ -84,6 +87,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcol
               /_____\\  %sThe Lamb that was slain%s
                              %sfor our sins.%s
                                %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -101,6 +105,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
           |  *    *  || %sThe Lamb that was slain%s
           |__________||      %sfor our sins.%s
            '----------'        %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -118,6 +123,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
                         I;|.|.|   %sThe Lamb that was slain%s
                        <|i::|i|'.      %sfor our sins.%s
                       (' ^'"'-' ")       %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -137,6 +143,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
                 |    '._//'   |  %sThe Lamb that was slain%s
                .'             '.      %sfor our sins.%s
             _,'                 ',_     %sJohn 3:16%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -156,6 +163,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
                  '._,\/ ._\     %sfor our sins.%s
                    '._// ./'-._   %sJohn 3:16%s
                      '-._-_-_.-'%s
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.BLUE, bcolors.ENDC)
     }

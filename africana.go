@@ -151,7 +151,7 @@ func anonymitySetups() {
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
     utils.ClearScreen(); banners.Banner(); internals.InternalScanner()
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.PURPLE + "(҂`_´)Select your 🎯" + bcolors.RED + "target!!!" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "Select your" + bcolors.PURPLE + "(҂`_´) " + bcolors.RED + "target!!🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
 }
@@ -753,7 +753,7 @@ func africanaFramework() {
         case "9":
             creditsGivers       (           )
             return
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99":
             scriptureNarators   (           )
         case "00", "h", "H", "help", "Help", "HELP":
             menus.HelpMenuZero()

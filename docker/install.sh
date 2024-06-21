@@ -35,7 +35,7 @@ echo
 print_blue " Africana - Dependencies Install "
 echo
 echo
-print_blue "This script will install Jok3r and all the required dependencies"
+print_blue "This script will install Africana and all the required dependencies"
 
 # Make sure we are root !
 if [ "$EUID" -ne 0 ]; then 
@@ -735,7 +735,7 @@ print_delimiter
 
 # -----------------------------------------------------------------------------
 
-print_blue "[~] Install Python3 libraries required by Jok3r (if missing)"
+print_blue "[~] Install Python3 libraries required by Africana (if missing)"
 pip3 install -r requirements.txt
 pip3 install --upgrade requests
 print_delimiter
