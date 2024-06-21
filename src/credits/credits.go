@@ -7,45 +7,30 @@ import (
 )
 
 func Contributors() {
-    fmt.Printf(`%s
-                     _,._
-                 __.'   _)
-                <_,)'.-"a\
-                  /' (    \
-      _.-----..,-'   ('"--^
-     //              |
-    (|   ';      ,   :
-      \   ;.----/  , /
-       ) // /   | |\ \
-       \ \\'\   | |/ /      %sJesus Christ%s
-        \ \\ \  | |\/  %sThe Lamb that was slain%s
-         '" '"  '""         %sfor our sins.%s
-    `, bcolors.BLUE, bcolors.GREEN + bcolors.GREEN, 
-bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
- bcolors.ENDC)
-    fmt.Printf(bcolors.YELLOW + `
-         __                 _____ _____     _     _
-      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
-     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-     |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-                         ¯\_(ツ)_/¯
-    ` + bcolors.ENDC)
-
-    fmt.Printf(bcolors.GREEN + `
-                 🛰️ Africana-Framework
+    fmt.Printf(bcolors.ORANGE + bcolors.ITALIC + `
+                    🦊Africana-Framework
     ` + bcolors.ENDC)
 
     fmt.Printf(bcolors.BLUE + `
  Africana name        Developer's name       Original_name
     ` + bcolors.ENDC)
 
-    credits := bcolors.ENDC + `
+    fmt.Printf(bcolors.DARKCYAN + `
 1. africana-framework..Rojahs montari..africana-framework ]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                2.    Tor system setup
-1. tor_vanish.......Salim Zaved Karim..............Neutron]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.DARKCYAN + `
+1. tor_vanish.......Salim Zaved Karim..............Neutron]
+    ` + bcolors.ENDC)
+
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                3. Internal-Network-Attack
+    ` + bcolors.ENDC)
+   fmt.Printf(bcolors.DARKCYAN + `
 3. bettercap.....................................bettercap]
 4. nmap...............................................nmap]
 5. metasploit-framework.........................msfconsole]
@@ -54,8 +39,12 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
 8. beef-xss.......................................beef-xss]
 9. responder.....................................responder]
 10 toxssin.........................................toxssin]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                4. Generate Undetectable Malware
+    ` + bcolors.ENDC)
+   fmt.Printf(bcolors.DARKCYAN + `
 1. Blackjack..............t3l3machus...............Villain]
 2. ShellzGen................4ndr34z.................Shellz]
 3. PowerJoker...................................PowerJoker]
@@ -65,26 +54,43 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
 7. AndroidRAT...................................AndroidRAT]
 8. Chameleon.....................................Chameleon]
 9. Gh0x0st.................Gh0x0st....Invoke-PSObfuscation]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                5.     WiFi Attack Vectors
+    ` + bcolors.ENDC)
+   fmt.Printf(bcolors.DARKCYAN + `
 1. Wifite...........................................Wifite]
 2. Wifipumpkin3................................Wifipumpkin]
 3. Airgeddon.....................................Airgeddon]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                6. Crack Hash, Pcap & Brute Passwords
+    ` + bcolors.ENDC)
+   fmt.Printf(bcolors.DARKCYAN + `
 1. Aircrack_ng.................................Aircrack_ng]
 2. John...............................................John]
 3. Hash-Buster.........Somdev Sangwan..........Hash-Buster]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                7.   Social-Engineering Attacks
+    ` + bcolors.ENDC)
+   fmt.Printf(bcolors.DARKCYAN + `
 1. Gophish.........................................Gophish]
 2. Good Ginx.....................................Evil Ginx]
 3. AdvPhishing.................................AdvPhishing]
 4. Setoolkit...........David Kennedy.............Setoolkit]
 5. Anonphisher.................................Anonphisher]
 6. Cyberphish...................................Cyberphish]
+    ` + bcolors.ENDC)
 
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                8.     Website Attack Vectors
+    ` + bcolors.ENDC)
+
+    fmt.Printf(bcolors.DARKCYAN + `
 1. Musker.................Bing A.I.................Proxyes]
 2. wafw00f.........................................wafw00f]
 3. Dnsrecon.......................................Dnsrecon]
@@ -106,16 +112,12 @@ bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN,
 19. Jok3r..................koutto....................Jok3r]
 20. Osmedeus...............j3ssie.................Osmedeus]
 21. Ufonet.................epsylon..................Ufonet]
-` + bcolors.ENDC
-    for _, c := range credits {
-        fmt.Print(string(c))
-        time.Sleep(01 * time.Millisecond)
-    }
+` + bcolors.ENDC)
 
 }
 
 func Developer() {
-    fmt.Printf(bcolors.YELLOW + `
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                    🛰️ About the author
     ` + bcolors.ENDC)
     developer := bcolors.BLUE + `
@@ -140,22 +142,25 @@ func Developer() {
 ` + bcolors.ENDC
     for _, d := range developer {
         fmt.Print(string(d))
-        time.Sleep(03 * time.Millisecond)
+        time.Sleep(3 * time.Millisecond)
     }
-    fmt.Print(bcolors.YELLOW + `
+    fmt.Printf(bcolors.GREEN + `
+         __                 _____ _____     _     _
+      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+     |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+                         ¯\_(ツ)_/¯
+    ` + bcolors.ENDC)
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
+         🛰️ The devil has no power over fasting
+    ` + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + `
 [ What is there 4 U 2 gain the whole world & loose your...]
 [ soul? Be smart your Creator has good plans for you......]
 [ Life Tip.: Defeat the 😈 devil by fasting & praying.....]
-` + bcolors.ENDC)
-
-    fmt.Print(bcolors.DARKCYAN + `
 [ Email....: rojahsmontari@gmail.com......................]
 [ YouTube..: https://youtube.com/@RojahsMontari...........]
-` + bcolors.ENDC)
-    fmt.Printf(`
-             %sTo. %sExit %s& Go To Main Menu%s %sType %s0.
 
-`, bcolors.YELLOW, bcolors.RED, bcolors.DARKCYAN, bcolors.YELLOW, 
-            bcolors.ENDC, bcolors.ENDC)
+` + bcolors.ENDC)
 
 }

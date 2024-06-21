@@ -7,7 +7,7 @@ import (
 )
 
 func MenuZero() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🦊" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🦊" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install or update africana-framework.." + bcolors.DARKCYAN + "(Start here )" + bcolors.BLUE + "🩺] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration........." + bcolors.DARKCYAN + "(Setup tor &)" + bcolors.BLUE + "🎭] " + bcolors.ENDC)
@@ -18,8 +18,8 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks............" + bcolors.DARKCYAN + "(Gophish, gi)" + bcolors.BLUE + "🪝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors................" + bcolors.DARKCYAN + "(Osmedeus, j)" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Credits, Tricks and About............." + bcolors.DARKCYAN + "(About, auth)" + bcolors.BLUE + "📚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(" + bcolors.RED + "JC❤️sU " + bcolors.GREEN + "︻╦╤─" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "💻] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework..............." + bcolors.DARKCYAN + "(" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + ")" + bcolors.BLUE + "💻] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuZero() {
@@ -37,7 +37,7 @@ func HelpMenuZero() {
     fmt.Println(bcolors.YELLOW + "                                Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
 }
 func MenuOne() {
-    println(bcolors.BLUE + "\n        ~>( 🩺" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    println(bcolors.BLUE + "\n        ~>( 🩺" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     println(bcolors.BLUE + "[ 1. Kali-Linux..........................." + bcolors.DARKCYAN + "(It is Stable)" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 2. Ubuntu-Linux.......................................🥝] " + bcolors.ENDC)
@@ -45,7 +45,7 @@ func MenuOne() {
     println(bcolors.BLUE + "[ 4. Windows(7, 8, 10, 11, 12)..........................🦟] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 5. Uninstall-Africana.................................🐞] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuOne() {
@@ -61,7 +61,7 @@ func HelpMenuOne() {
 }
 
 func MenuTwo() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🎭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "......................" + bcolors.DARKCYAN + "(start here)" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅] " + bcolors.ENDC)
@@ -69,7 +69,7 @@ func MenuTwo() {
     fmt.Println(bcolors.BLUE + "[ 4. Check if using " + bcolors.DARKCYAN + "tor.🧄." + bcolors.BLUE + ".............................🦨] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Chains....." + bcolors.DARKCYAN + "local.🐌." + bcolors.DARKCYAN + "squid.🐙." + bcolors.DARKCYAN + "privoxy.🎭." + bcolors.DARKCYAN + "tor.🧄." + bcolors.DARKCYAN + "WEB.🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuTwo() {
@@ -84,7 +84,7 @@ func HelpMenuTwo() {
 }
 
 func MenuThree() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🐹" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🐹" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Discover Targets...................................🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Port discovery on the target.......................🐾] " + bcolors.ENDC)
@@ -96,7 +96,7 @@ func MenuThree() {
     fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For (M.I.B)..............🥩] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing (XSS Injection)..🍇] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func MenuThreeOne() {
@@ -132,7 +132,7 @@ func HelpMenuThree() {
 }
 
 func MenuFour() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🐭" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Blackjack......................" + bcolors.DARKCYAN + "(All Distro...R.A.T)" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ShellzGen......................" + bcolors.DARKCYAN + "(Windows Rev Shells)" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
@@ -144,7 +144,7 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 8. Chameleon......................" + bcolors.DARKCYAN + "(Obfuscation .Ps1 S)" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Gh0x0st........................" + bcolors.DARKCYAN + "(Obfuscation .Ps1 S)" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuFour() {
@@ -163,7 +163,7 @@ func HelpMenuFour() {
 }
 
 func MenuFive() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🍍" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🍍" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ......................Wifite............" + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ....................Bettercap..........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
@@ -175,7 +175,7 @@ func MenuFive() {
     fmt.Println(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🫐] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuFive() {
@@ -194,12 +194,12 @@ func HelpMenuFive() {
 }
 
 func MenuSix() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Online......................." + bcolors.DARKCYAN + "(automated_Bruteforce)" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Offline................." + bcolors.DARKCYAN + "(automated/ maunal/ Hashes)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuSix() {
@@ -211,7 +211,7 @@ func HelpMenuSix() {
 }
 
 func MenuSixOne() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ...................Bruteforce " + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "..................🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ...................Bruteforce " + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "..................🔑] " + bcolors.ENDC)
@@ -223,7 +223,7 @@ func MenuSixOne() {
     fmt.Println(bcolors.BLUE + "[ 8. ...................Bruteforce " + bcolors.DARKCYAN + "HTTP/S" + bcolors.BLUE + "...............🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ...................Bruteforce " + bcolors.DARKCYAN + "All/SS" + bcolors.BLUE + "...............🩴] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuSixOne() {
@@ -242,7 +242,7 @@ func HelpMenuSixOne() {
 }
 
 func MenuSixTwo() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ....................Aircrack_ng........." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. .......................John............." + bcolors.DARKCYAN + "(Automated)" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
@@ -254,13 +254,13 @@ func MenuSixTwo() {
     fmt.Println(bcolors.BLUE + "[ 8. ....................Hash-Buster....................🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 
 func HelpMenuSixTwo() {
-    fmt.Println(bcolors.YELLOW + "\n            Aircrack_ng " + bcolors.ENDC + ": 1. Automated. It will prompt you for location of the file ex. ntlm file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   John " + bcolors.ENDC + ": 2. Automated. It will prompt you for location of the file ex. .pcap file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "\n            Aircrack_ng " + bcolors.ENDC + ": 1. Automated. It will prompt you for location of the file e.g. ntlm file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   John " + bcolors.ENDC + ": 2. Automated. It will prompt you for location of the file e.g. .pcap file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 3. Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 4. Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 5. Still working on this option." + bcolors.ENDC)
@@ -274,11 +274,11 @@ func HelpMenuSixTwo() {
 }
 
 func MenuSeven() {
-    fmt.Println(bcolors.BLUE + "\n      ~>( 🪝" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n      ~>( 🪝" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. ..............Gophish.(Browser Gui)." + bcolors.DARKCYAN + "(All Templetes)" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ...............Good Ginx (Advanced)." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. ...................AdvPhishing......" + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. .....................Zphisher......." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. ....................Setoolkit......." + bcolors.DARKCYAN + "(Web Cloning..)" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. ....................Anonphisher....." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. ....................Cyberphish......" + bcolors.DARKCYAN + "(phish temps..)" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
@@ -286,7 +286,7 @@ func MenuSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. ......................To Add.........................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuSeven() {
@@ -305,7 +305,7 @@ func HelpMenuSeven() {
 }
 
 func MenuEight() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources🪰] " + bcolors.ENDC)
@@ -317,7 +317,7 @@ func MenuEight() {
     fmt.Println(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu.........🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Heavy Automation Attacks On The Host........🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEight() {
@@ -343,7 +343,7 @@ func MenuEightFour() {
     fmt.Println(bcolors.BLUE + "[ 3. ............Sql injection with Sqlmap......" + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. ............Xss injection with Xsser......." + bcolors.DARKCYAN + "(Manual)" + bcolors.BLUE + "🐌] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧯] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEightFour() {
@@ -357,7 +357,7 @@ func HelpMenuEightFour() {
 }
 
 func MenuEightFive() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
@@ -369,7 +369,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scanned Nettacker report list.................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEightFive() {
@@ -388,7 +388,7 @@ func HelpMenuEightFive() {
 }
 
 func MenuEightSix() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install all jok3r tools..." + bcolors.DARKCYAN + "(Pleas start here if not)" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
@@ -400,7 +400,7 @@ func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "[ 8. View the full results from the security checks.....🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Clean database & delete results....................🥑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEightSix() {
@@ -419,7 +419,7 @@ func HelpMenuEightSix() {
 }
 
 func MenuEightSeven() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
@@ -431,7 +431,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. Start web UI server................................🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scanned osmedeus report list..................🌈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEightSeven() {
@@ -450,7 +450,7 @@ func HelpMenuEightSeven() {
 }
 
 func MenuEightEight() {
-    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server.......🍄.]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Test if bots are alive............................📡.] " + bcolors.ENDC)
@@ -462,7 +462,7 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 8. Start Grider.............." + bcolors.DARKCYAN + "........(Grider.........)" + bcolors.BLUE + "🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!........" + bcolors.DARKCYAN + "........(Launch ALL!!...)" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🦨] " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + bcolors.ITALIC + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "🕊️)" + bcolors.ENDC)
 }
 
 func HelpMenuEightEight() {
@@ -478,4 +478,55 @@ func HelpMenuEightEight() {
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+}
+
+func HelpMenuMain() {
+    scriptures.Verse()
+    fmt.Println(bcolors.ENDC + "\nGithub Page " + bcolors.GREEN + "          " + bcolors.DARKCYAN + "https://github.com/r0jahsm0ntar1/africana-framework" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "\nUsages: " + bcolors.PURPLE + "   (◕‿◕✿)" + bcolors.ENDC + "       🦊africana (" + bcolors.DARKCYAN + "options" + bcolors.ENDC + ")" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.ENDC + "To start " + bcolors.GREEN + "africana " + bcolors.ENDC + "in " + bcolors.DARKCYAN + "aoutomation" + bcolors.ENDC + " mode try;" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "           --auto       (" + bcolors.GREEN + "africana " + bcolors.PURPLE + "-a) " + bcolors.ENDC + "or " + bcolors.ENDC + "(" + bcolors.GREEN + "africana " + bcolors.PURPLE + "--auto" + bcolors.ENDC + ")" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "Options:                                                                          " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -00, -h, --help       Show this " + bcolors.ORANGE + "help message" + bcolors.ENDC + " and exit." + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "       -hh              Display " + bcolors.DARKCYAN + "full help " + bcolors.ENDC + "with " + bcolors.DARKCYAN + "suplementary advanced" + bcolors.ENDC + " examples     " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        and exit.                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Setups" + bcolors.ENDC + ":                                                   " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -v       --version    Display the version and exit                              " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -u,      --update     Check for " + bcolors.DARKCYAN + "new version " + bcolors.ENDC + "and " + bcolors.DARKCYAN + "update " + bcolors.GREEN + "africana " + bcolors.ENDC + "tool set." + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -1,  -i, --install    Go to installation menu to either " + bcolors.DARKCYAN + "🩺install, update" + bcolors.ENDC + " or      " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.DARKCYAN + "uninstall " + bcolors.ENDC + "africana." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Cyphers" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -2,  -t, --anonsurf   Tor menu to set " + bcolors.ORANGE + "🎭system " + bcolors.PURPLE + "securities " + bcolors.ENDC + "configures and fix" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        (" + bcolors.DARKCYAN + "dnsleak, Iptables, squid, privoxy, tor, dnsmasq" + bcolors.ENDC + ")" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        all Chained together for the best privacy & anonymity." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Networks" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -3,  -n, --networks   Go to " + bcolors.ORANGE + "Local network attack " + bcolors.ENDC + "vectors and perform            " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        automated (" + bcolors.DARKCYAN + "🐹MITM, MITB, SNIFF, SPOOF" + bcolors.ENDC + ") " + bcolors.ENDC + "among others." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Malwares" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -4,  -m, --malwares   Launch " + bcolors.ORANGE + "🐭Malware generation" + bcolors.ENDC + " menu. You will be guided on" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        how to (" + bcolors.DARKCYAN + "Generate undetectable Backdoors" + bcolors.ENDC + ") & launch C2s." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Wireless" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -5,  -w, --wireless   " + bcolors.ORANGE + "🍍WiFi attack vectors" + bcolors.ENDC + " menu. Perform " + bcolors.DARKCYAN + "effective wireless" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        attacks." + bcolors.PURPLE + "(✿◠‿◠)" + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Crackers" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -6,  -p, --crackers   Crack (" + bcolors.DARKCYAN + "NTLMS, HASHES, PCAPS" + bcolors.ENDC + ") " + bcolors.ENDC + "& " + bcolors.ORANGE + "🔐bruteforces " + bcolors.ENDC + "both" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.DARKCYAN + "offline " + bcolors.ENDC + "and " + bcolors.DARKCYAN + "online " + bcolors.ENDC + "services like (" + bcolors.DARKCYAN + "SSH, FTP, SMB, RPC" + bcolors.ENDC + ")" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        among others." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Phishers" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -7,  -f, --phishers   This option will guide you on how to perform " + bcolors.ORANGE + "🪝Phishing" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        attacks " + bcolors.DARKCYAN + "effectively.                                      " + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Websites" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -8,  -s, --websites   Launch " + bcolors.ORANGE + "🌍Web Penetration " + bcolors.ENDC + "engines with proxy support." + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        Supported proxies are. " + bcolors.ENDC + "(" + bcolors.DARKCYAN + "SOCK4, SOCKS5, HTTP " + bcolors.ENDC + "or " + bcolors.DARKCYAN + "HTTPS" + bcolors.ENDC + ")     " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        (" + bcolors.ORANGE + "format: " + bcolors.DARKCYAN + "host:port" + bcolors.ENDC + ") " + bcolors.ORANGE + "e.g." + bcolors.ENDC + "(" + bcolors.PURPLE + "http://localhost:8080" + bcolors.ENDC + ")" + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Credits" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -9,  -c, --credits    Show about (" + bcolors.DARKCYAN + "📚who developes " + bcolors.GREEN + "africana" + bcolors.DARKCYAN + " and credits" + bcolors.ENDC + ") for " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        those whose " + bcolors.DARKCYAN + "opensource" + bcolors.ENDC + " tools have been modified and used  " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        to make " + bcolors.GREEN + "africana " + bcolors.PURPLE + "lethal." + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Scriptures" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -99, -b, --scriptures Show " + bcolors.ORANGE + "Scripture's verses" + bcolors.ENDC + " in an uniform way as used in " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        each and every menu." + bcolors.PURPLE + "(✿◠‿◠)                                  " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube " + bcolors.DARKCYAN + "https://youtube.com/@RojahsMontari\n" + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "[" + bcolors.ENDC + "!" + bcolors.DARKCYAN + "] " + bcolors.ENDC + "To see full list of options use " + bcolors.ORANGE + "--hh. " + bcolors.PURPLE + "🦠｡ ◕‿◕｡" + bcolors.ENDC)
+
 }

@@ -129,15 +129,15 @@ func anonymitySetups() {
             africanaFramework()
             return
         case "1":
-            securities.Vanishstart     (          )
+            securities.Vanishstart     (           )
         case "2":
-            securities.Vanishstart     (          )
+            securities.Vanishstart     (           )
         case "3":
-            securities.Vanishstop      (          )
+            securities.Vanishstop      (           )
         case "4":
-            securities.ChecktorStatus  (          )
+            securities.ChecktorStatus  (           )
         case "5":
-            securities.ChainsStatus    (          )
+            securities.ChainsStatus    (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuTwo()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -167,30 +167,30 @@ func internalAttackers() {
             africanaFramework()
             return
         case "1":
-            internaltargetInput         (          )
+            internaltargetInput         (           )
             utils.ClearScreen()
             banners.Banner(); menus.MenuThree   (  )
         case "2":
-            internals.NmapPortscan      (userTarget)
+            internals.NmapPortscan       (userTarget)
         case "3":
-            internals.NmapVulnscan      (userTarget)
+            internals.NmapVulnscan       (userTarget)
         case "4":
-            internals.SmbVulnscan       (userTarget)
-            internals.SmbMapscan        (userTarget)
-            internals.RpcEnumscan       (userTarget)
+            internals.SmbVulnscan        (userTarget)
+            internals.SmbMapscan         (userTarget)
+            internals.RpcEnumscan        (userTarget)
         case "5":
-            internals.SmbVulnscan       (userTarget)
-            internals.SmbExploit        (userTarget)
+            internals.SmbVulnscan        (userTarget)
+            internals.SmbExploit         (userTarget)
         case "6":
-            internals.PacketSniffer     (userTarget)
+            internals.PacketSniffer      (userTarget)
             internalAttackers()
             return
         case "7":
-            internals.PacketsResponder  (          )
+            internals.PacketsResponder  (           )
         case "8":
-            internals.BeefBettercap     (userTarget)
+            internals.BeefBettercap      (userTarget)
         case "9":
-            internals.RpcEnumscan       (userTarget)
+            internals.RpcEnumscan        (userTarget)
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThree()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -213,23 +213,23 @@ func malwareGenerators() {
             africanaFramework()
             return
         case "1":
-            butchers.BlackJack  (          )
+            butchers.BlackJack  (           )
         case "2":
-            butchers.Shellz     (          )
+            butchers.Shellz     (           )
         case "3":
-            butchers.PowerJoker (          )
+            butchers.PowerJoker (           )
         case "4":
-            butchers.MeterPeter (          )
+            butchers.MeterPeter (           )
         case "5":
-             butchers.Havoc     (          )
+             butchers.Havoc     (           )
         case "6":
-            butchers.TearDroid  (          )
+            butchers.TearDroid  (           )
         case "7":
-            butchers.AndroRat   (          )
+            butchers.AndroRat   (           )
         case "8":
-            butchers.Chameleon  (          )
+            butchers.Chameleon  (           )
         case "9":
-            butchers.ChameLeon  (          )
+            butchers.ChameLeon  (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuFour()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -252,23 +252,23 @@ func wirelesAttackers() {
             africanaFramework()
             return
         case "1":
-            wireless.WifiteAuto         (          )
+            wireless.WifiteAuto         (           )
         case "2":
-            wireless.BettercapAuto      (          )
+            wireless.BettercapAuto      (           )
         case "3":
-            wireless.WifiPumpkin3Auto   (          )
+            wireless.WifiPumpkin3Auto   (           )
         case "4":
-            wireless.AirGeddon          (          )
+            wireless.AirGeddon          (           )
         case "5":
-            wireless.AirGeddon          (          )
+            wireless.AirGeddon          (           )
         case "6":
-            wireless.AirGeddon          (          )
+            wireless.AirGeddon          (           )
         case "7":
-            wireless.WifiPumpkin3       (          )
+            wireless.WifiPumpkin3       (           )
         case "8":
-            wireless.AirGeddon          (          )
+            wireless.AirGeddon          (           )
         case "9":
-            wireless.AirGeddon          (          )
+            wireless.AirGeddon          (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuFive()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -302,23 +302,23 @@ func passwordsCrackers() {
                     passwordsCrackers()
                     return
                 case "1":
-                    crackers.HydraSsh   (          )
+                    crackers.HydraSsh   (           )
                 case "2":
-                    crackers.HydraFtp   (          )
+                    crackers.HydraFtp   (           )
                 case "3":
-                    crackers.HydraSmb   (          )
+                    crackers.HydraSmb   (           )
                 case "4":
-                    crackers.HydraRdp   (          )
+                    crackers.HydraRdp   (           )
                 case "5":
-                    crackers.HydraLdap  (          )
+                    crackers.HydraLdap  (           )
                 case "6":
-                    crackers.HydraSmtp  (          )
+                    crackers.HydraSmtp  (           )
                 case "7":
-                    crackers.HydraTelnet(          )
+                    crackers.HydraTelnet(           )
                 case "8":
-                    crackers.HydraHttps (          )
+                    crackers.HydraHttps (           )
                 case "9":
-                    crackers.CyberBrute (          )
+                    crackers.CyberBrute (           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuSixOne()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -336,14 +336,14 @@ func passwordsCrackers() {
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
-                    passwordsCrackers   (          )
+                    passwordsCrackers   (           )
                     return
                 case "1":
-                    crackers.AirCrackng (          )
+                    crackers.AirCrackng (           )
                 case "2":
-                    crackers.JohnCrackng(          )
+                    crackers.JohnCrackng(           )
                 case "8":
-                    crackers.HashBuster (          )
+                    crackers.HashBuster (           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuSixOne()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -374,23 +374,23 @@ func credsPhishers() {
             africanaFramework()
             return
         case "1":
-            phishers.GoPhish    (          )
+            phishers.GoPhish    (           )
         case "2":
-            phishers.GoodGinx   (          )
+            phishers.GoodGinx   (           )
         case "3":
-            phishers.ZPhisher   (          )
+            phishers.ZPhisher   (           )
         case "4":
-            phishers.SetoolKit  (          )
+            phishers.SetoolKit  (           )
         case "5":
-            phishers.AnonPhisher(          )
+            phishers.AnonPhisher(           )
         case "6":
-            phishers.CyberPhish (          )
+            phishers.CyberPhish (           )
         case "7":
-            utils.UpsentTools   (          )
+            utils.UpsentTools   (           )
         case "8":
-            utils.UpsentTools   (          )
+            utils.UpsentTools   (           )
         case "9":
-            utils.UpsentTools   (          )
+            utils.UpsentTools   (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuSeven()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -440,6 +440,10 @@ func websiteUserTarget() {
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🎯" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
+    userTargetx = strings.TrimSpace (userTarget)
+    userTargetx = strings.TrimPrefix(userTargetx, "http://")
+    userTargetx = strings.TrimPrefix(userTargetx, "https://")
+    userTargetx = strings.TrimPrefix(userTargetx, "www.")
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -464,10 +468,6 @@ func websiteUserTarget() {
 //8. Website Attack Vectors................(Attack, Phase)🌍
 func websitesAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuEight()
-    userTargetx = strings.TrimSpace(userTarget)
-    userTargetx = strings.TrimPrefix(userTargetx, "http://")
-    userTargetx = strings.TrimPrefix(userTargetx, "https://")
-    userTargetx = strings.TrimPrefix(userTargetx, "www.")
 
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -482,10 +482,10 @@ func websitesAttackers() {
             webattackers.WafW00f(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.Nuclei(userTargetx)
         //2. Gather e-mails & subdomain namesfrom public sources🪰
         case "2":
-            webattackers.Harvester(userTarget)
+            webattackers.Harvester (userTarget)
         //3. Start Bruteforcing Host's Root Files...............🦑
         case "3":
-            webattackers. Gobuster(userTarget)
+            webattackers. Gobuster (userTarget)
         //4. Start SQL, XSS & SSRF Detection & Eploitation......💉
         case "4":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFour()
@@ -498,16 +498,16 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.SqlmapAuto(userTarget)
+                    webattackers.SqlmapAuto (userTarget)
                 case "2":
-                    webattackers.CommixAuto(userTarget)
-                    webattackers.XsserAuto (userTarget)
-                    webattackers.KatanaAuto(userTarget)
+                    webattackers.CommixAuto (userTarget)
+                    webattackers.XsserAuto  (userTarget)
+                    webattackers.KatanaAuto (userTarget)
                 case "3":
-                    webattackers.SqlmapMan (          )
+                    webattackers.SqlmapMan  (           )
                 case "4":
-                    webattackers.CommixMan (          )
-                    webattackers.XsserMan  (          )
+                    webattackers.CommixMan  (           )
+                    webattackers.XsserMan   (           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuEightFour()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -528,23 +528,23 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.NetTacker1(userTarget)
+                    webattackers.NetTacker1 (userTarget)
                 case "2":
-                    webattackers.NetTacker2(userTarget)
+                    webattackers.NetTacker2 (userTarget)
                 case "3":
-                    webattackers.NetTacker3(userTarget)
+                    webattackers.NetTacker3 (userTarget)
                 case "4":
-                    webattackers.NetTacker4(userTarget)
+                    webattackers.NetTacker4 (userTarget)
                 case "5":
-                    webattackers.NetTacker5(userTarget)
+                    webattackers.NetTacker5 (userTarget)
                 case "6":
-                    webattackers.NetTacker6(userTarget)
+                    webattackers.NetTacker6 (userTarget)
                 case "7":
-                    webattackers.NetTacker7(userTarget)
+                    webattackers.NetTacker7 (userTarget)
                 case "8":
-                    webattackers.NetTacker8(userTarget)
+                    webattackers.NetTacker8 (userTarget)
                 case "9":
-                    webattackers.NetTacker9(          )
+                    webattackers.NetTacker9(           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuEightFive()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -565,23 +565,23 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Jok3r1(          )
+                    webattackers.Jok3r1(           )
                 case "2":
-                    webattackers.Jok3r2(          )
+                    webattackers.Jok3r2(           )
                 case "3":
-                    webattackers.Jok3r3(          )
+                    webattackers.Jok3r3(           )
                 case "4":
-                    webattackers.Jok3r4(          )
+                    webattackers.Jok3r4(           )
                 case "5":
-                    webattackers.Jok3r5(userTarget)
+                    webattackers.Jok3r5 (userTarget)
                 case "6":
-                    webattackers.Jok3r6(userTarget)
+                    webattackers.Jok3r6 (userTarget)
                 case "7":
-                    webattackers.Jok3r7(userTarget)
+                    webattackers.Jok3r7 (userTarget)
                 case "8":
-                    webattackers.Jok3r8(          )
+                    webattackers.Jok3r8(           )
                 case "9":
-                    webattackers.Jok3r9(          )
+                    webattackers.Jok3r9(           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuEightSix()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -602,23 +602,23 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Osmedeus1(          )
+                    webattackers.Osmedeus1(           )
                 case "2":
-                    webattackers.Osmedeus2(userTarget)
+                    webattackers.Osmedeus2 (userTarget)
                 case "3":
-                    webattackers.Osmedeus3(userTarget)
+                    webattackers.Osmedeus3 (userTarget)
                 case "4":
-                    webattackers.Osmedeus4(userTarget)
+                    webattackers.Osmedeus4 (userTarget)
                 case "5":
-                    webattackers.Osmedeus5(userTarget)
+                    webattackers.Osmedeus5 (userTarget)
                 case "6":
-                    webattackers.Osmedeus6(userTarget)
+                    webattackers.Osmedeus6 (userTarget)
                 case "7":
-                    webattackers.Osmedeus7(userTarget)
+                    webattackers.Osmedeus7 (userTarget)
                 case "8":
-                    webattackers.Osmedeus8(          )
+                    webattackers.Osmedeus8(           )
                 case "9":
-                    webattackers.Osmedeus9(          )
+                    webattackers.Osmedeus9(           )
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuEightSeven()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -639,23 +639,23 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Ufonet1(          )
+                    webattackers.Ufonet1(           )
                 case "2":
-                    webattackers.Ufonet2(          )
+                    webattackers.Ufonet2(           )
                 case "3":
-                    webattackers.Ufonet3(userTarget)
+                    webattackers.Ufonet3 (userTarget)
                 case "4":
-                    webattackers.Ufonet4(userTarget)
+                    webattackers.Ufonet4 (userTarget)
                 case "5":
-                    webattackers.Ufonet5(userTarget)
+                    webattackers.Ufonet5 (userTarget)
                 case "6":
-                    webattackers.Ufonet6(userTarget)
+                    webattackers.Ufonet6 (userTarget)
                 case "7":
-                    webattackers.Ufonet7(          )
+                    webattackers.Ufonet7(           )
                 case "8":
-                    webattackers.Ufonet8(          )
+                    webattackers.Ufonet8(           )
                 case "9":
-                    webattackers.Ufonet9(userTarget)
+                    webattackers.Ufonet9 (userTarget)
                 case "99", "m", "M", "menu", "Menu", "MENU":
                     menus.MenuEightEight()
                 case "00", "h", "H", "help", "Help", "HELP":
@@ -666,7 +666,7 @@ func websitesAttackers() {
             }
         //9. Launch Heavy Automation Attacks On The Host........🤖
         case "9":
-            webattackers.WafW00f(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.Nuclei(userTargetx); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3(userTarget); webattackers.ParamSpider(userTarget); webattackers.SqlmapAuto(userTarget); webattackers.CommixAuto(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
+            webattackers.WafW00f(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.Nuclei(userTargetx); webattackers.SeekOlver (userTarget); webattackers.Gobuster (userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider (userTarget); webattackers.SqlmapAuto (userTarget); webattackers.CommixAuto (userTarget); webattackers.KatanaAuto (userTarget); webattackers.XsserAuto (userTarget); webattackers.Nikto (userTarget); webattackers.Uniscan (userTarget)
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuEight()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -681,7 +681,7 @@ func websitesAttackers() {
 func creditsGivers() {
     utils.ClearScreen(); credits.Contributors(); credits.Developer()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -720,41 +720,41 @@ func africanaFramework() {
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
-            utils.ClearScreen   (          )
-            banners.Banner      (          )
-            scriptures.Verse    (          )
+            utils.ClearScreen   (           )
+            banners.Banner      (           )
+            scriptures.Verse    (           )
             return
         case "1":
-            systemSetups        (          )
+            systemSetups        (           )
             return
         case "2":
-            anonymitySetups     (          )
+            anonymitySetups     (           )
             return
         case "3":
-            internaltargetInput (          )
-            internalAttackers   (          )
+            internaltargetInput (           )
+            internalAttackers   (           )
             return
         case "4":
-            malwareGenerators   (          )
+            malwareGenerators   (           )
             return
         case "5":
-            wirelesAttackers    (          )
+            wirelesAttackers    (           )
             return
         case "6":
-            passwordsCrackers   (          )
+            passwordsCrackers   (           )
             return
         case "7":
-            credsPhishers       (          )
+            credsPhishers       (           )
             return
         case "8":
-            websiteUserTarget   (          )
-            websitesAttackers   (          )
+            websiteUserTarget   (           )
+            websitesAttackers   (           )
             return
         case "9":
-            creditsGivers       (          )
+            creditsGivers       (           )
             return
         case "99", "m", "M", "menu", "Menu", "MENU":
-            scriptureNarators   (          )
+            scriptureNarators   (           )
         case "00", "h", "H", "help", "Help", "HELP":
             menus.HelpMenuZero()
         default:
@@ -763,8 +763,61 @@ func africanaFramework() {
     }
 }
 
-//           ...........................(Main runner..)
-func main(){
-    sudo()
-    return
+//...........................................(Main runner..)
+func main() {
+    if len(os.Args) < 2 {
+        banners.Banner      (           )
+        menus.HelpMenuMain  (           )
+        return
+    }
+    command := os.Args[1]
+    switch command {
+    case "-v",           "--version":
+        banners.Banner      (           )
+        return
+    case "-u",            "--update":
+        systemSetups        (           )
+        return
+    case "-0", "-a",        "--auto":
+        sudo                (           )
+        return
+    case "-1", "-i",     "--install":
+        systemSetups        (           )
+        return
+    case "-2", "-t",    "--anonsurf":
+        anonymitySetups     (           )
+        return
+    case "-3", "-n",    "--networks":
+        internaltargetInput (           )
+        internalAttackers   (           )
+        return
+    case "-4", "-m",    "--malwares":
+        malwareGenerators   (           )
+        return
+    case "-5", "-w",    "--wireless":
+        wirelesAttackers    (           )
+        return
+    case "-6", "-p",    "--crackers":
+        passwordsCrackers   (           )
+        return
+    case "-7", "-f",    "--phishers":
+        credsPhishers       (           )
+        return
+    case "-8", "-s",    "--websites":
+        websiteUserTarget   (           )
+        websitesAttackers   (           )
+        return
+    case "-9", "-c",     "--credits":
+        creditsGivers       (           )
+        return
+    case "-99", "-b", "--scriptures":
+        scriptureNarators   (           )
+        return
+    case "-00", "-h",       "--help":
+        banners.Banner      (           )
+        menus.HelpMenuMain  (           )
+    default:
+        banners.Banner      (           )
+        menus.HelpMenuMain  (           )
+    }
 }

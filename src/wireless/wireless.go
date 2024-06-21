@@ -65,12 +65,12 @@ func WifiPumpkin3Auto() {
     if userIface == "" {
         userIface = "wlan0"
     }
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Name to set your wifi?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "Calvary Free Wifi" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Name to set your wifi?" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "Jesus is the answer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userSsid, _ := reader.ReadString('\n')
     userSsid = strings.TrimSpace(userSsid)
-    if userIface == "" {
-        userIface = "Africana Free Wifi"
+    if userSsid == "" {
+       userSsid = "Jesus is the answer"
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {

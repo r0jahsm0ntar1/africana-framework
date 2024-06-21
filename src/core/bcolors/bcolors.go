@@ -1,58 +1,85 @@
 package bcolors
 
 import (
-    "fmt"
     "runtime"
     "math/rand"
-    "time"
 )
 
-var PURPLE = "\033[95m"
-var CYAN = "\033[96m"
-var DARKCYAN = "\033[36m"
-var BLUE = "\033[94m"
-var GREEN = "\033[92m"
-var YELLOW = "\033[93m"
-var RED = "\033[91m"
-var BOLD = "\033[1m"
-var UNDERL = "\033[4m"
-var ENDC = "\033[0m"
-var backBlack = "\033[40m"
-var backRed = "\033[41m"
-var backGreen = "\033[42m"
-var backYellow = "\033[43m"
-var backBlue = "\033[44m"
-var backMagenta = "\033[45m"
-var backCyan = "\033[46m"
-var backWhite = "\033[47m"
+var (
+    ENDC        = "\033[0m"
+    BOLD        = "\033[1m"
+    ITALIC      = "\033[3m"
+    UNDERL      = "\033[4m"
+    BLINK       = "\033[5m"
+    ORANGE      = "\033[33m"
+    MAGENTA     = "\033[35m"
+    DARKCYAN    = "\033[36m"
+    backBlack   = "\033[40m"
+    backRed     = "\033[41m"
+    backGreen   = "\033[42m"
+    backYellow  = "\033[43m"
+    backBlue    = "\033[44m"
+    backMagenta = "\033[45m"
+    backCyan    = "\033[46m"
+    backWhite   = "\033[47m"
+    RED         = "\033[91m"
+    GREEN       = "\033[92m"
+    YELLOW      = "\033[93m"
+    BLUE        = "\033[94m"
+    PURPLE      = "\033[95m"
+    CYAN        = "\033[96m"
+    colorTaken  = []string{}
+)
 
 func init() {
     if runtime.GOOS == "windows" {
-        PURPLE = ""
-        CYAN = ""
-        BLUE = ""
-        GREEN = ""
-        YELLOW = ""
-        RED = ""
-        ENDC = ""
-        BOLD = ""
-        UNDERL = ""
-        backBlack = ""
-        backRed = ""
-        backGreen = ""
-        backYellow = ""
-        backBlue = ""
+        ENDC        = ""
+        BOLD        = ""
+        ITALIC      = ""
+        UNDERL      = ""
+        BLINK       = ""
+        ORANGE      = ""
+        MAGENTA     = ""
+        DARKCYAN    = ""
+        backBlack   = ""
+        backRed     = ""
+        backGreen   = ""
+        backYellow  = ""
+        backBlue    = ""
         backMagenta = ""
-        backCyan = ""
-        backWhite = ""
-        DARKCYAN = ""
+        backCyan    = ""
+        backWhite   = ""
+        RED         = ""
+        GREEN       = ""
+        YELLOW      = ""
+        BLUE        = ""
+        PURPLE      = ""
+        CYAN        = ""
     }
 }
 
-func Colors(words string) {
-    colors := []string{ BLUE, PURPLE, CYAN, DARKCYAN, GREEN, YELLOW, RED,
+func Colors(args ...string) string {
+    colors := []string{MAGENTA, BLUE, PURPLE, CYAN, DARKCYAN, GREEN, YELLOW, RED, ORANGE,}
+    if len(args) > 0 {
+        return args[0]
+    } else {
+        if len(colorTaken) == 0 {
+            return colors[rand.Intn(len(colors))]
+        } else {
+            availableColors := []string{}
+            for _, c := range colors {
+                unique := true
+                for _, t := range colorTaken {
+                    if c == t {
+                        unique = false
+                        break
+                    }
+                }
+                if unique {
+                    availableColors = append(availableColors, c)
+                }
+            }
+            return availableColors[rand.Intn(len(availableColors))]
+        }
     }
-    rand.Seed(time.Now().UnixNano())
-    randomIndex := rand.Intn(len(colors))
-    fmt.Printf("%s%s\n", colors[randomIndex], words)
 }
