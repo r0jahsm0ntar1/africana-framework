@@ -21,16 +21,18 @@ var(
 
 //Online crackers
 func HydraSsh() {
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Target IP" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
-    fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Path to wordlist" + bcolors.GREEN + ")" + bcolors.GREEN + "(" + bcolors.RED + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.GREEN + ")# " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.RED + "Path to wordlist" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "Rockyou.txt" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userWordlists, _ := reader.ReadString('\n')
     userWordlists = strings.TrimSpace(userWordlists)
     if userWordlists == "" {
         userWordlists = "/usr/share/wordlists/rockyou.txt"
     }
-    fmt.Printf(bcolors.BLUE + "\n(" + bcolors.RED + "Bruteforcing SSH password" + bcolors.BLUE + ")" + bcolors.BLUE + " -> " + bcolors.BLUE + "(" + bcolors.YELLOW + "%s", userTarget + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Performing: " + bcolors.GREEN + "SSH Pass Bruteforce " + bcolors.PURPLE + "Target: " + bcolors.YELLOW + "%s🎯\n" + bcolors.ENDC, userTarget)
     subprocess.PopenThree(`hydra -L /usr/share/wordlists/rockyou.txt -P %s -f -o /root/.africana/output/Hydrassh_outfile.txt -u ssh://%s`, userWordlists, userTarget)
 }
 

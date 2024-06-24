@@ -59,20 +59,6 @@ go build ./africana.go; mv africana /usr/local/bin
 ```bash
 sudo africana
 ```
-#Python user setup
-```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework -b v2.0.0
-```
-```bash
-cd africana-framework
-```
-```bash
-python3 install.py
-```
-## The script should be run as a super user do(sudo) for root permissions .
-```bash
-sudo africana
-```
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
 ## About the Author

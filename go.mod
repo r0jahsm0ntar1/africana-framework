@@ -1,8 +1,6 @@
 module main.go
 
-go 1.22.2
-
-replace guides => ./src/guides/
+replace credits => ./src/credits/
 
 replace menus => ./src/core/menus/
 
@@ -43,7 +41,7 @@ require (
 	butchers v0.0.0-00010101000000-000000000000 // indirect
 	configures v0.0.0-00010101000000-000000000000 // indirect
 	crackers v0.0.0-00010101000000-000000000000 // indirect
-	guides v0.0.0-00010101000000-000000000000 // indirect
+	credits v0.0.0-00010101000000-000000000000 // indirect
 	internals v0.0.0-00010101000000-000000000000 // indirect
 	menus v0.0.0-00010101000000-000000000000 // indirect
 	phishers v0.0.0-00010101000000-000000000000 // indirect

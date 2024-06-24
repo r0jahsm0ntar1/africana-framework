@@ -14,7 +14,7 @@ func Popen(one string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -41,7 +41,7 @@ func PopenTwo(one, two string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -68,7 +68,7 @@ func PopenThree(one, two, three string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -95,7 +95,7 @@ func PopenFour(one, two, three, four string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -122,7 +122,7 @@ func PopenFive(one, two, three, four, five string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -149,7 +149,7 @@ func PopenSix(one, two, three, four, five, six string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
@@ -176,7 +176,7 @@ func PopenSeven(one, two, three, four, five, six, seven string) {
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
-        flag = "/C"
+        flag = "/c"
     default:
         shell = "bash"
         flag = "-c"
