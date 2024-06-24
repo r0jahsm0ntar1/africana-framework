@@ -1,2 +1,1 @@
 module phishers.go
-
