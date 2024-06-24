@@ -1,7 +1,5 @@
 module main.go
 
-go 1.22.2
-
 replace credits => ./src/credits/
 
 replace menus => ./src/core/menus/

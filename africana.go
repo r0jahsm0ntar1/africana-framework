@@ -69,7 +69,7 @@ func userAgreements() {
                         fmt.Println("Error writing to file:", err)
                         return
                     }
-                    utils.InitiLize(); africanaFramework()
+                    utils.InitiLize(); runner()
                     return
                 case "n", "N", "no", "No", "NO":
                     os.Exit(0)
@@ -78,7 +78,7 @@ func userAgreements() {
                 }
             }
     } else {
-        utils.InitiLize(); africanaFramework()
+        utils.InitiLize(); runner()
         return
     }
 }
@@ -679,9 +679,15 @@ func websitesAttackers() {
 
 //9. Help, Credits, Tricks and About.......(🕊  ︻╦╤─JC❤sU)
 func creditsGivers() {
+<<<<<<< HEAD
+    utils.ClearScreen(); banners.Banner(); scriptures.Verse(); credits.Contributors(); credits.Developer()
+    for {
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT " + bcolors.ENDC + "to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+=======
     utils.ClearScreen(); credits.Contributors(); credits.Developer()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+>>>>>>> ec1b05b4cb4d6d2468fa38ba9e7886e54eaca580
         fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -764,7 +770,11 @@ func africanaFramework() {
 }
 
 //...........................................(Main runner..)
+<<<<<<< HEAD
+func runner() {
+=======
 func main() {
+>>>>>>> ec1b05b4cb4d6d2468fa38ba9e7886e54eaca580
     if len(os.Args) < 2 {
         banners.Banner      (           )
         menus.HelpMenuMain  (           )
@@ -779,7 +789,11 @@ func main() {
         systemSetups        (           )
         return
     case "-0", "-a",        "--auto":
+<<<<<<< HEAD
+        africanaFramework   (           )
+=======
         sudo                (           )
+>>>>>>> ec1b05b4cb4d6d2468fa38ba9e7886e54eaca580
         return
     case "-1", "-i",     "--install":
         systemSetups        (           )
@@ -820,4 +834,8 @@ func main() {
         banners.Banner      (           )
         menus.HelpMenuMain  (           )
     }
+}
+
+func main() {
+     sudo()
 }
