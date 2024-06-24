@@ -69,7 +69,7 @@ func userAgreements() {
                         fmt.Println("Error writing to file:", err)
                         return
                     }
-                    utils.InitiLize(); runner()
+                    utils.InitiLize(); africanaFramework()
                     return
                 case "n", "N", "no", "No", "NO":
                     os.Exit(0)
@@ -78,7 +78,7 @@ func userAgreements() {
                 }
             }
     } else {
-        utils.InitiLize(); runner()
+        utils.InitiLize(); africanaFramework()
         return
     }
 }
@@ -679,9 +679,9 @@ func websitesAttackers() {
 
 //9. Help, Credits, Tricks and About.......(🕊  ︻╦╤─JC❤sU)
 func creditsGivers() {
-    utils.ClearScreen(); banners.Banner(); scriptures.Verse(); credits.Contributors(); credits.Developer()
+    utils.ClearScreen(); credits.Contributors(); credits.Developer()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT " + bcolors.ENDC + "to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -764,7 +764,7 @@ func africanaFramework() {
 }
 
 //...........................................(Main runner..)
-func runner() {
+func main() {
     if len(os.Args) < 2 {
         banners.Banner      (           )
         menus.HelpMenuMain  (           )
@@ -779,7 +779,7 @@ func runner() {
         systemSetups        (           )
         return
     case "-0", "-a",        "--auto":
-        africanaFramework   (           )
+        sudo                (           )
         return
     case "-1", "-i",     "--install":
         systemSetups        (           )
@@ -820,8 +820,4 @@ func runner() {
         banners.Banner      (           )
         menus.HelpMenuMain  (           )
     }
-}
-
-func main() {
-     sudo()
 }
