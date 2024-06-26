@@ -16,7 +16,7 @@ func Contributors() {
 ` + bcolors.ENDC
     for _, c := range credits {
         fmt.Print(string(c))
-        time.Sleep(28 * time.Millisecond)
+        time.Sleep(90 * time.Millisecond)
     }
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
  Africana name        Developer's name       Original_name` + bcolors.ENDC)
