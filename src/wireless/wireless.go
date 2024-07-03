@@ -3,6 +3,7 @@ package wireless
 import (
     "os"
     "fmt"
+    "utils"
     "bufio"
     "strings"
     "bcolors"
@@ -18,7 +19,7 @@ func AirGeddon() {
 func WifiPumpkin3() {
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`wifipumpkin3; clear`)
+        subprocess.Popen(`wifipumpkin3`); utils.ClearScreen()
     }
     subprocess.Popen(`wifipumpkin3`)
 }

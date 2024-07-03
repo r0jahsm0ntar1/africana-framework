@@ -9,10 +9,10 @@ import (
 func Contributors() {
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                   🦊Africana-Framework` + bcolors.ENDC)
-    credits := bcolors.DARKCYAN + `
-[ Special thanks to the following people whose third party]
-[ tools have been modified and used to contribute to the..]
-[ creation of africana-framework:.........................]
+    credits := bcolors.BLUE + `
+(Special thanks to the following people whose third party.)
+(tools have been modified and used to contribute to the...)
+(creation of africana-framework:..........................)
 ` + bcolors.ENDC
     for _, c := range credits {
         fmt.Print(string(c))
@@ -118,6 +118,23 @@ func Contributors() {
 func Developer() {
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                  🛰️ About the author` + bcolors.ENDC)
+    fmt.Printf(bcolors.ORANGE + `
+(Genesis)+------------------------------------------------+
+| Rojahs Montari Machine Pentesters For Exploration       |
++---------------------------------------------------------+
+    A    F    R    I    C    A    N    A    Framework.
+    *    *    *    *    *    *    *    *    *
+    |    |    |    |    |    |    |    |    |
+    |    |    |    |    |    |    |    |    +- 1. Install.]
+    |    |    |    |    |    |    |    +------ 2. Proxies.]
+    |    |    |    |    |    |    +----------- 3. Networks]
+    |    |    |    |    |    +---------------- 4. C2 & RAT]
+    |    |    |    |    +--------------------- 5. Wireless]
+    |    |    |    + ------------------------- 6. Cracking]
+    |    |    + ------------------------------ 7. Phishing]
+    |    +------------------------------------ 8. Website.]
+    +----------------------------------------- 9. Credits.]
+` + bcolors.ENDC)
     developer := bcolors.BLUE + `
 [ I am Rojahs Montari a Devoted Christian & Pentester.....]
 [ One might describe me as an erudite.....................]
@@ -149,12 +166,12 @@ func Developer() {
     }
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + bcolors.BLINK + `
         🛰️ The devil has no power over you soldier` + bcolors.ENDC)
-    fmt.Printf(bcolors.ORANGE + bcolors.ITALIC + `
-[ What is there 4 U 2 gain the whole world & loose your...]
-[ soul? Be smart your Creator has good plans for you......]
-[ Life Tip.: Defeat the devil by fasting & praying........]
-[ Email....: rojahsmontari@gmail.com......................]
-[ YouTube..: https://youtube.com/@RojahsMontari...........]` + bcolors.ENDC)
+    fmt.Printf(bcolors.RED + bcolors.ITALIC + `
+(What is there 4 U 2 gain the whole world & loose your....)
+(soul? Be smart your Creator has good plans for you.......)
+(Life Tip.: Defeat the devil by fasting & praying.........)
+(Email....: rojahsmontari@gmail.com.......................)
+(YouTube..: https://youtube.com/@RojahsMontari............)` + bcolors.ENDC)
     fmt.Printf(bcolors.DARKGREEN + `
          __                 _____ _____     _     _
       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_

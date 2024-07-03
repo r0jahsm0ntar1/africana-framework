@@ -3,13 +3,13 @@ package internals
 import (
     "os"
     "fmt"
+    "time"
     "utils"
+    "menus"
     "bufio"
+    "bcolors"
     "strings"
     "io/ioutil"
-    "bcolors"
-    "menus"
-    "time"
     "subprocess"
 )
 

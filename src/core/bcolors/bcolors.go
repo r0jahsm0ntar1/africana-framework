@@ -15,6 +15,8 @@ var (
     DARKGREEN   = "\033[32m"
     MAGENTA     = "\033[35m"
     DARKCYAN    = "\033[36m"
+    LIGHTGREY   = "\033[37m"
+    DARKGREY    = "\033[90m"
     backBlack   = "\033[40m"
     backRed     = "\033[41m"
     backGreen   = "\033[42m"

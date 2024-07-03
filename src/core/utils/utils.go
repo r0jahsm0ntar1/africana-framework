@@ -5,10 +5,12 @@ import (
     "net"
     "fmt"
     "time"
+    "syscall"
     "bcolors"
     "strings"
     "runtime"
     "math/big"
+    "os/signal"
     "io/ioutil"
     "subprocess"
     "crypto/rand"
@@ -75,7 +77,7 @@ func generateSelfSignedCert(certPath, keyPath string) {
     template := x509.Certificate{
         SerialNumber: serialNumber,
         Subject: pkix.Name{
-            Organization: []string{"Your Organization"},
+            Organization: []string{"The End Time Ministries"},
         },
         NotBefore:             notBefore,
         NotAfter:              notAfter,
@@ -143,6 +145,16 @@ func Editors(filesToReplacements map[string]map[string]string) {
     }
 }
 
+func Handler() {
+    c := make(chan os.Signal, 1)
+    signal.Notify(c, os.Interrupt, syscall.SIGINT)
+    go func() {
+        <-c
+        fmt.Println(bcolors.Colors() + bcolors.BOLD + "\nCTRL-C detected. Exiting.... " + bcolors.ENDC)
+        os.Exit(0)
+    }()
+}
+
 func ClearScreen() {
     if runtime.GOOS == "linux" {
         subprocess.Popen("clear")
@@ -165,8 +177,10 @@ func Certs() {
 
 func WordLists() {
     if runtime.GOOS == "linux" {
-        filePath := "/usr/share/wordlists/rockyou.txt"
+        filePath := "/usr/share/wordlists/rockyou.txt.gz"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
+            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "wordlists not installed in your operating system.\n" + bcolors.ENDC)
+        } else {
             subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
         }
     }

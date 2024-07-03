@@ -24,8 +24,6 @@ replace banners => ./src/core/banners/
 
 replace agreements => ./src/agreements/
 
-replace configures => ./src/configures/
-
 replace scriptures => ./src/scriptures/
 
 replace securities => ./src/securities/
@@ -39,7 +37,6 @@ require (
 	banners v0.0.0-00010101000000-000000000000 // indirect
 	bcolors v0.0.0-00010101000000-000000000000 // indirect
 	butchers v0.0.0-00010101000000-000000000000 // indirect
-	configures v0.0.0-00010101000000-000000000000 // indirect
 	crackers v0.0.0-00010101000000-000000000000 // indirect
 	credits v0.0.0-00010101000000-000000000000 // indirect
 	internals v0.0.0-00010101000000-000000000000 // indirect

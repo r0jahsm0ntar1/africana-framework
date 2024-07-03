@@ -3,8 +3,8 @@ package webattackers
 import (
     "os"
     "fmt"
-    "bufio"
     "time"
+    "bufio"
     "strings"
     "bcolors"
     "subprocess"

@@ -129,15 +129,15 @@ func anonymitySetups() {
             africanaFramework()
             return
         case "1":
-            securities.Vanishstart     (           )
+            securities.AnonymitySetups  (           )
         case "2":
-            securities.Vanishstart     (           )
+            securities.AnonymityStart   (           )
         case "3":
-            securities.Vanishstop      (           )
+            securities.AnonymityStop    (           )
         case "4":
-            securities.ChecktorStatus  (           )
+            securities.AnonymityStatus  (           )
         case "5":
-            securities.ChainsStatus    (           )
+            securities.AnonymityChains  (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuTwo()
         case "00", "h", "H", "help", "Help", "HELP":

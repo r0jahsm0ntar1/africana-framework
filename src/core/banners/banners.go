@@ -1,13 +1,13 @@
 package banners
 
 import (
-    "time"
     "fmt"
+    "time"
     "bcolors"
     "math/rand"
 )
 var (
-    version = "v2.0.5"
+    version = "v2.0.6"
 )
 
 type Banners struct{}
