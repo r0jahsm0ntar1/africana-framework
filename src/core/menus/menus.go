@@ -64,9 +64,13 @@ func MenuTwo() {
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "........................" + bcolors.DARKCYAN + "start here" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Stop tor & restore all iptables....................🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Check if using " + bcolors.DARKCYAN + "tor.🧄." + bcolors.BLUE + ".............................🦨] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Chains....." + bcolors.DARKCYAN + "local.🐌." + bcolors.DARKCYAN + "squid.🐙." + bcolors.DARKCYAN + "privoxy.🎭." + bcolors.DARKCYAN + "tor.🧄." + bcolors.DARKCYAN + "WEB.🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. Connect to a different exit-node...................🐞] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. Check if all services are up and running...........🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. Check current External IP address..................🐾] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. Back up and reset Iptables to default..............🐝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Reload anonsurf and restart a fresh................🦨]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.DARKCYAN + "local.🐌." + bcolors.DARKCYAN + "squid.🐙." + bcolors.DARKCYAN + "privoxy.🎭." + bcolors.DARKCYAN + "tor.🧄." + bcolors.DARKCYAN + "WEB.🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Stop anonsurf & restore all iptables...............🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -99,17 +103,20 @@ func MenuThree() {
 }
 
 func MenuThreeOne() {
+    fmt.Println(); scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Launch Eternalblue Exploit.........................🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
 }
 
 func MenuThreeTwo() {
+    fmt.Println(); scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s) traffick to early selected target🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s) traffick to all Connected devices🪰]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
+    fmt.Println(); scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js to early selected target........🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js to All Connected devices........🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
@@ -312,7 +319,7 @@ func MenuEight() {
     fmt.Println(bcolors.BLUE + "[ 4. Start SQL, XSS & SSRF Detection & Eploitation......💉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Launch OWASP Nettacker project Main Menu...........🦣] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...🃏] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Osmedeus Next Generation Workflow Engine Main Menu.🐨] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Osmedeus Next Generation Workflow Engine Main Menu.🔮] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu.........🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Heavy Automation Attacks On The Host........🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
@@ -326,7 +333,7 @@ func HelpMenuEight() {
     fmt.Println(bcolors.YELLOW + "  Start 💉SQL, XSS & SSRF " + bcolors.ENDC + ": 4. This is an injection phase. Chosen tools are configured to find injection vulns. The choice contain embeded submenu that supports both automation and manual injection tackticks." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode. (Intrusive phase)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Jok3r " + bcolors.ENDC + ": 6. Like Nettacker, Joker is a fullset framework. It is intergrated with a collection of several third party tools. The embeded menu in this option will guide you through." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 Osmedeus " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "              Osmedeus 🔮 " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Ufonet 🦠DDOS " + bcolors.ENDC + ": 8. Danger!!! This tool kills websites completely. Use it at your own risk. The embeded menu on this choice will guide you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Heavy Automation Attacks " + bcolors.ENDC + ": 9. Chosen tools are selected in this option to run simulteniously giving you all desirable Outcomes. Other tools are added that are not in the above options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
@@ -424,7 +431,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Scan list of targets (Full path of target needed)..🥐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Cloud - Run scan in Distributed Cloud mode.........🌏] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. Cloud - Run scan in Distributed Cloud mode.........🔮] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Performing Full web vuln & secret scan on host.....🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Update the vulnerability database before attacking.📜] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Start web UI server................................🌍] " + bcolors.ENDC)

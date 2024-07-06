@@ -169,8 +169,103 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
     }
 }
 
+func anonymas() {
+     banner := `
+                    .;1tfLCL1,
+                   .,,..;i;f0G;
+                         ,:,tCC.  ...
+                         ;i:fCL,1LLtf1i;,
+                       .,::tCL1LC1::;, .,,
+                       ;1:tCL,tLt,1:
+                      ,::tLf, 1Lf;::.
+                    .ii:tLt.  .1Lf;i1.
+                    ,:;tf1      1ft;::
+                 .1;:tf1  ,i1t1,  ift;;1,
+                ,i:t;f. ,LLffLL:  tft;i:
+                .;:;fff  .LCLLLf, 1ffi:;.
+                :fi;Lff1.  ,;;:  ifffi;f;
+                 .:::tCLLfi:,,:ifLfLt::;.
+                  ,11:1CCCCCLLLLLLf1;1t:
+                  .it;:;1fLLLLfft1;:;ti.
+                     ,:;::;;;;;;;;;;,
+                       .,::::::::,.`
+    fmt.Printf("%s%s%s\n", bcolors.DARKGREEN, banner, bcolors.ENDC)
+}
+
+func Graphicx() {
+    rand.Seed(time.Now().UnixNano())
+    menu := rand.Intn(5) + 1
+
+    switch menu {
+    case 1:
+        anonymas()
+        fmt.Printf(`%s
+                                                    _____
+  _____    ____   ____   ____   ________ __________/ ____\
+  \__  \  /    \ /  _ \ /    \ /  ___/  |  \_  __ \   __\
+   / __ \|   |  (  <_> )   |  \\___ \|  |  /|  | \/|  |
+  (____  /___|  /\____/|___|  /____  >____/ |__|   |__|
+       \/     \/            \/     \/               %s%s%s%s
+
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 2:
+        anonymas()
+        fmt.Printf(`%s
+     _______  ________  ________   ________  ________  ________
+   ╱╱       ╲╱    ╱   ╲╱        ╲ ╱        ╲╱        ╲╱        ╲
+  ╱╱        ╱         ╱         ╱_╱       ╱╱        _╱        _╱
+ ╱       --╱         ╱        _╱╱         ╱-        ╱╱       ╱
+ ╲________╱╲___╱____╱╲____╱___╱ ╲________╱╲________╱ ╲______╱
+                                                    %s%s%s%s
+
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 3:
+        anonymas()
+        fmt.Printf(`%s
+
+    ██      ▄   ████▄    ▄      ▄▄▄▄▄   ▄   █▄▄▄▄ ▄████
+    █ █      █  █   █     █    █     ▀▄  █  █  ▄▀ █▀   ▀
+    █▄▄█ ██   █ █   █ ██   █ ▄  ▀▀▀▀▄ █   █ █▀▀▌  █▀▀
+    █  █ █ █  █ ▀████ █ █  █  ▀▄▄▄▄▀  █   █ █  █  █
+       █ █  █ █       █  █ █          █▄ ▄█   █    █
+      █  █   ██       █   ██           ▀▀▀   ▀      ▀
+     ▀                                              %s%s%s%s
+
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 4:
+        anonymas()
+        fmt.Printf(`%s
+  ▐▄▄▄▄▄▄ ..▄▄ · ▄• ▄▌.▄▄ ·   ▄▄·  ▄ .▄▄▄▄  ▪  .▄▄ · ▄▄▄▄▄
+   ·██▀▄.▀·▐█ ▀. █▪██▌▐█ ▀.  ▐█ ▌▪██▪▐█▀▄ █·██ ▐█ ▀. •██
+ ▪▄ ██▐▀▀▪▄▄▀▀▀█▄█▌▐█▌▄▀▀▀█▄ ██ ▄▄██▀▐█▐▀▀▄ ▐█·▄▀▀▀█▄ ▐█.▪
+ ▐▌▐█▌▐█▄▄▌▐█▄▪▐█▐█▄█▌▐█▄▪▐█ ▐███▌██▌▐▀▐█•█▌▐█▌▐█▄▪▐█ ▐█▌·
+  ▀▀▀• ▀▀▀  ▀▀▀▀  ▀▀▀  ▀▀▀▀  ·▀▀▀ ▀▀▀ ·.▀  ▀▀▀▀ ▀▀▀▀  ▀▀▀ 
+                                                    %s%s%s%s
+
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 5:
+        anonymas()
+        fmt.Printf(`%s
+        ______  ________  ________  ________  ________ 
+       /      \/        \/        \/    /   \/        \
+      /       /         /        _/         /        _/
+    _/      //        _/-        /         /-        /
+    \______//\________/\________/\________/\________/
+                                            %s%s%s%s
+
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    }
+}
+
 func Banner() {
     Graphics()
 }
 
-
+func AnonSurfBanner() {
+    Graphicx()
+}

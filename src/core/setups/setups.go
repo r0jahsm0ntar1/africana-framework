@@ -69,7 +69,7 @@ func UbuntuSetups() {
     }
 }
 
-func ArchaLlSetup() {
+func ArchaLSetups() {
 
 }
 
@@ -84,7 +84,7 @@ func RemoveSetups() {
     fmt.Scan(&userInput)
     switch userInput {
         case "y", "Y", "yes", "Yes", "YES":
-            subprocess.Popen(`rm -rf /root/.africana/; rm -rf /usr/local/bin/africana; rm -rf /etc/privoxy/config; mv /etc/privoxy/config.bak_africana /etc/privoxy/config; rm -rf /etc/squid/squid.conf; mv /etc/squid/squid.conf.bak_africana /etc/squid/squid.conf; rm -rf /etc/dhcp/dhclient.conf; mv /etc/dhcp/dhclient.conf.bak_africana /etc/dhcp/dhclient.conf; rm -rf /etc/dnsmasq.conf; mv /etc/dnsmasq.conf.bak_africana /etc/dnsmasq.conf`)
+            subprocess.Popen(`rm -rf /root/.africana/; rm -rf /usr/local/bin/africana`)
             fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Africana Fully. " + bcolors.YELLOW + "Uninstalled!" + bcolors.ENDC)
             return
         case "n", "N", "no", "No", "NO":

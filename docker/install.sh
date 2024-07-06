@@ -110,6 +110,7 @@ print_delimiter
 print_blue "[~] Install various required packages (if missing)"
 
 PACKAGES="
+golang
 alien
 apt-transport-https
 apt-utils

@@ -7,7 +7,10 @@ import (
     "runtime"
 )
 
-var shell, flag string
+var (
+    shell   string
+    flag    string
+)
 
 func Popen(one string) {
 

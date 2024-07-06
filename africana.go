@@ -32,7 +32,7 @@ var (
     proxyURL    string
 )
 
-func sudo() {
+func africana() {
     switch runtime.GOOS {
     case "windows":
         userAgreements()
@@ -118,7 +118,7 @@ func systemSetups() {
 }
 
 //2. System Security Configuration.........(Setup tor &)🎭
-func anonymitySetups() {
+func anonsurfSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuTwo()
     for {
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -129,15 +129,32 @@ func anonymitySetups() {
             africanaFramework()
             return
         case "1":
-            securities.AnonymitySetups  (           )
+            utils.ClearScreen           (           )
+            securities.AnonsurfSetups   (           )
         case "2":
-            securities.AnonymityStart   (           )
+            utils.ClearScreen           (           )
+            securities.AnonsurfStart    (           )
         case "3":
-            securities.AnonymityStop    (           )
+            utils.ClearScreen           (           )
+            securities.AnonsurfExitnode (           )
         case "4":
-            securities.AnonymityStatus  (           )
+            utils.ClearScreen           (           )
+            securities.AnonsurfStatus   (           )
         case "5":
-            securities.AnonymityChains  (           )
+            utils.ClearScreen           (           )
+            securities.AnonsurfIpaddr   (           )
+        case "6":
+            utils.ClearScreen           (           )
+            securities.AnonsurfRIptabls (           )
+        case "7":
+            utils.ClearScreen           (           )
+            securities.AnonsurfReload   (           )
+        case "8":
+            utils.ClearScreen           (           )
+            securities.AnonsurfChains   (           )
+        case "9":
+            utils.ClearScreen           (           )
+            securities.AnonsurfStop     (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuTwo()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -728,7 +745,7 @@ func africanaFramework() {
             systemSetups        (           )
             return
         case "2":
-            anonymitySetups     (           )
+            anonsurfSetups     (           )
             return
         case "3":
             internaltargetInput (           )
@@ -785,7 +802,7 @@ func genesis() {
         systemSetups        (           )
         return
     case "-2", "-t",    "--anonsurf":
-        anonymitySetups     (           )
+        anonsurfSetups     (           )
         return
     case "-3", "-n",    "--networks":
         internaltargetInput (           )
@@ -823,5 +840,5 @@ func genesis() {
 }
 
 func main() {
-     sudo()
+     africana()
 }

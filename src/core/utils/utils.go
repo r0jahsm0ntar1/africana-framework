@@ -138,9 +138,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error replacing strings in file %s: %v\n" + bcolors.ENDC, fileName, err)
+            fmt.Printf(bcolors.RED + "\nError:" + bcolors.DARKCYAN + "Replacing " + bcolors.ENDC + "strings in file %s: %v" + bcolors.ENDC, fileName, err)
         } else {
-            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Replacements completed successfully in file %s!\n" + bcolors.ENDC, fileName,)
+            fmt.Printf(bcolors.DARKCYAN + "\nSucces:" + bcolors.ENDC + "Replacing file: %s%s!\n" + bcolors.ENDC, bcolors.RED, fileName)
         }
     }
 }

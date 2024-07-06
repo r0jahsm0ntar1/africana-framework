@@ -277,7 +277,7 @@ func Osmedeus3(userTarget string) {
 
 func Osmedeus4(userTargets string) {
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Full path: " + bcolors.DARKCYAN + "To your saved 🎯targets to be " + bcolors.RED + "attacked!!🚀" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTargets)
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing bulk scan on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
     subprocess.PopenTwo(`osmedeus scan -f vuln-and-dirb -T %s`, userTarget)
@@ -303,7 +303,7 @@ func Osmedeus7(userTarget string) {
 
 func Osmedeus8() {
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Port: " + bcolors.DARKCYAN + "To start your server on🌍" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "3333" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     reader := bufio.NewReader(os.Stdin)
     userPort, _ := reader.ReadString('\n')
     userPort = strings.TrimSpace(userPort)
