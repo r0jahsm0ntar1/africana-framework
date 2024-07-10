@@ -16,7 +16,7 @@
     +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
 
 
-* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Go lang & some Python3. 
+* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Go lang & Pure Python3. 
 * It aims to make penetration testing easier for testers by covering a wide range of attack vectors including;
  web exploitation, WiFi attacks, phishing, malware generation, social engineering attacks, password cracking, and internal network attacks.
 
@@ -36,32 +36,103 @@
 - 🎭 Social Engineering Attacks with Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher, etc.
 - 🌐 Website Attack Vectors with Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix, etc.
 
-## Prerequisites
+## Golang version. Prerequisites try;
 Before you begin, ensure you have met the following requirements:
-**Python 3:** Africana is written in Python 3, so make sure you have it installed on your machine.
+**Golang:** Africana is written in Golang, so make sure you have it installed on your machine.
 
 ```bash
 sudo apt update -y
-sudo apt install Golang -y
+sudo apt install golang git apt -y
 ```
-## Installation
+## Installation Ubuntu, Kali & all Debian based distros;
 
 ```bash
-git clone https://github.com/r0jahsm0ntar1/africana-framework
+sudo apt update -y
+sudo apt install golang -y
+```
+```bash
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 ```
 ```bash
 cd africana-framework
 ```
 ```bash
-go build ./africana.go; mv africana /usr/local/bin
+sudo go build ./africana.go; mv africana /usr/local/bin
 ```
+
+## Installation in all Arch based distros;
+```bash
+sudo pacman -Syu
+sudo pacman -Sy golang git
+```
+```bash
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
+```
+```bash
+cd africana-framework
+```
+```bash
+sudo go build ./africana.go; mv africana /usr/local/bin
+```
+
+## The script should be run as a super user do(sudo) for root permissions .
+```bash
+sudo africana -i
+```
+
+## For Python version. Prerequisites try;
+
+Before you begin, ensure you have met the following requirements:
+**Python3:** Africana is written in Golang, so make sure you have it installed on your machine.
+
+```bash
+sudo apt update -y
+sudo apt install python3 git apt -y
+```
+## Installation Ubuntu, Kali & all Debian based distros;
+
+```bash
+sudo apt update -y
+sudo apt install python3 -y
+```
+```bash
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs --depth 1
+```
+```bash
+cd africana-framework
+```
+```bash
+sudo python3 installer.py
+```
+
+## Installation in all Arch based distros;
+```bash
+sudo pacman -Syu
+sudo pacman -Sy python3 git
+```
+```bash
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs --depth 1
+```
+```bash
+cd africana-framework
+```
+```bash
+sudo python3 installer.py
+```
+
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
 sudo africana
-```
+
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
 ## About the Author
+                               .--,
+                           ,.-( (o)\
+                          /   .)/\ ')
+                        .',./'/   )/
+                    ()=///=))))==()
+                      /
                         __                 _____ _____     _     _ 
                      __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
                     |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|

@@ -17,7 +17,7 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords......" + bcolors.DARKCYAN + "Hashcat, jo" + bcolors.BLUE + "🔐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks.............." + bcolors.DARKCYAN + "Gophish, gi" + bcolors.BLUE + "🪝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors.................." + bcolors.DARKCYAN + "Osmedeus, j" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Credits, Tricks and About..............." + bcolors.DARKCYAN + "About, auth" + bcolors.BLUE + "📚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Credits, and About the author..........." + bcolors.DARKCYAN + "About, auth" + bcolors.BLUE + "📚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework................." + bcolors.DARKCYAN + "" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + "" + bcolors.BLUE + "💻] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -69,7 +69,7 @@ func MenuTwo() {
     fmt.Println(bcolors.BLUE + "[ 5. Check current External IP address..................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Back up and reset Iptables to default..............🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Reload anonsurf and restart a fresh................🦨]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.DARKCYAN + "local.🐌." + bcolors.DARKCYAN + "squid.🐙." + bcolors.DARKCYAN + "privoxy.🎭." + bcolors.DARKCYAN + "tor.🧄." + bcolors.DARKCYAN + "WEB.🌍" + bcolors.BLUE + "] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.ITALIC + bcolors.ENDC + "local.🐌.squid.🐙.privoxy.🎭.tor.🧄.WEB.🌍" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Stop anonsurf & restore all iptables...............🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
@@ -91,7 +91,7 @@ func MenuThree() {
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Discover Targets...................................🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Port discovery on the target.......................🐾] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Vuln' Scann the Target.............................🐶] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. Vuln' Scan the Target..............................🐶] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. S.M.B enumration on the target.....................🪳] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Exploit S.M.B on target............................🐼] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Sniff Internal Packets.............................🐽] " + bcolors.ENDC)
@@ -103,20 +103,20 @@ func MenuThree() {
 }
 
 func MenuThreeOne() {
-    fmt.Println(); scriptures.Verse()
+    fmt.Println(); scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Launch Eternalblue Exploit.........................🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
 }
 
 func MenuThreeTwo() {
-    fmt.Println(); scriptures.Verse()
+    fmt.Println(); scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s) traffick to early selected target🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s) traffick to all Connected devices🪰]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
-    fmt.Println(); scriptures.Verse()
+    fmt.Println(); scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js to early selected target........🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js to All Connected devices........🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
@@ -125,8 +125,8 @@ func MenuThreeThree() {
 func HelpMenuThree() {
     fmt.Println(bcolors.YELLOW + "                  Discover Targets " + bcolors.ENDC + ": 1. Scan all subnet for connected devices and list them in a table form for you to select a target for further penetration testing againist it." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Port discovery on the target " + bcolors.ENDC + ": 2. Scan the initial selected target for open ports and services to give you vivid info on how to to tackle your target." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Vuln' Scann the Target " + bcolors.ENDC + ": 3. Scann for known vulnerbility that may be an easy win on all open ports." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    S.M.B enumration on the target " + bcolors.ENDC + ": 4. Reconn smb ports, scanning them and check if there are vulnerbilities and shares that could be exploited further." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "             Vuln' Scan the Target " + bcolors.ENDC + ": 3. Scan for known vulnerbility that may be an easy win on all open ports." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    S.M.B enumration on the target " + bcolors.ENDC + ": 4. Recon smb ports, scan them and check if there are vulnerbilities and shares that could be exploited further." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Exploit S.M.B on target " + bcolors.ENDC + ": 5. Africana will launch some tools that will scout the target smb services give you more vivid info and try to automate each connection" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Sniff Internal Packets " + bcolors.ENDC + ": 6. Sniffs all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Lunch Responder with IPv6 Support " + bcolors.ENDC + ": 7. Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version" + bcolors.ENDC)
@@ -373,7 +373,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 6. Run CVE scans on the target host...................🍹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. View scanned Nettacker report list.................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }

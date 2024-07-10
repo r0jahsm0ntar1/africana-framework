@@ -118,23 +118,6 @@ func Contributors() {
 func Developer() {
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
                  🛰️ About the author` + bcolors.ENDC)
-    fmt.Printf(bcolors.ORANGE + `
-(Genesis)+------------------------------------------------+
-| Rojahs Montari Machine Pentesters For Exploration       |
-+---------------------------------------------------------+
-    A    F    R    I    C    A    N    A    Framework.
-    *    *    *    *    *    *    *    *    *
-    |    |    |    |    |    |    |    |    |
-    |    |    |    |    |    |    |    |    +- 1. Install.]
-    |    |    |    |    |    |    |    +------ 2. Proxies.]
-    |    |    |    |    |    |    +----------- 3. Networks]
-    |    |    |    |    |    +---------------- 4. C2 & RAT]
-    |    |    |    |    +--------------------- 5. Wireless]
-    |    |    |    + ------------------------- 6. Cracking]
-    |    |    + ------------------------------ 7. Phishing]
-    |    +------------------------------------ 8. Website.]
-    +----------------------------------------- 9. Credits.]
-` + bcolors.ENDC)
     developer := bcolors.BLUE + `
 [ I am Rojahs Montari a Devoted Christian & Pentester.....]
 [ One might describe me as an erudite.....................]
@@ -172,6 +155,23 @@ func Developer() {
 (Life Tip.: Defeat the devil by fasting & praying.........)
 (Email....: rojahsmontari@gmail.com.......................)
 (YouTube..: https://youtube.com/@RojahsMontari............)` + bcolors.ENDC)
+    fmt.Printf(bcolors.ORANGE + `
+(John 3:16)+----------------------------------------------+
+| Rojahs Montari Machine Pentesters For Exploration       |
++---------------------------------------------------------+
+    A    F    R    I    C    A    N    A    Framework.
+    *    *    *    *    *    *    *    *    *
+    |    |    |    |    |    |    |    |    |
+    |    |    |    |    |    |    |    |    +- 1. Install.]
+    |    |    |    |    |    |    |    +------ 2. Proxies.]
+    |    |    |    |    |    |    +----------- 3. Networks]
+    |    |    |    |    |    +---------------- 4. C2 & RAT]
+    |    |    |    |    +--------------------- 5. Wireless]
+    |    |    |    + ------------------------- 6. Cracking]
+    |    |    + ------------------------------ 7. Phishing]
+    |    +------------------------------------ 8. Website.]
+    +----------------------------------------- 9. Credits.]
+` + bcolors.ENDC)
     fmt.Printf(bcolors.DARKGREEN + `
          __                 _____ _____     _     _
       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_

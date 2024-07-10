@@ -87,7 +87,7 @@ func userAgreements() {
 func systemSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuOne()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -95,15 +95,15 @@ func systemSetups() {
             africanaFramework()
             return
         case "1":
-            utils.ClearScreen(); banners.Banner(); setups.KaliSetups()
+            utils.ClearScreen(); banners.Banner(); setups.KaliSetups();   africanaFramework()
             return
         case "2":
-            utils.ClearScreen(); banners.Banner(); setups.UbuntuSetups()
+            utils.ClearScreen(); banners.Banner(); setups.UbuntuSetups(); africanaFramework()
             return
         case "3":
             break
         case "4":
-            utils.ClearScreen(); banners.Banner(); setups.WindowsSetup()
+            utils.ClearScreen(); banners.Banner(); setups.WindowsSetup(); africanaFramework()
             return
         case "5":
             utils.ClearScreen(); banners.Banner(); setups.RemoveSetups()
@@ -121,7 +121,7 @@ func systemSetups() {
 func anonsurfSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuTwo()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Anonsurf" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -167,8 +167,8 @@ func anonsurfSetups() {
 
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
-    utils.ClearScreen(); banners.Banner(); internals.InternalScanner()
-    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.ORANGE + "Select your" + bcolors.PURPLE + "(҂`_´) " + bcolors.RED + "target!!🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    utils.ClearScreen(); banners.Banner(); internals.InternalScan()
+    fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ORANGE + "Select your " + bcolors.RED + "target!!🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
 }
@@ -176,7 +176,7 @@ func internaltargetInput() {
 func internalAttackers() {
     banners.Banner(); menus.MenuThree()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -188,15 +188,15 @@ func internalAttackers() {
             utils.ClearScreen()
             banners.Banner(); menus.MenuThree   (  )
         case "2":
-            internals.NmapPortscan       (userTarget)
+            internals.NmapPortScan       (userTarget)
         case "3":
-            internals.NmapVulnscan       (userTarget)
+            internals.NmapVulnScan       (userTarget)
         case "4":
-            internals.SmbVulnscan        (userTarget)
-            internals.SmbMapscan         (userTarget)
-            internals.RpcEnumscan        (userTarget)
+            internals.SmbVulnScan        (userTarget)
+            internals.SmbMapScan         (userTarget)
+            internals.RpcEnumScan        (userTarget)
         case "5":
-            internals.SmbVulnscan        (userTarget)
+            internals.SmbVulnScan        (userTarget)
             internals.SmbExploit         (userTarget)
         case "6":
             internals.PacketSniffer      (userTarget)
@@ -207,7 +207,7 @@ func internalAttackers() {
         case "8":
             internals.BeefBettercap      (userTarget)
         case "9":
-            internals.RpcEnumscan        (userTarget)
+            internals.RpcEnumScan        (userTarget)
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThree()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -222,7 +222,7 @@ func internalAttackers() {
 func malwareGenerators() {
     utils.ClearScreen(); banners.Banner(); menus.MenuFour()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Malwares" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -246,7 +246,7 @@ func malwareGenerators() {
         case "8":
             butchers.Chameleon  (           )
         case "9":
-            butchers.ChameLeon  (           )
+            butchers.Gh0x0st    (           )
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuFour()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -258,10 +258,10 @@ func malwareGenerators() {
 }
 
 //5. WiFi Attack Vectors...................(Wifite, air)🍍
-func wirelesAttackers() {
+func wirelessAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuFive()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Wireless" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -300,7 +300,7 @@ func wirelesAttackers() {
 func passwordsCrackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSix()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -348,7 +348,7 @@ func passwordsCrackers() {
         case "2":
             utils.ClearScreen(); banners.Banner(); menus.MenuSixTwo()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -383,7 +383,7 @@ func passwordsCrackers() {
 func credsPhishers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuSeven()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Phishers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🪝" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -419,7 +419,6 @@ func credsPhishers() {
 }
 
 //8. Website Attack Vectors................(Proxy, Conf)🎭
-
 func askForProxy() (*url.URL) {
     reader := bufio.NewReader(os.Stdin)
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL🛰️ Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
@@ -487,7 +486,7 @@ func websitesAttackers() {
     utils.ClearScreen(); banners.Banner(); menus.MenuEight()
 
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Websites" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🪲" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -499,7 +498,7 @@ func websitesAttackers() {
             webattackers.WafW00f(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.Nuclei(userTargetx)
         //2. Gather e-mails & subdomain namesfrom public sources🪰
         case "2":
-            webattackers.Harvester (userTarget)
+            webattackers.TheHarvester (userTarget)
         //3. Start Bruteforcing Host's Root Files...............🦑
         case "3":
             webattackers. Gobuster (userTarget)
@@ -507,7 +506,7 @@ func websitesAttackers() {
         case "4":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFour()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Injections" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -537,7 +536,7 @@ func websitesAttackers() {
         case "5": 
             utils.ClearScreen(); banners.Banner(); menus.MenuEightFive()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Nettacker" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🦣" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -574,7 +573,7 @@ func websitesAttackers() {
         case "6":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSix()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Jok3r" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🃏" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -611,7 +610,7 @@ func websitesAttackers() {
         case "7":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightSeven()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Osmedeus" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -648,7 +647,7 @@ func websitesAttackers() {
         case "8":
             utils.ClearScreen(); banners.Banner(); menus.MenuEightEight()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Ufonet" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🦠" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -698,7 +697,7 @@ func websitesAttackers() {
 func creditsGivers() {
     utils.ClearScreen(); banners.Banner(); scriptures.Verse(); credits.Contributors(); credits.Developer()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + " Enter 0, e, E, exit, Exit or EXIT " + bcolors.ENDC + "to go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -715,7 +714,7 @@ func creditsGivers() {
 func scriptureNarators() {
     utils.ClearScreen(); scriptures.TheScriptures(); scriptures.CommandMents()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─✍🏼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -732,7 +731,7 @@ func scriptureNarators() {
 func africanaFramework() {
     utils.ClearScreen(); banners.Banner(); menus.MenuZero()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Home" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
@@ -745,7 +744,7 @@ func africanaFramework() {
             systemSetups        (           )
             return
         case "2":
-            anonsurfSetups     (           )
+            anonsurfSetups      (           )
             return
         case "3":
             internaltargetInput (           )
@@ -755,7 +754,7 @@ func africanaFramework() {
             malwareGenerators   (           )
             return
         case "5":
-            wirelesAttackers    (           )
+            wirelessAttackers    (           )
             return
         case "6":
             passwordsCrackers   (           )
@@ -772,6 +771,8 @@ func africanaFramework() {
             return
         case "99":
             scriptureNarators   (           )
+        case       "m", "M", "menu", "Menu", "MENU":
+            menus.MenuZero()
         case "00", "h", "H", "help", "Help", "HELP":
             menus.HelpMenuZero()
         default:
@@ -802,7 +803,7 @@ func genesis() {
         systemSetups        (           )
         return
     case "-2", "-t",    "--anonsurf":
-        anonsurfSetups     (           )
+        anonsurfSetups      (           )
         return
     case "-3", "-n",    "--networks":
         internaltargetInput (           )
@@ -812,7 +813,7 @@ func genesis() {
         malwareGenerators   (           )
         return
     case "-5", "-w",    "--wireless":
-        wirelesAttackers    (           )
+        wirelessAttackers   (           )
         return
     case "-6", "-p",    "--crackers":
         passwordsCrackers   (           )

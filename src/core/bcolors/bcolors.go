@@ -65,7 +65,7 @@ func init() {
 }
 
 func Colors(args ...string) string {
-    colors := []string{MAGENTA, BLUE, PURPLE, CYAN, DARKCYAN, GREEN, YELLOW, RED, ORANGE,}
+    colors := []string{ORANGE, DARKGREEN, MAGENTA, DARKCYAN, LIGHTGREY, DARKGREY, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN}
     if len(args) > 0 {
         return args[0]
     } else {

@@ -2,36 +2,36 @@ package phishers
 
 import (
     "fmt"
+    "time"
     "subprocess"
 )
 
 func GoPhish() {
-    subprocess.Popen(`gophish`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/GoPhish.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'gophish' -O %s`, Logs); fmt.Println()
 }
 
 func GoodGinx() {
-    subprocess.Popen(`evilginx2`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/GoodGinx.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'evilginx2' -O %s`, Logs); fmt.Println()
 }
 
 func ZPhisher() {
-    subprocess.Popen(`cd /root/.africana/africana-base/zphisher; bash zphisher.sh`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/ZPhisher.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'cd /root/.africana/africana-base/zphisher; bash zphisher.sh' -O %s`, Logs); fmt.Println()
 }
 
 func SetoolKit() {
-    subprocess.Popen(`cd /root/.africana/africana-base/set/; python3 setoolkit`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/SetoolKit.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'cd /root/.africana/africana-base/set/; python3 setoolkit' -O %s`, Logs); fmt.Println()
 }
 
 func AnonPhisher() {
-    subprocess.Popen(`cd /root/.africana/africana-base/anonphisher; bash anonphisher.sh`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/AnonPhisher.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'cd /root/.africana/africana-base/anonphisher; bash anonphisher.sh' -O %s`, Logs); fmt.Println()
 }
 
 func CyberPhish() {
-    subprocess.Popen(`cd /root/.africana/africana-base/cyberphish; python3 cyberphish.py`)
-    fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/CyberPhish.Log-%s.txt", time.Now().Format("20060102.150405"))
+    subprocess.PopenTwo(`script -q -c 'cd /root/.africana/africana-base/cyberphish; python3 cyberphish.py' -O %s`, Logs); fmt.Println()
 }
-

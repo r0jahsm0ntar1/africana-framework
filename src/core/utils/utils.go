@@ -177,10 +177,8 @@ func Certs() {
 
 func WordLists() {
     if runtime.GOOS == "linux" {
-        filePath := "/usr/share/wordlists/rockyou.txt.gz"
+        filePath := "/usr/share/wordlists/rockyou.txt"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
-            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "wordlists not installed in your operating system.\n" + bcolors.ENDC)
-        } else {
             subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
         }
     }

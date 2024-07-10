@@ -114,7 +114,7 @@ func configSquid() {
             "/etc/squid/squid.conf": {
                 "# no artificial limit on the number of concurrent spare attempts": "# no artificial limit on the number of concurrent spare attempts\n\ncache_peer 127.0.0.1 parent 8118 7 no-query no-digest",
                 "http_port 3128": "http_port 3129",
-                "# shutdown_lifetime 30 seconds": "shutdown_lifetime 3 seconds",
+                "# shutdown_lifetime 30 seconds": "shutdown_lifetime 0 seconds",
             },
         }
         utils.Editors(filesToReplacements)
@@ -578,7 +578,8 @@ var torrString = []string{
 
 
 func AnonsurfSetups() {
-    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfSetups.Log.%s.txt", time.Now().Format("20060102.150405"))
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server' -O %s`, Logs); fmt.Println()
 }
 
 func AnonsurfStart() {
@@ -590,7 +591,8 @@ func AnonsurfExitnode() {
 }
 
 func AnonsurfStatus() {
-    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfStatus.Log.%s.txt", time.Now().Format("20060102.150405"))
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service' -O %s`, Logs); fmt.Println()
 }
 
 func AnonsurfIpaddr() {
@@ -606,7 +608,8 @@ func AnonsurfReload() {
 }
 
 func AnonsurfChains() {
-    fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()
+    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfChains.Log.%s.txt", time.Now().Format("20060102.150405"))
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'tail -vf /var/log/privoxy/logfile' -O %s`, Logs); fmt.Println()
 }
 
 func AnonsurfStop() {
