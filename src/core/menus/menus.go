@@ -369,7 +369,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Start insane information gathering on host.........🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vulnscansecurity checks...........🦍] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vuln scan security checks.........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Run CVE scans on the target host...................🍹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)

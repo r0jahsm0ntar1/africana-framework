@@ -194,7 +194,7 @@ func anonymas() {
 
 func Graphicx() {
     rand.Seed(time.Now().UnixNano())
-    menu := rand.Intn(5) + 1
+    menu := rand.Intn(2) + 1
 
     switch menu {
     case 1:
@@ -212,18 +212,6 @@ func Graphicx() {
     case 2:
         anonymas()
         fmt.Printf(`%s
-     _______  ________  ________   ________  ________  ________
-   ╱╱       ╲╱    ╱   ╲╱        ╲ ╱        ╲╱        ╲╱        ╲
-  ╱╱        ╱         ╱         ╱_╱       ╱╱        _╱        _╱
- ╱       --╱         ╱        _╱╱         ╱-        ╱╱       ╱
- ╲________╱╲___╱____╱╲____╱___╱ ╲________╱╲________╱ ╲______╱
-                                                    %s%s%s%s
-
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    case 3:
-        anonymas()
-        fmt.Printf(`%s
 
     ██      ▄   ████▄    ▄      ▄▄▄▄▄   ▄   █▄▄▄▄ ▄████
     █ █      █  █   █     █    █     ▀▄  █  █  ▄▀ █▀   ▀
@@ -232,30 +220,6 @@ func Graphicx() {
        █ █  █ █       █  █ █          █▄ ▄█   █    █
       █  █   ██       █   ██           ▀▀▀   ▀      ▀
      ▀                                              %s%s%s%s
-
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    case 4:
-        anonymas()
-        fmt.Printf(`%s
-  ▐▄▄▄▄▄▄ ..▄▄ · ▄• ▄▌.▄▄ ·   ▄▄·  ▄ .▄▄▄▄  ▪  .▄▄ · ▄▄▄▄▄
-   ·██▀▄.▀·▐█ ▀. █▪██▌▐█ ▀.  ▐█ ▌▪██▪▐█▀▄ █·██ ▐█ ▀. •██
- ▪▄ ██▐▀▀▪▄▄▀▀▀█▄█▌▐█▌▄▀▀▀█▄ ██ ▄▄██▀▐█▐▀▀▄ ▐█·▄▀▀▀█▄ ▐█.▪
- ▐▌▐█▌▐█▄▄▌▐█▄▪▐█▐█▄█▌▐█▄▪▐█ ▐███▌██▌▐▀▐█•█▌▐█▌▐█▄▪▐█ ▐█▌·
-  ▀▀▀• ▀▀▀  ▀▀▀▀  ▀▀▀  ▀▀▀▀  ·▀▀▀ ▀▀▀ ·.▀  ▀▀▀▀ ▀▀▀▀  ▀▀▀ 
-                                                    %s%s%s%s
-
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    case 5:
-        anonymas()
-        fmt.Printf(`%s
-        ______  ________  ________  ________  ________ 
-       /      \/        \/        \/    /   \/        \
-      /       /         /        _/         /        _/
-    _/      //        _/-        /         /-        /
-    \______//\________/\________/\________/\________/
-                                            %s%s%s%s
 
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
 

@@ -79,7 +79,7 @@ func Gh0x0st() {
     if userOutput == "" {
         userOutput = "/root/.africana/output/levuathan.txt"
     }
-    subprocess.PopenFour(`script -q -c 'cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s' -O %s`, userScript, userOutput, Logs); fmt.Println()
+    subprocess.PopenFour(`script -q -c 'cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"' -O %s`, userScript, userOutput, Logs); fmt.Println()
 }
 
 func BlackJack() {
@@ -104,7 +104,7 @@ func BlackJack() {
         if userLport == "" {
             userLport = "9999"
         }
-        subprocess.PopenThree(`script -q -c 'cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -i -s -n %s' -O %s`, userLport, Logs); fmt.Println()
+        subprocess.PopenThree(`script -q -c 'cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -i -n %s' -O %s`, userLport, Logs); fmt.Println()
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -121,7 +121,7 @@ func BlackJack() {
         if userHport == "" {
             userHport = "3333"
         }
-        subprocess.PopenFour(`script -q -c 'cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -i -s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s' -O %s`, userLport, userHport, Logs); fmt.Println()
+        subprocess.PopenFour(`script -q -c 'cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -i -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s' -O %s`, userLport, userHport, Logs); fmt.Println()
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
