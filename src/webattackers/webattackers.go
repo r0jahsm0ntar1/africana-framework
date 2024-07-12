@@ -83,7 +83,7 @@ func SqlmapAuto(userTarget string) {
 
 func SqlmapMan() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing man sql 💉 scan on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`sqlmap --tamper=between,luanginx,xforwardedfor --random-agent --threads=10 --level=5 --risk=3 --eta -wizard'`); fmt.Println()
+    subprocess.Popen(`sqlmap --tamper=between,luanginx,xforwardedfor --random-agent --threads=10 --level=5 --risk=3 --eta -wizard`); fmt.Println()
 }
 
 func CommixAuto(userTarget string) {
@@ -93,7 +93,7 @@ func CommixAuto(userTarget string) {
 
 func CommixMan() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing man command 💉 scan on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`commix --all --tamper=between,luanginx,xforwardedfor --random-agent --level=5 --wizard'`); fmt.Println()
+    subprocess.Popen(`commix --all --tamper=between,luanginx,xforwardedfor --random-agent --level=5 --wizard`); fmt.Println()
 }
 
 func KatanaAuto(userTarget string) {
@@ -108,7 +108,7 @@ func XsserAuto(userTarget string) {
 
 func XsserMan() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing man xss 💉 scan on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`xsser -u --wizard'`); fmt.Println(); fmt.Println()
+    subprocess.Popen(`xsser -u --wizard`); fmt.Println()
 }
 
 func NetTacker1(userTarget string) {
@@ -153,27 +153,27 @@ func NetTacker8(userTarget string) {
 
 func NetTacker9() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Launched WebUI key: africana " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/nettacker/; python3 nettacker.py --start-api --api-access-key africana'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/nettacker/; python3 nettacker.py --start-api --api-access-key africana`); fmt.Println()
 }
 
 func Jok3r1() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Installing tools in the toolbox" + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; /bin/bash install-all.sh'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; bash install-all.sh`); fmt.Println()
 }
 
 func Jok3r2() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Updating tools in the toolbox " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py toolbox --update-all --auto'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py toolbox --update-all --auto`); fmt.Println()
 }
 
 func Jok3r3() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Showing tools in the toolbox " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py toolbox --show-all'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py toolbox --show-all`); fmt.Println()
 }
 
 func Jok3r4() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Showing supported products " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py info --services'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py info --services`); fmt.Println()
 }
 
 func Jok3r5(userTarget string) {
@@ -193,17 +193,17 @@ func Jok3r7(userTarget string) {
 
 func Jok3r8() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Showing results & scans " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; xhost +; python3 jok3r.py db creds vulns mission hosts products services report quit; xhost -'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; xhost +; python3 jok3r.py db creds vulns mission hosts products services report quit; xhost -`); fmt.Println()
 }
 
 func Jok3r9() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Cleaning results & scans " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py db "mission -d default"'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py db "mission -d default"`); fmt.Println()
 }
 
 func Osmedeus1() {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Updating Osmedeus & Runing diagnostics to checks " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`osmedeus version --json; osmedeus update; osmedeus update --vuln; osmedeus update --force --clean'`); fmt.Println()
+    subprocess.Popen(`osmedeus version --json; osmedeus update; osmedeus update --vuln; osmedeus update --force --clean`); fmt.Println()
 }
 
 func Osmedeus2(userTarget string) {
@@ -221,7 +221,7 @@ func Osmedeus4(userTarget string) {
     fmt.Printf(bcolors.BLUE + "╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing bulk scan on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`osmedeus scan -f vuln-and-dirb -T %s`, userTarget); fmt.Println()
+    subprocess.Popen(`osmedeus scan -f vuln-and-dirb -t %s`, userTarget); fmt.Println()
 }
 
 func Osmedeus5(userTarget string) {
@@ -254,7 +254,7 @@ func Osmedeus8() {
 
 func Osmedeus9() {
     fmt.Printf(bcolors.BLUE  + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Showing scanned osmedeus report list " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`osmedeus report list'`); fmt.Println()
+    subprocess.Popen(`osmedeus report list`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Pleas select a target to expand list" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&chosenTarget)
@@ -264,12 +264,12 @@ func Osmedeus9() {
 
 func Ufonet1() {
     fmt.Printf(bcolors.BLUE  + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Downloading list of bots from C.S " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --download-zombies'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --download-zombies`); fmt.Println()
 }
 
 func Ufonet2() {
     fmt.Printf(bcolors.BLUE  + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Testing If all bots are alive & ready to launch " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet -t botnet/zombies.txt'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet -t botnet/zombies.txt`); fmt.Println()
 }
 
 func Ufonet3(userTarget string) {
@@ -294,12 +294,12 @@ func Ufonet6(userTarget string) {
 
 func Ufonet7() {
     fmt.Printf(bcolors.BLUE  + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Launched ufonet UI on http://localhost:9999 " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --gui'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --gui`); fmt.Println()
 }
 
 func Ufonet8() {
     fmt.Printf(bcolors.BLUE  + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Started Grider ufonet --grider  " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC)
-    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --grider'`); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/ufonet/; python3 ufonet --grider`); fmt.Println()
 }
 
 func Ufonet9(userTarget string) {
