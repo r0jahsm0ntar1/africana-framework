@@ -32,8 +32,6 @@ replace webattackers => ./src/webattackers/
 
 replace subprocess => ./src/core/subprocess/
 
-module github.com/r0jahsm0ntar1/africana-framework
-
 require (
 	agreements v0.0.0-00010101000000-000000000000 // indirect
 	banners v0.0.0-00010101000000-000000000000 // indirect
