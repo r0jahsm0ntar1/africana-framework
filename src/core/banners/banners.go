@@ -7,7 +7,7 @@ import (
     "math/rand"
 )
 var (
-    version = "v2.0.7"
+    version = "v2.0.8"
 )
 
 type Banners struct{}

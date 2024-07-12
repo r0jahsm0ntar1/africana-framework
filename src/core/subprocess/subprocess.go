@@ -1,19 +1,22 @@
 package subprocess
 
 import (
-    "os"
     "fmt"
+    "os"
     "os/exec"
+    "os/signal"
     "runtime"
+    "syscall"
 )
 
 var (
-    shell   string
-    flag    string
+    shell string
+    flag  string
+    sh    *exec.Cmd // Store the exec.Cmd object globally
 )
 
-func Popen(one string) {
-
+func init() {
+    // Initialize shell and flag based on runtime OS
     switch runtime.GOOS {
     case "windows":
         shell = "cmd"
@@ -21,182 +24,44 @@ func Popen(one string) {
     default:
         shell = "bash"
         flag = "-c"
-    }
-
-    process := fmt.Sprintf(one)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
     }
 }
 
-func PopenTwo(one, two string) {
+// Popen starts a subprocess with the given command and waits for termination.
+func Popen(command string, args ...interface{}) {
+    // Format command with provided arguments
+    process := fmt.Sprintf(command, args...)
 
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two)
-    sh := exec.Command(shell, flag, process)
+    // Create exec.Command object
+    sh = exec.Command(shell, flag, process)
     sh.Stdin = os.Stdin
     sh.Stdout = os.Stdout
     sh.Stderr = os.Stderr
 
+    // Channel to capture interrupt signals
+    sigs := make(chan os.Signal, 1)
+    signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
+
+    // Start the command
     if err := sh.Start(); err != nil {
         fmt.Fprintln(os.Stderr, "Error starting process:", err)
         return
     }
 
+    // Goroutine to listen for interrupt signals and forward them to the subprocess
+    go func() {
+        for sig := range sigs {
+            if sh.Process != nil {
+                sh.Process.Signal(sig)
+            }
+        }
+    }()
+
+    // Wait for the command to finish
     if err := sh.Wait(); err != nil {
         fmt.Fprintln(os.Stderr, "Process finished with error:", err)
     }
-}
 
-func PopenThree(one, two, three string) {
-
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two, three)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
-    }
-}
-
-func PopenFour(one, two, three, four string) {
-
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two, three, four)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
-    }
-}
-
-func PopenFive(one, two, three, four, five string) {
-
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two, three, four, five)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
-    }
-}
-
-func PopenSix(one, two, three, four, five, six string) {
-
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two, three, four, five, six)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
-    }
-}
-
-func PopenSeven(one, two, three, four, five, six, seven string) {
-
-    switch runtime.GOOS {
-    case "windows":
-        shell = "cmd"
-        flag = "/c"
-    default:
-        shell = "bash"
-        flag = "-c"
-    }
-
-    process := fmt.Sprintf(one, two, three, four, five, six, seven)
-    sh := exec.Command(shell, flag, process)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
-
-    if err := sh.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
-        return
-    }
-
-    if err := sh.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
-    }
+    signal.Stop(sigs) // Stop capturing interrupt signals
+    close(sigs)
 }

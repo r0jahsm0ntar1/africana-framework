@@ -340,8 +340,7 @@ func torStatus(Timer float64) {
         Timer++
         if Timer > 2 {
             fmt.Println(bcolors.RED + "\nUnable to get network details, " + bcolors.ORANGE + "Check Internet Connections & " + bcolors.CYAN + "retry....\n" + bcolors.ENDC)
-            fmt.Println(bcolors.RED + "Error:" + bcolors.DARKCYAN, err, bcolors.ENDC)
-            fmt.Println()
+            fmt.Println(bcolors.RED + "Error:" + bcolors.DARKCYAN, err, bcolors.ENDC); fmt.Println()
             return
         }
         fmt.Println(bcolors.GREEN + "\nHaving trouble fetching exit-node details,     " + bcolors.CYAN + "retrying...." + bcolors.ENDC)
@@ -578,8 +577,7 @@ var torrString = []string{
 
 
 func AnonsurfSetups() {
-    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfSetups.Log.%s.txt", time.Now().Format("20060102.150405"))
-    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server' -O %s`, Logs); fmt.Println()
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()
 }
 
 func AnonsurfStart() {
@@ -591,8 +589,7 @@ func AnonsurfExitnode() {
 }
 
 func AnonsurfStatus() {
-    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfStatus.Log.%s.txt", time.Now().Format("20060102.150405"))
-    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service' -O %s`, Logs); fmt.Println()
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()
 }
 
 func AnonsurfIpaddr() {
@@ -608,8 +605,7 @@ func AnonsurfReload() {
 }
 
 func AnonsurfChains() {
-    Logs := fmt.Sprintf("/root/.africana/logs/AnonsurfChains.Log.%s.txt", time.Now().Format("20060102.150405"))
-    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.PopenTwo(`script -q -c 'tail -vf /var/log/privoxy/logfile' -O %s`, Logs); fmt.Println()
+    banners.AnonSurfBanner(); scriptures.Verse(); fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()
 }
 
 func AnonsurfStop() {
