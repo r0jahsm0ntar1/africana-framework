@@ -26,7 +26,7 @@ func KaliSetups() {
     } else {
         for {
             fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
@@ -55,7 +55,7 @@ func UbuntuSetups() {
     } else {
         for {
             fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
@@ -84,7 +84,7 @@ func ArchaLSetups() {
     } else {
         for {
             fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
@@ -109,7 +109,7 @@ func WindowsSetup() {
 func RemoveSetups() {
     for {
         fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Are you sure you want to " + bcolors.RED + "UNINSTALL! " + bcolors.YELLOW + "africana? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {

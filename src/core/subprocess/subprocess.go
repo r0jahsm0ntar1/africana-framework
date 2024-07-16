@@ -1,12 +1,12 @@
 package subprocess
 
 import (
-    "fmt"
     "os"
-    "os/exec"
-    "os/signal"
+    "fmt"
     "runtime"
     "syscall"
+    "os/exec"
+    "os/signal"
 )
 
 var (

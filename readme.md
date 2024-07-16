@@ -124,7 +124,6 @@ sudo python3 installer.py
 ```bash
 sudo africana
 ```
-
 ![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
 ## About the Author

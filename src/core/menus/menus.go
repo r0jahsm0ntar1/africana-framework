@@ -117,6 +117,13 @@ func MenuThreeTwo() {
 
 func MenuThreeThree() {
     fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. Ettercap...........................................🐹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................................🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
+}
+
+func MenuThreeFour() {
+    fmt.Println(); scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js to early selected target........🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js to All Connected devices........🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)

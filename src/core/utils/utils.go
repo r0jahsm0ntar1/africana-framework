@@ -5,6 +5,9 @@ import (
     "net"
     "fmt"
     "time"
+    "bytes"
+    "os/exec"
+    "regexp"
     "syscall"
     "bcolors"
     "strings"
@@ -56,6 +59,41 @@ func GetDefaultIP() (string, error) {
         }
     }
     return "", fmt.Errorf(bcolors.BLUE + "[+] " + bcolors.GREEN + "no active network interface found\n" + bcolors.ENDC)
+}
+
+func GetDefaultGatewayIP() (string, error) {
+    var cmd *exec.Cmd
+    if runtime.GOOS == "windows" {
+        cmd = exec.Command("cmd", "/C", "route", "print", "0.0.0.0")
+    } else {
+        cmd = exec.Command("sh", "-c", "ip route | grep default")
+    }
+
+    var out bytes.Buffer
+    cmd.Stdout = &out
+    err := cmd.Run()
+    if err != nil {
+        return "", err
+    }
+
+    output := out.String()
+
+    var gatewayIP string
+
+    if runtime.GOOS == "windows" {
+        re := regexp.MustCompile(`\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`)
+        matches := re.FindStringSubmatch(output)
+        if len(matches) > 0 {
+            gatewayIP = matches[0]
+        }
+    } else {
+        fields := strings.Fields(output)
+        if len(fields) >= 3 {
+            gatewayIP = fields[2]
+        }
+    }
+
+    return gatewayIP, nil
 }
 
 func generateSelfSignedCert(certPath, keyPath string) {
