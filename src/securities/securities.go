@@ -112,9 +112,7 @@ func configSquid() {
         subprocess.Popen(`cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana`)
         filesToReplacements := map[string]map[string]string{
             "/etc/squid/squid.conf": {
-                "# no artificial limit on the number of concurrent spare attempts": "# no artificial limit on the number of concurrent spare attempts\n\ncache_peer 127.0.0.1 parent 8118 7 no-query no-digest",
-                "http_port 3128": "http_port 3129",
-                "# shutdown_lifetime 30 seconds": "shutdown_lifetime 0 seconds",
+                "http_port 3128": "http_port 3129\nnever_direct allow all\nshutdown_lifetime 0 seconds\ncache_peer localhost parent 8118 7 no-digest no-query",
             },
         }
         utils.Editors(filesToReplacements)

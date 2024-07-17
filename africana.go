@@ -321,7 +321,7 @@ func passwordsCrackers() {
         case "1":
             utils.ClearScreen(); banners.Banner(); menus.MenuSixOne()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "OnLineCrackers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -360,7 +360,7 @@ func passwordsCrackers() {
         case "2":
             utils.ClearScreen(); banners.Banner(); menus.MenuSixTwo()
             for {
-                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "OffLineCrackers" + bcolors.BLUE + ")\n" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
@@ -376,7 +376,7 @@ func passwordsCrackers() {
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
-                    menus.MenuSixOne()
+                    menus.MenuSixTwo()
                 case "00", "h", "H", "help", "Help", "HELP":
                     menus.HelpMenuSixTwo()
                 default:
