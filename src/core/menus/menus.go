@@ -117,8 +117,8 @@ func MenuThreeTwo() {
 
 func MenuThreeThree() {
     fmt.Println(); scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Ettercap...........................................🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................................🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Bettercap..........................................🐹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Ettercap...........................................🐼] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
 }
 
@@ -145,6 +145,151 @@ func HelpMenuThree() {
 }
 
 func MenuFour() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. Androids........................." + bcolors.DARKCYAN + "all Android R.A.Ts" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Iphones.........................." + bcolors.DARKCYAN + "Iphones Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. Windows.........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. MackOS'.........................." + bcolors.DARKCYAN + "MackOS' Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. LinuxOS.........................." + bcolors.DARKCYAN + "LinuxOS Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. Websites........................." + bcolors.DARKCYAN + "Website Rev Shells" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Univasals........................" + bcolors.DARKCYAN + "Generate for All D" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones................" + bcolors.DARKCYAN + "Launch Some Best C2s" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourOne() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. Teardroid......................." + bcolors.DARKCYAN + "Android 4 to 13 Rat" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. AndroidRAT......................" + bcolors.DARKCYAN + "Android 4 to 09 Rat" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourTwo() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourThree() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourFour() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourFive() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+
+func MenuFourSix() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourSeven() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourEight() {
+    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
+    scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourNine() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)

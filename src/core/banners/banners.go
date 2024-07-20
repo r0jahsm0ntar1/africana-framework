@@ -52,6 +52,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
             \(\          %sfor our sins.%s
                            %sJohn 3:16%s
 
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.PURPLE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -69,6 +70,8 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors
                     %sfollow the white Pigeon.%s
                      %sknock, knock, knock,%s
                           %sMan Of God.%s
+
+
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcolors.GREEN, bcolors.PURPLE, bcolors.ENDC)
@@ -88,6 +91,8 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcol
                              %sfor our sins.%s
                                %sJohn 3:16%s
 
+
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -106,6 +111,8 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
           |__________||      %sfor our sins.%s
            '----------'        %sJohn 3:16%s
 
+
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -118,11 +125,13 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
   - -----==;;;'==--------------------==';;;==----- -
                \/  ~"~"~"~"~"~\~"~)~"/
                (_ (   \  (     >    \)
-                 \_( _ <         >_>'     %s%s%s%s%s
-                    ~ '-i' ::>|--"    %sJesus Christ is%s
-                        I;|.|.|   %sThe Lamb that was slain%s
-                       <|i::|i|'.      %sfor our sins.%s
-                      (' ^'"'-' ")       %sJohn 3:16%s
+                 \_( _ <         >_>'
+                    ~ '-i' ::>|--"
+                        I;|.|.|             %s%s%s%s%s
+                       <|i::|i|'.      %sJesus Christ is%s
+                      (' ^'"'-' ")  %sThe Lamb that was slain%s
+                                         %sfor our sins.%s
+                                          %sJohn 3:16%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
@@ -169,50 +178,27 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
     }
 }
 
-func anonymas() {
-     banner := `
-                    .;1tfLCL1,
-                   .,,..;i;f0G;
-                         ,:,tCC.  ...
-                         ;i:fCL,1LLtf1i;,
-                       .,::tCL1LC1::;, .,,
-                       ;1:tCL,tLt,1:
-                      ,::tLf, 1Lf;::.
-                    .ii:tLt.  .1Lf;i1.
-                    ,:;tf1      1ft;::
-                 .1;:tf1  ,i1t1,  ift;;1,
-                ,i:t;f. ,LLffLL:  tft;i:
-                .;:;fff  .LCLLLf, 1ffi:;.
-                :fi;Lff1.  ,;;:  ifffi;f;
-                 .:::tCLLfi:,,:ifLfLt::;.
-                  ,11:1CCCCCLLLLLLf1;1t:
-                  .it;:;1fLLLLfft1;:;ti.
-                     ,:;::;;;;;;;;;;,
-                       .,::::::::,.`
-    fmt.Printf("%s%s%s\n", bcolors.DARKGREEN, banner, bcolors.ENDC)
-}
-
 func Graphicx() {
     rand.Seed(time.Now().UnixNano())
     menu := rand.Intn(2) + 1
 
     switch menu {
     case 1:
-        anonymas()
+        Banner()
         fmt.Printf(`%s
-                                                    _____
-  _____    ____   ____   ____   ________ __________/ ____\
-  \__  \  /    \ /  _ \ /    \ /  ___/  |  \_  __ \   __\
-   / __ \|   |  (  <_> )   |  \\___ \|  |  /|  | \/|  |
-  (____  /___|  /\____/|___|  /____  >____/ |__|   |__|
-       \/     \/            \/     \/               %s%s%s%s
+    ██      ▄   ████▄    ▄      ▄▄▄▄▄   ▄   █▄▄▄▄ ▄████
+    █ █      █  █   █     █    █     ▀▄  █  █  ▄▀ █▀   ▀
+    █▄▄█ ██   █ █   █ ██   █ ▄  ▀▀▀▀▄ █   █ █▀▀▌  █▀▀
+    █  █ █ █  █ ▀████ █ █  █  ▀▄▄▄▄▀  █   █ █  █  █
+       █ █  █ █       █  █ █          █▄ ▄█   █    █
+      █  █   ██       █   ██           ▀▀▀   ▀      ▀
+     ▀                                              %s%s%s%s
 
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
 
     case 2:
-        anonymas()
+        Banner()
         fmt.Printf(`%s
-
     ██      ▄   ████▄    ▄      ▄▄▄▄▄   ▄   █▄▄▄▄ ▄████
     █ █      █  █   █     █    █     ▀▄  █  █  ▄▀ █▀   ▀
     █▄▄█ ██   █ █   █ ██   █ ▄  ▀▀▀▀▄ █   █ █▀▀▌  █▀▀

@@ -10,7 +10,12 @@ import (
     "subprocess"
 )
 
-var userInput, userIface, userSsid string
+var (
+    userInput   string
+    userIface   string
+    userSsid    string
+    reader = bufio.NewReader(os.Stdin)
+)
 
 func AirGeddon() {
     subprocess.Popen(`airgeddon`); fmt.Println()
@@ -28,7 +33,6 @@ func WifiteAuto() {
     fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
     if userIface == "" {
@@ -41,7 +45,6 @@ func BettercapAuto() {
     fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
     if userIface == "" {
@@ -54,7 +57,6 @@ func WifiPumpkin3Auto() {
     fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userIface, _ := reader.ReadString('\n')
     userIface = strings.TrimSpace(userIface)
     if userIface == "" {

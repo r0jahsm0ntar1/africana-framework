@@ -19,6 +19,7 @@ var(
     userMalware string
     userScript  string
     userOutput  string
+    reader = bufio.NewReader(os.Stdin)
 )
 
 func Havoc() {
@@ -36,13 +37,12 @@ func MeterPeter() {
 func TearDroid() {
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "africana.apk" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userMalware, _ := reader.ReadString('\n')
     userMalware = strings.TrimSpace(userMalware)
     if userMalware == "" {
         userMalware = "africana.apk"
     }
-    subprocess.Popen(`cd /root/.africana/africana-base/Teardroid-phprat/; python3 Teardroid.py -b %s`, userMalware); fmt.Println()
+    subprocess.Popen(`cd /root/.africana/africana-base/teardroid/; python3 Teardroid.py -b %s`, userMalware); fmt.Println()
 }
 
 func Chameleon() {
@@ -51,7 +51,6 @@ func Chameleon() {
     fmt.Scan(&userScript)
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
     if userOutput == "" {
@@ -66,7 +65,6 @@ func Gh0x0st() {
     fmt.Scan(&userScript)
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
     if userOutput == "" {
@@ -78,7 +76,6 @@ func Gh0x0st() {
 func BlackJack() {
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.PURPLE + "Go back" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userInput, _ := reader.ReadString('\n')
     userInput = strings.TrimSpace(userInput)
     if userInput == "" {
@@ -90,7 +87,6 @@ func BlackJack() {
     case "1":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
         if userLport == "" {
@@ -100,7 +96,6 @@ func BlackJack() {
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        reader := bufio.NewReader(os.Stdin)
         userLport, _ := reader.ReadString('\n')
         userLport = strings.TrimSpace(userLport)
         if userLport == "" {
@@ -128,7 +123,6 @@ func PowerJoker() {
     fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userLhost, _ := reader.ReadString('\n')
     userLhost = strings.TrimSpace(userLhost)
     if userLhost == "" {
@@ -157,7 +151,6 @@ func AndroRat() {
     fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userLhost, _ := reader.ReadString('\n')
     userLhost = strings.TrimSpace(userLhost)
     if userLhost == "" {

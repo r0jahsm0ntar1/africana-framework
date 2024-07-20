@@ -10,10 +10,11 @@ import (
 )
 
 var (
- userInput    string
- userPort     string
- userTarget   string
- chosenTarget string
+    userInput    string
+    userPort     string
+    userTarget   string
+    chosenTarget string
+    reader = bufio.NewReader(os.Stdin)
 )
 
 func WafW00f(userTarget string) {
@@ -182,7 +183,7 @@ func Jok3r5(userTarget string) {
 }
 
 func Jok3r6(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing security checks on " + bcolors.RED + "🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
+    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing security checks on " + bcolors.RED + "\n🎯target: " + bcolors.YELLOW + "🐾%s " + bcolors.GREEN + "(◕‿◕✿)\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`cd /root/.africana/africana-base/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast`, userTarget); fmt.Println()
 }
 
@@ -242,7 +243,6 @@ func Osmedeus7(userTarget string) {
 func Osmedeus8() {
     fmt.Printf(bcolors.BLUE  + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Port: " + bcolors.DARKCYAN + "To start your server on🌍" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "3333" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    reader := bufio.NewReader(os.Stdin)
     userPort, _ := reader.ReadString('\n')
     userPort = strings.TrimSpace(userPort)
     if userPort == "" {

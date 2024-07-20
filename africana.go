@@ -28,8 +28,10 @@ import (
 var (
     userInput   string
     userTarget  string
-    userTargetx string
+    userXtarget string
+    userXdomain      string
     proxyURL    string
+    reader = bufio.NewReader(os.Stdin)
 )
 
 func africana() {
@@ -131,32 +133,32 @@ func anonsurfSetups() {
             africanaFramework()
             return
         case "1":
-            utils.ClearScreen           (           )
-            securities.AnonsurfSetups   (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfSetups   ()
         case "2":
-            utils.ClearScreen           (           )
-            securities.AnonsurfStart    (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfStart    ()
         case "3":
-            utils.ClearScreen           (           )
-            securities.AnonsurfExitnode (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfExitnode ()
         case "4":
-            utils.ClearScreen           (           )
-            securities.AnonsurfStatus   (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfStatus   ()
         case "5":
-            utils.ClearScreen           (           )
-            securities.AnonsurfIpaddr   (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfIpaddr   ()
         case "6":
-            utils.ClearScreen           (           )
-            securities.AnonsurfRIptabls (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfRIptabls ()
         case "7":
-            utils.ClearScreen           (           )
-            securities.AnonsurfReload   (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfReload   ()
         case "8":
-            utils.ClearScreen           (           )
-            securities.AnonsurfChains   (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfChains   ()
         case "9":
-            utils.ClearScreen           (           )
-            securities.AnonsurfStop     (           )
+            utils.ClearScreen           ()
+            securities.AnonsurfStop     ()
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -188,7 +190,7 @@ func internalAttackers() {
             africanaFramework()
             return
         case "1":
-            internaltargetInput         (           )
+            internaltargetInput         ()
             utils.ClearScreen()
             banners.Banner(); menus.MenuThree   (  )
         case "2":
@@ -207,7 +209,7 @@ func internalAttackers() {
             internalAttackers()
             return
         case "7":
-            internals.PacketsResponder  (           )
+            internals.PacketsResponder  ()
         case "8":
             internals.BeefInjector      (userTarget)
         case "9":
@@ -236,23 +238,347 @@ func malwareGenerators() {
             africanaFramework()
             return
         case "1":
-            butchers.BlackJack  (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourOne()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Androids" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    butchers.TearDroid  ()
+                case "2":
+                    butchers.AndroRat   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                     utils.UpsentTools  ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourOne()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "2":
-            butchers.Shellz     (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourTwo()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Iphones" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    utils.UpsentTools   ()
+                case "2":
+                    utils.UpsentTools   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourTwo()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "3":
-            butchers.PowerJoker (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourThree()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Windows" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    butchers.BlackJack  ()
+                case "2":
+                    butchers.Shellz     ()
+                case "3":
+                    butchers.PowerJoker ()
+                case "4":
+                    butchers.MeterPeter ()
+                case "5":
+                     butchers.Havoc     ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourThree()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "4":
-            butchers.MeterPeter (           )
-        case "5":
-             butchers.Havoc     (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourFour()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "MackOS" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    utils.UpsentTools   ()
+                case "2":
+                    utils.UpsentTools   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourFour()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
+        case "5": 
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourFive()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "LinuxOS" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    utils.UpsentTools   ()
+                case "2":
+                    utils.UpsentTools   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourFive()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "6":
-            butchers.TearDroid  (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourSix()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Websites" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    utils.UpsentTools   ()
+                case "2":
+                    utils.UpsentTools   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourSix()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "7":
-            butchers.AndroRat   (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourSeven()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Univasals" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    utils.UpsentTools   ()
+                case "2":
+                    utils.UpsentTools   ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourSeven()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "8":
-            butchers.Chameleon  (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourEight()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Obfsications" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    malwareGenerators()
+                    return
+                case "1":
+                    butchers.Gh0x0st    ()
+                case "2":
+                    butchers.Chameleon  ()
+                case "3":
+                    utils.UpsentTools   ()
+                case "4":
+                    utils.UpsentTools   ()
+                case "5":
+                    utils.UpsentTools   ()
+                case "6":
+                    utils.UpsentTools   ()
+                case "7":
+                    utils.UpsentTools   ()
+                case "8":
+                    utils.UpsentTools   ()
+                case "9":
+                    utils.UpsentTools   ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFourEight()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "9":
-            butchers.Gh0x0st    (           )
+            utils.ClearScreen(); banners.Banner(); menus.MenuFourNine()
+            for {
+                fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "ChosenOnes" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Scan(&userInput)
+                switch userInput {
+                case "0", "e", "E", "exit", "Exit", "EXIT":
+                    africanaFramework()
+                    return
+                case "1":
+                    butchers.BlackJack  ()
+                case "2":
+                    butchers.Shellz     ()
+                case "3":
+                    butchers.PowerJoker ()
+                case "4":
+                    butchers.MeterPeter ()
+                case "5":
+                     butchers.Havoc     ()
+                case "6":
+                    butchers.TearDroid  ()
+                case "7":
+                    butchers.AndroRat   ()
+                case "8":
+                    butchers.Chameleon  ()
+                case "9":
+                    butchers.Gh0x0st    ()
+                case "cls", "clear":
+                    utils.ClearScreen()
+                case "99", "m", "M", "menu", "Menu", "MENU":
+                    menus.MenuFour()
+                case "00", "h", "H", "help", "Help", "HELP":
+                    menus.HelpMenuFour()
+                default:
+                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                }
+            }
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -277,23 +603,23 @@ func wirelessAttackers() {
             africanaFramework()
             return
         case "1":
-            wireless.WifiteAuto         (           )
+            wireless.WifiteAuto         ()
         case "2":
-            wireless.BettercapAuto      (           )
+            wireless.BettercapAuto      ()
         case "3":
-            wireless.WifiPumpkin3Auto   (           )
+            wireless.WifiPumpkin3Auto   ()
         case "4":
-            wireless.AirGeddon          (           )
+            wireless.AirGeddon          ()
         case "5":
-            wireless.AirGeddon          (           )
+            wireless.AirGeddon          ()
         case "6":
-            wireless.AirGeddon          (           )
+            wireless.AirGeddon          ()
         case "7":
-            wireless.WifiPumpkin3       (           )
+            wireless.WifiPumpkin3       ()
         case "8":
-            wireless.AirGeddon          (           )
+            wireless.AirGeddon          ()
         case "9":
-            wireless.AirGeddon          (           )
+            wireless.AirGeddon          ()
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -329,23 +655,23 @@ func passwordsCrackers() {
                     passwordsCrackers()
                     return
                 case "1":
-                    crackers.HydraSsh   (           )
+                    crackers.HydraSsh   ()
                 case "2":
-                    crackers.HydraFtp   (           )
+                    crackers.HydraFtp   ()
                 case "3":
-                    crackers.HydraSmb   (           )
+                    crackers.HydraSmb   ()
                 case "4":
-                    crackers.HydraRdp   (           )
+                    crackers.HydraRdp   ()
                 case "5":
-                    crackers.HydraLdap  (           )
+                    crackers.HydraLdap  ()
                 case "6":
-                    crackers.HydraSmtp  (           )
+                    crackers.HydraSmtp  ()
                 case "7":
-                    crackers.HydraTelnet(           )
+                    crackers.HydraTelnet()
                 case "8":
-                    crackers.HydraHttps (           )
+                    crackers.HydraHttps ()
                 case "9":
-                    crackers.CyberBrute (           )
+                    crackers.CyberBrute ()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -365,14 +691,14 @@ func passwordsCrackers() {
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
-                    passwordsCrackers   (           )
+                    passwordsCrackers   ()
                     return
                 case "1":
-                    crackers.AirCrackng (           )
+                    crackers.AirCrackng ()
                 case "2":
-                    crackers.JohnCrackng(           )
+                    crackers.JohnCrackng()
                 case "8":
-                    crackers.HashBuster (           )
+                    crackers.HashBuster ()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -405,23 +731,23 @@ func credsPhishers() {
             africanaFramework()
             return
         case "1":
-            phishers.GoPhish    (           )
+            phishers.GoPhish    ()
         case "2":
-            phishers.GoodGinx   (           )
+            phishers.GoodGinx   ()
         case "3":
-            phishers.ZPhisher   (           )
+            phishers.ZPhisher   ()
         case "4":
-            phishers.SetoolKit  (           )
+            phishers.SetoolKit  ()
         case "5":
-            phishers.AnonPhisher(           )
+            phishers.AnonPhisher()
         case "6":
-            phishers.CyberPhish (           )
+            phishers.CyberPhish ()
         case "7":
-            utils.UpsentTools   (           )
+            utils.UpsentTools   ()
         case "8":
-            utils.UpsentTools   (           )
+            utils.UpsentTools   ()
         case "9":
-            utils.UpsentTools   (           )
+            utils.UpsentTools   ()
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -436,7 +762,6 @@ func credsPhishers() {
 
 //8. Website Attack Vectors................(Proxy, Conf)🎭
 func askForProxy() (*url.URL) {
-    reader := bufio.NewReader(os.Stdin)
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL🛰️ Eg:" + bcolors.YELLOW + "(http://localhost:80)\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     proxyStr, _ := reader.ReadString('\n')
@@ -472,10 +797,21 @@ func websiteUserTarget() {
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🎯" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
-    userTargetx = strings.TrimSpace (userTarget)
-    userTargetx = strings.TrimPrefix(userTargetx, "http://")
-    userTargetx = strings.TrimPrefix(userTargetx, "https://")
-    userTargetx = strings.TrimPrefix(userTargetx, "www.")
+
+    prefixes := []string{"http://", "https://", "www."}
+    userXtarget := userTarget
+    for _, prefix := range prefixes {
+        userXtarget = strings.TrimPrefix(userXtarget, prefix)
+    }
+
+    userXtarget = strings.TrimSpace(userXtarget)
+
+    if !strings.HasPrefix(userTarget, "http://") && !strings.HasPrefix(userTarget, "https://") {
+        userXdomain = "http://" + userTarget
+    } else {
+        userXdomain = userTarget
+    }
+
     for {
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -509,10 +845,10 @@ func websitesAttackers() {
         case "0", "e", "E", "exit", "Exit", "EXIT":
             africanaFramework()
             return
-        //1. Start Passive Web recon & Subdomain Enumration.....🌍
+        //1. Start Passive Web recon & SubuserXdomain Enumration.....🌍
         case "1":
-            webattackers.WafW00f(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.Nuclei(userTargetx)
-        //2. Gather e-mails & subdomain namesfrom public sources🪰
+            webattackers.WafW00f(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.Nuclei(userXtarget)
+        //2. Gather e-mails & subuserXdomain namesfrom public sources🪰
         case "2":
             webattackers.TheHarvester (userTarget)
         //3. Start Bruteforcing Host's Root Files...............🦑
@@ -536,10 +872,10 @@ func websitesAttackers() {
                     webattackers.XsserAuto  (userTarget)
                     webattackers.KatanaAuto (userTarget)
                 case "3":
-                    webattackers.SqlmapMan  (           )
+                    webattackers.SqlmapMan  ()
                 case "4":
-                    webattackers.CommixMan  (           )
-                    webattackers.XsserMan   (           )
+                    webattackers.CommixMan  ()
+                    webattackers.XsserMan   ()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -578,7 +914,7 @@ func websitesAttackers() {
                 case "8":
                     webattackers.NetTacker8 (userTarget)
                 case "9":
-                    webattackers.NetTacker9(           )
+                    webattackers.NetTacker9()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -601,23 +937,23 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Jok3r1(           )
+                    webattackers.Jok3r1()
                 case "2":
-                    webattackers.Jok3r2(           )
+                    webattackers.Jok3r2()
                 case "3":
-                    webattackers.Jok3r3(           )
+                    webattackers.Jok3r3()
                 case "4":
-                    webattackers.Jok3r4(           )
+                    webattackers.Jok3r4()
                 case "5":
-                    webattackers.Jok3r5 (userTarget)
+                    webattackers.Jok3r5 (userXdomain)
                 case "6":
-                    webattackers.Jok3r6 (userTarget)
+                    webattackers.Jok3r6 (userXdomain)
                 case "7":
-                    webattackers.Jok3r7 (userTarget)
+                    webattackers.Jok3r7 (userXdomain)
                 case "8":
-                    webattackers.Jok3r8(           )
+                    webattackers.Jok3r8()
                 case "9":
-                    webattackers.Jok3r9(           )
+                    webattackers.Jok3r9()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -640,7 +976,7 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Osmedeus1(           )
+                    webattackers.Osmedeus1()
                 case "2":
                     webattackers.Osmedeus2 (userTarget)
                 case "3":
@@ -654,9 +990,9 @@ func websitesAttackers() {
                 case "7":
                     webattackers.Osmedeus7 (userTarget)
                 case "8":
-                    webattackers.Osmedeus8(           )
+                    webattackers.Osmedeus8()
                 case "9":
-                    webattackers.Osmedeus9(           )
+                    webattackers.Osmedeus9()
                  case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -679,9 +1015,9 @@ func websitesAttackers() {
                     websitesAttackers()
                     return
                 case "1":
-                    webattackers.Ufonet1(           )
+                    webattackers.Ufonet1()
                 case "2":
-                    webattackers.Ufonet2(           )
+                    webattackers.Ufonet2()
                 case "3":
                     webattackers.Ufonet3 (userTarget)
                 case "4":
@@ -691,9 +1027,9 @@ func websitesAttackers() {
                 case "6":
                     webattackers.Ufonet6 (userTarget)
                 case "7":
-                    webattackers.Ufonet7(           )
+                    webattackers.Ufonet7()
                 case "8":
-                    webattackers.Ufonet8(           )
+                    webattackers.Ufonet8()
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "9":
@@ -708,7 +1044,7 @@ func websitesAttackers() {
             }
         //9. Launch Heavy Automation Attacks On The Host........🤖
         case "9":
-            webattackers.WafW00f(userTargetx); webattackers.WhatWeb(userTargetx); webattackers.DnsRecon(userTargetx); webattackers.Nuclei(userTargetx); webattackers.SeekOlver (userTarget); webattackers.Gobuster (userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider (userTarget); webattackers.SqlmapAuto (userTarget); webattackers.CommixAuto (userTarget); webattackers.KatanaAuto (userTarget); webattackers.XsserAuto (userTarget); webattackers.Nikto (userTarget); webattackers.Uniscan (userTarget)
+            webattackers.WafW00f(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.Nuclei(userXtarget); webattackers.SeekOlver (userTarget); webattackers.Gobuster (userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider (userTarget); webattackers.SqlmapAuto (userTarget); webattackers.CommixAuto (userTarget); webattackers.KatanaAuto (userTarget); webattackers.XsserAuto (userTarget); webattackers.Nikto (userTarget); webattackers.Uniscan (userTarget)
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -768,43 +1104,43 @@ func africanaFramework() {
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
-            utils.ClearScreen   (           )
-            banners.Banner      (           )
-            scriptures.Verse    (           )
+            utils.ClearScreen   ()
+            banners.Banner      ()
+            scriptures.Verse    ()
             return
         case "1":
-            systemSetups        (           )
+            systemSetups        ()
             return
         case "2":
-            anonsurfSetups      (           )
+            anonsurfSetups      ()
             return
         case "3":
-            internaltargetInput (           )
-            internalAttackers   (           )
+            internaltargetInput ()
+            internalAttackers   ()
             return
         case "4":
-            malwareGenerators   (           )
+            malwareGenerators   ()
             return
         case "5":
-            wirelessAttackers    (           )
+            wirelessAttackers    ()
             return
         case "6":
-            passwordsCrackers   (           )
+            passwordsCrackers   ()
             return
         case "7":
-            credsPhishers       (           )
+            credsPhishers       ()
             return
         case "8":
-            websiteUserTarget   (           )
-            websitesAttackers   (           )
+            websiteUserTarget   ()
+            websitesAttackers   ()
             return
         case "9":
-            creditsGivers       (           )
+            creditsGivers       ()
             return
         case "cls", "clear":
             utils.ClearScreen()
         case "99":
-            scriptureNarators   (           )
+            scriptureNarators   ()
         case       "m", "M", "menu", "Menu", "MENU":
             menus.MenuZero()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -818,59 +1154,59 @@ func africanaFramework() {
 //...........................................(Main runner..)
 func genesis() {
     if len(os.Args) < 2 {
-        banners.Banner      (           )
-        menus.HelpMenuMain  (           )
+        banners.Banner      ()
+        menus.HelpMenuMain  ()
         return
     }
     command := os.Args[1]
     switch command {
     case "-v",           "--version":
-        banners.Banner      (           )
+        banners.Banner      ()
         return
     case "-u",            "--update":
-        systemSetups        (           )
+        systemSetups        ()
         return
     case "-0", "-a",        "--auto":
-        africanaFramework   (           )
+        africanaFramework   ()
         return
     case "-1", "-i",     "--install":
-        systemSetups        (           )
+        systemSetups        ()
         return
     case "-2", "-t",    "--anonsurf":
-        anonsurfSetups      (           )
+        anonsurfSetups      ()
         return
     case "-3", "-n",    "--networks":
-        internaltargetInput (           )
-        internalAttackers   (           )
+        internaltargetInput ()
+        internalAttackers   ()
         return
     case "-4", "-m",    "--malwares":
-        malwareGenerators   (           )
+        malwareGenerators   ()
         return
     case "-5", "-w",    "--wireless":
-        wirelessAttackers   (           )
+        wirelessAttackers   ()
         return
     case "-6", "-p",    "--crackers":
-        passwordsCrackers   (           )
+        passwordsCrackers   ()
         return
     case "-7", "-f",    "--phishers":
-        credsPhishers       (           )
+        credsPhishers       ()
         return
     case "-8", "-s",    "--websites":
-        websiteUserTarget   (           )
-        websitesAttackers   (           )
+        websiteUserTarget   ()
+        websitesAttackers   ()
         return
     case "-9", "-c",     "--credits":
-        creditsGivers       (           )
+        creditsGivers       ()
         return
     case "-99", "-b", "--scriptures":
-        scriptureNarators   (           )
+        scriptureNarators   ()
         return
     case "-00", "-h",       "--help":
-        banners.Banner      (           )
-        menus.HelpMenuMain  (           )
+        banners.Banner      ()
+        menus.HelpMenuMain  ()
     default:
-        banners.Banner      (           )
-        menus.HelpMenuMain  (           )
+        banners.Banner      ()
+        menus.HelpMenuMain  ()
     }
 }
 
