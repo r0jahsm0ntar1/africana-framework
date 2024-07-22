@@ -6,15 +6,19 @@ import (
 )
 
 func GoPhish() {
-    subprocess.Popen(`gophish'`); fmt.Println()
+    subprocess.Popen(`gophish`); fmt.Println()
 }
 
 func GoodGinx() {
-    subprocess.Popen(`evilginx2'`); fmt.Println()
+    subprocess.Popen(`evilginx2`); fmt.Println()
 }
 
 func ZPhisher() {
     subprocess.Popen(`cd /root/.africana/africana-base/zphisher; bash zphisher.sh`); fmt.Println()
+}
+
+func Darkphish() {
+    subprocess.Popen(`cd /root/.africana/africana-base/darkphish; python3 dark-phish.py`); fmt.Println()
 }
 
 func SetoolKit() {

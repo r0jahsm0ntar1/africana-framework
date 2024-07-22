@@ -609,17 +609,17 @@ func wirelessAttackers() {
         case "3":
             wireless.WifiPumpkin3Auto   ()
         case "4":
-            wireless.AirGeddon          ()
+            utils.UpsentTools           ()
         case "5":
-            wireless.AirGeddon          ()
+            utils.UpsentTools           ()
         case "6":
-            wireless.AirGeddon          ()
+            wireless.FluxionMan         ()
         case "7":
-            wireless.WifiPumpkin3       ()
+            wireless.AirGeddon          ()
         case "8":
-            wireless.AirGeddon          ()
+            wireless.WifiPumpkin3       ()
         case "9":
-            wireless.AirGeddon          ()
+            utils.UpsentTools           ()
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -737,13 +737,13 @@ func credsPhishers() {
         case "3":
             phishers.ZPhisher   ()
         case "4":
-            phishers.SetoolKit  ()
+            phishers.Darkphish  ()
         case "5":
             phishers.AnonPhisher()
         case "6":
             phishers.CyberPhish ()
         case "7":
-            utils.UpsentTools   ()
+            phishers.SetoolKit  ()
         case "8":
             utils.UpsentTools   ()
         case "9":

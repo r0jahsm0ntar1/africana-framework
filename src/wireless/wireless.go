@@ -75,3 +75,7 @@ func WifiPumpkin3Auto() {
     }
     subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, userIface, userSsid); fmt.Println()
 }
+
+func FluxionMan() {
+    subprocess.Popen(`cd /root/.africana/africana-base/fluxion/; bash fluxion.sh`); fmt.Println()
+}
