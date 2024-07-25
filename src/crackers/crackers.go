@@ -46,7 +46,7 @@ func HydraSsh() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SSHcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraSsh_outfile.txt -u ssh://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraSsh_outfile.txt -u ssh://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SSHcracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -64,10 +64,9 @@ func HydraSsh() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SSHcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraSsh_outfile.txt -u ssh://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraSsh_outfile.txt -u ssh://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
-
 }
 
 func HydraFtp() {
@@ -94,7 +93,7 @@ func HydraFtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraFtp_outfile.txt -u ftp://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraFtp_outfile.txt -u ftp://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "FTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -112,10 +111,9 @@ func HydraFtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraFtp_outfile.txt -u ftp://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraFtp_outfile.txt -u ftp://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
-
 }
 
 func HydraSmb() {
@@ -142,7 +140,7 @@ func HydraSmb() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMBcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraSmb_outfile.txt -u smb://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraSmb_outfile.txt -u smb://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SMBCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -160,10 +158,9 @@ func HydraSmb() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMBCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraSmb_outfile.txt -u smb://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraSmb_outfile.txt -u smb://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
-
 }
 
 func HydraRdp() {
@@ -190,7 +187,7 @@ func HydraRdp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "RDPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraRdp_outfile.txt -u rdp://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraRdp_outfile.txt -u rdp://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "RDPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -208,7 +205,7 @@ func HydraRdp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "RDPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraRdp_outfile.txt -u rdp://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraRdp_outfile.txt -u rdp://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }
@@ -237,7 +234,7 @@ func HydraLdap() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "LDAPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraLdap_outfile.txt -u ldap://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraLdap_outfile.txt -u ldap://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "LDAPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -255,7 +252,7 @@ func HydraLdap() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "LDAPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraLdap_outfile.txt -u ldap://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraLdap_outfile.txt -u ldap://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }
@@ -284,7 +281,7 @@ func HydraSmtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraSmtp_outfile.txt -u smtp://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraSmtp_outfile.txt -u smtp://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SMTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -302,7 +299,7 @@ func HydraSmtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraSmtp_outfile.txt -u smtp://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraSmtp_outfile.txt -u smtp://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }
@@ -331,7 +328,7 @@ func HydraSnmtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SNMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraSnmtp_outfile.txt -u snmtp://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraSnmtp_outfile.txt -u snmtp://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SNMTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -349,7 +346,7 @@ func HydraSnmtp() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SNMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraSnmtp_outfile.txt -u snmtp://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraSnmtp_outfile.txt -u snmtp://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }
@@ -378,7 +375,7 @@ func HydraTelnet() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraTelnet_outfile.txt -u telnet://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraTelnet_outfile.txt -u telnet://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "TELNETCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -396,7 +393,7 @@ func HydraTelnet() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "TELNETCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraTelnet_outfile.txt -u telnet://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraTelnet_outfile.txt -u telnet://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }
@@ -425,7 +422,7 @@ func HydraHttps() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/output/HydraHttps_outfile.txt -u https://%s`, userName, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.africana/outputs/HydraHttps_outfile.txt -u https://%s`, userName, userWordPass, userTarget); fmt.Println()
         return
     case "2":
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "HTTPSCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "User Names to Crack " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
@@ -443,7 +440,7 @@ func HydraHttps() {
             userWordPass = "/usr/share/wordlists/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "HTTPSCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userTarget)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/output/HydraHttps_outfile.txt -u http://%s`, userNames, userWordPass, userTarget); fmt.Println()
+        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.africana/outputs/HydraHttps_outfile.txt -u http://%s`, userNames, userWordPass, userTarget); fmt.Println()
         return
     }
 }

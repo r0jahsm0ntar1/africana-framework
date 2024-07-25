@@ -9,7 +9,7 @@ import (
 func MenuZero() {
     fmt.Println(bcolors.BLUE + "        ~>( 🦊" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Install or update africana-framework...." + bcolors.DARKCYAN + "Start here " + bcolors.BLUE + "🩺] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here " + bcolors.BLUE + "🔧] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration..........." + bcolors.DARKCYAN + "Setup tor &" + bcolors.BLUE + "🎭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors............" + bcolors.DARKCYAN + "Mitm, sniff" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors........." + bcolors.DARKCYAN + "C2 & shells" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
@@ -34,16 +34,21 @@ func HelpMenuZero() {
     fmt.Println(bcolors.YELLOW + "           Credits, Tricks and About " + bcolors.ENDC + ": 9. Know about the africana developer & Check on other third party tools' developers & their github names before redeveloped." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                                Exit " + bcolors.ENDC + ": 0. Exit africana-framework." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                          True Light " + bcolors.ENDC + ": 99. Get guidence Veteran. If lost or broken see what the map will reveal to you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                                Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                                Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 func MenuOne() {
     fmt.Println(bcolors.BLUE + "        ~>( 🩺" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[ 1. Kali-Linux............................." + bcolors.DARKCYAN + "It is Stable" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 2. Ubuntu-Linux.......................................🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 3. Arch-Linux/ Black-Arch-Linux/ Manjaro-Linux........🐙] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 4. Windows(7, 8, 10, 11, 12)..........................🦟] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 5. Uninstall-Africana.................................🐞] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 1. Kali-Linux..........." + bcolors.DARKCYAN + "Debian family. They are Stable" + bcolors.BLUE + "🦎] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 2. Ubuntu-Linux....." + bcolors.DARKCYAN + "Will use Docker to avoid breakages" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 3. Arch-Linux.........." + bcolors.DARKCYAN + "Black-Arch-Linux, Manjaro-Linux" + bcolors.BLUE + "🗻] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 4. Windows.........................." + bcolors.DARKCYAN + "(7, 8, 10, 11, 12)" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 5. Android Tmux..........." + bcolors.DARKCYAN + "Kali-Linux Will Be Installed" + bcolors.BLUE + "📱] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 6. View Logs....." + bcolors.DARKCYAN + "Play Logs On shell Using scriptreplay" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 7. Browse your logs......" + bcolors.DARKCYAN + "Open your all logs on brwoser" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 8. Clear all your logs....." + bcolors.DARKCYAN + "Delete all your stored logs" + bcolors.BLUE + "🧹] " + bcolors.ENDC)
+    println(bcolors.BLUE + "[ 9. Uninstall Africana......." + bcolors.DARKCYAN + "Caution Irevasable action!" + bcolors.BLUE + "🥴] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -56,7 +61,8 @@ func HelpMenuOne() {
     fmt.Println(bcolors.YELLOW + "              UnInstall " + bcolors.ENDC + ": 5. Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me rojahsmontari@gmail.com" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuTwo() {
@@ -83,7 +89,8 @@ func HelpMenuTwo() {
     fmt.Println(bcolors.YELLOW + "             Check Chains Traffic" + bcolors.ENDC + ": Display Logs from system through Squid > Privoxy Tor to Web." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                            Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                            Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "             Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuThree() {
@@ -96,8 +103,8 @@ func MenuThree() {
     fmt.Println(bcolors.BLUE + "[ 5. Exploit S.M.B on target............................🐼] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Sniff Internal Packets.............................🐽] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Lunch Responder with IPv6 Support..................🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For (M.I.B)..............🥩] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing (XSS Injection)..🍇] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For..............." + bcolors.DARKCYAN + "(M.I.B)" + bcolors.BLUE + "🥩] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing..." + bcolors.DARKCYAN + "(XSS Injection)" + bcolors.BLUE + "🍇] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -110,22 +117,22 @@ func MenuThreeOne() {
 
 func MenuThreeTwo() {
     fmt.Println(); scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s) traffick to early selected target🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s) traffick to all Connected devices🪰]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to early selected target" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to all Connected devices" + bcolors.BLUE + "🪰]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
     fmt.Println(); scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Bettercap..........................................🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Ettercap...........................................🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Ettercap............................" + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................." + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
 }
 
 func MenuThreeFour() {
     fmt.Println(); scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js to early selected target........🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js to All Connected devices........🦁] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 }
 
@@ -141,7 +148,8 @@ func HelpMenuThree() {
     fmt.Println(bcolors.YELLOW + "   Get Shell through XSS Injection " + bcolors.ENDC + ": 9. Working on this Option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                              Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                              Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "               Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuFour() {
@@ -149,7 +157,7 @@ func MenuFour() {
     scriptures.Verse(); fmt.Println()
     fmt.Println(bcolors.BLUE + "[ 1. Androids........................." + bcolors.DARKCYAN + "all Android R.A.Ts" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Iphones.........................." + bcolors.DARKCYAN + "Iphones Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Windows.........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. Windows.........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. MackOS'.........................." + bcolors.DARKCYAN + "MackOS' Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. LinuxOS.........................." + bcolors.DARKCYAN + "LinuxOS Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Websites........................." + bcolors.DARKCYAN + "Website Rev Shells" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
@@ -317,7 +325,8 @@ func HelpMenuFour() {
     fmt.Println(bcolors.YELLOW + "   Gh0x0st(Obfsication) " + bcolors.ENDC + ": 9. It is a gint powershell obfsication tool that beats almost all AVS. Try it out you will love it." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuFive() {
@@ -348,7 +357,8 @@ func HelpMenuFive() {
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuSix() {
@@ -365,7 +375,8 @@ func HelpMenuSix() {
     fmt.Println(bcolors.YELLOW + "                Offline " + bcolors.ENDC + ": 2. Attack .pcaps, hashes, captured ntlms or documents with passwords." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuSixOne() {
@@ -434,17 +445,24 @@ func HelpMenuSixTwo() {
 func MenuSeven() {
     fmt.Println(bcolors.BLUE + "      ~>( 🪝" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Gophish................................" + bcolors.DARKCYAN + "All Templets" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Good Ginx.............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Zphisher..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Darkphish.............................." + bcolors.DARKCYAN + "Recent Templ" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Anonphisher............................" + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Cyberphish.............." + bcolors.DARKCYAN + "Generates Phishing templets" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Setoolkit................." + bcolors.DARKCYAN + "Supports Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. GoPhish................................" + bcolors.DARKCYAN + "All Templets" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. GoodGinx..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. ZPhisher..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. DarkPhish.............................." + bcolors.DARKCYAN + "Recent Templ" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. AdvnPhish.............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. CyberPhish................." + bcolors.DARKCYAN + "Generates Phishing temps" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. SeToolkit.................." + bcolors.DARKCYAN + "Support Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Local Ninja Phish.........." + bcolors.DARKCYAN + "Using Ettercap & Betterc" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuSevenOne() {
+    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println(bcolors.BLUE + "[ 1. NijaPhish to Phish............" + bcolors.DARKCYAN + "Early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. NijaPhish to Phish............" + bcolors.DARKCYAN + "All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
 }
 
 func HelpMenuSeven() {
@@ -459,7 +477,8 @@ func HelpMenuSeven() {
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEight() {
@@ -485,12 +504,13 @@ func HelpMenuEight() {
     fmt.Println(bcolors.YELLOW + "  Start 💉SQL, XSS & SSRF " + bcolors.ENDC + ": 4. This is an injection phase. Chosen tools are configured to find injection vulns. The choice contain embeded submenu that supports both automation and manual injection tackticks." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode. (Intrusive phase)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Jok3r " + bcolors.ENDC + ": 6. Like Nettacker, Joker is a fullset framework. It is intergrated with a collection of several third party tools. The embeded menu in this option will guide you through." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Osmedeus 🔮 " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "               Osmedeus🔮 " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Ufonet 🦠DDOS " + bcolors.ENDC + ": 8. Danger!!! This tool kills websites completely. Use it at your own risk. The embeded menu on this choice will guide you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Heavy Automation Attacks " + bcolors.ENDC + ": 9. Chosen tools are selected in this option to run simulteniously giving you all desirable Outcomes. Other tools are added that are not in the above options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "     Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                     Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                     Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "      Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEightFour() {
@@ -511,7 +531,8 @@ func HelpMenuEightFour() {
     fmt.Println(bcolors.YELLOW + "       Xss injection(M) " + bcolors.ENDC + ": 4. (Manual) In this option you will be required to enter xss website injection required data manually." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEightFive() {
@@ -542,7 +563,8 @@ func HelpMenuEightFive() {
     fmt.Println(bcolors.YELLOW + "     View scanned report" + bcolors.ENDC + ": 9. Show all logs of scanned domains with findings." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEightSix() {
@@ -573,7 +595,8 @@ func HelpMenuEightSix() {
     fmt.Println(bcolors.YELLOW + "      Clean the database " + bcolors.ENDC + ": 9. Delete all results and logs for previous scanns in the databases." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEightSeven() {
@@ -604,7 +627,8 @@ func HelpMenuEightSeven() {
     fmt.Println(bcolors.YELLOW + "     View scanned report " + bcolors.ENDC + ": 9. Reports and all logs for the scanner will be displayed showing even the targets and their vulns." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
 }
 
 func MenuEightEight() {
@@ -674,7 +698,7 @@ func HelpMenuMain() {
     fmt.Println(bcolors.ENDC + "  -7,  -f, --phishers   This option will guide you on how to perform " + bcolors.ORANGE + "🪝Phishing" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        attacks " + bcolors.DARKCYAN + "effectively.                                      " + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "Websites" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -8,  -s, --websites   Launch " + bcolors.ORANGE + "🌍Web Penetration " + bcolors.ENDC + "engines with proxy support." + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -8,  -x, --websites   Launch " + bcolors.ORANGE + "🌍Web Penetration " + bcolors.ENDC + "engines with proxy support." + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        Supported proxies are. " + bcolors.ENDC + "(" + bcolors.DARKCYAN + "SOCK4, SOCKS5, HTTP " + bcolors.ENDC + "or " + bcolors.DARKCYAN + "HTTPS" + bcolors.ENDC + ")     " + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        (" + bcolors.ORANGE + "format: " + bcolors.DARKCYAN + "host:port" + bcolors.ENDC + ") " + bcolors.ORANGE + "e.g." + bcolors.ENDC + "(" + bcolors.PURPLE + "http://localhost:8080" + bcolors.ENDC + ")" + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "Credits" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
@@ -682,9 +706,12 @@ func HelpMenuMain() {
     fmt.Println(bcolors.ENDC + "                        those whose " + bcolors.DARKCYAN + "opensource" + bcolors.ENDC + " tools have been modified and used  " + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        to make " + bcolors.GREEN + "africana " + bcolors.PURPLE + "lethal." + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "Scriptures" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -99, -b, --scriptures Show " + bcolors.ORANGE + "Scripture's verses" + bcolors.ENDC + " in an uniform way as used in " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -99, -b, --scriptures Show " + bcolors.ORANGE + "Scripture's verses" + bcolors.ENDC + " in an uniform way as used in" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        each and every menu." + bcolors.PURPLE + "(✿◠‿◠)                                  " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + "https://youtube.com/@RojahsMontari\n" + bcolors.ENDC)
+    fmt.Println(bcolors.DARKCYAN + "Inatactive Shell" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "  -s, -sh --cmd --shell " + bcolors.ORANGE + "Launch " + bcolors.ENDC + "Intaractive shell In " + bcolors.GREEN + "africana " + bcolors.ORANGE + "e.g " + bcolors.PURPLE + "'cmd.exe''bash'" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        ex. "  + bcolors.GREEN + "africana " + bcolors.PURPLE + "--shell " + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + bcolors.ITALIC + "https://youtube.com/@RojahsMontari\n" + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "[" + bcolors.ENDC + "!" + bcolors.DARKCYAN + "] " + bcolors.ENDC + "To see full list of options use " + bcolors.ORANGE + "--hh. " + bcolors.PURPLE + "🦠｡ ◕‿◕｡" + bcolors.ENDC)
 
 }

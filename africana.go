@@ -19,6 +19,7 @@ import (
     "phishers"
     "io/ioutil"
     "internals"
+    "subprocess"
     "agreements"
     "scriptures"
     "securities"
@@ -90,7 +91,7 @@ func systemSetups() {
     utils.ClearScreen(); banners.Banner(); menus.MenuOne()
     for {
         fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "╰─🔧" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0", "e", "E", "exit", "Exit", "EXIT":
@@ -105,12 +106,15 @@ func systemSetups() {
         case "3":
             break
         case "4":
-            utils.ClearScreen(); banners.Banner(); setups.WindowsSetup(); africanaFramework()
+            //utils.ClearScreen(); banners.Banner(); setups.WindowsSetup();
+            utils.UpsentTools(); africanaFramework()
             return
         case "5":
-            utils.ClearScreen(); banners.Banner(); setups.RemoveSetups()
+            utils.ClearScreen(); banners.Banner(); setups.Uninstall()
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuOne()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -161,6 +165,8 @@ func anonsurfSetups() {
             securities.AnonsurfStop     ()
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuTwo()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -174,7 +180,7 @@ func anonsurfSetups() {
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
     utils.ClearScreen(); banners.Banner(); internals.InternalScan()
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ORANGE + "Select your " + bcolors.RED + "target!!🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ENDC + bcolors.ITALIC + "Select your " + bcolors.RED + "Target!🎯" + bcolors.BLUE + ")\n" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userTarget)
 }
@@ -216,6 +222,8 @@ func internalAttackers() {
             internals.RpcEnumScan        (userTarget)
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThree()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -572,7 +580,7 @@ func malwareGenerators() {
                 case "cls", "clear":
                     utils.ClearScreen()
                 case "99", "m", "M", "menu", "Menu", "MENU":
-                    menus.MenuFour()
+                    menus.MenuFourNine()
                 case "00", "h", "H", "help", "Help", "HELP":
                     menus.HelpMenuFour()
                 default:
@@ -581,6 +589,8 @@ func malwareGenerators() {
             }
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuFour()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -622,6 +632,8 @@ func wirelessAttackers() {
             utils.UpsentTools           ()
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuFive()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -739,7 +751,7 @@ func credsPhishers() {
         case "4":
             phishers.Darkphish  ()
         case "5":
-            phishers.AnonPhisher()
+            phishers.AdvPhisher ()
         case "6":
             phishers.CyberPhish ()
         case "7":
@@ -747,9 +759,12 @@ func credsPhishers() {
         case "8":
             utils.UpsentTools   ()
         case "9":
-            utils.UpsentTools   ()
+            internaltargetInput()
+            phishers.NinjaPhish (userTarget)
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuSeven()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -799,7 +814,7 @@ func websiteUserTarget() {
     fmt.Scan(&userTarget)
 
     prefixes := []string{"http://", "https://", "www."}
-    userXtarget := userTarget
+    userXtarget = userTarget
     for _, prefix := range prefixes {
         userXtarget = strings.TrimPrefix(userXtarget, prefix)
     }
@@ -847,7 +862,7 @@ func websitesAttackers() {
             return
         //1. Start Passive Web recon & SubuserXdomain Enumration.....🌍
         case "1":
-            webattackers.WafW00f(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.Nuclei(userXtarget)
+            webattackers.WhatWeb(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.WafW00f(userXtarget); webattackers.Ashock1(userTarget); webattackers.Sublist3r(userTarget); webattackers.Nuclei(userXtarget)
         //2. Gather e-mails & subuserXdomain namesfrom public sources🪰
         case "2":
             webattackers.TheHarvester (userTarget)
@@ -1044,9 +1059,11 @@ func websitesAttackers() {
             }
         //9. Launch Heavy Automation Attacks On The Host........🤖
         case "9":
-            webattackers.WafW00f(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.Nuclei(userXtarget); webattackers.SeekOlver (userTarget); webattackers.Gobuster (userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider (userTarget); webattackers.SqlmapAuto (userTarget); webattackers.CommixAuto (userTarget); webattackers.KatanaAuto (userTarget); webattackers.XsserAuto (userTarget); webattackers.Nikto (userTarget); webattackers.Uniscan (userTarget)
+            webattackers.WhatWeb(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.WafW00f(userXtarget); webattackers.Ashock1(userTarget); webattackers.Sublist3r(userTarget); webattackers.Nuclei(userXtarget); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider(userTarget); webattackers.SqlmapAuto(userTarget); webattackers.CommixAuto(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuEight()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -1067,6 +1084,8 @@ func creditsGivers() {
         switch userInput {
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "0", "e", "E", "exit", "Exit", "EXIT":
             africanaFramework()
             return
@@ -1086,6 +1105,8 @@ func scriptureNarators() {
         switch userInput {
         case "cls", "clear":
             utils.ClearScreen()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "0", "e", "E", "exit", "Exit", "EXIT":
             africanaFramework()
             return
@@ -1139,6 +1160,8 @@ func africanaFramework() {
             return
         case "cls", "clear":
             utils.ClearScreen()
+        case  "sh", "shell", "bash", "cmd", "pwsh":
+            fmt.Println(); subprocess.InteractiveShell(); fmt.Println()
         case "99":
             scriptureNarators   ()
         case       "m", "M", "menu", "Menu", "MENU":
@@ -1191,7 +1214,7 @@ func genesis() {
     case "-7", "-f",    "--phishers":
         credsPhishers       ()
         return
-    case "-8", "-s",    "--websites":
+    case "-8", "-x",    "--websites":
         websiteUserTarget   ()
         websitesAttackers   ()
         return
@@ -1204,6 +1227,10 @@ func genesis() {
     case "-00", "-h",       "--help":
         banners.Banner      ()
         menus.HelpMenuMain  ()
+    case "-s", "-sh", "--cmd", "--shell":
+        subprocess.InteractiveShell()
+        africanaFramework          ()
+        return
     default:
         banners.Banner      ()
         menus.HelpMenuMain  ()

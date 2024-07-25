@@ -15,7 +15,7 @@ import (
     "math/big"
     "os/signal"
     "io/ioutil"
-    "subprocess"
+    //"subprocess"
     "crypto/rand"
     "crypto/x509"
     "crypto/ecdsa"
@@ -23,6 +23,8 @@ import (
     "crypto/elliptic"
     "crypto/x509/pkix"
 )
+
+var cmd *exec.Cmd
 
 func GetDefaultIP() (string, error) {
     interfaces, err := net.Interfaces()
@@ -194,12 +196,22 @@ func Handler() {
 }
 
 func ClearScreen() {
-    if runtime.GOOS == "linux" {
-        subprocess.Popen("clear")
-    } else if runtime.GOOS == "windows" {
-        subprocess.Popen("cls")
-    } else {
-        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Unsupported operating system.\n" + bcolors.ENDC)
+
+    switch runtime.GOOS {
+    case "linux", "darwin": // "darwin" is the runtime.GOOS value for macOS
+        cmd = exec.Command("clear")
+    case "windows":
+        cmd = exec.Command("cmd", "/c", "cls")
+    default:
+        fmt.Println("[+] Unsupported operating system.")
+        return
+    }
+
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
+
+    if err := cmd.Run(); err != nil {
+        fmt.Printf("[+] Error clearing screen: %v\n", err)
     }
 }
 
@@ -213,11 +225,21 @@ func Certs() {
     }
 }
 
+
 func WordLists() {
     if runtime.GOOS == "linux" {
         filePath := "/usr/share/wordlists/rockyou.txt"
+        gzFilePath := filePath + ".gz"
+
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
-            subprocess.Popen(`gunzip /usr/share/wordlists/rockyou.txt.gz`)
+            if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
+                return
+            }
+            cmd := exec.Command("gunzip", gzFilePath)
+            err := cmd.Run()
+            if err != nil {
+                return
+            }
         }
     }
 }
@@ -228,7 +250,7 @@ func Foundations() {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
-    fileOuts := "/root/.africana/output"
+    fileOuts := "/root/.africana/outputs"
     if err := os.MkdirAll(fileOuts, os.ModePerm); err != nil {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
