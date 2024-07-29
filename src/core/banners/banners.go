@@ -177,7 +177,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
      ,'   '-_ \/ '-.'--.\    _\_.-'\__.-'-.'-._'.
     (_.o> ,--. '._/'--.-',--'  \_.-'       \'-._ \
      '---'    '._ '---._/__,----'           '-. '-\
-               /_, ,  _..-'        %s%s%s%s%s    '-._\
+               /_, ,  _..-'        %s%s%s%s%s      '-._\
                \_, \/ ._(      %sJesus Christ is%s
                 \_, \/ ._\ %sThe Lamb that was slain%s
                  '._,\/ ._\     %sfor our sins.%s

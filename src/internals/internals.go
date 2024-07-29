@@ -44,9 +44,24 @@ func SmbVulnScan(userTarget string) {
     subprocess.Popen(`nmap -Pn -v --script "smb-vuln*" -p139,445 %s`, userTarget); fmt.Println()
 }
 
+func Enum4linux(userTarget string) {
+    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`cd /root/.africana/africana-base/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, userTarget); fmt.Println()
+}
+
+func EnumNxc(userTarget string) {
+    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-users --rid-brute --sessions --users --shares --pass-pol`, userTarget); fmt.Println()
+}
+
 func SmbMapScan(userTarget string) {
     fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`smbmap -q -H %s -u null -p null -r --depth 5`, userTarget); fmt.Println()
+    subprocess.Popen(`smbmap --no-banner -H %s -u null -p null -r --depth 5`, userTarget); fmt.Println()
+}
+
+func SmbCrackmapExec(userTarget string) {
+    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`crackmapexec smb %s --pass-pol -u '' -p '' --shares --local-auth --content --depth 5`, userTarget); fmt.Println()
 }
 
 func RpcEnumScan(userTarget string) {

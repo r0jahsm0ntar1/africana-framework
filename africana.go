@@ -104,10 +104,10 @@ func systemSetups() {
             utils.ClearScreen(); banners.Banner(); setups.UbuntuSetups(); africanaFramework()
             return
         case "3":
+            utils.ClearScreen(); banners.Banner(); setups.ArchSetups(); africanaFramework()
             break
         case "4":
-            //utils.ClearScreen(); banners.Banner(); setups.WindowsSetup();
-            utils.UpsentTools(); africanaFramework()
+            utils.ClearScreen(); banners.Banner(); setups.WindowsSetups(); utils.UpsentTools(); africanaFramework()
             return
         case "5":
             utils.ClearScreen(); banners.Banner(); setups.Uninstall()
@@ -198,14 +198,17 @@ func internalAttackers() {
         case "1":
             internaltargetInput         ()
             utils.ClearScreen()
-            banners.Banner(); menus.MenuThree   (  )
+            banners.Banner(); menus.MenuThree()
         case "2":
             internals.NmapPortScan       (userTarget)
         case "3":
             internals.NmapVulnScan       (userTarget)
         case "4":
             internals.SmbVulnScan        (userTarget)
+            internals.Enum4linux         (userTarget)
+            internals.EnumNxc            (userTarget)
             internals.SmbMapScan         (userTarget)
+            internals.SmbCrackmapExec    (userTarget)
             internals.RpcEnumScan        (userTarget)
         case "5":
             internals.SmbVulnScan        (userTarget)
@@ -749,17 +752,17 @@ func credsPhishers() {
         case "3":
             phishers.ZPhisher   ()
         case "4":
-            phishers.Darkphish  ()
+            phishers.Blackeye   ()
         case "5":
             phishers.AdvPhisher ()
         case "6":
-            phishers.CyberPhish ()
+            phishers.Darkphish  ()
         case "7":
-            phishers.SetoolKit  ()
+            phishers.CyberPhish ()
         case "8":
-            utils.UpsentTools   ()
+            phishers.SetoolKit  ()
         case "9":
-            internaltargetInput()
+            internaltargetInput ()
             phishers.NinjaPhish (userTarget)
         case "cls", "clear":
             utils.ClearScreen()

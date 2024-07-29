@@ -25,11 +25,7 @@ func installFoundationTools(commands []string) {
 func installGithubTools() {
     githubCommands := []string{
         `cd /root/.africana/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1`,
-        `cd ./africana-base; git clone https://github.com/ScRiPt1337/Teardroid-phprat`,
-        `cd ./Teardroid-phprat; pip3 install -r requirements.txt`,
-        `wget https://github.com/ScRiPt1337/Teardroidv4_api/archive/refs/heads/main.zip; unzip main.zip; rm -rf main.zip`,
-        `cd ..; git clone https://github.com/devanshbatham/paramspider; cd paramspider; pip3 install .`,
-        `cd ..; pip3 install --upgrade setuptools`,
+        `pip3 install --upgrade setuptools`,
         `pip3 install -r /root/.africana/africana-base/requirements.txt`,
         `go install github.com/j3ssie/osmedeus@latest`,
         `go install github.com/hahwul/dalfox/v2@latest`,
@@ -78,7 +74,7 @@ func KaliSetups() {
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -103,7 +99,7 @@ func UbuntuSetups() {
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -119,13 +115,31 @@ func ArchSetups() {
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)" + bcolors.ENDC)
         foundationCommands := []string{
-            `pacman -Syyu --noconfirm`,
-            `pacman -S --noconfirm curl wget`,
-            `mkdir -p /etc/pacman.d/gnupg`,
-            `curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > /etc/pacman.d/gnupg/playit.gpg`,
-            `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/pacman.d/mirrorlist`,
-            `pacman -S --noconfirm --needed base-devel`,
-            `pacman -S --noconfirm tor squid privoxy iptables tmux openssh client libpcap npm openssh-server ftp ncat rlwrap powershell go docker python python-pip`,
+            `pacman -Syu --noconfirm`,
+            `pacman -S --noconfirm zsh git curl wget go`,
+            `pacman -S --noconfirm tor squid privoxy iptables tmux npm openssh ftp ncat rlwrap docker python3 python3-pip base-devel`,
+            `pip install setuptools virtualenv`,
+        }
+        installFoundationTools(foundationCommands)
+        BlackArchSetups()
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
+        installGithubTools()
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Africana Fully Installed. " + bcolors.YELLOW + "Safe Hacking!" + bcolors.ENDC)
+    } else {
+        promptForUpdate()
+    }
+}
+
+func BlackArchSetups() {
+    filePath := "/root/.africana/africana-base/"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)" + bcolors.ENDC)
+        foundationCommands := []string{
+            `curl -O https://blackarch.org/strap.sh`,
+            `chmod +x strap.sh`,
+            `./strap.sh`,
+            `pacman -Syu --noconfirm`,
+            `pacman -S --noconfirm blackarch`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -167,4 +181,3 @@ func Uninstall() {
         fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.RED + "Africana is not installed. " + bcolors.ENDC)
     }
 }
-
