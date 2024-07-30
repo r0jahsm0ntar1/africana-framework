@@ -40,9 +40,9 @@ func installGithubTools() {
 
 func promptForUpdate() {
     for {
-        fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "y", "Y", "yes", "Yes", "YES":
@@ -117,8 +117,6 @@ func ArchSetups() {
         foundationCommands := []string{
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm zsh git curl wget go`,
-            `pacman -S --noconfirm tor squid privoxy iptables tmux npm openssh ftp ncat rlwrap docker python3 python3-pip base-devel`,
-            `pip install setuptools virtualenv`,
         }
         installFoundationTools(foundationCommands)
         BlackArchSetups()
@@ -140,6 +138,7 @@ func BlackArchSetups() {
             `./strap.sh`,
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm blackarch`,
+            `pacman -S --noconfirm base-devel tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser powershell-empire util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -158,13 +157,13 @@ func Uninstall() {
     filePath := "/root/.africana/africana-base/"
     if _, err := os.Stat(filePath); !os.IsNotExist(err) {
         for {
-            fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Are you sure you want to uninstall Africana? " + bcolors.RED + "(y/n)\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Uninstaller" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println(bcolors.ENDC + "(҂`_´) " + bcolors.DARKCYAN + "🧬Are you sure you want to uninstall Africana? " + bcolors.RED + "(y/n)" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Uninstaller" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userInput)
             switch userInput {
             case "y", "Y", "yes", "Yes", "YES":
-                subprocess.Popen(`rm -rf /root/.africana/`)
+                subprocess.Popen(`rm -rf /root/.africana/; rm -rf /usr/local/bin/africana`)
                 fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Africana successfully uninstalled. " + bcolors.YELLOW + "Goodbye!" + bcolors.ENDC)
                 return
             case "n", "N", "no", "No", "NO":

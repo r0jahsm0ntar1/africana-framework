@@ -149,16 +149,14 @@ func Developer() {
     }
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + bcolors.BLINK + `
         🛰️ The devil has no power over you soldier` + bcolors.ENDC)
-    fmt.Printf(bcolors.RED + bcolors.ITALIC + `
+    fmt.Printf(bcolors.GREEN + bcolors.ITALIC + `
 (What is there 4 U 2 gain the whole world & loose your....)
 (soul? Be smart your Creator has good plans for you.......)
 (Life Tip.: Defeat the devil by fasting & praying.........)
 (Email....: rojahsmontari@gmail.com.......................)
 (YouTube..: https://youtube.com/@RojahsMontari............)` + bcolors.ENDC)
     fmt.Printf(bcolors.ORANGE + `
-(John 3:16)+----------------------------------------------+
-| Rojahs Montari Machine Pentesters For Exploration       |
-+---------------------------------------------------------+
+
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
     |    |    |    |    |    |    |    |    |
@@ -170,8 +168,7 @@ func Developer() {
     |    |    |    + ------------------------- 6. Cracking]
     |    |    + ------------------------------ 7. Phishing]
     |    +------------------------------------ 8. Website.]
-    +----------------------------------------- 9. Credits.]
-` + bcolors.ENDC)
+    +----------------------------------------- 9. Credits.]` + bcolors.ENDC)
     fmt.Printf(bcolors.DARKGREEN + `
          __                 _____ _____     _     _
       __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
@@ -179,7 +176,6 @@ func Developer() {
      |_____|___|___|___|___|_____|__|__|_| |_|___|_|` + bcolors.ENDC)
     fmt.Printf(bcolors.ENDC + bcolors.BLINK + `
                          ¯\_(ツ)_/¯
-
 ` + bcolors.ENDC)
 
 }

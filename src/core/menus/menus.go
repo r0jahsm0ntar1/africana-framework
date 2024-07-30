@@ -8,8 +8,8 @@ import (
 
 func MenuZero() {
     fmt.Println(bcolors.BLUE + "        ~>( 🦊" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here " + bcolors.BLUE + "🔧] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here " + bcolors.BLUE + "🔧] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration..........." + bcolors.DARKCYAN + "Setup tor &" + bcolors.BLUE + "🎭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors............" + bcolors.DARKCYAN + "Mitm, sniff" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors........." + bcolors.DARKCYAN + "C2 & shells" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
@@ -19,7 +19,7 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors.................." + bcolors.DARKCYAN + "Osmedeus, j" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Credits, and About the author..........." + bcolors.DARKCYAN + "About, auth" + bcolors.BLUE + "📚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework................." + bcolors.DARKCYAN + "" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + "" + bcolors.BLUE + "💻] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuZero() {
@@ -35,12 +35,12 @@ func HelpMenuZero() {
     fmt.Println(bcolors.YELLOW + "                                Exit " + bcolors.ENDC + ": 0. Exit africana-framework." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                          True Light " + bcolors.ENDC + ": 99. Get guidence Veteran. If lost or broken see what the map will reveal to you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                                Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 func MenuOne() {
     fmt.Println(bcolors.BLUE + "        ~>( 🩺" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    println(bcolors.BLUE + "[ 1. Kali-Linux..........." + bcolors.DARKCYAN + "Debian family. They are Stable" + bcolors.BLUE + "🦎] " + bcolors.ENDC)
+    scriptures.Verse()
+    println(bcolors.BLUE + "\n[ 1. Kali-Linux..........." + bcolors.DARKCYAN + "Debian family. They are Stable" + bcolors.BLUE + "🦎] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 2. Ubuntu-Linux....." + bcolors.DARKCYAN + "Will use Docker to avoid breakages" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 3. Arch-Linux.........." + bcolors.DARKCYAN + "Black-Arch-Linux, Manjaro-Linux" + bcolors.BLUE + "🗻] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 4. Windows.........................." + bcolors.DARKCYAN + "(7, 8, 10, 11, 12)" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
@@ -50,7 +50,7 @@ func MenuOne() {
     println(bcolors.BLUE + "[ 8. Clear all your logs....." + bcolors.DARKCYAN + "Delete all your stored logs" + bcolors.BLUE + "🧹] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 9. Uninstall Africana......." + bcolors.DARKCYAN + "Caution Irevasable action!" + bcolors.BLUE + "🥴] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuOne() {
@@ -62,13 +62,13 @@ func HelpMenuOne() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuTwo() {
     fmt.Println(bcolors.BLUE + "        ~>( 🎭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "........................" + bcolors.DARKCYAN + "start here" + bcolors.BLUE + "] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "........................" + bcolors.DARKCYAN + "start here" + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Connect to a different exit-node...................🐞] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Check if all services are up and running...........🐼] " + bcolors.ENDC)
@@ -78,7 +78,7 @@ func MenuTwo() {
     fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.ITALIC + bcolors.ENDC + "local.🐌.squid.🐙.privoxy.🎭.tor.🧄.WEB.🌍" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Stop anonsurf & restore all iptables...............🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuTwo() {
@@ -90,13 +90,13 @@ func HelpMenuTwo() {
     fmt.Println(bcolors.YELLOW + "          Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                            Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "             Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuThree() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐹" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Discover Targets...................................🐹] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Discover Targets...................................🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Port discovery on the target.......................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Vuln' Scan the Target..............................🐶] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. S.M.B enumration on the target.....................🪳] " + bcolors.ENDC)
@@ -106,34 +106,38 @@ func MenuThree() {
     fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss & Bettercap For..............." + bcolors.DARKCYAN + "(M.I.B)" + bcolors.BLUE + "🥩] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing..." + bcolors.DARKCYAN + "(XSS Injection)" + bcolors.BLUE + "🍇] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuThreeOne() {
-    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println()
+    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Launch Eternalblue Exploit.........................🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] " + bcolors.ENDC)
 }
 
 func MenuThreeTwo() {
-    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println()
+    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to early selected target" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to all Connected devices" + bcolors.BLUE + "🪰]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
-    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println()
+    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Ettercap............................" + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐼] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................." + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] " + bcolors.ENDC)
 }
 
 func MenuThreeFour() {
-    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println()
+    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
 func HelpMenuThree() {
@@ -149,13 +153,13 @@ func HelpMenuThree() {
     fmt.Println(bcolors.YELLOW + "            Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                              Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "               Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "               Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuFour() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Androids........................." + bcolors.DARKCYAN + "all Android R.A.Ts" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Androids........................." + bcolors.DARKCYAN + "all Android R.A.Ts" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Iphones.........................." + bcolors.DARKCYAN + "Iphones Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Windows.........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. MackOS'.........................." + bcolors.DARKCYAN + "MackOS' Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
@@ -165,13 +169,13 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones................" + bcolors.DARKCYAN + "Launch Some Best C2s" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourOne() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Teardroid......................." + bcolors.DARKCYAN + "Android 4 to 13 Rat" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Teardroid......................." + bcolors.DARKCYAN + "Android 4 to 13 Rat" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. AndroidRAT......................" + bcolors.DARKCYAN + "Android 4 to 09 Rat" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -181,13 +185,13 @@ func MenuFourOne() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourTwo() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -197,13 +201,13 @@ func MenuFourTwo() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourThree() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -213,13 +217,13 @@ func MenuFourThree() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourFour() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -229,13 +233,13 @@ func MenuFourFour() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourFive() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -245,14 +249,14 @@ func MenuFourFive() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 
 func MenuFourSix() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -262,13 +266,13 @@ func MenuFourSix() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -278,13 +282,13 @@ func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourEight() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -294,13 +298,13 @@ func MenuFourEight() {
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourNine() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. ShellzGen........................" + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
@@ -310,7 +314,7 @@ func MenuFourNine() {
     fmt.Println(bcolors.BLUE + "[ 8. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuFour() {
@@ -326,13 +330,13 @@ func HelpMenuFour() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuFive() {
     fmt.Println(bcolors.BLUE + "        ~>( 🍍" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Wifite...................................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Wifite...................................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Bettercap................................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Wifipumpkin3....................." + bcolors.DARKCYAN + "Automated Phishing" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add...............................................] " + bcolors.ENDC)
@@ -342,7 +346,7 @@ func MenuFive() {
     fmt.Println(bcolors.BLUE + "[ 8. wifiPumpkin3................................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🫐] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuFive() {
@@ -358,16 +362,16 @@ func HelpMenuFive() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuSix() {
     fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Online........................." + bcolors.DARKCYAN + "Automated_Bruteforce" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Online........................." + bcolors.DARKCYAN + "Automated_Bruteforce" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Offline..................." + bcolors.DARKCYAN + "Automated/ maunal/ Hashes" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuSix() {
@@ -376,13 +380,13 @@ func HelpMenuSix() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuSixOne() {
     fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Bruteforce......................................" + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Bruteforce......................................" + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Bruteforce......................................" + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "🔑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Bruteforce......................................" + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Bruteforce......................................" + bcolors.DARKCYAN + "RDP" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
@@ -392,7 +396,7 @@ func MenuSixOne() {
     fmt.Println(bcolors.BLUE + "[ 8. Bruteforce..................................." + bcolors.DARKCYAN + "HTTP/S" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Bruteforce..................................." + bcolors.DARKCYAN + "All/SS" + bcolors.BLUE + "🩴] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuSixOne() {
@@ -407,13 +411,13 @@ func HelpMenuSixOne() {
     fmt.Println(bcolors.YELLOW + "           ALL SERVICES " + bcolors.ENDC + ": 9. The Automatic Bruteforce Tool for all opened services. Works nice and automatic." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
 func MenuSixTwo() {
     fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Aircrack_ng..............................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Aircrack_ng..............................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. John......................................" + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add...............................................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add...............................................] " + bcolors.ENDC)
@@ -423,7 +427,7 @@ func MenuSixTwo() {
     fmt.Println(bcolors.BLUE + "[ 8. Hash-Buster........................................🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 
@@ -439,13 +443,13 @@ func HelpMenuSixTwo() {
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 9. Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
 func MenuSeven() {
     fmt.Println(bcolors.BLUE + "      ~>( 🪝" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. GoPhish................................" + bcolors.DARKCYAN + "All Templets" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. GoPhish................................" + bcolors.DARKCYAN + "All Templets" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. GoodGinx..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. ZPhisher..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Blackeye..............................." + bcolors.DARKCYAN + "Supports OTP" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
@@ -455,14 +459,15 @@ func MenuSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. SeToolkit.................." + bcolors.DARKCYAN + "Support Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Local Ninja Phish.........." + bcolors.DARKCYAN + "Using Ettercap & Betterc" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuSevenOne() {
-    fmt.Println(); scriptures.Verse(); fmt.Println()
+    fmt.Println()
+    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. NijaPhish to Phish............" + bcolors.DARKCYAN + "Early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. NijaPhish to Phish............" + bcolors.DARKCYAN + "All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] \n" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
 func HelpMenuSeven() {
@@ -478,13 +483,13 @@ func HelpMenuSeven() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEight() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources🪰] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Start Bruteforcing Host's Root Files...............🦑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Start SQL, XSS & SSRF Detection & Eploitation......💉] " + bcolors.ENDC)
@@ -494,7 +499,7 @@ func MenuEight() {
     fmt.Println(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu.........🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Heavy Automation Attacks On The Host........🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEight() {
@@ -510,18 +515,18 @@ func HelpMenuEight() {
     fmt.Println(bcolors.YELLOW + "   Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "     Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                     Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "      Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEightFour() {
     fmt.Println(bcolors.BLUE + "      ~>( " + bcolors.ENDC + "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Sql injection with sqlmap................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Sql injection with sqlmap................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Xss injection with Dalfox, Xsser.........." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🪰] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Sql injection with Sqlmap...................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Xss injection with Xsser....................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐌] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧯] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEightFour() {
@@ -532,13 +537,13 @@ func HelpMenuEightFour() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Start insane information gathering on host.........🧄] " + bcolors.ENDC)
@@ -548,7 +553,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEightFive() {
@@ -564,13 +569,13 @@ func HelpMenuEightFive() {
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Install all jok3r tools....." + bcolors.DARKCYAN + "Pleas start here if not" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Install all jok3r tools....." + bcolors.DARKCYAN + "Pleas start here if not" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Show all the tools in the toolbox..................🍒] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Show supported products for all services...........🍵] " + bcolors.ENDC)
@@ -580,7 +585,7 @@ func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "[ 8. View the full results from the security checks.....🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Clean database & delete results....................🥑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEightSix() {
@@ -596,13 +601,13 @@ func HelpMenuEightSix() {
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Scan list of targets (Full path of target needed)..🥐] " + bcolors.ENDC)
@@ -612,7 +617,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "[ 8. Start web UI server................................🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scanned osmedeus report list..................🌈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEightSeven() {
@@ -628,13 +633,13 @@ func HelpMenuEightSeven() {
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here..\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse(); fmt.Println()
-    fmt.Println(bcolors.BLUE + "[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server........🍄]" + bcolors.ENDC)
+    scriptures.Verse()
+    fmt.Println(bcolors.BLUE + "\n[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server........🍄]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Test if bots are alive.............................📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch palantir....................." + bcolors.DARKCYAN + "Palantir 3.14.." + bcolors.BLUE + "🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Launch socking_waves................" + bcolors.DARKCYAN + "Knockout!......" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
@@ -644,7 +649,7 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 8. Start Grider........................" + bcolors.DARKCYAN + "Grider........." + bcolors.BLUE + "🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!.................." + bcolors.DARKCYAN + "Launch ALL!!..." + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🦨] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + `                      ¯\_(ツ)_/¯` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func HelpMenuEightEight() {
@@ -659,12 +664,12 @@ func HelpMenuEightEight() {
     fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk. (Attack With ALL!)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused.\n" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
 func HelpMenuMain() {
     scriptures.Verse()
-    fmt.Println(bcolors.ENDC + "\nGithub Page " + bcolors.GREEN + "          " + bcolors.DARKCYAN + "https://github.com/r0jahsm0ntar1/africana-framework\n" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "\nGithub Page " + bcolors.GREEN + "          " + bcolors.DARKCYAN + "https://github.com/r0jahsm0ntar1/africana-framework" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "Usages: " + bcolors.PURPLE + "   (◕‿◕✿)" + bcolors.ENDC + "       🦊africana (" + bcolors.DARKCYAN + "options" + bcolors.ENDC + ")" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        " + bcolors.ENDC + "To start " + bcolors.GREEN + "africana " + bcolors.ENDC + "in " + bcolors.DARKCYAN + "aoutomation" + bcolors.ENDC + " mode try;" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "           --auto       (" + bcolors.GREEN + "africana " + bcolors.PURPLE + "-a) " + bcolors.ENDC + "or " + bcolors.ENDC + "(" + bcolors.GREEN + "africana " + bcolors.PURPLE + "--auto" + bcolors.ENDC + ")" + bcolors.ENDC)
@@ -711,7 +716,7 @@ func HelpMenuMain() {
     fmt.Println(bcolors.DARKCYAN + "Inatactive Shell" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "  -s, -sh --cmd --shell " + bcolors.ORANGE + "Launch " + bcolors.ENDC + "Intaractive shell In " + bcolors.GREEN + "africana " + bcolors.ORANGE + "e.g " + bcolors.PURPLE + "'cmd.exe''bash'" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "                        ex. "  + bcolors.GREEN + "africana " + bcolors.PURPLE + "--shell " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + bcolors.ITALIC + "https://youtube.com/@RojahsMontari\n" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + bcolors.ITALIC + "https://youtube.com/@RojahsMontari" + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "[" + bcolors.ENDC + "!" + bcolors.DARKCYAN + "] " + bcolors.ENDC + "To see full list of options use " + bcolors.ORANGE + "--hh. " + bcolors.PURPLE + "🦠｡ ◕‿◕｡" + bcolors.ENDC)
 
 }

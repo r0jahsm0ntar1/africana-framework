@@ -159,6 +159,33 @@ func generateSelfSignedCert(certPath, keyPath string) {
     }
 }
 
+func Iface() {
+        interfaces, err := net.Interfaces()
+        if err != nil {
+                fmt.Println("Error getting interfaces:", err)
+                return
+        }
+
+        for _, iface := range interfaces {
+                fmt.Println("Interface Name:", iface.Name)
+                fmt.Println("  Hardware Address:", iface.HardwareAddr)
+                fmt.Println("  Flags:", iface.Flags)
+
+                addrs, err := iface.Addrs()
+                if err != nil {
+                        fmt.Println("  Error getting addresses:", err)
+                        continue
+                }
+
+                for _, addr := range addrs {
+                        fmt.Println("  Address:", addr.String())
+                }
+
+                fmt.Println()
+        }
+}
+
+
 func replaceStringsInFile(fileName string, replacements map[string]string) error {
     content, err := ioutil.ReadFile(fileName)
     if err != nil {
@@ -178,9 +205,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf(bcolors.RED + "\nError:" + bcolors.DARKCYAN + "Replacing " + bcolors.ENDC + "strings in file %s: %v" + bcolors.ENDC, fileName, err)
+            fmt.Printf(bcolors.RED + "Error: " + bcolors.DARKCYAN + "Configuring file: " + bcolors.ENDC + "%s %v" + bcolors.ENDC, fileName, err)
         } else {
-            fmt.Printf(bcolors.DARKCYAN + "\nSucces:" + bcolors.ENDC + "Replacing file: %s%s!\n" + bcolors.ENDC, bcolors.RED, fileName)
+            fmt.Printf(bcolors.DARKCYAN + "Succes: " + bcolors.ENDC + "Configuring file: %s%s!\n" + bcolors.ENDC, bcolors.RED, fileName)
         }
     }
 }
@@ -198,7 +225,7 @@ func Handler() {
 func ClearScreen() {
 
     switch runtime.GOOS {
-    case "linux", "darwin": // "darwin" is the runtime.GOOS value for macOS
+    case "linux", "darwin":
         cmd = exec.Command("clear")
     case "windows":
         cmd = exec.Command("cmd", "/c", "cls")
@@ -258,7 +285,7 @@ func Foundations() {
 }
 
 func UpsentTools() {
-    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯` + bcolors.RED + "Choice selected not yet implimented, " + bcolors.YELLOW + "comming soon!\n" + bcolors.ENDC)
+    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯ ` + bcolors.RED + "Choice selected not implimented, " + bcolors.YELLOW + "comming soon!" + bcolors.ENDC)
 }
 
 func InitiLize() {

