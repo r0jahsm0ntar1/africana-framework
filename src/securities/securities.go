@@ -44,7 +44,10 @@ WantedBy=multi-user.target
             return
         }
     }
-    configDhclient(); configDnsmasq(); configSquid(); configPrivoxy()
+    configDhclient()
+    configDnsmasq ()
+    configSquid   ()
+    configPrivoxy ()
 }
 
 func configDhclient() {

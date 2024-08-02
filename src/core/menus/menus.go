@@ -9,7 +9,7 @@ import (
 func MenuZero() {
     fmt.Println(bcolors.BLUE + "        ~>( 🦊" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here " + bcolors.BLUE + "🔧] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here!" + bcolors.BLUE + "🔧] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration..........." + bcolors.DARKCYAN + "Setup tor &" + bcolors.BLUE + "🎭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors............" + bcolors.DARKCYAN + "Mitm, sniff" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors........." + bcolors.DARKCYAN + "C2 & shells" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
@@ -167,7 +167,7 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 6. Websites........................." + bcolors.DARKCYAN + "Website Rev Shells" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Univasals........................" + bcolors.DARKCYAN + "Generate for All D" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones................" + bcolors.DARKCYAN + "Launch Some Best C2s" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones.................." + bcolors.DARKCYAN + "Launch The Best C2" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }

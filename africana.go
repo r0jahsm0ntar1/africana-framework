@@ -290,23 +290,23 @@ func malwareGenerators() {
                     malwareGenerators   ()
                     return
                 case "1":
-                    butchers.TearDroid  ()
+                    butchers.TearDroid()
                 case "2":
-                    butchers.AndroRat   ()
+                    butchers.AndroRat ()
                 case "3":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "4":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "5":
-                     utils.UpsentTools  ()
+                     utils.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "7":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "8":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "9":
-                    utils.UpsentTools()
+                    utils.UpsentTools ()
                 case "cls", "clear":
                     utils.ClearScreen   ()
                 case "99", "m", "M", "menu", "Menu", "MENU":
@@ -607,7 +607,7 @@ func malwareGenerators() {
                 fmt.Scan(&userInput)
                 switch userInput {
                 case "0", "e", "E", "exit", "Exit", "EXIT":
-                    africanaFramework  ()
+                    malwareGenerators  ()
                     return
                 case "1":
                     butchers.BlackJack ()

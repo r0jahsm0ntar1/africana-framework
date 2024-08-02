@@ -24,7 +24,10 @@ import (
     "crypto/x509/pkix"
 )
 
-var cmd *exec.Cmd
+var (
+    cmd *exec.Cmd
+    gatewayIP string
+)
 
 func GetDefaultIP() (string, error) {
     interfaces, err := net.Interfaces()
@@ -70,18 +73,13 @@ func GetDefaultGatewayIP() (string, error) {
     } else {
         cmd = exec.Command("sh", "-c", "ip route | grep default")
     }
-
     var out bytes.Buffer
     cmd.Stdout = &out
     err := cmd.Run()
     if err != nil {
         return "", err
     }
-
     output := out.String()
-
-    var gatewayIP string
-
     if runtime.GOOS == "windows" {
         re := regexp.MustCompile(`\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`)
         matches := re.FindStringSubmatch(output)
@@ -94,7 +92,6 @@ func GetDefaultGatewayIP() (string, error) {
             gatewayIP = fields[2]
         }
     }
-
     return gatewayIP, nil
 }
 
@@ -105,15 +102,12 @@ func generateSelfSignedCert(certPath, keyPath string) {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
-
     notBefore := time.Now()
     notAfter := notBefore.Add(365 * 24 * time.Hour)
-
     serialNumber, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
     if err != nil {
         panic(err)
     }
-
     template := x509.Certificate{
         SerialNumber: serialNumber,
         Subject: pkix.Name{
@@ -125,34 +119,29 @@ func generateSelfSignedCert(certPath, keyPath string) {
         ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
         BasicConstraintsValid: true,
     }
-
     certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
     if err != nil {
         panic(err)
     }
-
     keyFile, err := os.OpenFile(keyPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
     if err != nil {
         panic(err)
     }
-    defer keyFile.Close()
 
+    defer keyFile.Close()
     privBytes, err := x509.MarshalECPrivateKey(priv)
     if err != nil {
         panic(err)
     }
-
     err = pem.Encode(keyFile, &pem.Block{Type: "EC PRIVATE KEY", Bytes: privBytes})
     if err != nil {
         panic(err)
     }
-
     certFile, err := os.Create(certPath)
     if err != nil {
         panic(err)
     }
     defer certFile.Close()
-
     err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certDER})
     if err != nil {
         panic(err)
@@ -160,29 +149,25 @@ func generateSelfSignedCert(certPath, keyPath string) {
 }
 
 func Iface() {
-        interfaces, err := net.Interfaces()
+    interfaces, err := net.Interfaces()
+    if err != nil {
+        fmt.Println("Error getting interfaces:", err)
+        return
+    }
+    for _, iface := range interfaces {
+        fmt.Println("Interface Name:", iface.Name)
+        fmt.Println("Hardware Address:", iface.HardwareAddr)
+        fmt.Println("Flags:", iface.Flags)
+        addrs, err := iface.Addrs()
         if err != nil {
-                fmt.Println("Error getting interfaces:", err)
-                return
+                fmt.Println("Error getting addresses:", err)
+                continue
         }
-
-        for _, iface := range interfaces {
-                fmt.Println("Interface Name:", iface.Name)
-                fmt.Println("  Hardware Address:", iface.HardwareAddr)
-                fmt.Println("  Flags:", iface.Flags)
-
-                addrs, err := iface.Addrs()
-                if err != nil {
-                        fmt.Println("  Error getting addresses:", err)
-                        continue
-                }
-
-                for _, addr := range addrs {
-                        fmt.Println("  Address:", addr.String())
-                }
-
-                fmt.Println()
+        for _, addr := range addrs {
+                fmt.Println("Address:", addr.String())
         }
+        fmt.Println()
+    }
 }
 
 
@@ -191,13 +176,10 @@ func replaceStringsInFile(fileName string, replacements map[string]string) error
     if err != nil {
         return err
     }
-
     textContent := string(content)
-
     for old, new := range replacements {
         textContent = strings.Replace(textContent, old, new, -1)
     }
-
     return ioutil.WriteFile(fileName, []byte(textContent), 0644)
 }
 
@@ -277,7 +259,7 @@ func Foundations() {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
-    fileOuts := "/root/.africana/outputs"
+    fileOuts := "/root/.africana/output/"
     if err := os.MkdirAll(fileOuts, os.ModePerm); err != nil {
         fmt.Println(bcolors.BLUE + "[+] " + bcolors.GREEN + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
@@ -289,5 +271,7 @@ func UpsentTools() {
 }
 
 func InitiLize() {
-    Certs(); Foundations(); WordLists()
+    Certs()
+    Foundations()
+    WordLists()
 }
