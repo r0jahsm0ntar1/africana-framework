@@ -58,7 +58,8 @@ func userAgreements() {
     filePath := "/root/.africana/agreements/"
     content := "📜 User accepted the terms."
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        utils.ClearScreen(); agreements.Covenant()
+        utils.ClearScreen()
+        agreements.Covenant()
         for {
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "\n╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -530,7 +531,7 @@ func malwareGenerators() {
                     malwareGenerators()
                     return
                 case "1":
-                    utils.UpsentTools()
+                    butchers.NoiseMaker()
                 case "2":
                     utils.UpsentTools()
                 case "3":

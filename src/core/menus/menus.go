@@ -135,8 +135,8 @@ func MenuThreeThree() {
 func MenuThreeFour() {
     fmt.Println()
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js..........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
@@ -165,7 +165,7 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 4. MackOS'.........................." + bcolors.DARKCYAN + "MackOS' Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. LinuxOS.........................." + bcolors.DARKCYAN + "LinuxOS Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Websites........................." + bcolors.DARKCYAN + "Website Rev Shells" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Univasals........................" + bcolors.DARKCYAN + "Generate for All D" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Persisternts....................." + bcolors.DARKCYAN + "Generate Backdoors" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones.................." + bcolors.DARKCYAN + "Launch The Best C2" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
@@ -272,7 +272,7 @@ func MenuFourSix() {
 func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMaker.........................................🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)

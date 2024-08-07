@@ -69,8 +69,8 @@ func KaliSetups() {
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
-            `mkdir -p /etc/apt/trusted.gpg.d/`,
-            `cd /etc/apt/trusted.gpg.d/; curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
+            `mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/`,
+            `curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,

