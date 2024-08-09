@@ -101,7 +101,7 @@ func systemSetups() {
         fmt.Printf(bcolors.BLUE + "\n╰─🔧" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework   ()
             return
         case "1":
@@ -121,7 +121,7 @@ func systemSetups() {
             banners.Banner      ()
             setups.ArchSetups   ()
             africanaFramework   ()
-            break
+            return
         case "4":
             utils.ClearScreen   ()
             banners.Banner      ()
@@ -130,6 +130,16 @@ func systemSetups() {
             africanaFramework   ()
             return
         case "5":
+            utils.ClearScreen   ()
+            banners.Banner      ()
+            setups.Uninstall    ()
+        case "6":
+            utils.TermLogs      ()
+        case "7":
+            utils.BrowserLogs   ()
+        case "8":
+            utils.ClearLogs     ()
+        case "9":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.Uninstall    ()
@@ -142,7 +152,7 @@ func systemSetups() {
         case "00", "h", "H", "help", "Help", "HELP":
             menus.HelpMenuOne          ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00, 99" + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
     }
 }
@@ -157,7 +167,7 @@ func anonsurfSetups() {
         fmt.Printf(bcolors.BLUE + "\n╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework()
             return
         case "1":
@@ -219,7 +229,7 @@ func internalAttackers() {
         fmt.Printf(bcolors.BLUE + "\n╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework  ()
             return
         case "1":
@@ -275,7 +285,7 @@ func malwareGenerators() {
         fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework()
             return
         case "1":
@@ -287,7 +297,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -327,7 +337,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -367,7 +377,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -407,7 +417,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators()
                     return
                 case "1":
@@ -447,7 +457,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators()
                     return
                 case "1":
@@ -487,7 +497,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators()
                     return
                 case "1":
@@ -527,7 +537,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators()
                     return
                 case "1":
@@ -567,7 +577,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -607,7 +617,7 @@ func malwareGenerators() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -662,7 +672,7 @@ func wirelessAttackers() {
         fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework          ()
             return
         case "1":
@@ -707,7 +717,7 @@ func passwordsCrackers() {
         fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework()
             return
         //Online crackers
@@ -720,7 +730,7 @@ func passwordsCrackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -761,7 +771,7 @@ func passwordsCrackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -800,7 +810,7 @@ func credsPhishers() {
         fmt.Printf(bcolors.BLUE + "\n╰─🪝" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework   ()
             return
         case "1":
@@ -921,7 +931,7 @@ func websitesAttackers() {
         fmt.Printf(bcolors.BLUE + "\n╰─🪲" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework()
             return
         //1. Start Passive Web recon & SubuserXdomain Enumration.....🌍
@@ -941,7 +951,7 @@ func websitesAttackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     websitesAttackers()
                     return
                 case "1":
@@ -975,7 +985,7 @@ func websitesAttackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🦣" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     websitesAttackers      ()
                     return
                 case "1":
@@ -1016,7 +1026,7 @@ func websitesAttackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🃏" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     websitesAttackers  ()
                     return
                 case "1":
@@ -1057,7 +1067,7 @@ func websitesAttackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     websitesAttackers()
                     return
                 case "1":
@@ -1098,7 +1108,7 @@ func websitesAttackers() {
                 fmt.Printf(bcolors.BLUE + "\n╰─🦠" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 fmt.Scan(&userInput)
                 switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT":
+                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
                     websitesAttackers()
                     return
                 case "1":
@@ -1162,7 +1172,7 @@ func creditsGivers() {
             utils.ClearScreen()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework()
             return
         default:
@@ -1186,7 +1196,7 @@ func scriptureNarators() {
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             africanaFramework          ()
             return
         default:
@@ -1205,7 +1215,7 @@ func africanaFramework() {
         fmt.Printf(bcolors.BLUE + "\n╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         fmt.Scan(&userInput)
         switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT":
+        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
             utils.ClearScreen   ()
             banners.Banner      ()
             scriptures.Verse    ()

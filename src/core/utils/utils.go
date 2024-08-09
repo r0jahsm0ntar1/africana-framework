@@ -15,7 +15,7 @@ import (
     "math/big"
     "os/signal"
     "io/ioutil"
-    //"subprocess"
+    "subprocess"
     "crypto/rand"
     "crypto/x509"
     "crypto/ecdsa"
@@ -27,6 +27,7 @@ import (
 var (
     cmd *exec.Cmd
     gatewayIP string
+    userInput string
 )
 
 func GetDefaultIP() (string, error) {
@@ -205,7 +206,6 @@ func Handler() {
 }
 
 func ClearScreen() {
-
     switch runtime.GOOS {
     case "linux", "darwin":
         cmd = exec.Command("clear")
@@ -222,6 +222,37 @@ func ClearScreen() {
     if err := cmd.Run(); err != nil {
         fmt.Printf("[+] Error clearing screen: %v\n", err)
     }
+}
+
+func TermLogs() {
+    subprocess.Popen(`cat /root/.africana/logs/*.log`)
+    for {
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─✍🏼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Scan(&userInput)
+        switch userInput {
+        case "cls", "clear":
+            ClearScreen                ()
+        case "sh", "shell", "bash", "cmd", "pwsh":
+            subprocess.InteractiveShell()
+        case "0", "e", "E", "exit", "Exit", "EXIT":
+            return
+        default:
+            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
+        }
+    }
+}
+
+func BrowserLogs() {
+    subprocess.Popen(`cd /root/.africana/logs/; cat *.log | aha --black > index.html`)
+    subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null`)
+    subprocess.Popen(`php -S 0.0.0:80`)
+    return
+}
+
+func ClearLogs() {
+    subprocess.Popen(`rm -rf /root/.africana/logs/*.*; rm -rf /root/.africana/output/*.*`)
+    return
 }
 
 func Certs() {
