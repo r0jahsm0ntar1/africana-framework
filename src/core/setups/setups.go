@@ -47,8 +47,8 @@ func promptForUpdate() {
         switch userInput {
         case "y", "Y", "yes", "Yes", "YES":
             subprocess.Popen(`cd /root/.africana/africana-base; git pull .`)
-            subprocess.Popen(`git clone https://github.com/r0jahsm0ntar1/africana-framework`)
-            subprocess.Popen(`cd africana-framework; go build africana; mv africana /usr/local/bin; rm -rf ../africana-framework`)
+            subprocess.Popen(`git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1`)
+            subprocess.Popen(`cd africana-framework; go build -v -x ./africana.go; mv africana /usr/local/bin; rm -rf ../africana-framework`)
             fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Africana Fully Updated. " + bcolors.YELLOW + "Safe Hacking!" + bcolors.ENDC)
             return
         case "n", "N", "no", "No", "NO":

@@ -38,7 +38,7 @@ func NmapPortScan(userTarget string) {
 
 func NmapVulnScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing vuln scan: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nmap --open -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
+    subprocess.Popen(`nmap --open -v -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
     return
 }
 

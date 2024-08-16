@@ -272,7 +272,7 @@ func MenuFourSix() {
 func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMaker.........................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMaker.............." + bcolors.DARKCYAN + "Backdoor with Dll injection" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)

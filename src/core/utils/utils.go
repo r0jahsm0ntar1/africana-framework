@@ -149,7 +149,7 @@ func generateSelfSignedCert(certPath, keyPath string) {
     }
 }
 
-func Iface() {
+func Ifaces() {
     interfaces, err := net.Interfaces()
     if err != nil {
         fmt.Println("Error getting interfaces:", err)
@@ -251,7 +251,7 @@ func BrowserLogs() {
 }
 
 func ClearLogs() {
-    subprocess.Popen(`rm -rf /root/.africana/logs/*.*; rm -rf /root/.africana/output/*.*`)
+    subprocess.Popen(`ls /root/.africana/logs/; ls  /root/.africana/output/; rm -rf /root/.africana/logs/*.*; rm -rf /root/.africana/output/*.*`)
     return
 }
 

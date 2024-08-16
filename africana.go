@@ -541,7 +541,7 @@ func malwareGenerators() {
                     malwareGenerators()
                     return
                 case "1":
-                    butchers.NoiseMaker()
+                    butchers.NoiseMakers()
                 case "2":
                     utils.UpsentTools()
                 case "3":

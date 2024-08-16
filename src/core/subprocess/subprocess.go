@@ -1,17 +1,17 @@
 package subprocess
 
 import (
-    "bufio"
-    "fmt"
     "os"
+    "fmt"
+    "time"
+    "bufio"
     "bcolors"
-    "os/exec"
-    "os/signal"
-    "path/filepath"
     "runtime"
     "strings"
     "syscall"
-    "time"
+    "os/exec"
+    "os/signal"
+    "path/filepath"
 )
 
 var (
