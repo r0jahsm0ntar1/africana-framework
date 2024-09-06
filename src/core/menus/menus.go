@@ -272,8 +272,8 @@ func MenuFourSix() {
 func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMaker.............." + bcolors.DARKCYAN + "Backdoor with Dll injection" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMakers............." + bcolors.DARKCYAN + "Backdoor with Dll injection" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. CodeBrokers............." + bcolors.DARKCYAN + "Backdoor with Regestry keys" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
@@ -315,6 +315,12 @@ func MenuFourNine() {
     fmt.Println(bcolors.BLUE + "[ 9. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+}
+
+func MenuFourSevenOne() {
+    fmt.Println(bcolors.BLUE + "\n[ 1. Launch ncat listener................................🦟] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Launch metasploit Listener..........................🦁] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu................................] " + bcolors.ENDC)
 }
 
 func HelpMenuFour() {

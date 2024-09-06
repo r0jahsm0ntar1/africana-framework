@@ -33,6 +33,7 @@ var (
     userXdomain      string
     proxyURL    string
     reader = bufio.NewReader(os.Stdin)
+    scanner = bufio.NewScanner(os.Stdin)
 )
 
 func africana() {
@@ -63,9 +64,10 @@ func userAgreements() {
         for {
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")" + bcolors.ENDC)
             fmt.Printf(bcolors.BLUE + "\n╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-            fmt.Scan(&userInput)
-            switch userInput {
-                case "y", "Y", "yes", "Yes", "YES":
+            scanner.Scan()
+            userInput := scanner.Text()
+            switch strings.ToLower(userInput) {
+                case "y", "yes":
                     if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
                         fmt.Println("Error creating file:", err)
                         return
@@ -78,7 +80,7 @@ func userAgreements() {
                     utils.InitiLize()
                     genesis()
                     return
-                case "n", "N", "no", "No", "NO":
+                case "n", "no":
                     os.Exit(0)
                 default:
                     fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
@@ -99,9 +101,10 @@ func systemSetups() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🔧" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework   ()
             return
         case "1":
@@ -147,9 +150,9 @@ func systemSetups() {
             utils.ClearScreen   ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuOne              ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuOne          ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00, 99" + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -165,9 +168,10 @@ func anonsurfSetups() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Anonsurf" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework()
             return
         case "1":
@@ -201,9 +205,9 @@ func anonsurfSetups() {
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuTwo              ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuTwo          ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 5" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -218,7 +222,8 @@ func internaltargetInput() {
     internals.InternalScan()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ENDC + bcolors.ITALIC + "Select your " + bcolors.RED + "Target!🎯" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userTarget)
+    scanner.Scan()
+    userTarget = scanner.Text()
 }
 
 func internalAttackers() {
@@ -227,9 +232,10 @@ func internalAttackers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework  ()
             return
         case "1":
@@ -265,9 +271,9 @@ func internalAttackers() {
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuThree            ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuThree        ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -283,9 +289,10 @@ func malwareGenerators() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Malwares" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework()
             return
         case "1":
@@ -295,9 +302,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Androids" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -320,9 +328,9 @@ func malwareGenerators() {
                     utils.UpsentTools ()
                 case "cls", "clear":
                     utils.ClearScreen   ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourOne   ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -335,9 +343,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Iphones" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -360,9 +369,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen   ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourTwo   ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -375,9 +384,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Windows" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -400,9 +410,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen   ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourThree ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -415,9 +425,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "MackOS" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -440,9 +451,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourFour()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -455,9 +466,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "LinuxOS" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -480,9 +492,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourFive()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -495,9 +507,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Websites" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -520,9 +533,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourSix()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -535,15 +548,16 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Univasals" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators()
                     return
                 case "1":
                     butchers.NoiseMakers()
                 case "2":
-                    utils.UpsentTools()
+                    butchers.CodeBrokers()
                 case "3":
                     utils.UpsentTools()
                 case "4":
@@ -560,9 +574,9 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "cls", "clear":
                     utils.ClearScreen()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourSeven()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -575,9 +589,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Obfsications" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -600,9 +615,9 @@ func malwareGenerators() {
                     utils.UpsentTools  ()
                 case "cls", "clear":
                     utils.ClearScreen  ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourEight()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -615,9 +630,10 @@ func malwareGenerators() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "ChosenOnes" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -640,9 +656,9 @@ func malwareGenerators() {
                     butchers.Gh0x0st   ()
                 case "cls", "clear":
                     utils.ClearScreen  ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuFourNine ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuFour ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -652,9 +668,9 @@ func malwareGenerators() {
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuFour             ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuFour         ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -670,9 +686,10 @@ func wirelessAttackers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Wireless" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework          ()
             return
         case "1":
@@ -697,9 +714,9 @@ func wirelessAttackers() {
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuFive             ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuFive         ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -715,9 +732,10 @@ func passwordsCrackers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework()
             return
         //Online crackers
@@ -728,9 +746,10 @@ func passwordsCrackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "OnLineCrackers" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -753,9 +772,9 @@ func passwordsCrackers() {
                     crackers.CyberBrute ()
                 case "cls", "clear":
                     utils.ClearScreen   ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuSixOne    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuSixOne()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -769,9 +788,10 @@ func passwordsCrackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "OffLineCrackers" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -782,17 +802,17 @@ func passwordsCrackers() {
                     crackers.HashBuster ()
                 case "cls", "clear":
                     utils.ClearScreen   ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuSixTwo    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuSixTwo()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
             }
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.HelpMenuSixTwo()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuSix()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 2" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -808,9 +828,10 @@ func credsPhishers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Phishers" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🪝" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework   ()
             return
         case "1":
@@ -836,9 +857,9 @@ func credsPhishers() {
             utils.ClearScreen   ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuSeven            ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuSeven        ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -883,7 +904,8 @@ func websiteUserTarget() {
     banners.Banner    ()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🎯" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userTarget)
+    scanner.Scan()
+    userTarget = scanner.Text()
 
     prefixes := []string{"http://", "https://", "www."}
     userXtarget = userTarget
@@ -902,9 +924,10 @@ func websiteUserTarget() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "y", "yes", "Y", "Yes", "YES":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "y", "yes":
             proxyURL := askForProxy()
 
             if err := setProxyEnv(proxyURL); err != nil {
@@ -912,7 +935,7 @@ func websiteUserTarget() {
                 return
             }
             return
-        case "n", "no", "N", "No", "NO":
+        case "n", "no":
             return
         default:
             fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
@@ -929,9 +952,10 @@ func websitesAttackers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Websites" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🪲" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
             africanaFramework()
             return
         //1. Start Passive Web recon & SubuserXdomain Enumration.....🌍
@@ -949,9 +973,10 @@ func websitesAttackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Injections" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -967,9 +992,9 @@ func websitesAttackers() {
                     webattackers.XsserMan   ()
                 case "cls", "clear":
                     utils.ClearScreen       ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuEightFour     ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuEightFour ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -983,9 +1008,10 @@ func websitesAttackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Nettacker" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🦣" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     websitesAttackers      ()
                     return
                 case "1":
@@ -1008,9 +1034,9 @@ func websitesAttackers() {
                     webattackers.NetTacker9()
                 case "cls", "clear":
                     utils.ClearScreen      ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuEightFive    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuEightFive()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -1024,9 +1050,10 @@ func websitesAttackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Jok3r" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🃏" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     websitesAttackers  ()
                     return
                 case "1":
@@ -1049,9 +1076,9 @@ func websitesAttackers() {
                     webattackers.Jok3r9()
                 case "cls", "clear":
                     utils.ClearScreen     ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuEightSix    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuEightSix()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -1065,9 +1092,10 @@ func websitesAttackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Osmedeus" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -1090,9 +1118,9 @@ func websitesAttackers() {
                     webattackers.Osmedeus9()
                  case "cls", "clear":
                     utils.ClearScreen       ()
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuEightSeven    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuEightSeven()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -1106,9 +1134,10 @@ func websitesAttackers() {
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Ufonet" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─🦠" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-                fmt.Scan(&userInput)
-                switch userInput {
-                case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+                scanner.Scan()
+                userInput := scanner.Text()
+                switch strings.ToLower(userInput) {
+                case "0", "e", "exit", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -1131,9 +1160,9 @@ func websitesAttackers() {
                     utils.ClearScreen   ()
                 case "9":
                     webattackers.Ufonet9 (userTarget)
-                case "99", "m", "M", "menu", "Menu", "MENU":
+                case "99", "m", "menu":
                     menus.MenuEightEight    ()
-                case "00", "h", "H", "help", "Help", "HELP":
+                case "00", "h", "help":
                     menus.HelpMenuEightEight()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -1146,9 +1175,9 @@ func websitesAttackers() {
             utils.ClearScreen()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "99", "m", "M", "menu", "Menu", "MENU":
+        case "99", "m", "menu":
             menus.MenuEight()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuEight()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
@@ -1166,15 +1195,16 @@ func creditsGivers() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
+            africanaFramework()
+            return
         case "cls", "clear":
             utils.ClearScreen()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
-            africanaFramework()
-            return
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to Go to menu" + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -1190,15 +1220,16 @@ func scriptureNarators() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─✍🏼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
+            africanaFramework          ()
+            return
         case "cls", "clear":
             utils.ClearScreen          ()
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
-            africanaFramework          ()
-            return
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
         }
@@ -1213,11 +1244,12 @@ func africanaFramework() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Home" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
-            utils.ClearScreen   ()
-            banners.Banner      ()
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "0", "e", "exit", "back":
+            //utils.ClearScreen   ()
+            //banners.Banner      ()
             scriptures.Verse    ()
             return
         case "1":
@@ -1257,7 +1289,7 @@ func africanaFramework() {
             scriptureNarators          ()
         case       "m", "M", "menu", "Menu", "MENU":
             menus.MenuZero             ()
-        case "00", "h", "H", "help", "Help", "HELP":
+        case "00", "h", "help":
             menus.HelpMenuZero         ()
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
