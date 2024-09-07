@@ -65,16 +65,17 @@ func promptForUpdate() {
 func KaliSetups() {
     filePath := "/root/.africana/africana-base/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)" + bcolors.ENDC)
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)\n" + bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
-            `mkdir -p /etc/apt/trusted.gpg.d/; cd /etc/apt/trusted.gpg.d/`,
-            `curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
+            `mkdir -p /etc/apt/trusted.gpg.d/`,
+            `curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > /etc/apt/trusted.gpg.d/playit.gpg`,
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -88,18 +89,19 @@ func KaliSetups() {
 func UbuntuSetups() {
     filePath := "/root/.africana/africana-base/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)" + bcolors.ENDC)
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)\n" + bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
             `wget "https://archive.kali.org/archive-key.asc"; apt-key add ./archive-key.asc; rm -rf ./archive-key.asc`,
             `echo -n "Package: *" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin: release a=kali-rolling" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin-Priority: 50" >> /etc/apt/preferences.d/kali.pref`,
             `mkdir -p /etc/apt/trusted.gpg.d/`,
-            `cd /etc/apt/trusted.gpg.d/; curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
+            `curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > /etc/apt/trusted.gpg.d/playit.gpg`,
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)
@@ -131,14 +133,15 @@ func ArchSetups() {
 func BlackArchSetups() {
     filePath := "/root/.africana/africana-base/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)" + bcolors.ENDC)
+        fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing foundation tools " + bcolors.BLUE + "Eg." + bcolors.YELLOW + "(curl, wget, Go)\n" + bcolors.ENDC)
         foundationCommands := []string{
             `curl -O https://blackarch.org/strap.sh`,
             `chmod +x strap.sh`,
             `./strap.sh`,
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm blackarch`,
-            `pacman -S --noconfirm base-devel tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser powershell-empire util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `pacman -S --noconfirm base-devel tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser powershell-empire util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
         fmt.Println(bcolors.ENDC + `¯\_(ツ)_/¯` + bcolors.DARKCYAN + "🧬Installing Github third party tools" + bcolors.ENDC)

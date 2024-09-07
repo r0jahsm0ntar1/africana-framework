@@ -19,6 +19,7 @@ var(
     userWordPass    string
     userWordlists   string
     reader = bufio.NewReader(os.Stdin)
+    scanner = bufio.NewScanner(os.Stdin)
 )
 
 //Online crackers

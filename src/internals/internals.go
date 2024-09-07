@@ -25,55 +25,64 @@ var (
 )
 
 func InternalScan() {
-    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`)
+    fmt.Println()
+    subprocess.Popen(`ip address`)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Interface to use " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userIface, _ := reader.ReadString('\n')
+    userIface = strings.TrimSpace(userIface)
+    if userIface == "" {
+        userIface = "eth0"
+    }
+    subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; active; ticker on"`, userIface)
     return
 }
 
 func NmapPortScan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing: " + bcolors.RED + bcolors.ITALIC + "PORT scan " + bcolors.DARKGREEN + "Target " + bcolors.PURPLE + "set to: " + bcolors.ORANGE + bcolors.ITALIC + "%s 🐾" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "Port scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     //subprocess.Popen(`masscan -v %s --ports 0-65535 --rate 10000 --wait 0`, userTarget); fmt.Println()
     subprocess.Popen(`nmap --open -T4 -Pn -n -v -p- %s`, userTarget)
     return
 }
 
 func NmapVulnScan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing vuln scan: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "Vuln scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`nmap --open -v -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
     return
 }
 
 func SmbVulnScan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB scan: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB vuln scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`nmap -Pn -v --script "smb-vuln*" -p139,445 %s`, userTarget)
     return
 }
 
 func Enum4linux(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`cd /root/.africana/africana-base/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, userTarget)
     return
 }
 
 func EnumNxc(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-users --rid-brute --sessions --users --shares --pass-pol`, userTarget)
     return
 }
 
 func SmbMapScan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`smbmap --no-banner -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, userTarget, userTarget)
     return
 }
 
 func SmbCrackmapExec(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing SMB recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`crackmapexec smb %s --pass-pol -u '' -p '' --shares --local-auth --content --depth 5`, userTarget)
     return
 }
 
 func RpcEnumScan(userTarget string) {
-    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "] " + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + "Performing RPC Recon: " +  bcolors.RED + "Target!!🎯 " + bcolors.YELLOW + "%s 🐾\n" + bcolors.ENDC, userTarget)
+    fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "RPC recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`rpcclient -U "" -N %s`, userTarget)
     return
 }

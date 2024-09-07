@@ -27,6 +27,7 @@ var(
     userScript  string
     userOutput  string
     reader = bufio.NewReader(os.Stdin)
+    scanner = bufio.NewScanner(os.Stdin)
 )
 
 func Havoc() {
@@ -82,7 +83,7 @@ func Gh0x0st() {
 }
 
 func BlackJack() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.PURPLE + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "LISTENER " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput, _ := reader.ReadString('\n')
     userInput = strings.TrimSpace(userInput)
@@ -196,7 +197,7 @@ func AndroRat() {
 }
 
 func ShikataGanai() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.BLUE + "or " + bcolors.BLUE + "0. " + bcolors.PURPLE + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "LISTENER " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.ENDC + bcolors.ITALIC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput, _ := reader.ReadString('\n')
     userInput = strings.TrimSpace(userInput)
@@ -414,13 +415,17 @@ func MalwareReg() {
 }
 
 func ListenerTcp() {
-    fmt.Printf(bcolors.DARKGREEN + "\nSelect a Listener to Launch:" + bcolors.ENDC)
+    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + "\n                Select a Listener to Launch:" + bcolors.ENDC)
     menus.MenuFourSevenOne()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "CodeCracker " + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥥" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userInput)
-    switch userInput {
-    case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
+    scanner.Scan()
+    userInput := scanner.Text()
+    if userInput == "" {
+        userInput = "1"
+    }
+    switch strings.ToLower(userInput) {
+    case "0", "e", "exit", "back":
         return
     case "1":
         userLhostIp, err := utils.GetDefaultIP()
@@ -559,7 +564,7 @@ func ListenerLauncher() {
     case "n":
         return
     case "y":
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "Listener type" + bcolors.ENDC + ": " + bcolors.BLUE + bcolors.ITALIC + "1. " + bcolors.ORANGE + "TCP " + bcolors.BLUE + "2. " + bcolors.ORANGE + "HTTPS " + bcolors.BLUE + "or " + bcolors.ORANGE + "0. " + bcolors.ENDC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "LISTENER " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         userInput, _ := reader.ReadString('\n')
         userInput = strings.TrimSpace(userInput)
@@ -587,7 +592,7 @@ func NoiseMakers() {
     ListenerLauncher()
 }
 
-func CodeBrokers() {
+func CodeBreakers() {
     ShikataGanai    ()
     MalwareReg      ()
     ListenerLauncher()

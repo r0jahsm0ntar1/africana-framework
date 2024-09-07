@@ -30,7 +30,7 @@ var (
     userInput   string
     userTarget  string
     userXtarget string
-    userXdomain      string
+    userXdomain string
     proxyURL    string
     reader = bufio.NewReader(os.Stdin)
     scanner = bufio.NewScanner(os.Stdin)
@@ -217,8 +217,6 @@ func anonsurfSetups() {
 
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
-    utils.ClearScreen     ()
-    banners.Banner        ()
     internals.InternalScan()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ENDC + bcolors.ITALIC + "Select your " + bcolors.RED + "Target!🎯" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -557,7 +555,7 @@ func malwareGenerators() {
                 case "1":
                     butchers.NoiseMakers()
                 case "2":
-                    butchers.CodeBrokers()
+                    butchers.CodeBreakers()
                 case "3":
                     utils.UpsentTools()
                 case "4":
