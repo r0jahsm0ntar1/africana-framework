@@ -22,7 +22,7 @@ func MenuZero() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuZero() {
+func HelpMenuZeroo() {
     fmt.Println(bcolors.YELLOW + "                   Install or update " + bcolors.ENDC + ": 1. It is an inbuild self mentainace code to update and install africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       System Security Configuration " + bcolors.ENDC + ": 2. This choice enables you to secure your system by keenly installing & configuring privoxy, squid, tor & dnsmasq." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "        Local Network Attack Vectors " + bcolors.ENDC + ": 3. It is aplace where you are guided through pentesting internal network devices with their open services." + bcolors.ENDC)
@@ -318,9 +318,17 @@ func MenuFourNine() {
 }
 
 func MenuFourSevenOne() {
-    fmt.Println(bcolors.BLUE + "\n[ 1. Launch ncat listener................................🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Launch metasploit Listener..........................🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu................................] " + bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + "\n 1) " + bcolors.ENDC + "ncat"           + bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + " 2) " + bcolors.ENDC + "blackjack"      + bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + " 3) " + bcolors.ENDC + "metasploit"     + bcolors.ENDC)
+    fmt.Println(bcolors.RED       + " 0) " + bcolors.ENDC + "Exit & Go back" + bcolors.ENDC)
+}
+
+func MenuFourSevenTwo() {
+    fmt.Println(bcolors.DARKGREEN + "\n 1) " + bcolors.ENDC + "lync.ico    " + bcolors.DARKGREEN + " 5) " + bcolors.ENDC + "pdf.ico        " + bcolors.DARKGREEN + "  9) " + bcolors.ENDC + "rat.ico " + bcolors.DARKGREEN + "  0) " + bcolors.RED + "No icon"+ bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + " 2) " + bcolors.ENDC + "excel.ico   " + bcolors.DARKGREEN + " 6) " + bcolors.ENDC + "project.ico    " + bcolors.DARKGREEN + " 10) " + bcolors.ENDC + "vlc.ico " + bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + " 3) " + bcolors.ENDC + "access.ico  " + bcolors.DARKGREEN + " 7) " + bcolors.ENDC + "publisher.ico  " + bcolors.DARKGREEN + " 11) " + bcolors.ENDC + "word.ico" + bcolors.ENDC)
+    fmt.Println(bcolors.DARKGREEN + " 4) " + bcolors.ENDC + "autorun.ico " + bcolors.DARKGREEN + " 8) " + bcolors.ENDC + "powerpoint.ico " + bcolors.DARKGREEN + " 12) " + bcolors.ENDC + "visio.ico" + bcolors.ENDC)
 }
 
 func HelpMenuFour() {
@@ -673,7 +681,7 @@ func HelpMenuEightEight() {
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
-func HelpMenuMain() {
+func HelpMenuMainX() {
     scriptures.Verse()
     fmt.Println(bcolors.ENDC + "\nGithub Page " + bcolors.GREEN + "          " + bcolors.DARKCYAN + "https://github.com/r0jahsm0ntar1/africana-framework" + bcolors.ENDC)
     fmt.Println(bcolors.ENDC + "Usages: " + bcolors.PURPLE + "   (◕‿◕✿)" + bcolors.ENDC + "       🦊africana (" + bcolors.DARKCYAN + "options" + bcolors.ENDC + ")" + bcolors.ENDC)
@@ -725,4 +733,87 @@ func HelpMenuMain() {
     fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + bcolors.ITALIC + "https://youtube.com/@RojahsMontari" + bcolors.ENDC)
     fmt.Println(bcolors.DARKCYAN + "[" + bcolors.ENDC + "!" + bcolors.DARKCYAN + "] " + bcolors.ENDC + "To see full list of options use " + bcolors.ORANGE + "--hh. " + bcolors.PURPLE + "🦠｡ ◕‿◕｡" + bcolors.ENDC)
 
+}
+
+func HelpMenuZero() {
+    fmt.Printf(`%s
+    Command       Description
+    -------       -----------
+    ?                 Help menu
+    banner            Display an awesome africana banner
+    clear             Clear the working screen
+    exit              Exit the console
+    features          Display the list of not yet released features that can be opted in to
+    help              Help menu
+    history           Show command history
+    load              Load a framework plugin
+    quit              Exit the console
+    set               Sets a context-specific variable to a value
+    sleep             Do nothing for the specified number of seconds
+    spool             Write console output into a file as well the screen
+    tips              Show a list of useful productivity tips
+    unload            Unload a framework plugin
+    unset             Unsets one or more context-specific variables
+    unsetg            Unsets one or more global variables
+    version           Show the framework and console library version numbers
+
+Module Commands
+---------------
+
+    Command        Description
+    -------        -----------
+    advanced       Displays advanced options for one or more modules
+    back           Move back from the current context
+    info           Displays information about one or more modules
+    list           List the module stack
+    options        Displays global options or for one or more modules
+    previous       Sets the previously loaded module as the current module
+    search         Searches module names and descriptions
+    show           Displays modules of a given type, or all modules
+    use            Interact with a module by name or search term/index
+
+Developer Commands
+------------------
+
+    Command        Description
+    -------        -----------
+    log            Display framework.log paged to the end if possible
+    time           Time how long it takes to run a particular command
+    shell          Open an interactive shell in the current context
+
+For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
+`,bcolors.ENDC , bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+func HelpMenuMain() {
+    fmt.Println(bcolors.ENDC + `
+Usage: ./africana [options]
+
+Common options:
+    -a, --auto           Start africana in automation mode 'start from main menu'
+
+Setup options:
+    -i, --install        Launch Installation menu to install neede dependencies
+    -u, --update         Update africana and africana-base tools
+
+Framework options:
+    -l, --logs           Show logs in terminal
+    -L --logger          Show logs in your browser
+    -v, -V, --version    Show version
+
+Console options:
+    -t, --anonsurf       Launch anonsurf menu to torify your system './africana -t'
+    -n, --networks       Start internal network attacks
+    -m, --malwares       Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+    -g, --wireless       From wifi, bluetooth and other wireles attack vectors
+    -p, --crackers       Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+    -f, --phishers       Perform Phishing attacks
+    -w, --websites       Launch Web Penetration engines
+    -c, --credits        Show who developes africana (& third party tools developers)
+    -b, --verses         Launch Bible verses in an uniform way manner as used in the framework
+    -s, --shell          Start Intaractive shell In africana (other flags '--sh --cmd --zsh')
+    -x, --usage          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
+    -h, --help
+
+Github Page:             https://github.com/r0jahsm0ntar1/africana-framework` + bcolors.ENDC)
 }

@@ -567,7 +567,7 @@ func BeefInjector(userTarget string) {
         case "2":
             BeefBettercap (userTarget)
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
          }
     }
 }

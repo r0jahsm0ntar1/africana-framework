@@ -1,12 +1,45 @@
 package credits
 
 import (
+    "os"
     "fmt"
     "time"
+    "bufio"
     "bcolors"
 )
 
+func readFileLetterByLetter(filename string, delay time.Duration) {
+    if _, err := os.Stat(filename); os.IsNotExist(err) {
+        return
+    }
+
+    file, err := os.Open(filename)
+    if err != nil {
+        fmt.Println("Error opening file:", err)
+        return
+    }
+    defer file.Close()
+
+    scanner := bufio.NewScanner(file)
+
+    for scanner.Scan() {
+        line := scanner.Text()
+        for _, letter := range line {
+            fmt.Print(string(letter))
+            time.Sleep(delay)
+        }
+        fmt.Println()
+    }
+
+    if err := scanner.Err(); err != nil {
+        fmt.Println("Error reading file:", err)
+    }
+}
+
 func Contributors() {
+    filename := "/root/.africana/africana-base/cheetsheets/cheatsheet.txt"
+    delay := 0 * time.Millisecond
+    readFileLetterByLetter(filename, delay)
     fmt.Printf(bcolors.ENDC + bcolors.ITALIC + `
  Africana name        Developer's name       Original_name` + bcolors.ENDC)
 

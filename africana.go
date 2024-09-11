@@ -32,7 +32,6 @@ var (
     userXtarget string
     userXdomain string
     proxyURL    string
-    reader = bufio.NewReader(os.Stdin)
     scanner = bufio.NewScanner(os.Stdin)
 )
 
@@ -155,7 +154,7 @@ func systemSetups() {
         case "00", "h", "help":
             menus.HelpMenuOne          ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00, 99" + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -210,7 +209,7 @@ func anonsurfSetups() {
         case "00", "h", "help":
             menus.HelpMenuTwo          ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 5" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -274,7 +273,7 @@ func internalAttackers() {
         case "00", "h", "help":
             menus.HelpMenuThree        ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -331,7 +330,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "2":
@@ -372,7 +371,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "3":
@@ -413,7 +412,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour  ()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "4":
@@ -454,7 +453,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "5": 
@@ -495,7 +494,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "6":
@@ -536,7 +535,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "7":
@@ -577,7 +576,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "8":
@@ -618,7 +617,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour ()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "9":
@@ -659,7 +658,7 @@ func malwareGenerators() {
                 case "00", "h", "help":
                     menus.HelpMenuFour ()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "cls", "clear":
@@ -671,7 +670,7 @@ func malwareGenerators() {
         case "00", "h", "help":
             menus.HelpMenuFour         ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -717,7 +716,7 @@ func wirelessAttackers() {
         case "00", "h", "help":
             menus.HelpMenuFive         ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -775,7 +774,7 @@ func passwordsCrackers() {
                 case "00", "h", "help":
                     menus.HelpMenuSixOne()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         //Offline crackers
@@ -805,7 +804,7 @@ func passwordsCrackers() {
                 case "00", "h", "help":
                     menus.HelpMenuSixTwo()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         case "99", "m", "menu":
@@ -813,7 +812,7 @@ func passwordsCrackers() {
         case "00", "h", "help":
             menus.HelpMenuSix()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 2" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -860,25 +859,31 @@ func credsPhishers() {
         case "00", "h", "help":
             menus.HelpMenuSeven        ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
 
 //8. Website Attack Vectors................(Proxy, Conf)🎭
-func askForProxy() (*url.URL) {
+func askForProxy() *url.URL {
+    scanner := bufio.NewScanner(os.Stdin)
+
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "Enter proxy URL🛰️ Eg:" + bcolors.YELLOW + "(http://localhost:80)" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    proxyStr, _ := reader.ReadString('\n')
+
+    scanner.Scan()
+    proxyStr := scanner.Text()
     proxyStr = strings.TrimSpace(proxyStr)
 
     proxyURL, err := url.Parse(proxyStr)
     if err != nil {
-        return nil
+        fmt.Println(bcolors.RED + "Invalid URL format. Please try again." + bcolors.ENDC)
+        return askForProxy()
     }
 
     if proxyURL.Scheme != "http" && proxyURL.Scheme != "https" && proxyURL.Scheme != "socks5" && proxyURL.Scheme != "socks4" {
-        askForProxy()
+        fmt.Println(bcolors.RED + "Invalid scheme. Only http, https, socks5, or socks4 are allowed." + bcolors.ENDC)
+        return askForProxy()
     }
 
     return proxyURL
@@ -936,7 +941,7 @@ func websiteUserTarget() {
         case "n", "no":
             return
         default:
-            fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -1037,7 +1042,7 @@ func websitesAttackers() {
                 case "00", "h", "help":
                     menus.HelpMenuEightFive()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...🃏
@@ -1079,7 +1084,7 @@ func websitesAttackers() {
                 case "00", "h", "help":
                     menus.HelpMenuEightSix()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         //7. Osmedeus Next Generation Workflow Engine Main Menu.🐨
@@ -1121,7 +1126,7 @@ func websitesAttackers() {
                 case "00", "h", "help":
                     menus.HelpMenuEightSeven()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         //8. Ufonet Next Generation DDOS Tool Main Menu.........🦠
@@ -1163,7 +1168,7 @@ func websitesAttackers() {
                 case "00", "h", "help":
                     menus.HelpMenuEightEight()
                 default:
-                    fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
                 }
             }
         //9. Launch Heavy Automation Attacks On The Host........🤖
@@ -1178,7 +1183,7 @@ func websitesAttackers() {
         case "00", "h", "help":
             menus.HelpMenuEight()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -1204,7 +1209,7 @@ func creditsGivers() {
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to Go to menu" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -1229,7 +1234,7 @@ func scriptureNarators() {
         case "sh", "shell", "bash", "cmd", "pwsh":
             subprocess.InteractiveShell()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }
@@ -1290,7 +1295,7 @@ func africanaFramework() {
         case "00", "h", "help":
             menus.HelpMenuZero         ()
         default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 9" + bcolors.BLUE + ")" + bcolors.ENDC)
+            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
         }
     }
 }

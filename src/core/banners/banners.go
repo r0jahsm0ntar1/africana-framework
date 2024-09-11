@@ -7,7 +7,7 @@ import (
     "math/rand"
 )
 var (
-    version = "v3.0.0"
+    version = "v3.0.1"
 )
 
 type Banners struct{}
@@ -189,7 +189,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
     }
 }
 
-func Graphicx() {
+func GraphicsAnonsurf() {
     rand.Seed(time.Now().UnixNano())
     menu := rand.Intn(2) + 1
 
@@ -221,10 +221,70 @@ func Graphicx() {
     }
 }
 
+func GraphicsMini() {
+    rand.Seed(time.Now().UnixNano())
+    menu := rand.Intn(4) + 1
+
+    switch menu {
+    case 1:
+        fmt.Printf(`%s
+# cowsay++
+ ____________
+< africana >
+ ------------
+       \   ,__,
+        \  (oo)____
+           (__)    )\
+              ||--|| *
+
+                                        %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 2:
+        fmt.Printf(`%s
+             _.-;;-._
+      '-..-'|   ||   |
+      '-..-'|_.-;;-._|
+      '-..-'|   ||   |
+      '-..-'|_.-''-._|
+                                        %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 3:
+        fmt.Printf(`%s
+         .'"".'/|\'.""'.
+        :  .' / | \ '.  :
+        '.'  /  |  \  '.'
+         '. /   |   \ .'
+           '-.__|__.-'
+                                        %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+    case 4:
+        fmt.Printf(`%s
+ ______________________________________
+/ If it were not for you Lord God Jesus\
+\ where would I have been?             /
+ --------------------------------------
+ \
+  \
+     __
+    /  \
+    |  |
+    @  @
+    |  |
+    || |/
+    || ||
+    |\_/|
+    \___/
+                                        %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+    }
+}
+
 func Banner() {
     Graphics()
 }
 
 func AnonSurfBanner() {
-    Graphicx()
+    GraphicsAnonsurf()
 }

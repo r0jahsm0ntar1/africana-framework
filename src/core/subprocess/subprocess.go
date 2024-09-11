@@ -90,11 +90,10 @@ func InteractiveShell() {
         return
     }
 
-    fmt.Println(bcolors.ITALIC + "\n   🐧System " + bcolors.DARKGREEN + "'interactive' " + bcolors.RED + "'shell' " + bcolors.ENDC + bcolors.ITALIC + "Type exit to quit!" + bcolors.ENDC)
-
+    fmt.Println("\n      Welcome! Type 'help' to list available commands." + bcolors.ENDC)
     for {
-        fmt.Print(bcolors.BLUE + "\n╭─(" + bcolors.ORANGE + bcolors.ITALIC + currentDir + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Print(bcolors.BLUE + "\n╰─🐚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Print(bcolors.BLUE + "\n╭─(" + bcolors.RED + "root" + bcolors.ENDC + "@" + bcolors.ORANGE + "shell" + bcolors.BLUE + ")[" + bcolors.GREEN + currentDir + bcolors.BLUE + "]" + bcolors.ENDC)
+        fmt.Print(bcolors.BLUE + "\n└─" + bcolors.ENDC + bcolors.RED + "# " + bcolors.ENDC)
 
         command, err := reader.ReadString('\n')
         if err != nil {
