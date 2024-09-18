@@ -19,7 +19,6 @@ import (
     "phishers"
     "io/ioutil"
     "internals"
-    "subprocess"
     "agreements"
     "scriptures"
     "securities"
@@ -103,58 +102,72 @@ func systemSetups() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework   ()
             return
-        case "1":
+        case "1", "use kali":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.KaliSetups   ()
             africanaFramework   ()
             return
-        case "2":
+        case "2", "use ubuntu":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.UbuntuSetups ()
             africanaFramework   ()
             return
-        case "3":
+        case "3", "use arch":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.ArchSetups   ()
             africanaFramework   ()
             return
-        case "4":
+        case "4", "use windows":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.WindowsSetups()
             utils.UpsentTools()
             africanaFramework   ()
             return
-        case "5":
+        case "5", "use android":
             utils.ClearScreen   ()
             banners.Banner      ()
-            setups.Uninstall    ()
-        case "6":
+            setups.Androidinstall()
+        case "6", "use termlogs":
             utils.TermLogs      ()
-        case "7":
+        case "7", "use viewlogs":
             utils.BrowserLogs   ()
-        case "8":
+        case "8", "use clearlogs":
             utils.ClearLogs     ()
-        case "9":
+        case "9", "use uninstall":
             utils.ClearScreen   ()
             banners.Banner      ()
             setups.Uninstall    ()
-        case "cls", "clear":
-            utils.ClearScreen   ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuOne              ()
-        case "00", "h", "help":
-            menus.HelpMenuOne          ()
+        case "show", "help show":
+            menus.HelpInfoShow()
+        case "show modules", "show all":
+            menus.ListSetupsModules()
+        case "info", "help info":
+            menus.HelpInfoSetups()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuOne       ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -170,46 +183,54 @@ func anonsurfSetups() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
-            africanaFramework()
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
+            africanaFramework   ()
             return
-        case "1":
+        case "1", "anonsurf install":
             utils.ClearScreen          ()
             securities.AnonsurfSetups  ()
-        case "2":
+        case "2", "anonsurf start":
             utils.ClearScreen          ()
             securities.AnonsurfStart   ()
-        case "3":
+        case "3", "anonsurf restart":
             utils.ClearScreen          ()
             securities.AnonsurfExitnode()
-        case "4":
+        case "4", "anonsurf status":
             utils.ClearScreen          ()
             securities.AnonsurfStatus  ()
-        case "5":
+        case "5", "anonsurf ip":
             utils.ClearScreen          ()
             securities.AnonsurfIpaddr  ()
-        case "6":
+        case "6", "anonsurf iptables":
             utils.ClearScreen          ()
             securities.AnonsurfRIptabls()
-        case "7":
+        case "7", "anonsurf reload":
             utils.ClearScreen          ()
             securities.AnonsurfReload  ()
-        case "8":
+        case "8", "anonsurf logs":
             utils.ClearScreen          ()
             securities.AnonsurfChains  ()
-        case "9":
+        case "9", "anonsurf stop":
             utils.ClearScreen          ()
             securities.AnonsurfStop    ()
-        case "cls", "clear":
-            utils.ClearScreen          ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuTwo              ()
-        case "00", "h", "help":
-            menus.HelpMenuTwo          ()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuTwo       ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -232,48 +253,55 @@ func internalAttackers() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework  ()
             return
-        case "1":
+        case "1", "discover targets":
             internaltargetInput()
             utils.ClearScreen  ()
             banners.Banner     ()
             menus.MenuThree    ()
-        case "2":
+        case "2", "run portscan":
             internals.NmapPortScan     (userTarget)
-        case "3":
+        case "3", "run vulnscan":
             internals.NmapVulnScan     (userTarget)
-        case "4":
+        case "4", "run enumscan":
             internals.SmbVulnScan      (userTarget)
             internals.Enum4linux       (userTarget)
             internals.EnumNxc          (userTarget)
             internals.SmbMapScan       (userTarget)
-            internals.SmbCrackmapExec  (userTarget)
             internals.RpcEnumScan      (userTarget)
-        case "5":
+        case "5", "run exploit":
             internals.SmbVulnScan      (userTarget)
             internals.SmbExploit       (userTarget)
-        case "6":
+        case "6", "run sniffer":
             internals.PacketSniffer    (userTarget)
             internalAttackers          ()
             return
-        case "7":
+        case "7", "run responder":
             internals.PacketsResponder ()
-        case "8":
+        case "8", "run beefninja":
             internals.BeefInjector     (userTarget)
         case "9":
             internals.RpcEnumScan      (userTarget)
-        case "cls", "clear":
-            utils.ClearScreen          ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuThree            ()
-        case "00", "h", "help":
-            menus.HelpMenuThree        ()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuThree     ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -289,7 +317,9 @@ func malwareGenerators() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework()
             return
         case "1":
@@ -302,7 +332,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -323,14 +355,22 @@ func malwareGenerators() {
                     utils.UpsentTools ()
                 case "9":
                     utils.UpsentTools ()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
-                case "99", "m", "menu":
-                    menus.MenuFourOne   ()
-                case "00", "h", "help":
-                    menus.HelpMenuFour  ()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuFour      ()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "2":
@@ -343,7 +383,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -364,14 +406,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
-                case "99", "m", "menu":
-                    menus.MenuFourTwo   ()
-                case "00", "h", "help":
-                    menus.HelpMenuFour  ()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuFourTwo()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "3":
@@ -384,7 +434,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators   ()
                     return
                 case "1":
@@ -405,14 +457,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
-                case "99", "m", "menu":
-                    menus.MenuFourThree ()
-                case "00", "h", "help":
-                    menus.HelpMenuFour  ()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuFourThree()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "4":
@@ -425,7 +485,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -446,14 +508,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen()
-                case "99", "m", "menu":
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
                     menus.MenuFourFour()
-                case "00", "h", "help":
-                    menus.HelpMenuFour()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "5": 
@@ -466,7 +536,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -487,14 +559,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen()
-                case "99", "m", "menu":
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
                     menus.MenuFourFive()
-                case "00", "h", "help":
-                    menus.HelpMenuFour()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "6":
@@ -507,7 +587,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -528,14 +610,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen()
-                case "99", "m", "menu":
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
                     menus.MenuFourSix()
-                case "00", "h", "help":
-                    menus.HelpMenuFour()
+                case "00", "?", "h", "help":
+                    menus.MenuZero      ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "7":
@@ -548,7 +638,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators()
                     return
                 case "1":
@@ -569,14 +661,22 @@ func malwareGenerators() {
                     utils.UpsentTools()
                 case "9":
                     utils.UpsentTools()
-                case "cls", "clear":
-                    utils.ClearScreen()
-                case "99", "m", "menu":
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
                     menus.MenuFourSeven()
-                case "00", "h", "help":
-                    menus.HelpMenuFour()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "8":
@@ -589,7 +689,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -610,14 +712,22 @@ func malwareGenerators() {
                     utils.UpsentTools  ()
                 case "9":
                     utils.UpsentTools  ()
-                case "cls", "clear":
-                    utils.ClearScreen  ()
-                case "99", "m", "menu":
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
                     menus.MenuFourEight()
-                case "00", "h", "help":
-                    menus.HelpMenuFour ()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "9":
@@ -630,7 +740,9 @@ func malwareGenerators() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     malwareGenerators  ()
                     return
                 case "1":
@@ -651,26 +763,46 @@ func malwareGenerators() {
                     butchers.Chameleon ()
                 case "9":
                     butchers.Gh0x0st   ()
-                case "cls", "clear":
-                    utils.ClearScreen  ()
-                case "99", "m", "menu":
-                    menus.MenuFourNine ()
-                case "00", "h", "help":
-                    menus.HelpMenuFour ()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuFourNine()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
-        case "cls", "clear":
-            utils.ClearScreen          ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuFour             ()
-        case "00", "h", "help":
-            menus.HelpMenuFour         ()
+        case "show", "show modules":
+            menus.ListMalwareModules()
+        case "info", "help info":
+            menus.HelpInfoMalwares()
+        case "info blackjack":
+            menus.HelpInfoBlackJack()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuFour   ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -686,7 +818,9 @@ func wirelessAttackers() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework          ()
             return
         case "1":
@@ -707,32 +841,37 @@ func wirelessAttackers() {
             wireless.WifiPumpkin3      ()
         case "9":
             utils.UpsentTools          ()
-        case "cls", "clear":
-            utils.ClearScreen          ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuFive             ()
-        case "00", "h", "help":
-            menus.HelpMenuFive         ()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuFive    ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
 
 //6. Crack Hash, Pcap & Brute Passwords....(Hashcat, jo)🔐
 func passwordsCrackers() {
-    utils.ClearScreen ()
-    banners.Banner    ()
-    menus.MenuSix     ()
     for {
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "Cracker " + bcolors.BLUE + "1. " + bcolors.YELLOW + "Online " + bcolors.BLUE + "2. " + bcolors.YELLOW + "Offline " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework()
             return
         //Online crackers
@@ -746,7 +885,9 @@ func passwordsCrackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -767,14 +908,22 @@ func passwordsCrackers() {
                     crackers.HydraHttps ()
                 case "9":
                     crackers.CyberBrute ()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
-                case "99", "m", "menu":
-                    menus.MenuSixOne    ()
-                case "00", "h", "help":
-                    menus.HelpMenuSixOne()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuSixOne ()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         //Offline crackers
@@ -788,7 +937,9 @@ func passwordsCrackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     passwordsCrackers   ()
                     return
                 case "1":
@@ -797,22 +948,30 @@ func passwordsCrackers() {
                     crackers.JohnCrackng()
                 case "8":
                     crackers.HashBuster ()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
-                case "99", "m", "menu":
-                    menus.MenuSixTwo    ()
-                case "00", "h", "help":
-                    menus.HelpMenuSixTwo()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuSixTwo ()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         case "99", "m", "menu":
-            menus.HelpMenuSixTwo()
-        case "00", "h", "help":
-            menus.HelpMenuSix()
+            menus.MenuSix     ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoSix()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -828,7 +987,9 @@ func credsPhishers() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework   ()
             return
         case "1":
@@ -850,16 +1011,22 @@ func credsPhishers() {
         case "9":
             internaltargetInput ()
             phishers.NinjaPhish (userTarget)
-        case "cls", "clear":
-            utils.ClearScreen   ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuSeven            ()
-        case "00", "h", "help":
-            menus.HelpMenuSeven        ()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuSeven  ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -930,6 +1097,10 @@ func websiteUserTarget() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
+            africanaFramework()
         case "y", "yes":
             proxyURL := askForProxy()
 
@@ -941,7 +1112,7 @@ func websiteUserTarget() {
         case "n", "no":
             return
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -958,7 +1129,9 @@ func websitesAttackers() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework()
             return
         //1. Start Passive Web recon & SubuserXdomain Enumration.....🌍
@@ -972,14 +1145,18 @@ func websitesAttackers() {
             webattackers. Gobuster (userTarget)
         //4. Start SQL, XSS & SSRF Detection & Eploitation......💉
         case "4":
-            utils.ClearScreen(); banners.Banner(); menus.MenuEightFour()
+            utils.ClearScreen()
+            banners.Banner()
+            menus.MenuEightFour()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Injections" + bcolors.BLUE + ")" + bcolors.ENDC)
                 fmt.Printf(bcolors.BLUE + "\n╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -993,12 +1170,20 @@ func websitesAttackers() {
                 case "4":
                     webattackers.CommixMan  ()
                     webattackers.XsserMan   ()
-                case "cls", "clear":
-                    utils.ClearScreen       ()
-                case "99", "m", "menu":
-                    menus.MenuEightFour     ()
-                case "00", "h", "help":
-                    menus.HelpMenuEightFour ()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuEightFour()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
                     fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please try option " + bcolors.GREEN + "00 " + bcolors.YELLOW  + "or " + bcolors.BLUE + "(" + bcolors.DARKCYAN + "0 to 4" + bcolors.BLUE + ")" + bcolors.ENDC)
                 }
@@ -1014,7 +1199,9 @@ func websitesAttackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     websitesAttackers      ()
                     return
                 case "1":
@@ -1035,14 +1222,22 @@ func websitesAttackers() {
                     webattackers.NetTacker8(userTarget)
                 case "9":
                     webattackers.NetTacker9()
-                case "cls", "clear":
-                    utils.ClearScreen      ()
-                case "99", "m", "menu":
-                    menus.MenuEightFive    ()
-                case "00", "h", "help":
-                    menus.HelpMenuEightFive()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuEightFive()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         //6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...🃏
@@ -1056,7 +1251,9 @@ func websitesAttackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     websitesAttackers  ()
                     return
                 case "1":
@@ -1077,14 +1274,22 @@ func websitesAttackers() {
                     webattackers.Jok3r8()
                 case "9":
                     webattackers.Jok3r9()
-                case "cls", "clear":
-                    utils.ClearScreen     ()
-                case "99", "m", "menu":
-                    menus.MenuEightSix    ()
-                case "00", "h", "help":
-                    menus.HelpMenuEightSix()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuEightSix()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         //7. Osmedeus Next Generation Workflow Engine Main Menu.🐨
@@ -1098,7 +1303,9 @@ func websitesAttackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -1108,7 +1315,7 @@ func websitesAttackers() {
                 case "3":
                     webattackers.Osmedeus3(userTarget)
                 case "4":
-                    webattackers.Osmedeus4(userTarget)
+                    webattackers.Osmedeus4()
                 case "5":
                     webattackers.Osmedeus5(userTarget)
                 case "6":
@@ -1119,14 +1326,22 @@ func websitesAttackers() {
                     webattackers.Osmedeus8()
                 case "9":
                     webattackers.Osmedeus9()
-                 case "cls", "clear":
-                    utils.ClearScreen       ()
-                case "99", "m", "menu":
-                    menus.MenuEightSeven    ()
-                case "00", "h", "help":
-                    menus.HelpMenuEightSeven()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuEightSeven()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero         ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         //8. Ufonet Next Generation DDOS Tool Main Menu.........🦠
@@ -1140,7 +1355,9 @@ func websitesAttackers() {
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
-                case "0", "e", "exit", "back":
+                case "e", "q", "exit", "quit":
+                    os.Exit(0)
+                case "0", "b", "back":
                     websitesAttackers()
                     return
                 case "1":
@@ -1159,31 +1376,45 @@ func websitesAttackers() {
                     webattackers.Ufonet7()
                 case "8":
                     webattackers.Ufonet8()
-                case "cls", "clear":
-                    utils.ClearScreen   ()
                 case "9":
                     webattackers.Ufonet9 (userTarget)
-                case "99", "m", "menu":
-                    menus.MenuEightEight    ()
-                case "00", "h", "help":
-                    menus.HelpMenuEightEight()
+                case "set", "help set":
+                    menus.HelpInfoSet   ()
+                case "use", "help use":
+                    menus.HelpInfoUse   ()
+                case "run", "help run":
+                    menus.HelpInfoRun   ()
+                case "banner":
+                    banners.Banner      ()
+                case "version":
+                    banners.Version     ()
+                case "m", "menu":
+                    menus.MenuEightEight()
+                case "00", "?", "h", "help":
+                    menus.HelpInfoMenuZero  ()
                 default:
-                    fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+                    utils.SystemShell(userInput)
                 }
             }
         //9. Launch Heavy Automation Attacks On The Host........🤖
         case "9":
-             webattackers.WafW00f(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.DigRecon(userXtarget); webattackers.WhoIs(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.Ashock1(userTarget); webattackers.Sublist3r(userTarget); webattackers.Nuclei(userXtarget); webattackers.OneForAll(userTarget); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Osmedeus6 (userTarget); webattackers.NetTacker8(userTarget); webattackers.Jok3r6(userXdomain); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
-        case "cls", "clear":
-            utils.ClearScreen()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99", "m", "menu":
-            menus.MenuEight()
-        case "00", "h", "help":
-            menus.HelpMenuEight()
+             webattackers.WafW00f(userXtarget); webattackers.WhatWeb(userXtarget); webattackers.DigRecon(userXtarget); webattackers.WhoIs(userXtarget); webattackers.DnsRecon(userXtarget); webattackers.Ashock1(userTarget); webattackers.Sublist3r(userTarget); webattackers.Nuclei(userXtarget); webattackers.OneForAll(userTarget); webattackers.SeekOlver(userTarget); webattackers.Gobuster(userTarget); webattackers.Osmedeus3 (userTarget); webattackers.ParamSpider(userTarget); webattackers.KatanaAuto(userTarget); webattackers.XsserAuto(userTarget); webattackers.Osmedeus6(userTarget); webattackers.NetTacker8(userTarget); webattackers.Jok3r6(userXdomain); webattackers.Nikto(userTarget); webattackers.Uniscan(userTarget)
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuEight   ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -1201,15 +1432,27 @@ func creditsGivers() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework()
             return
-        case "cls", "clear":
-            utils.ClearScreen()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            //
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero  ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -1226,15 +1469,27 @@ func scriptureNarators() {
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             africanaFramework          ()
             return
-        case "cls", "clear":
-            utils.ClearScreen          ()
-        case "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun   ()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuZero      ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero  ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -1245,57 +1500,75 @@ func africanaFramework() {
     banners.Banner    ()
     menus.MenuZero    ()
     for {
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Home" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🦊" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
-        case "0", "e", "exit", "back":
-            //utils.ClearScreen   ()
-            //banners.Banner      ()
-            scriptures.Verse    ()
-            return
-        case "1":
+        case "0", "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "b", "back":
+        case "1", "use setups":
             systemSetups        ()
             return
-        case "2":
+        case "2", "use anonsurf":
             anonsurfSetups      ()
             return
-        case "3":
+        case "3", "use networks":
             internaltargetInput ()
             internalAttackers   ()
             return
-        case "4":
+        case "4", "use malwares":
             malwareGenerators   ()
             return
-        case "5":
+        case "5", "use wireless":
             wirelessAttackers   ()
             return
-        case "6":
+        case "6", "use crackers":
             passwordsCrackers   ()
             return
-        case "7":
+        case "7", "use phishers":
             credsPhishers       ()
             return
-        case "8":
+        case "8", "use websites":
             websiteUserTarget   ()
             websitesAttackers   ()
             return
-        case "9":
+        case "9", "use credits":
             creditsGivers       ()
             return
-        case "cls", "clear":
-            utils.ClearScreen   ()
-        case  "sh", "shell", "bash", "cmd", "pwsh":
-            subprocess.InteractiveShell()
-        case "99":
-            scriptureNarators          ()
-        case       "m", "M", "menu", "Menu", "MENU":
-            menus.MenuZero             ()
-        case "00", "h", "help":
-            menus.HelpMenuZero         ()
+        case "99", "use verses":
+            scriptureNarators   ()
+        case "info", "help info":
+            menus.HelpInfoMain()
+        case "info setups":
+            menus.HelpInfoSetups()
+        case "help setups":
+            menus.HelpInfoSetups()
+        case "set", "help set":
+            menus.HelpInfoSet   ()
+        case "use", "help use":
+            menus.HelpInfoUse   ()
+        case "run", "help run":
+            menus.HelpInfoRun()
+        case "show", "help show":
+            menus.HelpInfoShow()
+        case "l", "list", "modules", "list modules", "show modules", "show all":
+            menus.ListMainModules()
+        case "bash", "use bash":
+            utils.SystemShell(userInput)
+        case "history":
+            utils.History()
+        case "banner":
+            banners.Banner      ()
+        case "version":
+            banners.Version     ()
+        case "m", "menu":
+            menus.MenuZero      ()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero         ()
         default:
-            fmt.Printf(bcolors.RED + "\n[-] " + bcolors.ENDC + "Unknown command: " + bcolors.DARKGREY + "%s. " + bcolors.ENDC + "Run the " + bcolors.DARKGREEN + "help " + bcolors.ENDC + "command for more details.\n", userInput + bcolors.ENDC)
+            utils.SystemShell(userInput)
         }
     }
 }
@@ -1303,8 +1576,7 @@ func africanaFramework() {
 //...........................................(Main runner..)
 func genesis() {
     if len(os.Args) < 2 {
-        banners.Banner      ()
-        menus.HelpMenuMain  ()
+        africanaFramework()
         return
     }
     command := os.Args[1]
@@ -1350,16 +1622,11 @@ func genesis() {
     case "-99", "-b", "--scriptures":
         scriptureNarators   ()
         return
-    case "-00", "-h",       "--help":
-        banners.Banner      ()
-        menus.HelpMenuMain  ()
-    case "-s", "-sh", "--cmd", "--shell":
-        subprocess.InteractiveShell()
-        africanaFramework          ()
+    case "-00", "-h", "?", "--help":
+        menus.HelpInfoMain  ()
         return
     default:
-        banners.Banner      ()
-        menus.HelpMenuMain  ()
+        menus.HelpInfoMain  ()
     }
 }
 

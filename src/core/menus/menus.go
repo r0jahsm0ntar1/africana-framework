@@ -22,7 +22,7 @@ func MenuZero() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuZeroo() {
+func HelpZeroo() {
     fmt.Println(bcolors.YELLOW + "                   Install or update " + bcolors.ENDC + ": 1. It is an inbuild self mentainace code to update and install africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       System Security Configuration " + bcolors.ENDC + ": 2. This choice enables you to secure your system by keenly installing & configuring privoxy, squid, tor & dnsmasq." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "        Local Network Attack Vectors " + bcolors.ENDC + ": 3. It is aplace where you are guided through pentesting internal network devices with their open services." + bcolors.ENDC)
@@ -53,7 +53,7 @@ func MenuOne() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuOne() {
+func HelpOne() {
     fmt.Println(bcolors.YELLOW + "             Kali Linux " + bcolors.ENDC + ": 1. It is a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Ubuntu Linux " + bcolors.ENDC + ": 2. Is a good distor but has alot of problems while installing kali-linux packages to avoid issues like dependencies problems, use docker image or install kali-linux in Ubuntu docker then install africana." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Arch Linux " + bcolors.ENDC + ": 3. It is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros." + bcolors.ENDC)
@@ -81,7 +81,7 @@ func MenuTwo() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuTwo() {
+func HelpTwo() {
     fmt.Println(bcolors.YELLOW + "                      Installing " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Start anonymizing through tor " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Stop tor & restore all iptables " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
@@ -140,7 +140,7 @@ func MenuThreeFour() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
-func HelpMenuThree() {
+func HelpThree() {
     fmt.Println(bcolors.YELLOW + "                  Discover Targets " + bcolors.ENDC + ": 1. Scan all subnet for connected devices and list them in a table form for you to select a target for further penetration testing againist it." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Port discovery on the target " + bcolors.ENDC + ": 2. Scan the initial selected target for open ports and services to give you vivid info on how to to tackle your target." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Vuln' Scan the Target " + bcolors.ENDC + ": 3. Scan for known vulnerbility that may be an easy win on all open ports." + bcolors.ENDC)
@@ -331,7 +331,7 @@ func MenuFourSevenTwo() {
     fmt.Println(bcolors.DARKGREEN + " 4) " + bcolors.ENDC + "autorun.ico " + bcolors.DARKGREEN + " 8) " + bcolors.ENDC + "powerpoint.ico " + bcolors.DARKGREEN + " 12) " + bcolors.ENDC + "visio.ico" + bcolors.ENDC)
 }
 
-func HelpMenuFour() {
+func HelpFour() {
     fmt.Println(bcolors.YELLOW + "              Blackjack " + bcolors.ENDC + ": 1. It is a tool derived from villain framework. It supports both tcp, hhtp & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              ShellzGen " + bcolors.ENDC + ": 2. It is anice tool. Supports all distro reverse shell generation that supports both tcp, https & https connection. Launches variety of listeners." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             PowerJoker " + bcolors.ENDC + ": 3. A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection." + bcolors.ENDC)
@@ -363,7 +363,7 @@ func MenuFive() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuFive() {
+func HelpFive() {
     fmt.Println(bcolors.YELLOW + "                 Wifite " + bcolors.ENDC + ": Automated. Wifite Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              Bettercap " + bcolors.ENDC + ": Automated. Bettercap Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Wifipumpkin3 " + bcolors.ENDC + ": You will be guided to launch a phishing wireless network which when any one joins it, you view all their traffick. Internet is needed for redirects." + bcolors.ENDC)
@@ -388,7 +388,7 @@ func MenuSix() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuSix() {
+func HelpInfoSix() {
     fmt.Println(bcolors.YELLOW + "                 Online " + bcolors.ENDC + ": 1. Attack services that are online. Ex SMB, SSH, FTP, HTTP, HTTPS etc." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                Offline " + bcolors.ENDC + ": 2. Attack .pcaps, hashes, captured ntlms or documents with passwords." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
@@ -413,7 +413,7 @@ func MenuSixOne() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuSixOne() {
+func HelpSixOne() {
     fmt.Println(bcolors.YELLOW + "                    SSH " + bcolors.ENDC + ": 1. Automated Bruteforcer for SSH using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    FTP " + bcolors.ENDC + ": 2. Bruteforcer for FTP using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    SMB " + bcolors.ENDC + ": 3. Hydra Bruteforcer for SMB using rockyou.txt wordlists." + bcolors.ENDC)
@@ -445,7 +445,7 @@ func MenuSixTwo() {
 }
 
 
-func HelpMenuSixTwo() {
+func HelpSixTwo() {
     fmt.Println(bcolors.YELLOW + "            Aircrack_ng " + bcolors.ENDC + ": 1. Automated. It will prompt you for location of the file e.g. ntlm file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   John " + bcolors.ENDC + ": 2. Automated. It will prompt you for location of the file e.g. .pcap file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 3. Still working on this option." + bcolors.ENDC)
@@ -484,7 +484,7 @@ func MenuSevenOne() {
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
 }
 
-func HelpMenuSeven() {
+func HelpSeven() {
     fmt.Println(bcolors.YELLOW + "  Gophish.(Browser Gui) " + bcolors.ENDC + ": I is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default user is: admin, Default password is: kali-gophish" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Good Ginx (Advanced) " + bcolors.ENDC + ": It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            AdvPhishing " + bcolors.ENDC + ": A nice framework with alot of templets. Also bypasses OTP with ngrock support." + bcolors.ENDC)
@@ -516,7 +516,7 @@ func MenuEight() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEight() {
+func HelpEight() {
     fmt.Println(bcolors.YELLOW + "                Web recon " + bcolors.ENDC + ": 1. Automated. Start Passive Web recon & Subdomain Enumration. Chosen tools with less noise are used to gather information on agiven domain before Intrusion begins." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Gather e-mails " + bcolors.ENDC + ": 2. Theharvester tool will try to harvest emails with user names that could be used for phishing, creat wordlists or also as login names for admin panels." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Start Bruteforcing " + bcolors.ENDC + ": 3. In this phase, Gobuster tool is used to show us hidden files in the website and also try to find login pages." + bcolors.ENDC)
@@ -543,7 +543,7 @@ func MenuEightFour() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEightFour() {
+func HelpEightFour() {
     fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1. (Automated) Sqlmap tool is configured to run with obfsication templets to avoid detection and give you desirable outcomes. (Intrusive)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Xss injection(A) " + bcolors.ENDC + ": 2. (Automated) Acompination of tools are used to try and find xss injection vulnerbility on the website. (Intrusive)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Sql injection(M) " + bcolors.ENDC + ": 3. (Manual) In this option you will be required to enter sql website injection required data manually." + bcolors.ENDC)
@@ -570,7 +570,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEightFive() {
+func HelpEightFive() {
     fmt.Println(bcolors.YELLOW + "  Nettacker port & web  " + bcolors.ENDC + ": 1. Scans for all open ports and services. Recons for hidden root files in the target host." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "        Scan subdomains " + bcolors.ENDC + ": 2. Digs for all sudomains related to your target for alternative pentesting." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Launch admin_scan " + bcolors.ENDC + ": 3. Scans the given target in an aim of finding the login panels where you can try SQL injections & password bruteforcing." + bcolors.ENDC)
@@ -602,7 +602,7 @@ func MenuEightSix() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEightSix() {
+func HelpEightSix() {
     fmt.Println(bcolors.YELLOW + "    Install jok3r tools " + bcolors.ENDC + ": 1. Jok3r comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Jok3r are installed for better results. (Run once)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          Update toolbox " + bcolors.ENDC + ": 2. If all third party are installed, you could update the tools using this option.(Not necessary in new install.)" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Show all the tools " + bcolors.ENDC + ": 3. Health check. See if all tools are installed correctly and are working properly before engaging in hacking." + bcolors.ENDC)
@@ -634,7 +634,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEightSeven() {
+func HelpEightSeven() {
     fmt.Println(bcolors.YELLOW + "         Update Osmedeus " + bcolors.ENDC + ": 1. Osmedeus comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Osmedeus are installed for better results. (Run once)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Simple scan " + bcolors.ENDC + ": 2. The tool will Start a simple scan with other flow like discovering domains and ports. (Reconing)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Vuln and directory " + bcolors.ENDC + ": 3. Osmedeus will check for vulnerbilities and discover hidden root directories disclosing related subdomains on your target." + bcolors.ENDC)
@@ -666,7 +666,7 @@ func MenuEightEight() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpMenuEightEight() {
+func HelpEightEight() {
     fmt.Println(bcolors.YELLOW + "  Download list of Bots " + bcolors.ENDC + ": 1. Ufonet will download a list of zombies machines from Community servers that will be used durring DDOS attacks.." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Test if bots are alive " + bcolors.ENDC + ": 2. After downloding the zombies, it is good to test them if they are alive and working for a better results." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "        Launch palantir " + bcolors.ENDC + ": 3. It is a kind of ddos attack that can be launched in non-root mode." + bcolors.ENDC)
@@ -681,112 +681,8 @@ func HelpMenuEightEight() {
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
-func HelpMenuMainX() {
-    scriptures.Verse()
-    fmt.Println(bcolors.ENDC + "\nGithub Page " + bcolors.GREEN + "          " + bcolors.DARKCYAN + "https://github.com/r0jahsm0ntar1/africana-framework" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "Usages: " + bcolors.PURPLE + "   (◕‿◕✿)" + bcolors.ENDC + "       🦊africana (" + bcolors.DARKCYAN + "options" + bcolors.ENDC + ")" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.ENDC + "To start " + bcolors.GREEN + "africana " + bcolors.ENDC + "in " + bcolors.DARKCYAN + "aoutomation" + bcolors.ENDC + " mode try;" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "           --auto       (" + bcolors.GREEN + "africana " + bcolors.PURPLE + "-a) " + bcolors.ENDC + "or " + bcolors.ENDC + "(" + bcolors.GREEN + "africana " + bcolors.PURPLE + "--auto" + bcolors.ENDC + ")" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "Options:                                                                          " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -00, -h, --help       Show this " + bcolors.ORANGE + "help message" + bcolors.ENDC + " and exit." + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "       -hh              Display " + bcolors.DARKCYAN + "full help " + bcolors.ENDC + "with " + bcolors.DARKCYAN + "suplementary advanced" + bcolors.ENDC + " examples &" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        exit.                                                     " + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Setups" + bcolors.ENDC + ":                                                   " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -v       --version    Display the version and exit                              " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -u,      --update     Check for " + bcolors.DARKCYAN + "new version " + bcolors.ENDC + "and " + bcolors.DARKCYAN + "update " + bcolors.GREEN + "africana " + bcolors.ENDC + "tool set." + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -1,  -i, --install    Go to installation menu to either " + bcolors.DARKCYAN + "🩺install, update" + bcolors.ENDC + " or      " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.DARKCYAN + "uninstall " + bcolors.ENDC + "africana." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Cyphers" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -2,  -t, --anonsurf   Tor menu to set " + bcolors.ORANGE + "🎭system " + bcolors.PURPLE + "securities " + bcolors.ENDC + "configures and fix" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        (" + bcolors.DARKCYAN + "dnsleak, Iptables, squid, privoxy, tor, dnsmasq" + bcolors.ENDC + ")" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        all Chained together for the best privacy & anonymity." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Networks" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -3,  -n, --networks   Go to " + bcolors.ORANGE + "Local network attack " + bcolors.ENDC + "vectors and perform            " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        automated (" + bcolors.DARKCYAN + "🐹MITM, MITB, SNIFF, SPOOF" + bcolors.ENDC + ") " + bcolors.ENDC + "among others." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Malwares" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -4,  -m, --malwares   Launch " + bcolors.ORANGE + "🐭Malware generation" + bcolors.ENDC + " menu. You will be guided on" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        how to (" + bcolors.DARKCYAN + "Generate undetectable Backdoors" + bcolors.ENDC + ") & launch C2s." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Wireless" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -5,  -w, --wireless   " + bcolors.ORANGE + "🍍WiFi attack vectors" + bcolors.ENDC + " menu. Perform " + bcolors.DARKCYAN + "effective wireless" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        attacks." + bcolors.PURPLE + "(✿◠‿◠)" + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Crackers" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -6,  -p, --crackers   Crack (" + bcolors.DARKCYAN + "NTLMS, HASHES, PCAPS" + bcolors.ENDC + ") " + bcolors.ENDC + "& " + bcolors.ORANGE + "🔐bruteforces " + bcolors.ENDC + "both" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.DARKCYAN + "offline " + bcolors.ENDC + "and " + bcolors.DARKCYAN + "online " + bcolors.ENDC + "services like (" + bcolors.DARKCYAN + "SSH, FTP, SMB, RPC" + bcolors.ENDC + ")" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        among others." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Phishers" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -7,  -f, --phishers   This option will guide you on how to perform " + bcolors.ORANGE + "🪝Phishing" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        attacks " + bcolors.DARKCYAN + "effectively.                                      " + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Websites" + bcolors.ENDC + ":                                                 " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -8,  -x, --websites   Launch " + bcolors.ORANGE + "🌍Web Penetration " + bcolors.ENDC + "engines with proxy support." + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        Supported proxies are. " + bcolors.ENDC + "(" + bcolors.DARKCYAN + "SOCK4, SOCKS5, HTTP " + bcolors.ENDC + "or " + bcolors.DARKCYAN + "HTTPS" + bcolors.ENDC + ")     " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        (" + bcolors.ORANGE + "format: " + bcolors.DARKCYAN + "host:port" + bcolors.ENDC + ") " + bcolors.ORANGE + "e.g." + bcolors.ENDC + "(" + bcolors.PURPLE + "http://localhost:8080" + bcolors.ENDC + ")" + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Credits" + bcolors.ENDC + ":                                                  " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -9,  -c, --credits    Show about (" + bcolors.DARKCYAN + "📚who developes " + bcolors.GREEN + "africana" + bcolors.DARKCYAN + " and credits" + bcolors.ENDC + ") for " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        those whose " + bcolors.DARKCYAN + "opensource" + bcolors.ENDC + " tools have been modified and used  " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        to make " + bcolors.GREEN + "africana " + bcolors.PURPLE + "lethal." + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Scriptures" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -99, -b, --scriptures Show " + bcolors.ORANGE + "Scripture's verses" + bcolors.ENDC + " in an uniform way as used in" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        each and every menu." + bcolors.PURPLE + "(✿◠‿◠)                                  " + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "Inatactive Shell" + bcolors.ENDC + ":                                               " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "  -s, -sh --cmd --shell " + bcolors.ORANGE + "Launch " + bcolors.ENDC + "Intaractive shell In " + bcolors.GREEN + "africana " + bcolors.ORANGE + "e.g " + bcolors.PURPLE + "'cmd.exe''bash'" + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        ex. "  + bcolors.GREEN + "africana " + bcolors.PURPLE + "--shell " + bcolors.ENDC)
-    fmt.Println(bcolors.ENDC + "                        " + bcolors.ORANGE + "Usages 🐾 on: " + bcolors.RED + "YouTube: " + bcolors.DARKCYAN + bcolors.ITALIC + "https://youtube.com/@RojahsMontari" + bcolors.ENDC)
-    fmt.Println(bcolors.DARKCYAN + "[" + bcolors.ENDC + "!" + bcolors.DARKCYAN + "] " + bcolors.ENDC + "To see full list of options use " + bcolors.ORANGE + "--hh. " + bcolors.PURPLE + "🦠｡ ◕‿◕｡" + bcolors.ENDC)
-
-}
-
-func HelpMenuZero() {
-    fmt.Printf(`%s
-    Command       Description
-    -------       -----------
-    ?                 Help menu
-    banner            Display an awesome africana banner
-    clear             Clear the working screen
-    exit              Exit the console
-    features          Display the list of not yet released features that can be opted in to
-    help              Help menu
-    history           Show command history
-    load              Load a framework plugin
-    quit              Exit the console
-    set               Sets a context-specific variable to a value
-    sleep             Do nothing for the specified number of seconds
-    spool             Write console output into a file as well the screen
-    tips              Show a list of useful productivity tips
-    unload            Unload a framework plugin
-    unset             Unsets one or more context-specific variables
-    unsetg            Unsets one or more global variables
-    version           Show the framework and console library version numbers
-
-Module Commands
----------------
-
-    Command        Description
-    -------        -----------
-    advanced       Displays advanced options for one or more modules
-    back           Move back from the current context
-    info           Displays information about one or more modules
-    list           List the module stack
-    options        Displays global options or for one or more modules
-    previous       Sets the previously loaded module as the current module
-    search         Searches module names and descriptions
-    show           Displays modules of a given type, or all modules
-    use            Interact with a module by name or search term/index
-
-Developer Commands
-------------------
-
-    Command        Description
-    -------        -----------
-    log            Display framework.log paged to the end if possible
-    time           Time how long it takes to run a particular command
-    shell          Open an interactive shell in the current context
-
-For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
-`,bcolors.ENDC , bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
-}
-
-func HelpMenuMain() {
-    fmt.Println(bcolors.ENDC + `
+func HelpInfoMenuMain() {
+    fmt.Print(bcolors.ENDC + `
 Usage: ./africana [options]
 
 Common options:
@@ -811,9 +707,283 @@ Console options:
     -w, --websites       Launch Web Penetration engines
     -c, --credits        Show who developes africana (& third party tools developers)
     -b, --verses         Launch Bible verses in an uniform way manner as used in the framework
-    -s, --shell          Start Intaractive shell In africana (other flags '--sh --cmd --zsh')
     -x, --usage          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
-    -h, --help
-
-Github Page:             https://github.com/r0jahsm0ntar1/africana-framework` + bcolors.ENDC)
+    -h, --help           Show this message
+` + bcolors.ENDC)
 }
+
+func HelpInfoMenuZero() {
+    fmt.Printf(`%s
+    Command       Description
+    -------       -----------
+    ?                 Help menu
+    banner            Display an awesome africana banner
+    clear             Clear the working screen
+    exit              Exit the console
+    features          Display the list of not yet released features that can be opted in to
+    help              Help menu
+    history           Show command history
+    load              Load a framework plugin
+    menu              Print the menu of the current phase. Alias to letter (m)
+    quit              Exit the console
+    set               Sets a context-specific variable to a value
+    sleep             Do nothing for the specified number of seconds
+    spool             Write console output into a file as well the screen
+    tips              Show a list of useful productivity tips
+    unload            Unload a framework plugin
+    unset             Unsets one or more context-specific variables
+    version           Show the framework and console library version numbers
+
+Module Commands
+---------------
+
+    Command        Description
+    -------        -----------
+    advanced       Displays advanced options for one or more modules
+    back           Move back from the current context
+    run            Run a selected module
+    exploit        Alias for run
+    info           Displays information about one or more modules
+    list           List the module stack
+    options        Displays global options or for one or more modules
+    previous       Sets the previously loaded module as the current module
+    search         Searches module names and descriptions
+    show           Displays modules of a given type, or all modules
+    use            Interact with a module by name or search term
+
+Developer Commands
+------------------
+
+    Command        Description
+    -------        -----------
+    log            Display framework.log paged to the end if possible
+    time           Time how long it takes to run a particular command
+    bash           Start Intaractive shell in africana (other flags 'sh, zsh, cmd, powershell')
+
+For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
+`, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+func ListMainModules() {
+    fmt.Print(`
+Main modules:
+-------------
+
+  # Name           Description
+  - ----           -----------
+  1 setups         . Install, Uninstall africana-framework
+  2 anonsurf       . Launch anonsurf menu to torify your system './africana -t'
+  3 networks       . Start internal network attacks
+  4 malwares       . Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+  5 wireless       . From wifi, bluetooth and other wireles attack vectors
+  6 crackers       . Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+  7 phishers       . Perform Phishing attacks
+  8 websites       . Launch Web Penetration engines
+  9 credits        . Show who developes africana (& third party tools developers)
+  10 verses        . Launch Bible verses in an uniform way manner as used in the framework
+`)
+}
+
+func HelpInfoRun() {
+    fmt.Print(`
+Usage: run [module]
+
+Run a module
+    show modules to list modules or <show all>
+
+Examples:
+    run setups
+`)
+}
+
+func HelpInfoShow() {
+    fmt.Printf(`
+Usage: show [modules] or show [all]
+
+Examples:
+  show modules
+
+%s[*]%s Valid parameters for the "show" command are: modules, all
+%s[*]%s Additional module-specific parameters are: missing, advanced
+`, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+}
+
+func HelpInfoUse() {
+    fmt.Print(`
+Usage: use <name|term>
+
+Interact with a module by name or search term/index.
+If a module name is not found, it will be treated as a search term.
+An index from the previous search results can be selected if desired.
+
+Examples:
+  use setups, anonsurf, internals, malwares, wireless, phishers, websites, verses
+
+  use setups
+  use <name>
+`)
+}
+
+func HelpInfoSet() {
+    fmt.Print(`
+Usage: set [options] [name] [value]
+
+Set the given option to value.  If value is omitted, print the current value.
+If both are omitted, print options that are currently set.
+
+If run from a module context, this will set the value in the module's
+datastore.  Use -g to operate on the global datastore.
+
+If setting a PAYLOAD, this command can take an index from 'show payloads'.
+
+OPTIONS:
+
+    -c, --clear   Clear the values, explicitly setting to nil (default)
+    -g, --global  Operate on global datastore variables
+    -h, --help    Help banner.
+`)
+}
+
+func HelpInfoMain() {
+    fmt.Print(`
+Usage: info <module name>
+
+Examples:
+  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+
+Queries the supplied module or modules for information. If no module is given,
+show info for the currently active module.
+`)
+}
+
+func HelpSetupsInfo() {
+    fmt.Print(`
+Usage: info <module name>
+
+Examples:
+  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+
+Queries the supplied module or modules for information. If no module is given,
+show info for the currently active module.
+`)
+}
+
+func HelpInfoSetups() {
+    fmt.Print(`
+       Name: Setups
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License (BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  This module enables you to Install, uninstall, update & mentain africana
+`)
+}
+
+func HelpUsageSetups() {
+    fmt.Print(`
+Usage: run [setups]
+
+Description:
+  This module enables you to Install, uninstall, update & mentain africana
+`)
+}
+
+func ListSetupsModules() {
+    fmt.Print(`
+Setups Modules
+------ -------
+
+  #  Module       Description
+  -  ------       -----------
+
+  1 kali          .  Installs africana-framework in Kali-Linux
+  2 ubuntu        .  This Module installs africana-framework in Ubuntu-Linux
+  3 arch          .  Tools will be installed with blackman an intergration of black-arch in any arch-linux distro
+  4 windows       .  Under development. But can run if tools well installed using commando vm. Just give me time
+  5 uninstall     .  use this module to completelty uninstall africana with all it's dependencies from your system
+`)
+}
+
+func HelpInfoMalwares() {
+    fmt.Print(`
+Usage: info <module name>
+
+Examples:
+  info blackjack
+
+Malware sub modules:
+  blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
+
+Queries the supplied module or modules for information. If no module is given,
+show info for the currently active module.
+`)
+}
+
+func ListMalwareModules() {
+    fmt.Print(`
+Malware sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports obfsications & bypasses almost all avs.
+  2 shellzgen      . Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
+  3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection.
+  4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques.
+  5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users.
+  6 teardroid      . Andoird C2. Needs alot of online configuration but the best for now.
+  7 androidrat     . It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  8 chameleon      . A good obfsication tool for powershell scripts. Already configured for you.
+  9 gh0x0st        . It is a giant powershell obfsication tool that beats almost all AVS. Try it out you will love it
+  10 usage         . Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
+`)
+}
+
+func HelpInfoBlackJack() {
+    fmt.Print(`
+       Name: BlackJack
+     Module: /root/.africana/africana-base/blackjack
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License (BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by t3l3machus
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a tool derived from villain framework. It supports both tcp, hhtp & https
+  reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+

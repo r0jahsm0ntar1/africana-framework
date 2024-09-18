@@ -1013,10 +1013,10 @@ var verses = map[int]string{
 func CommandMents() {
     fmt.Printf(bcolors.GREEN + `
     ╭───────────────────────────────────────────────╮
-    │ "What good is it to gain the whole world      │
+    │ What good is it to gain the whole world       │
     │ and lose your soul? Your Creator has wonderful│
     │ plans for you! Life Tip: Defeat the Devil by  │
-    │ fasting and praying."                         │
+    │ fasting and praying.                          │
     └───────────────────────────────────────────────┘
 ` + bcolors.ENDC)
 

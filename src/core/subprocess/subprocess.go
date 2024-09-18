@@ -1,24 +1,20 @@
 package subprocess
 
 import (
-    "os"
     "fmt"
-    "time"
-    "bufio"
-    "bcolors"
-    "runtime"
-    "strings"
-    "syscall"
+    "os"
     "os/exec"
     "os/signal"
     "path/filepath"
+    "runtime"
+    "sync"
 )
 
 var (
-    shell string
-    flag  string
-    sh    *exec.Cmd
-    reader = bufio.NewReader(os.Stdin)
+    shell   string
+    flag    string
+    logFile *os.File
+    mu      sync.Mutex
 )
 
 func init() {
@@ -30,52 +26,41 @@ func init() {
         shell = "bash"
         flag = "-c"
     }
-}
 
-func Popen(command string, args ...interface{}) {
-    process := fmt.Sprintf(command, args...)
-
-    logDir := "/root/.africana/logs"
+    logDir := filepath.Join("/root/.africana", "logs")
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
         fmt.Fprintln(os.Stderr, "Error creating log directory:", err)
         return
     }
 
-    logFileName := fmt.Sprintf("session_%s.log", time.Now().Format("2006-01-02_15-04-05"))
-    logFileTime := fmt.Sprintf("logtime_%s.tme", time.Now().Format("2006-01-02_15-04-05"))
-    logTimePath := filepath.Join(logDir, logFileTime)
-    logFilePath := filepath.Join(logDir, logFileName)
-
-    var scriptCommand string
-    if runtime.GOOS == "windows" {
-        scriptCommand = process
-    } else {
-        escapeCommand := fmt.Sprintf("%q", process)
-        scriptCommand = fmt.Sprintf("script -q -c %s --log-timing %s --log-out %s", escapeCommand, logTimePath, logFilePath)
+    var err error
+    logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    if err != nil {
+        fmt.Fprintln(os.Stderr, "Error opening log file:", err)
     }
+}
 
-    sh = exec.Command(shell, flag, scriptCommand)
-    sh.Stdin = os.Stdin
-    sh.Stdout = os.Stdout
-    sh.Stderr = os.Stderr
+func Popen(command string, args ...interface{}) {
+    process := fmt.Sprintf(command, args...)
+
+    logCommand(process)
+
+    cmd := exec.Command(shell, flag, process)
+    cmd.Stdin = os.Stdin
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
 
     sigs := make(chan os.Signal, 1)
-    signal.Notify(sigs, os.Interrupt, syscall.SIGTERM)
+    signal.Notify(sigs, os.Interrupt)
 
-    if err := sh.Start(); err != nil {
+    if err := cmd.Start(); err != nil {
         fmt.Fprintln(os.Stderr, "Error starting process:", err)
         return
     }
 
-    go func() {
-        for sig := range sigs {
-            if sh.Process != nil {
-                sh.Process.Signal(sig)
-            }
-        }
-    }()
+    go handleInterrupt(cmd, sigs)
 
-    if err := sh.Wait(); err != nil {
+    if err := cmd.Wait(); err != nil {
         fmt.Fprintln(os.Stderr, "Process finished with error:", err)
     }
 
@@ -83,56 +68,39 @@ func Popen(command string, args ...interface{}) {
     close(sigs)
 }
 
-func InteractiveShell() {
-    currentDir, err := os.Getwd()
-    if err != nil {
-        fmt.Fprintln(os.Stderr, "Error getting current directory:", err)
-        return
-    }
+func logCommand(command string) {
+    mu.Lock()
+    defer mu.Unlock()
 
-    fmt.Println("\n      Welcome! Type 'help' to list available commands." + bcolors.ENDC)
-    for {
-        fmt.Print(bcolors.BLUE + "\n╭─(" + bcolors.RED + "root" + bcolors.ENDC + "@" + bcolors.ORANGE + "shell" + bcolors.BLUE + ")[" + bcolors.GREEN + currentDir + bcolors.BLUE + "]" + bcolors.ENDC)
-        fmt.Print(bcolors.BLUE + "\n└─" + bcolors.ENDC + bcolors.RED + "# " + bcolors.ENDC)
-
-        command, err := reader.ReadString('\n')
-        if err != nil {
-            fmt.Fprintln(os.Stderr, "Error reading command:", err)
-            continue
-        }
-
-        command = strings.TrimSpace(command)
-
-        if command == "exit" {
-            break
-        }
-
-        if strings.HasPrefix(command, "cd ") {
-            dir := strings.TrimSpace(strings.TrimPrefix(command, "cd "))
-            if dir == "" {
-                dir = os.Getenv("HOME")
-            }
-            if err := os.Chdir(dir); err != nil {
-                fmt.Fprintln(os.Stderr, "Error changing directory:", err)
-            } else {
-                currentDir, _ = os.Getwd()
-            }
-            continue
-        }
-
-        sh = exec.Command(shell, flag, command)
-        sh.Stdin = os.Stdin
-        sh.Stdout = os.Stdout
-        sh.Stderr = os.Stderr
-
-        if err := sh.Start(); err != nil {
-            fmt.Fprintln(os.Stderr, "Error starting process:", err)
-            continue
-        }
-
-        if err := sh.Wait(); err != nil {
-            fmt.Fprintln(os.Stderr, "Process finished with error:", err)
+    if logFile != nil {
+        if _, err := logFile.WriteString(command + "\n"); err != nil {
+            fmt.Fprintln(os.Stderr, "Error writing to log file:", err)
         }
     }
 }
 
+func handleInterrupt(cmd *exec.Cmd, sigs chan os.Signal) {
+    <-sigs
+    if cmd.Process != nil {
+        if err := cmd.Process.Signal(os.Interrupt); err != nil {
+            if !isProcessFinished(err) {
+                fmt.Fprintln(os.Stderr, "Error sending interrupt signal:", err)
+            }
+        }
+    }
+}
+
+func isProcessFinished(err error) bool {
+    return err == os.ErrProcessDone
+}
+
+func CloseLogFile() {
+    mu.Lock()
+    defer mu.Unlock()
+
+    if logFile != nil {
+        if err := logFile.Close(); err != nil {
+            fmt.Fprintln(os.Stderr, "Error closing log file:", err)
+        }
+    }
+}

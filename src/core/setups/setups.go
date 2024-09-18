@@ -74,7 +74,7 @@ func KaliSetups() {
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc jq aircrack-ng gawk cowpatty dhcpd 7zip hostapd lighttpd net-tools macchanger mdk4 dsniff mdk3 nmap openssl php-cgi xterm rfkill unzip php-cgi bc hydra wine32:i386`,
             `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
@@ -100,7 +100,7 @@ func UbuntuSetups() {
             `curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o /etc/apt/sources.list.d/playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `apt-get install -y tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec aha set playit libssl-dev gcc jq aircrack-ng gawk cowpatty dhcpd 7zip hostapd lighttpd net-tools macchanger mdk4 dsniff mdk3 nmap openssl php-cgi xterm rfkill unzip php-cgi bc hydra wine32:i386`,
             `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
@@ -140,7 +140,7 @@ func BlackArchSetups() {
             `./strap.sh`,
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm blackarch`,
-            `pacman -S --noconfirm base-devel tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser powershell-empire util-linux netexec aha set playit libssl-dev gcc hydra wine32:i386`,
+            `pacman -S --noconfirm base-devel tor squid privoxy iptables tmux openssh-client libpcap-dev npm openssh-server ftp ncat rlwrap go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev privoxy dnsmasq gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework dnsrecon feroxbuster dirsearch uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser powershell-empire util-linux netexec aha set playit libssl-dev gcc jq aircrack-ng gawk cowpatty dhcpd 7zip hostapd lighttpd net-tools macchanger mdk4 dsniff mdk3 nmap openssl php-cgi xterm rfkill unzip php-cgi bc hydra wine32:i386`,
             `winecfg /v win11`,
         }
         installFoundationTools(foundationCommands)
@@ -153,6 +153,10 @@ func BlackArchSetups() {
 }
 
 func WindowsSetups() {
+    // Placeholder for Windows setup logic
+}
+
+func Androidinstall() {
     // Placeholder for Windows setup logic
 }
 

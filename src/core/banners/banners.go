@@ -7,10 +7,17 @@ import (
     "math/rand"
 )
 var (
-    version = "v3.0.1"
+    version = "3.0.1-dev"
 )
 
 type Banners struct{}
+
+func Version() {
+    fmt.Printf(`
+Framework: %s
+Console  : %s
+` + bcolors.ENDC, version, version)
+}
 
 func Graphics() {
     rand.Seed(time.Now().UnixNano())
@@ -33,6 +40,7 @@ func Graphics() {
          '" '"  '""         %sfor our sins.%s
                              %sJohn 3:16%s
 
+
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -45,12 +53,13 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
             |  /
            /-.(
            \_._\
-            \ \';           %s%s%s%s%s
-             > |/        %sJesus Christ%s
-            / //       %sL❤️.VE'S U. He is%s
-            |//    %sThe Lamb that was slain%s
-            \(\          %sfor our sins.%s
-                           %sJohn 3:16%s
+            \ \';
+             > |/           %s%s%s%s%s
+            / //         %sJesus Christ%s
+            |//       %sL❤️.VE'S U. He is%s
+            \(\    %sThe Lamb that was slain%s
+                         %sfor our sins.%s
+                          %sJohn 3:16%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.PURPLE, bcolors.PURPLE, bcolors.ENDC)
@@ -62,12 +71,16 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors
                           /   .)/\ ')
                         .',./'/   )/
                     ()=///=))))==()
-                      /      %s%s%s%s%s
+                      /
+             /^v^\                      /^v^\
+                    /^v^\
+        /^v^\
+                          %s%s%s%s%s
                       %swake up, Christian%s
               %sLord God Jesus Christ L❤️.VE'S you%s
                     %sfollow the white Pigeon.%s
                      %sknock, knock, knock,%s
-                          %sMan Of God.%s
+                         %sMan Of God.%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcolors.GREEN, bcolors.PURPLE, bcolors.ENDC)
@@ -89,7 +102,6 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcol
          ; ,''-,;' ''-     %sThe Lamb that was slain%s
           ''-..__''--'          %sfor our sins.%s
                                   %sJohn 3:16%s
-
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
 
@@ -102,9 +114,11 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
             ||_____||    _____ /        ____
             |o_____*|   [o_+_+]--------[=i==]
              |     ________|           drive
-             |  __|_            %s%s%s%s%s
-             '-/_==_\       %sJesus Christ is%s
-              /_____\\  %sThe Lamb that was slain%s
+             |  __|_
+             '-/_==_\
+              /_____\\          %s%s%s%s%s
+                             %sJesus Christ is%s
+                        %sThe Lamb that was slain%s
                              %sfor our sins.%s
                                %sJohn 3:16%s
 
@@ -120,11 +134,13 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
           |  *    *  |||  *  *  * |  *       ||
           |__________|||__________|__________||
           |          || '---------------------'
+          |  *    *  ||
+          |          ||
           |  *    *  ||         %s%s%s%s%s
-          |          ||     %sJesus Christ is%s
-          |  *    *  || %sThe Lamb that was slain%s
-          |__________||      %sfor our sins.%s
-           '----------'        %sJohn 3:16%s
+          |__________||     %sJesus Christ is%s
+           '----------' %sThe Lamb that was slain%s
+                              %sfor our sins.%s
+                               %sJohn 3:16%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
@@ -138,11 +154,13 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
 - -----==;;;'==--------------------==';;;==----- -
              \/  ~"~"~"~"~"~\~"~)~"/
              (_ (   \  (     >    \) 
-               \_( _ <         >_>'     %s%s%s%s%s
-                  ~ '-i' ::>|--"    %sJesus Christ is%s
-                      I;|.|.|  %sThe Lamb that was slain%s
-                     <|i::|i|'.      %sfor our sins.%s
-                    (' ^'"'-' ")       %sJohn 3:16%s
+               \_( _ <         >_>'
+                  ~ '-i' ::>|--"
+                      I;|.|.|             %s%s%s%s%s
+                     <|i::|i|'.        %sJesus Christ is%s
+                    (' ^'"'-' ")   %sThe Lamb that was slain%s
+                                       %sfor our sins.%s
+                                         %sJohn 3:16%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)
@@ -177,7 +195,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
      ,'   '-_ \/ '-.'--.\    _\_.-'\__.-'-.'-._'.
     (_.o> ,--. '._/'--.-',--'  \_.-'       \'-._ \
      '---'    '._ '---._/__,----'           '-. '-\
-               /_, ,  _..-'        %s%s%s%s%s      '-._\
+               /_, ,  _..-'       %s%s%s%s%s    '-._\
                \_, \/ ._(      %sJesus Christ is%s
                 \_, \/ ._\ %sThe Lamb that was slain%s
                  '._,\/ ._\     %sfor our sins.%s
@@ -189,77 +207,71 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
     }
 }
 
-func GraphicsAnonsurf() {
-    rand.Seed(time.Now().UnixNano())
-    menu := rand.Intn(2) + 1
-
-    switch menu {
-    case 1:
-        Banner()
-        fmt.Printf(`%s
+func AnonSurfBanner() {
+    fmt.Printf(`%s
           \                                       _|
          _ \   __ \   _ \  __ \   __| |   |  __| |
         ___ \  |   | (   | |   |\__ \ |   | |    __|
       _/    _\_|  _|\___/ _|  _|____/\__,_|_|   _|  %s%s%s%s
 
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    case 2:
-        Banner()
-        fmt.Printf(`%s
-
-    ██      ▄   ████▄    ▄      ▄▄▄▄▄   ▄   █▄▄▄▄ ▄████
-    █ █      █  █   █     █    █     ▀▄  █  █  ▄▀ █▀   ▀
-    █▄▄█ ██   █ █   █ ██   █ ▄  ▀▀▀▀▄ █   █ █▀▀▌  █▀▀
-    █  █ █ █  █ ▀████ █ █  █  ▀▄▄▄▄▀  █   █ █  █  █
-       █ █  █ █       █  █ █          █▄ ▄█   █    █
-      █  █   ██       █   ██           ▀▀▀   ▀      ▀
-     ▀                                              %s%s%s%s
-
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    }
 }
 
 func GraphicsMini() {
     rand.Seed(time.Now().UnixNano())
-    menu := rand.Intn(4) + 1
+    menu := rand.Intn(5) + 1
 
     switch menu {
     case 1:
-        fmt.Printf(`%s
-# cowsay++
- ____________
-< africana >
- ------------
-       \   ,__,
-        \  (oo)____
-           (__)    )\
-              ||--|| *
-
-                                        %s%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
-
-    case 2:
         fmt.Printf(`%s
              _.-;;-._
       '-..-'|   ||   |
       '-..-'|_.-;;-._|
       '-..-'|   ||   |
       '-..-'|_.-''-._|
-                                        %s%s%s%s
+
+                                                  %s%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
 
-    case 3:
+    case 2:
         fmt.Printf(`%s
          .'"".'/|\'.""'.
         :  .' / | \ '.  :
         '.'  /  |  \  '.'
          '. /   |   \ .'
            '-.__|__.-'
-                                        %s%s%s%s
+                                                  %s%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 3:
+        fmt.Printf(`%s
+         _
+       (( )_,     ,
+.--.    \ '/     /.\
+    )   / \=    /O o\     _
+   (   / _/    /' o O| ,_( ))___     ('
+    '-|   )_  /o_O_'_(  \'    _ '\    ) 
+      '""""'            ='---<___/---'
+                            "'
+                                                  %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
     case 4:
+        fmt.Printf(`%s
+ ______________________________________
+/ If it were not for you Lord God Jesus\
+\ where would I have been?             /
+ '------------------------------------'
+       \   ,__,
+        \  (oo)____
+           (__)    )\
+              ||--|| *
+
+
+                                                 %s%s%s%s
+`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
+
+    case 5:
         fmt.Printf(`%s
  ______________________________________
 / If it were not for you Lord God Jesus\
@@ -276,15 +288,11 @@ func GraphicsMini() {
     || ||
     |\_/|
     \___/
-                                        %s%s%s%s
+                                                  %s%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
     }
 }
 
 func Banner() {
     Graphics()
-}
-
-func AnonSurfBanner() {
-    GraphicsAnonsurf()
 }

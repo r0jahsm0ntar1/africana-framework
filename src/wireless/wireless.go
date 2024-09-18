@@ -5,7 +5,6 @@ import (
     "fmt"
     "utils"
     "bufio"
-    "strings"
     "bcolors"
     "subprocess"
 )
@@ -14,11 +13,15 @@ var (
     userInput   string
     userIface   string
     userSsid    string
-    reader = bufio.NewReader(os.Stdin)
+    scanner = bufio.NewScanner(os.Stdin)
 )
 
 func AirGeddon() {
     subprocess.Popen(`airgeddon`)
+}
+
+func FluxionMan() {
+    subprocess.Popen(`cd /root/.africana/africana-base/wireless/fluxion/; bash fluxion.sh`)
 }
 
 func WifiPumpkin3() {
@@ -35,8 +38,8 @@ func WifiteAuto() {
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userIface, _ := reader.ReadString('\n')
-    userIface = strings.TrimSpace(userIface)
+    scanner.Scan()
+    userIface := scanner.Text()
     if userIface == "" {
         userIface = "wlan0"
     }
@@ -48,8 +51,8 @@ func BettercapAuto() {
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userIface, _ := reader.ReadString('\n')
-    userIface = strings.TrimSpace(userIface)
+    scanner.Scan()
+    userIface := scanner.Text()
     if userIface == "" {
         userIface = "wlan0"
     }
@@ -61,15 +64,15 @@ func WifiPumpkin3Auto() {
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userIface, _ := reader.ReadString('\n')
-    userIface = strings.TrimSpace(userIface)
+    scanner.Scan()
+    userIface := scanner.Text()
     if userIface == "" {
         userIface = "wlan0"
     }
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wifi name " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Jesus Is The Answer" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-    userSsid, _ := reader.ReadString('\n')
-    userSsid = strings.TrimSpace(userSsid)
+    scanner.Scan()
+    userSsid := scanner.Text()
     if userSsid == "" {
        userSsid = "Jesus Is The Answer"
     }
@@ -80,6 +83,3 @@ func WifiPumpkin3Auto() {
     subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, userIface, userSsid)
 }
 
-func FluxionMan() {
-    subprocess.Popen(`cd /root/.africana/africana-base/fluxion/; bash fluxion.sh`)
-}
