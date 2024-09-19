@@ -21,13 +21,13 @@ import (
     "crypto/x509"
     "crypto/ecdsa"
     "encoding/pem"
-    "path/filepath"
     "crypto/elliptic"
     "crypto/x509/pkix"
 )
 
 var (
     cmd *exec.Cmd
+    command string
     gatewayIP string
     userInput string
     scanner = bufio.NewScanner(os.Stdin)
@@ -71,7 +71,6 @@ func GetDefaultIP() (string, error) {
 }
 
 func GetDefaultGatewayIP() (string, error) {
-    var cmd *exec.Cmd
     if runtime.GOOS == "windows" {
         cmd = exec.Command("cmd", "/C", "route", "print", "0.0.0.0")
     } else {
@@ -201,20 +200,14 @@ func Editors(filesToReplacements map[string]map[string]string) {
 func ClearScreen() {
     switch runtime.GOOS {
     case "linux", "darwin":
-        cmd = exec.Command("clear")
+        command = "clear"
     case "windows":
-        cmd = exec.Command("cmd", "/c", "cls")
+        command = "cls"
     default:
         fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Unsupported operating system.")
         return
     }
-
-    cmd.Stdout = os.Stdout
-    cmd.Stderr = os.Stderr
-
-    if err := cmd.Run(); err != nil {
-        fmt.Printf(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error clearing screen: %v\n", err)
-    }
+    subprocess.Popen(command)
 }
 
 func TermLogs() {
@@ -244,48 +237,9 @@ func WordLists() {
             if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
                 return
             }
-            cmd := exec.Command("gunzip", gzFilePath)
-            err := cmd.Run()
-            if err != nil {
-                return
-            }
+            command := "gunzip %s"
+            subprocess.Popen(command, gzFilePath)
         }
-    }
-}
-
-func History() {
-    logDir := "/root/.africana/logs"
-    logFilePath := filepath.Join(logDir, "command_history.log")
-
-    file, err := os.Open(logFilePath)
-    if err != nil {
-        fmt.Println("Error opening history file:", err)
-        return
-    }
-    defer file.Close()
-
-    scanner := bufio.NewScanner(file)
-    fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Command History:\n")
-    lineNumber := 1
-    for scanner.Scan() {
-        fmt.Printf("%d. %s\n", lineNumber, scanner.Text())
-        lineNumber++
-    }
-
-    if err := scanner.Err(); err != nil {
-        fmt.Println("Error reading history:", err)
-    }
-}
-
-func ClearHistory() {
-    logDir := "/root/.africana/logs"
-    logFilePath := filepath.Join(logDir, "command_history.log")
-
-    err := os.Remove(logFilePath)
-    if err != nil {
-        fmt.Println("Error clearing history:", err)
-    } else {
-        fmt.Println("Command history cleared.")
     }
 }
 

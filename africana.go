@@ -19,6 +19,7 @@ import (
     "phishers"
     "io/ioutil"
     "internals"
+    "subprocess"
     "agreements"
     "scriptures"
     "securities"
@@ -1553,12 +1554,14 @@ func africanaFramework() {
             menus.HelpInfoRun()
         case "show", "help show":
             menus.HelpInfoShow()
+        case "clearlogs":
+            subprocess.ClearHistory()
         case "l", "list", "modules", "list modules", "show modules", "show all":
             menus.ListMainModules()
         case "bash", "use bash":
             utils.SystemShell(userInput)
         case "history":
-            utils.History()
+            subprocess.History()
         case "banner":
             banners.Banner      ()
         case "version":
@@ -1566,7 +1569,7 @@ func africanaFramework() {
         case "m", "menu":
             menus.MenuZero      ()
         case "00", "?", "h", "help":
-            menus.HelpInfoMenuZero         ()
+            menus.HelpInfoMenuZero()
         default:
             utils.SystemShell(userInput)
         }
