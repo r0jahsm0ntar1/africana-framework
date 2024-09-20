@@ -1,6 +1,6 @@
 package agreements
 
-import (
+import(
     "fmt"
     "bcolors"
 )

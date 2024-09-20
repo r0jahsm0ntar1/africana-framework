@@ -1,6 +1,6 @@
 package utils
 
-import (
+import(
     "os"
     "net"
     "fmt"
@@ -25,7 +25,7 @@ import (
     "crypto/x509/pkix"
 )
 
-var (
+var(
     cmd *exec.Cmd
     command string
     gatewayIP string
@@ -33,7 +33,7 @@ var (
     scanner = bufio.NewScanner(os.Stdin)
 )
 
-func GetDefaultIP() (string, error) {
+func GetDefaultIP()(string, error) {
     interfaces, err := net.Interfaces()
     if err != nil {
         return "", err
@@ -70,7 +70,7 @@ func GetDefaultIP() (string, error) {
     return "", fmt.Errorf(bcolors.BLUE + "[+] " + bcolors.GREEN + "no active network interface found\n" + bcolors.ENDC)
 }
 
-func GetDefaultGatewayIP() (string, error) {
+func GetDefaultGatewayIP()(string, error) {
     if runtime.GOOS == "windows" {
         cmd = exec.Command("cmd", "/C", "route", "print", "0.0.0.0")
     } else {

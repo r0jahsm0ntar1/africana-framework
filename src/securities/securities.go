@@ -1,6 +1,6 @@
 package securities
 
-import (
+import(
     "os"
     "fmt"
     "time"
@@ -45,9 +45,9 @@ WantedBy=multi-user.target
         }
     }
     configDhclient()
-    configDnsmasq ()
-    configSquid   ()
-    configPrivoxy ()
+    configDnsmasq()
+    configSquid()
+    configPrivoxy()
 }
 
 func configDhclient() {
@@ -341,7 +341,8 @@ func torStatus(Timer float64) {
         Timer++
         if Timer > 2 {
             fmt.Println(bcolors.RED + "\nUnable to get network details, " + bcolors.ORANGE + "Check Internet Connections & " + bcolors.CYAN + "retry....\n" + bcolors.ENDC)
-            fmt.Println(bcolors.RED + "Error:" + bcolors.DARKCYAN, err, bcolors.ENDC); fmt.Println()
+            fmt.Println(bcolors.RED + "Error:" + bcolors.DARKCYAN, err, bcolors.ENDC)
+            fmt.Println()
             return
         }
         fmt.Println(bcolors.GREEN + "\nHaving trouble fetching exit-node details,     " + bcolors.CYAN + "retrying...." + bcolors.ENDC)

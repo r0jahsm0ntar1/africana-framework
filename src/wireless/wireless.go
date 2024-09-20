@@ -1,6 +1,6 @@
 package wireless
 
-import (
+import(
     "os"
     "fmt"
     "utils"
@@ -9,7 +9,7 @@ import (
     "subprocess"
 )
 
-var (
+var(
     userInput   string
     userIface   string
     userSsid    string

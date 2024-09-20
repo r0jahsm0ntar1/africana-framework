@@ -1,6 +1,6 @@
 package menus
 
-import (
+import(
     "fmt"
     "bcolors"
     "scriptures"
@@ -486,7 +486,7 @@ func MenuSevenOne() {
 
 func HelpSeven() {
     fmt.Println(bcolors.YELLOW + "  Gophish.(Browser Gui) " + bcolors.ENDC + ": I is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default user is: admin, Default password is: kali-gophish" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Good Ginx (Advanced) " + bcolors.ENDC + ": It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "   Good Ginx(Advanced) " + bcolors.ENDC + ": It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            AdvPhishing " + bcolors.ENDC + ": A nice framework with alot of templets. Also bypasses OTP with ngrock support." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              Setoolkit " + bcolors.ENDC + ": This tool clones real website and intergrates it direct for phishing. It also comes With email campeighns support ." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Anonphisher " + bcolors.ENDC + ": Works also like AdvPhishing tool." + bcolors.ENDC)
@@ -521,7 +521,7 @@ func HelpEight() {
     fmt.Println(bcolors.YELLOW + "           Gather e-mails " + bcolors.ENDC + ": 2. Theharvester tool will try to harvest emails with user names that could be used for phishing, creat wordlists or also as login names for admin panels." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Start Bruteforcing " + bcolors.ENDC + ": 3. In this phase, Gobuster tool is used to show us hidden files in the website and also try to find login pages." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "  Start 💉SQL, XSS & SSRF " + bcolors.ENDC + ": 4. This is an injection phase. Chosen tools are configured to find injection vulns. The choice contain embeded submenu that supports both automation and manual injection tackticks." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode. (Intrusive phase)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode.(Intrusive phase)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                    Jok3r " + bcolors.ENDC + ": 6. Like Nettacker, Joker is a fullset framework. It is intergrated with a collection of several third party tools. The embeded menu in this option will guide you through." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "               Osmedeus🔮 " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Ufonet 🦠DDOS " + bcolors.ENDC + ": 8. Danger!!! This tool kills websites completely. Use it at your own risk. The embeded menu on this choice will guide you." + bcolors.ENDC)
@@ -544,10 +544,10 @@ func MenuEightFour() {
 }
 
 func HelpEightFour() {
-    fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1. (Automated) Sqlmap tool is configured to run with obfsication templets to avoid detection and give you desirable outcomes. (Intrusive)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Xss injection(A) " + bcolors.ENDC + ": 2. (Automated) Acompination of tools are used to try and find xss injection vulnerbility on the website. (Intrusive)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Sql injection(M) " + bcolors.ENDC + ": 3. (Manual) In this option you will be required to enter sql website injection required data manually." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Xss injection(M) " + bcolors.ENDC + ": 4. (Manual) In this option you will be required to enter xss website injection required data manually." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1.(Automated) Sqlmap tool is configured to run with obfsication templets to avoid detection and give you desirable outcomes.(Intrusive)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "       Xss injection(A) " + bcolors.ENDC + ": 2.(Automated) Acompination of tools are used to try and find xss injection vulnerbility on the website.(Intrusive)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "       Sql injection(M) " + bcolors.ENDC + ": 3.(Manual) In this option you will be required to enter sql website injection required data manually." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "       Xss injection(M) " + bcolors.ENDC + ": 4.(Manual) In this option you will be required to enter xss website injection required data manually." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
@@ -563,7 +563,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 4. Start insane information gathering on host.........🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vuln scan security checks.........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Run CVE scans on the target host...................🍹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
@@ -595,7 +595,7 @@ func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "[ 4. Show supported products for all services...........🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vulnscansecurity checks...........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Run all & intense security checks against an URL...🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Search for (critical vulns & easy to exploit)......🌈] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🌈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. View the full results from the security checks.....🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Clean database & delete results....................🥑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
@@ -603,13 +603,13 @@ func MenuEightSix() {
 }
 
 func HelpEightSix() {
-    fmt.Println(bcolors.YELLOW + "    Install jok3r tools " + bcolors.ENDC + ": 1. Jok3r comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Jok3r are installed for better results. (Run once)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Install jok3r tools " + bcolors.ENDC + ": 1. Jok3r comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Jok3r are installed for better results.(Run once)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          Update toolbox " + bcolors.ENDC + ": 2. If all third party are installed, you could update the tools using this option.(Not necessary in new install.)" + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Show all the tools " + bcolors.ENDC + ": 3. Health check. See if all tools are installed correctly and are working properly before engaging in hacking." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Show supported products " + bcolors.ENDC + ": 4. Jok3r will show you all supported products and services that it is made to attack." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Vulnscansecurity checks " + bcolors.ENDC + ": 5. Wide range of vulnerbility checks and bugs on the given target will be scanned by Jok3r as it store outcome in its database." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Intense security checks " + bcolors.ENDC + ": 6. A heavy vulnerbility scanning on the target host will be done storing all logs in Jok3r database." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Critical vulns " + bcolors.ENDC + ": 7. Jok3r will Search for (critical vulns & easy to exploit) avoiding heavy intrusions on your target." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "          Critical vulns " + bcolors.ENDC + ": 7. Jok3r will Search for(critical vulns & easy to exploit) avoiding heavy intrusions on your target." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       View full results " + bcolors.ENDC + ": 8. All logs for the scanner will be displayed showing even the targets and their vulns." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Clean the database " + bcolors.ENDC + ": 9. Delete all results and logs for previous scanns in the databases." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
@@ -624,7 +624,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "\n[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🦍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Scan list of targets (Full path of target needed)..🥐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. Scan list of targets(Full path of target needed)..🥐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Cloud - Run scan in Distributed Cloud mode.........🔮] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Performing Full web vuln & secret scan on host.....🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Update the vulnerability database before attacking.📜] " + bcolors.ENDC)
@@ -635,8 +635,8 @@ func MenuEightSeven() {
 }
 
 func HelpEightSeven() {
-    fmt.Println(bcolors.YELLOW + "         Update Osmedeus " + bcolors.ENDC + ": 1. Osmedeus comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Osmedeus are installed for better results. (Run once)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Simple scan " + bcolors.ENDC + ": 2. The tool will Start a simple scan with other flow like discovering domains and ports. (Reconing)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "         Update Osmedeus " + bcolors.ENDC + ": 1. Osmedeus comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Osmedeus are installed for better results.(Run once)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "             Simple scan " + bcolors.ENDC + ": 2. The tool will Start a simple scan with other flow like discovering domains and ports.(Reconing)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "      Vuln and directory " + bcolors.ENDC + ": 3. Osmedeus will check for vulnerbilities and discover hidden root directories disclosing related subdomains on your target." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "    Scan list of targets " + bcolors.ENDC + ": 4. If you have alist of several targets you would need to scan at once. Mybe a harvested subdomains, use this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "               Cloud-Run " + bcolors.ENDC + ": 5. In this option, Osmedeus will allow you to scan your target using cloud database." + bcolors.ENDC)
@@ -675,7 +675,7 @@ func HelpEightEight() {
     fmt.Println(bcolors.YELLOW + "          Launch xcom-2 " + bcolors.ENDC + ": 6. Only DDoS mode without a combination of other attack modes." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Ufonet-gui " + bcolors.ENDC + ": 7. Launch a web UI which you can interact with ufonet in a graphickal paspective." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Start Grider " + bcolors.ENDC + ": 8. Share your zombies. WARNING: this *ADVANCED* function is *NOT* secure, proceed if you really want to." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk. (Attack With ALL!)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk.(Attack With ALL!)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
@@ -700,12 +700,12 @@ Framework options:
 Console options:
     -t, --anonsurf       Launch anonsurf menu to torify your system './africana -t'
     -n, --networks       Start internal network attacks
-    -m, --malwares       Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+    -m, --malwares       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
     -g, --wireless       From wifi, bluetooth and other wireles attack vectors
-    -p, --crackers       Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+    -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
     -f, --phishers       Perform Phishing attacks
     -w, --websites       Launch Web Penetration engines
-    -c, --credits        Show who developes africana (& third party tools developers)
+    -c, --credits        Show who developes africana(& third party tools developers)
     -b, --verses         Launch Bible verses in an uniform way manner as used in the framework
     -x, --usage          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
     -h, --help           Show this message
@@ -724,7 +724,7 @@ func HelpInfoMenuZero() {
     help              Help menu
     history           Show command history
     load              Load a framework plugin
-    menu              Print the menu of the current phase. Alias to letter (m)
+    menu              Print the menu of the current phase. Alias to letter(m)
     quit              Exit the console
     set               Sets a context-specific variable to a value
     sleep             Do nothing for the specified number of seconds
@@ -758,7 +758,7 @@ Developer Commands
     -------        -----------
     log            Display framework.log paged to the end if possible
     time           Time how long it takes to run a particular command
-    bash           Start Intaractive shell in africana (other flags 'sh, zsh, cmd, powershell')
+    bash           Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 `, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
@@ -774,12 +774,12 @@ Main modules:
   1 setups         . Install, Uninstall africana-framework
   2 anonsurf       . Launch anonsurf menu to torify your system './africana -t'
   3 networks       . Start internal network attacks
-  4 malwares       . Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+  4 malwares       . Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
   5 wireless       . From wifi, bluetooth and other wireles attack vectors
-  6 crackers       . Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+  6 crackers       . Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
   7 phishers       . Perform Phishing attacks
   8 websites       . Launch Web Penetration engines
-  9 credits        . Show who developes africana (& third party tools developers)
+  9 credits        . Show who developes africana(& third party tools developers)
   10 verses        . Launch Bible verses in an uniform way manner as used in the framework
 `)
 }
@@ -838,7 +838,7 @@ If setting a PAYLOAD, this command can take an index from 'show payloads'.
 
 OPTIONS:
 
-    -c, --clear   Clear the values, explicitly setting to nil (default)
+    -c, --clear   Clear the values, explicitly setting to nil(default)
     -g, --global  Operate on global datastore variables
     -h, --help    Help banner.
 `)
@@ -875,7 +875,7 @@ func HelpInfoSetups() {
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
-    License: Africana Framework License (BSD)
+    License: Africana Framework License(BSD)
        Rank: Normal
   Disclosed: 2024
 
@@ -960,7 +960,7 @@ func HelpInfoBlackJack() {
    Platform: Windows
        Arch: x64, x86
  Privileged: No
-    License: Africana Framework License (BSD)
+    License: Africana Framework License(BSD)
        Rank: Insane
   Disclosed: 2024
 

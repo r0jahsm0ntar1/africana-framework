@@ -1,6 +1,6 @@
 package setups
 
-import (
+import(
     "fmt"
     "os"
     "menus"
@@ -11,7 +11,7 @@ import (
     "subprocess"
 )
 
-var (
+var(
     userInput string
 )
 
@@ -57,7 +57,7 @@ func promptForUpdate() {
             scriptures.Verse()
             return
         default:
-            fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
+            fmt.Println(bcolors.GREEN + "(" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
         }
     }
 }
@@ -180,7 +180,7 @@ func Uninstall() {
                 menus.MenuOne()
                 return
             default:
-                fmt.Println(bcolors.GREEN + "           (" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
+                fmt.Println(bcolors.GREEN + "(" + bcolors.DARKCYAN + "Choices are [" + bcolors.ENDC + "y|n|Y|N|yes|no|YES|NO" + bcolors.DARKCYAN + "]" + bcolors.GREEN + ")" + bcolors.ENDC)
             }
         }
     } else {

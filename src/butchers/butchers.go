@@ -1,6 +1,6 @@
 package butchers
 
-import (
+import(
     "os"
     "fmt"
     "log"
@@ -637,16 +637,16 @@ func ListenerLauncher() {
 }
 
 func NoiseMakers() {
-    ShikataGanai    ()
-    MalwareDll      ()
-    IconChanger     ()
+    ShikataGanai()
+    MalwareDll()
+    IconChanger()
     ListenerLauncher()
 }
 
 func CodeBreakers() {
-    ShikataGanai    ()
-    MalwareReg      ()
-    IconChanger     ()
+    ShikataGanai()
+    MalwareReg()
+    IconChanger()
     ListenerLauncher()
 }
 

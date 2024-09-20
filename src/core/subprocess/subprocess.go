@@ -1,9 +1,10 @@
 package subprocess
 
-import (
+import(
     "bufio"
     "fmt"
     "os"
+    "bcolors"
     "os/exec"
     "os/signal"
     "path/filepath"
@@ -11,7 +12,7 @@ import (
     "sync"
 )
 
-var (
+var(
     shell   string
     flag    string
     logFile *os.File
@@ -71,18 +72,17 @@ func Popen(command string, args ...interface{}) {
         <-sigs
         if cmd.Process != nil {
             if err := cmd.Process.Signal(os.Interrupt); err != nil && !isProcessFinished(err) {
-                fmt.Fprintln(os.Stderr, "Error sending interrupt:", err)
+                fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error sending interrupt:", err)
             }
         }
     }()
 
     if err := cmd.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, "Error starting process:", err)
+        fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error starting process:", err)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        //fmt.Printf(bcolors.RED + "[*] " + bcolors.ENDC + "Unknown command: %s. Run the %shelp %scommand for more details.\n", command, bcolors.DARKGREEN, bcolors.ENDC)
         fmt.Fprintln(os.Stderr, "Process finished with error:", err)
     }
     signal.Stop(sigs)
@@ -103,7 +103,7 @@ func logCommand(command string) {
 
     if command != "" {
         if _, err := logFile.WriteString(command + "\n"); err != nil {
-            fmt.Fprintln(os.Stderr, "Error writing to log file:", err)
+            fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error writing to log file:", err)
         }
     }
 }
@@ -114,7 +114,7 @@ func CloseLogFile() {
 
     if logFile != nil {
         if err := logFile.Close(); err != nil {
-            fmt.Fprintln(os.Stderr, "Error closing log file:", err)
+            fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error closing log file:", err)
         }
     }
 }
@@ -122,19 +122,19 @@ func CloseLogFile() {
 func History() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
-        fmt.Println("History file does not exist.")
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "History file does not exist.")
         return
     }
 
     file, err := os.Open(logFilePath)
     if err != nil {
-        fmt.Println("Error opening history file:", err)
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error opening history file:", err)
         return
     }
     defer file.Close()
 
     scanner := bufio.NewScanner(file)
-    fmt.Println("[*] exec: history")
+    fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "exec: history\n")
     lineNumber := 1
     for scanner.Scan() {
         fmt.Printf("%d  %s\n", lineNumber, scanner.Text())
@@ -142,7 +142,7 @@ func History() {
     }
 
     if err := scanner.Err(); err != nil {
-        fmt.Println("Error reading history:", err)
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error reading history:", err)
     }
 }
 
@@ -151,7 +151,7 @@ func ClearHistory() {
 
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Println("Error clearing history:", err)
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error clearing history:", err)
     } else {
         fmt.Println("Command history cleared.")
         openLogFile()

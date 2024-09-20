@@ -1,11 +1,11 @@
 package bcolors
 
-import (
+import(
     "runtime"
     "math/rand"
 )
 
-var (
+var(
     ENDC        = "\033[0m"
     BOLD        = "\033[1m"
     ITALIC      = "\033[3m"

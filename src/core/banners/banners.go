@@ -1,6 +1,6 @@
 package banners
 
-import (
+import(
     "fmt"
     "time"
     "bcolors"

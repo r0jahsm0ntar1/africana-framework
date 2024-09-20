@@ -1,6 +1,6 @@
 package credits
 
-import (
+import(
     "os"
     "fmt"
     "time"
