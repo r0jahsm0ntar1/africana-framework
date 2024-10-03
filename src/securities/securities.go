@@ -581,12 +581,14 @@ var torrString = []string{
 func AnonsurfSetups() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`)
 }
 
 func AnonsurfStart() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     confiGure()
     configureFirewall()
     torStatus(0)
@@ -595,30 +597,35 @@ func AnonsurfStart() {
 func AnonsurfExitnode() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     torCircuit()
 }
 
 func AnonsurfStatus() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`)
 }
 
 func AnonsurfIpaddr() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     torStatus(0)
 }
 
 func AnonsurfRIptabls() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     resetToDefault(false, false)
 }
 
 func AnonsurfReload() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     confiGure()
     configureFirewall()
     torStatus(0)
@@ -627,11 +634,13 @@ func AnonsurfReload() {
 func AnonsurfChains() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     subprocess.Popen(`tail -vf /var/log/privoxy/logfile`)
 }
 
 func AnonsurfStop() {
     banners.AnonSurfBanner()
     scriptures.Verse()
+    fmt.Println()
     termiNate()
 }

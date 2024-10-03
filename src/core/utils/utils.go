@@ -204,7 +204,7 @@ func ClearScreen() {
     case "windows":
         command = "cls"
     default:
-        fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Unsupported operating system.")
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Unsupported operating system." + bcolors.ENDC)
         return
     }
     subprocess.Popen(command)
@@ -270,6 +270,11 @@ func ClearLogs() {
     return
 }
 
+func ListJunks() {
+    subprocess.Popen(`ls /root/.africana/output`)
+    return
+}
+
 func Certs() {
     certPath := "/root/.africana/certs/africana-cert.pem"
     keyPath := "/root/.africana/certs/africana-key.pem"
@@ -292,6 +297,12 @@ func Foundations() {
         fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
+}
+
+func Sleep() {
+    scanner.Scan()
+    userInput := scanner.Text()
+    subprocess.Popen(`sleep %s`, userInput)
 }
 
 func UpsentTools() {

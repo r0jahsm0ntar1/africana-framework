@@ -680,7 +680,7 @@ var verses = map[int]string{
     670: `For by grace are ye saved through faith    Eph.2:8`,
     671: `For we are his workmanship, created in Christ Jesus unto good works    Eph.2:10`,
     672: `Ye who sometimes were far off are made nigh by the blood of Christ    Eph.2:13`,
-    673: `Ye are... fellowcitizens with the saints, and of the household of God    Eph.2:19`,
+    673: `Ye are... fellow citizens with the saints, and of the household of God    Eph.2:19`,
     674: `I beseech you that ye walk worthy of the vocation wherewith ye are called    Eph.4:1`,
     675: `Unto every one of us is given grace according to the measure of the gift of Christ.    Eph.4:7`,
     676: `Speak every man truth with his neighbour    Eph.4:25`,

@@ -1,26 +1,30 @@
 module main.go
 
-replace credits => ./src/credits/
+replace africana => ./src/core/main
 
 replace menus => ./src/core/menus/
 
 replace utils => ./src/core/utils/
 
-replace butchers => ./src/butchers/
+replace setups => ./src/core/setups/
+
+replace bcolors => ./src/core/bcolors/
+
+replace banners => ./src/core/banners/
+
+replace subprocess => ./src/core/subprocess/
+
+replace credits => ./src/credits/
 
 replace wireless => ./src/wireless/
+
+replace butchers => ./src/butchers/
 
 replace crackers => ./src/crackers/
 
 replace phishers => ./src/phishers/
 
-replace setups => ./src/core/setups/
-
 replace internals => ./src/internals/
-
-replace bcolors => ./src/core/bcolors/
-
-replace banners => ./src/core/banners/
 
 replace agreements => ./src/agreements/
 
@@ -30,9 +34,8 @@ replace securities => ./src/securities/
 
 replace webattackers => ./src/webattackers/
 
-replace subprocess => ./src/core/subprocess/
-
 require (
+	africana v0.0.0-00010101000000-000000000000 // indirect
 	agreements v0.0.0-00010101000000-000000000000 // indirect
 	banners v0.0.0-00010101000000-000000000000 // indirect
 	bcolors v0.0.0-00010101000000-000000000000 // indirect

@@ -55,6 +55,10 @@ func Blackeye() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/blackeye; bash blackeye.sh`)
 }
 
+func ShellPhish() {
+    subprocess.Popen(`cd /root/.africana/africana-base/phishers/shellphish; bash shellphish.sh`)
+}
+
 func NinjaEttercap(userTarget string) {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {

@@ -18,25 +18,10 @@ func MenuZero() {
     fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks.............." + bcolors.DARKCYAN + "Gophish, gi" + bcolors.BLUE + "🪝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors.................." + bcolors.DARKCYAN + "Osmedeus, j" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Credits, and About the author..........." + bcolors.DARKCYAN + "About, auth" + bcolors.BLUE + "📚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework................." + bcolors.DARKCYAN + "" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + "" + bcolors.BLUE + "💻] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ e. Exit africana-framework................." + bcolors.DARKCYAN + "" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + "" + bcolors.BLUE + "💻] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpZeroo() {
-    fmt.Println(bcolors.YELLOW + "                   Install or update " + bcolors.ENDC + ": 1. It is an inbuild self mentainace code to update and install africana." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       System Security Configuration " + bcolors.ENDC + ": 2. This choice enables you to secure your system by keenly installing & configuring privoxy, squid, tor & dnsmasq." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "        Local Network Attack Vectors " + bcolors.ENDC + ": 3. It is aplace where you are guided through pentesting internal network devices with their open services." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Generate Undetectable Backdoors " + bcolors.ENDC + ": 4. Africana offers variety of insane C2's and malware generation engines that work despite hightly monitored environments." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 WiFi Attack Vectors " + bcolors.ENDC + ": 5. Wireless networks penetration menu with advanced tools configured to give you desirerable outcomes." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " BruteForce Hashes, Pcaps & Passwods " + bcolors.ENDC + ": 6. Crack ntlms, hashes & passwords. easly using most and advanced tools." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Social-Engineering Attacks " + bcolors.ENDC + ": 7. Africana gives you a room to Phish credentials from companies or individuals, using legendary opensource tools." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Website Attack Vectors " + bcolors.ENDC + ": 8. A collection of almost all insane frameworks mentained & set together in a redteam manner for website pentesting." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Credits, Tricks and About " + bcolors.ENDC + ": 9. Know about the africana developer & Check on other third party tools' developers & their github names before redeveloped." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                                Exit " + bcolors.ENDC + ": 0. Exit africana-framework." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                          True Light " + bcolors.ENDC + ": 99. Get guidence Veteran. If lost or broken see what the map will reveal to you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                                Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
 func MenuOne() {
     fmt.Println(bcolors.BLUE + "        ~>( 🩺" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
@@ -49,20 +34,8 @@ func MenuOne() {
     println(bcolors.BLUE + "[ 7. Browse your logs......" + bcolors.DARKCYAN + "Open your all logs on brwoser" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 8. Clear all your logs....." + bcolors.DARKCYAN + "Delete all your stored logs" + bcolors.BLUE + "🧹] " + bcolors.ENDC)
     println(bcolors.BLUE + "[ 9. Uninstall Africana......." + bcolors.DARKCYAN + "Caution Irevasable action!" + bcolors.BLUE + "🥴] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpOne() {
-    fmt.Println(bcolors.YELLOW + "             Kali Linux " + bcolors.ENDC + ": 1. It is a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Ubuntu Linux " + bcolors.ENDC + ": 2. Is a good distor but has alot of problems while installing kali-linux packages to avoid issues like dependencies problems, use docker image or install kali-linux in Ubuntu docker then install africana." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Arch Linux " + bcolors.ENDC + ": 3. It is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "         Windows System " + bcolors.ENDC + ": 4. Under development. But can run if tools well installed. Just give me time." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              UnInstall " + bcolors.ENDC + ": 5. Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me rojahsmontari@gmail.com" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuTwo() {
@@ -77,20 +50,8 @@ func MenuTwo() {
     fmt.Println(bcolors.BLUE + "[ 7. Reload anonsurf and restart a fresh................🦨]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.ITALIC + bcolors.ENDC + "local.🐌.squid.🐙.privoxy.🎭.tor.🧄.WEB.🌍" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Stop anonsurf & restore all iptables...............🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpTwo() {
-    fmt.Println(bcolors.YELLOW + "                      Installing " + bcolors.ENDC + ": Africana will install all necessary tools to set your system into anonimity mode and fix dns-leaks. It is good to start here." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Start anonymizing through tor " + bcolors.ENDC + ": This option Africana will configure local tarfficks through privoxy > squid > then tor network. It is done with great care and integrity for super securities." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Stop tor & restore all iptables " + bcolors.ENDC + ": Your system securities will be restored to its initial state and trffick going through your ISP." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Check if using tor network " + bcolors.ENDC + ": Africana will check if your system using tor by querring your publick ip on tor network severs." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Check Chains Traffic" + bcolors.ENDC + ": Display Logs from system through Squid > Privoxy Tor to Web." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                            Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuThree() {
@@ -105,7 +66,7 @@ func MenuThree() {
     fmt.Println(bcolors.BLUE + "[ 7. Lunch Responder with IPv6 Support..................🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss/ Bettercap & Ettercap For....." + bcolors.DARKCYAN + "(M.I.B)" + bcolors.BLUE + "🥩] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing..." + bcolors.DARKCYAN + "(XSS Injection)" + bcolors.BLUE + "🍇] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -113,23 +74,23 @@ func MenuThreeOne() {
     fmt.Println()
     scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Launch Eternalblue Exploit.........................🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🪳] " + bcolors.ENDC)
 }
 
 func MenuThreeTwo() {
     fmt.Println()
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to early selected target" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s)." + bcolors.DARKCYAN + "traffick to all Connected devices" + bcolors.BLUE + "🪰]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s)..................................🐹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s)..................................🪰]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back..............................................] " + bcolors.ENDC)
 }
 
 func MenuThreeThree() {
     fmt.Println()
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Ettercap............................" + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐼] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................." + bcolors.DARKCYAN + "Spoof Them All!" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu.............................🪳] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Ettercap...........................................🐼] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................................🐹] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🪳] " + bcolors.ENDC)
 }
 
 func MenuThreeFour() {
@@ -137,23 +98,7 @@ func MenuThreeFour() {
     scriptures.Verse()
     fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
-}
-
-func HelpThree() {
-    fmt.Println(bcolors.YELLOW + "                  Discover Targets " + bcolors.ENDC + ": 1. Scan all subnet for connected devices and list them in a table form for you to select a target for further penetration testing againist it." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Port discovery on the target " + bcolors.ENDC + ": 2. Scan the initial selected target for open ports and services to give you vivid info on how to to tackle your target." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Vuln' Scan the Target " + bcolors.ENDC + ": 3. Scan for known vulnerbility that may be an easy win on all open ports." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    S.M.B enumration on the target " + bcolors.ENDC + ": 4. Recon smb ports, scan them and check if there are vulnerbilities and shares that could be exploited further." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Exploit S.M.B on target " + bcolors.ENDC + ": 5. Africana will launch some tools that will scout the target smb services give you more vivid info and try to automate each connection" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Sniff Internal Packets " + bcolors.ENDC + ": 6. Sniffs all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Lunch Responder with IPv6 Support " + bcolors.ENDC + ": 7. Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "  Start Beef & Bettercap For M.I.B " + bcolors.ENDC + ": 8. Combine both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Get Shell through XSS Injection " + bcolors.ENDC + ": 9. Working on this Option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                              Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "               Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back..............................................] " + bcolors.ENDC)
 }
 
 func MenuFour() {
@@ -168,7 +113,7 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 7. Persisternts....................." + bcolors.DARKCYAN + "Generate Backdoors" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones.................." + bcolors.DARKCYAN + "Launch The Best C2" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -184,7 +129,7 @@ func MenuFourOne() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -200,7 +145,7 @@ func MenuFourTwo() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -216,7 +161,7 @@ func MenuFourThree() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -232,7 +177,7 @@ func MenuFourFour() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -248,7 +193,7 @@ func MenuFourFive() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -265,7 +210,7 @@ func MenuFourSix() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -281,7 +226,7 @@ func MenuFourSeven() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -297,7 +242,7 @@ func MenuFourEight() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -313,7 +258,7 @@ func MenuFourNine() {
     fmt.Println(bcolors.BLUE + "[ 7. AndroidRAT......................." + bcolors.DARKCYAN + "Android 4 > 10 Rat" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -331,22 +276,6 @@ func MenuFourSevenTwo() {
     fmt.Println(bcolors.DARKGREEN + " 4) " + bcolors.ENDC + "autorun.ico " + bcolors.DARKGREEN + " 8) " + bcolors.ENDC + "powerpoint.ico " + bcolors.DARKGREEN + " 12) " + bcolors.ENDC + "visio.ico" + bcolors.ENDC)
 }
 
-func HelpFour() {
-    fmt.Println(bcolors.YELLOW + "              Blackjack " + bcolors.ENDC + ": 1. It is a tool derived from villain framework. It supports both tcp, hhtp & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              ShellzGen " + bcolors.ENDC + ": 2. It is anice tool. Supports all distro reverse shell generation that supports both tcp, https & https connection. Launches variety of listeners." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             PowerJoker " + bcolors.ENDC + ": 3. A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             MeterPeter " + bcolors.ENDC + ": 4. Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "               Havoc C2 " + bcolors.ENDC + ": 5. It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Teardroid " + bcolors.ENDC + ": 6. Andoird C2. Needs alot of online configuration but the best for now." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             AndroidRAT " + bcolors.ENDC + ": 7. It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Chameleon(Obfsication) " + bcolors.ENDC + ": 8. A good obfsication tool for powershell scripts. Already configured for you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Gh0x0st(Obfsication) " + bcolors.ENDC + ": 9. It is a gint powershell obfsication tool that beats almost all AVS. Try it out you will love it." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
 func MenuFive() {
     fmt.Println(bcolors.BLUE + "        ~>( 🍍" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
@@ -359,7 +288,7 @@ func MenuFive() {
     fmt.Println(bcolors.BLUE + "[ 7. Airgeddon...................................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. wifiPumpkin3................................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🫐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🫐] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -384,7 +313,7 @@ func MenuSix() {
     scriptures.Verse()
     fmt.Println(bcolors.BLUE + "\n[ 1. Online........................." + bcolors.DARKCYAN + "Automated_Bruteforce" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Offline..................." + bcolors.DARKCYAN + "Automated/ maunal/ Hashes" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -409,7 +338,7 @@ func MenuSixOne() {
     fmt.Println(bcolors.BLUE + "[ 7. Bruteforce..................................." + bcolors.DARKCYAN + "Telnet" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Bruteforce..................................." + bcolors.DARKCYAN + "HTTP/S" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Bruteforce..................................." + bcolors.DARKCYAN + "All/SS" + bcolors.BLUE + "🩴] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -440,7 +369,7 @@ func MenuSixTwo() {
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Hash-Buster........................................🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -469,10 +398,10 @@ func MenuSeven() {
     fmt.Println(bcolors.BLUE + "[ 4. Blackeye..............................." + bcolors.DARKCYAN + "Supports OTP" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. AdvnPhish.............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. DarkPhish.............................." + bcolors.DARKCYAN + "Recent Templ" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. CyberPhish................." + bcolors.DARKCYAN + "Generates Phishing temps" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 7. ShellPhish................." + bcolors.DARKCYAN + "Just Another Phishing To" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. SeToolkit.................." + bcolors.DARKCYAN + "Support Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Local Ninja Phish.........." + bcolors.DARKCYAN + "Using Ettercap & Betterc" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -512,7 +441,7 @@ func MenuEight() {
     fmt.Println(bcolors.BLUE + "[ 7. Osmedeus Next Generation Workflow Engine Main Menu.🔮] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu.........🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Heavy Automation Attacks On The Host........🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -539,7 +468,7 @@ func MenuEightFour() {
     fmt.Println(bcolors.BLUE + "[ 2. Xss injection with Dalfox, Xsser.........." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🪰] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Sql injection with Sqlmap...................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. Xss injection with Xsser....................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐌] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧯] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧯] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -566,7 +495,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -598,7 +527,7 @@ func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🌈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. View the full results from the security checks.....🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Clean database & delete results....................🥑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -630,7 +559,7 @@ func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "[ 7. Update the vulnerability database before attacking.📜] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Start web UI server................................🌍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scanned osmedeus report list..................🌈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🧬] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -662,7 +591,7 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 7. Launch ufonet-gui..................." + bcolors.DARKCYAN + "Gui on browser." + bcolors.BLUE + "🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Start Grider........................" + bcolors.DARKCYAN + "Grider........." + bcolors.BLUE + "🐝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!.................." + bcolors.DARKCYAN + "Launch ALL!!..." + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit africana-framework............................🦨] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🦨] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
@@ -718,7 +647,7 @@ func HelpInfoMenuZero() {
     -------       -----------
     ?                 Help menu
     banner            Display an awesome africana banner
-    clear             Clear the working screen
+    clear             Clear the working screen or (flag 'history' clear history)
     exit              Exit the console
     features          Display the list of not yet released features that can be opted in to
     help              Help menu
@@ -764,32 +693,16 @@ For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 `, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
-func ListMainModules() {
-    fmt.Print(`
-Main modules:
--------------
-
-  # Name           Description
-  - ----           -----------
-  1 setups         . Install, Uninstall africana-framework
-  2 anonsurf       . Launch anonsurf menu to torify your system './africana -t'
-  3 networks       . Start internal network attacks
-  4 malwares       . Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
-  5 wireless       . From wifi, bluetooth and other wireles attack vectors
-  6 crackers       . Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
-  7 phishers       . Perform Phishing attacks
-  8 websites       . Launch Web Penetration engines
-  9 credits        . Show who developes africana(& third party tools developers)
-  10 verses        . Launch Bible verses in an uniform way manner as used in the framework
-`)
-}
-
 func HelpInfoRun() {
     fmt.Print(`
 Usage: run [module]
 
 Run a module
     show modules to list modules or <show all>
+
+Just like start & use, run enables you to Interact with a module by name or search term/index.
+If a module name is not found, it will be treated as a search term.
+An index from the previous search results can be selected if desired.
 
 Examples:
     run setups
@@ -812,23 +725,54 @@ func HelpInfoUse() {
     fmt.Print(`
 Usage: use <name|term>
 
-Interact with a module by name or search term/index.
+Just like start & run, use enables you to Interact with a module by name or search term/index.
 If a module name is not found, it will be treated as a search term.
 An index from the previous search results can be selected if desired.
 
 Examples:
-  use setups, anonsurf, internals, malwares, wireless, phishers, websites, verses
+  use setups, anonsurf, networks, malwares, wireless, phishers, websites, credits, verses
 
   use setups
   use <name>
 `)
 }
 
+func HelpInfoStart() {
+    fmt.Print(`
+Usage: start <name|term>
+
+Just like use & run, start enables you to Interact with a module by name or search term/index.
+If a module name is not found, it will be treated as a search term.
+An index from the previous search results can be selected if desired.
+
+Examples:
+  start setups, anonsurf, networks, malwares, wireless, phishers, websites, credits, verses
+
+  start setups
+  start <name>
+`)
+}
+
+func HelpInfoList() {
+    fmt.Printf(`
+Usage: list <name|term>
+
+Show all modules or sub-modules in a specific face you are. If you are in modules
+setups, list modules command, will list all sub-modules available in that module.
+
+Examples:
+  list modules
+
+%s[*]%s Valid parameters for the "list" command are: modules, all
+%s[*]%s Additional module-specific parameters are: missing, advanced
+`, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+}
+
 func HelpInfoSet() {
     fmt.Print(`
 Usage: set [options] [name] [value]
 
-Set the given option to value.  If value is omitted, print the current value.
+Set the given option to value. If value is omitted, print the current value.
 If both are omitted, print options that are currently set.
 
 If run from a module context, this will set the value in the module's
@@ -844,7 +788,7 @@ OPTIONS:
 `)
 }
 
-func HelpInfoMain() {
+func HelpInfo() {
     fmt.Print(`
 Usage: info <module name>
 
@@ -853,6 +797,26 @@ Examples:
 
 Queries the supplied module or modules for information. If no module is given,
 show info for the currently active module.
+`)
+}
+
+func HelpInfoTips() {
+    fmt.Print(`
+Usage: getips <module name>
+
+Examples:
+  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+
+Gives you special information about a module and how to successfully use it in
+real life scenario.
+`)
+}
+
+func HelpInfoFeatures() {
+    fmt.Print(`
+Usage: features
+
+Prints feature plans for africana. Ex. modules to be added, what to be corrected
 `)
 }
 
@@ -863,14 +827,42 @@ Usage: info <module name>
 Examples:
   info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
 
-Queries the supplied module or modules for information. If no module is given,
-show info for the currently active module.
+Queries the supplied module or modules for information. If no module is given, show info for the currently active module.
+`)
+}
+
+func HelpUsageSetups() {
+    fmt.Print(`
+Usage: run [setups]
+
+Description:
+  This module enables you to Install, uninstall, update & mentain africana
+`)
+}
+
+func ListMainModules() {
+    fmt.Print(`
+Main modules:
+-------------
+
+  # Name           Description
+  - ----           -----------
+  1 setups         . Install, Uninstall africana-framework
+  2 anonsurf       . Launch anonsurf menu to torify your system './africana -t'
+  3 networks       . Start internal network attacks
+  4 malwares       . Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
+  5 wireless       . From wifi, bluetooth and other wireles attack vectors
+  6 crackers       . Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
+  7 phishers       . Perform Phishing attacks
+  8 websites       . Launch Web Penetration engines
+  9 credits        . Show who developes africana(& third party tools developers)
+  10 verses        . Launch Bible verses in an uniform way manner as used in the framework
 `)
 }
 
 func HelpInfoSetups() {
     fmt.Print(`
-       Name: Setups
+       Name: install, update, setups
      Module: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
@@ -892,12 +884,310 @@ Description:
 `)
 }
 
-func HelpUsageSetups() {
+func HelpInfoAnonsurf () {
     fmt.Print(`
-Usage: run [setups]
+       Name: AnonSurf
+     Module: /src/securities
+   Platform: Linux
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All linux/ macos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  START          Auto             Auto      Start anonymizing through tor
+  STOP           Auto             Auto      Stop anonymizing through tor
+  RESTART        Auto             Auto      Reload anonsurf and restart a fresh
+  Check IP       Auto             Auto      Check current External IP address
+  CHECK ALL      Auto             Auto      Check if all services are up and running
 
 Description:
-  This module enables you to Install, uninstall, update & mentain africana
+  Anonsurf is a tool derived from -----. It configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in to completely anonimize your system through Tor network.
+`)
+}
+
+func HelpInfoNetworks () {
+    fmt.Print(`
+       Name: Networks
+     Module: /src/internals
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All linux/ macos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  Interface      eth0             Yes       Set default interface to use for attacking
+  Target         Null             Yes       Set target to be attacked
+  Discover       Auto             Auto      Start scanning for connected devices in the network
+  Port discovery Auto             Auto      Scan set Target for open ports
+  Vuln Scan      Auto             Auto      Launch vulnerbility scanner on the selected target
+  Active Dir     Auto             Auto      Recon for Active Directory on the selected target
+  Exploit        Auto             Auto      Launch Exploit attacks on Active Directory services on the target
+  Sniff          Auto             Auto      Sniff all Internal Packets
+  Responder      Auto             Auto      Start responder with IPv6 Support ready and set accordingly to attack
+                                            Local machines pricesly.
+  M.I.B          Auto             Auto      Start Beefxss/ Bettercap & Ettercap For man in the browser attacks.
+  XSS Injection  Auto             Auto      Not yet implimented.
+
+Description:
+  Networks is a module enriched with creative attacking faces to help redtemers in successfully attacking local area networks with ease.
+`)
+}
+
+func HelpInfoMalwares() {
+    fmt.Print(`
+       Name: Malwares
+     Module: /src/butchers
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Malware sub modules:
+  blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
+
+Description:
+  Malwares is a module enriched with insane frameworks and c2s to help redtemers in successfully Perform attacks with ease avading most AVS.
+`)
+}
+
+func HelpInfoWireless() {
+    fmt.Print(`
+       Name: Wireless
+     Module: /src/wireless
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All linux/ macos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  Interface      wlan0            Yes       Set default interface to use for attacking
+  SSID NAME      E.T.M            No        The ssid name to be used while spoofing targets.
+
+Description:
+  Wireless is a module enriched with creative attacking faces to help redtemers in successfully attacking wireless networks with ease.
+`)
+}
+
+func HelpInfoCrackers() {
+    fmt.Print(`
+       Name: Crackers
+     Module: /src/crackers
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All linux/ macos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  Target         Null             Yes       If online attacks, a target is required to be attacked
+  Wordlists      rockyou.txt      Yes       Wordlists to be used for dictionary attacks
+  Pcap file      Null             Yes       If offline, a file with encription needed to be bruteforced
+
+Description:
+  Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
+`)
+}
+
+func HelpInfoPhishers() {
+    fmt.Print(`
+       Name: Phishers
+     Module: /src/phishers
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All linux/ macos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  Interface      eth0             No        If Ninja Phish is used then an interface is required
+  Target         Null             No        If Ninja Phish sub-module is to be used
+
+Description:
+  Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.
+`)
+}
+
+func HelpInfoWebsites() {
+    fmt.Print(`
+       Name: Websites
+     Module: /src/websites
+   Platform: All linux/ Macos
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All websites
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  Target         Null             Yes       Set a target to be attacked
+  Proxies        Null             No        Set proxies to intercept traffick using Burp or force all traffick through tor
+
+Description:
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos, sql/xss/command/_injectors among others
+`)
+}
+
+func HelpInfoCredits() {
+    fmt.Print(`
+       Name: Credits
+     Module: /src/credits
+   Platform: All Distros
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+          Null
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+Description:
+  Credits is a module to print on third party tools with their authors. It enables africana to acknowledge each developer for his/her hard work
+`)
+}
+
+func HelpInfoVerses() {
+    fmt.Print(`
+       Name: Verses
+     Module: /src/verses
+   Platform: All Distros
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+          Null
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+Description:
+  Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge The LORD GOD JESUS CHRIST for Creating everything including me, you even the machines
 `)
 }
 
@@ -913,43 +1203,234 @@ Setups Modules
   2 ubuntu        .  This Module installs africana-framework in Ubuntu-Linux
   3 arch          .  Tools will be installed with blackman an intergration of black-arch in any arch-linux distro
   4 windows       .  Under development. But can run if tools well installed using commando vm. Just give me time
-  5 uninstall     .  use this module to completelty uninstall africana with all it's dependencies from your system
+  5 android       .  Install africana-framework in Tmux using chroot environment.
+  6 viewlogs      .  Play Logs on your terminal shell Using scriptreplay
+  7 browserlogs   .  Open all your logs on a brwoser
+  8 clearlogs     .  Delete all your stored logs from lod directory in /root/.africana/logs
+  9 uninstall     .  use this module to completelty uninstall africana with all it's dependencies from your system
 `)
 }
 
-func HelpInfoMalwares() {
+func HelpInfoKali() {
     fmt.Print(`
-Usage: info <module name>
+       Name: kali
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
 
-Examples:
-  info blackjack
+Provided by:
+  Created by r0jahsm0ntar1
 
-Malware sub modules:
-  blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
 
-Queries the supplied module or modules for information. If no module is given,
-show info for the currently active module.
+Description:
+  It is a module to install africana-framework in kali-linux a stable debian based distro that
+  has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
 `)
 }
 
-func ListMalwareModules() {
+func HelpInfoUbuntu() {
     fmt.Print(`
-Malware sub modules:
---------------------
+       Name: ubuntu
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
 
-  #   Name         Description
-  -   ----         -----------
+Provided by:
+  Created by r0jahsm0ntar1
 
-  1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports obfsications & bypasses almost all avs.
-  2 shellzgen      . Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
-  3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection.
-  4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques.
-  5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users.
-  6 teardroid      . Andoird C2. Needs alot of online configuration but the best for now.
-  7 androidrat     . It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
-  8 chameleon      . A good obfsication tool for powershell scripts. Already configured for you.
-  9 gh0x0st        . It is a giant powershell obfsication tool that beats almost all AVS. Try it out you will love it
-  10 usage         . Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  It is a module to install africana-framework ubuntu which is a good distor but has alot
+  of problems while installing kali-linux packages. To avoid issues like dependencies problems,
+  Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
+`)
+}
+
+func HelpInfoArch() {
+    fmt.Print(`
+       Name: arch
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  It is a module to install africana-framework in arch based distros. Arch is well established
+  and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro.
+  No errors reported. africana can run well in arch-linux distros.
+`)
+}
+
+func HelpInfoWindows() {
+    fmt.Print(`
+       Name: windows
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All windows
+
+Description:
+  Under development. But can run if tools well installed. Just give me time. To intergarte this module
+  with commando vm for windows.
+`)
+}
+
+func HelpInfoAndroid() {
+    fmt.Print(`
+       Name: android
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   Android
+
+Description:
+  It is a module to install africana-framework in android devices. Kali-linux will be installed in
+  termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
+`)
+}
+
+func HelpInfoTermLogs() {
+    fmt.Print(`
+       Name: termlogs
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  This module will show you all logs in your terminal that has been recorded from the last time you cleaned the log folder.
+`)
+}
+
+func HelpInfoBrowserLogs() {
+    fmt.Print(`
+       Name: browserlogs
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  This module will show you all logs in the browser that has been recorded from the last time you cleaned the log folder.
+`)
+}
+
+func HelpInfoClearLogs() {
+    fmt.Print(`
+       Name: clearlogs
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  This module will clear all your logs that has been recorded from the last time you cleaned the log folder.
+`)
+}
+
+func HelpInfoUninstall() {
+    fmt.Print(`
+       Name: uninstall
+     Module: src/core/setups
+   Platform: All
+       Arch: x64, x86, amd_64, android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Distros
+
+Description:
+  Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
 `)
 }
 
@@ -981,9 +1462,941 @@ Basic options:
   LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
 Description:
-  It is a tool derived from villain framework. It supports both tcp, hhtp & https
-  reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a tool derived from villain framework. It supports both tcp, hhtp & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
 `)
 }
 
+func ListAnonsurfModules() {
+    fmt.Print(`
+Setups Modules
+------ -------
+
+  #  Module       Description
+  -  ------       -----------
+
+  1 anonsurf -i   .  Installs dnsmasq, squid, privoxy and tor (also set configs)
+  2 anonsurf -m   .  start anonymizing
+  3 anonsurf -r   .  Shuffle exit-node
+  4 anonsurf -w   .  Check if using tor (Show if all anononimty services are up and running)
+  5 anonsurf -a   .  Check current IP address
+  6 anonsurf -n   .  Back up & resets Iptables to default
+  7 anonsurf -s   .  Connect to a different exit-node
+  8 anonsurf -l   .  View traffic logs from squid, privoxy, to tor
+  9 anonsurf -e   .  Exit and Get back to the surface-web
+`)
+}
+
+func HelpInfoAnonsurfI() {
+    fmt.Print(`
+       Name: anonsurf -i
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  1 anonsurf     -i               Yes        Installs dnsmasq, squid, privoxy and tor (also set configs)
+
+Description:
+  This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go 
+  through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
+`)
+}
+
+func HelpInfoAnonsurfM() {
+    fmt.Print(`
+       Name: anonsurf -m
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  2 anonsurf     -m               Yes       Start anonymizing
+
+Description:
+  This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. 
+  It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.
+`)
+}
+
+func HelpInfoAnonsurfR() {
+    fmt.Print(`
+       Name: anonsurf -r
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  3 anonsurf    -r                Yes       Shuffle exit-node
+
+Description:
+  This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, this module can help to find a fast one.
+`)
+}
+
+func HelpInfoAnonsurfW() {
+    fmt.Print(`
+       Name: anonsurf -w
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  4 anonsurf     -w               Yes       Check if using tor (Show if all anononimty services are up and running)
+
+Description:
+  This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if
+  all traffic goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
+`)
+}
+
+func HelpInfoAnonsurfA() {
+    fmt.Print(`
+       Name: anonsurf -a
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  5 anonsurf     -a               Yes       Check current IP address
+
+Description:
+  This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
+  configured, then you will get a congratulation mesage from tor website.
+`)
+}
+
+func HelpInfoAnonsurfN() {
+    fmt.Print(`
+       Name: anonsurf -n
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  6 anonsurf     -n               Yes       Back up & resets Iptables to default
+
+Description:
+  This module will restore your Iptables to default. If the module was killed instantly and IPTABLES were not set as intended, this module
+  will help you fix the lack off internet connection.
+`)
+}
+
+func HelpInfoAnonsurfS() {
+    fmt.Print(`
+       Name: anonsurf -s
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  7 anonsurf     -s               Yes       Connect to a different exit-node
+
+Description:
+  For a better security, this module enables you to shuffle into different exit nodes in a tor proxy network.
+`)
+}
+
+func HelpInfoAnonsurfL() {
+    fmt.Print(`
+       Name: anonsurf -l
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  8 anonsurf     -l               Yes       View traffic logs from squid, privoxy, to tor
+
+Description:
+  This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
+`)
+}
+
+func HelpInfoAnonsurfE() {
+    fmt.Print(`
+       Name: anonsurf -i
+     Module: src/anonsurf
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  9 anonsurf     -e               Yes       Exit and Get back to the surface-web
+
+Description:
+  This module will stop macchanger, dnsmasq, squid, privoxy, tor then restore Iptables, and other edited configs back to default.
+  This will live your system as it was without proxies and anyone can intercept your connections even your ISP.
+`)
+}
+
+func ListInternalModules() {
+    fmt.Print(`
+Setups Modules
+------ -------
+
+  #  Module       Description
+  -  ------       -----------
+
+  1 discover      .  Discover Targets
+  2 portscan      .  Port discovery on the target
+  3 vulnscan      .  Vuln' Scan the Target
+  4 enumscan      .  S.M.B enumration on the target
+  5 smbexplo      .  Exploit S.M.B on target
+  6 psniffer      .  Sniff Internal Packets
+  7 responder     .  Lunch Responder with IPv6 Support
+  8 beefninja     .  Start Beef & Bettercap For M.I.B
+  9 xsshooker     .  Get Shell through XSS Injection
+`)
+}
+
+func HelpInfoDiscover() {
+    fmt.Print(`
+       Name: discover
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  1 discover     Null             No        Discover Targets
+
+Description:
+  This module will scann for all connected devices in the network given using bettercap then arrange the targets
+  in a table for you to select one to attack further
+`)
+}
+
+func HelpInfoPortScan() {
+    fmt.Print(`
+       Name: portscan
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  2 portscan     Null             No        Port discovery on the target
+
+Description:
+  This module will scan all open ports of the target to reveal open ports. The tool used is nmap
+  command = nmap -p- Target
+`)
+}
+
+func HelpInfoVulnScan() {
+    fmt.Print(`
+       Name: vulnscan
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  2 vulnscan     Null             No        Vuln' Scan the Target
+
+Description:
+  This module will Scan for known vulnerbility on the target that may be an easy win
+`)
+}
+
+func HelpInfoEnumScan() {
+    fmt.Print(`
+       Name: enumscan
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  4 enumscan     Null             No        S.M.B enumration on the target
+
+Description:
+  This module will Automate active directory ports, scan them and check if there are vulnerbilities and shares that could be exploited further
+`)
+}
+
+func HelpInfoExplScan() {
+    fmt.Print(`
+       Name: smbexplo
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  5 smbexplo     Null             No        Exploit S.M.B on target
+
+Description:
+  This module will Scout the target active directory services and try to auto exploit them
+`)
+}
+
+func HelpInfoPsniffer() {
+    fmt.Print(`
+       Name: psniffer
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  6 psniffer     Null             No        Sniff Internal Packets
+
+Description:
+  This module will sniff all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https
+`)
+}
+
+func HelpInfoResponder() {
+    fmt.Print(`
+       Name: responder
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  7 responder    Null             No        Lunch Responder with IPv6 Support
+
+Description:
+  This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version
+`)
+}
+
+func HelpInfoBeefNinja() {
+    fmt.Print(`
+       Name: beefninja
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  8 beefninja    Null             No        Start Beef & Bettercap For M.I.B
+
+Description:
+  This module will Launch a Combination of both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you
+`)
+}
+
+func HelpInfoXssHoocker() {
+    fmt.Print(`
+       Name: xsshooker
+     Module: src/internals
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>       0
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  9 xsshooker    Null             No        Get Shell through XSS Injection
+
+Description:
+  This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.
+`)
+}
+
+func ListMalwareModules() {
+    fmt.Print(`
+Malware sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 androids       . This module Generates android malwares and launches Listeners.
+  2 iphones        . Contains Iphone c2s and malware generation engines.
+  3 windows        . Lethal C2s that generates obfsicated powershell malwares and handles variety of reverse connection.
+  4 mackos         . A collection of mackos c2s with backdoor generators.
+  5 guineas        . C2s for Linux based distros with backdoor generators.
+  6 websites       . Backdoors for backends with their listeners
+  7 backdoors      . These module contains a collection of persisten mechanisims for variety Distros.
+  8 stealths       . Coolections of nalware obfsication tools.
+  9 chosens        . Only the best tools brought together. The beat almost all AVS. Try them & you will love them.
+`)
+}
+
+func HelpInfoAndroids() {
+    fmt.Print(`
+       Name: androids
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   androids
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of android malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoIphones() {
+    fmt.Print(`
+       Name: iphones
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   iphones
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module Contains Iphone c2s and malware generation engines that can enerate variety of iphone malwares and launches Listeners.
+  A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoWindowsM() {
+    fmt.Print(`
+       Name: windows
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   windows
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of windows malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoMackos() {
+    fmt.Print(`
+       Name: mackos
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   mackos
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of mackos malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoGuineas() {
+    fmt.Print(`
+       Name: guineas
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   guineas
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of guineas malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoWebsitesM() {
+    fmt.Print(`
+       Name: websites
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   websites
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of websites malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoBackdoors() {
+    fmt.Print(`
+       Name: backdoors
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   ALL
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will Generate variety of Persistent malwares and launches Listeners. A lot of c2 are included to suit you.
+`)
+}
+
+func HelpInfoStealths() {
+    fmt.Print(`
+       Name: stealths
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   ALL
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          Null             yes       The full location of the script to obfsication
+
+Description:
+  This module will help you obfsicate scripts like powershell to aid in avading almost all AVS 99.9%
+`)
+}
+
+func HelpInfoChosens() {
+    fmt.Print(`
+       Name: chosens
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   ALL
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module contain a collection of only the best tools brought together. The beat almost all AVS. Try them & you will love them.
+`)
+}
+
+func ListMNineModules() {
+    fmt.Print(`
+Malware sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports obfsications & bypasses almost all avs.
+  2 shellzgen      . Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
+  3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection.
+  4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques.
+  5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users.
+  6 teardroid      . Andoird C2. Needs alot of online configuration but the best for now.
+  7 androidrat     . It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  8 chameleon      . A good obfsication tool for powershell scripts. Already configured for you.
+  9 gh0x0st        . It is a giant powershell obfsication tool that beats almost all AVS. Try it out you will love it.
+`)
+}
 

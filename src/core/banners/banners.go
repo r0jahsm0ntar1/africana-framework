@@ -34,7 +34,7 @@ func Graphics() {
      //              |
     (|   ';      ,   :
       \   ;.----/  , /
-       ) // /   | |\ \         %s%s%s%s%s
+       ) // /   | |\ \        %s%s%s%s%s
        \ \\'\   | |/ /      %sJesus Christ%s
         \ \\ \  | |\/  %sThe Lamb that was slain%s
          '" '"  '""         %sfor our sins.%s
@@ -54,7 +54,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
            /-.(
            \_._\
             \ \';
-             > |/           %s%s%s%s%s
+             > |/          %s%s%s%s%s
             / //         %sJesus Christ%s
             |//       %sL❤️.VE'S U. He is%s
             \(\    %sThe Lamb that was slain%s
@@ -72,15 +72,15 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors
                         .',./'/   )/
                     ()=///=))))==()
                       /
-             /^v^\                      /^v^\
-                    /^v^\
-        /^v^\
-                          %s%s%s%s%s
+
+                         %s%s%s%s%s
                       %swake up, Christian%s
               %sLord God Jesus Christ L❤️.VE'S you%s
                     %sfollow the white Pigeon.%s
                      %sknock, knock, knock,%s
                          %sMan Of God.%s
+
+
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcolors.GREEN, bcolors.PURPLE, bcolors.ENDC)
@@ -90,14 +90,14 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.DARKCYAN, bcol
                 ('.         ,-,
                 ' '.    ,;' /
                  '.  ,'/ .'
-                  '. X /.'
+                  '. X/ .'
         .-;--''--.._' . (
       .'            /   '
      ,           ' '   Q '
      ,         ,   '._    \
   ,.|         '     '-.;_.'
   :  . '  ;    '  ' --,.._;
-   ' '    ,   )   .'               %s%s%s%s%s
+   ' '    ,   )   .'              %s%s%s%s%s
       '._ ,  '   /_            %sJesus Christ is%s
          ; ,''-,;' ''-     %sThe Lamb that was slain%s
           ''-..__''--'          %sfor our sins.%s
@@ -116,7 +116,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
              |     ________|           drive
              |  __|_
              '-/_==_\
-              /_____\\          %s%s%s%s%s
+              /_____\\         %s%s%s%s%s
                              %sJesus Christ is%s
                         %sThe Lamb that was slain%s
                              %sfor our sins.%s
@@ -136,7 +136,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
           |          || '---------------------'
           |  *    *  ||
           |          ||
-          |  *    *  ||         %s%s%s%s%s
+          |  *    *  ||        %s%s%s%s%s
           |__________||     %sJesus Christ is%s
            '----------' %sThe Lamb that was slain%s
                               %sfor our sins.%s
@@ -156,7 +156,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
              (_ (   \  (     >    \) 
                \_( _ <         >_>'
                   ~ '-i' ::>|--"
-                      I;|.|.|             %s%s%s%s%s
+                      I;|.|.|            %s%s%s%s%s
                      <|i::|i|'.        %sJesus Christ is%s
                     (' ^'"'-' ")   %sThe Lamb that was slain%s
                                        %sfor our sins.%s
@@ -176,7 +176,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
        /    |  \  |    \
     .-' ,-''|   ; |''-, '-.
         |   |    \|   |
-        |   |    ;|   |            %s%s%s%s%s
+        |   |    ;|   |           %s%s%s%s%s
         |   \    //   |        %sJesus Christ is%s
         |    '._//'   |   %sThe Lamb that was slain%s
        .'             '.        %sfor our sins.%s
@@ -262,13 +262,13 @@ func GraphicsMini() {
 / If it were not for you Lord God Jesus\
 \ where would I have been?             /
  '------------------------------------'
-       \   ,__,
-        \  (oo)____
-           (__)    )\
-              ||--|| *
-
-
-                                                 %s%s%s%s
+  \
+   \
+     ,__,
+     (oo)____
+     (__)    )\
+        ||--|| *
+                                                  %s%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC)
 
     case 5:

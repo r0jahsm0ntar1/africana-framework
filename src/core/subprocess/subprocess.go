@@ -1,15 +1,15 @@
 package subprocess
 
 import(
-    "bufio"
-    "fmt"
     "os"
+    "fmt"
+    "sync"
+    "bufio"
+    "runtime"
     "bcolors"
     "os/exec"
     "os/signal"
     "path/filepath"
-    "runtime"
-    "sync"
 )
 
 var(
@@ -31,7 +31,7 @@ func init() {
     }
 
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
-        fmt.Fprintln(os.Stderr, "Error creating log directory:", err)
+        fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error creating log directory:", err)
         return
     }
     openLogFile()
@@ -49,7 +49,7 @@ func openLogFile() {
     logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"),
         os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        fmt.Fprintln(os.Stderr, "Error opening log file:", err)
+        fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error opening log file: ", err)
     }
 }
 
@@ -72,18 +72,18 @@ func Popen(command string, args ...interface{}) {
         <-sigs
         if cmd.Process != nil {
             if err := cmd.Process.Signal(os.Interrupt); err != nil && !isProcessFinished(err) {
-                fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error sending interrupt:", err)
+                //fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error sending interrupt: ", err)
             }
         }
     }()
 
     if err := cmd.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error starting process:", err)
+        //fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error starting process: ", err)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, "Process finished with error:", err)
+        //fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Process finished with error: ", err)
     }
     signal.Stop(sigs)
     close(sigs)
@@ -103,7 +103,7 @@ func logCommand(command string) {
 
     if command != "" {
         if _, err := logFile.WriteString(command + "\n"); err != nil {
-            fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error writing to log file:", err)
+            //fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error writing to log file: ", err)
         }
     }
 }
@@ -114,21 +114,21 @@ func CloseLogFile() {
 
     if logFile != nil {
         if err := logFile.Close(); err != nil {
-            fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error closing log file:", err)
+            //fmt.Fprintln(os.Stderr, bcolors.RED + "[*] " + bcolors.ENDC + "Error closing log file: ", err)
         }
     }
 }
 
-func History() {
+func LogHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
-        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "History file does not exist.")
+        //fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "History file does not exist.")
         return
     }
 
     file, err := os.Open(logFilePath)
     if err != nil {
-        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error opening history file:", err)
+        //fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error opening history file: ", err)
         return
     }
     defer file.Close()
@@ -142,18 +142,17 @@ func History() {
     }
 
     if err := scanner.Err(); err != nil {
-        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error reading history:", err)
+        //fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error reading history: ", err)
     }
 }
 
 func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
-
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error clearing history:", err)
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Error clearing history: ", err)
     } else {
-        fmt.Println("Command history cleared.")
+        fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "history cleared.")
         openLogFile()
     }
 }
