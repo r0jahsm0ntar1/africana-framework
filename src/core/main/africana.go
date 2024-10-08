@@ -418,8 +418,8 @@ func internalAttackers() {
             internals.PacketsResponder()
         case "8", "use 8", "run 8", "start 8", "run beefninja", "use beefninja", "start beefninja":
             internals.BeefInjector(userTarget)
-        case "9", "use 9", "run 9", "start 9", "run xsshooker", "use xsshooker", "start xsshooker":
-            internals.RpcEnumScan(userTarget)
+        case "9", "use 9", "run 9", "start 9", "run ninjaphish", "use ninjaphish", "start ninjaphish":
+            phishers.NinjaPhish(userTarget)
         default:
             utils.SystemShell(userInput)
         }
@@ -553,26 +553,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1", "use 1", "run 1", "start 1", "run teardroid", "use teardroid", "start teardroid":
                     butchers.TearDroid()
@@ -613,7 +613,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourTwo()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -649,26 +649,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1":
                     utils.UpsentTools()
@@ -709,7 +709,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourThree()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -745,26 +745,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
                     butchers.BlackJack()
@@ -805,7 +805,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourFour()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -841,29 +841,29 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info seashell", "help seashell", "seashell":
+                    menus.HelpInfoSeaShell()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1":
-                    utils.UpsentTools()
+                    butchers.SeaShell()
                 case "2":
                     utils.UpsentTools()
                 case "3":
@@ -901,7 +901,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourFive()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -937,26 +937,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1":
                     utils.UpsentTools()
@@ -997,7 +997,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourSix()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -1033,26 +1033,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1":
                     utils.UpsentTools()
@@ -1093,7 +1093,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourSeven()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -1129,26 +1129,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1", "use 1", "run 1", "start 1", "run noisemaker", "use noisemaker", "start noisemaker":
                     butchers.NoiseMakers()
@@ -1189,7 +1189,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourEight()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -1225,26 +1225,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMainModules()
+                    menus.ListMalwareNineModules()
 
                 case "1", "use 1", "run 1", "start 1", "run ghost", "use ghost", "start ghost":
                     butchers.Gh0x0st()
@@ -1285,7 +1285,7 @@ func malwareGenerators() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuFourOne()
+                    menus.MenuFourNine()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -1321,26 +1321,26 @@ func malwareGenerators() {
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
 
-                case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-                    menus.HelpInfoSetups()
-                case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-                    menus.HelpInfoAnonsurf()
-                case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-                    menus.HelpInfoNetworks()
-                case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-                    menus.HelpInfoMalwares()
-                case "? 5", "info 5", "help 5", "info android", "help android", "android":
-                    menus.HelpInfoWireless()
-                case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-                    menus.HelpInfoCrackers()
-                case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-                    menus.HelpInfoPhishers()
-                case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-                    menus.HelpInfoWebsites()
-                case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-                    menus.HelpInfoCredits()
+                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
+                    menus.HelpInfoBlackJack()
+                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
+                    menus.HelpInfoShellz()
+                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
+                    menus.HelpInfoPowerJoker()
+                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
+                    menus.HelpInfoMeterPeter()
+                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
+                    menus.HelpInfoHavoc()
+                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
+                    menus.HelpInfoTearNdroid()
+                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
+                    menus.HelpInfoAndroidRat()
+                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
+                    menus.HelpInfoChameLeon()
+                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
+                    menus.HelpInfoGhost()
                 case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMalwareModules()
+                    menus.ListMalwareNineModules()
 
                 case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
                     butchers.BlackJack()
@@ -1443,23 +1443,23 @@ func wirelessAttackers() {
         case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
             menus.HelpInfoCredits()
         case "list all", "list modules", "show modules", "show all", "modules":
-            menus.ListMainModules()
+            menus.ListWirelessModules()
 
-        case "1", "use 1", "run 1", "start 1", "run wifiteauto", "use wifiteauto", "start wifiteauto":
+        case "1", "use 1", "run 1", "start 1", "wifite -a", "run wifite -a", "use wifite -a", "start wifite -a":
             wireless.WifiteAuto()
-        case "2", "use 2", "run 2", "start 2", "run bettercapauto", "use bettercapauto", "start bettercapauto":
+        case "2", "use 2", "run 2", "start 2", "bettercap -a", "run bettercap -a", "use bettercap -a", "start bettercap -a":
             wireless.BettercapAuto()
-        case "3", "use 3", "run 3", "start 3", "run wifipumpkinauto", "use wifipumpkinauto", "start wifipumpkinauto":
+        case "3", "use 3", "run 3", "start 3", "wifipumpkin -a", "run wifipumpkin -a", "use wifipumpkin -a", "start wifipumpkin -a":
             wireless.WifiPumpkin3Auto()
         case "4":
             utils.UpsentTools()
         case "5":
             utils.UpsentTools()
-        case "6", "use 6", "run 6", "start 6", "run fluxionmanual", "use fluxionmanual", "start fluxionmanual":
+        case "6", "use 6", "run 6", "start 6", "fluxion -m", "run fluxion -m", "use fluxion -m", "start fluxion -m":
             wireless.FluxionMan()
-        case "7", "use 7", "run 7", "start 7", "run airgeddonmanual", "use airgeddonmanual", "start airgeddonmanual":
+        case "7", "use 7", "run 7", "start 7", "airgeddon -m", "run airgeddon -m", "use airgeddon -m", "start airgeddon -m":
             wireless.AirGeddon()
-        case "8", "use 8", "run 8", "start 8", "run wifipumpkinmanual", "use wifipumpkinmanual", "start wifipumpkinmanual":
+        case "8", "use 8", "run 8", "start 8", "wifipumpkin -m", "run wifipumpkin -m", "use wifipumpkin -m", "start wifipumpkin -m":
             wireless.WifiPumpkin3()
         case "9":
             utils.UpsentTools()
@@ -1484,7 +1484,7 @@ func passwordsCrackers() {
         case "version":
             banners.Version()
         case "m", "menu":
-            menus.MenuFive()
+            //
         case "logs", "history":
             subprocess.LogHistory()
         case "o", "junks", "outputs":
@@ -1656,7 +1656,7 @@ func passwordsCrackers() {
                 case "version":
                     banners.Version()
                 case "m", "menu":
-                    menus.MenuSixOne()
+                    menus.MenuSixTwo()
                 case "logs", "history":
                     subprocess.LogHistory()
                 case "o", "junks", "outputs":
@@ -1747,7 +1747,7 @@ func credsPhishers() {
         case "version":
             banners.Version()
         case "m", "menu":
-            menus.MenuSixOne()
+            menus.MenuSeven()
         case "logs", "history":
             subprocess.LogHistory()
         case "o", "junks", "outputs":
@@ -1821,8 +1821,7 @@ func credsPhishers() {
         case "8", "use 8", "run 8", "start 8", "run setoolkit", "use setoolkit", "start setoolkit":
             phishers.SetoolKit()
         case "9", "use 9", "run 9", "start 9", "run ninjaphish", "use ninjaphish", "start ninjaphish":
-            internaltargetInput()
-            phishers.NinjaPhish(userTarget)
+            phishers.Thc()
         default:
             utils.SystemShell(userInput)
         }
@@ -1902,8 +1901,7 @@ func websiteUserTarget() {
         case "version":
             banners.Version()
         case "m", "menu":
-            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "Use proxies:" + bcolors.DARKCYAN + "Eg: SOCK4, SOCKS5, HTTP or HTTPS " + bcolors.YELLOW + "(y/n)" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🎭" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            //
         case "logs", "history":
             subprocess.LogHistory()
         case "o", "junks", "outputs":
@@ -2568,7 +2566,7 @@ func creditsGivers() {
         case "version":
             banners.Version()
         case "m", "menu":
-            //menus.MenuEightEight()
+            //
         case "logs", "history":
             subprocess.LogHistory()
         case "o", "junks", "outputs":

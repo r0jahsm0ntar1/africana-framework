@@ -38,6 +38,10 @@ func Shellz() {
     subprocess.Popen(`cd /root/.africana/africana-base/malwares/shells/; bash shells.sh`)
 }
 
+func SeaShell() {
+    subprocess.Popen(`cd /root/.africana/africana-base/malwares/mackrat/; python3 sea_shell.py`)
+}
+
 func MeterPeter() {
     subprocess.Popen(`cd /root/.africana/africana-base/malwares/meterpeter/; pwsh meterpeter.ps1`)
 }

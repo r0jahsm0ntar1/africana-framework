@@ -152,11 +152,11 @@ func MenuFourTwo() {
 func MenuFourThree() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. ShellzGen........................" + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 5. Havoc C2........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
@@ -168,7 +168,7 @@ func MenuFourThree() {
 func MenuFourFour() {
     fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "\n[ 1. SeaShell..........................." + bcolors.DARKCYAN + "Cool MacOS R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
@@ -292,22 +292,6 @@ func MenuFive() {
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
-func HelpFive() {
-    fmt.Println(bcolors.YELLOW + "                 Wifite " + bcolors.ENDC + ": Automated. Wifite Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Bettercap " + bcolors.ENDC + ": Automated. Bettercap Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Wifipumpkin3 " + bcolors.ENDC + ": You will be guided to launch a phishing wireless network which when any one joins it, you view all their traffick. Internet is needed for redirects." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Airgeddon " + bcolors.ENDC + ": Africana will launch airgeddon in manual mode." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           wifiPumpkin3 " + bcolors.ENDC + ": Africana will launch wifiPumpkin3 in manual mode." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
 func MenuSix() {
     fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
     scriptures.Verse()
@@ -351,7 +335,7 @@ func HelpSixOne() {
     fmt.Println(bcolors.YELLOW + "                   SMTP " + bcolors.ENDC + ": 6. Bruteforcer for SMTP using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                 TELNET " + bcolors.ENDC + ": 7. Bruteforcer for TELNET using rockyou.txt wordlists." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            HTTP/ HTTPS " + bcolors.ENDC + ": 8. Hydra Bruteforcer for HTTP/ HTTPS using rockyou.txt wordlists. Forms needed." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           ALL SERVICES " + bcolors.ENDC + ": 9. The Automatic Bruteforce Tool for all opened services. Works nice and automatic." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "           All SERVICES " + bcolors.ENDC + ": 9. The Automatic Bruteforce Tool for all opened services. Works nice and automatic." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
@@ -400,7 +384,7 @@ func MenuSeven() {
     fmt.Println(bcolors.BLUE + "[ 6. DarkPhish.............................." + bcolors.DARKCYAN + "Recent Templ" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. ShellPhish................." + bcolors.DARKCYAN + "Just Another Phishing To" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. SeToolkit.................." + bcolors.DARKCYAN + "Support Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Local Ninja Phish.........." + bcolors.DARKCYAN + "Using Ettercap & Betterc" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. TheHackerChoice............" + bcolors.DARKCYAN + "One of the best phishers" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -590,7 +574,7 @@ func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "[ 6. Launch xcom-2......................." + bcolors.DARKCYAN + "Only DoS......." + bcolors.BLUE + "🍵] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Launch ufonet-gui..................." + bcolors.DARKCYAN + "Gui on browser." + bcolors.BLUE + "🧄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. Start Grider........................" + bcolors.DARKCYAN + "Grider........." + bcolors.BLUE + "🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!.................." + bcolors.DARKCYAN + "Launch ALL!!..." + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!.................." + bcolors.DARKCYAN + "Launch All!!..." + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🦨] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
@@ -604,7 +588,7 @@ func HelpEightEight() {
     fmt.Println(bcolors.YELLOW + "          Launch xcom-2 " + bcolors.ENDC + ": 6. Only DDoS mode without a combination of other attack modes." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "             Ufonet-gui " + bcolors.ENDC + ": 7. Launch a web UI which you can interact with ufonet in a graphickal paspective." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "           Start Grider " + bcolors.ENDC + ": 8. Share your zombies. WARNING: this *ADVANCED* function is *NOT* secure, proceed if you really want to." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk.(Attack With ALL!)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk.(Attack With All!)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
@@ -913,7 +897,7 @@ Basic options:
   STOP           Auto             Auto      Stop anonymizing through tor
   RESTART        Auto             Auto      Reload anonsurf and restart a fresh
   Check IP       Auto             Auto      Check current External IP address
-  CHECK ALL      Auto             Auto      Check if all services are up and running
+  CHECK All      Auto             Auto      Check if all services are up and running
 
 Description:
   Anonsurf is a tool derived from -----. It configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in to completely anonimize your system through Tor network.
@@ -1431,38 +1415,6 @@ Available targets:
 
 Description:
   Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
-`)
-}
-
-func HelpInfoBlackJack() {
-    fmt.Print(`
-       Name: BlackJack
-     Module: /root/.africana/africana-base/blackjack
-   Platform: Windows
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by t3l3machus
-  Edited  by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Windows Evaluation
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
-
-Description:
-  It is a tool derived from villain framework. It supports both tcp, hhtp & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
 `)
 }
 
@@ -2302,7 +2254,7 @@ Provided by:
 Available targets:
       Id  Name
       --  ----
-  =>  0   ALL
+  =>  0   All
 
 Check supported:
 
@@ -2334,7 +2286,7 @@ Provided by:
 Available targets:
       Id  Name
       --  ----
-  =>  0   ALL
+  =>  0   All
 
 Check supported:
 
@@ -2365,7 +2317,7 @@ Provided by:
 Available targets:
       Id  Name
       --  ----
-  =>  0   ALL
+  =>  0   All
 
 Check supported:
 
@@ -2380,7 +2332,7 @@ Description:
 `)
 }
 
-func ListMNineModules() {
+func ListMalwareNineModules() {
     fmt.Print(`
 Malware sub modules:
 --------------------
@@ -2400,3 +2352,357 @@ Malware sub modules:
 `)
 }
 
+func HelpInfoBlackJack() {
+    fmt.Print(`
+       Name: BlackJack
+     Module: /root/.africana/africana-base/blackjack
+   Platform: Windows
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by t3l3machus
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+func HelpInfoShellz() {
+    fmt.Print(`
+       Name: Shellz
+     Module: /root/.africana/africana-base/shellz
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by 
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a tool that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+func HelpInfoPowerJoker() {
+    fmt.Print(`
+       Name: powerjoker
+     Module: /root/.africana/africana-base/powerjoker
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+func HelpInfoMeterPeter() {
+    fmt.Print(`
+       Name: meterpeter
+     Module: /root/.africana/africana-base/meterpeter
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+func HelpInfoHavoc() {
+    fmt.Print(`
+       Name: havoc
+     Module: /usr/share/havoc
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+Description:
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+`)
+}
+
+func HelpInfoTearNdroid() {
+    fmt.Print(`
+       Name: tearndroid
+     Module: /root/.africana/africana-base/tearndroid
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Androids
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+`)
+}
+
+func HelpInfoAndroidRat() {
+    fmt.Print(`
+       Name: androidrat
+     Module: /root/.africana/africana-base/androidrat
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Androids
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+`)
+}
+
+func HelpInfoChameLeon() {
+    fmt.Print(`
+       Name: chameleon
+     Module: /root/.africana/africana-base/chameleon
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  script         Null             Yes       Script to be obfsicated ex. .ps1 script
+
+Description:
+  It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+`)
+}
+
+func HelpInfoGhost() {
+    fmt.Print(`
+       Name: ghost
+     Module: /root/.africana/africana-base/ghost
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Windows Evaluation
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  script         Null             Yes       Script to be obfsicated ex. .ps1 script
+
+Description:
+  It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+`)
+}
+
+func HelpInfoSeaShell() {
+    fmt.Print(`
+       Name: seashell
+     Module: /root/.africana/africana-base/mackrat
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by
+  Edited  by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All MACKOS
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+
+Description:
+  It is a module that enables the redteam to gain and control all iphones & macos. It supports sms dumping, camera viewing e.t.c
+`)
+}
+
+func HelpFive() {
+    fmt.Println(bcolors.YELLOW + "                 Wifite " + bcolors.ENDC + ": Automated. Wifite Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "              Bettercap " + bcolors.ENDC + ": Automated. Bettercap Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "           Wifipumpkin3 " + bcolors.ENDC + ": You will be guided to launch a phishing wireless network which when any one joins it, you view all their traffick. Internet is needed for redirects." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "              Airgeddon " + bcolors.ENDC + ": Africana will launch airgeddon in manual mode." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "           wifiPumpkin3 " + bcolors.ENDC + ": Africana will launch wifiPumpkin3 in manual mode." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
+}
+
+func ListWirelessModules() {
+    fmt.Print(`
+Wireless sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 wifite        -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
+  2 bettercap     -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
+  3 wifipumpkin   -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
+  4 
+  5 
+  6 fluxion       Launch manual wifi attacks with fluxion tool.
+  7 airgeddon     Launch manual wifi attacks with airgeddon tool.
+  8 
+  9 
+`)
+}

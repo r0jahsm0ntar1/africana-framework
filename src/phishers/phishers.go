@@ -31,16 +31,20 @@ func GoodGinx() {
     subprocess.Popen(`evilginx2`)
 }
 
+func Thc() {
+    subprocess.Popen(`cd /root/.africana/africana-base/phishers/thc; bash thc.sh`)
+}
+
+func SetoolKit() {
+    subprocess.Popen(`cd /root/.africana/africana-base/phishers/set/; python3 setoolkit`)
+}
+
 func ZPhisher() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/zphisher; bash zphisher.sh`)
 }
 
 func Darkphish() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/darkphish; python3 dark-phish.py`)
-}
-
-func SetoolKit() {
-    subprocess.Popen(`cd /root/.africana/africana-base/phishers/set/; python3 setoolkit`)
 }
 
 func AdvPhisher() {
