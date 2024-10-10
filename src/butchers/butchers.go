@@ -473,7 +473,7 @@ func IconChanger() {
 func ListenerTcp() {
     fmt.Println(bcolors.BLUE + bcolors.ITALIC + "              " + bcolors.UNDERL + "Select a Listener to Launch:" + bcolors.ENDC)
     menus.MenuFourSevenOne()
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "CodeCracker " + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "CodeCracker" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🥥" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
