@@ -125,7 +125,7 @@ class main_menu(object):
         print(bcolors.BLUE + "[ 2. ...............Good Ginx (Advanced)." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 3. ...................AdvPhishing......" + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 4. ....................Setoolkit......." + bcolors.DARKCYAN + "(Web Cloning..)" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-        print(bcolors.BLUE + "[ 5. ....................Anonphisher....." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
+        print(bcolors.BLUE + "[ 5. ...................Dark-phish......." + bcolors.DARKCYAN + "(OTP Bypass...)" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 6. ....................Cyberphish......" + bcolors.DARKCYAN + "(phish temps..)" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 7. ......................To Add.........................] " + bcolors.ENDC)
         print(bcolors.BLUE + "[ 8. ......................To Add.........................] " + bcolors.ENDC)

@@ -26,16 +26,16 @@ class anonym(object):
 
     def vanish_start(self):
         os.system('clear')
-        subprocess.Popen(['cd src/externals/tor-vanish/; python3 vanisher.py -m'], shell = True).wait()
+        subprocess.Popen(['cd /root/.africana/africana-base/anonsurf/torvanish/; python3 vanisher.py -m'], shell = True).wait()
         config.configure_all()
 
     def vanish_stop(self):
         os.system('clear')
-        subprocess.Popen('cd src/externals/tor-vanish/; python3 vanisher.py -e', shell = True).wait()
+        subprocess.Popen('cd /root/.africana/africana-base/anonsurf/torvanish/; python3 vanisher.py -e', shell = True).wait()
 
     def checktor_status(self):
         os.system('clear')
-        subprocess.Popen('cd src/externals/tor-vanish/; python3 vanisher.py -w', shell = True).wait()
+        subprocess.Popen('cd /root/.africana/africana-base/anonsurf/torvanish/; python3 vanisher.py -w', shell = True).wait()
 
     def chains_start(self):
         os.system('clear')

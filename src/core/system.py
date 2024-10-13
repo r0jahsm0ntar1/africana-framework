@@ -54,8 +54,7 @@ class update(object):
                         if choice[0].lower() == "y":
                             try:
                                 print(bcolors.BLUE + "\n[" + bcolors.GREEN + "✔" + bcolors.BLUE + "] " + bcolors.GREEN + "Updating all Project Discovery tools & testing them 4U" + bcolors.ENDC)
-                                spinner.run_subprocesu('apt-get update -y')
-                                spinner.run_subprocesux('cd /root/.africana/africana-base; git pull; cd src/externals/Teardroid-phprat; git pull; cd ../AdvPhishing; git pull; cd ../anonphisher; git pull')
+                                spinner.run_subprocesu('apt-get update -y; rm -rf /root/.africana/africana-base/; cd /root/.africana/; cd /root/.africana/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1')
                                 time.sleep(0.09)
                                 africs = '/root/go'
                                 if os.path.exists(africs):
@@ -200,7 +199,7 @@ class update(object):
                                 print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring some github third party tools" + bcolors.ENDC)
                                 try:
-                                    spinner.run_subprocesx('cd /root/.africana/africana-base/src/externals/androrat; apt install ./zipalign_*_amd64.deb; cd ..; git clone https://github.com/ScRiPt1337/Teardroid-phprat; cd ./Teardroid-phprat; pip3 install -r requirements.txt; wget https://github.com/ScRiPt1337/Teardroidv4_api/archive/refs/heads/main.zip; unzip main.zip; rm -rf main.zip; git clone https://github.com/devanshbatham/paramspider; cd paramspider; pip3 install .; cd ..; git clone https://github.com/Ignitetch/AdvPhishing.git; cd AdvPhishing/; chmod 777 *; ./Linux-Setup.sh; cd ..;git clone https://github.com/TermuxHackz/anonphisher; cd ./anonphisher; chmod 777 *; bash anonphisher.sh')
+                                    spinner.run_subprocesx('cd /root/.africana/africana-base/; git pull')
                                 except:
                                     pass
 
@@ -265,7 +264,7 @@ class update(object):
                                 print("")
                                 spinner.run_subprocess('apt-get update -y')
                                 print("")
-                                spinner.run_subprocess('cd /root/.africana/africana-base; git pull; cd src/externals/Teardroid-phprat; git pull; cd ../AdvPhishing; git pull; cd ../anonphisher; git pull')
+                                spinner.run_subprocess('cd /root/.africana/africana-base; git pull')
                                 time.sleep(0.09)
                                 print("")
                                 print(bcolors.BLUE + "[              Setting up project discovery tools         ] " + bcolors.ENDC)
@@ -418,7 +417,7 @@ class update(object):
                                 print("")
                                 print(bcolors.BOLD + "[" + bcolors.BLUE + "+" + bcolors.ENDC + bcolors.BOLD + "] " + bcolors.GREEN + "Installing and Configuring some github third party tools" + bcolors.ENDC)
                                 try:
-                                    spinner.run_subprocesx('cd /root/.africana/africana-base/src/externals/androrat; apt install ./zipalign_*_amd64.deb; cd ..; git clone https://github.com/ScRiPt1337/Teardroid-phprat; cd ./Teardroid-phprat; pip3 install -r requirements.txt; wget https://github.com/ScRiPt1337/Teardroidv4_api/archive/refs/heads/main.zip; unzip main.zip; rm -rf main.zip; git clone https://github.com/devanshbatham/paramspider; cd paramspider; pip3 install .; cd ..; git clone https://github.com/Ignitetch/AdvPhishing.git; cd AdvPhishing/; chmod 777 *; ./Linux-Setup.sh; cd ..;git clone https://github.com/TermuxHackz/anonphisher; cd ./anonphisher; chmod 777 *; bash anonphisher.sh')
+                                    spinner.run_subprocesx('cd /root/.africana/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; python3 -m pip install -r /root/.africana/africana-base/requirements.txt')
                                 except:
                                     pass
 

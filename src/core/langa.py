@@ -37,7 +37,7 @@ class neo_start(object):
     def user_agree(self):
         while True:
             try:
-                os.system('clear')
+                #os.system('clear')
                 if not os.path.isfile("src/agreement/covenant.txt"):
                     with open("readme/LICENSE") as fileopen:
                         for line in fileopen:
@@ -45,7 +45,7 @@ class neo_start(object):
                     if os.path.exists('/root/.africana/'):
                         pass
                     elif not os.path.exists('/root/.africana/'):
-                        os.system('mkdir -p /root/.africana/')
+                        os.system('mkdir -p /root/.africana/output/')
                     mega_menu.menu_zero()
                     covenant = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana: " + bcolors.DARKCYAN + "Do you agree to the terms of service [y/n]:" + bcolors.GREEN + ")# " + bcolors.ENDC)
                     covenant += " "
@@ -55,14 +55,14 @@ class neo_start(object):
                         neo.one()
                         break
                     else:
-                        os.system('clear')
+                        #os.system('clear')
                         beauty.graphics(), scriptures.verses()
                         break
                 else:
                     neo.one()
                     break
             except:
-                os.system('clear')
+                #os.system('clear')
                 beauty.graphics(), scriptures.verses()
                 break
 
@@ -1146,13 +1146,13 @@ class neo_start(object):
                 try:
                     choice = input(bcolors.GREEN + "(" + bcolors.ENDC + "africana:" + bcolors.ENDC + bcolors.DARKCYAN + "framework" + bcolors.GREEN + ")# " + bcolors.ENDC)
                 except:
-                    os.system('clear')
-                    beauty.graphics(), scriptures.verses()
+                    #os.system('clear')
+                    #beauty.graphics(), scriptures.verses()
                     break
                 try:
                     if choice == '0':
-                        os.system('clear')
-                        beauty.graphics(), scriptures.verses()
+                        #os.system('clear')
+                        #beauty.graphics(), scriptures.verses()
                         break
                     elif choice == '1':
                         try:
@@ -1219,8 +1219,8 @@ class neo_start(object):
                     neo.one()
                     break
             except:
-                os.system('clear')
-                beauty.graphics(), scriptures.verses()
+                #os.system('clear')
+                #beauty.graphics(), scriptures.verses()
                 break
 
 neo = neo_start()

@@ -281,7 +281,7 @@ class Interna_Attack(object):
         if not re.match(r'http(s?)\:', url):
             url = 'https://' + url
         os.system('clear')
-        os.system('cd /root/.africana/africana-base/toxssin; python3 toxssin.py -u %s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -v' %(url))
+        os.system('cd /root/.africana/africana-base/networks/toxssin; python3 toxssin.py -u %s -c /root/.africana/certs/africana-cert.pem -k /root/.africana/certs/africana-key.pem -v' %(url))
 
 internal_scanner = Interna_Attack(host = '')
 

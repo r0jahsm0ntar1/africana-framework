@@ -10,7 +10,7 @@ class africana(object):
             pass
         else:
             os.mkdir('/root/.africana')
-        os.system('cd /usr/local/opt/africana-framework; script -q -c "python3 africana.py" %s%s%s%s' %(africs, "africana-", time.strftime("%Y%m%d-%H%M%S"), ".log"))
+        os.system('cd /usr/local/opt/africana-framework; python3 africana.py')
 main = africana()
 
 if ' __name__' == '__main__':
