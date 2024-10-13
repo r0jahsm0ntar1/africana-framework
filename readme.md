@@ -57,7 +57,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo go build ./africana.go; mv africana /usr/local/bin
+sudo make; mv africana_linux /usr/local/bin/africana
 ```
 
 ## Installation in all Arch based distros;
@@ -72,7 +72,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo go build ./africana.go; mv africana /usr/local/bin
+sudo make; mv africana_linux /usr/local/bin/africana
 ```
 
 ## The script should be run as a super user do(sudo) for root permissions .
@@ -80,7 +80,7 @@ sudo go build ./africana.go; mv africana /usr/local/bin
 sudo africana -i
 ```
 
-## For Python version. Prerequisites try;
+## For Python version. Prerequisites try; DEPRICATED USE GO VERSION
 
 Before you begin, ensure you have met the following requirements:
 **Python3:** Africana is written in Golang, so make sure you have it installed on your machine.
