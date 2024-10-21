@@ -80,8 +80,8 @@ func MenuThreeOne() {
 func MenuThreeTwo() {
     fmt.Println()
     scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s)..................................🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s)..................................🪰]" + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s).........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s).........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Go back..............................................] " + bcolors.ENDC)
 }
 
@@ -614,13 +614,13 @@ Console options:
     -t, --anonsurf       Launch anonsurf menu to torify your system './africana -t'
     -n, --networks       Start internal network attacks
     -m, --malwares       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
-    -g, --wireless       From wifi, bluetooth and other wireles attack vectors
+    -w, --wireless       From wifi, bluetooth and other wireles attack vectors
     -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
     -f, --phishers       Perform Phishing attacks
-    -w, --websites       Launch Web Penetration engines
+    -x, --websites       Launch Web Penetration engines
     -c, --credits        Show who developes africana(& third party tools developers)
     -b, --verses         Launch Bible verses in an uniform way manner as used in the framework
-    -x, --usage          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
+    -g, --guide          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
     -h, --help           Show this message
 ` + bcolors.ENDC)
 }
@@ -636,15 +636,12 @@ func HelpInfoMenuZero() {
     features          Display the list of not yet released features that can be opted in to
     help              Help menu
     history           Show command history
-    load              Load a framework plugin
     menu              Print the menu of the current phase. Alias to letter(m)
+    modules           Print all list of modules in the phase given
     quit              Exit the console
     set               Sets a context-specific variable to a value
     sleep             Do nothing for the specified number of seconds
-    spool             Write console output into a file as well the screen
     tips              Show a list of useful productivity tips
-    unload            Unload a framework plugin
-    unset             Unsets one or more context-specific variables
     version           Show the framework and console library version numbers
 
 Module Commands
@@ -655,11 +652,9 @@ Module Commands
     advanced       Displays advanced options for one or more modules
     back           Move back from the current context
     run            Run a selected module
-    exploit        Alias for run
     info           Displays information about one or more modules
     list           List the module stack
     options        Displays global options or for one or more modules
-    previous       Sets the previously loaded module as the current module
     search         Searches module names and descriptions
     show           Displays modules of a given type, or all modules
     use            Interact with a module by name or search term

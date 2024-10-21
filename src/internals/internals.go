@@ -105,7 +105,7 @@ func SmbExploit(userTarget string) {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuThreeOne()
@@ -180,7 +180,7 @@ func PacketSniffer(userTarget string) {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuThreeTwo()
@@ -285,7 +285,7 @@ func BeefEttercap(userTarget string) {
             banners.Banner()
     case "sleep":
         utils.Sleep()
-    case "version":
+    case "v", "version":
         banners.Version()
     case "m", "menu":
        menus.MenuThreeFour()
@@ -536,7 +536,7 @@ func BeefBettercap(userTarget string) {
         banners.Banner()
     case "sleep":
         utils.Sleep()
-    case "version":
+    case "v", "version":
         banners.Version()
     case "m", "menu":
         menus.MenuThreeFour()
@@ -724,7 +724,7 @@ func BeefInjector(userTarget string) {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuThreeThree()

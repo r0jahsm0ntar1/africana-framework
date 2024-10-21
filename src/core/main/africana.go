@@ -107,7 +107,7 @@ func systemSetups() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuOne()
@@ -229,7 +229,7 @@ func anonsurfSetups() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuTwo()
@@ -334,7 +334,7 @@ func internalAttackers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuThree()
@@ -441,7 +441,7 @@ func malwareGenerators() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuFour()
@@ -514,7 +514,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourOne()
@@ -610,7 +610,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourTwo()
@@ -706,7 +706,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourThree()
@@ -802,7 +802,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourFour()
@@ -898,7 +898,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourFive()
@@ -994,7 +994,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourSix()
@@ -1090,7 +1090,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourSeven()
@@ -1186,7 +1186,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourEight()
@@ -1282,7 +1282,7 @@ func malwareGenerators() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuFourNine()
@@ -1385,7 +1385,7 @@ func wirelessAttackers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuFive()
@@ -1481,7 +1481,7 @@ func passwordsCrackers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             //
@@ -1556,7 +1556,7 @@ func passwordsCrackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuSixOne()
@@ -1653,7 +1653,7 @@ func passwordsCrackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuSixTwo()
@@ -1744,7 +1744,7 @@ func credsPhishers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuSeven()
@@ -1898,7 +1898,7 @@ func websiteUserTarget() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             //
@@ -1990,7 +1990,7 @@ func websitesAttackers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuEight()
@@ -2074,7 +2074,7 @@ func websitesAttackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuEightFour()
@@ -2164,7 +2164,7 @@ func websitesAttackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuEightFive()
@@ -2261,7 +2261,7 @@ func websitesAttackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuEightSix()
@@ -2358,7 +2358,7 @@ func websitesAttackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuEightSeven()
@@ -2455,7 +2455,7 @@ func websitesAttackers() {
                     banners.Banner()
                 case "sleep":
                     utils.Sleep()
-                case "version":
+                case "v", "version":
                     banners.Version()
                 case "m", "menu":
                     menus.MenuEightEight()
@@ -2563,7 +2563,7 @@ func creditsGivers() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             //
@@ -2644,7 +2644,7 @@ func scriptureNarators() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             //menus.MenuEightEight()
@@ -2724,7 +2724,7 @@ func africanaFramework() {
             banners.Banner()
         case "sleep":
             utils.Sleep()
-        case "version":
+        case "v", "version":
             banners.Version()
         case "m", "menu":
             menus.MenuZero()
@@ -2830,7 +2830,7 @@ func genesis() {
     command := os.Args[1]
     switch command {
     case "-v", "--version":
-        banners.Banner()
+        banners.Version()
         return
     case "-u", "--update":
         systemSetups()
@@ -2870,6 +2870,8 @@ func genesis() {
     case "-99", "-b", "--scriptures":
         scriptureNarators()
         return
+    case "-g", "--guide":
+        utils.BrowseTutarilas()
     case "-00", "-h", "?", "--help":
         menus.HelpInfoMenuMain()
         return

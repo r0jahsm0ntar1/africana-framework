@@ -7,16 +7,16 @@ import(
     "math/rand"
 )
 var (
-    version = "3.0.1-dev"
+    version = "3.0.2"
 )
 
 type Banners struct{}
 
 func Version() {
     fmt.Printf(`
-Framework: %s
-Console  : %s
-` + bcolors.ENDC, version, version)
+%sFramework %s: %s
+%sConsole   %s: %s
+`, bcolors.GREEN, bcolors.ENDC, version, bcolors.GREEN, bcolors.ENDC, version)
 }
 
 func Graphics() {
