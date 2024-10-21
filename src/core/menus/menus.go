@@ -634,6 +634,7 @@ func HelpInfoMenuZero() {
     clear             Clear the working screen or (flag 'history' clear history)
     exit              Exit the console
     features          Display the list of not yet released features that can be opted in to
+    guide             Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
     help              Help menu
     history           Show command history
     menu              Print the menu of the current phase. Alias to letter(m)

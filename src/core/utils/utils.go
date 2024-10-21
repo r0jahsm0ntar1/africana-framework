@@ -213,9 +213,9 @@ func ClearScreen() {
 func BrowseTutarilas() {
     switch runtime.GOOS {
     case "linux", "darwin":
-        command = "open https://youtube.com/@RojahsMontari"
+        command = `open https://youtube.com/@RojahsMontari`
     case "windows":
-        command = "open https://youtube.com/@RojahsMontari"
+        command = `start "" "https://youtube.com/@RojahsMontari"`
     default:
         fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Unsupported operating system." + bcolors.ENDC)
         return
