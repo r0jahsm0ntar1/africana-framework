@@ -47,7 +47,7 @@ func InternalScan() {
 func NmapPortScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "Port scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     //subprocess.Popen(`masscan -v %s --ports 0-65535 --rate 10000 --wait 0`, userTarget)
-        fmt.Println()
+    fmt.Println()
     subprocess.Popen(`nmap --open -T4 -Pn -n -v -p- %s`, userTarget)
     return
 }
@@ -78,7 +78,7 @@ func EnumNxc(userTarget string) {
 
 func SmbMapScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`smbmap --no-banner -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, userTarget, userTarget)
+    subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, userTarget, userTarget)
     return
 }
 
@@ -126,7 +126,7 @@ func SmbExploit(userTarget string) {
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -201,7 +201,7 @@ func PacketSniffer(userTarget string) {
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -306,7 +306,7 @@ func BeefEttercap(userTarget string) {
     case "info set", "set", "help set":
         menus.HelpInfoSet()
     case "clear junks", "clear outputs":
-        subprocess.ClearHistory()
+        utils.ClearJunks()
     case "? use", "info use", "help use", "use":
         menus.HelpInfoUse()
     case "? run", "info run", "help run", "run":
@@ -557,7 +557,7 @@ func BeefBettercap(userTarget string) {
     case "info set", "set", "help set":
         menus.HelpInfoSet()
     case "clear junks", "clear outputs":
-        subprocess.ClearHistory()
+        utils.ClearJunks()
     case "? use", "info use", "help use", "use":
         menus.HelpInfoUse()
     case "? run", "info run", "help run", "run":
@@ -745,7 +745,7 @@ func BeefInjector(userTarget string) {
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":

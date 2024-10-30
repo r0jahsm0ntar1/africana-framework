@@ -606,8 +606,7 @@ Setup options:
     -u, --update         Update africana and africana-base tools
 
 Framework options:
-    -l, --logs           Show logs in terminal
-    -L --logger          Show logs in your browser
+    -l, -L, --logs       Show logs in terminal
     -v, -V, --version    Show version
 
 Console options:
@@ -629,13 +628,12 @@ func HelpInfoMenuZero() {
     fmt.Printf(`%s
     Command       Description
     -------       -----------
-    ?                 Help menu
+    ?                 Help menu. Alias to (help)
     banner            Display an awesome africana banner
     clear             Clear the working screen or (flag 'history' clear history)
     exit              Exit the console
     features          Display the list of not yet released features that can be opted in to
     guide             Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
-    help              Help menu
     history           Show command history
     menu              Print the menu of the current phase. Alias to letter(m)
     modules           Print all list of modules in the phase given
@@ -652,10 +650,10 @@ Module Commands
     -------        -----------
     advanced       Displays advanced options for one or more modules
     back           Move back from the current context
-    run            Run a selected module
     info           Displays information about one or more modules
     list           List the module stack
     options        Displays global options or for one or more modules
+    run            Run a selected module
     search         Searches module names and descriptions
     show           Displays modules of a given type, or all modules
     use            Interact with a module by name or search term
@@ -665,9 +663,9 @@ Developer Commands
 
     Command        Description
     -------        -----------
-    log            Display framework.log paged to the end if possible
-    time           Time how long it takes to run a particular command
     bash           Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
+    logs           Display framework.log paged to the end if possible
+    time           Time how long it takes to run a particular command
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 `, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
@@ -2667,38 +2665,22 @@ Description:
 `)
 }
 
-func HelpFive() {
-    fmt.Println(bcolors.YELLOW + "                 Wifite " + bcolors.ENDC + ": Automated. Wifite Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Bettercap " + bcolors.ENDC + ": Automated. Bettercap Will scan for available wireless network, capture .pcap then crack using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Wifipumpkin3 " + bcolors.ENDC + ": You will be guided to launch a phishing wireless network which when any one joins it, you view all their traffick. Internet is needed for redirects." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Airgeddon " + bcolors.ENDC + ": Africana will launch airgeddon in manual mode." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           wifiPumpkin3 " + bcolors.ENDC + ": Africana will launch wifiPumpkin3 in manual mode." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
 func ListWirelessModules() {
     fmt.Print(`
 Wireless sub modules:
 --------------------
 
-  #   Name         Description
-  -   ----         -----------
+  #   Name         flag       Description
+  -   ----         ----       -----------
 
-  1 wifite        -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
-  2 bettercap     -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
-  3 wifipumpkin   -a, -m for Automated wifi attacks use flag -a. for manual use flag -m.
-  4 
-  5 
-  6 fluxion       Launch manual wifi attacks with fluxion tool.
-  7 airgeddon     Launch manual wifi attacks with airgeddon tool.
-  8 
-  9 
+  1 wifite        . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
+  2 bettercap     . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
+  3 wifipumpkin   . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
+  4 To Add        .           Still working on this option.
+  5 To Add        .           Still working on this option.
+  6 fluxion       . Launch manual wifi attacks with fluxion tool.
+  7 airgeddon     . Launch manual wifi attacks with airgeddon tool.
+  8 To Add        .           Still working on this option.
+  9 To Add        .           Still working on this option.
 `)
 }

@@ -57,7 +57,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo make; mv africana_linux /usr/local/bin/africana
+sudo make; mv africana_linux /usr/local/bin/africana; africana -i
 ```
 
 ## Installation in all Arch based distros;
@@ -72,12 +72,34 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo make; mv africana_linux /usr/local/bin/africana
+sudo make; mv africana_linux /usr/local/bin/africana; africana -i
+```
+## Installation in tmux on Android based distros;
+```bash
+pkg update
+pkg upgrade
+termux-setup-storage
+pkg install wget
+wget -O install-nethunter-termux https://offs.ec/2MceZWr
+chmod +x install-nethunter-termux
+./install-nethunter-termux
+nethunter
+sudo apt update && sudo apt full-upgrade -y
+sudo apt install golang -y
+```
+```bash
+sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
+```
+```bash
+cd africana-framework
+```
+```bash
+sudo make; mv africana_linux /usr/local/bin/africana; africana -i
 ```
 
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
-sudo africana -i
+sudo africana
 ```
 
 ## For Python version. Prerequisites try; DEPRICATED USE GO VERSION

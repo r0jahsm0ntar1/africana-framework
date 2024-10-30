@@ -7,7 +7,7 @@ import(
     "math/rand"
 )
 var (
-    version = "3.0.2"
+    version = "3.0.2-dev"
 )
 
 type Banners struct{}
@@ -54,7 +54,7 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
            /-.(
            \_._\
             \ \';
-             > |/          %s%s%s%s%s
+             > |/         %s%s%s%s%s
             / //         %sJesus Christ%s
             |//       %sL❤️.VE'S U. He is%s
             \(\    %sThe Lamb that was slain%s
@@ -73,12 +73,12 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors
                     ()=///=))))==()
                       /
 
-                         %s%s%s%s%s
+                            %s%s%s%s%s
                       %swake up, Christian%s
               %sLord God Jesus Christ L❤️.VE'S you%s
                     %sfollow the white Pigeon.%s
                      %sknock, knock, knock,%s
-                         %sMan Of God.%s
+                          %sMan Of God.%s
 
 
 
@@ -156,11 +156,11 @@ bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolor
              (_ (   \  (     >    \) 
                \_( _ <         >_>'
                   ~ '-i' ::>|--"
-                      I;|.|.|            %s%s%s%s%s
+                      I;|.|.|             %s%s%s%s%s
                      <|i::|i|'.        %sJesus Christ is%s
                     (' ^'"'-' ")   %sThe Lamb that was slain%s
-                                       %sfor our sins.%s
-                                         %sJohn 3:16%s
+                                        %sfor our sins.%s
+                                          %sJohn 3:16%s
 
 `, bcolors.BLUE, bcolors.RED, bcolors.ITALIC, version, bcolors.ENDC, bcolors.BLUE, bcolors.YELLOW, bcolors.BLUE,
 bcolors.GREEN, bcolors.BLUE, bcolors.GREEN, bcolors.BLUE, bcolors.PURPLE, bcolors.ENDC)

@@ -213,13 +213,14 @@ func ClearScreen() {
 func BrowseTutarilas() {
     switch runtime.GOOS {
     case "linux", "darwin":
-        command = `open https://youtube.com/@RojahsMontari`
+        command = `xdg-open "https://youtube.com/@RojahsMontari" 2>/dev/null`
     case "windows":
         command = `start "" "https://youtube.com/@RojahsMontari"`
     default:
         fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "Unsupported operating system." + bcolors.ENDC)
         return
     }
+    fmt.Println(bcolors.BLUE + "[*] " + bcolors.GREEN + "Launched youtube tutarials..." + bcolors.ENDC)
     subprocess.Popen(command)
 }
 
@@ -237,21 +238,6 @@ func TermLogs() {
             return
         default:
             fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
-        }
-    }
-}
-
-func WordLists() {
-    if runtime.GOOS == "linux" {
-        filePath := "/usr/share/wordlists/rockyou.txt"
-        gzFilePath := filePath + ".gz"
-
-        if _, err := os.Stat(filePath); os.IsNotExist(err) {
-            if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
-                return
-            }
-            command := "gunzip %s"
-            subprocess.Popen(command, gzFilePath)
         }
     }
 }
@@ -288,6 +274,18 @@ func ListJunks() {
     return
 }
 
+func ClearJunks() {
+    subprocess.Popen(`rm -rf /root/.africana/output/*`)
+    fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "All junks cleared." + bcolors.ENDC)
+    return
+}
+
+func Sleep() {
+    scanner.Scan()
+    userInput := scanner.Text()
+    subprocess.Popen(`sleep %s`, userInput)
+}
+
 func Certs() {
     certPath := "/root/.africana/certs/africana-cert.pem"
     keyPath := "/root/.africana/certs/africana-key.pem"
@@ -298,6 +296,20 @@ func Certs() {
     }
 }
 
+func WordLists() {
+    if runtime.GOOS == "linux" {
+        filePath := "/usr/share/wordlists/rockyou.txt"
+        gzFilePath := filePath + ".gz"
+
+        if _, err := os.Stat(filePath); os.IsNotExist(err) {
+            if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
+                return
+            }
+            command := "gunzip %s"
+            subprocess.Popen(command, gzFilePath)
+        }
+    }
+}
 
 func Foundations() {
     fileLogs := "/root/.africana/logs/"
@@ -310,20 +322,14 @@ func Foundations() {
         fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
+    Certs()
+    WordLists()
 }
 
-func Sleep() {
-    scanner.Scan()
-    userInput := scanner.Text()
-    subprocess.Popen(`sleep %s`, userInput)
+func InitiLize() {
+    Foundations()
 }
 
 func UpsentTools() {
     fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯ ` + bcolors.RED + "Choice selected not implimented, " + bcolors.YELLOW + "comming soon!" + bcolors.ENDC)
-}
-
-func InitiLize() {
-    Certs()
-    Foundations()
-    WordLists()
 }

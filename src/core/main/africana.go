@@ -124,12 +124,14 @@ func systemSetups() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -246,12 +248,14 @@ func anonsurfSetups() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -351,12 +355,14 @@ func internalAttackers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -458,12 +464,14 @@ func malwareGenerators() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -531,13 +539,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -627,13 +637,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -723,13 +735,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -819,13 +833,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -915,13 +931,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1011,13 +1029,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1107,13 +1127,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1203,13 +1225,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1299,13 +1323,15 @@ func malwareGenerators() {
                 case "0", "b", "back":
                     malwareGenerators()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1402,13 +1428,15 @@ func wirelessAttackers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -1498,13 +1526,15 @@ func passwordsCrackers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -1573,13 +1603,15 @@ func passwordsCrackers() {
                 case "0", "b", "back":
                     passwordsCrackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1670,13 +1702,15 @@ func passwordsCrackers() {
                 case "0", "b", "back":
                     passwordsCrackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -1761,13 +1795,15 @@ func credsPhishers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -1915,13 +1951,15 @@ func websiteUserTarget() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -2007,13 +2045,15 @@ func websitesAttackers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -2091,13 +2131,15 @@ func websitesAttackers() {
                 case "0", "b", "back":
                     websitesAttackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -2181,13 +2223,15 @@ func websitesAttackers() {
                 case "0", "b", "back":
                     websitesAttackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -2278,13 +2322,15 @@ func websitesAttackers() {
                 case "0", "b", "back":
                     websitesAttackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -2375,13 +2421,15 @@ func websitesAttackers() {
                 case "0", "b", "back":
                     websitesAttackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -2472,13 +2520,15 @@ func websitesAttackers() {
                 case "0", "b", "back":
                     websitesAttackers()
                     return
+                case "g", "t", "guide", "tutarial":
+                    utils.BrowseTutarilas()
 
                 case "clear logs", "clear history":
                     subprocess.ClearHistory()
                 case "info set", "set", "help set":
                     menus.HelpInfoSet()
                 case "clear junks", "clear outputs":
-                    subprocess.ClearHistory()
+                    utils.ClearJunks()
                 case "? use", "info use", "help use", "use":
                     menus.HelpInfoUse()
                 case "? run", "info run", "help run", "run":
@@ -2580,13 +2630,15 @@ func creditsGivers() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -2647,7 +2699,7 @@ func scriptureNarators() {
         case "v", "version":
             banners.Version()
         case "m", "menu":
-            //menus.MenuEightEight()
+            //
         case "logs", "history":
             subprocess.LogHistory()
         case "o", "junks", "outputs":
@@ -2661,9 +2713,11 @@ func scriptureNarators() {
         case "0", "b", "back":
             africanaFramework()
             return
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
 
         case "clear logs", "clear history":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
@@ -2740,12 +2794,15 @@ func africanaFramework() {
             os.Exit(0)
         case "0", "b", "back":
             //
+        case "g", "t", "guide", "tutarial":
+            utils.BrowseTutarilas()
+
         case "clear logs", "clear history":
             subprocess.ClearHistory()
         case "info set", "set", "help set":
             menus.HelpInfoSet()
         case "clear junks", "clear outputs":
-            subprocess.ClearHistory()
+            utils.ClearJunks()
         case "? use", "info use", "help use", "use":
             menus.HelpInfoUse()
         case "? run", "info run", "help run", "run":
@@ -2873,6 +2930,7 @@ func genesis() {
     case "-g", "--guide":
         utils.BrowseTutarilas()
     case "-00", "-h", "?", "--help":
+        banners.Banner()
         menus.HelpInfoMenuMain()
         return
     default:
