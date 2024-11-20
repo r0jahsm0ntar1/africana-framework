@@ -67,7 +67,7 @@ func GetDefaultIP()(string, error) {
             return ip.String(), nil
         }
     }
-    return "", fmt.Errorf(bcolors.BLUE + "[+] " + bcolors.GREEN + "no active network interface found\n" + bcolors.ENDC)
+    return "", fmt.Errorf(bcolors.GREEN + bcolors.ITALIC + "No active network interface found." + bcolors.ENDC)
 }
 
 func GetDefaultGatewayIP()(string, error) {
@@ -328,8 +328,4 @@ func Foundations() {
 
 func InitiLize() {
     Foundations()
-}
-
-func UpsentTools() {
-    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯ ` + bcolors.RED + "Choice selected not implimented, " + bcolors.YELLOW + "comming soon!" + bcolors.ENDC)
 }

@@ -77,14 +77,6 @@ func MenuThreeOne() {
     fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🪳] " + bcolors.ENDC)
 }
 
-func MenuThreeTwo() {
-    fmt.Println()
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Sniff tcp/http(s).........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Sniff tcp/http(s).........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back..............................................] " + bcolors.ENDC)
-}
-
 func MenuThreeThree() {
     fmt.Println()
     scriptures.Verse()
@@ -114,7 +106,7 @@ func MenuFour() {
     fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones.................." + bcolors.DARKCYAN + "Launch The Best C2" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                 ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Listeners! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
 }
 
 func MenuFourOne() {
@@ -157,7 +149,7 @@ func MenuFourThree() {
     fmt.Println(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 5. Havoc C2........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 6. HoaxShell........................" + bcolors.DARKCYAN + "Use ncat -nvp port" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
@@ -263,10 +255,15 @@ func MenuFourNine() {
 }
 
 func MenuFourSevenOne() {
-    fmt.Println(bcolors.DARKGREEN + "\n 1) " + bcolors.ENDC + "ncat"           + bcolors.ENDC)
-    fmt.Println(bcolors.DARKGREEN + " 2) " + bcolors.ENDC + "blackjack"      + bcolors.ENDC)
-    fmt.Println(bcolors.DARKGREEN + " 3) " + bcolors.ENDC + "metasploit"     + bcolors.ENDC)
-    fmt.Println(bcolors.RED       + " 0) " + bcolors.ENDC + "Exit & Go back" + bcolors.ENDC)
+
+    fmt.Printf(`
+ %sC2s:%s
+ 1. ncat
+ 2. blackjack
+ 3. metasploit
+%s 0. Exit & Go back%s
+
+`, bcolors.BLUE, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func MenuFourSevenTwo() {
@@ -395,22 +392,6 @@ func MenuSevenOne() {
     fmt.Println(bcolors.BLUE + "[ 1. NijaPhish to Phish............" + bcolors.DARKCYAN + "Early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. NijaPhish to Phish............" + bcolors.DARKCYAN + "All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
-}
-
-func HelpSeven() {
-    fmt.Println(bcolors.YELLOW + "  Gophish.(Browser Gui) " + bcolors.ENDC + ": I is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default user is: admin, Default password is: kali-gophish" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Good Ginx(Advanced) " + bcolors.ENDC + ": It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            AdvPhishing " + bcolors.ENDC + ": A nice framework with alot of templets. Also bypasses OTP with ngrock support." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              Setoolkit " + bcolors.ENDC + ": This tool clones real website and intergrates it direct for phishing. It also comes With email campeighns support ." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Anonphisher " + bcolors.ENDC + ": Works also like AdvPhishing tool." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Cyberphish " + bcolors.ENDC + ": This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + ":   . bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
 }
 
 func MenuEight() {
@@ -594,6 +575,11 @@ func HelpEightEight() {
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
+
+func UpsentTools() {
+    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Choice selected " + bcolors.RED + "not implimented " + bcolors.BLUE + "yet!, but " + bcolors.YELLOW + "comming soon!" + bcolors.ENDC)
+}
+
 func HelpInfoMenuMain() {
     fmt.Print(bcolors.ENDC + `
 Usage: ./africana [options]
@@ -610,17 +596,17 @@ Framework options:
     -v, -V, --version    Show version
 
 Console options:
-    -t, --anonsurf       Launch anonsurf menu to torify your system './africana -t'
-    -n, --networks       Start internal network attacks
+    -t, --anonsurf       Launch anonsurf menu to torify your system.
+    -n, --networks       Start internal network attacks.
     -m, --malwares       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
-    -w, --wireless       From wifi, bluetooth and other wireles attack vectors
+    -w, --wireless       From wifi, bluetooth and other wireles attack vectors.
     -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
-    -f, --phishers       Perform Phishing attacks
-    -x, --websites       Launch Web Penetration engines
+    -f, --phishers       Perform Phishing attacks.
+    -x, --websites       Launch Web Penetration engines.
     -c, --credits        Show who developes africana(& third party tools developers)
-    -b, --verses         Launch Bible verses in an uniform way manner as used in the framework
-    -g, --guide          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
-    -h, --help           Show this message
+    -b, --verses         Launch Bible verses in an uniform way manner as used in the framework.
+    -g, --guide          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari.
+    -h, --help           Show this message.
 ` + bcolors.ENDC)
 }
 
@@ -825,16 +811,16 @@ Main modules:
 
   # Name           Description
   - ----           -----------
-  1 setups         . Install, Uninstall africana-framework
-  2 anonsurf       . Launch anonsurf menu to torify your system './africana -t'
-  3 networks       . Start internal network attacks
+  1 setups         . Install, Uninstall africana-framework.
+  2 anonsurf       . Launch anonsurf menu to torify your system.
+  3 networks       . Start internal network attacks.
   4 malwares       . Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
-  5 wireless       . From wifi, bluetooth and other wireles attack vectors
+  5 wireless       . From wifi, bluetooth and other wireles attack vectors.
   6 crackers       . Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
-  7 phishers       . Perform Phishing attacks
-  8 websites       . Launch Web Penetration engines
+  7 phishers       . Perform Phishing attacks.
+  8 websites       . Launch Web Penetration engines.
   9 credits        . Show who developes africana(& third party tools developers)
-  10 verses        . Launch Bible verses in an uniform way manner as used in the framework
+  10 verses        . Launch Bible verses in an uniform way manner as used in the framework.
 `)
 }
 
@@ -875,7 +861,7 @@ func HelpInfoAnonsurf () {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -911,7 +897,7 @@ func HelpInfoNetworks () {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -954,7 +940,7 @@ func HelpInfoMalwares() {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -990,7 +976,7 @@ func HelpInfoWireless() {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -1023,7 +1009,7 @@ func HelpInfoCrackers() {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -1057,7 +1043,7 @@ func HelpInfoPhishers() {
 
 Provided by:
   Created by _
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2035,6 +2021,7 @@ Malware sub modules:
   7 backdoors      . These module contains a collection of persisten mechanisims for variety Distros.
   8 stealths       . Coolections of nalware obfsication tools.
   9 chosens        . Only the best tools brought together. The beat almost all AVS. Try them & you will love them.
+ 99 listeners      . Launch a backdoor listener for any reverse shells.
 `)
 }
 
@@ -2326,6 +2313,38 @@ Description:
 `)
 }
 
+func HelpInfoListeners() {
+    fmt.Print(`
+       Name: listeners
+     Module: src/butchers
+   Platform: All
+       Arch: x64, x86
+ Privileged: Yes
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   androids
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  LHOST          eth0             yes       The listen address (an interface may be specified)
+  LPORT          9999             yes       The listen port
+
+Description:
+  This module will help you launch a listener as you are guided through.
+`)
+}
+
 func ListMalwareNineModules() {
     fmt.Print(`
 Malware sub modules:
@@ -2359,7 +2378,7 @@ func HelpInfoBlackJack() {
 
 Provided by:
   Created by t3l3machus
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2391,7 +2410,7 @@ func HelpInfoShellz() {
 
 Provided by:
   Created by 
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2423,7 +2442,7 @@ func HelpInfoPowerJoker() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2455,7 +2474,7 @@ func HelpInfoMeterPeter() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2487,7 +2506,7 @@ func HelpInfoHavoc() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2518,7 +2537,7 @@ func HelpInfoTearNdroid() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2550,7 +2569,7 @@ func HelpInfoAndroidRat() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2582,7 +2601,7 @@ func HelpInfoChameLeon() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2614,7 +2633,7 @@ func HelpInfoGhost() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2646,7 +2665,7 @@ func HelpInfoSeaShell() {
 
 Provided by:
   Created by
-  Edited  by r0jahsm0ntar1
+   Edited by r0jahsm0ntar1
 
 Available targets:
       Id  Name
@@ -2670,17 +2689,509 @@ func ListWirelessModules() {
 Wireless sub modules:
 --------------------
 
-  #   Name         flag       Description
-  -   ----         ----       -----------
+  #   Name         Description
+  -   ----         -----------
 
-  1 wifite        . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
-  2 bettercap     . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
-  3 wifipumpkin   . -a, -m    (-a) for Automated wifi attacks (-m) for manual wifi attacks.
-  4 To Add        .           Still working on this option.
-  5 To Add        .           Still working on this option.
-  6 fluxion       . Launch manual wifi attacks with fluxion tool.
-  7 airgeddon     . Launch manual wifi attacks with airgeddon tool.
-  8 To Add        .           Still working on this option.
-  9 To Add        .           Still working on this option.
+  1 wifite         . Wifite is a tool to audit WEP or WPA encrypted wireless networks. Use flag (-a) for Automated wifi attacks (-m) for manual wifi attacks.
+  2 bettercap      . Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks. Use flag (-a) for Automated wifi attacks (-m) for manual wifi attacks.
+  3 wifipumpkin3   . wifipumpkin3 - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
+  4 To Add         . Still working on this option.
+  5 To Add         . Still working on this option.
+  6 fluxion        . Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  7 airgeddon      . Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  8 wifipumpkin3   . This option runs wifipumpkin3 in manual mode where africana sets everything for you.
+  9 To Add         . Still working on this option.
+`)
+}
+
+func HelpInfoWifite() {
+    fmt.Print(`
+       Name: wifite
+     Module: src/wireless
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by kimocoder
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   WiFi
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  wifite         -a               yes       Automated attack to all wireless networks.
+  wifite         -m               yes       Manual attack to all wireless networks.
+
+Description:
+    Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
+    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+`)
+}
+
+func HelpInfoBetterCap() {
+    fmt.Print(`
+       Name: bettercap
+     Module: src/wireless
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   WiFi
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  bettercap      -a               yes       Automated attack to all wireless networks.
+  bettercap      -m               yes       Manual attack to all wireless networks.
+
+Description:
+    Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
+    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+`)
+}
+
+func HelpInfoWifiPumpkin() {
+    fmt.Print(`
+       Name: wifipumpkin
+     Module: src/wireless
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by P0cL4bs Team
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   WiFi
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  wifipumpkin    -a               yes       Automated attack to all wireless networks.
+  wifipumpkin    -m               yes       Manual attack to all wireless networks.
+
+Description:
+    Wifipumpkin is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
+    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+`)
+}
+
+func HelpInfoFluxion() {
+    fmt.Print(`
+       Name: fluxion
+     Module: src/wireless
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   WiFi
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  fluxion        null             no        Manual attack to all wireless networks.
+
+Description:
+    Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
+    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+`)
+}
+
+func HelpInfoAirGeddon() {
+    fmt.Print(`
+       Name: airgeddon
+     Module: src/wireless
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by v1s1t0r
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   WiFi
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  airgeddon      null             no        Manual attack to all wireless networks.
+
+Description:
+    Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
+    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+`)
+}
+
+func ListCrackersModules() {
+    fmt.Print(`
+Crackers sub modules:
+---------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 online         . It contains password bruteforcers that attack online services like ssh, ftp, smb, rdp, ldap, http, https etc.
+                     Submodules: include hydra, rainbow.
+
+  2 offline        . Supports all cracking offline encrypted files like .zip, .rar, .pcap, .ntlm, .MD4, .MD5, SHA1-SHA3, Kerberos etc.
+                     Submodules: include hashcat, aircrack-ng.
+`)
+}
+
+func ListPhishersModules() {
+    fmt.Printf(`
+sMalware sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 gophish        . It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default user is: admin, Default password is: kali-gophish.
+  2 goodginx       . It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP.
+  3 zphisher       . A nice framework with alot of templets. Also bypasses OTP with ngrock support.
+  4 blackeye       . 
+  5 advnphish      . 
+  6 darkphish      . 
+  7 shellphish     . Supports otp bypass. Wide range of phishing templets.
+  8 setoolkit      . This tool is equiped with alot of social eneneering. Supports cloning of actual websites.
+  9 thehackerchoice. This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing.
+`)
+}
+
+func HelpInfoGophish() {
+    fmt.Print(`
+       Name: gophish
+     Module: /usr/share/gophish
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoGoodGinx() { 
+    fmt.Print(`
+       Name: goodginx
+     Module: /usr/share/eginx
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoZphisher() {
+    fmt.Print(`
+       Name: zphisher
+     Module: /root/.africana/africana-base/zphisher
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoBlackEye() {
+    fmt.Print(`
+       Name: blackeye
+     Module: /root/.africana/africana-base/phishers/blackeye
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoAdvnPhish() {
+    fmt.Print(`
+       Name: advnphish
+     Module: /root/.africana/africana-base/phishers/advnphish
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoDarkPhish() { 
+    fmt.Print(`
+       Name: darkphish
+     Module: /root/.africana/africana-base/phishers/darkphish
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoShellPhish() {
+    fmt.Print(`
+       Name: shellphish
+     Module: /root/.africana/africana-base/phishers/shellphish
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoSetToolkit() {
+    fmt.Print(`
+       Name: setoolkit
+     Module: /root/.africana/africana-base/phishers/set
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
+`)
+}
+
+func HelpInfoTheHackerChoice() {
+    fmt.Print(`
+       Name: thehackerchoice
+     Module: /root/.africana/africana-base/phishers/thehackerchoice
+   Platform: All
+       Arch: x64, x86
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Insane
+  Disclosed: 2024
+
+Provided by:
+  Created by _____________
+   Edited by r0jahsm0ntar1
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All
+
+Check supported:
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  null           _______________  ________  ___________
+
+Description:
+  It is a module that enables the redteamers to perform phising attacks on various bases.
 `)
 }

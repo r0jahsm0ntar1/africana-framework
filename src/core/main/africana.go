@@ -190,7 +190,7 @@ func systemSetups() {
             utils.ClearScreen()
             banners.Banner()
             setups.WindowsSetups()
-            utils.UpsentTools()
+            menus.UpsentTools()
             africanaFramework()
             return
         case "5", "use 5", "run 5", "start 5", "run android", "use android", "start android":
@@ -319,7 +319,7 @@ func anonsurfSetups() {
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
     internals.InternalScan()
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.ENDC + bcolors.ITALIC + "Select your " + bcolors.RED + "Target!🎯" + bcolors.BLUE + ")" + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Networks " + bcolors.GREEN + "select your " + bcolors.RED + "Target!🎯" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐹" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     scanner.Scan()
     userTarget = scanner.Text()
@@ -505,6 +505,8 @@ func malwareGenerators() {
             menus.HelpInfoStealths()
         case "? 9", "info 9", "help 9", "info chosens", "help chosens", "chosens":
             menus.HelpInfoChosens()
+        case "? 99", "info 99", "help 99", "info listeners", "help listeners", "listeners":
+            menus.HelpInfoListeners()
         case "list all", "list modules", "show modules", "show all", "modules":
             menus.ListMalwareModules()
 
@@ -589,19 +591,19 @@ func malwareGenerators() {
                 case "2", "use 2", "run 2", "start 2", "run androrat", "use androrat", "start androrat":
                     butchers.AndroRat()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                     utils.UpsentTools()
+                     menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -683,23 +685,23 @@ func malwareGenerators() {
                     menus.ListMalwareNineModules()
 
                 case "1":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "2":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -789,15 +791,15 @@ func malwareGenerators() {
                 case "4", "use 4", "run 4", "start 4", "run meterpeter", "use meterpeter", "start meterpeter":
                     butchers.MeterPeter()
                 case "5", "use 5", "run 5", "start 5", "run havoc", "use havoc", "start havoc":
-                     butchers.Havoc()
+                    butchers.Havoc()
                 case "6":
-                    utils.UpsentTools()
+                    butchers.HoaxMalware()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -881,21 +883,21 @@ func malwareGenerators() {
                 case "1":
                     butchers.SeaShell()
                 case "2":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -977,23 +979,23 @@ func malwareGenerators() {
                     menus.ListMalwareNineModules()
 
                 case "1":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "2":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -1075,23 +1077,23 @@ func malwareGenerators() {
                     menus.ListMalwareNineModules()
 
                 case "1":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "2":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -1177,19 +1179,19 @@ func malwareGenerators() {
                 case "2", "use 2", "run 2", "start 2", "run codebreaker", "use codebreaker", "start codebreaker":
                     butchers.CodeBreakers()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -1275,19 +1277,19 @@ func malwareGenerators() {
                 case "2", "use 2", "run 2", "start 2", "run chameleon", "use chameleon", "start chameleon":
                     butchers.Chameleon()
                 case "3":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "4":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "5":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "6":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "7":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "8":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 case "9":
-                    utils.UpsentTools()
+                    menus.UpsentTools()
                 default:
                     utils.SystemShell(userInput)
                 }
@@ -1390,6 +1392,8 @@ func malwareGenerators() {
                     utils.SystemShell(userInput)
                 }
             }
+        case "99":
+            butchers.ListenerLauncher()
         default:
             utils.SystemShell(userInput)
         }
@@ -1452,22 +1456,22 @@ func wirelessAttackers() {
         case "? start", "info start", "help start", "start":
             menus.HelpInfoStart()
 
-        case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-            menus.HelpInfoSetups()
-        case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-            menus.HelpInfoAnonsurf()
-        case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-            menus.HelpInfoNetworks()
-        case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-            menus.HelpInfoMalwares()
-        case "? 5", "info 5", "help 5", "info android", "help android", "android":
-            menus.HelpInfoWireless()
-        case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-            menus.HelpInfoCrackers()
+        case "? 1", "info 1", "help 1", "info wifite", "help wifite", "wifite":
+            menus.HelpInfoWifite()
+        case "? 2", "info 2", "help 2", "info bettercap", "help bettercap", "bettercap":
+            menus.HelpInfoBetterCap()
+        case "? 3", "info 3", "help 3", "info wifipumpkin", "help wifipumpkin", "wifipumpkin":
+            menus.HelpInfoWifiPumpkin()
+        case "? 4", "info 4", "help 4":
+            menus.UpsentTools()
+        case "? 5", "info 5", "help 5":
+            menus.UpsentTools()
+        case "? 6", "info 6", "help 6", "info fluxion", "help fluxion", "fluxion":
+            menus.HelpInfoFluxion()
         case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
             menus.HelpInfoPhishers()
-        case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-            menus.HelpInfoWebsites()
+        case "? 8", "info 8", "help 8":
+            menus.HelpInfoWifiPumpkin()
         case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
             menus.HelpInfoCredits()
         case "list all", "list modules", "show modules", "show all", "modules":
@@ -1480,9 +1484,9 @@ func wirelessAttackers() {
         case "3", "use 3", "run 3", "start 3", "wifipumpkin -a", "run wifipumpkin -a", "use wifipumpkin -a", "start wifipumpkin -a":
             wireless.WifiPumpkin3Auto()
         case "4":
-            utils.UpsentTools()
+            menus.UpsentTools()
         case "5":
-            utils.UpsentTools()
+            menus.UpsentTools()
         case "6", "use 6", "run 6", "start 6", "fluxion -m", "run fluxion -m", "use fluxion -m", "start fluxion -m":
             wireless.FluxionMan()
         case "7", "use 7", "run 7", "start 7", "airgeddon -m", "run airgeddon -m", "use airgeddon -m", "start airgeddon -m":
@@ -1490,7 +1494,7 @@ func wirelessAttackers() {
         case "8", "use 8", "run 8", "start 8", "wifipumpkin -m", "run wifipumpkin -m", "use wifipumpkin -m", "start wifipumpkin -m":
             wireless.WifiPumpkin3()
         case "9":
-            utils.UpsentTools()
+            menus.UpsentTools()
         default:
             utils.SystemShell(userInput)
         }
@@ -1500,7 +1504,7 @@ func wirelessAttackers() {
 //6. Crack Hash, Pcap & Brute Passwords....(Hashcat, jo)🔐
 func passwordsCrackers() {
     for {
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "use " + bcolors.RED + "Cracker " + bcolors.BLUE + "1. " + bcolors.YELLOW + "Online " + bcolors.BLUE + "2. " + bcolors.YELLOW + "Offline " + bcolors.ENDC + "or " + bcolors.BLUE + "0. " + bcolors.YELLOW + bcolors.ITALIC + "Go back" + bcolors.BLUE + ")" + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers: " + bcolors.ENDC + bcolors.BLUE + "1. " + bcolors.YELLOW + "online " + bcolors.BLUE + "2. " + bcolors.YELLOW + "offline " + bcolors.BLUE + "0. " + bcolors.YELLOW + "Go back" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
@@ -1569,7 +1573,7 @@ func passwordsCrackers() {
         case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
             menus.HelpInfoCredits()
         case "list all", "list modules", "show modules", "show all", "modules":
-            menus.ListMainModules()
+            menus.ListCrackersModules()
 
         //Online crackers
         case "1", "use 1", "run 1", "start 1", "run onlinecrackers", "use onlinecrackers", "start onlinecrackers":
@@ -1819,26 +1823,26 @@ func credsPhishers() {
         case "? start", "info start", "help start", "start":
             menus.HelpInfoStart()
 
-        case "? 1", "info 1", "help 1", "info kali", "help kali", "kali":
-            menus.HelpInfoSetups()
-        case "? 2", "info 2", "help 2", "info ubuntu", "help ubuntu", "ubuntu":
-            menus.HelpInfoAnonsurf()
-        case "? 3", "info 3", "help 3", "info arch", "help arch", "arch":
-            menus.HelpInfoNetworks()
-        case "? 4", "info 4", "help 4", "info windows", "help windows", "windows":
-            menus.HelpInfoMalwares()
-        case "? 5", "info 5", "help 5", "info android", "help android", "android":
-            menus.HelpInfoWireless()
-        case "? 6", "info 6", "help 6", "info termlogs", "help termlogs", "tremlogs":
-            menus.HelpInfoCrackers()
-        case "? 7", "info 7", "help 7", "info viewlogs", "help viewlogs", "viewlogs":
-            menus.HelpInfoPhishers()
-        case "? 8", "info 8", "help 8", "info clearlogs", "help clearlogs", "clearlogs":
-            menus.HelpInfoWebsites()
-        case "? 9", "info 9", "help 9", "info uninstall", "help uninstall", "uninstall":
-            menus.HelpInfoCredits()
+        case "? 1", "info 1", "help 1", "info gophish", "help gophish", "gophish":
+            menus.HelpInfoGophish()
+        case "? 2", "info 2", "help 2", "info goodginx", "help goodginx", "goodginx":
+            menus.HelpInfoGoodGinx()
+        case "? 3", "info 3", "help 3", "info zphisher", "help zphisher", "zphisher":
+            menus.HelpInfoZphisher()
+        case "? 4", "info 4", "help 4", "info blackeye", "help blackeye", "blackeye":
+            menus.HelpInfoBlackEye()
+        case "? 5", "info 5", "help 5", "info advphisher", "help advphisher", "advphisher":
+            menus.HelpInfoAdvnPhish()
+        case "? 6", "info 6", "help 6", "info darkphish", "help darkphish", "darkphish":
+            menus.HelpInfoDarkPhish()
+        case "? 7", "info 7", "help 7", "info shellphish", "help shellphish", "shellphish":
+            menus.HelpInfoShellPhish()
+        case "? 8", "info 8", "help 8", "info setoolkit", "help setoolkit", "setoolkit":
+            menus.HelpInfoSetToolkit()
+        case "? 9", "info 9", "help 9", "info thc", "help thc", "thc", "info thehackerchoice", "help thehackerchoice", "thehackerchoice":
+            menus.HelpInfoTheHackerChoice()
         case "list all", "list modules", "show modules", "show all", "modules":
-            menus.ListMainModules()
+            menus.ListPhishersModules()
 
         case "1", "use 1", "run 1", "start 1", "run gophish", "use gophish", "start gophish":
             phishers.GoPhish()
@@ -1856,7 +1860,7 @@ func credsPhishers() {
             phishers.ShellPhish()
         case "8", "use 8", "run 8", "start 8", "run setoolkit", "use setoolkit", "start setoolkit":
             phishers.SetoolKit()
-        case "9", "use 9", "run 9", "start 9", "run ninjaphish", "use ninjaphish", "start ninjaphish":
+        case "9", "use 9", "run 9", "start 9", "run thc",  "use thc", "start thc", "run thehackerchoice", "use thehackerchoice", "start thehackerchoice":
             phishers.Thc()
         default:
             utils.SystemShell(userInput)
@@ -1903,8 +1907,6 @@ func setProxyEnv(proxyURL *url.URL) error {
 
 //8. Website Attack Vectors................(userTarget, set)🎭
 func websiteUserTarget() {
-    utils.ClearScreen()
-    banners.Banner()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "Enter Target:" + bcolors.DARKCYAN + "Either 📡HTTP(S)//: HOSTNAME or IP🌍" + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🎯" + bcolors.GREEN + "❯ " + bcolors.ENDC)
     scanner.Scan()
