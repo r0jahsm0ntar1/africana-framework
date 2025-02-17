@@ -13,6 +13,7 @@ import(
     "bcolors"
     "strings"
     "runtime"
+    "net/url"
     "math/big"
     "os/signal"
     "io/ioutil"
@@ -67,7 +68,7 @@ func GetDefaultIP()(string, error) {
             return ip.String(), nil
         }
     }
-    return "", fmt.Errorf(bcolors.GREEN + bcolors.ITALIC + "No active network interface found." + bcolors.ENDC)
+    return "", fmt.Errorf(bcolors.RED + "[-] " + bcolors.ENDC + "No active network interface found." + bcolors.ENDC)
 }
 
 func GetDefaultGatewayIP()(string, error) {
@@ -102,7 +103,7 @@ func generateSelfSignedCert(certPath, keyPath string) {
     filePath := "/root/.africana/certs/"
     priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
     if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
-        fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
+        fmt.Println(bcolors.BLUE + "[-] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
         return
     }
     notBefore := time.Now()
@@ -151,6 +152,45 @@ func generateSelfSignedCert(certPath, keyPath string) {
     }
 }
 
+// AskForProxy prompts the user to enter a proxy URL and validates it.
+func AskForProxy() *url.URL {
+    scanner := bufio.NewScanner(os.Stdin)
+
+    for {
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + 
+            " websites(" + bcolors.RED + "src/webattackers/askfor_proxy(eg.http://localhost:80).fn" + 
+            bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+
+        scanner.Scan()
+        proxyStr := strings.TrimSpace(scanner.Text())
+
+        proxyURL, err := url.Parse(proxyStr)
+        if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
+            fmt.Println(bcolors.RED + "Invalid URL format. Please enter a valid proxy URL (e.g., http://localhost:80)." + bcolors.ENDC)
+            continue
+        }
+
+        validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
+        if !validSchemes[proxyURL.Scheme] {
+            fmt.Println(bcolors.RED + "Invalid scheme. Only http, https, socks5, or socks4 are allowed." + bcolors.ENDC)
+            continue
+        }
+
+        return proxyURL
+    }
+}
+
+// SetProxyEnv sets the HTTP and HTTPS proxy environment variables.
+func SetProxyEnv(proxyURL *url.URL) error {
+    if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
+        return err
+    }
+    if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
+        return err
+    }
+    return nil
+}
+
 func Ifaces() {
     interfaces, err := net.Interfaces()
     if err != nil {
@@ -163,11 +203,11 @@ func Ifaces() {
         fmt.Println("Flags:", iface.Flags)
         addrs, err := iface.Addrs()
         if err != nil {
-                fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error getting addresses:", err)
-                continue
+            fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error getting addresses:", err)
+            continue
         }
         for _, addr := range addrs {
-                fmt.Println("Address:", addr.String())
+            fmt.Println("Address:", addr.String())
         }
         fmt.Println()
     }
@@ -311,7 +351,7 @@ func WordLists() {
     }
 }
 
-func Foundations() {
+func InitiLize() {
     fileLogs := "/root/.africana/logs/"
     if err := os.MkdirAll(fileLogs, os.ModePerm); err != nil {
         fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
@@ -324,8 +364,4 @@ func Foundations() {
     }
     Certs()
     WordLists()
-}
-
-func InitiLize() {
-    Foundations()
 }

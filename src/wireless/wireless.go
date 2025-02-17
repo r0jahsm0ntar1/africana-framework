@@ -20,10 +20,6 @@ func AirGeddon() {
     subprocess.Popen(`airgeddon`)
 }
 
-func FluxionMan() {
-    subprocess.Popen(`cd /root/.africana/africana-base/wireless/fluxion/; bash fluxion.sh`)
-}
-
 func WifiPumpkin3() {
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -31,6 +27,10 @@ func WifiPumpkin3() {
         utils.ClearScreen()
     }
     subprocess.Popen(`wifipumpkin3`)
+}
+
+func FluxionMan() {
+    subprocess.Popen(`cd /root/.africana/africana-base/wireless/fluxion/; bash fluxion.sh`)
 }
 
 func WifiteAuto() {

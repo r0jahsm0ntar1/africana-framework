@@ -43,6 +43,14 @@ func ZPhisher() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/zphisher/; bash zphisher.sh`)
 }
 
+func Blackeye() {
+    subprocess.Popen(`cd /root/.africana/africana-base/phishers/blackeye/; bash blackeye.sh`)
+}
+
+func ShellPhish() {
+    subprocess.Popen(`cd /root/.africana/africana-base/phishers/shellphish/; bash shellphish.sh`)
+}
+
 func Darkphish() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/darkphish/; python3 dark-phish.py`)
 }
@@ -53,14 +61,6 @@ func AdvPhisher() {
 
 func CyberPhish() {
     subprocess.Popen(`cd /root/.africana/africana-base/phishers/cyberphish/; python3 cyberphish.py`)
-}
-
-func Blackeye() {
-    subprocess.Popen(`cd /root/.africana/africana-base/phishers/blackeye/; bash blackeye.sh`)
-}
-
-func ShellPhish() {
-    subprocess.Popen(`cd /root/.africana/africana-base/phishers/shellphish/; bash shellphish.sh`)
 }
 
 func NinjaEttercap(userTarget string) {

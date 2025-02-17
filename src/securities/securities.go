@@ -6,6 +6,7 @@ import(
     "time"
     "bufio"
     "utils"
+    "menus"
     "regexp"
     "banners"
     "strings"
@@ -14,7 +15,11 @@ import(
     "net/http"
     "io/ioutil"
     "subprocess"
-    "scriptures"
+)
+
+var(
+    userInput string
+    scanner = bufio.NewScanner(os.Stdin)
 )
 
 func chameLeons() {
@@ -579,15 +584,14 @@ var torrString = []string{
 }
 
 func AnonsurfSetups() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`)
+    fmt.Println()
 }
 
 func AnonsurfStart() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     confiGure()
     configureFirewall()
@@ -595,36 +599,138 @@ func AnonsurfStart() {
 }
 
 func AnonsurfExitnode() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     torCircuit()
 }
 
 func AnonsurfStatus() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
-    fmt.Println()
-    subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED +  "src/securities/show_status.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    scanner.Scan()
+    userInput := scanner.Text()
+    for {
+        switch strings.ToLower(userInput) {
+            case "banner":
+                banners.RandomBanners()
+                AnonsurfStatus()
+                return
+            case "sleep":
+                utils.Sleep()
+                AnonsurfStatus()
+                return
+            case "info":
+                menus.HelpInfoAnonsurf()
+                AnonsurfStatus()
+                return
+            case "v", "version":
+                banners.Version()
+                AnonsurfStatus()
+                return
+            case "options", "show options":
+                menus.HelpInfoExecute()
+                AnonsurfStatus()
+                return
+            case "m", "menu":
+                menus.MenuTwo()
+                AnonsurfStatus()
+                return
+            case "logs", "history":
+                subprocess.LogHistory()
+                AnonsurfStatus()
+                return
+            case "o", "junks", "outputs":
+                utils.ListJunks()
+                AnonsurfStatus()
+                return
+            case "? info", "help info":
+                menus.HelpInfo()
+                AnonsurfStatus()
+                return
+            case "00", "?", "h", "help":
+                menus.HelpInfoMenuZero()
+                AnonsurfStatus()
+                return
+            case "e", "q", "exit", "quit":
+                os.Exit(0)
+            case "0", "b", "back":
+                return
+            case "g", "t", "guide", "tutarial":
+                utils.BrowseTutarilas()
+                AnonsurfStatus()
+                return
+            case "clear logs", "clear history":
+                subprocess.ClearHistory()
+                AnonsurfStatus()
+                return
+            case "info set", "set", "help set":
+                menus.HelpInfoSet()
+                AnonsurfStatus()
+                return
+            case "clear junks", "clear outputs":
+                utils.ClearJunks()
+                AnonsurfStatus()
+                return
+            case "? run", "info run", "help run":
+                menus.HelpInfoRun()
+                AnonsurfStatus()
+                return
+            case "? start", "info start", "help start":
+                menus.HelpInfoStart()
+                AnonsurfStatus()
+                return
+            case "? use", "info use", "help use", "use":
+                menus.HelpInfoUse()
+                AnonsurfStatus()
+                return
+            case "f", "use f", "use features", "features":
+                menus.HelpInfoFeatures()
+                AnonsurfStatus()
+                return
+            case "? tips", "info tips", "help tips", "tips":
+                menus.HelpInfoTips()
+                AnonsurfStatus()
+                return
+            case "? show", "info show", "help show", "show":
+                menus.HelpInfoShow()
+                AnonsurfStatus()
+                return
+            case "info list", "help list", "use list", "list":
+                menus.HelpInfoList()
+                AnonsurfStatus()
+                return
+            case "? options", "info options", "help options":
+                menus.HelpInfOptions()
+                AnonsurfStatus()
+                return
+            case "run", "start", "execute":
+                banners.GraphicsTorNet()
+                fmt.Println()
+                subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`)
+                fmt.Println()
+                AnonsurfStatus()
+                return
+            default:
+                utils.SystemShell(userInput)
+                AnonsurfStatus()
+                return
+         }
+    }
 }
 
 func AnonsurfIpaddr() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     torStatus(0)
 }
 
 func AnonsurfRIptabls() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     resetToDefault(false, false)
 }
 
 func AnonsurfReload() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     confiGure()
     configureFirewall()
@@ -632,15 +738,14 @@ func AnonsurfReload() {
 }
 
 func AnonsurfChains() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     subprocess.Popen(`tail -vf /var/log/privoxy/logfile`)
+    fmt.Println()
 }
 
 func AnonsurfStop() {
-    banners.AnonSurfBanner()
-    scriptures.Verse()
+    banners.GraphicsTorNet()
     fmt.Println()
     termiNate()
 }

@@ -79,7 +79,7 @@ func SslScan(userTarget string) {
 
 func Gobuster(userTarget string) {
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing dir recon on " + bcolors.ORANGE + "Target " + bcolors.ENDC + "= " + bcolors.GREEN + bcolors.ITALIC + "%s \n" + bcolors.ENDC, userTarget)
-    subprocess.Popen(`gobuster dir vhost --debug --no-error --random-agent -w /root/.africana/africana-base/crackers/wordlists/content/dirb_big.txt -e -u %s`, userTarget)
+    subprocess.Popen(`gobuster dir vhost --debug --no-error --random-agent -w /root/.africana/africana-base/wordlists/everything.txt -e -u %s`, userTarget)
 }
 
 func Nuclei(userTarget string) {

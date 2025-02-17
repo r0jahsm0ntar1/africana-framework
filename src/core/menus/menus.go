@@ -2,300 +2,389 @@ package menus
 
 import(
     "fmt"
+    "utils"
     "bcolors"
-    "scriptures"
 )
 
 func MenuZero() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🦊" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Install, Update or View your Logs......." + bcolors.DARKCYAN + "Start here!" + bcolors.BLUE + "🔧] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. System Security Configuration..........." + bcolors.DARKCYAN + "Setup tor &" + bcolors.BLUE + "🎭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Local Network Attack Vectors............" + bcolors.DARKCYAN + "Mitm, sniff" + bcolors.BLUE + "🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Generate Undetectable Backdoors........." + bcolors.DARKCYAN + "C2 & shells" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. WiFi Attack Vectors....................." + bcolors.DARKCYAN + "Wifite, air" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Crack Hash, Pcap & Brute Passwords......" + bcolors.DARKCYAN + "Hashcat, jo" + bcolors.BLUE + "🔐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Social-Engineering Attacks.............." + bcolors.DARKCYAN + "Gophish, gi" + bcolors.BLUE + "🪝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Website Attack Vectors.................." + bcolors.DARKCYAN + "Osmedeus, j" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Credits, and About the author..........." + bcolors.DARKCYAN + "About, auth" + bcolors.BLUE + "📚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ e. Exit africana-framework................." + bcolors.DARKCYAN + "" + bcolors.Colors() + "JC❤️sU " + bcolors.Colors() + "︻╦╤─" + bcolors.DARKCYAN + "" + bcolors.BLUE + "💻] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sInstall, Update & View Logs
+%s 2. %sSystem Security Configuration
+%s 3. %sLocal Network Penetration Testing
+%s 4. %sBackdoors & Trojans Generating Engines
+%s 5. %sWireless Networks Attacks Vector
+%s 6. %sPasswords, Hashes & .Pcap Crackers
+%s 7. %sSocial-Engineering & Phishings Vectors
+%s 8. %sWebsite Penetration Testing Vectors
+%s 9. %sCredits, & about the author
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s99. %s%s%s%sGet Bonus Packages.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuOne() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🩺" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    println(bcolors.BLUE + "\n[ 1. Kali-Linux..........." + bcolors.DARKCYAN + "Debian family. They are Stable" + bcolors.BLUE + "🦎] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 2. Ubuntu-Linux....." + bcolors.DARKCYAN + "Will use Docker to avoid breakages" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 3. Arch-Linux.........." + bcolors.DARKCYAN + "Black-Arch-Linux, Manjaro-Linux" + bcolors.BLUE + "🗻] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 4. Windows.........................." + bcolors.DARKCYAN + "(7, 8, 10, 11, 12)" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 5. Android Tmux..........." + bcolors.DARKCYAN + "Kali-Linux Will Be Installed" + bcolors.BLUE + "📱] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 6. View Logs....." + bcolors.DARKCYAN + "Play Logs On shell Using scriptreplay" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 7. Browse your logs......" + bcolors.DARKCYAN + "Open your all logs on brwoser" + bcolors.BLUE + "🌍] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 8. Clear all your logs....." + bcolors.DARKCYAN + "Delete all your stored logs" + bcolors.BLUE + "🧹] " + bcolors.ENDC)
-    println(bcolors.BLUE + "[ 9. Uninstall Africana......." + bcolors.DARKCYAN + "Caution Irevasable action!" + bcolors.BLUE + "🥴] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %skali linux
+%s 2. %subuntu linux
+%s 3. %sarch linux
+%s 4. %swindows os
+%s 5. %sandroid tmux
+%s 6. %sview system logs
+%s 7. %sbrowse your logs
+%s 8. %sclear all your logs
+%s 9. %suninstall africana-framework
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuTwo() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🎭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Install & Setup " + bcolors.RED + "Tor" + bcolors.BLUE + "........................" + bcolors.DARKCYAN + "start here" + bcolors.BLUE + "] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Start anonymizing through tor......................🧅] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Connect to a different exit-node...................🐞] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Check if all services are up and running...........🐼] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Check current External IP address..................🐾] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Back up and reset Iptables to default..............🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Reload anonsurf and restart a fresh................🦨]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. See Chains." + bcolors.ITALIC + bcolors.ENDC + "local.🐌.squid.🐙.privoxy.🎭.tor.🧄.WEB.🌍" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Stop anonsurf & restore all iptables...............🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sInstall & setup tor
+%s 2. %sStart anonymizing through tor
+%s 3. %sConnect to a different exit-node
+%s 4. %sCheck if all services are up & running
+%s 5. %sCheck current External IP address
+%s 6. %sBack up & reset Iptables to default
+%s 7. %sReload anonsurf and restart a fresh
+%s 8. %sView live logs from local.squid.privoxy.tor.web
+%s 9. %sStop anonsurf & restore all iptables
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuThree() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐹" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Discover Targets...................................🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Port discovery on the target.......................🐾] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Vuln' Scan the Target..............................🐶] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Active Directory recon on the target...............🪳] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Exploit Active Directory on target.................🐼] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Sniff Internal Packets.............................🐽] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Lunch Responder with IPv6 Support..................🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Start Beefxss/ Bettercap & Ettercap For....." + bcolors.DARKCYAN + "(M.I.B)" + bcolors.BLUE + "🥩] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Get Reverse shell through snifing..." + bcolors.DARKCYAN + "(XSS Injection)" + bcolors.BLUE + "🍇] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sDiscover connected devices
+%s 2. %sScan for open ports on the target
+%s 3. %sVulnerbility scann the selected target
+%s 4. %sStart active directory information gathering
+%s 5. %sLaunch known exploits on the targets active directory
+%s 6. %sSniff all packets passing in wire (sniffs all services)
+%s 7. %sLunch killer Responder with IPv6 Support
+%s 8. %sStart Beefxss with Bettercap & Ettercap For (M.I.B)
+%s 9. %sGet Reverse shell through snifing (XSS Injection)
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuThreeOne() {
-    fmt.Println()
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Launch Eternalblue Exploit.........................🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🪳] " + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sLaunch eternalblue exploit on the target
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuThreeThree() {
-    fmt.Println()
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Ettercap...........................................🐼] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Bettercap..........................................🐹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🪳] " + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sLaunch hosts dns using ettercap
+%s 2. %sLaunch hosts dns using bettercap
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuThreeFour() {
-    fmt.Println()
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. Inject beef-xss.js........." + bcolors.DARKCYAN + "to early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Inject beef-xss.js........." + bcolors.DARKCYAN + "to All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back..............................................] " + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sInject beef-xss.js to early selected target
+%s 2. %sInject beef-xss.js to all connected devices
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFour() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Androids........................." + bcolors.DARKCYAN + "all Android R.A.Ts" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Iphones.........................." + bcolors.DARKCYAN + "Iphones Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Windows.........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🪟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. MackOS'.........................." + bcolors.DARKCYAN + "MackOS' Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. LinuxOS.........................." + bcolors.DARKCYAN + "LinuxOS Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Websites........................." + bcolors.DARKCYAN + "Website Rev Shells" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Persisternts....................." + bcolors.DARKCYAN + "Generate Backdoors" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Obfsications....................." + bcolors.DARKCYAN + "Deceive Antiviruse" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. The chosen Ones.................." + bcolors.DARKCYAN + "Launch The Best C2" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                 ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Listeners! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sandroids
+%s 2. %siphones
+%s 3. %swindows
+%s 4. %smackos
+%s 5. %slinuxos
+%s 6. %swebsites
+%s 7. %spersisternts
+%s 8. %sobfsications
+%s 9. %schosens
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourOne() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Teardroid......................." + bcolors.DARKCYAN + "Android 4 to 13 Rat" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. AndroidRAT......................" + bcolors.DARKCYAN + "Android 4 to 09 Rat" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %steardroid
+%s 2. %sandrorat
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourTwo() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sto add
+%s 2. %sto add
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourThree() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. ShellzGen........................" + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Havoc C2........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. HoaxShell........................" + bcolors.DARKCYAN + "Use ncat -nvp port" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sblackjack
+%s 2. %sshellz
+%s 3. %spowerjoker
+%s 4. %smeterpeter
+%s 5. %shavoc C2
+%s 6. %shoaxshell
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourFour() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. SeaShell..........................." + bcolors.DARKCYAN + "Cool MacOS R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sseashell.
+%s 2. %sto add
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourFive() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sto add
+%s 2. %sto add
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 
 func MenuFourSix() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. To Add.............................................🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. To Add.............................................🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sto add
+%s 2. %sto add
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourSeven() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. NoiseMakers............." + bcolors.DARKCYAN + "Backdoor with Dll injection" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. CodeBreakers............" + bcolors.DARKCYAN + "Backdoor with Regestry keys" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %snoisemakers
+%s 2. %scodebreakers
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourEight() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add.............................................🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add.............................................🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add.............................................🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. To Add.............................................🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add.............................................🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sgh0x0st
+%s 2. %schameleon
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourNine() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🐭" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Blackjack........................" + bcolors.DARKCYAN + "All Distro...R.A.T" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. ShellzGen........................" + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🦐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. PowerJoker......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. MeterPeter......................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Havoc C2........................." + bcolors.DARKCYAN + "Windows Rev Shells" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Teardroid........................" + bcolors.DARKCYAN + "Android 4 > 13 Rat" + bcolors.BLUE + "🥙] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. AndroidRAT......................." + bcolors.DARKCYAN + "Android 4 > 10 Rat" + bcolors.BLUE + "🐭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Chameleon........................" + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍤] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Gh0x0st.........................." + bcolors.DARKCYAN + "Obfuscation .Ps1 S" + bcolors.BLUE + "🍈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sblackjack
+%s 2. %sshellzgen
+%s 3. %spowerjoker
+%s 4. %smeterpeter
+%s 5. %shavocc2
+%s 6. %steardroid
+%s 7. %sandroidrat
+%s 8. %schameleon
+%s 9. %sgh0x0st
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourSevenOne() {
-
     fmt.Printf(`
- %sC2s:%s
- 1. ncat
- 2. blackjack
- 3. metasploit
-%s 0. Exit & Go back%s
+%s%s%sSelect a number from the table below.%s
 
-`, bcolors.BLUE, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+%s 1. %sncat
+%s 2. %sblackjack
+%s 3. %smetasploit
+%s 4. %sMeterPeter
+%s 5. %s.
+%s 6. %s.
+%s 7. %s.
+%s 8. %s.
+%s 9. %s.
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFourSevenTwo() {
-    fmt.Println(bcolors.DARKGREEN + "\n 1) " + bcolors.ENDC + "lync.ico    " + bcolors.DARKGREEN + " 5) " + bcolors.ENDC + "pdf.ico        " + bcolors.DARKGREEN + "  9) " + bcolors.ENDC + "rat.ico " + bcolors.DARKGREEN + "  0) " + bcolors.RED + "No icon"+ bcolors.ENDC)
-    fmt.Println(bcolors.DARKGREEN + " 2) " + bcolors.ENDC + "excel.ico   " + bcolors.DARKGREEN + " 6) " + bcolors.ENDC + "project.ico    " + bcolors.DARKGREEN + " 10) " + bcolors.ENDC + "vlc.ico " + bcolors.ENDC)
-    fmt.Println(bcolors.DARKGREEN + " 3) " + bcolors.ENDC + "access.ico  " + bcolors.DARKGREEN + " 7) " + bcolors.ENDC + "publisher.ico  " + bcolors.DARKGREEN + " 11) " + bcolors.ENDC + "word.ico" + bcolors.ENDC)
-    fmt.Println(bcolors.DARKGREEN + " 4) " + bcolors.ENDC + "autorun.ico " + bcolors.DARKGREEN + " 8) " + bcolors.ENDC + "powerpoint.ico " + bcolors.DARKGREEN + " 12) " + bcolors.ENDC + "visio.ico" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+%s 1. %slync.ico                              %s 10. %svlc.ico
+%s 2. %sexcel.ico                             %s 11. %sword.ico
+%s 3. %saccess.ico                            %s 12. %svisio.ico
+%s 4. %sautorun.ico
+%s 5. %spdf.ico
+%s 6. %sproject.ico
+%s 7. %spublisher.ico
+%s 8. %spowerpoint.ico
+%s 9. %srat.ico
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
+
+func AndroRatOptions() {
+    userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
+        }
+    fmt.Printf(`
+Module options (exploit/android/andro_rat):
+
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
+  LPORT          9999             Yes       Listening local host machine port for reverse connections.
+  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
+  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.africana/output/)
+  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Target
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFive() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🍍" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Wifite...................................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🎯] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Bettercap................................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Wifipumpkin3....................." + bcolors.DARKCYAN + "Automated Phishing" + bcolors.BLUE + "🍍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Fluxion......................................" + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Airgeddon...................................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. wifiPumpkin3................................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🫐] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+%s 1. %swifite                                         automated
+%s 2. %sbettercap                                      automated
+%s 3. %swifipumpkin3                                   automated
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sfluxion                                           manual
+%s 7. %sairgeddon                                         manual
+%s 8. %swifipumpkin3                                      manual
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuSix() {
-    fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Online........................." + bcolors.DARKCYAN + "Automated_Bruteforce" + bcolors.BLUE + "🍋] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Offline..................." + bcolors.DARKCYAN + "Automated/ maunal/ Hashes" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sonline services.(bruteforcing remote services like ssh, ftp etc.)
+%s 2. %soffline services.(cracking of hashes/ntlms and .pcap)
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpInfoSix() {
@@ -308,19 +397,21 @@ func HelpInfoSix() {
 }
 
 func MenuSixOne() {
-    fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Bruteforce......................................" + bcolors.DARKCYAN + "SSH" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Bruteforce......................................" + bcolors.DARKCYAN + "FTP" + bcolors.BLUE + "🔑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Bruteforce......................................" + bcolors.DARKCYAN + "SMB" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Bruteforce......................................" + bcolors.DARKCYAN + "RDP" + bcolors.BLUE + "🍒] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Bruteforce....................................." + bcolors.DARKCYAN + "LDAP" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Bruteforce....................................." + bcolors.DARKCYAN + "SMTP" + bcolors.BLUE + "🌈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Bruteforce..................................." + bcolors.DARKCYAN + "Telnet" + bcolors.BLUE + "🐚] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Bruteforce..................................." + bcolors.DARKCYAN + "HTTP/S" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Bruteforce..................................." + bcolors.DARKCYAN + "All/SS" + bcolors.BLUE + "🩴] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sssh
+%s 2. %sftp
+%s 3. %ssmb
+%s 4. %srdp
+%s 5. %sldap
+%s 6. %ssmtp
+%s 7. %stelnet
+%s 8. %shttp/https
+%s 9. %sall services
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpSixOne() {
@@ -339,75 +430,90 @@ func HelpSixOne() {
 }
 
 func MenuSixTwo() {
-    fmt.Println(bcolors.BLUE + "      ~>( 🔐" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Aircrack_ng..............................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. John......................................" + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🥭] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. To Add.............................................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Hash-Buster........................................🪀] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. To Add...............................................] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
 
+%s 1. %saircrack_ng
+%s 2. %sjohn
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %shash_buster
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
 
 func HelpSixTwo() {
     fmt.Println(bcolors.YELLOW + "            Aircrack_ng " + bcolors.ENDC + ": 1. Automated. It will prompt you for location of the file e.g. ntlm file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   John " + bcolors.ENDC + ": 2. Automated. It will prompt you for location of the file e.g. .pcap file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 3. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 4. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 5. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 6. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 7. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 3. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 4. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 5. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 6. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 7. Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "            Hash-Buster " + bcolors.ENDC + ": 8. It is a tool to crack hashes. It need internet connection to search for the hashes before caracking them." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 To Add " + bcolors.ENDC + ": 9. Still working on this option." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 9. Still working on this option." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
 }
 
 func MenuSeven() {
-    fmt.Println(bcolors.BLUE + "      ~>( 🪝" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. GoPhish................................" + bcolors.DARKCYAN + "All Templets" + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. GoodGinx..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🍹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. ZPhisher..............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Blackeye..............................." + bcolors.DARKCYAN + "Supports OTP" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. AdvnPhish.............................." + bcolors.DARKCYAN + "Bypasses OTP" + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. DarkPhish.............................." + bcolors.DARKCYAN + "Recent Templ" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. ShellPhish................." + bcolors.DARKCYAN + "Just Another Phishing To" + bcolors.BLUE + "🫑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. SeToolkit.................." + bcolors.DARKCYAN + "Support Deep Web Cloning" + bcolors.BLUE + "🧉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. TheHackerChoice............" + bcolors.DARKCYAN + "One of the best phishers" + bcolors.BLUE + "🪀] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sgophish
+%s 2. %sgoodginx
+%s 3. %szphisher
+%s 4. %sblackeye
+%s 5. %sadvnphish
+%s 6. %sdarkphish
+%s 7. %sshellphish
+%s 8. %ssetoolkit
+%s 9. %sthehackerchoice
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuSevenOne() {
-    fmt.Println()
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "[ 1. NijaPhish to Phish............" + bcolors.DARKCYAN + "Early selected target" + bcolors.BLUE + "🦟] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. NijaPhish to Phish............" + bcolors.DARKCYAN + "All Connected devices" + bcolors.BLUE + "🦁] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Exit & Go To Main Menu...............................] " + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %sninja phish           attack early selected target
+%s 2. %sgoodginx              attack all Connected devices
+%s 3. %sto add
+%s 4. %sto add
+%s 5. %sto add
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuEight() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Start Passive Web recon & Subdomain Enumration.....🌍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Gather e-mails & subdomain namesfrom public sources🪰] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Start Bruteforcing Host's Root Files...............🦑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Start SQL, XSS & SSRF Detection & Eploitation......💉] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Launch OWASP Nettacker project Main Menu...........🦣] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Jok3r v3.5 Insane Mult Reconing Engine Main Menu...🃏] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Osmedeus Next Generation Workflow Engine Main Menu.🔮] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Ufonet Next Generation DDOS Tool Main Menu.........🦠] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Launch Heavy Automation Attacks On The Host........🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %ssubdomain
+%s 2. %semails
+%s 3. %sbruteforce
+%s 4. %scode injection
+%s 5. %snettacker
+%s 6. %sjok3r
+%s 7. %sosmedeus
+%s 8. %sufonet
+%s 9. %sautomation
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpEight() {
@@ -427,14 +533,21 @@ func HelpEight() {
 }
 
 func MenuEightFour() {
-    fmt.Println(bcolors.BLUE + "      ~>( " + bcolors.ENDC + "💉Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
-    fmt.Println(bcolors.BLUE + "\n[ 1. Sql injection with sqlmap................." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🐞] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Xss injection with Dalfox, Xsser.........." + bcolors.DARKCYAN + "Automated" + bcolors.BLUE + "🪰] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Sql injection with Sqlmap...................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐛] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Xss injection with Xsser....................." + bcolors.DARKCYAN + "Manual" + bcolors.BLUE + "🐌] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧯] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %ssql_auto
+%s 2. %sxss_auto
+%s 3. %ssql_manual
+%s 4. %sxss_manual
+%s 5. %snettacker
+%s 6. %sto add
+%s 7. %sto add
+%s 8. %sto add
+%s 9. %sto add
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpEightFour() {
@@ -450,7 +563,6 @@ func HelpEightFour() {
 
 func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "\n[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
@@ -482,7 +594,6 @@ func HelpEightFive() {
 
 func MenuEightSix() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "\n[ 1. Install all jok3r tools....." + bcolors.DARKCYAN + "Pleas start here if not" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Show all the tools in the toolbox..................🍒] " + bcolors.ENDC)
@@ -514,7 +625,6 @@ func HelpEightSix() {
 
 func MenuEightSeven() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "\n[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🦍] " + bcolors.ENDC)
@@ -546,7 +656,6 @@ func HelpEightSeven() {
 
 func MenuEightEight() {
     fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    scriptures.Verse()
     fmt.Println(bcolors.BLUE + "\n[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server........🍄]" + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 2. Test if bots are alive.............................📡] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 3. Launch palantir....................." + bcolors.DARKCYAN + "Palantir 3.14.." + bcolors.BLUE + "🦍] " + bcolors.ENDC)
@@ -581,7 +690,7 @@ func UpsentTools() {
 }
 
 func HelpInfoMenuMain() {
-    fmt.Print(bcolors.ENDC + `
+    fmt.Printf(`
 Usage: ./africana [options]
 
 Common options:
@@ -598,21 +707,22 @@ Framework options:
 Console options:
     -t, --anonsurf       Launch anonsurf menu to torify your system.
     -n, --networks       Start internal network attacks.
-    -m, --malwares       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
+    -m, --exploits       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
     -w, --wireless       From wifi, bluetooth and other wireles attack vectors.
     -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
     -f, --phishers       Perform Phishing attacks.
     -x, --websites       Launch Web Penetration engines.
     -c, --credits        Show who developes africana(& third party tools developers)
     -b, --verses         Launch Bible verses in an uniform way manner as used in the framework.
-    -g, --guide          Watch tutarials on YouTube: https://youtube.com/@RojahsMontari.
+    -g, --guide          Watch tutarials on YouTube: %shttps://youtube.com/@RojahsMontari%s.
     -h, --help           Show this message.
-` + bcolors.ENDC)
+
+`, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoMenuZero() {
     fmt.Printf(`%s
-    Command       Description
+    Command       Description%s
     -------       -----------
     ?                 Help menu. Alias to (help)
     banner            Display an awesome africana banner
@@ -629,11 +739,11 @@ func HelpInfoMenuZero() {
     tips              Show a list of useful productivity tips
     version           Show the framework and console library version numbers
 
-Module Commands
+%sModule Commands%s
 ---------------
 
-    Command        Description
-    -------        -----------
+    %sCommand      Description%s
+    -------      -----------
     advanced       Displays advanced options for one or more modules
     back           Move back from the current context
     info           Displays information about one or more modules
@@ -644,17 +754,18 @@ Module Commands
     show           Displays modules of a given type, or all modules
     use            Interact with a module by name or search term
 
-Developer Commands
+%sDeveloper Commands%s
 ------------------
 
-    Command        Description
-    -------        -----------
+    %sCommand      Description%s
+    -------      -----------
     bash           Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
     logs           Display framework.log paged to the end if possible
     time           Time how long it takes to run a particular command
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
-`, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoRun() {
@@ -670,18 +781,32 @@ An index from the previous search results can be selected if desired.
 
 Examples:
     run setups
+
+`)
+}
+
+func HelpInfOptions() {
+    fmt.Print(`
+Usage: options
+
+Examples:
+    options alias to [show options]
+
+Just like show options command, options shows commands in which a sub module can run in a given submenu.
+
 `)
 }
 
 func HelpInfoShow() {
     fmt.Printf(`
-Usage: show [modules] or show [all]
+Usage: show [all], [modules], [options]
 
 Examples:
   show modules
 
-%s[*]%s Valid parameters for the "show" command are: modules, all
+%s[*]%s Valid parameters for the "show" command are:  all, modules, options
 %s[*]%s Additional module-specific parameters are: missing, advanced
+
 `, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
 
@@ -694,10 +819,11 @@ If a module name is not found, it will be treated as a search term.
 An index from the previous search results can be selected if desired.
 
 Examples:
-  use setups, anonsurf, networks, malwares, wireless, phishers, websites, credits, verses
+  use setups, anonsurf, networks, exploits, wireless, phishers, websites, credits, verses
 
   use setups
   use <name>
+
 `)
 }
 
@@ -710,10 +836,11 @@ If a module name is not found, it will be treated as a search term.
 An index from the previous search results can be selected if desired.
 
 Examples:
-  start setups, anonsurf, networks, malwares, wireless, phishers, websites, credits, verses
+  start setups, anonsurf, networks, exploits, wireless, phishers, websites, credits, verses
 
   start setups
   start <name>
+
 `)
 }
 
@@ -729,6 +856,7 @@ Examples:
 
 %s[*]%s Valid parameters for the "list" command are: modules, all
 %s[*]%s Additional module-specific parameters are: missing, advanced
+
 `, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
 
@@ -749,6 +877,7 @@ OPTIONS:
     -c, --clear   Clear the values, explicitly setting to nil(default)
     -g, --global  Operate on global datastore variables
     -h, --help    Help banner.
+
 `)
 }
 
@@ -757,10 +886,11 @@ func HelpInfo() {
 Usage: info <module name>
 
 Examples:
-  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
 
 Queries the supplied module or modules for information. If no module is given,
 show info for the currently active module.
+
 `)
 }
 
@@ -769,10 +899,11 @@ func HelpInfoTips() {
 Usage: getips <module name>
 
 Examples:
-  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
 
 Gives you special information about a module and how to successfully use it in
 real life scenario.
+
 `)
 }
 
@@ -781,6 +912,7 @@ func HelpInfoFeatures() {
 Usage: features
 
 Prints feature plans for africana. Ex. modules to be added, what to be corrected
+
 `)
 }
 
@@ -789,9 +921,10 @@ func HelpSetupsInfo() {
 Usage: info <module name>
 
 Examples:
-  info setups, anonsurf, internals, malwares, wireless, phishers, webs, verses
+  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
 
 Queries the supplied module or modules for information. If no module is given, show info for the currently active module.
+
 `)
 }
 
@@ -801,30 +934,41 @@ Usage: run [setups]
 
 Description:
   This module enables you to Install, uninstall, update & mentain africana
+
 `)
+}
+
+func HelpInfoExecute() {
+    fmt.Printf(`
+%sOptions%s:
+-------
+    %srun%s : Launch the selected module. Alias to (start, execute)
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func ListMainModules() {
-    fmt.Print(`
-Main modules:
+    fmt.Printf(`
+%sMain modules%s:
 -------------
 
-  # Name           Description
-  - ----           -----------
-  1 setups         . Install, Uninstall africana-framework.
-  2 anonsurf       . Launch anonsurf menu to torify your system.
-  3 networks       . Start internal network attacks.
-  4 malwares       . Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
-  5 wireless       . From wifi, bluetooth and other wireles attack vectors.
-  6 crackers       . Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
-  7 phishers       . Perform Phishing attacks.
-  8 websites       . Launch Web Penetration engines.
-  9 credits        . Show who developes africana(& third party tools developers)
-  10 verses        . Launch Bible verses in an uniform way manner as used in the framework.
-`)
+  # %sName           Description%s
+  - ----             -----------
+  %s1.%s setups         : Install, Uninstall africana-framework.
+  %s2.%s anonsurf       : Launch anonsurf menu to torify your system.
+  %s3.%s networks       : Start internal network attacks.
+  %s4.%s exploits       : Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+  %s5.%s wireless       : From wifi, bluetooth and other wireles attack vectors.
+  %s6.%s crackers       : Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+  %s7.%s phishers       : Perform Phishing attacks.
+  %s8.%s websites       : Launch Web Penetration engines.
+  %s9.%s credits        : Show who developes africana (& third party tools developers)
+  %s10.%s verses        : Launch Bible verses in an uniform way manner as used in the framework.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
 
-func HelpInfoSetups() {
+func HelpInfoPmanager() {
     fmt.Print(`
        Name: install, update, setups
      Module: src/core/setups
@@ -845,10 +989,11 @@ Available targets:
 
 Description:
   This module enables you to Install, uninstall, update & mentain africana
+
 `)
 }
 
-func HelpInfoAnonsurf () {
+func HelpInfoAnonsurf() {
     fmt.Print(`
        Name: AnonSurf
      Module: /src/securities
@@ -881,6 +1026,7 @@ Basic options:
 
 Description:
   Anonsurf is a tool derived from -----. It configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in to completely anonimize your system through Tor network.
+
 `)
 }
 
@@ -924,12 +1070,13 @@ Basic options:
 
 Description:
   Networks is a module enriched with creative attacking faces to help redtemers in successfully attacking local area networks with ease.
+
 `)
 }
 
-func HelpInfoMalwares() {
+func HelpInfoexploits() {
     fmt.Print(`
-       Name: Malwares
+       Name: exploits
      Module: /src/butchers
    Platform: All linux/ Macos
        Arch: x64, x86
@@ -959,7 +1106,8 @@ Malware sub modules:
   blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
 
 Description:
-  Malwares is a module enriched with insane frameworks and c2s to help redtemers in successfully Perform attacks with ease avading most AVS.
+  exploits is a module enriched with insane frameworks and c2s to help redtemers in successfully Perform attacks with ease avading most AVS.
+
 `)
 }
 
@@ -993,6 +1141,7 @@ Basic options:
 
 Description:
   Wireless is a module enriched with creative attacking faces to help redtemers in successfully attacking wireless networks with ease.
+
 `)
 }
 
@@ -1027,6 +1176,7 @@ Basic options:
 
 Description:
   Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
+
 `)
 }
 
@@ -1060,6 +1210,7 @@ Basic options:
 
 Description:
   Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.
+
 `)
 }
 
@@ -1092,6 +1243,7 @@ Basic options:
 
 Description:
   Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos, sql/xss/command/_injectors among others
+
 `)
 }
 
@@ -1122,6 +1274,7 @@ Basic options:
 
 Description:
   Credits is a module to print on third party tools with their authors. It enables africana to acknowledge each developer for his/her hard work
+
 `)
 }
 
@@ -1151,7 +1304,8 @@ Basic options:
   ----           ---------------  --------  -----------
 
 Description:
-  Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge The LORD GOD JESUS CHRIST for Creating everything including me, you even the machines
+  Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge our LORD GOD JESUS CHRIST for Creating everything including you, me & everything.
+
 `)
 }
 
@@ -1172,6 +1326,22 @@ Setups Modules
   7 browserlogs   .  Open all your logs on a brwoser
   8 clearlogs     .  Delete all your stored logs from lod directory in /root/.africana/logs
   9 uninstall     .  use this module to completelty uninstall africana with all it's dependencies from your system
+
+`)
+}
+
+func SetupOptions() {
+    fmt.Print(`
+Use: run [submodule]
+   example: run kali, start kali or kali
+   
+  commands: run, show, start, list
+            run takes flags like [run kali]
+      flag: kali, ubuntu, arch, windows, android, viewlogs, browserlogs, clearlogs or uninstall
+
+Description:
+  Select an action you want to perform using the above modules Install, uninstall, update & mentain africana
+
 `)
 }
 
@@ -1197,6 +1367,7 @@ Available targets:
 Description:
   It is a module to install africana-framework in kali-linux a stable debian based distro that
   has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
+
 `)
 }
 
@@ -1223,6 +1394,7 @@ Description:
   It is a module to install africana-framework ubuntu which is a good distor but has alot
   of problems while installing kali-linux packages. To avoid issues like dependencies problems,
   Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
+
 `)
 }
 
@@ -1249,6 +1421,7 @@ Description:
   It is a module to install africana-framework in arch based distros. Arch is well established
   and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro.
   No errors reported. africana can run well in arch-linux distros.
+
 `)
 }
 
@@ -1274,6 +1447,7 @@ Available targets:
 Description:
   Under development. But can run if tools well installed. Just give me time. To intergarte this module
   with commando vm for windows.
+
 `)
 }
 
@@ -1299,6 +1473,55 @@ Available targets:
 Description:
   It is a module to install africana-framework in android devices. Kali-linux will be installed in
   termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
+
+`)
+}
+
+func HelpInfoSetups() {
+    fmt.Println(`
+       Name: setups
+     Module: src/core/setups
+   Platform: Linux/ Android/ Mack/ Windows
+       Arch: x64_x86
+ Privileged: Yes
+    License: Africana Framework License (BSD)
+       Rank: Best
+  Disclosed: 2024-03-14
+
+Provided by:
+  r0jahsm0ntar1
+  africanasec group
+  Rojahs Montari <rojahsmontari@gmail.com>
+
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   at for automatic target
+      1   kali
+      2   arch
+      3   ubuntu
+      4   mackos
+      5   android > 8
+      6   windows > 10
+
+Check supported:
+  Yes
+
+Basic options:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  distro                          yes       The target distibution to set africana-frame work
+
+Description:
+  This module will set up africana-framework in the given system as intended.
+
+Usage:
+  set distro kali
+  run or start
+
+
+View the full module info with the info -d command.
 `)
 }
 
@@ -1323,6 +1546,7 @@ Available targets:
 
 Description:
   This module will show you all logs in your terminal that has been recorded from the last time you cleaned the log folder.
+
 `)
 }
 
@@ -1347,6 +1571,7 @@ Available targets:
 
 Description:
   This module will show you all logs in the browser that has been recorded from the last time you cleaned the log folder.
+
 `)
 }
 
@@ -1371,10 +1596,11 @@ Available targets:
 
 Description:
   This module will clear all your logs that has been recorded from the last time you cleaned the log folder.
+
 `)
 }
 
-func HelpInfoUninstall() {
+func HelpInfoTotalUninstaller() {
     fmt.Print(`
        Name: uninstall
      Module: src/core/setups
@@ -1395,6 +1621,7 @@ Available targets:
 
 Description:
   Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
+
 `)
 }
 
@@ -1415,6 +1642,7 @@ Setups Modules
   7 anonsurf -s   .  Connect to a different exit-node
   8 anonsurf -l   .  View traffic logs from squid, privoxy, to tor
   9 anonsurf -e   .  Exit and Get back to the surface-web
+
 `)
 }
 
@@ -1442,11 +1670,12 @@ Check supported:
 Basic options:
   Name           Current Setting  Required  Description
   ----           ---------------  --------  -----------
-  1 anonsurf     -i               Yes        Installs dnsmasq, squid, privoxy and tor (also set configs)
+  1 anonsurf     -i               Yes       Installs dnsmasq, squid, privoxy and tor (also set configs)
 
 Description:
   This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go 
   through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
+
 `)
 }
 
@@ -1479,6 +1708,7 @@ Basic options:
 Description:
   This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. 
   It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.
+
 `)
 }
 
@@ -1510,6 +1740,7 @@ Basic options:
 
 Description:
   This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, this module can help to find a fast one.
+
 `)
 }
 
@@ -1542,6 +1773,7 @@ Basic options:
 Description:
   This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if
   all traffic goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
+
 `)
 }
 
@@ -1574,6 +1806,7 @@ Basic options:
 Description:
   This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
   configured, then you will get a congratulation mesage from tor website.
+
 `)
 }
 
@@ -1606,6 +1839,7 @@ Basic options:
 Description:
   This module will restore your Iptables to default. If the module was killed instantly and IPTABLES were not set as intended, this module
   will help you fix the lack off internet connection.
+
 `)
 }
 
@@ -1637,6 +1871,7 @@ Basic options:
 
 Description:
   For a better security, this module enables you to shuffle into different exit nodes in a tor proxy network.
+
 `)
 }
 
@@ -1668,6 +1903,7 @@ Basic options:
 
 Description:
   This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
+
 `)
 }
 
@@ -1700,6 +1936,7 @@ Basic options:
 Description:
   This module will stop macchanger, dnsmasq, squid, privoxy, tor then restore Iptables, and other edited configs back to default.
   This will live your system as it was without proxies and anyone can intercept your connections even your ISP.
+
 `)
 }
 
@@ -1720,6 +1957,7 @@ Setups Modules
   7 responder     .  Lunch Responder with IPv6 Support
   8 beefninja     .  Start Beef & Bettercap For M.I.B
   9 xsshooker     .  Get Shell through XSS Injection
+
 `)
 }
 
@@ -1752,6 +1990,7 @@ Basic options:
 Description:
   This module will scann for all connected devices in the network given using bettercap then arrange the targets
   in a table for you to select one to attack further
+
 `)
 }
 
@@ -1784,6 +2023,7 @@ Basic options:
 Description:
   This module will scan all open ports of the target to reveal open ports. The tool used is nmap
   command = nmap -p- Target
+
 `)
 }
 
@@ -1815,6 +2055,7 @@ Basic options:
 
 Description:
   This module will Scan for known vulnerbility on the target that may be an easy win
+
 `)
 }
 
@@ -1846,6 +2087,7 @@ Basic options:
 
 Description:
   This module will Automate active directory ports, scan them and check if there are vulnerbilities and shares that could be exploited further
+
 `)
 }
 
@@ -1877,6 +2119,7 @@ Basic options:
 
 Description:
   This module will Scout the target active directory services and try to auto exploit them
+
 `)
 }
 
@@ -1908,6 +2151,7 @@ Basic options:
 
 Description:
   This module will sniff all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https
+
 `)
 }
 
@@ -1939,6 +2183,7 @@ Basic options:
 
 Description:
   This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version
+
 `)
 }
 
@@ -1970,6 +2215,7 @@ Basic options:
 
 Description:
   This module will Launch a Combination of both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you
+
 `)
 }
 
@@ -2001,6 +2247,7 @@ Basic options:
 
 Description:
   This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.
+
 `)
 }
 
@@ -2012,16 +2259,17 @@ Malware sub modules:
   #   Name         Description
   -   ----         -----------
 
-  1 androids       . This module Generates android malwares and launches Listeners.
+  1 androids       . This module Generates android exploits and launches Listeners.
   2 iphones        . Contains Iphone c2s and malware generation engines.
-  3 windows        . Lethal C2s that generates obfsicated powershell malwares and handles variety of reverse connection.
+  3 windows        . Lethal C2s that generates obfsicated powershell exploits and handles variety of reverse connection.
   4 mackos         . A collection of mackos c2s with backdoor generators.
   5 guineas        . C2s for Linux based distros with backdoor generators.
   6 websites       . Backdoors for backends with their listeners
   7 backdoors      . These module contains a collection of persisten mechanisims for variety Distros.
-  8 stealths       . Coolections of nalware obfsication tools.
+  8 stealths       . Colections of malware obfsication tools.
   9 chosens        . Only the best tools brought together. The beat almost all AVS. Try them & you will love them.
  99 listeners      . Launch a backdoor listener for any reverse shells.
+
 `)
 }
 
@@ -2053,7 +2301,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of android malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of android exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2085,8 +2334,9 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module Contains Iphone c2s and malware generation engines that can enerate variety of iphone malwares and launches Listeners.
+  This module Contains Iphone c2s and malware generation engines that can enerate variety of iphone exploits and launches Listeners.
   A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2118,7 +2368,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of windows malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of windows exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2150,7 +2401,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of mackos malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of mackos exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2182,7 +2434,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of guineas malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of guineas exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2214,7 +2467,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of websites malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of websites exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2246,7 +2500,8 @@ Basic options:
   LPORT          9999             yes       The listen port
 
 Description:
-  This module will Generate variety of Persistent malwares and launches Listeners. A lot of c2 are included to suit you.
+  This module will Generate variety of Persistent exploits and launches Listeners. A lot of c2 are included to suit you.
+
 `)
 }
 
@@ -2278,6 +2533,7 @@ Basic options:
 
 Description:
   This module will help you obfsicate scripts like powershell to aid in avading almost all AVS 99.9%
+
 `)
 }
 
@@ -2310,6 +2566,7 @@ Basic options:
 
 Description:
   This module contain a collection of only the best tools brought together. The beat almost all AVS. Try them & you will love them.
+
 `)
 }
 
@@ -2342,6 +2599,7 @@ Basic options:
 
 Description:
   This module will help you launch a listener as you are guided through.
+
 `)
 }
 
@@ -2355,13 +2613,14 @@ Malware sub modules:
 
   1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports obfsications & bypasses almost all avs.
   2 shellzgen      . Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
-  3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell malwares and handles variety of reverse connection.
+  3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell exploits and handles variety of reverse connection.
   4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques.
   5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users.
   6 teardroid      . Andoird C2. Needs alot of online configuration but the best for now.
   7 androidrat     . It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
   8 chameleon      . A good obfsication tool for powershell scripts. Already configured for you.
   9 gh0x0st        . It is a giant powershell obfsication tool that beats almost all AVS. Try it out you will love it.
+
 `)
 }
 
@@ -2394,6 +2653,7 @@ Basic options:
 
 Description:
   It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+
 `)
 }
 
@@ -2426,6 +2686,7 @@ Basic options:
 
 Description:
   It is a tool that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+
 `)
 }
 
@@ -2458,6 +2719,7 @@ Basic options:
 
 Description:
   It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+
 `)
 }
 
@@ -2490,6 +2752,7 @@ Basic options:
 
 Description:
   It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+
 `)
 }
 
@@ -2521,6 +2784,7 @@ Basic options:
 
 Description:
   It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+
 `)
 }
 
@@ -2553,6 +2817,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+
 `)
 }
 
@@ -2585,6 +2850,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+
 `)
 }
 
@@ -2617,6 +2883,7 @@ Basic options:
 
 Description:
   It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+
 `)
 }
 
@@ -2649,6 +2916,7 @@ Basic options:
 
 Description:
   It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+
 `)
 }
 
@@ -2681,6 +2949,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteam to gain and control all iphones & macos. It supports sms dumping, camera viewing e.t.c
+
 `)
 }
 
@@ -2695,12 +2964,13 @@ Wireless sub modules:
   1 wifite         . Wifite is a tool to audit WEP or WPA encrypted wireless networks. Use flag (-a) for Automated wifi attacks (-m) for manual wifi attacks.
   2 bettercap      . Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks. Use flag (-a) for Automated wifi attacks (-m) for manual wifi attacks.
   3 wifipumpkin3   . wifipumpkin3 - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
-  4 To Add         . Still working on this option.
-  5 To Add         . Still working on this option.
+  4 to add         . Still working on this option.
+  5 to add         . Still working on this option.
   6 fluxion        . Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
   7 airgeddon      . Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
   8 wifipumpkin3   . This option runs wifipumpkin3 in manual mode where africana sets everything for you.
-  9 To Add         . Still working on this option.
+  9 to add         . Still working on this option.
+
 `)
 }
 
@@ -2735,6 +3005,7 @@ Basic options:
 Description:
     Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
     This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+
 `)
 }
 
@@ -2769,6 +3040,7 @@ Basic options:
 Description:
     Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
     This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+
 `)
 }
 
@@ -2803,6 +3075,7 @@ Basic options:
 Description:
     Wifipumpkin is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
     This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+
 `)
 }
 
@@ -2836,6 +3109,7 @@ Basic options:
 Description:
     Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
     This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+
 `)
 }
 
@@ -2869,6 +3143,7 @@ Basic options:
 Description:
     Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
     This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+
 `)
 }
 
@@ -2885,6 +3160,7 @@ Crackers sub modules:
 
   2 offline        . Supports all cracking offline encrypted files like .zip, .rar, .pcap, .ntlm, .MD4, .MD5, SHA1-SHA3, Kerberos etc.
                      Submodules: include hashcat, aircrack-ng.
+
 `)
 }
 
@@ -2905,6 +3181,7 @@ sMalware sub modules:
   7 shellphish     . Supports otp bypass. Wide range of phishing templets.
   8 setoolkit      . This tool is equiped with alot of social eneneering. Supports cloning of actual websites.
   9 thehackerchoice. This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing.
+
 `)
 }
 
@@ -2937,6 +3214,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -2969,6 +3247,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3001,6 +3280,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3033,6 +3313,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3065,6 +3346,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3097,6 +3379,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3129,6 +3412,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3161,6 +3445,7 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
 
@@ -3193,5 +3478,6 @@ Basic options:
 
 Description:
   It is a module that enables the redteamers to perform phising attacks on various bases.
+
 `)
 }
