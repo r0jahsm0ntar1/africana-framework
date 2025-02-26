@@ -30,7 +30,7 @@ func InternalScan() {
     fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Println()
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/set_iface/default_eth0.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/set_iface/default_eth0_func.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userIface := scanner.Text()
     if userIface == "" {
@@ -104,7 +104,7 @@ func SmbExploit(userTarget string) {
     }
     menus.MenuThreeOne()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/launch_smb_exploit.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/launch_smb_exploit_func.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -156,7 +156,7 @@ func SmbExploit(userTarget string) {
             fmt.Println()
             subprocess.Popen(`ip address`)
             fmt.Println()
-            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LHOST_default/%s", userLhostIp + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LHOST_default/%s", userLhostIp + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
@@ -164,7 +164,7 @@ func SmbExploit(userTarget string) {
             }
             fmt.Printf(`LHOST => %s`, userLhostIp)
             fmt.Println()
-            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LPORT_default/9999" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED +  "src/internals/set_LPORT_default/9999" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
             scanner.Scan()
             userLport := scanner.Text()
             if userLport == "" {
@@ -182,7 +182,7 @@ func SmbExploit(userTarget string) {
 func PacketSniffer(userTarget string) {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Sniff: " + bcolors.GREEN + "Target: " + bcolors.ENDC + bcolors.BLUE + "1. " + bcolors.YELLOW + "%s " + bcolors.BLUE + "2. " + bcolors.YELLOW + "all devices " + bcolors.BLUE + "0. " + bcolors.YELLOW + "Go back" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC, userTarget)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐽" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐽" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         if userInput == "" {
@@ -256,14 +256,14 @@ func PacketsResponder() {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userIface := scanner.Text()
         if userIface == "" {
             userIface = "eth0"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Responder " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🐷" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userLhost := scanner.Text()
         if userLhost == "" {
@@ -292,7 +292,7 @@ func BeefEttercap(userTarget string) {
     }
     menus.MenuThreeFour()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
@@ -344,7 +344,7 @@ func BeefEttercap(userTarget string) {
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -370,21 +370,21 @@ func BeefEttercap(userTarget string) {
             fmt.Println()
             subprocess.Popen(`ip address`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userIface := scanner.Text()
             if userIface == "" {
                 userIface = "eth0"
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
                 userLhost = userLhostIp
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userFakeDns := scanner.Text()
             if userFakeDns == "" {
@@ -450,7 +450,7 @@ func BeefEttercap(userTarget string) {
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -476,21 +476,21 @@ func BeefEttercap(userTarget string) {
             fmt.Println()
             subprocess.Popen(`ip address`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userIface := scanner.Text()
             if userIface == "" {
                 userIface = "eth0"
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
                 userLhost = userLhostIp
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userFakeDns := scanner.Text()
             if userFakeDns == "" {
@@ -560,7 +560,7 @@ func BeefBettercap(userTarget string) {
     }
     menus.MenuThreeFour()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
@@ -612,7 +612,7 @@ func BeefBettercap(userTarget string) {
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -638,14 +638,14 @@ func BeefBettercap(userTarget string) {
             fmt.Println()
             subprocess.Popen(`ip address`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userIface := scanner.Text()
             if userIface == "" {
                 userIface = "eth0"
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
@@ -686,7 +686,7 @@ func BeefBettercap(userTarget string) {
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Type new " + bcolors.ENDC + "password " + bcolors.DARKGREY + bcolors.ITALIC + "for the " + bcolors.ENDC + "beef " + bcolors.DARKGREY + bcolors.ITALIC + "user" + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             fmt.Scan(&userPass)
             newString := fmt.Sprintf(`passwd: "%s"`, userPass)
             filesToReplacements := map[string]map[string]string{
@@ -712,14 +712,14 @@ func BeefBettercap(userTarget string) {
             fmt.Println()
             subprocess.Popen(`ip address`)
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userIface := scanner.Text()
             if userIface == "" {
                 userIface = "eth0"
             }
             fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
             scanner.Scan()
             userLhost := scanner.Text()
             if userLhost == "" {
@@ -761,7 +761,7 @@ func BeefInjector(userTarget string) {
     menus.MenuThreeThree()
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "BeefInject " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + bcolors.ITALIC + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         if userInput == "" {

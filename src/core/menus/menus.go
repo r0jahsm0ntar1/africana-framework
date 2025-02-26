@@ -19,6 +19,7 @@ func MenuZero() {
 %s 7. %sSocial-Engineering & Phishings Vectors
 %s 8. %sWebsite Penetration Testing Vectors
 %s 9. %sCredits, & about the author
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s99. %s%s%s%sGet Bonus Packages.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -37,6 +38,7 @@ func MenuOne() {
 %s 7. %sbrowse your logs
 %s 8. %sclear all your logs
 %s 9. %suninstall africana-framework
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -55,6 +57,7 @@ func MenuTwo() {
 %s 7. %sReload anonsurf and restart a fresh
 %s 8. %sView live logs from local.squid.privoxy.tor.web
 %s 9. %sStop anonsurf & restore all iptables
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -73,6 +76,7 @@ func MenuThree() {
 %s 7. %sLunch killer Responder with IPv6 Support
 %s 8. %sStart Beefxss with Bettercap & Ettercap For (M.I.B)
 %s 9. %sGet Reverse shell through snifing (XSS Injection)
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -83,6 +87,7 @@ func MenuThreeOne() {
 %s%s%sSelect a number from the table below.%s
 
 %s 1. %sLaunch eternalblue exploit on the target
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -94,7 +99,9 @@ func MenuThreeThree() {
 
 %s 1. %sLaunch hosts dns using ettercap
 %s 2. %sLaunch hosts dns using bettercap
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
@@ -104,7 +111,9 @@ func MenuThreeFour() {
 
 %s 1. %sInject beef-xss.js to early selected target
 %s 2. %sInject beef-xss.js to all connected devices
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
@@ -119,8 +128,9 @@ func MenuFour() {
 %s 5. %slinuxos
 %s 6. %swebsites
 %s 7. %spersisternts
-%s 8. %sobfsications
-%s 9. %schosens
+%s 8. %sevasions
+%s 9. %slisteners
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -139,6 +149,7 @@ func MenuFourOne() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -157,6 +168,7 @@ func MenuFourTwo() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -171,10 +183,11 @@ func MenuFourThree() {
 %s 3. %spowerjoker
 %s 4. %smeterpeter
 %s 5. %shavoc C2
-%s 6. %shoaxshell
+%s 6. %sshikataganai
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -193,6 +206,7 @@ func MenuFourFour() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -211,6 +225,7 @@ func MenuFourFive() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -230,6 +245,7 @@ func MenuFourSix() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -248,6 +264,7 @@ func MenuFourSeven() {
 %s 7. %sto add
 %s 8. %sto add
 %s 9. %sto add
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -310,9 +327,10 @@ func MenuFourSevenOne() {
 func MenuFourSevenTwo() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
-%s 1. %slync.ico                              %s 10. %svlc.ico
-%s 2. %sexcel.ico                             %s 11. %sword.ico
-%s 3. %saccess.ico                            %s 12. %svisio.ico
+
+%s 1. %slync.ico                                   %s 10. %svlc.ico
+%s 2. %sexcel.ico                                  %s 11. %sword.ico
+%s 3. %saccess.ico                                 %s 12. %svisio.ico
 %s 4. %sautorun.ico
 %s 5. %spdf.ico
 %s 6. %sproject.ico
@@ -324,45 +342,18 @@ func MenuFourSevenTwo() {
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
-func AndroRatOptions() {
-    userLhostIp, err := utils.GetDefaultIP()
-        if err != nil {
-            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
-        }
-    fmt.Printf(`
-Module options (exploit/android/andro_rat):
-
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
-  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.africana/output/)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   0   Automatic Target
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
 func MenuFive() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
-%s 1. %swifite                                         automated
-%s 2. %sbettercap                                      automated
-%s 3. %swifipumpkin3                                   automated
+
+%s 1. %swifite                                        automated
+%s 2. %sbettercap                                     automated
+%s 3. %swifipumpkin3                                  automated
 %s 4. %sto add
 %s 5. %sto add
-%s 6. %sfluxion                                           manual
-%s 7. %sairgeddon                                         manual
-%s 8. %swifipumpkin3                                      manual
+%s 6. %sfluxion                                          manual
+%s 7. %sairgeddon                                        manual
+%s 8. %swifipumpkin3                                     manual
 %s 9. %sto add
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
@@ -551,7 +542,7 @@ func MenuEightFour() {
 }
 
 func HelpEightFour() {
-    fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1.(Automated) Sqlmap tool is configured to run with obfsication templets to avoid detection and give you desirable outcomes.(Intrusive)." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1.(Automated) Sqlmap tool is configured to run with evasion templets to avoid detection and give you desirable outcomes.(Intrusive)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Xss injection(A) " + bcolors.ENDC + ": 2.(Automated) Acompination of tools are used to try and find xss injection vulnerbility on the website.(Intrusive)." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Sql injection(M) " + bcolors.ENDC + ": 3.(Manual) In this option you will be required to enter sql website injection required data manually." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Xss injection(M) " + bcolors.ENDC + ": 4.(Manual) In this option you will be required to enter xss website injection required data manually." + bcolors.ENDC)
@@ -686,7 +677,7 @@ func HelpEightEight() {
 
 
 func UpsentTools() {
-    fmt.Println(bcolors.ENDC + "\n" + `¯\_(ツ)_/¯ ` + bcolors.BLUE + "Choice selected " + bcolors.RED + "not implimented " + bcolors.BLUE + "yet!, but " + bcolors.YELLOW + "comming soon!" + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "\n[!] " + bcolors.ENDC + "Choice selected not implimented yet!, but comming soon!" + bcolors.ENDC)
 }
 
 func HelpInfoMenuMain() {
@@ -707,7 +698,7 @@ Framework options:
 Console options:
     -t, --anonsurf       Launch anonsurf menu to torify your system.
     -n, --networks       Start internal network attacks.
-    -m, --exploits       Generate undetectebal RATs(Launch c2s for all systems. Obfsications also included)
+    -m, --exploits       Generate undetectebal RATs(Launch c2s for all systems. Evasions also included)
     -w, --wireless       From wifi, bluetooth and other wireles attack vectors.
     -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
     -f, --phishers       Perform Phishing attacks.
@@ -957,7 +948,7 @@ func ListMainModules() {
   %s1.%s setups         : Install, Uninstall africana-framework.
   %s2.%s anonsurf       : Launch anonsurf menu to torify your system.
   %s3.%s networks       : Start internal network attacks.
-  %s4.%s exploits       : Generate undetectebal RATs (Launch c2s for all systems. Obfsications also included)
+  %s4.%s exploits       : Generate undetectebal RATs (Launch c2s for all systems. Evasions also included)
   %s5.%s wireless       : From wifi, bluetooth and other wireles attack vectors.
   %s6.%s crackers       : Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
   %s7.%s phishers       : Perform Phishing attacks.
@@ -1077,7 +1068,7 @@ Description:
 func HelpInfoexploits() {
     fmt.Print(`
        Name: exploits
-     Module: /src/butchers
+     Module: /src/exploits
    Platform: All linux/ Macos
        Arch: x64, x86
  Privileged: Yes
@@ -2266,9 +2257,8 @@ Malware sub modules:
   5 guineas        . C2s for Linux based distros with backdoor generators.
   6 websites       . Backdoors for backends with their listeners
   7 backdoors      . These module contains a collection of persisten mechanisims for variety Distros.
-  8 stealths       . Colections of malware obfsication tools.
-  9 chosens        . Only the best tools brought together. The beat almost all AVS. Try them & you will love them.
- 99 listeners      . Launch a backdoor listener for any reverse shells.
+  8 stealths       . Colections of malware evasion tools.
+  9 listeners      . Launch a backdoor listener for any reverse shells.
 
 `)
 }
@@ -2276,7 +2266,7 @@ Malware sub modules:
 func HelpInfoAndroids() {
     fmt.Print(`
        Name: androids
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2309,7 +2299,7 @@ Description:
 func HelpInfoIphones() {
     fmt.Print(`
        Name: iphones
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2343,7 +2333,7 @@ Description:
 func HelpInfoWindowsM() {
     fmt.Print(`
        Name: windows
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2376,7 +2366,7 @@ Description:
 func HelpInfoMackos() {
     fmt.Print(`
        Name: mackos
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2409,7 +2399,7 @@ Description:
 func HelpInfoGuineas() {
     fmt.Print(`
        Name: guineas
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2442,7 +2432,7 @@ Description:
 func HelpInfoWebsitesM() {
     fmt.Print(`
        Name: websites
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2475,7 +2465,7 @@ Description:
 func HelpInfoBackdoors() {
     fmt.Print(`
        Name: backdoors
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2508,7 +2498,7 @@ Description:
 func HelpInfoStealths() {
     fmt.Print(`
        Name: stealths
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2529,7 +2519,7 @@ Check supported:
 Basic options:
   Name           Current Setting  Required  Description
   ----           ---------------  --------  -----------
-  LHOST          Null             yes       The full location of the script to obfsication
+  LHOST          Null             yes       The full location of the script to evasion
 
 Description:
   This module will help you obfsicate scripts like powershell to aid in avading almost all AVS 99.9%
@@ -2537,43 +2527,10 @@ Description:
 `)
 }
 
-func HelpInfoChosens() {
-    fmt.Print(`
-       Name: chosens
-     Module: src/butchers
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module contain a collection of only the best tools brought together. The beat almost all AVS. Try them & you will love them.
-
-`)
-}
-
 func HelpInfoListeners() {
     fmt.Print(`
        Name: listeners
-     Module: src/butchers
+     Module: src/exploits
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2611,15 +2568,15 @@ Malware sub modules:
   #   Name         Description
   -   ----         -----------
 
-  1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports obfsications & bypasses almost all avs.
+  1 blackjack      . It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
   2 shellzgen      . Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
   3 powerjoker     . A simple but lethal C2 that generates obfsicated powershell exploits and handles variety of reverse connection.
-  4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull obfsication techniques.
-  5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced obfsication to bypas avs. For advanced users.
+  4 meterpeter     . Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull evasion techniques.
+  5 havoc          . It is agiant C2. Its payloads are easly detected. Needs advanced evasion to bypas avs. For advanced users.
   6 teardroid      . Andoird C2. Needs alot of online configuration but the best for now.
   7 androidrat     . It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
-  8 chameleon      . A good obfsication tool for powershell scripts. Already configured for you.
-  9 gh0x0st        . It is a giant powershell obfsication tool that beats almost all AVS. Try it out you will love it.
+  8 chameleon      . A good evasion tool for powershell scripts. Already configured for you.
+  9 gh0x0st        . It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
 
 `)
 }
@@ -2652,7 +2609,7 @@ Basic options:
   LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
 Description:
-  It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
 
 `)
 }
@@ -2685,7 +2642,7 @@ Basic options:
   LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
 Description:
-  It is a tool that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a tool that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
 
 `)
 }
@@ -2718,7 +2675,7 @@ Basic options:
   LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
 Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
 
 `)
 }
@@ -2751,7 +2708,7 @@ Basic options:
   LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
 Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
 
 `)
 }
@@ -2783,7 +2740,7 @@ Basic options:
   ----           ---------------  --------  -----------
 
 Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild obfsications and bypasses almost all avs. It is the best for now
+  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
 
 `)
 }
@@ -2821,37 +2778,124 @@ Description:
 `)
 }
 
-func HelpInfoAndroidRat() {
-    fmt.Print(`
-       Name: androidrat
-     Module: /root/.africana/africana-base/androidrat
+func HelpInfoAndroRat() {
+    userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
+        }
+    fmt.Printf(`
+       Name: androrat
+     Module: src/exploits/androrat.fn
    Platform: All
-       Arch: x64, x86
+       Arch: android
  Privileged: No
     License: Africana Framework License(BSD)
-       Rank: Insane
+       Rank: Normal
   Disclosed: 2024
 
 Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+  Created by _
+
+Module options (exploit/android/andro_rat):
+
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
+  LPORT          9999             Yes       Listening local host machine port for reverse connections.
+  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
+  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.africana/output/)
+  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
 
 Available targets:
       Id  Name
       --  ----
   =>  0   All Androids
 
-Check supported:
+Description:
+  This module generates an android backdoor and launches a c2 listener for call back connections.
 
-Basic options:
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
+
+func AndroRatOptions() {
+    userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
+        }
+    fmt.Printf(`
+Module options (exploit/android/andro_rat):
+
   Name           Current Setting  Required  Description
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
 
-Description:
-  It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
+  LPORT          9999             Yes       Listening local host machine port for reverse connections.
+  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
+  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.africana/output/)
+  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
 
-`)
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Target
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
+
+func AndroRatMenu() {
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %srun -> run the module (alias to "run", "start", "launch", "exploit", "execute")
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
+
+func BlackJackMenu() {
+    fmt.Printf(`
+%s%s%sSelect a number from the table below.%s
+
+%s 1. %srun -> run the module (alias to "run", "start", "launch", "exploit", "execute")
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+}
+
+func BlackJackOptions() {
+    userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
+        }
+    fmt.Printf(`
+Module options (exploit/windows/blackjack_c2):
+
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
+  LPORT          9999             Yes       Listening local host machine port for reverse connections.
+  HPORT          3333             No        HTTP smuggler port.
+  LISTENER       tcp              Yes       Choose listener type (tcp or http/https)
+  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Target
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpInfoChameLeon() {
@@ -2951,6 +2995,68 @@ Description:
   It is a module that enables the redteam to gain and control all iphones & macos. It supports sms dumping, camera viewing e.t.c
 
 `)
+}
+
+func ListAndroidModules() {
+    fmt.Print(`
+Wireless sub modules:
+--------------------
+
+  #   Name         Description
+
+  1 teardroid         . Geneartes a sighned android backdoor and launches a c2.
+  2 androrat          . Generate android backdoor and launches a c2.
+  3 to add
+  4 to add
+  5 to add
+  6 to add
+  7 to add
+  8 to add
+  9 to add
+
+`)
+}
+
+func HelpInfoTearDroid() {
+    userLhostIp, err := utils.GetDefaultIP()
+        if err != nil {
+            fmt.Println(bcolors.RED + "Error!" + bcolors.ENDC + ": " + bcolors.BLUE + "Getting default " + bcolors.RED + "LhostIp ", err)
+        }
+    fmt.Printf(`
+       Name: teardroid
+     Module: src/exploits/tear_droid.fn
+   Platform: All
+       Arch: android
+ Privileged: No
+    License: Africana Framework License(BSD)
+       Rank: Normal
+  Disclosed: 2024
+
+Provided by:
+  Created by _
+
+Module options (exploit/android/tear_droid.fn):
+
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+
+  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
+  LPORT          9999             Yes       Listening local host machine port for reverse connections.
+  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
+  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.africana/output/)
+  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
+
+Available targets:
+      Id  Name
+      --  ----
+  =>  0   All Androids
+
+Description:
+  This module generates an android backdoor and launches a c2 listener for call back connections.
+
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+
+`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func ListWirelessModules() {

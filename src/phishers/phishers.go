@@ -71,7 +71,7 @@ func NinjaEttercap(userTarget string) {
     }
     menus.MenuSevenOne()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
@@ -81,21 +81,21 @@ func NinjaEttercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userIface := scanner.Text()
         if userIface == "" {
             userIface = "eth0"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userLhost := scanner.Text()
         if userLhost == "" {
             userLhost = userLhostIp
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userFakeDns := scanner.Text()
         if userFakeDns == "" {
@@ -140,21 +140,21 @@ func NinjaEttercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userIface := scanner.Text()
         if userIface == "" {
             userIface = "eth0"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userLhost := scanner.Text()
         if userLhost == "" {
             userLhost = userLhostIp
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userFakeDns := scanner.Text()
         if userFakeDns == "" {
@@ -205,7 +205,7 @@ func NinjaBettercap(userTarget string) {
     }
     menus.MenuSevenOne()
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     switch strings.ToLower(userInput) {
@@ -215,14 +215,14 @@ func NinjaBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userIface := scanner.Text()
         if userIface == "" {
             userIface = "eth0"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userLhost := scanner.Text()
         if userLhost == "" {
@@ -236,14 +236,14 @@ func NinjaBettercap(userTarget string) {
         fmt.Println()
         subprocess.Popen(`ip address`)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userIface := scanner.Text()
         if userIface == "" {
             userIface = "eth0"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userLhost := scanner.Text()
         if userLhost == "" {
@@ -262,7 +262,7 @@ func NinjaPhish(userTarget string) {
     for {
         menus.MenuThreeThree()
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaIPhish " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         if userInput == "" {
