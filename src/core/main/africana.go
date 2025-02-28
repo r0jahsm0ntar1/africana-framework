@@ -12,7 +12,7 @@ import(
     "banners"
     "runtime"
     "bcolors"
-    "butchers"
+    "handlers"
     "wireless"
     "crackers"
     "phishers"
@@ -60,7 +60,7 @@ func userAgreements() {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " > " + bcolors.ENDC)
             scanner.Scan()
             userInput := scanner.Text()
             switch strings.ToLower(userInput) {
@@ -92,9 +92,9 @@ func userAgreements() {
 
 //1. Install or update africana-framework..(Start here )🩺
 func systemSetups() {
-    menus.MenuOne()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED + "src/core/setups.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        menus.MenuOne()
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED + "src/core/setups.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -204,9 +204,9 @@ func systemSetups() {
 
 //2. System Security Configuration.........(Setup tor &)🎭
 func anonsurfSetups() {
-    menus.MenuTwo()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED + "src/securities.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        menus.MenuTwo()
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED + "src/securities.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -302,15 +302,15 @@ func anonsurfSetups() {
 //3. Local Network Attack Vectors..........(Mitm, sniff)🐹
 func internaltargetInput() {
     internals.InternalScan()
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "\nafr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/choose_target.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "\nafr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/choose_target.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userTarget = scanner.Text()
 }
 
 func internalAttackers() {
-    menus.MenuThree()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/choose_option.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        menus.MenuThree()
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "src/internals/choose_option.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -412,9 +412,9 @@ func internalAttackers() {
 
 //4. Generate Undetectable Backdoors.......(C2 & shells)🐭
 func malwareGenerators() {
-    menus.MenuFour()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "src/butchers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        menus.MenuFour()
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "src/handlers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -479,16 +479,14 @@ func malwareGenerators() {
             menus.HelpInfoBackdoors()
         case "? 8", "info 8", "help 8", "info stealths", "help stealths", "stealths":
             menus.HelpInfoStealths()
-        case "? 9", "info 9", "help 9", "info chosens", "help chosens", "chosens":
-            menus.HelpInfoChosens()
-        case "? 99", "info 99", "help 99", "info listeners", "help listeners", "listeners":
+        case "? 9", "info 9", "help 9", "info listeners", "help listeners", "listeners":
             menus.HelpInfoListeners()
         case "list all", "list modules", "show modules", "show all", "modules":
             menus.ListMalwareModules()
         case "1", "use 1", "run 1", "start 1", "run androids", "use androids", "start androids":
-            menus.MenuFourOne()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "src/butchers/androids.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourOne()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "handlers/androids.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -535,30 +533,30 @@ func malwareGenerators() {
                     menus.HelpInfoList()
                 case "? start", "info start", "help start", "start":
                     menus.HelpInfoStart()
-                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
-                    menus.HelpInfoBlackJack()
-                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
-                    menus.HelpInfoShellz()
-                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
-                    menus.HelpInfoPowerJoker()
-                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
-                    menus.HelpInfoMeterPeter()
-                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
-                    menus.HelpInfoHavoc()
-                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
-                    menus.HelpInfoTearNdroid()
-                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
-                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
-                    menus.HelpInfoChameLeon()
-                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
-                    menus.HelpInfoGhost()
-                case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMalwareNineModules()
+                case "? 1", "info 1", "help 1", "info teardroid", "help teardroid", "teardroid":
+                    menus.HelpInfoTearDroid()
+                case "? 2", "info 2", "help 2", "info androrat", "help androrat", "androrat":
+                    menus.HelpInfoAndroRat()
+                case "? 3", "info 3", "help 3":
+                    menus.UpsentTools()
+                case "? 4", "info 4", "help 4":
+                    menus.UpsentTools()
+                case "? 5", "info 5", "help 5":
+                    menus.UpsentTools()
+                case "? 6", "info 6", "help 6":
+                    menus.UpsentTools()
+                case "? 7", "info 7", "help 7":
+                    menus.UpsentTools()
+                case "? 8", "info 8", "help 8":
+                    menus.UpsentTools()
+                case "? 9", "info 9", "help 9":
+                    menus.UpsentTools()
+                case "list all", "list modules":
+                    menus.ListAndroidModules()
                 case "1", "use 1", "run 1", "start 1", "run teardroid", "use teardroid", "start teardroid":
-                    butchers.TearDroid()
+                    handlers.TearDroid()
                 case "2", "use 2", "run 2", "start 2", "run androrat", "use androrat", "start androrat":
-                    butchers.AndroRat()
+                    handlers.AndroRat()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -578,9 +576,9 @@ func malwareGenerators() {
                 }
             }
         case "2", "use 2", "run 2", "start 2", "run iphones", "use iphones", "start iphones":
-            menus.MenuFourTwo()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/iphones.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourTwo()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/iphones.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -640,7 +638,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -670,9 +668,9 @@ func malwareGenerators() {
                 }
             }
         case "3", "use 3", "run 3", "start 3", "run windows", "use windows", "start windows":
-            menus.MenuFourThree()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/windows.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourThree()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/windows.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -732,7 +730,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -740,17 +738,17 @@ func malwareGenerators() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
-                    butchers.BlackJack()
+                    handlers.BlackJack()
                 case "2", "use 2", "run 2", "start 2", "run shellz", "use shellz", "start shellz":
-                    butchers.Shellz()
+                    handlers.Shellz()
                 case "3", "use 3", "run 3", "start 3", "run powerjoker", "use powerjoker", "start powerjoker":
-                    butchers.PowerJoker()
+                    handlers.PowerJoker()
                 case "4", "use 4", "run 4", "start 4", "run meterpeter", "use meterpeter", "start meterpeter":
-                    butchers.MeterPeter()
+                    handlers.MeterPeter()
                 case "5", "use 5", "run 5", "start 5", "run havoc", "use havoc", "start havoc":
-                    butchers.Havoc()
+                    handlers.Havoc()
                 case "6":
-                    butchers.HoaxMalware()
+                    handlers.ShikataGanai()
                 case "7":
                     menus.UpsentTools()
                 case "8":
@@ -762,9 +760,9 @@ func malwareGenerators() {
                 }
             }
         case "4", "use 4", "run 4", "start 4", "run macos", "use macos", "start macos":
-            menus.MenuFourFour()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/mackos.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourFour()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/mackos.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -824,7 +822,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -832,7 +830,7 @@ func malwareGenerators() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1":
-                    butchers.SeaShell()
+                    handlers.SeaShell()
                 case "2":
                     menus.UpsentTools()
                 case "3":
@@ -854,9 +852,9 @@ func malwareGenerators() {
                 }
             }
         case "5", "use 5", "run 5", "start 5", "run linux", "use linux", "start linux":
-            menus.MenuFourFive()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/linux.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourFive()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/linux.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -916,7 +914,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -946,9 +944,9 @@ func malwareGenerators() {
                 }
             }
         case "6", "use 6", "run 6", "start 6", "run websites", "use websites", "start websites":
-            menus.MenuFourSix()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/websites.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourSix()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/websites.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -1008,7 +1006,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -1038,9 +1036,9 @@ func malwareGenerators() {
                 }
             }
         case "7", "use 7", "run 7", "start 7", "run backdoors", "use backdoors", "start backdoors":
-            menus.MenuFourSeven()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/universals.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourSeven()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/universals.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -1100,7 +1098,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -1108,9 +1106,9 @@ func malwareGenerators() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run noisemaker", "use noisemaker", "start noisemaker":
-                    butchers.NoiseMakers()
+                    handlers.NoiseMakers()
                 case "2", "use 2", "run 2", "start 2", "run codebreaker", "use codebreaker", "start codebreaker":
-                    butchers.CodeBreakers()
+                    handlers.CodeBreakers()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -1130,9 +1128,9 @@ func malwareGenerators() {
                 }
             }
         case "8", "use 8", "run 8", "start 8", "run stealths", "use stealths", "start stealths":
-            menus.MenuFourEight()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/obfsicators.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                menus.MenuFourEight()
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "handlers/evasions.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -1192,7 +1190,7 @@ func malwareGenerators() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -1200,9 +1198,9 @@ func malwareGenerators() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run ghost", "use ghost", "start ghost":
-                    butchers.Gh0x0st()
+                    handlers.Gh0x0st()
                 case "2", "use 2", "run 2", "start 2", "run chameleon", "use chameleon", "start chameleon":
-                    butchers.Chameleon()
+                    handlers.Chameleon()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -1221,100 +1219,8 @@ func malwareGenerators() {
                     utils.SystemShell(userInput)
                 }
             }
-        case "9", "use 9", "run 9", "start 9", "run chosens", "use chosens", "start chosens":
-            menus.MenuFourNine()
-            for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED +  "src/butchers/chosens.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
-                scanner.Scan()
-                userInput := scanner.Text()
-                switch strings.ToLower(userInput) {
-                case "banner":
-                    banners.RandomBanners()
-                case "sleep":
-                    utils.Sleep()
-                case "v", "version":
-                    banners.Version()
-                case "m", "menu":
-                    menus.MenuFourNine()
-                case "logs", "history":
-                    subprocess.LogHistory()
-                case "o", "junks", "outputs":
-                    utils.ListJunks()
-                case "? info", "info", "help info":
-                    menus.HelpInfo()
-                case "00", "?", "h", "help":
-                    menus.HelpInfoMenuZero()
-                case "e", "q", "exit", "quit":
-                    os.Exit(0)
-                case "0", "b", "back":
-                    malwareGenerators()
-                    return
-                case "g", "t", "guide", "tutarial":
-                    utils.BrowseTutarilas()
-                case "clear logs", "clear history":
-                    subprocess.ClearHistory()
-                case "info set", "set", "help set":
-                    menus.HelpInfoSet()
-                case "clear junks", "clear outputs":
-                    utils.ClearJunks()
-                case "? use", "info use", "help use", "use":
-                    menus.HelpInfoUse()
-                case "? run", "info run", "help run", "run":
-                    menus.HelpInfoRun()
-                case "f", "use f", "use features", "features":
-                    menus.HelpInfoFeatures()
-                case "? tips", "info tips", "help tips", "tips":
-                    menus.HelpInfoTips()
-                case "? show", "info show", "help show", "show":
-                    menus.HelpInfoShow()
-                case "info list", "help list", "use list", "list":
-                    menus.HelpInfoList()
-                case "? start", "info start", "help start", "start":
-                    menus.HelpInfoStart()
-                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
-                    menus.HelpInfoBlackJack()
-                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
-                    menus.HelpInfoShellz()
-                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
-                    menus.HelpInfoPowerJoker()
-                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
-                    menus.HelpInfoMeterPeter()
-                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
-                    menus.HelpInfoHavoc()
-                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
-                    menus.HelpInfoTearNdroid()
-                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
-                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
-                    menus.HelpInfoChameLeon()
-                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
-                    menus.HelpInfoGhost()
-                case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMalwareNineModules()
-                case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
-                    butchers.BlackJack()
-                case "2", "use 2", "run 2", "start 2", "run shellz", "use shellz", "start shellz":
-                    butchers.Shellz()
-                case "3", "use 3", "run 3", "start 3", "run powerjoker", "use powerjoker", "start powerjoker":
-                    butchers.PowerJoker()
-                case "4", "use 4", "run 4", "start 4", "run meterpeter", "use meterpeter", "start meterpeter":
-                    butchers.MeterPeter()
-                case "5", "use 5", "run 5", "start 5", "run havoc", "use havoc", "start havoc":
-                     butchers.Havoc()
-                case "6", "use 6", "run 6", "start 6", "run tearndroid", "use tearndroid", "start teandroid":
-                    butchers.TearDroid()
-                case "7", "use 7", "run 7", "start 7", "run androidrat", "use androidrat", "start androidrat":
-                    butchers.AndroRat()
-                case "8", "use 8", "run 8", "start 8", "run chameleon", "use chameleon", "start chameleon":
-                    butchers.Chameleon()
-                case "9", "use 9", "run 9", "start 9", "run ghost", "use ghost", "start ghost":
-                    butchers.Gh0x0st()
-                default:
-                    utils.SystemShell(userInput)
-                }
-            }
-        case "99":
-            butchers.ListenerLauncher()
+        case "9":
+            handlers.ListenersLauncher()
         default:
             utils.SystemShell(userInput)
         }
@@ -1323,9 +1229,9 @@ func malwareGenerators() {
 
 //5. WiFi Attack Vectors...................(Wifite, air)🍍
 func wirelessAttackers() {
-    menus.MenuFive()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " wireless(" + bcolors.RED +  "src/wireless.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        menus.MenuFive()
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " wireless(" + bcolors.RED +  "src/wireless.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -1422,7 +1328,7 @@ func wirelessAttackers() {
 func passwordsCrackers() {
     for {
         menus.MenuSix()
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -1496,7 +1402,7 @@ func passwordsCrackers() {
         case "1", "use 1", "run 1", "start 1", "run onlinecrackers", "use onlinecrackers", "start onlinecrackers":
             menus.MenuSixOne()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers/online.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers/online.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -1591,7 +1497,7 @@ func passwordsCrackers() {
         case "2", "use 2", "run 2", "start 2", "run offlinecrackers", "use offlinecrackers", "start offlinecrackers":
             menus.MenuSixTwo()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers/offline.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "src/crackers/offline.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -1678,7 +1584,7 @@ func passwordsCrackers() {
 func credsPhishers() {
     menus.MenuSeven()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " phishers(" + bcolors.RED + "src/phishers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " phishers(" + bcolors.RED + "src/phishers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -1774,7 +1680,7 @@ func credsPhishers() {
 
 //8. Website Attack Vectors................(userTarget, set)🎭
 func websiteUserTarget() {
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/set_target.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/set_target.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userTarget = scanner.Text()
 
@@ -1793,7 +1699,7 @@ func websiteUserTarget() {
     }
 
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/use_proxies.fn" + bcolors.ORANGE + "(y/n)" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/use_proxies.fn" + bcolors.ORANGE + "(y/n)" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -1884,7 +1790,7 @@ func websitesAttackers() {
     menus.MenuEight()
 
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -1968,7 +1874,7 @@ func websitesAttackers() {
             //banners.RandomBanners()
             menus.MenuEightFour()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/all_injections.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/injections.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -2056,7 +1962,7 @@ func websitesAttackers() {
             //banners.RandomBanners()
             menus.MenuEightFive()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/nettacker_5.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/nettacker.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -2151,7 +2057,7 @@ func websitesAttackers() {
             //banners.RandomBanners()
             menus.MenuEightSix()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/jok3r_6.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/jok3r.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -2244,7 +2150,7 @@ func websitesAttackers() {
         case "7":
             menus.MenuEightSeven()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/osmedeus_7.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/osmedeus.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -2339,7 +2245,7 @@ func websitesAttackers() {
             //banners.RandomBanners()
             menus.MenuEightEight()
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/ufonet_8.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " websites(" + bcolors.RED +  "src/webattackers/ufonet.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -2442,7 +2348,7 @@ func creditsGivers() {
     credits.Contributors()
     credits.Developer()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " credits(" + bcolors.RED +  "src/credits.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " credits(" + bcolors.RED +  "src/credits.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -2522,7 +2428,7 @@ func scriptureNarators() {
     scriptures.CommandMents()
     scriptures.Narration()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -2601,7 +2507,7 @@ func scriptureNarators() {
 func africanaAutomation() {
     menus.MenuZero()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -2828,7 +2734,7 @@ func africanaAutomation() {
 //1. Install or update africana-framework..(Start here )🩺
 func systemSetupsManual() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED + "src/core/setups.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED + "src/core/setups.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -2942,7 +2848,7 @@ func systemSetupsManual() {
 //2. System Security Configuration.........(Setup tor &)🎭
 func anonsurfSetupsManual() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED + "src/securities.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED + "src/securities.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -3041,7 +2947,7 @@ func anonsurfSetupsManual() {
 
 func internalAttackersManual() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "internal_attacks" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " networks(" + bcolors.RED + "internal_attacks" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -3143,7 +3049,7 @@ func internalAttackersManual() {
 //4. Generate Undetectable Backdoors.......(C2 & shells)🐭
 func malwareGeneratorsManual() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "/src/butchers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "/src/handlers.go" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -3208,15 +3114,13 @@ func malwareGeneratorsManual() {
             menus.HelpInfoBackdoors()
         case "? 8", "info 8", "help 8", "info stealths", "help stealths", "stealths":
             menus.HelpInfoStealths()
-        case "? 9", "info 9", "help 9", "info chosens", "help chosens", "chosens":
-            menus.HelpInfoChosens()
-        case "? 99", "info 99", "help 99", "info listeners", "help listeners", "listeners":
+        case "? 9", "info 9", "help 9", "info listeners", "help listeners", "listeners":
             menus.HelpInfoListeners()
         case "list all", "list modules", "show modules", "show all", "modules":
             menus.ListMalwareModules()
         case "1", "use 1", "run 1", "start 1", "run androids", "use androids", "start androids":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/androids_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/androids_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3276,7 +3180,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3284,9 +3188,9 @@ func malwareGeneratorsManual() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run teardroid", "use teardroid", "start teardroid":
-                    butchers.TearDroid()
+                    handlers.TearDroid()
                 case "2", "use 2", "run 2", "start 2", "run androrat", "use androrat", "start androrat":
-                    butchers.AndroRat()
+                    handlers.AndroRat()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -3307,7 +3211,7 @@ func malwareGeneratorsManual() {
             }
         case "2", "use 2", "run 2", "start 2", "run iphones", "use iphones", "start iphones":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/iphones_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/iphones_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3367,7 +3271,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3398,7 +3302,7 @@ func malwareGeneratorsManual() {
             }
         case "3", "use 3", "run 3", "start 3", "run windows", "use windows", "start windows":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/windows_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/windows_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3458,7 +3362,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3466,17 +3370,17 @@ func malwareGeneratorsManual() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
-                    butchers.BlackJack()
+                    handlers.BlackJack()
                 case "2", "use 2", "run 2", "start 2", "run shellz", "use shellz", "start shellz":
-                    butchers.Shellz()
+                    handlers.Shellz()
                 case "3", "use 3", "run 3", "start 3", "run powerjoker", "use powerjoker", "start powerjoker":
-                    butchers.PowerJoker()
+                    handlers.PowerJoker()
                 case "4", "use 4", "run 4", "start 4", "run meterpeter", "use meterpeter", "start meterpeter":
-                    butchers.MeterPeter()
+                    handlers.MeterPeter()
                 case "5", "use 5", "run 5", "start 5", "run havoc", "use havoc", "start havoc":
-                    butchers.Havoc()
+                    handlers.Havoc()
                 case "6":
-                    butchers.HoaxMalware()
+                    handlers.ShikataGanai()
                 case "7":
                     menus.UpsentTools()
                 case "8":
@@ -3489,7 +3393,7 @@ func malwareGeneratorsManual() {
             }
         case "4", "use 4", "run 4", "start 4", "run macos", "use macos", "start macos":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/mackos_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/mackos_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3549,7 +3453,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3557,7 +3461,7 @@ func malwareGeneratorsManual() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1":
-                    butchers.SeaShell()
+                    handlers.SeaShell()
                 case "2":
                     menus.UpsentTools()
                 case "3":
@@ -3580,7 +3484,7 @@ func malwareGeneratorsManual() {
             }
         case "5", "use 5", "run 5", "start 5", "run linux", "use linux", "start linux":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/linuxos_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/linuxos_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3640,7 +3544,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3671,7 +3575,7 @@ func malwareGeneratorsManual() {
             }
         case "6", "use 6", "run 6", "start 6", "run websites", "use websites", "start websites":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/websites_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/websites_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3731,7 +3635,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3762,7 +3666,7 @@ func malwareGeneratorsManual() {
             }
         case "7", "use 7", "run 7", "start 7", "run backdoors", "use backdoors", "start backdoors":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/universals_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/universals_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3822,7 +3726,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3830,9 +3734,9 @@ func malwareGeneratorsManual() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run noisemaker", "use noisemaker", "start noisemaker":
-                    butchers.NoiseMakers()
+                    handlers.NoiseMakers()
                 case "2", "use 2", "run 2", "start 2", "run codebreaker", "use codebreaker", "start codebreaker":
-                    butchers.CodeBreakers()
+                    handlers.CodeBreakers()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -3853,7 +3757,7 @@ func malwareGeneratorsManual() {
             }
         case "8", "use 8", "run 8", "start 8", "run stealths", "use stealths", "start stealths":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/obfsicators_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/evasive_backdoors" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -3913,7 +3817,7 @@ func malwareGeneratorsManual() {
                 case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
                     menus.HelpInfoTearNdroid()
                 case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
+                    menus.HelpInfoAndroRat()
                 case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
                     menus.HelpInfoChameLeon()
                 case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
@@ -3921,9 +3825,9 @@ func malwareGeneratorsManual() {
                 case "list all", "list modules", "show modules", "show all", "modules":
                     menus.ListMalwareNineModules()
                 case "1", "use 1", "run 1", "start 1", "run ghost", "use ghost", "start ghost":
-                    butchers.Gh0x0st()
+                    handlers.Gh0x0st()
                 case "2", "use 2", "run 2", "start 2", "run chameleon", "use chameleon", "start chameleon":
-                    butchers.Chameleon()
+                    handlers.Chameleon()
                 case "3":
                     menus.UpsentTools()
                 case "4":
@@ -3942,99 +3846,8 @@ func malwareGeneratorsManual() {
                     utils.SystemShell(userInput)
                 }
             }
-        case "9", "use 9", "run 9", "start 9", "run chosens", "use chosens", "start chosens":
-            for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " exploit(" + bcolors.RED + "c2/chosens_frameworks" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
-                scanner.Scan()
-                userInput := scanner.Text()
-                switch strings.ToLower(userInput) {
-                case "banner":
-                    banners.RandomBanners()
-                case "sleep":
-                    utils.Sleep()
-                case "v", "version":
-                    banners.Version()
-                case "m", "menu":
-                    menus.MenuFourNine()
-                case "logs", "history":
-                    subprocess.LogHistory()
-                case "o", "junks", "outputs":
-                    utils.ListJunks()
-                case "? info", "info", "help info":
-                    menus.HelpInfo()
-                case "00", "?", "h", "help":
-                    menus.HelpInfoMenuZero()
-                case "e", "q", "exit", "quit":
-                    os.Exit(0)
-                case "0", "b", "back":
-                    malwareGeneratorsManual()
-                    return
-                case "g", "t", "guide", "tutarial":
-                    utils.BrowseTutarilas()
-                case "clear logs", "clear history":
-                    subprocess.ClearHistory()
-                case "info set", "set", "help set":
-                    menus.HelpInfoSet()
-                case "clear junks", "clear outputs":
-                    utils.ClearJunks()
-                case "? use", "info use", "help use", "use":
-                    menus.HelpInfoUse()
-                case "? run", "info run", "help run", "run":
-                    menus.HelpInfoRun()
-                case "f", "use f", "use features", "features":
-                    menus.HelpInfoFeatures()
-                case "? tips", "info tips", "help tips", "tips":
-                    menus.HelpInfoTips()
-                case "? show", "info show", "help show", "show":
-                    menus.HelpInfoShow()
-                case "info list", "help list", "use list", "list":
-                    menus.HelpInfoList()
-                case "? start", "info start", "help start", "start":
-                    menus.HelpInfoStart()
-                case "? 1", "info 1", "help 1", "info blackjack", "help blackjack", "blackjack":
-                    menus.HelpInfoBlackJack()
-                case "? 2", "info 2", "help 2", "info shellz", "help shellz", "shellz":
-                    menus.HelpInfoShellz()
-                case "? 3", "info 3", "help 3", "info powerjoker", "help powerjoker", "powerjoker":
-                    menus.HelpInfoPowerJoker()
-                case "? 4", "info 4", "help 4", "info meterpeter", "help meterpeter", "meterpeter":
-                    menus.HelpInfoMeterPeter()
-                case "? 5", "info 5", "help 5", "info havoc", "help havoc", "havoc":
-                    menus.HelpInfoHavoc()
-                case "? 6", "info 6", "help 6", "info tearndroid", "help tearndroid", "tearndroid":
-                    menus.HelpInfoTearNdroid()
-                case "? 7", "info 7", "help 7", "info androidrat", "help androidrat", "androidrat":
-                    menus.HelpInfoAndroidRat()
-                case "? 8", "info 8", "help 8", "info chameleon", "help chameleon", "chameleon":
-                    menus.HelpInfoChameLeon()
-                case "? 9", "info 9", "help 9", "info ghost", "help ghost", "ghost":
-                    menus.HelpInfoGhost()
-                case "list all", "list modules", "show modules", "show all", "modules":
-                    menus.ListMalwareNineModules()
-                case "1", "use 1", "run 1", "start 1", "run blackjack", "use blackjack", "start blackjack":
-                    butchers.BlackJack()
-                case "2", "use 2", "run 2", "start 2", "run shellz", "use shellz", "start shellz":
-                    butchers.Shellz()
-                case "3", "use 3", "run 3", "start 3", "run powerjoker", "use powerjoker", "start powerjoker":
-                    butchers.PowerJoker()
-                case "4", "use 4", "run 4", "start 4", "run meterpeter", "use meterpeter", "start meterpeter":
-                    butchers.MeterPeter()
-                case "5", "use 5", "run 5", "start 5", "run havoc", "use havoc", "start havoc":
-                     butchers.Havoc()
-                case "6", "use 6", "run 6", "start 6", "run tearndroid", "use tearndroid", "start teandroid":
-                    butchers.TearDroid()
-                case "7", "use 7", "run 7", "start 7", "run androidrat", "use androidrat", "start androidrat":
-                    butchers.AndroRat()
-                case "8", "use 8", "run 8", "start 8", "run chameleon", "use chameleon", "start chameleon":
-                    butchers.Chameleon()
-                case "9", "use 9", "run 9", "start 9", "run ghost", "use ghost", "start ghost":
-                    butchers.Gh0x0st()
-                default:
-                    utils.SystemShell(userInput)
-                }
-            }
-        case "99":
-            butchers.ListenerLauncher()
+        case "9":
+            handlers.ListenersLauncher()
         default:
             utils.SystemShell(userInput)
         }
@@ -4044,7 +3857,7 @@ func malwareGeneratorsManual() {
 //5. WiFi Attack Vectors...................(Wifite, air)🍍
 func wirelessAttackersManual() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " (" + bcolors.RED + "wireless" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " (" + bcolors.RED + "wireless" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -4141,7 +3954,7 @@ func wirelessAttackersManual() {
 func passwordsCrackersManual() {
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Crackers: " + bcolors.ENDC + bcolors.BLUE + "1. " + bcolors.YELLOW + "online " + bcolors.BLUE + "2. " + bcolors.YELLOW + "offline " + bcolors.BLUE + "0. " + bcolors.YELLOW + "Go back" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🔐" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -4213,7 +4026,7 @@ func passwordsCrackersManual() {
         //Online crackers
         case "1", "use 1", "run 1", "start 1", "run onlinecrackers", "use onlinecrackers", "start onlinecrackers":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "online" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "online" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4305,7 +4118,7 @@ func passwordsCrackersManual() {
         //Offline crackers
         case "2", "use 2", "run 2", "start 2", "run offlinecrackers", "use offlinecrackers", "start offlinecrackers":
             for {
-                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "offline" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " crackers(" + bcolors.RED + "offline" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4394,7 +4207,7 @@ func credsPhishersManual() {
     banners.RandomBanners()
     menus.MenuSeven()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " (" + bcolors.RED + "phishers" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " (" + bcolors.RED + "phishers" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -4496,7 +4309,7 @@ func websitesAttackersManual() {
 
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Websites" + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🪲" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🪲" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -4584,7 +4397,7 @@ func websitesAttackersManual() {
             menus.MenuEightFour()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Injections" + bcolors.BLUE + ")" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "\n╰─💉" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "\n╰─💉" + bcolors.GREEN + "> " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4676,7 +4489,7 @@ func websitesAttackersManual() {
             menus.MenuEightFive()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Nettacker" + bcolors.BLUE + ")" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "\n╰─🦣" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "\n╰─🦣" + bcolors.GREEN + "> " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4775,7 +4588,7 @@ func websitesAttackersManual() {
             menus.MenuEightSix()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Jok3r" + bcolors.BLUE + ")" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "\n╰─🃏" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "\n╰─🃏" + bcolors.GREEN + "> " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4874,7 +4687,7 @@ func websitesAttackersManual() {
             menus.MenuEightSeven()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Osmedeus" + bcolors.BLUE + ")" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "\n╰─🐨" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "\n╰─🐨" + bcolors.GREEN + "> " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -4973,7 +4786,7 @@ func websitesAttackersManual() {
             menus.MenuEightEight()
             for {
                 fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Ufonet" + bcolors.BLUE + ")" + bcolors.ENDC)
-                fmt.Printf(bcolors.BLUE + "\n╰─🦠" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+                fmt.Printf(bcolors.BLUE + "\n╰─🦠" + bcolors.GREEN + "> " + bcolors.ENDC)
                 scanner.Scan()
                 userInput := scanner.Text()
                 switch strings.ToLower(userInput) {
@@ -5083,7 +4896,7 @@ func creditsGiversManual() {
     credits.Developer()
     for {
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─📚" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─📚" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -5163,7 +4976,7 @@ func scriptureNaratorsManual() {
     scriptures.CommandMents()
     scriptures.Narration()
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -5241,7 +5054,7 @@ func scriptureNaratorsManual() {
 //Africana-Manual Mode......................(The rolling 9)
 func africanaFramework() {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + bcolors.GREEN + " > " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {

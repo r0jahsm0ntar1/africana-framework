@@ -245,7 +245,7 @@ func Osmedeus3(userTarget string) {
 
 func Osmedeus4() {
     fmt.Printf(bcolors.BLUE  + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Full path: " + bcolors.DARKCYAN + "To your saved 🎯targets to be " + bcolors.RED + "attacked!!🚀" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userTarget := scanner.Text()
     fmt.Printf(bcolors.BLUE + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Performing bulk scan on " + bcolors.ORANGE + "Targets " + bcolors.ENDC + "= " + bcolors.GREEN + bcolors.ITALIC + "%s \n" + bcolors.ENDC, userTarget)
@@ -269,7 +269,7 @@ func Osmedeus7(userTarget string) {
 
 func Osmedeus8() {
     fmt.Printf(bcolors.BLUE  + "╭─" + bcolors.BLUE + "(" + bcolors.ENDC + "Enter Port: " + bcolors.DARKCYAN + "To start your server on🌍" + bcolors.BLUE + "Default:" + bcolors.YELLOW + "3333" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userPort := scanner.Text()
     if userPort == "" {
@@ -283,7 +283,7 @@ func Osmedeus9() {
     fmt.Printf(bcolors.BLUE  + "\n[" + bcolors.ENDC + bcolors.BOLD + "*" + bcolors.ENDC + bcolors.BLUE + "] " + bcolors.ENDC + bcolors.BLUE + "Showing scanned osmedeus report list " + bcolors.GREEN + "(◕‿◕✿)" + bcolors.ENDC)
     subprocess.Popen(`osmedeus report list`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Pleas select a target to expand list" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🔮" + bcolors.GREEN + "> " + bcolors.ENDC)
     fmt.Scan(&chosenTarget)
     fmt.Printf(bcolors.RED + "\n(More results for = %s)", chosenTarget + bcolors.ENDC)
     subprocess.Popen(`osmedeus report view --static -t %s`, chosenTarget)

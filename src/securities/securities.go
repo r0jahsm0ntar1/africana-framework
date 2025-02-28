@@ -605,7 +605,7 @@ func AnonsurfExitnode() {
 }
 
 func AnonsurfStatus() {
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED +  "src/securities/show_status.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " anonsurf(" + bcolors.RED +  "src/securities/show_status.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     for {

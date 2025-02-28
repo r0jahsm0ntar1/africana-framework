@@ -46,7 +46,7 @@ func promptForUpdate() {
     for {
         fmt.Println(bcolors.RED + "(҂`_´) " + bcolors.ENDC + "Africana already installed. " + bcolors.YELLOW + "Update it? " + bcolors.RED + "(y/n)" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Installer" + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🩺" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+        fmt.Printf(bcolors.BLUE + "\n╰─🩺" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userInput := scanner.Text()
         switch strings.ToLower(userInput) {
@@ -68,7 +68,7 @@ func promptForUpdate() {
 }
 
 func KaliSetups() {
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "src/core/setups/kali_linux.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "kali/setup.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     for {
@@ -195,7 +195,7 @@ func KaliSetups() {
 }
 
 func UbuntuSetups() {
-    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "src/core/setups/ubuntu_linux.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "ubuntu/setup.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
     scanner.Scan()
     userInput := scanner.Text()
     for {
@@ -368,7 +368,7 @@ func TotalUninstaller() {
     filePath := "/root/.africana/africana-base/"
     if _, err := os.Stat(filePath); !os.IsNotExist(err) {
         for {
-            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "src/core/setups/total_uninstaller.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " ❯ " + bcolors.ENDC)
+            fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + " setups(" + bcolors.RED +  "uninstaller/setup.fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
             scanner.Scan()
             userInput := scanner.Text()
             switch strings.ToLower(userInput) {

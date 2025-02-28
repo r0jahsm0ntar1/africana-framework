@@ -37,7 +37,7 @@ func WifiteAuto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userIface := scanner.Text()
     if userIface == "" {
@@ -50,7 +50,7 @@ func BettercapAuto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userIface := scanner.Text()
     if userIface == "" {
@@ -63,14 +63,14 @@ func WifiPumpkin3Auto() {
     fmt.Println()
     subprocess.Popen(`ip address`)
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wireless card " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "wlan0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userIface := scanner.Text()
     if userIface == "" {
         userIface = "wlan0"
     }
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Wifi name " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Jesus Is The Answer" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "❯ " + bcolors.ENDC)
+    fmt.Printf(bcolors.BLUE + "\n╰─🍍" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
     userSsid := scanner.Text()
     if userSsid == "" {
