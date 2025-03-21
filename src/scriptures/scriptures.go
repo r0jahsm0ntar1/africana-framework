@@ -1027,7 +1027,8 @@ func CommandMents() {
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
 
-func Narration() {
+func ScriptureNarators() {
+    CommandMents()
     fmt.Printf(`%s%s%s
 Bible verse desktop (vrsoft.org). Copyright Public Domain. Language English.
 Scripture taken from the King James Version.%s
@@ -1037,7 +1038,6 @@ Scripture taken from the King James Version.%s
     for _, verse := range verses {
         PrintVerse(bcolors.ORANGE + verse + bcolors.ENDC)
     }
-    fmt.Printf(`%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sReturn to main menu.%s`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func Verse() {
@@ -1055,4 +1055,3 @@ func PrintVerse(verse string) {
     }
     fmt.Println()
 }
-

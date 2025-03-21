@@ -5,11 +5,8 @@ import(
     "net"
     "fmt"
     "time"
-    "bytes"
-    "bufio"
+    "os/user"
     "os/exec"
-    "regexp"
-    "syscall"
     "bcolors"
     "strings"
     "runtime"
@@ -26,92 +23,129 @@ import(
     "crypto/x509/pkix"
 )
 
-var(
+var (
     cmd *exec.Cmd
-    command string
-    gatewayIP string
-    userInput string
-    scanner = bufio.NewScanner(os.Stdin)
+    flag       string
+    shell      string
+    command    string
+    certDir   = "/root/.afr3/certs/"
+    outputDir = "/root/.afr3/output/"
+    agreementDir = "/root/.afr3/agreements/"
+    agreement = "User accepted the terms."
+    keyPath   = certDir + "africana-key.pem"
+    certPath  = certDir + "africana-cert.pem"
+    agreementPath = agreementDir + "covenant.txt"
+    rkyPath   = "/usr/share/wordlists/rockyou.txt"
 )
 
-func GetDefaultIP()(string, error) {
-    interfaces, err := net.Interfaces()
-    if err != nil {
-        return "", err
-    }
-    for _, iface := range interfaces {
-        if iface.Flags&net.FlagUp == 0 {
-            continue
-        }
-        if iface.Flags&net.FlagLoopback != 0 {
-            continue
-        }
-        addrs, err := iface.Addrs()
-        if err != nil {
-            return "", err
-        }
-        for _, addr := range addrs {
-            var ip net.IP
-            switch neo := addr.(type) {
-            case *net.IPNet:
-                ip = neo.IP
-            case *net.IPAddr:
-                ip = neo.IP
-            }
-            if ip == nil || ip.IsLoopback() {
-                continue
-            }
-            ip = ip.To4()
-            if ip == nil {
-                continue
-            }
-            return ip.String(), nil
-        }
-    }
-    return "", fmt.Errorf(bcolors.RED + "[!] " + bcolors.ENDC + "No active network interface found." + bcolors.ENDC)
+func isRoot() bool {
+    return os.Geteuid() == 0
 }
 
-func GetDefaultGatewayIP()(string, error) {
-    if runtime.GOOS == "windows" {
-        cmd = exec.Command("cmd", "/C", "route", "print", "0.0.0.0")
-    } else {
-        cmd = exec.Command("sh", "-c", "ip route | grep default")
+func ClearScreen() {
+    switch runtime.GOOS {
+    case "windows":
+        shell = "cmd"
+        flag = "/c"
+        command = "cls"
+    default:
+        shell = "bash"
+        flag = "-c"
+        command = "clear"
     }
-    var out bytes.Buffer
-    cmd.Stdout = &out
-    err := cmd.Run()
-    if err != nil {
-        return "", err
-    }
-    output := out.String()
-    if runtime.GOOS == "windows" {
-        re := regexp.MustCompile(`\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}`)
-        matches := re.FindStringSubmatch(output)
-        if len(matches) > 0 {
-            gatewayIP = matches[0]
-        }
-    } else {
-        fields := strings.Fields(output)
-        if len(fields) >= 3 {
-            gatewayIP = fields[2]
-        }
-    }
-    return gatewayIP, nil
-}
+    cmd := exec.Command(shell, flag, command)
+    cmd.Stdin = os.Stdin
+    cmd.Stdout = os.Stdout
+    cmd.Stderr = os.Stderr
 
-func generateSelfSignedCert(certPath, keyPath string) {
-    filePath := "/root/.africana/certs/"
-    priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
-    if err := os.MkdirAll(filePath, os.ModePerm); err != nil {
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error creating file: %s\n" + bcolors.ENDC, err)
+    sigs := make(chan os.Signal, 1)
+    signal.Notify(sigs, os.Interrupt)
+
+    go func() {
+        <-sigs
+        if cmd.Process != nil {
+            _ = cmd.Process.Signal(os.Interrupt)
+        }
+    }()
+
+    if err := cmd.Start(); err != nil {
+        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s%s_", bcolors.RED, bcolors.BLUE, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
         return
     }
+
+    if err := cmd.Wait(); err != nil {
+        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
+    }
+
+    signal.Stop(sigs)
+    close(sigs)
+}
+
+
+func getUserHomeDir() string {
+    usr, err := user.Current()
+    if err != nil {
+        fmt.Println("Error getting current user:", err)
+        return ""
+    }
+    return usr.HomeDir
+}
+
+func GetAgreementPath() string {
+    if isRoot() {
+        return agreementPath
+    } else {
+        homeDir := getUserHomeDir()
+        return homeDir + "/.afr3/agreements/covenant.txt"
+    }
+}
+
+func userAgreements(filePath string) {
+    dirPath := agreementDir
+    if !isRoot() {
+        dirPath = getUserHomeDir() + "/.afr3/agreements/"
+    }
+
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if err := os.MkdirAll(dirPath, os.ModePerm); err != nil {
+            fmt.Printf("[!] Error creating directory: %v\n", err)
+            return
+        }
+        err = ioutil.WriteFile(filePath, []byte("User agreement accepted."), os.ModePerm)
+        if err != nil {
+            fmt.Printf("[!] Error writing file: %v\n", err)
+            return
+        }
+    }
+}
+
+func UserSealing() {
+    filePath := GetAgreementPath()
+    userAgreements(filePath)
+}
+
+func SystemShell(userInput string) {
+    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BLUE, bcolors.ENDC, userInput)
+    subprocess.Popen(userInput)
+}
+
+func GenerateSelfSignedCert(certPath, keyPath string) {
+    priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+    if err != nil {
+        fmt.Println("Error generating key:", err)
+        return
+    }
+
     notBefore := time.Now()
     notAfter := notBefore.Add(365 * 24 * time.Hour)
     serialNumber, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
     if err != nil {
-        panic(err)
+        fmt.Println("Error generating serial number:", err)
+        return
     }
+
     template := x509.Certificate{
         SerialNumber: serialNumber,
         Subject: pkix.Name{
@@ -123,62 +157,122 @@ func generateSelfSignedCert(certPath, keyPath string) {
         ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
         BasicConstraintsValid: true,
     }
+
     certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
     if err != nil {
-        panic(err)
-    }
-    keyFile, err := os.OpenFile(keyPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
-    if err != nil {
-        panic(err)
+        fmt.Println("Error creating certificate:", err)
+        return
     }
 
+    keyFile, err := os.OpenFile(keyPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
+    if err != nil {
+        fmt.Println("Error creating key file:", err)
+        return
+    }
     defer keyFile.Close()
+
     privBytes, err := x509.MarshalECPrivateKey(priv)
     if err != nil {
-        panic(err)
+        fmt.Println("Error marshaling private key:", err)
+        return
     }
-    err = pem.Encode(keyFile, &pem.Block{Type: "EC PRIVATE KEY", Bytes: privBytes})
-    if err != nil {
-        panic(err)
-    }
+    pem.Encode(keyFile, &pem.Block{Type: "EC PRIVATE KEY", Bytes: privBytes})
+
     certFile, err := os.Create(certPath)
     if err != nil {
-        panic(err)
+        fmt.Println("Error creating certificate file:", err)
+        return
     }
     defer certFile.Close()
-    err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certDER})
+    pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certDER})
+}
+
+func GetDefaultIP() (string, error) {
+    interfaces, err := net.Interfaces()
     if err != nil {
-        panic(err)
+        return "", err
+    }
+    for _, iface := range interfaces {
+        if iface.Flags&net.FlagUp == 0 || iface.Flags&net.FlagLoopback != 0 {
+            continue
+        }
+        addrs, err := iface.Addrs()
+        if err != nil {
+            return "", err
+        }
+        for _, addr := range addrs {
+            switch v := addr.(type) {
+            case *net.IPNet:
+                if ip := v.IP.To4(); ip != nil {
+                    return ip.String(), nil
+                }
+            case *net.IPAddr:
+                if ip := v.IP.To4(); ip != nil {
+                    return ip.String(), nil
+                }
+            }
+        }
+    }
+    return "", fmt.Errorf("no active network interface found")
+}
+
+func Ifaces() {
+    interfaces, err := net.Interfaces()
+    if err != nil {
+        fmt.Printf("%s[!] %sError getting interfaces: %s", bcolors.RED, bcolors.ENDC, err)
+        return
+    }
+    for _, iface := range interfaces {
+        fmt.Printf("Interface Name: ", iface.Name)
+        fmt.Printf("Hardware Address: ", iface.HardwareAddr)
+        fmt.Printf("Flags: ", iface.Flags)
+        addrs, err := iface.Addrs()
+        if err != nil {
+            fmt.Printf("%s[!] %sError getting addresses: %s", bcolors.RED, bcolors.ENDC, err)
+            continue
+        }
+        for _, addr := range addrs {
+            fmt.Printf("Address: ", addr.String())
+        }
     }
 }
 
-// AskForProxy prompts the user to enter a proxy URL and validates it.
-func AskForProxy() *url.URL {
-    scanner := bufio.NewScanner(os.Stdin)
+func GetDefaultGatewayIP() (string, error) {
+    var cmd *exec.Cmd
+    if runtime.GOOS == "windows" {
+        cmd = exec.Command("cmd", "/C", "route print 0.0.0.0")
+    } else {
+        cmd = exec.Command("sh", "-c", "ip route show default | awk '{print $3}'")
+    }
+    output, err := cmd.Output()
+    if err != nil {
+        return "", err
+    }
+    gatewayIP := strings.TrimSpace(string(output))
+    if gatewayIP == "" {
+        return "", fmt.Errorf("default gateway not found")
+    }
+    return gatewayIP, nil
+}
 
+func AskForProxy(userProxy string) *url.URL {
     for {
-        fmt.Printf(bcolors.UNDERL + bcolors.BOLD + "afr3" + bcolors.ENDC + "websites(" + bcolors.RED + "src/webattackers/askfor_proxy(eg.http://localhost:80).fn" + bcolors.ENDC + ")" + bcolors.GREEN + " > " + bcolors.ENDC)
-
-        scanner.Scan()
-        proxyStr := strings.TrimSpace(scanner.Text())
-
+        proxyStr := strings.TrimSpace(userProxy)
         proxyURL, err := url.Parse(proxyStr)
         if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
-            fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Invalid URL format. Use, ex. http://localhost:80)." + bcolors.ENDC)
-            continue
+            fmt.Printf("%s[!] %sInvalid URL format. eg. http://localhost:80).\n", bcolors.RED, bcolors.ENDC)
+            return nil
         }
 
         validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
         if !validSchemes[proxyURL.Scheme] {
-            fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Invalid scheme. Use, http(s), socks4(5).")
-            continue
+            fmt.Printf("%s[!] %sInvalid scheme. Use, http(s), socks4(5).\n", bcolors.RED, bcolors.ENDC)
+            return nil
         }
-
         return proxyURL
     }
 }
 
-// SetProxyEnv sets the HTTP and HTTPS proxy environment variables.
 func SetProxyEnv(proxyURL *url.URL) error {
     if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
         return err
@@ -189,28 +283,13 @@ func SetProxyEnv(proxyURL *url.URL) error {
     return nil
 }
 
-func Ifaces() {
-    interfaces, err := net.Interfaces()
-    if err != nil {
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error getting interfaces:", err)
+func SetProxy(userProxy string) {
+    proxyURL := AskForProxy(userProxy)
+    if err := SetProxyEnv(proxyURL); err != nil {
+        fmt.Printf("%s[!] %sError setting proxy environment Variables: %s", bcolors.RED, bcolors.ENDC, err)
         return
     }
-    for _, iface := range interfaces {
-        fmt.Println("Interface Name:", iface.Name)
-        fmt.Println("Hardware Address:", iface.HardwareAddr)
-        fmt.Println("Flags:", iface.Flags)
-        addrs, err := iface.Addrs()
-        if err != nil {
-            fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error getting addresses:", err)
-            continue
-        }
-        for _, addr := range addrs {
-            fmt.Println("Address:", addr.String())
-        }
-        fmt.Println()
-    }
 }
-
 
 func replaceStringsInFile(fileName string, replacements map[string]string) error {
     content, err := ioutil.ReadFile(fileName)
@@ -228,24 +307,11 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf(bcolors.RED + "[!] " + bcolors.DARKCYAN + "Configuring file: %s%s %v%s", bcolors.ENDC, fileName, err, bcolors.ENDC)
+            fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.RED, bcolors.ENDC, fileName, err)
         } else {
-            fmt.Printf(bcolors.GREEN + "[*] " + bcolors.ENDC + "Succesfully configured file: %s%s%s\n", bcolors.RED, fileName, bcolors.ENDC)
+            fmt.Printf("%s[*] %sDone configuring: %s%s%s ...", bcolors.GREEN, bcolors.ENDC, bcolors.BLUE, fileName, bcolors.ENDC)
         }
     }
-}
-
-func ClearScreen() {
-    switch runtime.GOOS {
-    case "linux", "darwin":
-        command = "clear"
-    case "windows":
-        command = "cls"
-    default:
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Unsupported operating system." + bcolors.ENDC)
-        return
-    }
-    subprocess.Popen(command)
 }
 
 func BrowseTutarilas() {
@@ -255,111 +321,75 @@ func BrowseTutarilas() {
     case "windows":
         command = `start "" "https://youtube.com/@RojahsMontari"`
     default:
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Unsupported operating system." + bcolors.ENDC)
+        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.RED, bcolors.ENDC)
         return
     }
-    fmt.Println(bcolors.GREEN + "[*] " + bcolors.ENDC + "Launched youtube tutarials...")
+    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen(command)
 }
 
-func TermLogs() {
-    subprocess.Popen(`cat /root/.africana/logs/*.log`)
-    for {
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "Enter '0' 'exit' " + bcolors.DARKCYAN + "or" + bcolors.DARKGREY + bcolors.ITALIC + "'EXIT' " + bcolors.ENDC + "2 go back" + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─✍🏼" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userInput := scanner.Text()
-        switch strings.ToLower(userInput) {
-        case "0", "e", "q", "exit", "quit":
-            os.Exit(0)
-        case "b", "r", "back", "return":
-            return
-        default:
-            fmt.Println(bcolors.BLUE + "(" + bcolors.RED + "Poor choice of selection. Please select " + bcolors.YELLOW + "🦝00. or" + bcolors.BLUE + "(" + bcolors.DARKCYAN + " 0 & Go back " + bcolors.BLUE + ")" + bcolors.ENDC)
-        }
-    }
-}
-
-func Handler() {
-    c := make(chan os.Signal, 1)
-    signal.Notify(c, os.Interrupt, syscall.SIGINT)
-    go func() {
-        <-c
-        fmt.Println(bcolors.Colors() + bcolors.BOLD + "\nCTRL-C detected. Exiting.... " + bcolors.ENDC)
-        os.Exit(0)
-    }()
-}
-
-func SystemShell(userInput string) {
-    fmt.Printf(bcolors.BLUE + "[*] " + bcolors.ENDC + "exec: %s\n\n", userInput + bcolors.ENDC)
-    subprocess.Popen(userInput)
-}
-
 func BrowserLogs() {
-    subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.africana/logs/; cat *.log | aha --black > /var/www/html/index.html`)
+    subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr3/logs/; cat *.log | aha --black > /var/www/html/index.html`)
     subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null; php -S 0.0.0:80`)
     subprocess.Popen(`rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/`)
     return
 }
 
 func ClearLogs() {
-    subprocess.Popen(`ls /root/.africana/logs/; ls /root/.africana/output/; rm -rf /root/.africana/logs/*; rm -rf /root/.africana/output/*`)
+    subprocess.Popen(`ls /root/.afr3/logs/; ls /root/.afr3/output/; rm -rf /root/.afr3/logs/*; rm -rf /root/.afr3/output/*`)
     return
 }
 
 func ListJunks() {
-    subprocess.Popen(`ls /root/.africana/output`)
+    subprocess.Popen(`ls /root/.afr3/output`)
     return
 }
 
 func ClearJunks() {
-    subprocess.Popen(`rm -rf /root/.africana/output/*`)
-    fmt.Println(bcolors.RED + "[*] " + bcolors.ENDC + "All junks cleared." + bcolors.ENDC)
+    subprocess.Popen(`rm -rf /root/.afr3/output/*`)
+    fmt.Printf("%s[*] %s Succesfully cleared All junks.", bcolors.GREEN, bcolors.ENDC)
     return
 }
 
 func Sleep() {
-    scanner.Scan()
-    userInput := scanner.Text()
-    subprocess.Popen(`sleep %s`, userInput)
+    subprocess.Popen("sleep")
 }
 
-func Certs() {
-    certPath := "/root/.africana/certs/africana-cert.pem"
-    keyPath := "/root/.africana/certs/africana-key.pem"
-    if _, err := os.Stat(certPath); os.IsNotExist(err) {
-        if _, err := os.Stat(keyPath); os.IsNotExist(err) {
-            generateSelfSignedCert(certPath, keyPath)
+func InitiLize() {
+    if !isRoot() {
+        homeDir := getUserHomeDir()
+        if homeDir == "" {
+            return
         }
+        certDir = homeDir + "/.afr3/certs/"
+        outputDir = homeDir + "/.afr3/output/"
+        keyPath = certDir + "africana-key.pem"
+        certPath = certDir + "africana-cert.pem"
     }
-}
 
-func WordLists() {
+    if err := os.MkdirAll(certDir, os.ModePerm); err != nil {
+        msg, _ := fmt.Printf("%s[!] %sError creating cert directory ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
+        return
+    }
+    if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
+        msg, _ := fmt.Printf("%s[!] %sError creating output directory ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
+        return
+    }
+
+    if _, err := os.Stat(certPath); os.IsNotExist(err) {
+        GenerateSelfSignedCert(certPath, keyPath)
+    }
+
     if runtime.GOOS == "linux" {
-        filePath := "/usr/share/wordlists/rockyou.txt"
-        gzFilePath := filePath + ".gz"
-
-        if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        gzFilePath := rkyPath + ".gz"
+        if _, err := os.Stat(rkyPath); os.IsNotExist(err) {
             if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
                 return
             }
             command := "gunzip %s"
             subprocess.Popen(command, gzFilePath)
-        }
+         }
     }
-}
-
-func InitiLize() {
-    fileLogs := "/root/.africana/logs/"
-    if err := os.MkdirAll(fileLogs, os.ModePerm); err != nil {
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error creating file: %s%s\n", err, bcolors.ENDC)
-        return
-    }
-    fileOuts := "/root/.africana/output/"
-    if err := os.MkdirAll(fileOuts, os.ModePerm); err != nil {
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error creating file: %s%s\n", err, bcolors.ENDC)
-        return
-    }
-    Certs()
-    WordLists()
 }

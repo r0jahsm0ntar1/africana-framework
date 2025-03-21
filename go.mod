@@ -12,9 +12,7 @@ replace crackers => ./src/crackers/
 
 replace phishers => ./src/phishers/
 
-replace handlers => ./src/handlers/
-
-replace africana => ./src/core/main/
+replace exploits => ./src/exploits/
 
 replace setups => ./src/core/setups/
 
@@ -30,6 +28,8 @@ replace agreements => ./src/agreements/
 
 replace scriptures => ./src/scriptures/
 
+replace africana => ./src/core/africana/
+
 replace webattackers => ./src/webattackers/
 
 replace subprocess => ./src/core/subprocess/
@@ -41,7 +41,7 @@ require (
 	bcolors v0.0.0-00010101000000-000000000000 // indirect
 	crackers v0.0.0-00010101000000-000000000000 // indirect
 	credits v0.0.0-00010101000000-000000000000 // indirect
-	handlers v0.0.0-00010101000000-000000000000 // indirect
+	exploits v0.0.0-00010101000000-000000000000 // indirect
 	internals v0.0.0-00010101000000-000000000000 // indirect
 	menus v0.0.0-00010101000000-000000000000 // indirect
 	phishers v0.0.0-00010101000000-000000000000 // indirect

@@ -10,20 +10,22 @@ import (
     "runtime"
     "strings"
     "sync"
+    "os/user"
     "bcolors"
 )
 
 var (
-    shell      string
+    err        error
     flag       string
-    logFile    *os.File
-    mu         sync.Mutex
-    logDir     = "/root/.africana/logs"
+    shell      string
+    process    string
     initialDir string
     currentDir string
+    logFile    *os.File
+    mu         sync.Mutex
+    logDir    = "/root/.afr3/logs/"
 )
 
-// Initialize package variables and setup logging directory
 func init() {
     switch runtime.GOOS {
     case "windows":
@@ -39,33 +41,45 @@ func init() {
         initialDir = dir
         currentDir = dir
     }
+}
+
+func isRoot() bool {
+    return os.Geteuid() == 0
+}
+
+func getUserHomeDir() string {
+    usr, err := user.Current()
+    if err != nil {
+        fmt.Println("Error getting current user:", err)
+        return ""
+    }
+    return usr.HomeDir
+}
+
+func creatLogDir() {
+    if !isRoot() {
+        homeDir := getUserHomeDir()
+        if homeDir == "" {
+            return
+        }
+        logDir = homeDir + "/.afr3/logs/"
+    }
 
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
-        fmt.Fprintln(os.Stderr, bcolors.RED + "[!] " + bcolors.ENDC + "Error creating log directory:", err)
+        msg, _ := fmt.Printf("%s[!] %sError creating log directory ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
         return
     }
-    openLogFile()
 }
 
-// Open or create a log file for storing command history
-func openLogFile() {
-    mu.Lock()
-    defer mu.Unlock()
-
-    if logFile != nil {
-        logFile.Close()
-    }
-
-    var err error
-    logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-    if err != nil {
-        fmt.Fprintln(os.Stderr, bcolors.RED + "[!] " + bcolors.ENDC + "Error opening log file: ", err)
-    }
-}
-
-// Execute a command using the system shell
 func Popen(command string, args ...interface{}) {
-    process := fmt.Sprintf(command, args...)
+    creatLogDir()
+    openLogFile()
+    if len(args) > 0 {
+        process = fmt.Sprintf(command, args...)
+    } else {
+        process = command
+    }
 
     if process != "" {
         logCommand(process)
@@ -77,13 +91,12 @@ func Popen(command string, args ...interface{}) {
     }
 
     parts := strings.Split(process, "&&")
+
     for i, part := range parts {
         part = strings.TrimSpace(part)
-
         if strings.HasPrefix(part, "cd ") {
             cdCommand := strings.TrimSpace(strings.TrimPrefix(part, "cd "))
             changeDirectory(cdCommand)
-
             if i == len(parts)-1 {
                 return
             }
@@ -93,7 +106,6 @@ func Popen(command string, args ...interface{}) {
     }
 }
 
-// Execute a command fully, handling process execution and signals
 func executeFullCommand(command string) {
     cmd := exec.Command(shell, flag, command)
     cmd.Stdin = os.Stdin
@@ -112,41 +124,35 @@ func executeFullCommand(command string) {
     }()
 
     if err := cmd.Start(); err != nil {
-        fmt.Fprintln(os.Stderr, bcolors.RED + "[!] " + bcolors.ENDC + "Error starting command:", err)
+        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s%s_", bcolors.RED, bcolors.BLUE, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        fmt.Fprintln(os.Stderr, bcolors.YELLOW + "[!] " + bcolors.ENDC + "Process incomplete:", err)
+        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
     }
 
     signal.Stop(sigs)
     close(sigs)
 }
 
-// Change the current working directory
-func changeDirectory(newDir string) {
-    if newDir == "" || newDir == "~" {
-        // Force it to go to /root when `~` is used
-        newDir = "/root"
-    } else if strings.HasPrefix(newDir, "~/") {
-        // If it starts with `~/`, map it to /root and append the rest
-        newDir = "/root" + newDir[1:]
+func openLogFile() {
+    mu.Lock()
+    defer mu.Unlock()
+
+    if logFile != nil {
+        logFile.Close()
     }
 
-    if !filepath.IsAbs(newDir) {
-        newDir = filepath.Join(currentDir, newDir)
-    }
-
-    if stat, err := os.Stat(newDir); err == nil && stat.IsDir() {
-        currentDir = newDir
-        fmt.Printf(bcolors.GREEN + "[*] "+ bcolors.ENDC + "Changed directory to: %s%s%s\n", bcolors.BLUE, currentDir, bcolors.ENDC)
-    } else {
-        fmt.Printf(bcolors.RED + "[!] " + bcolors.ENDC + "Invalid directory: %s%s%s\n", bcolors.BLUE, newDir, bcolors.ENDC)
+    logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+    if err != nil {
+        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s%s_", bcolors.RED, bcolors.ENDC, bcolors.ENDC, err)
+        fmt.Fprintln(os.Stderr, msg)
     }
 }
 
-// Log executed commands to a file
 func logCommand(command string) {
     mu.Lock()
     defer mu.Unlock()
@@ -160,7 +166,6 @@ func logCommand(command string) {
     }
 }
 
-// Close the log file to prevent memory leaks
 func CloseLogFile() {
     mu.Lock()
     defer mu.Unlock()
@@ -170,7 +175,25 @@ func CloseLogFile() {
     }
 }
 
-// Print command history from the log file
+func changeDirectory(newDir string) {
+    if newDir == "" || newDir == "~" {
+        newDir = "/root"
+    } else if strings.HasPrefix(newDir, "~/") {
+        newDir = "/root" + newDir[1:]
+    }
+
+    if !filepath.IsAbs(newDir) {
+        newDir = filepath.Join(currentDir, newDir)
+    }
+
+    if stat, err := os.Stat(newDir); err == nil && stat.IsDir() {
+        currentDir = newDir
+        fmt.Printf("%s[*] %sChanged directory to: %s%s%s\n", bcolors.GREEN, bcolors.ENDC, bcolors.BLUE, currentDir, bcolors.ENDC)
+    } else {
+        fmt.Printf("%s[!] %sInvalid directory: %s%s%s\n", bcolors.RED, bcolors.ENDC, bcolors.BLUE, newDir, bcolors.ENDC)
+    }
+}
+
 func LogHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
@@ -184,7 +207,7 @@ func LogHistory() {
     defer file.Close()
 
     scanner := bufio.NewScanner(file)
-    fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "exec: history\n")
+    fmt.Printf("%s[*] %sexec: history\n\n", bcolors.BLUE, bcolors.ENDC)
     lineNumber := 1
     for scanner.Scan() {
         fmt.Printf("%d  %s\n", lineNumber, scanner.Text())
@@ -192,14 +215,13 @@ func LogHistory() {
     }
 }
 
-// Clear the command history log file
 func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Println(bcolors.RED + "[!] " + bcolors.ENDC + "Error clearing history:", err)
+        fmt.Printf("%s[!] %sError clearing history:", bcolors.RED, bcolors.ENDC, err)
     } else {
-        fmt.Println(bcolors.BLUE + "[*] " + bcolors.ENDC + "exec: clear history\n\n" + bcolors.GREEN + "[*] " + bcolors.ENDC + "History cleared successfully.")
+        fmt.Printf("%s[*] %sexec: clear history\n\n%s[*] %sHistory cleared ...\n", bcolors.BLUE, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         openLogFile()
     }
 }
