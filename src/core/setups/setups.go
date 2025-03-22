@@ -14,11 +14,15 @@ import(
 )
 
 var (
-    userInput, userDistro, userProxy, userModule string
-    scanner  = bufio.NewScanner(os.Stdin)
-    outPutDir = "/root/.afr3/output/"
-    filePath = "/root/.afr3/africana-base/"
+    scanner = bufio.NewScanner(os.Stdin)
+    userDistro = "kali"
+    userInput, userProxy, userModule string
+    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
 )
+
+var defaultValues = map[string]string{
+    "distro": userDistro,
+}
 
 func SetupsLauncher() {
     for {
@@ -419,6 +423,7 @@ func handleSetCommand(parts []string) {
     }
 }
 
+
 func handleUnsetCommand(parts []string) {
     if len(parts) < 2 {
         menus.HelpInfoSet()
@@ -430,8 +435,8 @@ func handleUnsetCommand(parts []string) {
         "module": &userModule,
     }
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = ""
-        fmt.Printf("%s => None\n", strings.ToUpper(key))
+        *ptr = defaultValues[key] // Reset to default
+        fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
     } else {
         menus.HelpInfoSet()
     }
@@ -446,7 +451,6 @@ func executeModule() {
         fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
-
     SetupsModules(userModule, userDistro)
 }
 
@@ -520,7 +524,7 @@ func UpdateAfricana() {
 
 func KaliSetups() {
     fmt.Printf("%s[>] %sInstalling africana in kali\n", bcolors.YELLOW, bcolors.ENDC)
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+    if _, err := os.Stat(userToolsDir); os.IsNotExist(err) {
         fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
@@ -529,7 +533,7 @@ func KaliSetups() {
             `cd /etc/apt/sources.list.d/; curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
+            `apt-get install -y bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f userWordList wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
@@ -544,7 +548,7 @@ func KaliSetups() {
 
 func UbuntuSetups() {
     fmt.Printf("%s[>] %sInstalling africana in ubuntu\n", bcolors.YELLOW, bcolors.ENDC)
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+    if _, err := os.Stat(userToolsDir); os.IsNotExist(err) {
         fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
@@ -555,7 +559,7 @@ func UbuntuSetups() {
             `cd /etc/apt/sources.list.d/; curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
-            `apt-get install -y bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
+            `apt-get install -y bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f userWordList wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
@@ -569,7 +573,7 @@ func UbuntuSetups() {
 
 func ArchSetups() {
     fmt.Printf("%s[>] %sInstalling africana in arch\n", bcolors.YELLOW, bcolors.ENDC)
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+    if _, err := os.Stat(userToolsDir); os.IsNotExist(err) {
         fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `pacman -Syu --noconfirm`,
@@ -587,7 +591,7 @@ func ArchSetups() {
 
 func BlackArchSetups() {
     fmt.Printf("%s[>] %sInstalling blackarch tools ...\n", bcolors.YELLOW, bcolors.ENDC)
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+    if _, err := os.Stat(userToolsDir); os.IsNotExist(err) {
         fmt.Printf("%s[>] %sInstalling foundation tools ...\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `curl -O https://blackarch.org/strap.sh`,
@@ -595,7 +599,7 @@ func BlackArchSetups() {
             `./strap.sh`,
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm blackarch`,
-            `pacman -S --noconfirm base-devel bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f wordlists wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
+            `pacman -S --noconfirm base-devel bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f userWordList wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
@@ -623,7 +627,7 @@ func AutoSetups() {
 
 func Uninstaller() {
     fmt.Printf("%s[!] %sUninstalling africana ...\n", bcolors.RED, bcolors.ENDC)
-    if _, err := os.Stat(filePath); !os.IsNotExist(err) {
+    if _, err := os.Stat(userToolsDir); !os.IsNotExist(err) {
         subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/africana`)
         fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.GREEN, bcolors.ENDC)
         os.Exit(0)

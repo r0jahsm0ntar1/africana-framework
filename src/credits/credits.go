@@ -15,7 +15,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
 
     file, err := os.Open(filename)
     if err != nil {
-        fmt.Println("Error opening file:", err)
+        fmt.Printf("Error opening file:", err)
         return
     }
     defer file.Close()
@@ -32,7 +32,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
     }
 
     if err := scanner.Err(); err != nil {
-        fmt.Println("Error reading file:", err)
+        fmt.Printf("Error reading file:", err)
     }
 }
 
@@ -185,6 +185,9 @@ func Developer() {
 [ prolific contributions to the technological milieu......]
 [ underscore a quintessential commitment to advancing.....]
 [ cybersecurity paradigms.................................]
+
+[ Great thanks to my Family & my one & only loving wife ..]
+[ Naomi Waceke for her love and emotional support.........]
 `
     for _, d := range developer {
         fmt.Print(string(d))

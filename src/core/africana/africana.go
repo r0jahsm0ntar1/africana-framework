@@ -30,12 +30,11 @@ var(
     userRhost   string
     userXhost   string
     userYhost   string
-    scanner   = bufio.NewScanner(os.Stdin)
+    scanner = bufio.NewScanner(os.Stdin)
     agreementDir = utils.GetAgreementPath()
 )
 
 func Run() {
-    utils.ClearScreen()
     if _, err := os.Stat(agreementDir); os.IsNotExist(err) {
         utils.ClearScreen()
         agreements.Covenant()
@@ -45,15 +44,15 @@ func Run() {
             userInput := strings.TrimSpace(strings.ToLower(scanner.Text()))
             switch userInput {
             case "y", "yes":
-                utils.UserSealing()
                 utils.ClearScreen()
+                utils.UserSealing()
                 utils.InitiLize()
                 Genesis()
                 return
             case "n", "q", "no", "exit", "quit":
                 os.Exit(0)
             default:
-                fmt.Println("Choices are (y|n|yes|no)")
+                fmt.Printf("Choices are (y|n|yes|no)")
             }
         }
     } else {
@@ -441,7 +440,7 @@ func africanaFramework() {
 
 func Genesis() {
     if len(os.Args) < 2 {
-        scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()
+        utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()
         return
     }
 
@@ -450,9 +449,9 @@ func Genesis() {
         "--version":        banners.Version,
         "-u":               setups.UpdateAfricana,
         "--update":         setups.UpdateAfricana,
-        "-0":               func() {scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
-        "-a":               func() {scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
-        "--auto":           func() {scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
+        "-0":               func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
+        "-a":               func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
+        "--auto":           func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutomation()},
         "-1":               func() {menus.MenuFour(); setups.SetupsLauncher(); menus.MenuZero()},
         "-i":               func() {menus.MenuFour(); setups.SetupsLauncher(); menus.MenuZero()},
         "--install":        func() {menus.MenuFour(); setups.SetupsLauncher(); menus.MenuZero()},

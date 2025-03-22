@@ -21,13 +21,15 @@ var(
     userRhost   string
     userProxy   string
     userModule  string
+
     userFakeDns = "*"
     userTarget  = "default"
     userIface   = "eth0"
-    scanner = bufio.NewScanner(os.Stdin)
+
     userLhost, _ = utils.GetDefaultIP()
+    scanner = bufio.NewScanner(os.Stdin)
     userGateway, _ = utils.GetDefaultGatewayIP()
-    outPutDir = "/root/.afr3/output/"
+    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -36,11 +38,11 @@ var defaultValues = map[string]string{
     "fakedns": "*",
     "target":  "default",
     "iface":   "eth0",
-    "output":  outPutDir,
     "rhost":   userRhost,
     "rhosts":  userRhost,
     "lhost":   userLhost,
     "gateway": userGateway,
+    "output":  userOutPutDir,
 }
 
 func NetworkPentest() {
@@ -197,13 +199,13 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "proxy":   &userProxy,
-        "rhost":   &userRhost,
-        "rhosts":  &userRhost,
-        "lhost":   &userLhost,
-        "iface":   &userIface,
-        "module":  &userModule,
-        "target":  &userTarget,
+        "proxy": &userProxy,
+        "rhost": &userRhost,
+        "rhosts": &userRhost,
+        "lhost": &userLhost,
+        "iface": &userIface,
+        "module": &userModule,
+        "target": &userTarget,
         "gateway": &userGateway,
         "fakedns": &userFakeDns,
     }
@@ -222,18 +224,18 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "proxy":   &userProxy,
-        "rhost":   &userRhost,
-        "lhost":   &userLhost,
-        "iface":   &userIface,
-        "rhosts":  &userRhost,
-        "module":  &userModule,
-        "target":  &userTarget,
+        "proxy": &userProxy,
+        "rhost": &userRhost,
+        "lhost": &userLhost,
+        "iface": &userIface,
+        "rhosts": &userRhost,
+        "module": &userModule,
+        "target": &userTarget,
         "gateway": &userGateway,
         "fakedns": &userFakeDns,
     }
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = defaultValues[key] // Reset to default
         fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
     } else {
         menus.HelpInfoSet()

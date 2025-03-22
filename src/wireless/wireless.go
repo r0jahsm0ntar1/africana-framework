@@ -15,21 +15,20 @@ import(
 
 
 var (
-    userSsid     = "End times ministries"
-    userIface    = "wlan0"
-    userInput    string
-    userRhost    string
-    userLhost    = userLhostIp
-    userLport    = "9999"
-    userHport    = "3333"
-    userProxy    string
-    userModule   string
-    userScript   string
+    userInput string
+    userRhost string
+    userProxy string
+    userModule string
+    userScript string
+    userLport = "9999"
+    userHport = "3333"
+    userIface = "wlan0"
+    userSsid = "End times ministries"
 
+    userLhost = userLhostIp
     userLhostIp, _ = utils.GetDefaultIP()
     scanner    = bufio.NewScanner(os.Stdin)
-    outPutDir  = "/root/.afr3/output"
-    toolsDir   = "/root/.afr3/africana-base"
+    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -40,7 +39,7 @@ var defaultValues = map[string]string{
     "lport":    "9999",
     "hport":    "3333",
     "module":   "",
-    "output":   outPutDir,
+    "output":   userOutPutDir,
 }
 
 func WirelessPentest() {
@@ -435,7 +434,7 @@ func handleSetCommand(parts []string) {
         "lport":    &userLport,
         "hport":    &userHport,
         "module":   &userModule,
-        "output":   &outPutDir,
+        "output":   &userOutPutDir,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -459,10 +458,10 @@ func handleUnsetCommand(parts []string) {
         "lport":    &userLport,
         "hport":    &userHport,
         "module":   &userModule,
-        "output":   &outPutDir,
+        "output":   &userOutPutDir,
     }
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = defaultValues[key] // Reset to default
         fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
     } else {
         menus.HelpInfoSet()
@@ -499,7 +498,7 @@ func WirelessPenModules(userModule string, args ...interface{}) {
     if action, exists := commands[userModule]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sAfr::OptionValidateError failed to validate MODULE: %s\n", bcolors.YELLOW, bcolors.ENDC, userModule)
+        fmt.Printf("\n%s[!] %sFailed to validate MODULE: %s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, userModule, bcolors.ENDC)
     }
 }
 
@@ -518,12 +517,12 @@ func WifiPumpkin() {
 }
 
 func Fluxion() {
-    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, toolsDir)
+    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, userToolsDir)
 }
 
 func WifiPumpkin3(userIface string, userSsid string) {
      if userSsid == "" {
-        fmt.Printf("\n%s[!] %sAfr::OptionValidateError failed to validate MISSING SSID: %s :%s\n", bcolors.RED, bcolors.ENDC, userModule, userIface)
+        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, userModule, userIface, bcolors.ENDC)
         return
     }
     filePath := "/root/.config/wifipumpkin3/"
@@ -533,9 +532,8 @@ func WifiPumpkin3(userIface string, userSsid string) {
     subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, userIface, userSsid)
 }
 
-
 func Wifite(userIface string) {
-    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic /usr/share/wordlists/rockyou.txt --require-fakeauth --nodeauth --pmkid-timeout 120`, userIface)
+    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic /usr/share/userWordList/rockyou.txt --require-fakeauth --nodeauth --pmkid-timeout 120`, userIface)
 }
 
 func Bettercap(userIface string) {

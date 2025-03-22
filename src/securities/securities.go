@@ -548,7 +548,7 @@ WantedBy=multi-user.target
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         err = ioutil.WriteFile(filePath, []byte(content), os.ModePerm)
         if err != nil {
-            fmt.Println("Error writing to file:", err)
+            fmt.Printf("Error writing to file:", err)
             return
         }
     }

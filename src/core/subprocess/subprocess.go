@@ -43,22 +43,22 @@ func init() {
     }
 }
 
-func isRoot() bool {
+func IsRoot() bool {
     return os.Geteuid() == 0
 }
 
-func getUserHomeDir() string {
+func GetUserHomeDir() string {
     usr, err := user.Current()
     if err != nil {
-        fmt.Println("Error getting current user:", err)
+        fmt.Printf("Error getting current user:", err)
         return ""
     }
     return usr.HomeDir
 }
 
 func creatLogDir() {
-    if !isRoot() {
-        homeDir := getUserHomeDir()
+    if !IsRoot() {
+        homeDir := GetUserHomeDir()
         if homeDir == "" {
             return
         }
@@ -73,8 +73,7 @@ func creatLogDir() {
 }
 
 func Popen(command string, args ...interface{}) {
-    creatLogDir()
-    openLogFile()
+    creatLogDir(); openLogFile()
     if len(args) > 0 {
         process = fmt.Sprintf(command, args...)
     } else {

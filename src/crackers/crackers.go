@@ -13,20 +13,28 @@ import(
 )
 
 var(
-    userPcap        string
-    userInput       string
-    userRhost       string
-    userProxy       string
-    userModule      string
-    userScript      string
-    userOutput      string
-    userHashes      string
-    userWordPass    string
-    userWordlists   string
+    userPcap string
+    userInput string
+    userRhost string
+    userProxy string
+    userModule string
+    userScript string
+    userOutput string
+    userHashes string
+    userWordPass string
     scanner = bufio.NewScanner(os.Stdin)
-    outPutDir = "/root/.afr3/output/"
+    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
 )
 
+var defaultValues = map[string]string{
+    "proxy": "",
+    "rhost": "",
+    "rhosts": "",
+    "module": "",
+    "password": userWordPass,
+    "output": userOutPutDir,
+    "wordlist": userWordList,
+}
 
 func PasswordPentest() {
     for {
@@ -182,10 +190,13 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-         "proxy": &userProxy,
-         "rhost": &userRhost,
+        "proxy": &userProxy,
+        "rhost": &userRhost,
         "rhosts": &userRhost,
         "module": &userModule,
+        "output": &userOutPutDir,
+        "wordlist": &userWordList,
+        "password": &userWordPass,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -202,14 +213,17 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-         "proxy": &userProxy,
-         "rhost": &userRhost,
+        "proxy": &userProxy,
+        "rhost": &userRhost,
         "rhosts": &userRhost,
         "module": &userModule,
+        "output": &userOutPutDir,
+        "wordlist": &userWordList,
+        "password": &userWordPass,
     }
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = ""
-        fmt.Printf("%s => None\n", strings.ToUpper(key))
+        *ptr = defaultValues[key] // Reset to default
+        fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
     } else {
         menus.HelpInfoSet()
     }
@@ -276,7 +290,7 @@ func HydraSsh() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SSHcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraSsh_outfile.txt -u ssh://%s`, userName, userWordPass, userRhost)
@@ -288,14 +302,14 @@ func HydraSsh() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SSHcracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SSHcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraSsh_outfile.txt -u ssh://%s`, userNames, userWordPass, userRhost)
@@ -327,7 +341,7 @@ func HydraFtp() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraFtp_outfile.txt -u ftp://%s`, userName, userWordPass, userRhost)
@@ -339,14 +353,14 @@ func HydraFtp() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "FTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraFtp_outfile.txt -u ftp://%s`, userNames, userWordPass, userRhost)
@@ -378,7 +392,7 @@ func HydraSmb() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMBcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraSmb_outfile.txt -u smb://%s`, userName, userWordPass, userRhost)
@@ -390,14 +404,14 @@ func HydraSmb() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SMBCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMBCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraSmb_outfile.txt -u smb://%s`, userNames, userWordPass, userRhost)
@@ -429,7 +443,7 @@ func HydraRdp() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "RDPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraRdp_outfile.txt -u rdp://%s`, userName, userWordPass, userRhost)
@@ -441,14 +455,14 @@ func HydraRdp() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "RDPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "RDPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraRdp_outfile.txt -u rdp://%s`, userNames, userWordPass, userRhost)
@@ -480,7 +494,7 @@ func HydraLdap() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "LDAPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraLdap_outfile.txt -u ldap://%s`, userName, userWordPass, userRhost)
@@ -492,14 +506,14 @@ func HydraLdap() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "LDAPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "LDAPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraLdap_outfile.txt -u ldap://%s`, userNames, userWordPass, userRhost)
@@ -531,7 +545,7 @@ func HydraSmtp() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraSmtp_outfile.txt -u smtp://%s`, userName, userWordPass, userRhost)
@@ -543,14 +557,14 @@ func HydraSmtp() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SMTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraSmtp_outfile.txt -u smtp://%s`, userNames, userWordPass, userRhost)
@@ -582,7 +596,7 @@ func HydraSnmtp() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SNMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraSnmtp_outfile.txt -u snmtp://%s`, userName, userWordPass, userRhost)
@@ -594,14 +608,14 @@ func HydraSnmtp() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "SNMTPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "SNMTPCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraSnmtp_outfile.txt -u snmtp://%s`, userNames, userWordPass, userRhost)
@@ -633,7 +647,7 @@ func HydraTelnet() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraTelnet_outfile.txt -u telnet://%s`, userName, userWordPass, userRhost)
@@ -645,14 +659,14 @@ func HydraTelnet() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "TELNETCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "TELNETCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraTelnet_outfile.txt -u telnet://%s`, userNames, userWordPass, userRhost)
@@ -684,7 +698,7 @@ func HydraHttps() {
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "FTPcracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o /root/.afr3/output/HydraHttps_outfile.txt -u https://%s`, userName, userWordPass, userRhost)
@@ -696,14 +710,14 @@ func HydraHttps() {
         scanner.Scan()
         userNames := scanner.Text()
         if userNames == "" {
-            userNames = "/usr/share/wordlists/rockyou.txt"
+            userNames = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "HTTPSCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
         fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
         scanner.Scan()
         userWordPass := scanner.Text()
         if userWordPass == "" {
-            userWordPass = "/usr/share/wordlists/rockyou.txt"
+            userWordPass = "/usr/share/userWordList/rockyou.txt"
         }
         fmt.Printf(bcolors.ENDC + "\n[" + bcolors.DARKCYAN + "HTTPSCracker has began" + bcolors.ENDC + "] [" + bcolors.GREEN + "Target" + bcolors.ENDC + ": " + bcolors.YELLOW + "%s" + bcolors.ENDC + "]\n\n" + bcolors.ENDC, userRhost)
         subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o /root/.afr3/output/HydraHttps_outfile.txt -u http://%s`, userNames, userWordPass, userRhost)
@@ -737,11 +751,11 @@ func AirCrackng() {
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "PCAPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
-    userWordlists := scanner.Text()
-    if userWordlists == "" {
-        userWordlists = "/usr/share/wordlists/rockyou.txt"
+    userWordList := scanner.Text()
+    if userWordList == "" {
+        userWordList = "/usr/share/userWordList/rockyou.txt"
     }
-    subprocess.Popen(`aircrack-ng %s -w %s`, userPcap, userWordlists)
+    subprocess.Popen(`aircrack-ng %s -w %s`, userPcap, userWordList)
     fmt.Println()
 }
 
@@ -752,10 +766,10 @@ func JohnCrackng() {
     fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "PCAPCracker " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "Path to Pass wordlist " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Rockyou.txt" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
     fmt.Printf(bcolors.BLUE + "\n╰─🐼" + bcolors.GREEN + "> " + bcolors.ENDC)
     scanner.Scan()
-    userWordlists := scanner.Text()
-    if userWordlists == "" {
-        userWordlists = "/usr/share/wordlists/rockyou.txt"
+    userWordList := scanner.Text()
+    if userWordList == "" {
+        userWordList = "/usr/share/userWordList/rockyou.txt"
     }
-    subprocess.Popen(`john %s --wordlist=%s`, userPcap, userWordlists)
+    subprocess.Popen(`john %s --wordlist=%s`, userPcap, userWordList)
     fmt.Println()
 }

