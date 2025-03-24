@@ -24,14 +24,9 @@ import(
 )
 
 var(
-    proxyURL    string
-    filePath    string
-    userInput   string
-    userRhost   string
-    userXhost   string
-    userYhost   string
     scanner = bufio.NewScanner(os.Stdin)
     agreementDir = utils.GetAgreementPath()
+    proxyURL, filePath, Input, Rhost, Xhost, Yhost   string
 )
 
 func Run() {
@@ -41,11 +36,11 @@ func Run() {
         for {
             fmt.Printf("%s%safr3%s%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
             scanner.Scan()
-            userInput := strings.TrimSpace(strings.ToLower(scanner.Text()))
-            switch userInput {
+            Input := strings.TrimSpace(strings.ToLower(scanner.Text()))
+            switch Input {
             case "y", "yes":
                 utils.ClearScreen()
-                utils.UserSealing()
+                utils.Sealing()
                 utils.InitiLize()
                 Genesis()
                 return
@@ -66,8 +61,8 @@ func africanaAutomation() {
     for {
         fmt.Printf("%s%safr3%s%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        userInput := strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(userInput)
+        Input := strings.TrimSpace(strings.ToLower(scanner.Text()))
+        buildParts := strings.Fields(Input)
 
         if len(buildParts) == 0 {
             continue
@@ -420,7 +415,7 @@ func africanaAutomation() {
             "help verses":      menus.HelpInfoVerses,
         }
 
-        if action, exists := commandMap[userInput]; exists {
+        if action, exists := commandMap[Input]; exists {
             action()
             continue
         }
@@ -430,7 +425,7 @@ func africanaAutomation() {
         case "0", "b", "back":
             //
         default:
-            utils.SystemShell(userInput)
+            utils.SystemShell(Input)
         }
     }
 }

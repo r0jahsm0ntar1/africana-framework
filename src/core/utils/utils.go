@@ -24,35 +24,9 @@ import(
 
 var (
     cmd *exec.Cmd
-    flag          string
-    shell         string
-    command       string
-    rkyPath       string
-    keyPath       string
-    certPath      string
-    userCertDir   string
-    userToolsDir  string
-    userWordList  string
-    agreementDir  string
-    userOutPutDir string
-    agreementPath string
+    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList, KyPath string
 
 )
-
-// IsRoot checks if the current user is root
-func IsRoot() bool {
-    return os.Geteuid() == 0
-}
-
-// GetUserHomeDir returns the current user's home directory
-func GetUserHomeDir() string {
-    homeDir, err := os.UserHomeDir()
-    if err != nil {
-        return ""
-    }
-    return homeDir
-}
-
 
 // ClearScreen clears the terminal screen
 func ClearScreen() {
@@ -70,9 +44,9 @@ func ClearScreen() {
 }
 
 // SystemShell executes a shell command
-func SystemShell(userInput string) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BLUE, bcolors.ENDC, userInput)
-    subprocess.Popen(userInput)
+func SystemShell(Input string) {
+    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BLUE, bcolors.ENDC, Input)
+    subprocess.Popen(Input)
 }
 
 // GenerateSelfSignedCert generates a self-signed certificate
@@ -204,9 +178,9 @@ func GetDefaultGatewayIP() (string, error) {
 }
 
 // AskForProxy validates and parses a proxy URL
-func AskForProxy(userProxy string) *url.URL {
+func AskForProxy(Proxy string) *url.URL {
     for {
-        proxyStr := strings.TrimSpace(userProxy)
+        proxyStr := strings.TrimSpace(Proxy)
         proxyURL, err := url.Parse(proxyStr)
         if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
             fmt.Printf("%s[!] %sInvalid URL format. eg. http://localhost:80).\n", bcolors.RED, bcolors.ENDC)
@@ -234,8 +208,8 @@ func SetProxyEnv(proxyURL *url.URL) error {
 }
 
 // SetProxy sets the system proxy
-func SetProxy(userProxy string) {
-    proxyURL := AskForProxy(userProxy)
+func SetProxy(Proxy string) {
+    proxyURL := AskForProxy(Proxy)
     if err := SetProxyEnv(proxyURL); err != nil {
         fmt.Printf("%s[!] %sError setting proxy environment Variables: %s", bcolors.RED, bcolors.ENDC, err)
         return
@@ -262,7 +236,7 @@ func Editors(filesToReplacements map[string]map[string]string) {
         if err != nil {
             fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.RED, bcolors.ENDC, fileName, err)
         } else {
-            fmt.Printf("%s[*] %sDone configuring: %s%s%s ...", bcolors.GREEN, bcolors.ENDC, bcolors.BLUE, fileName, bcolors.ENDC)
+            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.GREEN, bcolors.ENDC, bcolors.BLUE, fileName, bcolors.ENDC)
         }
     }
 }
@@ -320,11 +294,11 @@ func Sleep(){ //(seconds int) {
     //fmt.Printf("Slept for %d seconds.\n", seconds)
 }
 
-// GetAgreementPath returns the path to the agreement file based on the user's privilege level
+// GetAgreementPath returns the path to the agreement file based on the 's privilege level
 func GetAgreementPath() string {
     baseDir := "/root/.afr3/agreements/"
-    if !IsRoot() {
-        homeDir := GetUserHomeDir()
+    if !subprocess.IsRoot() {
+        homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
             return ""
         }
@@ -333,8 +307,8 @@ func GetAgreementPath() string {
     return filepath.Join(baseDir, "covenant.txt")
 }
 
-// userAgreements creates the agreement file if it doesn't exist
-func userAgreements(filePath string) {
+// Agreements creates the agreement file if it doesn't exist
+func Agreements(filePath string) {
     dirPath := filepath.Dir(filePath)
 
     // Create the directory if it doesn't exist
@@ -345,54 +319,54 @@ func userAgreements(filePath string) {
 
     // Create the agreement file if it doesn't exist
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        if err := ioutil.WriteFile(filePath, []byte("User agreement accepted."), os.ModePerm); err != nil {
+        if err := ioutil.WriteFile(filePath, []byte("user accepted to the agreement."), os.ModePerm); err != nil {
             fmt.Printf("[!] Error writing file: %v\n", err)
             return
         }
     }
 }
 
-// UserSealing ensures the agreement file exists
-func UserSealing() {
+// Sealing ensures the agreement file exists
+func Sealing() {
     filePath := GetAgreementPath()
     if filePath == "" {
         fmt.Println("[!] Error: Could not determine agreement file path.")
         return
     }
-    userAgreements(filePath)
+    Agreements(filePath)
 }
 
 // DirLocations returns the paths for certificates, output, and tools directories
-func DirLocations() (string, string, string, string) {
-    if IsRoot() {
-        userCertDir = "/root/.afr3/certs"
-        userOutPutDir = "/root/.afr3/output"
-        userToolsDir = "/root/.afr3/africana-base"
-        userWordList = filepath.Join(userToolsDir, "wordlists", "everything.txt")
-
+func DirLocations() (string, string, string, string, string, string) {
+    if subprocess.IsRoot() {
+        CertDir = "/root/.afr3/certs"
+        OutPutDir = "/root/.afr3/output"
+        ToolsDir = "/root/.afr3/africana-base"
+        KeyPath = filepath.Join(CertDir, "africana-key.pem")
+        CertPath = filepath.Join(CertDir, "africana-cert.pem")
+        WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
     } else {
-        homeDir := GetUserHomeDir()
+        homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
-            return "", "", "", ""
+            return "", "", "", "", "", ""
         }
-        userCertDir := filepath.Join(homeDir, ".afr3", "certs")
-        userOutPutDir := filepath.Join(homeDir, ".afr3", "output")
-        userToolsDir := filepath.Join(homeDir, ".afr3", "africana-base")
-        return userCertDir, userOutPutDir, userToolsDir, userWordList
+        CertDir = filepath.Join(homeDir, ".afr3", "certs")
+        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
+        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
+        KeyPath = filepath.Join(CertDir, "africana-key.pem")
+        CertPath = filepath.Join(CertDir, "africana-cert.pem")
+        WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
     }
-    return userCertDir, userOutPutDir, userToolsDir, userWordList
+    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList
 }
 
-// InitializePaths sets the correct paths based on whether the user is root or not
+// InitializePaths sets the correct paths based on whether the  is root or not
 func InitiLize() {
-    rkyPath  = "/usr/share/wordlist/rockyou.txt"
-    userCertDir, userOutPutDir, userToolsDir, _ := DirLocations()
-
-    keyPath = filepath.Join(userCertDir, "africana-key.pem")
-    certPath = filepath.Join(userCertDir, "africana-cert.pem")
+    CertDir, OutPutDir, _, _, _, _ := DirLocations()
+    KyPath  = "/usr/share/wordlist/rockyou.txt"
 
     // Create directories if they don't exist
-    for _, dir := range []string{userCertDir, userOutPutDir, userToolsDir} {
+    for _, dir := range []string{CertDir, OutPutDir} {
         if err := os.MkdirAll(dir, os.ModePerm); err != nil {
             fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.RED, bcolors.ENDC, dir, err)
             return
@@ -400,14 +374,14 @@ func InitiLize() {
     }
 
     // Generate self-signed certificate if it doesn't exist
-    if _, err := os.Stat(certPath); os.IsNotExist(err) {
-        GenerateSelfSignedCert(certPath, keyPath)
+    if _, err := os.Stat(CertPath); os.IsNotExist(err) {
+        GenerateSelfSignedCert(CertPath, KeyPath)
     }
 
     // Handle rockyou.txt.gz for Linux
     if runtime.GOOS == "linux" {
-        gzFilePath := rkyPath + ".gz"
-        if _, err := os.Stat(rkyPath); os.IsNotExist(err) {
+        gzFilePath := KyPath + ".gz"
+        if _, err := os.Stat(KyPath); os.IsNotExist(err) {
             if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
                 return
             }

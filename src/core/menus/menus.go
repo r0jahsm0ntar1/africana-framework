@@ -6,8 +6,8 @@ import(
     "bcolors"
 )
 var (
-    userLhost    = userLhostIp
-    userLhostIp, _ = utils.GetDefaultIP()
+    Lhost = LhostIp
+    LhostIp, _ = utils.GetDefaultIP()
 )
 
 func MenuZero() { 
@@ -129,9 +129,9 @@ func MenuFour() {
 %s 2. %siphones
 %s 3. %swindows
 %s 4. %smackos
-%s 5. %slinuxos
+%s 5. %slinux
 %s 6. %swebsites
-%s 7. %spersisternts
+%s 7. %sbackdoor
 %s 8. %sevasions
 %s 9. %slisteners
 
@@ -144,8 +144,8 @@ func MenuFourOne() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %steardroid
-%s 2. %sandrorat
+%s 1. %sandrorat
+%s 2. %steardroid
 %s 3. %sto add
 %s 4. %sto add
 %s 5. %sto add
@@ -300,7 +300,7 @@ func MenuFourNine() {
 %s 2. %sshellzgen
 %s 3. %spowerjoker
 %s 4. %smeterpeter
-%s 5. %shavocc2
+%s 5. %shavoc
 %s 6. %steardroid
 %s 7. %sandroidrat
 %s 8. %schameleon
@@ -521,7 +521,7 @@ func MenuEight() {
 
 func HelpEight() {
     fmt.Println(bcolors.YELLOW + "                Web recon " + bcolors.ENDC + ": 1. Automated. Start Passive Web recon & Subdomain Enumration. Chosen tools with less noise are used to gather information on agiven domain before Intrusion begins." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Gather e-mails " + bcolors.ENDC + ": 2. Theharvester tool will try to harvest emails with user names that could be used for phishing, creat wordlists or also as login names for admin panels." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + "           Gather e-mails " + bcolors.ENDC + ": 2. Theharvester tool will try to harvest emails with  names that could be used for phishing, creat wordlists or also as login names for admin panels." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "       Start Bruteforcing " + bcolors.ENDC + ": 3. In this phase, Gobuster tool is used to show us hidden files in the website and also try to find login pages." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "  Start 💉SQL, XSS & SSRF " + bcolors.ENDC + ": 4. This is an injection phase. Chosen tools are configured to find injection vulns. The choice contain embeded submenu that supports both automation and manual injection tackticks." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode.(Intrusive phase)." + bcolors.ENDC)
@@ -1178,6 +1178,22 @@ Basic options:
   ----           ---------------  --------  -----------
   LHOST          eth0             yes       The listen address (an interface may be specified)
   LPORT          9999             yes       The listen port
+
+Malware sub modules:
+--------------------
+
+  #   Name         Description
+  -   ----         -----------
+
+  1 androids      : This module Generates android exploits and launches Listeners.
+  2 iphones       : Contains Iphone c2s and malware generation engines.
+  3 windows       : Lethal C2s that generates obfsicated powershell exploits and handles variety of reverse connection.
+  4 mackos        : A collection of mackos c2s with backdoor generators.
+  5 guineas       : C2s for Linux based distros with backdoor generators.
+  6 websites      : Backdoors for backends with their listeners
+  7 backdoors     : These module contains a collection of persisten mechanisims for variety Distros.
+  8 stealths      : Colections of malware evasion tools.
+  9 listeners     : Launch a backdoor listener for any reverse shells.
 
 Malware sub modules:
   blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
@@ -2461,7 +2477,8 @@ Description:
 `)
 }
 
-func ListMalwareModules() {
+
+func ListExploitsModules() {
     fmt.Printf(`
 Malware sub modules:
 --------------------
@@ -2469,333 +2486,15 @@ Malware sub modules:
   #   Name         Description
   -   ----         -----------
 
-  1 androids      : This module Generates android exploits and launches Listeners.
-  2 iphones       : Contains Iphone c2s and malware generation engines.
-  3 windows       : Lethal C2s that generates obfsicated powershell exploits and handles variety of reverse connection.
-  4 mackos        : A collection of mackos c2s with backdoor generators.
-  5 guineas       : C2s for Linux based distros with backdoor generators.
-  6 websites      : Backdoors for backends with their listeners
-  7 backdoors     : These module contains a collection of persisten mechanisims for variety Distros.
-  8 stealths      : Colections of malware evasion tools.
-  9 listeners     : Launch a backdoor listener for any reverse shells.
-
-`)
-}
-
-func HelpInfoAndroids() {
-    fmt.Printf(`
-       Name: androids
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   androids
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of android exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoIphones() {
-    fmt.Printf(`
-       Name: iphones
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   iphones
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module Contains Iphone c2s and malware generation engines that can enerate variety of iphone exploits and launches Listeners.
-  A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoWindowsM() {
-    fmt.Printf(`
-       Name: windows
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   windows
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of windows exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoMackos() {
-    fmt.Printf(`
-       Name: mackos
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   mackos
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of mackos exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoGuineas() {
-    fmt.Printf(`
-       Name: guineas
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   guineas
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of guineas exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoWebsitesM() {
-    fmt.Printf(`
-       Name: websites
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   websites
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of websites exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoBackdoors() {
-    fmt.Printf(`
-       Name: backdoors
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will Generate variety of Persistent exploits and launches Listeners. A lot of c2 are included to suit you.
-
-`)
-}
-
-func HelpInfoStealths() {
-    fmt.Printf(`
-       Name: stealths
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          none             yes       The full location of the script to evasion
-
-Description:
-  This module will help you obfsicate scripts like powershell to aid in avading almost all AVS 99.9%
-
-`)
-}
-
-func HelpInfoListeners() {
-    fmt.Printf(`
-       Name: listeners
-     Module: src/exploits
-   Platform: All
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   androids
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Description:
-  This module will help you launch a listener as you are guided through.
-
-`)
-}
-
-func ListMalwareNineModules() {
-    fmt.Printf(`
-Malware sub modules:
---------------------
-
-  #   Name         Description
-  -   ----         -----------
-
-  1 blackjack     : It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
-  2 shellzgen     : Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
-  3 powerjoker    : A simple but lethal C2 that generates obfsicated powershell exploits and handles variety of reverse connection.
+  1 ghost         : It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
+  2 shellz        : Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
+  3 blackjack     : It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
   4 meterpeter    : Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull evasion techniques.
-  5 havoc         : It is agiant C2. Its payloads are easly detected. Needs advanced evasion to bypas avs. For advanced users.
-  6 teardroid     : Andoird C2. Needs alot of online configuration but the best for now.
-  7 androidrat    : It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  5 powerjoker    : A simple but lethal C2 that generates obfsicated powershell exploits and handles variety of reverse connection.
+  6 androidrat    : It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  7 teardroid     : Andoird C2. Needs alot of online configuration but the best for now.
   8 chameleon     : A good evasion tool for powershell scripts. Already configured for you.
-  9 gh0x0st       : It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
+  9 listener      : Launch any of your disearable c2 with costumized LHOST, LPORT etc.
 
 `)
 }
@@ -3032,7 +2731,7 @@ Description:
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func AndroRatOptions() {
@@ -3056,7 +2755,7 @@ Exploit target:
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func AndroRatMenu() {
@@ -3102,7 +2801,7 @@ Exploit target:
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpInfoChameLeon() {
@@ -3259,7 +2958,7 @@ Description:
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, userLhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func ListWirelessModules() {
@@ -3538,7 +3237,7 @@ Phishers modules:
   #   Name         Description
   -   ----         -----------
 
-  1 gophish       : It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default user is: admin, Default password is: kali-gophish.
+  1 gophish       : It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default  is: admin, Default password is: kali-gophish.
   2 goodginx      : It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP.
   3 zphisher      : A nice framework with alot of templets. Also bypasses OTP with ngrock support.
   4 blackeye      :

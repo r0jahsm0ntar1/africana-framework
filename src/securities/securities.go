@@ -19,7 +19,7 @@ import(
 )
 
 var (
-    userInput, userProxy, userModule string
+    Input, Proxy, Module string
     scanner  = bufio.NewScanner(os.Stdin)
 )
 
@@ -37,13 +37,13 @@ func Anonsurf() {
     for {
         fmt.Printf("%s%safr3%s anonsurf(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "securities_setup.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        userInput = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(userInput)
+        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
+        buildParts := strings.Fields(Input)
         if len(buildParts) == 0 {
             continue
         }
 
-        if executeCommand(userInput) {
+        if executeCommand(Input) {
             continue
         }
 
@@ -59,7 +59,7 @@ func Anonsurf() {
         case "run", "start", "launch", "exploit", "execute":
             executeModule()
         default:
-            utils.SystemShell(userInput)
+            utils.SystemShell(Input)
         }
     }
 }
@@ -418,8 +418,8 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "proxy": &userProxy,
-        "module": &userModule,
+        "proxy": &Proxy,
+        "module": &Module,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -436,8 +436,8 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "proxy": &userProxy,
-        "module": &userModule,
+        "proxy": &Proxy,
+        "module": &Module,
     }
     if ptr, exists := unsetValues[key]; exists {
         *ptr = ""
@@ -448,18 +448,18 @@ func handleUnsetCommand(parts []string) {
 }
 
 func executeModule() {
-    if userModule == ""{
+    if Module == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter MODULE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
-    AnonimityModules(userModule)
+    AnonimityModules(Module)
 }
 
 func AnonimityModules(module string, args ...interface{}) {
     fmt.Printf("\nMODULE => %s\n", module)
-    if userProxy != "" {
-        fmt.Printf("PROXIES => %s\n", userProxy)
-        utils.SetProxy(userProxy)
+    if Proxy != "" {
+        fmt.Printf("PROXIES => %s\n", Proxy)
+        utils.SetProxy(Proxy)
     }
 
     commands := map[string]func() {
@@ -542,7 +542,7 @@ Type=oneshot
 ExecStart=/usr/bin/macchanger -r %I
 RemainAfterExit=yes
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-.target
 `
     filePath := "/etc/systemd/system/changemac@.service"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
