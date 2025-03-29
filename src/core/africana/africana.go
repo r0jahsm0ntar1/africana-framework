@@ -111,7 +111,9 @@ func autoExecuteFuncAuto() {
 func africanaFrameworAuto() {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
     commands := map[string]func(){
         "setups":   func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
@@ -989,7 +991,9 @@ func autoExecuteFunc() {
 func africanaManual() {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
     commands := map[string]func(){
         "setups":   func() {setups.SetupsLauncher()},

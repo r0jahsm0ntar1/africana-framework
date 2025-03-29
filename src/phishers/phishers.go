@@ -168,36 +168,36 @@ func executeCommand(cmd string) bool {
     "use features":     menus.HelpInfoFeatures,
 
     //Chameleons//
-    "info":             menus.HelpInfoMain,
+    "info":             menus.HelpInfoPhishers,
 
-    "m":                menus.MenuEight,
-    "menu":             menus.MenuEight,
+    "m":                menus.MenuSeven,
+    "menu":             menus.MenuSeven,
 
     "option":           menus.HelpInfOptions,
     "options":          menus.HelpInfOptions,
     "show option":      menus.HelpInfOptions,
     "show options":     menus.HelpInfOptions,
 
-    "show all":         menus.ListMainFunctions,
-    "list all":         menus.ListMainFunctions,
+    "show all":         menus.ListPhishersFunctions,
+    "list all":         menus.ListPhishersFunctions,
 
-    "func":             menus.ListMainFunctions,
-    "funcs":            menus.ListMainFunctions,
-    "functions":        menus.ListMainFunctions,
-    "show func":        menus.ListMainFunctions,
-    "list funcs":       menus.ListMainFunctions,
-    "show funcs":       menus.ListMainFunctions,
-    "show function":    menus.ListMainFunctions,
-    "list function":    menus.ListMainFunctions,
-    "list functions":   menus.ListMainFunctions,
-    "show functions":   menus.ListMainFunctions,
+    "func":             menus.ListPhishersFunctions,
+    "funcs":            menus.ListPhishersFunctions,
+    "functions":        menus.ListPhishersFunctions,
+    "show func":        menus.ListPhishersFunctions,
+    "list funcs":       menus.ListPhishersFunctions,
+    "show funcs":       menus.ListPhishersFunctions,
+    "show function":    menus.ListPhishersFunctions,
+    "list function":    menus.ListPhishersFunctions,
+    "list functions":   menus.ListPhishersFunctions,
+    "show functions":   menus.ListPhishersFunctions,
 
-    "module":           menus.ListMainFunctions,
-    "modules":          menus.ListMainFunctions,
-    "list module":      menus.ListMainFunctions,
-    "show module":      menus.ListMainFunctions,
-    "list modules":     menus.ListMainFunctions,
-    "show modules":     menus.ListMainFunctions,
+    "module":           menus.ListPhishersFunctions,
+    "modules":          menus.ListPhishersFunctions,
+    "list module":      menus.ListPhishersFunctions,
+    "show module":      menus.ListPhishersFunctions,
+    "list modules":     menus.ListPhishersFunctions,
+    "show modules":     menus.ListPhishersFunctions,
 
     }
     if action, exists := commandMap[cmd]; exists {
@@ -294,7 +294,9 @@ func PhishingPenFunctions(Function string, args ...interface{}) {
     fmt.Printf("\nFunction => %s\n", Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
     commands := map[string]func() {

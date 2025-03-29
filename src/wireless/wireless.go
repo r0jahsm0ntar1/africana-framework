@@ -15,6 +15,7 @@ import(
 
 
 var (
+    Mode = "auto"
     Lport = "9999"
     Hport = "3333"
     Iface = "wlan0"
@@ -28,14 +29,17 @@ var (
 )
 
 var defaultValues = map[string]string{
-    "ssid":     "End times ministries",
-    "iface":    "wlan0",
-    "proxies":    "",
-    "lhost":    LhostIp,
-    "lport":    "9999",
-    "hport":    "3333",
-    "function":   "",
-    "output":   OutPutDir,
+    
+    "proxies": "",
+    "mode": "auto",
+    "function": "",
+    "lport": "9999",
+    "hport": "3333",
+    "iface": "wlan0",
+    "ssid": "End times ministries",
+
+    "lhost": LhostIp,
+    "output": OutPutDir,
 }
 
 func WirelessPentest() {
@@ -324,12 +328,12 @@ func executeCommand(cmd string) bool {
     "exploit WifiPumpkin3": func() {WirelessPenFunctions("WifiPumpkin3")},
     "execute WifiPumpkin3": func() {WirelessPenFunctions("WifiPumpkin3")},
 
-    "? 6":              menus.HelpInfoWifiPumpkin3,
-    "info 6":           menus.HelpInfoWifiPumpkin3,
-    "help 6":           menus.HelpInfoWifiPumpkin3,
-    "crackers":         menus.HelpInfoWifiPumpkin3,
-    "info crackers":    menus.HelpInfoWifiPumpkin3,
-    "help crackers":    menus.HelpInfoWifiPumpkin3,
+    "? 6":              menus.HelpInfoWifiPumpkin,
+    "info 6":           menus.HelpInfoWifiPumpkin,
+    "help 6":           menus.HelpInfoWifiPumpkin,
+    "crackers":         menus.HelpInfoWifiPumpkin,
+    "info crackers":    menus.HelpInfoWifiPumpkin,
+    "help crackers":    menus.HelpInfoWifiPumpkin,
 
     "7":                func() {menus.UpsentTools()},
     "run 7":            func() {menus.UpsentTools()},
@@ -439,6 +443,7 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
+        "mode": &Mode,
         "ssid": &Ssid,
         "iface": &Iface,
         "lhost": &Lhost,
@@ -466,6 +471,7 @@ func handleUnsetCommand(parts []string) {
     key := parts[1]
     unsetValues := map[string]*string{
 
+        "mode": &Mode,
         "ssid": &Ssid,
         "iface": &Iface,
         "lhost": &Lhost,
@@ -512,7 +518,9 @@ func autoExecuteFunc(distro string, function string) {
 func WirelessPenFunctions(Function string, args ...interface{}) {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
     commands := map[string]func(){
@@ -536,6 +544,10 @@ func AirGeddon() {
     subprocess.Popen(`airgeddon`)
 }
 
+func Fluxion() {
+    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, ToolsDir)
+}
+
 func WifiPumpkin() {
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -543,10 +555,6 @@ func WifiPumpkin() {
         utils.ClearScreen()
     }
     subprocess.Popen(`wifipumpkin3`)
-}
-
-func Fluxion() {
-    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, ToolsDir)
 }
 
 func WifiPumpkin3(Iface string, Ssid string) {

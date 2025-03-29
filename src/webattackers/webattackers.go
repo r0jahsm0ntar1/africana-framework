@@ -290,7 +290,9 @@ func WebPenFunctions(Function string, args ...interface{}) {
     fmt.Printf("\nRHOST => %s\nFunction => %s\n", Rhost, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
     commands := map[string]func() {

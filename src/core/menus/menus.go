@@ -6,6 +6,7 @@ import(
     "bcolors"
 )
 var (
+    Interfaces, _ = utils.Ifaces()
     Lhost, _ = utils.GetDefaultIP()
     Gateway, _ = utils.GetDefaultGatewayIP()
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
@@ -183,96 +184,21 @@ func MenuSix() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sonline services.(bruteforcing remote services like ssh, ftp etc.)
-%s 2. %soffline services.(cracking of hashes/ntlms and .pcap)
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
+  %sOnline Crackers%s:%s      Ofline Crackers%s:
+  ----------------      ----------------
+  %s1. %ssh                 %s1. %spcap
+  %s2. %sftp                %s2. %sntlm
+  %s3. %ssmb                %s3. %shash
+  %s4. %srdp
+  %s5. %sldap
+  %s6. %ssmtp
+  %s7. %stelnet
+  %s8. %shttp/https
+  %s9. %sall services
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpInfoSix() {
-    fmt.Println(bcolors.YELLOW + "                 Online " + bcolors.ENDC + ": 1. Attack services that are online. Ex SMB, SSH, FTP, HTTP, HTTPS etc." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                Offline " + bcolors.ENDC + ": 2. Attack .pcaps, hashes, captured ntlms or documents with passwords." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuSixOne() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sssh
-%s 2. %sftp
-%s 3. %ssmb
-%s 4. %srdp
-%s 5. %sldap
-%s 6. %ssmtp
-%s 7. %stelnet
-%s 8. %shttp/https
-%s 9. %sall services
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpSixOne() {
-    fmt.Println(bcolors.YELLOW + "                    SSH " + bcolors.ENDC + ": 1. Automated Bruteforcer for SSH using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    FTP " + bcolors.ENDC + ": 2. Bruteforcer for FTP using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    SMB " + bcolors.ENDC + ": 3. Hydra Bruteforcer for SMB using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    RDP " + bcolors.ENDC + ": 4. Bruteforcer for RDP using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   LDAP " + bcolors.ENDC + ": 5. Hydra Bruteforcer for LDAP using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   SMTP " + bcolors.ENDC + ": 6. Bruteforcer for SMTP using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 TELNET " + bcolors.ENDC + ": 7. Bruteforcer for TELNET using rockyou.txt wordlists." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            HTTP/ HTTPS " + bcolors.ENDC + ": 8. Hydra Bruteforcer for HTTP/ HTTPS using rockyou.txt wordlists. Forms needed." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           All SERVICES " + bcolors.ENDC + ": 9. The Automatic Bruteforce Tool for all opened services. Works nice and automatic." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-}
-
-func MenuSixTwo() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sjohn
-%s 2. %saircrack_ng
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %shash_buster
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpSixTwo() {
-    fmt.Println(bcolors.YELLOW + "            Aircrack_ng " + bcolors.ENDC + ": 1. Automated. It will prompt you for location of the file e.g. ntlm file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   John " + bcolors.ENDC + ": 2. Automated. It will prompt you for location of the file e.g. .pcap file to crack using rockyou.txt wordlists. Give full path." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 3. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 4. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 5. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 6. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 7. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Hash-Buster " + bcolors.ENDC + ": 8. It is a tool to crack hashes. It need internet connection to search for the hashes before caracking them." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                 to add " + bcolors.ENDC + ": 9. Still working on this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
+`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuSeven() {
@@ -330,180 +256,6 @@ func MenuEight() {
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpEight() {
-    fmt.Println(bcolors.YELLOW + "                Web recon " + bcolors.ENDC + ": 1. Automated. Start Passive Web recon & Subdomain Enumration. Chosen tools with less noise are used to gather information on agiven domain before Intrusion begins." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Gather e-mails " + bcolors.ENDC + ": 2. Theharvester tool will try to harvest emails with  names that could be used for phishing, creat wordlists or also as login names for admin panels." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Start Bruteforcing " + bcolors.ENDC + ": 3. In this phase, Gobuster tool is used to show us hidden files in the website and also try to find login pages." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "  Start 💉SQL, XSS & SSRF " + bcolors.ENDC + ": 4. This is an injection phase. Chosen tools are configured to find injection vulns. The choice contain embeded submenu that supports both automation and manual injection tackticks." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          OWASP Nettacker " + bcolors.ENDC + ": 5. Is a fullset framework to automate all website vulnerbilities. An embeded submenu within this option will guide you on how to attack website In an advanced mode.(Intrusive phase)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    Jok3r " + bcolors.ENDC + ": 6. Like Nettacker, Joker is a fullset framework. It is intergrated with a collection of several third party tools. The embeded menu in this option will guide you through." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "               Osmedeus🔮 " + bcolors.ENDC + ": 7. It is also a rich pentest framework to help you bug bount websites. It is fast written in go. The embeded menu in this choice will guigde you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "            Ufonet 🦠DDOS " + bcolors.ENDC + ": 8. Danger!!! This tool kills websites completely. Use it at your own risk. The embeded menu on this choice will guide you." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Heavy Automation Attacks " + bcolors.ENDC + ": 9. Chosen tools are selected in this option to run simulteniously giving you all desirable Outcomes. Other tools are added that are not in the above options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                     Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuEightFour() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %ssql_auto
-%s 2. %sxss_auto
-%s 3. %ssql_manual
-%s 4. %sxss_manual
-%s 5. %snettacker
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpEightFour() {
-    fmt.Println(bcolors.YELLOW + "       Sql injection(A) " + bcolors.ENDC + ": 1.(Automated) Sqlmap tool is configured to run with evasion templets to avoid detection and give you desirable outcomes.(Intrusive)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Xss injection(A) " + bcolors.ENDC + ": 2.(Automated) Acompination of tools are used to try and find xss injection vulnerbility on the website.(Intrusive)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Sql injection(M) " + bcolors.ENDC + ": 3.(Manual) In this option you will be required to enter sql website injection required data manually." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       Xss injection(M) " + bcolors.ENDC + ": 4.(Manual) In this option you will be required to enter xss website injection required data manually." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuEightFive() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "\n[ 1. Start Nettacker port & web content discovery.......📡] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Recon, find and scan subdomains....................🐾] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Launch admin_scan to find admin panel..............🦨] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Start insane information gathering on host.........🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vuln scan security checks.........🦍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Run CVE scans on the target host...................🍹] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Automate all Functions & security checks on target...🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpEightFive() {
-    fmt.Println(bcolors.YELLOW + "  Nettacker port & web  " + bcolors.ENDC + ": 1. Scans for all open ports and services. Recons for hidden root files in the target host." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "        Scan subdomains " + bcolors.ENDC + ": 2. Digs for all sudomains related to your target for alternative pentesting." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Launch admin_scan " + bcolors.ENDC + ": 3. Scans the given target in an aim of finding the login panels where you can try SQL injections & password bruteforcing." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "  Insane info gathering " + bcolors.ENDC + ": 4. The tool will recon for all necessary information on the website essential for your pentesting." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Vuln scansec checks " + bcolors.ENDC + ": 5. Check for known vulnerbilities on the website that are easy to exploit." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "              CVE scans " + bcolors.ENDC + ": 6. Scan the website for a collection of discovered CVES ready and easy to attack." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "        Critical vulns  " + bcolors.ENDC + ": 7. The scanner will scan for critical & easy to exploit bugs like SQLinjection, XSS and Others." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Automate all Functions " + bcolors.ENDC + ": 8. For lazy hackers this option got your needs. It will compine all the above tacticks to one and show you findings." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     View scanned report" + bcolors.ENDC + ": 9. Show all logs of scanned domains with findings." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuEightSix() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "\n[ 1. Install all jok3r tools....." + bcolors.DARKCYAN + "Pleas start here if not" + bcolors.BLUE + "🃏] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Update all the tools in the toolbox................🍄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Show all the tools in the toolbox..................🍒] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Show supported products for all services...........🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vulnscansecurity checks...........🦍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Run all & intense security checks against an URL...🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🌈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. View the full results from the security checks.....🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Clean database & delete results....................🥑] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpEightSix() {
-    fmt.Println(bcolors.YELLOW + "    Install jok3r tools " + bcolors.ENDC + ": 1. Jok3r comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Jok3r are installed for better results.(Run once)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Update toolbox " + bcolors.ENDC + ": 2. If all third party are installed, you could update the tools using this option.(Not necessary in new install.)" + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Show all the tools " + bcolors.ENDC + ": 3. Health check. See if all tools are installed correctly and are working properly before engaging in hacking." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Show supported products " + bcolors.ENDC + ": 4. Jok3r will show you all supported products and services that it is made to attack." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Vulnscansecurity checks " + bcolors.ENDC + ": 5. Wide range of vulnerbility checks and bugs on the given target will be scanned by Jok3r as it store outcome in its database." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Intense security checks " + bcolors.ENDC + ": 6. A heavy vulnerbility scanning on the target host will be done storing all logs in Jok3r database." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Critical vulns " + bcolors.ENDC + ": 7. Jok3r will Search for(critical vulns & easy to exploit) avoiding heavy intrusions on your target." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "       View full results " + bcolors.ENDC + ": 8. All logs for the scanner will be displayed showing even the targets and their vulns." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Clean the database " + bcolors.ENDC + ": 9. Delete all results and logs for previous scanns in the databases." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuEightSeven() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "\n[ 1. Update Osmedeus & Run diagnostics to check config..🍄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Start a simple scan with other flow................🦠] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Launch vuln and directory scan on domains..........🦍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Scan list of targets(Full path of target needed)..🥐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Cloud - Run scan in Distributed Cloud mode.........🔮] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Performing Full web vuln & secret scan on host.....🤖] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Update the vulnerability database before attacking.📜] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Start web UI server................................🌍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. View scanned osmedeus report list..................🌈] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpEightSeven() {
-    fmt.Println(bcolors.YELLOW + "         Update Osmedeus " + bcolors.ENDC + ": 1. Osmedeus comes without third party tools preinstalled. This option will make sure that all necessary tools needed by Osmedeus are installed for better results.(Run once)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Simple scan " + bcolors.ENDC + ": 2. The tool will Start a simple scan with other flow like discovering domains and ports.(Reconing)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "      Vuln and directory " + bcolors.ENDC + ": 3. Osmedeus will check for vulnerbilities and discover hidden root directories disclosing related subdomains on your target." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Scan list of targets " + bcolors.ENDC + ": 4. If you have alist of several targets you would need to scan at once. Mybe a harvested subdomains, use this option." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "               Cloud-Run " + bcolors.ENDC + ": 5. In this option, Osmedeus will allow you to scan your target using cloud database." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Performing Full recon " + bcolors.ENDC + ": 6. Osmedeus will run in automated mode performing all required security checks and data mining in this mode storing logs for review." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Update vuln db & attack " + bcolors.ENDC + ": 7. Osmedeus will Update the vulnerability database before attacking your selected target." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Start web UI server " + bcolors.ENDC + ": 8. Launch a web UI which you can interact with Osmedeus in a graphickal paspective." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     View scanned report " + bcolors.ENDC + ": 9. Reports and all logs for the scanner will be displayed showing even the targets and their vulns." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "  Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "    Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                    Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch shell or cmd " + bcolors.ENDC + "    .bash, shell, pwsh, cmd or sh commands launches system intaractive shell. One can do all you do with terminal here.." + bcolors.ENDC)
-}
-
-func MenuEightEight() {
-    fmt.Println(bcolors.BLUE + "        ~>( 🪲" + bcolors.ENDC + bcolors.ITALIC + "Select a number from the table below" + bcolors.ENDC + bcolors.BLUE + " )<~\n" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "\n[ 1. Download list of " + bcolors.RED + "Bots " + bcolors.BLUE + "from" + bcolors.YELLOW + " Community " + bcolors.BLUE + "server........🍄]" + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 2. Test if bots are alive.............................📡] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 3. Launch palantir....................." + bcolors.DARKCYAN + "Palantir 3.14.." + bcolors.BLUE + "🦍] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 4. Launch socking_waves................" + bcolors.DARKCYAN + "Knockout!......" + bcolors.BLUE + "🦠] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 5. Launch xcom-1......................." + bcolors.DARKCYAN + "Only DDoS......" + bcolors.BLUE + "🥐] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 6. Launch xcom-2......................." + bcolors.DARKCYAN + "Only DoS......." + bcolors.BLUE + "🍵] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 7. Launch ufonet-gui..................." + bcolors.DARKCYAN + "Gui on browser." + bcolors.BLUE + "🧄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Start Grider........................" + bcolors.DARKCYAN + "Grider........." + bcolors.BLUE + "🐝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 9. Launch Armageddon!.................." + bcolors.DARKCYAN + "Launch All!!..." + bcolors.BLUE + "🥝] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🦨] " + bcolors.ENDC)
-    fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
-}
-
-func HelpEightEight() {
-    fmt.Println(bcolors.YELLOW + "  Download list of Bots " + bcolors.ENDC + ": 1. Ufonet will download a list of zombies machines from Community servers that will be used durring DDOS attacks.." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Test if bots are alive " + bcolors.ENDC + ": 2. After downloding the zombies, it is good to test them if they are alive and working for a better results." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "        Launch palantir " + bcolors.ENDC + ": 3. It is a kind of ddos attack that can be launched in non-root mode." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Launch socking_waves " + bcolors.ENDC + ": 4. Another DDOS attack mode that yields instant Knockout!." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Launch xcom-1 " + bcolors.ENDC + ": 5. Ufonet launches only DDoS mode without a combination of other modes." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "          Launch xcom-2 " + bcolors.ENDC + ": 6. Only DDoS mode without a combination of other attack modes." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "             Ufonet-gui " + bcolors.ENDC + ": 7. Launch a web UI which you can interact with ufonet in a graphickal paspective." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "           Start Grider " + bcolors.ENDC + ": 8. Share your zombies. WARNING: this *ADVANCED* function is *NOT* secure, proceed if you really want to." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "     Launch Armageddon! " + bcolors.ENDC + ": 9. Very dangerous & Destructive. Use it at your own risk.(Attack With All!)." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "                   Help " + bcolors.ENDC + ": 00. Found in all faces of africana-framework. It will guide you through. Use it if lost or confused." + bcolors.ENDC)
-}
-
-
-func UpsentTools() {
-    fmt.Println(bcolors.YELLOW + "\n[!] " + bcolors.ENDC + "Choice selected not implimented yet!, but comming soon!" + bcolors.ENDC)
 }
 
 func HelpInfoMenuMain() {
@@ -811,6 +563,7 @@ func HelpInfoMain() {
 %sDescription%s:
 -----------
   This is the main module containing all africana-framework functions.
+
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
  ListMainFunctions()
 }
@@ -821,180 +574,126 @@ func MainOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  module         none             yes       Module to interact with. supported modules. -> (setups, torsocks, networks, exploits, wireless, crackers, phishers, websites, credits, verse).
-                                            Integer support.   -> (1 2 3 4 5 6 7 8 9 0 and 99)
+  module         none             yes       Select a module or function to interact with.
+
+  %ssupported modules%s:
+  --------- -------
+
+  1. setups   2. torsocks 3. networks 4. exploits 5. wireless
+  5. crackers 6. phishers 7. websites 8. credits  9. verse.  -> Integer input support. keys are. (1 2 3 4 5 6 7 8 9 0 and 99)
+
 %sex. %s%susage%s:
 --  ------
-  set module setups or -> use 1, use setups, execute 1, execute setups .etc
+  set module setups  or ->  use 1, use setups, execute 1, execute setups etc. Type 'menu' to get advanced usages.
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
-func HelpInfoCrackers() {
-    fmt.Printf(`
-       Name: Crackers
-     module: /src/crackers
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
 
-Provided by:
-  Created by _
-   Edited by r0jahsm0ntar1
 
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All linux/ macos
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  Target         none             Yes       If online attacks, a target is required to be attacked
-  Wordlists      rockyou.txt      Yes       Wordlists to be used for dictionary attacks
-  Pcap file      none             Yes       If offline, a file with encription needed to be bruteforced
-
-Description:
-  Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
-
-`)
-}
-
-func HelpInfoPhishers() {
-    fmt.Printf(`
-       Name: Phishers
-     module: /src/phishers
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by _
-   Edited by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All linux/ macos
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  Interface      eth0             No        If Ninja Phish is used then an interface is required
-  Target         none             No        If Ninja Phish sub-module is to be used
-
-Description:
-  Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.
-
-`)
-}
 
 func HelpInfoWebsites() {
     fmt.Printf(`
-       Name: Websites
-     module: /src/websites
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: websites
+   %sFunction%s: src/core/websites/bugbounty.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sTested Distros%s:
+------ -------
       Id  Name
       --  ----
-  =>  0   All websites
+   -> 0   All Distros
 
-Check supported:
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos, sql/xss/command/_injectors among others.
 
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  Target         none             Yes       Set a target to be attacked
-  Proxies        none             No        Set proxies to intercept traffick using Burp or force all traffick through tor
-
-Description:
-  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos, sql/xss/command/_injectors among others
-
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 func HelpInfoCredits() {
     fmt.Printf(`
-       Name: Credits
-     module: /src/credits
-   Platform: All Distros
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: credits
+   %sFunction%s: src/core/credits
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sTested Distros%s:
+------ -------
       Id  Name
       --  ----
-          none
+   -> 0   All Distros
 
-Check supported:
+%sDescription%s:
+-----------
+  Credits is a module to print on third party tools with their authors. It enables africana to acknowledge each developer for his/her hard work.
 
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-Description:
-  Credits is a module to print on third party tools with their authors. It enables africana to acknowledge each developer for his/her hard work
-
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoVerses() {
     fmt.Printf(`
-       Name: Verses
-     module: /src/verses
-   Platform: All Distros
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: verses
+   %sFunction%s: src/core/scriptures
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sTested Distros%s:
+------ -------
       Id  Name
       --  ----
-          none
+   -> 0   All Distros
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-Description:
+%sDescription%s:
+-----------
   Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge our LORD GOD JESUS CHRIST for Creating everything including you, me & everything.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
+
+
+
+
+
+
+
+
 
 func HelpInfoSetups() {
     fmt.Printf(`
@@ -1019,6 +718,7 @@ func HelpInfoSetups() {
 %sDescription%s:
 -----------
   This modules enables you to Install, uninstall, update & mentain africana-framework.
+
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
      ListSetupsDistros()
 }
@@ -1091,330 +791,266 @@ View the full module info with the %s'info'%s, or %s'info -d'%s command.
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
-
-func SetupOptions() {
-    fmt.Printf(`
-Use: run [function]
-   example: run kali, start kali or kali
-   
-  commands: run, show, start, list
-            run takes flags like [run kali]
-      flag: kali, ubuntu, arch, windows, android, viewlogs, browserlogs, clearlogs or uninstall
-
-Description:
-  Select an action you want to perform using the above modules Install, uninstall, update & mentain africana
-
-`)
-}
-
 func HelpInfoKali() {
     fmt.Printf(`
-       Name: kali
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: kali
+   %sFunction%s: src/core/setups_kali.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   Kali-Linux
 
-Description:
-  It is a module to install africana-framework in kali-linux a stable debian based distro that
-  has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
+%sDescription%s:
+-----------
+  It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoArch() {
     fmt.Printf(`
-       Name: arch
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: arch
+   %sFunction%s: src/core/setups_arch.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   Arch-Linux
 
-Description:
-  It is a module to install africana-framework in arch based distros. Arch is well established
-  and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro.
-  No errors reported. africana can run well in arch-linux distros.
+%sDescription%s:
+-----------
+  It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoUbuntu() {
     fmt.Printf(`
-       Name: ubuntu
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: ubuntu
+   %sFunction%s: src/core/setups_ubuntu.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   Ubuntu-Linux
 
-Description:
-  It is a module to install africana-framework ubuntu which is a good distor but has alot
-  of problems while installing kali-linux packages. To avoid issues like dependencies problems,
-  Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
+%sDescription%s:
+-----------
+  It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoMacos() {
     fmt.Printf(`
-       Name: macos
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: macos
+   %sFunction%s: src/core/setups_macos.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   Macintosh
 
-Description:
-  It is a module to install africana-framework Macos which is a good distor but has alot
-  of problems while installing kali-linux packages. To avoid issues like dependencies problems,
-  Pleas use docker image or install kali-linux in Macos docker then install africana.
+%sDescription%s:
+-----------
+  It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoWindows() {
     fmt.Printf(`
-       Name: windows
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: windows
+   %sFunction%s: src/core/setups_windows.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All windows
+   -> 0   Windows
 
-Description:
-  Under development. But can run if tools well installed. Just give me time. To intergarte this Function
-  with commando vm for windows.
+%sDescription%s:
+-----------
+  It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoAndroid() {
     fmt.Printf(`
-       Name: android
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: android
+   %sFunction%s: src/core/setups_android.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   Android
+   -> 0   Android
 
-Description:
-  It is a Function to install africana-framework in android devices. Kali-linux will be installed in
-  termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
+%sDescription%s:
+-----------
+  It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoUpdate() {
     fmt.Printf(`
-       Name: update
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: update
+   %sFunction%s: src/core/setups_update.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   all
+   -> 0   All
 
-Description:
-  It is a Function to update africana-framework
+%sDescription%s:
+-----------
+  It is a Function to update and mentain africana-framework.
 
-`)
-}
-
-func HelpInfoTermLogs() {
-    fmt.Printf(`
-       Name: termlogs
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Distros
-
-Description:
-  This Function will show you all logs in your terminal that has been recorded from the last time you cleaned the log folder.
-
-`)
-}
-
-func HelpInfoBrowserLogs() {
-    fmt.Printf(`
-       Name: browserlogs
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Distros
-
-Description:
-  This Function will show you all logs in the browser that has been recorded from the last time you cleaned the log folder.
-
-`)
-}
-
-func HelpInfoClearLogs() {
-    fmt.Printf(`
-       Name: clearlogs
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
-
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Distros
-
-Description:
-  This Function will clear all your logs that has been recorded from the last time you cleaned the log folder.
-
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoUninstaller() {
     fmt.Printf(`
-       Name: uninstall
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: uninstall
+   %sFunction%s: src/core/setups_uninstall.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   All
 
-Description:
-  Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
+%sDescription%s:
+-----------
+  It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoAuto() {
     fmt.Printf(`
-       Name: auto
-   Function: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: auto
+   %sFunction%s: src/core/setups/auto_manage.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   All
 
-Description:
-  Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
+%sDescription%s:
+-----------
+  It is a Function to auto select distro and install africana with all it's dependencies.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
+
+func HelpInfoClearLogs() {
+    fmt.Printf(`
+       %sName%s: clearlogs
+   %sFunction%s: src/core/utils/clear_logs.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All
+
+%sDescription%s:
+-----------
+  This Function will clear all your logs that has been recorded from the last time you cleaned the log folder..
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
 
 func ListTorsocksFunctions() {
     fmt.Printf(`
@@ -1848,6 +1484,7 @@ func HelpInfoNetworks() {
 %sDescription%s:
 -----------
   This is the Network module that contains all internal networks attacks functions.
+
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
     ListInternalFunctions()
 }
@@ -2119,7 +1756,7 @@ func OptionsResponder() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
@@ -2137,7 +1774,7 @@ func OptionsResponder() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoBeefNinja() {
@@ -2179,7 +1816,7 @@ func OptionsBeefNinja() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
@@ -2198,7 +1835,7 @@ func OptionsBeefNinja() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoXssHoocker() {
@@ -2240,7 +1877,7 @@ func OptionsXssHoocker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
@@ -2258,7 +1895,7 @@ func OptionsXssHoocker() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func ListExploitsFunctions() {
@@ -2281,8 +1918,8 @@ func ListExploitsFunctions() {
 %sex. %s%susage%s:
 --  ------
 
-    set function discover
-    run
+  set function discover
+  run
 
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
@@ -2309,6 +1946,7 @@ func HelpInfoExploits() {
 %sDescription%s:
 -----------
   This is the Exploits module that contains all c2, backdoors and obfsicatorsfunctions.
+
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
     ListExploitsFunctions()
 }
@@ -2321,12 +1959,12 @@ func ExploitsOptions() {
   ----           ---------------  --------  -----------
   C2             blackjack        yes       The default c2 to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
   ICON           vlc              yes       Icon to be used while generating backdoors using (noisemakers and codebreakers)
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
   FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, noisemaker, codebreaker).
@@ -2345,7 +1983,7 @@ func ExploitsOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoBlackJack() {
@@ -2371,7 +2009,7 @@ func HelpInfoBlackJack() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -2380,7 +2018,7 @@ func HelpInfoBlackJack() {
 -----------
   It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 
@@ -2407,7 +2045,7 @@ func HelpInfoShellz() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -2416,7 +2054,7 @@ func HelpInfoShellz() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoHoaxShell() {
@@ -2442,7 +2080,7 @@ func HelpInfoHoaxShell() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -2451,7 +2089,7 @@ func HelpInfoHoaxShell() {
 -----------
   It is a tool like villein or blackjack that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoNoiseMaker() {
@@ -2478,17 +2116,17 @@ func HelpInfoNoiseMaker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoHavoc() {
@@ -2515,17 +2153,17 @@ func HelpInfoHavoc() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoTearNdroid() {
@@ -2551,17 +2189,17 @@ func HelpInfoTearNdroid() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func BlackJackOptions() {
@@ -2570,7 +2208,7 @@ func BlackJackOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
@@ -2591,7 +2229,7 @@ func BlackJackOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoChameLeon() {
@@ -2617,10 +2255,10 @@ func HelpInfoChameLeon() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   SCRIPT         none             yes       Full location of the powershell script to be obfsicated.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
@@ -2628,7 +2266,7 @@ func HelpInfoChameLeon() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoGhost() {
@@ -2654,18 +2292,18 @@ func HelpInfoGhost() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Powershell script to obfsicate inorder to bypass AVs.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoSeaShell() {
@@ -2691,17 +2329,17 @@ func HelpInfoSeaShell() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoListener() {
@@ -2727,17 +2365,17 @@ func HelpInfoListener() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoCodeBreaker() {
@@ -2764,17 +2402,17 @@ func HelpInfoCodeBreaker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoTearDroid() {
@@ -2800,17 +2438,17 @@ func HelpInfoTearDroid() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoAndroRat() {
@@ -2836,17 +2474,17 @@ func HelpInfoAndroRat() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 
@@ -2856,12 +2494,12 @@ func AndroRatOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
 
@@ -2879,7 +2517,7 @@ func AndroRatOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func ListWirelessFunctions() {
@@ -2889,15 +2527,15 @@ func ListWirelessFunctions() {
 
   # %sName       Description%s
   - ----       -----------
-  %s1. %swifite      %s: Wifite is a tool to audit WEP or WPA encrypted wireless networks.
-  %s2. %sfluxion     %s: Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s3. %sbettercap   %s: Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks.
-  %s4. %sairgeddon   %s: Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s5. %swifipumpkin %s: wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
-  %s6. %sKillerpukin %s: This option runs wifipumpkin3 in manual mode where africana sets everything for you.
-  %s7. %sTo add      %s:
-  %s8. %sTo add      %s:
-  %s9. %sTo add      %s:
+  %s1. %s    wifite%s: Wifite is a tool to audit WEP or WPA encrypted wireless networks.
+  %s2. %s   fluxion%s: Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  %s3. %s bettercap%s: Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks.
+  %s4. %s airgeddon%s: Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  %s5. %s wifipumpk%s: wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
+  %s6. %s Killerpuk%s: This option runs wifipumpkin3 in manual mode where africana sets everything for you.
+  %s7. %s    To add%s: Not yet implimented.
+  %s8. %s    To add%s: Not yet implimented.
+  %s9. %s    To add%s: Not yet implimented.
 
 %sex. %s%susage%s:
 --  ------
@@ -2930,6 +2568,7 @@ func HelpInfoWireless() {
 %sDescription%s:
 -----------
   This is the wireless module containing all wireless pentesting functions.
+
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
     ListWirelessFunctions()
 }
@@ -2940,7 +2579,7 @@ func WirelessOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  IFACE          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  IFACE          ->               yes       %sDefault%s: %swlan0%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
@@ -2961,253 +2600,371 @@ func WirelessOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoWifite() {
     fmt.Printf(`
-       Name: wifite
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: wifite
+   %sFunction%s: src/exploits/wifite.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by kimocoder
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Wi-fi
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  wifite         -a               yes       Automated attack to all wireless networks.
-  wifite         -m               yes       Manual attack to all wireless networks.
+  MODE           auto             yes       Attacking mode to use. (auto or manual)
+  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
+  WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
 
-Description:
-    Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+%sDescription%s:
+-----------
+  Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function wifite
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoFluxion() {
     fmt.Printf(`
-       Name: fluxion
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: fluxion
+   %sFunction%s: src/exploits/fluxion.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by _____________
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Wi-fi
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  fluxion        none             no        Manual attack to all wireless networks.
+  MODE           auto             yes       Attacking mode to use. (auto or manual)
+  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
+  WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
 
-Description:
-    Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+%sDescription%s:
+-----------
+  Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function fluxion
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoBetterCap() {
     fmt.Printf(`
-       Name: bettercap
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: bettercap
+   %sFunction%s: src/exploits/bettercap.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by _____________
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Wi-fi
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  bettercap      -a               yes       Automated attack to all wireless networks.
-  bettercap      -m               yes       Manual attack to all wireless networks.
+  MODE           auto             yes       Attacking mode to use. (auto or manual)
+  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
+  WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
 
-Description:
-    Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+%sDescription%s:
+-----------
+  Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function bettercap
+  set mode auto
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoAirGeddon() {
     fmt.Printf(`
-       Name: airgeddon
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: airgeddon
+   %sFunction%s: src/exploits/airgeddon.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by v1s1t0r
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Wi-fi
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  airgeddon      none             no        Manual attack to all wireless networks.
+  MODE           auto             yes       Attacking mode to use. (auto or manual)
+  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
+  WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
 
-Description:
-    Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+%sDescription%s:
+-----------
+  Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function airgeddon
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoWifiPumpkin() {
     fmt.Printf(`
-       Name: wifipumpkin
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: wifipumpkin
+   %sFunction%s: src/exploits/wifipumpkin.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by P0cL4bs Team
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Wi-fi
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  wifipumpkin    -a               yes       Automated attack to all wireless networks.
-  wifipumpkin    -m               yes       Manual attack to all wireless networks.
+  MODE           auto             yes       Attacking mode to use. (auto or manual)
+  SSID           ->               yes       The fake name of your wifi for the clients to see. Default = 'End times ministries'
+  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
+  WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
 
-Description:
-    Wifipumpkin is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
+%sDescription%s:
+-----------
+  Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function wifipumpkin
+  set mode auto
+  set ssid ----
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoWifiPumpkin3() {
+func HelpInfoCrackers() {
     fmt.Printf(`
-       Name: wifipumpkin
-   Function: src/wireless
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: crackers
+   %sFunction%s: src/core/crackers.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by P0cL4bs Team
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sTested Distros%s:
+------ -------
       Id  Name
       --  ----
-  =>  0   WiFi
+   -> 0   All Distros
 
-Check supported:
+%sDescription%s:
+-----------
+  Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
 
-Basic options:
-  Name           Current Setting  Required  Description 
-  ----           ---------------  --------  -----------
-  wifipumpkin    -a               yes       Automated attack to all wireless networks.
-  wifipumpkin    -m               yes       Manual attack to all wireless networks.
-
-Description:
-    Wifipumpkin is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit.
-    This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListCrackersFunctions()
 }
 
 func ListCrackersFunctions() {
     fmt.Printf(`
-Crackers Functions:
-----------------
+%sCrackers Functions%s:
+-------- ---------
 
-  #   Name         Description
-  -   ----         -----------
+  # %sName       Description%s
+  - ----       -----------
 
-  1 online        : It contains password bruteforcers that attack online services like ssh, ftp, smb, rdp, ldap, http, https etc.
-                     SubFunctions: include hydra, rainbow.
+  %sOnline Crackers%s:
+  ---------------
+  %s1. %s         ssh%s: Automated Bruteforcer for SSH using rockyou.txt wordlists.
+  %s2. %s         ftp%s: Bruteforcer for FTP using rockyou.txt wordlists.
+  %s3. %s         smb%s: Hydra Bruteforcer for SMB using rockyou.txt wordlists.
+  %s4. %s         rdp%s: Bruteforcer for RDP using rockyou.txt wordlists.
+  %s5. %s        ldap%s: Hydra Bruteforcer for LDAP using rockyou.txt wordlists.
+  %s6. %s        smtp%s: Bruteforcer for SMTP using rockyou.txt wordlists.
+  %s7. %s      telnet%s: Bruteforcer for TELNET using rockyou.txt wordlists.
+  %s8. %s  http/https%s: Hydra Bruteforcer for HTTP/ HTTPS using rockyou.txt wordlists. Forms needed.
+  %s9. %sall services%s: The Automatic Bruteforce Tool for all opened services. Works nice and automatic.
 
-  2 offline       : Supports all cracking offline encrypted files like .zip, .rar, .pcap, .ntlm, .MD4, .MD5, SHA1-SHA3, Kerberos etc.
-                     SubFunctions: include hashcat, aircrack-ng.
+  %sOfline Crackers%s:
+  ------ --------
+  %s1. %s        pcap%s: Crack captured .pcap files. Full location is needed.
+  %s2. %s        ntlm%s: Crack ntlm file using default wordlists.
+  %s3. %s        hash%s: Auto identify hash and start bruteforcing for passwords.
 
-`)
+%sex. %s%susage%s:
+--  ------
+
+  set function ssh
+  set mode online
+  set wordlist -> (Give full path)
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
+
+
+func CrackersOptions() {
+    fmt.Printf(`
+%sModule Options %s(src/crackers/passwords_pentest.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+
+  MODE           none             yes       Mode to use. modes are(online or offline) Online attack remote services. Offline attack local files.
+  RHOST          none             yes       Target host to be attacked.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  FUNCTION       none             yes       The module or function to run. (ex. ssh, ftp, smb, rdp, ldap, smtp, telnet, http, https, auto)
+  USERNAME       root             yes       Single user name to attack on a give service.
+  PASSWORD       password         yes       Single password to use while attacking agiven name or password
+  WORDLIST       rockyou.txt      yes       Alist of user names or passwords to be used.
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set function ssh
+  set mode online
+  set wordlist -> (Give full path)
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+
+
+
+
+
+
 
 func ListPhishersFunctions() {
     fmt.Printf(`
-Phishers Functions:
-----------------
+%setworks Functions%s:
+-------- ---------
 
-  #   Name         Description
-  -   ----         -----------
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s   gophish%s: It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default  is: admin, Default password is: kali-gophish.
+  %s2. %s  goodginx%s: Goodginx is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP.
+  %s3. %s  zphisher%s: A nice framework with alot of templets. Also bypasses OTP with ngrock support.
+  %s4. %s advnphish%s: Wide range of phishing templets.
+  %s5. %sshellphish%s: Supports otp bypass. Wide range of phishing templets.
+  %s6. %s darkphish%s: Bypasses OTP with Wide range of phishing templets.
+  %s7. %s setoolkit%s: This tool is equiped with alot of social engeneering. Supports cloning of actual websites.
+  %s8. %s  blackeye%s: Writen in bash and full of phishing templets. Just check it out.
+  %s9. %s       THC%s: This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing.
 
-  1 gophish       : It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default  is: admin, Default password is: kali-gophish.
-  2 goodginx      : It is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP.
-  3 zphisher      : A nice framework with alot of templets. Also bypasses OTP with ngrock support.
-  4 blackeye      :
-  5 advnphish     :
-  6 darkphish     :
-  7 shellphish    : Supports otp bypass. Wide range of phishing templets.
-  8 setoolkit     : This tool is equiped with alot of social eneneering. Supports cloning of actual websites.
-  9 thehackerchoice:This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing.
+%sex. %s%susage%s:
+--  ------
 
-`)
+    set function gophish
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoPhishers() {
+    fmt.Printf(`
+       %sName%s: phishers
+   %sFunction%s: src/core/phishers.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListPhishersFunctions()
 }
 
 func HelpInfoGophish() {
@@ -3505,4 +3262,9 @@ Description:
   It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
+}
+
+
+func UpsentTools() {
+    fmt.Println(bcolors.YELLOW + "\n[!] " + bcolors.ENDC + "Choice selected not implimented yet!, but comming soon!" + bcolors.ENDC)
 }

@@ -28,6 +28,13 @@ var (
 
 )
 
+type InterfaceInfo struct {
+    Name        string
+    HardwareAddr string
+    Flags       net.Flags
+    Addresses   []string
+}
+
 // ClearScreen clears the terminal screen
 func ClearScreen() {
     var cmd *exec.Cmd
@@ -137,25 +144,35 @@ func GetDefaultIP() (string, error) {
 }
 
 // Ifaces lists all network interfaces and their addresses
-func Ifaces() {
+func Ifaces() ([]InterfaceInfo, error) {
     interfaces, err := net.Interfaces()
     if err != nil {
-        fmt.Printf("%s[!] %sError getting interfaces: %s", bcolors.RED, bcolors.ENDC, err)
-        return
+        return nil, fmt.Errorf("error getting interfaces: %w", err)
     }
+
+    var result []InterfaceInfo
+
     for _, iface := range interfaces {
-        fmt.Printf("Interface Name: ", iface.Name)
-        fmt.Printf("Hardware Address: ", iface.HardwareAddr)
-        fmt.Printf("Flags: ", iface.Flags)
+        info := InterfaceInfo{
+            Name:        iface.Name,
+            HardwareAddr: iface.HardwareAddr.String(),
+            Flags:       iface.Flags,
+        }
+
         addrs, err := iface.Addrs()
         if err != nil {
-            fmt.Printf("%s[!] %sError getting addresses: %s", bcolors.RED, bcolors.ENDC, err)
+            // You can choose to continue or return the error
             continue
         }
+
         for _, addr := range addrs {
-            fmt.Printf("Address: ", addr.String())
+            info.Addresses = append(info.Addresses, addr.String())
         }
+
+        result = append(result, info)
     }
+
+    return result, nil
 }
 
 // GetDefaultGatewayIP returns the default gateway IP address
@@ -178,42 +195,35 @@ func GetDefaultGatewayIP() (string, error) {
 }
 
 // AskForProxy validates and parses a proxy URL
-func AskForProxy(Proxy string) *url.URL {
-    for {
-        proxyStr := strings.TrimSpace(Proxy)
-        proxyURL, err := url.Parse(proxyStr)
-        if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
-            fmt.Printf("%s[!] %sInvalid PROXY format. eg. http://localhost:80).\n", bcolors.RED, bcolors.ENDC)
-            return nil
-        }
+func AskForProxy(Proxy string) (*url.URL, error) {
+    proxyStr := strings.TrimSpace(Proxy)
+    proxyURL, err := url.Parse(proxyStr)
+    if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
+        return nil, fmt.Errorf("invalid PROXY format (eg. http://localhost:80)")
+    }
 
-        validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
-        if !validSchemes[proxyURL.Scheme] {
-            fmt.Printf("%s[!] %sInvalid scheme. Use, http(s), socks4(5).\n", bcolors.RED, bcolors.ENDC)
-            return nil
-        }
-        return proxyURL
+    validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
+    if !validSchemes[proxyURL.Scheme] {
+        return nil, fmt.Errorf("invalid scheme (use http(s), socks4(5))")
     }
-}
-
-// SetProxyEnv sets the proxy environment variables
-func SetProxyEnv(proxyURL *url.URL) error {
-    if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
-        return err
-    }
-    if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
-        return err
-    }
-    return nil
+    return proxyURL, nil
 }
 
 // SetProxy sets the system proxy
-func SetProxy(Proxy string) {
-    proxyURL := AskForProxy(Proxy)
-    if err := SetProxyEnv(proxyURL); err != nil {
-        fmt.Printf("%s[!] %sError setting proxy environment Variables: %s", bcolors.RED, bcolors.ENDC, err)
-        return
+func SetProxy(Proxy string) error {
+    proxyURL, err := AskForProxy(Proxy)
+    if err != nil {
+        fmt.Printf("\n%s[!] %s%s\n", bcolors.RED, bcolors.ENDC, err)
+        return err
     }
+    
+    if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
+        return fmt.Errorf("error setting HTTP_PROXY: %w", err)
+    }
+    if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
+        return fmt.Errorf("error setting HTTPS_PROXY: %w", err)
+    }
+    return nil
 }
 
 // replaceStringsInFile replaces strings in a file

@@ -153,15 +153,15 @@ func executeCommand(cmd string) bool {
     "use features":     menus.HelpInfoFeatures,
 
     //Chameleons//
-    "info":             menus.HelpInfoMain,
+    "info":             menus.HelpInfoCrackers,
 
-    "m":                menus.MenuEight,
-    "menu":             menus.MenuEight,
+    "m":                menus.MenuSix,
+    "menu":             menus.MenuSix,
 
-    "option":           menus.HelpInfOptions,
-    "options":          menus.HelpInfOptions,
-    "show option":      menus.HelpInfOptions,
-    "show options":     menus.HelpInfOptions,
+    "option":           menus.CrackersOptions,
+    "options":          menus.CrackersOptions,
+    "show option":      menus.CrackersOptions,
+    "show options":     menus.CrackersOptions,
 
     "show all":         menus.ListCrackersFunctions,
     "list all":         menus.ListCrackersFunctions,
@@ -273,7 +273,9 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     fmt.Printf("\nRHOST => %s\nFunction => %s\n", Rhost, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
     commands := map[string]func() {

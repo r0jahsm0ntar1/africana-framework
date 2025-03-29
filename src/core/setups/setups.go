@@ -499,7 +499,9 @@ func SetupsFunction(Function string, args ...interface{}) {
     fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
-        utils.SetProxy(Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
     commands := map[string]func() {
