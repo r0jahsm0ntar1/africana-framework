@@ -42,9 +42,9 @@ func Contributors() {
     readFileLetterByLetter(filename, delay)
 
     fmt.Printf(`%s%s%s
-Anonsurf & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
+Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
     fmt.Printf(bcolors.ENDC + `
-1. anonsurf by Salim Zaved Karim
+1. torsocks
 ` + bcolors.ENDC)
 
     fmt.Printf(`

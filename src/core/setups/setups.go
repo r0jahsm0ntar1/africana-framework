@@ -14,19 +14,21 @@ import(
 )
 
 var (
-    Distro = "kali"
     scanner = bufio.NewScanner(os.Stdin)
-    Input, Proxy, Module string
+    Input, Proxy, Distro, Function string
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
-    "distro": Distro,
+    "distro": "",
+    "module": "",
+    "proxies": "",
+    "function": "",
 }
 
 func SetupsLauncher() {
     for {
-        fmt.Printf("%s%safr3%s setups(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "systems_launcher.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s systems(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "setups_launcher.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
         Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
         buildParts := strings.Fields(Input)
@@ -48,7 +50,7 @@ func SetupsLauncher() {
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
-            executeModule()
+            executeFunction()
         default:
             utils.SystemShell(Input)
         }
@@ -58,344 +60,363 @@ func SetupsLauncher() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-        "? info":           menus.HelpInfo,
-        "help info":        menus.HelpInfo,
+    "? info":           menus.HelpInfo,
+    "help info":        menus.HelpInfo,
 
-        "v":                banners.Version,
-        "version":          banners.Version,
+    "v":                banners.Version,
+    "version":          banners.Version,
 
-        "s":                utils.Sleep,
-        "sleep":            utils.Sleep,
+    "s":                utils.Sleep,
+    "sleep":            utils.Sleep,
 
-        "o":                utils.ListJunks,
-        "junks":            utils.ListJunks,
-        "outputs":          utils.ListJunks,
-        "clear junks":      utils.ClearJunks,
-        "clear outputs":    utils.ClearJunks,
+    "o":                utils.ListJunks,
+    "junks":            utils.ListJunks,
+    "outputs":          utils.ListJunks,
+    "clear junks":      utils.ClearJunks,
+    "clear outputs":    utils.ClearJunks,
 
-        "logs":             subprocess.LogHistory,
-        "history":          subprocess.LogHistory,
-        "clear logs":       subprocess.ClearHistory,
-        "clear history":    subprocess.ClearHistory,
+    "logs":             subprocess.LogHistory,
+    "history":          subprocess.LogHistory,
+    "clear logs":       subprocess.ClearHistory,
+    "clear history":    subprocess.ClearHistory,
 
-        "? run":            menus.HelpInfoRun,
-        "h run":            menus.HelpInfoRun,
-        "info run":         menus.HelpInfoRun,
-        "help run":         menus.HelpInfoRun,
-        "? use":            menus.HelpInfoRun,
-        "h use":            menus.HelpInfoRun,
-        "info use":         menus.HelpInfoRun,
-        "help use":         menus.HelpInfoRun,
-        "? exec":           menus.HelpInfoRun,
-        "h exec":           menus.HelpInfoRun,
-        "info exec":        menus.HelpInfoRun,
-        "help exec":        menus.HelpInfoRun,
-        "? start":          menus.HelpInfoRun,
-        "h start":          menus.HelpInfoRun,
-        "info start":       menus.HelpInfoRun,
-        "help start":       menus.HelpInfoRun,
-        "? launch":         menus.HelpInfoRun,
-        "h launch":         menus.HelpInfoRun,
-        "info launch":      menus.HelpInfoRun,
-        "help launch":      menus.HelpInfoRun,
-        "? exploit":        menus.HelpInfoRun,
-        "h exploit":        menus.HelpInfoRun,
-        "info exploit":     menus.HelpInfoRun,
-        "help exploit":     menus.HelpInfoRun,
-        "? execute":        menus.HelpInfoRun,
-        "h execute":        menus.HelpInfoRun,
-        "info execute":     menus.HelpInfoRun,
-        "help execute":     menus.HelpInfoRun,
+    "? run":            menus.HelpInfoRun,
+    "h run":            menus.HelpInfoRun,
+    "info run":         menus.HelpInfoRun,
+    "help run":         menus.HelpInfoRun,
+    "? use":            menus.HelpInfoRun,
+    "h use":            menus.HelpInfoRun,
+    "info use":         menus.HelpInfoRun,
+    "help use":         menus.HelpInfoRun,
+    "? exec":           menus.HelpInfoRun,
+    "h exec":           menus.HelpInfoRun,
+    "info exec":        menus.HelpInfoRun,
+    "help exec":        menus.HelpInfoRun,
+    "? start":          menus.HelpInfoRun,
+    "h start":          menus.HelpInfoRun,
+    "info start":       menus.HelpInfoRun,
+    "help start":       menus.HelpInfoRun,
+    "? launch":         menus.HelpInfoRun,
+    "h launch":         menus.HelpInfoRun,
+    "info launch":      menus.HelpInfoRun,
+    "help launch":      menus.HelpInfoRun,
+    "? exploit":        menus.HelpInfoRun,
+    "h exploit":        menus.HelpInfoRun,
+    "info exploit":     menus.HelpInfoRun,
+    "help exploit":     menus.HelpInfoRun,
+    "? execute":        menus.HelpInfoRun,
+    "h execute":        menus.HelpInfoRun,
+    "info execute":     menus.HelpInfoRun,
+    "help execute":     menus.HelpInfoRun,
 
-        "set":              menus.HelpInfoSet,
-        "h set":            menus.HelpInfoSet,
-        "info set":         menus.HelpInfoSet,
-        "help set":         menus.HelpInfoSet,
+    "set":              menus.HelpInfoSet,
+    "h set":            menus.HelpInfoSet,
+    "info set":         menus.HelpInfoSet,
+    "help set":         menus.HelpInfoSet,
 
-        "tips":             menus.HelpInfoTips,
-        "h tips":           menus.HelpInfoTips,
-        "? tips":           menus.HelpInfoTips,
-        "info tips":        menus.HelpInfoTips,
-        "help tips":        menus.HelpInfoTips,
+    "tips":             menus.HelpInfoTips,
+    "h tips":           menus.HelpInfoTips,
+    "? tips":           menus.HelpInfoTips,
+    "info tips":        menus.HelpInfoTips,
+    "help tips":        menus.HelpInfoTips,
 
-        "show":             menus.HelpInfoShow,
-        "? show":           menus.HelpInfoShow,
-        "h show":           menus.HelpInfoShow,
-        "info show":        menus.HelpInfoShow,
-        "help show":        menus.HelpInfoShow,
+    "show":             menus.HelpInfoShow,
+    "? show":           menus.HelpInfoShow,
+    "h show":           menus.HelpInfoShow,
+    "info show":        menus.HelpInfoShow,
+    "help show":        menus.HelpInfoShow,
 
-        "info list":        menus.HelpInfoList,
-        "help list":        menus.HelpInfoList,
-        "use list":         menus.HelpInfoList,
-        "list":             menus.HelpInfoList,
+    "info list":        menus.HelpInfoList,
+    "help list":        menus.HelpInfoList,
+    "use list":         menus.HelpInfoList,
+    "list":             menus.HelpInfoList,
 
-        "? options":        menus.HelpInfOptions,
-        "info options":     menus.HelpInfOptions,
-        "help options":     menus.HelpInfOptions,
+    "? options":        menus.HelpInfOptions,
+    "info options":     menus.HelpInfOptions,
+    "help options":     menus.HelpInfOptions,
 
-        "banner":           banners.RandomBanners,
-        "g":                utils.BrowseTutarilas,
-        "t":                utils.BrowseTutarilas,
-        "guide":            utils.BrowseTutarilas,
-        "tutarial":         utils.BrowseTutarilas,
-        "h":                menus.HelpInfoMenuZero,
-        "?":                menus.HelpInfoMenuZero,
-        "00":               menus.HelpInfoMenuZero,
-        "help":             menus.HelpInfoMenuZero,
-        "f":                menus.HelpInfoFeatures,
-        "use f":            menus.HelpInfoFeatures,
-        "features":         menus.HelpInfoFeatures,
-        "use features":     menus.HelpInfoFeatures,
+    "banner":           banners.RandomBanners,
+    "g":                utils.BrowseTutarilas,
+    "t":                utils.BrowseTutarilas,
+    "guide":            utils.BrowseTutarilas,
+    "tutarial":         utils.BrowseTutarilas,
+    "h":                menus.HelpInfoMenuZero,
+    "?":                menus.HelpInfoMenuZero,
+    "00":               menus.HelpInfoMenuZero,
+    "help":             menus.HelpInfoMenuZero,
+    "f":                menus.HelpInfoFeatures,
+    "use f":            menus.HelpInfoFeatures,
+    "features":         menus.HelpInfoFeatures,
+    "use features":     menus.HelpInfoFeatures,
 
-        //Chameleons//
-        "info":             menus.HelpInfoSetups,
+    //Chameleons//
+    "info":             menus.HelpInfoSetups,
 
-        "m":                menus.MenuOne,
-        "menu":             menus.MenuOne,
+    "m":                menus.MenuOne,
+    "menu":             menus.MenuOne,
 
-        "option":           menus.SetupsOptions,
-        "options":          menus.SetupsOptions,
-        "show option":      menus.SetupsOptions,
-        "show options":     menus.SetupsOptions,
+    "option":           menus.SetupsOptions,
+    "options":          menus.SetupsOptions,
+    "show option":      menus.SetupsOptions,
+    "show options":     menus.SetupsOptions,
 
-        "modules":          menus.ListSetupsModules,
-        "show all":         menus.ListSetupsModules,
-        "list all":         menus.ListSetupsModules,
-        "list modules":     menus.ListSetupsModules,
-        "show modules":     menus.ListSetupsModules,
+    "show all":         menus.ListSetupsFunction,
+    "list all":         menus.ListSetupsFunction,
 
-        "distros":          menus.ListSetupsDistros,
-        "show distros":     menus.ListSetupsDistros,
+    "func":             menus.ListSetupsFunction,
+    "funcs":            menus.ListSetupsFunction,
+    "functions":        menus.ListSetupsFunction,
+    "show func":        menus.ListSetupsFunction,
+    "list funcs":       menus.ListSetupsFunction,
+    "show funcs":       menus.ListSetupsFunction,
+    "show function":    menus.ListSetupsFunction,
+    "list function":    menus.ListSetupsFunction,
+    "list functions":   menus.ListSetupsFunction,
+    "show functions":   menus.ListSetupsFunction,
 
-        "1":                func() {Installer("kali")},
-        "run 1":            func() {Installer("kali")},
-        "use 1":            func() {Installer("kali")},
-        "exec 1":           func() {Installer("kali")},
-        "start 1":          func() {Installer("kali")},
-        "launch 1":         func() {Installer("kali")},
-        "exploit 1":        func() {Installer("kali")},
-        "execute 1":        func() {Installer("kali")},
-        "run setups":       func() {Installer("kali")},
-        "use setups":       func() {Installer("kali")},
-        "exec setups":      func() {Installer("kali")},
-        "start setups":     func() {Installer("kali")},
-        "launch setups":    func() {Installer("kali")},
-        "exploit setups":   func() {Installer("kali")},
-        "execute setups":   func() {Installer("kali")},
+    "module":           menus.ListSetupsFunction,
+    "modules":          menus.ListSetupsFunction,
+    "list module":      menus.ListSetupsFunction,
+    "show module":      menus.ListSetupsFunction,
+    "list modules":     menus.ListSetupsFunction,
+    "show modules":     menus.ListSetupsFunction,
 
-        "? 1":              menus.HelpInfoKali,
-        "info 1":           menus.HelpInfoKali,
-        "help 1":           menus.HelpInfoKali,
-        "setups":           menus.HelpInfoKali,
-        "info setups":      menus.HelpInfoKali,
-        "help setups":      menus.HelpInfoKali,
+    "distro":           menus.ListSetupsDistros,
+    "distros":          menus.ListSetupsDistros,
+    "list distro":      menus.ListSetupsDistros,
+    "list distros":     menus.ListSetupsDistros,
+    "show distro":      menus.ListSetupsDistros,
+    "show distros":     menus.ListSetupsDistros,
 
-        "2":                func() {Installer("arch")},
-        "run 2":            func() {Installer("arch")},
-        "use 2":            func() {Installer("arch")},
-        "exec 2":           func() {Installer("arch")},
-        "start 2":          func() {Installer("arch")},
-        "launch 2":         func() {Installer("arch")},
-        "exploit 2":        func() {Installer("arch")},
-        "execute 2":        func() {Installer("arch")},
-        "run anonsurf":     func() {Installer("arch")},
-        "use anonsurf":     func() {Installer("arch")},
-        "exec anonsurf":    func() {Installer("arch")},
-        "start anonsurf":   func() {Installer("arch")},
-        "launch anonsurf":  func() {Installer("arch")},
-        "exploit anonsurf": func() {Installer("arch")},
-        "execute anonsurf": func() {Installer("arch")},
+    "1":                func() {autoExecuteFunc("kali", "install")},
+    "run 1":            func() {autoExecuteFunc("kali", "install")},
+    "use 1":            func() {autoExecuteFunc("kali", "install")},
+    "exec 1":           func() {autoExecuteFunc("kali", "install")},
+    "start 1":          func() {autoExecuteFunc("kali", "install")},
+    "launch 1":         func() {autoExecuteFunc("kali", "install")},
+    "exploit 1":        func() {autoExecuteFunc("kali", "install")},
+    "execute 1":        func() {autoExecuteFunc("kali", "install")},
+    "run kali":         func() {autoExecuteFunc("kali", "install")},
+    "use kali":         func() {autoExecuteFunc("kali", "install")},
+    "exec kali":        func() {autoExecuteFunc("kali", "install")},
+    "start kali":       func() {autoExecuteFunc("kali", "install")},
+    "launch kali":      func() {autoExecuteFunc("kali", "install")},
+    "exploit kali":     func() {autoExecuteFunc("kali", "install")},
+    "execute kali":     func() {autoExecuteFunc("kali", "install")},
 
-        "? 2":              menus.HelpInfoArch,
-        "info 2":           menus.HelpInfoArch,
-        "help 2":           menus.HelpInfoArch,
-        "anonsurf":         menus.HelpInfoArch,
-        "info anonsurf":    menus.HelpInfoArch,
-        "help anonsurf":    menus.HelpInfoArch,
+    "? 1":              menus.HelpInfoKali,
+    "info 1":           menus.HelpInfoKali,
+    "help 1":           menus.HelpInfoKali,
+    "kali":             menus.HelpInfoKali,
+    "info kali":        menus.HelpInfoKali,
+    "help kali":        menus.HelpInfoKali,
 
-        "3":                func() {Installer("ubuntu")},
-        "run 3":            func() {Installer("ubuntu")},
-        "use 3":            func() {Installer("ubuntu")},
-        "exec 3":           func() {Installer("ubuntu")},
-        "start 3":          func() {Installer("ubuntu")},
-        "launch 3":         func() {Installer("ubuntu")},
-        "exploit 3":        func() {Installer("ubuntu")},
-        "execute 3":        func() {Installer("ubuntu")},
-        "run networks":     func() {Installer("ubuntu")},
-        "use networks":     func() {Installer("ubuntu")},
-        "exec networks":    func() {Installer("ubuntu")},
-        "start networks":   func() {Installer("ubuntu")},
-        "launch networks":  func() {Installer("ubuntu")},
-        "exploit networks": func() {Installer("ubuntu")},
-        "execute networks": func() {Installer("ubuntu")},
+    "2":                func() {autoExecuteFunc("arch", "install")},
+    "run 2":            func() {autoExecuteFunc("arch", "install")},
+    "use 2":            func() {autoExecuteFunc("arch", "install")},
+    "exec 2":           func() {autoExecuteFunc("arch", "install")},
+    "start 2":          func() {autoExecuteFunc("arch", "install")},
+    "launch 2":         func() {autoExecuteFunc("arch", "install")},
+    "exploit 2":        func() {autoExecuteFunc("arch", "install")},
+    "execute 2":        func() {autoExecuteFunc("arch", "install")},
+    "run arch":         func() {autoExecuteFunc("arch", "install")},
+    "use arch":         func() {autoExecuteFunc("arch", "install")},
+    "exec arch":        func() {autoExecuteFunc("arch", "install")},
+    "start arch":       func() {autoExecuteFunc("arch", "install")},
+    "launch arch":      func() {autoExecuteFunc("arch", "install")},
+    "exploit arch":     func() {autoExecuteFunc("arch", "install")},
+    "execute arch":     func() {autoExecuteFunc("arch", "install")},
 
-        "? 3":              menus.HelpInfoUbuntu,
-        "info 3":           menus.HelpInfoUbuntu,
-        "help 3":           menus.HelpInfoUbuntu,
-        "networks":         menus.HelpInfoUbuntu,
-        "info networks":    menus.HelpInfoUbuntu,
-        "help networks":    menus.HelpInfoUbuntu,
+    "? 2":              menus.HelpInfoArch,
+    "info 2":           menus.HelpInfoArch,
+    "help 2":           menus.HelpInfoArch,
+    "arch":             menus.HelpInfoArch,
+    "info arch":        menus.HelpInfoArch,
+    "help arch":        menus.HelpInfoArch,
 
-        "4":                func() {Installer("macos")},
-        "run 4":            func() {Installer("macos")},
-        "use 4":            func() {Installer("macos")},
-        "exec 4":           func() {Installer("macos")},
-        "start 4":          func() {Installer("macos")},
-        "launch 4":         func() {Installer("macos")},
-        "exploit 4":        func() {Installer("macos")},
-        "execute 4":        func() {Installer("macos")},
-        "run exploits":     func() {Installer("macos")},
-        "use exploits":     func() {Installer("macos")},
-        "exec exploits":    func() {Installer("macos")},
-        "start exploits":   func() {Installer("macos")},
-        "launch exploits":  func() {Installer("macos")},
-        "exploit exploits": func() {Installer("macos")},
-        "execute exploits": func() {Installer("macos")},
+    "3":                func() {autoExecuteFunc("ubuntu", "install")},
+    "run 3":            func() {autoExecuteFunc("ubuntu", "install")},
+    "use 3":            func() {autoExecuteFunc("ubuntu", "install")},
+    "exec 3":           func() {autoExecuteFunc("ubuntu", "install")},
+    "start 3":          func() {autoExecuteFunc("ubuntu", "install")},
+    "launch 3":         func() {autoExecuteFunc("ubuntu", "install")},
+    "exploit 3":        func() {autoExecuteFunc("ubuntu", "install")},
+    "execute 3":        func() {autoExecuteFunc("ubuntu", "install")},
+    "run ubuntu":       func() {autoExecuteFunc("ubuntu", "install")},
+    "use ubuntu":       func() {autoExecuteFunc("ubuntu", "install")},
+    "exec ubuntu":      func() {autoExecuteFunc("ubuntu", "install")},
+    "start ubuntu":     func() {autoExecuteFunc("ubuntu", "install")},
+    "launch ubuntu":    func() {autoExecuteFunc("ubuntu", "install")},
+    "exploit ubuntu":   func() {autoExecuteFunc("ubuntu", "install")},
+    "execute ubuntu":   func() {autoExecuteFunc("ubuntu", "install")},
 
-        "? 4":              menus.HelpInfoMacos,
-        "info 4":           menus.HelpInfoMacos,
-        "help 4":           menus.HelpInfoMacos,
-        "exploits":         menus.HelpInfoMacos,
-        "info exploits":    menus.HelpInfoMacos,
-        "help exploits":    menus.HelpInfoMacos,
+    "? 3":              menus.HelpInfoUbuntu,
+    "info 3":           menus.HelpInfoUbuntu,
+    "help 3":           menus.HelpInfoUbuntu,
+    "ubuntu":           menus.HelpInfoUbuntu,
+    "info ubuntu":      menus.HelpInfoUbuntu,
+    "help ubuntu":      menus.HelpInfoUbuntu,
 
-        "5":                func() {Installer("android")},
-        "run 5":            func() {Installer("android")},
-        "use 5":            func() {Installer("android")},
-        "exec 5":           func() {Installer("android")},
-        "start 5":          func() {Installer("android")},
-        "launch 5":         func() {Installer("android")},
-        "exploit 5":        func() {Installer("android")},
-        "execute 5":        func() {Installer("android")},
-        "run wireless":     func() {Installer("android")},
-        "use wireless":     func() {Installer("android")},
-        "exec wireless":    func() {Installer("android")},
-        "start wireless":   func() {Installer("android")},
-        "launch wireless":  func() {Installer("android")},
-        "exploit wireless": func() {Installer("android")},
-        "execute wireless": func() {Installer("android")},
+    "4":                func() {autoExecuteFunc("macos", "install")},
+    "run 4":            func() {autoExecuteFunc("macos", "install")},
+    "use 4":            func() {autoExecuteFunc("macos", "install")},
+    "exec 4":           func() {autoExecuteFunc("macos", "install")},
+    "start 4":          func() {autoExecuteFunc("macos", "install")},
+    "launch 4":         func() {autoExecuteFunc("macos", "install")},
+    "exploit 4":        func() {autoExecuteFunc("macos", "install")},
+    "execute 4":        func() {autoExecuteFunc("macos", "install")},
+    "run macos":        func() {autoExecuteFunc("macos", "install")},
+    "use macos":        func() {autoExecuteFunc("macos", "install")},
+    "exec macos":       func() {autoExecuteFunc("macos", "install")},
+    "start macos":      func() {autoExecuteFunc("macos", "install")},
+    "launch macos":     func() {autoExecuteFunc("macos", "install")},
+    "exploit macos":    func() {autoExecuteFunc("macos", "install")},
+    "execute macos":    func() {autoExecuteFunc("macos", "install")},
 
-        "? 5":              menus.HelpInfoAndroid,
-        "info 5":           menus.HelpInfoAndroid,
-        "help 5":           menus.HelpInfoAndroid,
-        "wireless":         menus.HelpInfoAndroid,
-        "info wireless":    menus.HelpInfoAndroid,
-        "help wireless":    menus.HelpInfoAndroid,
+    "? 4":              menus.HelpInfoMacos,
+    "info 4":           menus.HelpInfoMacos,
+    "help 4":           menus.HelpInfoMacos,
+    "exploits":         menus.HelpInfoMacos,
+    "info exploits":    menus.HelpInfoMacos,
+    "help exploits":    menus.HelpInfoMacos,
 
-        "6":                func() {Installer("windows")},
-        "run 6":            func() {Installer("windows")},
-        "use 6":            func() {Installer("windows")},
-        "exec 6":           func() {Installer("windows")},
-        "start 6":          func() {Installer("windows")},
-        "launch 6":         func() {Installer("windows")},
-        "exploit 6":        func() {Installer("windows")},
-        "execute 6":        func() {Installer("windows")},
-        "run crackers":     func() {Installer("windows")},
-        "use crackers":     func() {Installer("windows")},
-        "exec crackers":    func() {Installer("windows")},
-        "start crackers":   func() {Installer("windows")},
-        "launch crackers":  func() {Installer("windows")},
-        "exploit crackers": func() {Installer("windows")},
-        "execute crackers": func() {Installer("windows")},
+    "5":                func() {autoExecuteFunc("android", "install")},
+    "run 5":            func() {autoExecuteFunc("android", "install")},
+    "use 5":            func() {autoExecuteFunc("android", "install")},
+    "exec 5":           func() {autoExecuteFunc("android", "install")},
+    "start 5":          func() {autoExecuteFunc("android", "install")},
+    "launch 5":         func() {autoExecuteFunc("android", "install")},
+    "exploit 5":        func() {autoExecuteFunc("android", "install")},
+    "execute 5":        func() {autoExecuteFunc("android", "install")},
+    "run android":      func() {autoExecuteFunc("android", "install")},
+    "use android":      func() {autoExecuteFunc("android", "install")},
+    "exec android":     func() {autoExecuteFunc("android", "install")},
+    "start android":    func() {autoExecuteFunc("android", "install")},
+    "launch android":   func() {autoExecuteFunc("android", "install")},
+    "exploit android":  func() {autoExecuteFunc("android", "install")},
+    "execute android":  func() {autoExecuteFunc("android", "install")},
 
-        "? 6":              menus.HelpInfoWindows,
-        "info 6":           menus.HelpInfoWindows,
-        "help 6":           menus.HelpInfoWindows,
-        "crackers":         menus.HelpInfoWindows,
-        "info crackers":    menus.HelpInfoWindows,
-        "help crackers":    menus.HelpInfoWindows,
+    "? 5":              menus.HelpInfoAndroid,
+    "info 5":           menus.HelpInfoAndroid,
+    "help 5":           menus.HelpInfoAndroid,
+    "android":          menus.HelpInfoAndroid,
+    "info android":     menus.HelpInfoAndroid,
+    "help android":     menus.HelpInfoAndroid,
 
-        "7":                func() {SetupsModules("update")},
-        "run 7":            func() {SetupsModules("update")},
-        "use 7":            func() {SetupsModules("update")},
-        "exec 7":           func() {SetupsModules("update")},
-        "start 7":          func() {SetupsModules("update")},
-        "launch 7":         func() {SetupsModules("update")},
-        "exploit 7":        func() {SetupsModules("update")},
-        "execute 7":        func() {SetupsModules("update")},
-        "run phishers":     func() {SetupsModules("update")},
-        "use phishers":     func() {SetupsModules("update")},
-        "exec phishers":    func() {SetupsModules("update")},
-        "start phishers":   func() {SetupsModules("update")},
-        "launch phishers":  func() {SetupsModules("update")},
-        "exploit phishers": func() {SetupsModules("update")},
-        "execute phishers": func() {SetupsModules("update")},
+    "6":                func() {autoExecuteFunc("windows", "install")},
+    "run 6":            func() {autoExecuteFunc("windows", "install")},
+    "use 6":            func() {autoExecuteFunc("windows", "install")},
+    "exec 6":           func() {autoExecuteFunc("windows", "install")},
+    "start 6":          func() {autoExecuteFunc("windows", "install")},
+    "launch 6":         func() {autoExecuteFunc("windows", "install")},
+    "exploit 6":        func() {autoExecuteFunc("windows", "install")},
+    "execute 6":        func() {autoExecuteFunc("windows", "install")},
+    "run windows":      func() {autoExecuteFunc("windows", "install")},
+    "use windows":      func() {autoExecuteFunc("windows", "install")},
+    "exec windows":     func() {autoExecuteFunc("windows", "install")},
+    "start windows":    func() {autoExecuteFunc("windows", "install")},
+    "launch windows":   func() {autoExecuteFunc("windows", "install")},
+    "exploit windows":  func() {autoExecuteFunc("windows", "install")},
+    "execute windows":  func() {autoExecuteFunc("windows", "install")},
 
-        "? 7":              menus.HelpInfoUpdate,
-        "info 7":           menus.HelpInfoUpdate,
-        "help 7":           menus.HelpInfoUpdate,
-        "phishers":         menus.HelpInfoUpdate,
-        "info phishers":    menus.HelpInfoUpdate,
-        "help phishers":    menus.HelpInfoUpdate,
+    "? 6":              menus.HelpInfoWindows,
+    "info 6":           menus.HelpInfoWindows,
+    "help 6":           menus.HelpInfoWindows,
+    "update":           menus.HelpInfoWindows,
+    "info update":      menus.HelpInfoWindows,
+    "help update":      menus.HelpInfoWindows,
 
-        "8":                menus.UpsentTools,
-        "run 8":            menus.UpsentTools,
-        "use 8":            menus.UpsentTools,
-        "exec 8":           menus.UpsentTools,
-        "start 8":          menus.UpsentTools,
-        "launch 8":         menus.UpsentTools,
-        "exploit 8":        menus.UpsentTools,
-        "execute 8":        menus.UpsentTools,
-        "run websites":     menus.UpsentTools,
-        "use websites":     menus.UpsentTools,
-        "exec websites":    menus.UpsentTools,
-        "start websites":   menus.UpsentTools,
-        "launch websites":  menus.UpsentTools,
-        "exploit websites": menus.UpsentTools,
-        "execute websites": menus.UpsentTools,
+    "7":                func() {autoExecuteFunc(Distro, "update")},
+    "run 7":            func() {autoExecuteFunc(Distro, "update")},
+    "use 7":            func() {autoExecuteFunc(Distro, "update")},
+    "exec 7":           func() {autoExecuteFunc(Distro, "update")},
+    "start 7":          func() {autoExecuteFunc(Distro, "update")},
+    "launch 7":         func() {autoExecuteFunc(Distro, "update")},
+    "exploit 7":        func() {autoExecuteFunc(Distro, "update")},
+    "execute 7":        func() {autoExecuteFunc(Distro, "update")},
+    "run phishers":     func() {autoExecuteFunc(Distro, "update")},
+    "use phishers":     func() {autoExecuteFunc(Distro, "update")},
+    "exec phishers":    func() {autoExecuteFunc(Distro, "update")},
+    "start phishers":   func() {autoExecuteFunc(Distro, "update")},
+    "launch phishers":  func() {autoExecuteFunc(Distro, "update")},
+    "exploit phishers": func() {autoExecuteFunc(Distro, "update")},
+    "execute phishers": func() {autoExecuteFunc(Distro, "update")},
 
-         "? 8":             menus.HelpInfoAuto,
-        "info 8":           menus.HelpInfoAuto,
-        "help 8":           menus.HelpInfoAuto,
-        "websites":         menus.HelpInfoAuto,
-        "info websites":    menus.HelpInfoAuto,
-        "help websites":    menus.HelpInfoAuto,
+    "? 7":              menus.HelpInfoUpdate,
+    "info 7":           menus.HelpInfoUpdate,
+    "help 7":           menus.HelpInfoUpdate,
+    "auto":             menus.HelpInfoUpdate,
+    "info auto":        menus.HelpInfoUpdate,
+    "help auto":        menus.HelpInfoUpdate,
 
-        "9":               func() {SetupsModules("uninstall")},
-        "run 9":           func() {SetupsModules("uninstall")},
-        "use 9":           func() {SetupsModules("uninstall")},
-        "exec 9":          func() {SetupsModules("uninstall")},
-        "start 9":         func() {SetupsModules("uninstall")},
-        "launch 9":        func() {SetupsModules("uninstall")},
-        "exploit 9":       func() {SetupsModules("uninstall")},
-        "execute 9":       func() {SetupsModules("uninstall")},
-        "run credits":     func() {SetupsModules("uninstall")},
-        "use credits":     func() {SetupsModules("uninstall")},
-        "exec credits":    func() {SetupsModules("uninstall")},
-        "start credits":   func() {SetupsModules("uninstall")},
-        "launch credits":  func() {SetupsModules("uninstall")},
-        "exploit credits": func() {SetupsModules("uninstall")},
-        "execute credits": func() {SetupsModules("uninstall")},
+    "8":                func() {autoExecuteFunc(Distro, "install")},
+    "run 8":            func() {autoExecuteFunc(Distro, "install")},
+    "use 8":            func() {autoExecuteFunc(Distro, "install")},
+    "exec 8":           func() {autoExecuteFunc(Distro, "install")},
+    "start 8":          func() {autoExecuteFunc(Distro, "install")},
+    "launch 8":         func() {autoExecuteFunc(Distro, "install")},
+    "exploit 8":        func() {autoExecuteFunc(Distro, "install")},
+    "execute 8":        func() {autoExecuteFunc(Distro, "install")},
+    "run websites":     func() {autoExecuteFunc(Distro, "install")},
+    "use websites":     func() {autoExecuteFunc(Distro, "install")},
+    "exec websites":    func() {autoExecuteFunc(Distro, "install")},
+    "start websites":   func() {autoExecuteFunc(Distro, "install")},
+    "launch websites":  func() {autoExecuteFunc(Distro, "install")},
+    "exploit websites": func() {autoExecuteFunc(Distro, "install")},
+    "execute websites": func() {autoExecuteFunc(Distro, "install")},
 
-        "? 9":              menus.HelpInfoUninstaller,
-        "info 9":           menus.HelpInfoUninstaller,
-        "help 9":           menus.HelpInfoUninstaller,
-        "credits":          menus.HelpInfoUninstaller,
-        "info credits":     menus.HelpInfoUninstaller,
-        "help credits":     menus.HelpInfoUninstaller,
+     "? 8":             menus.HelpInfoAuto,
+    "info 8":           menus.HelpInfoAuto,
+    "help 8":           menus.HelpInfoAuto,
+    "websites":         menus.HelpInfoAuto,
+    "info websites":    menus.HelpInfoAuto,
+    "help websites":    menus.HelpInfoAuto,
 
-        "99":               scriptures.ScriptureNarators,
-        "run 99":           scriptures.ScriptureNarators,
-        "use 99":           scriptures.ScriptureNarators,
-        "exec 99":          scriptures.ScriptureNarators,
-        "start 99":         scriptures.ScriptureNarators,
-        "launch 99":        scriptures.ScriptureNarators,
-        "exploit 99":       scriptures.ScriptureNarators,
-        "execute 99":       scriptures.ScriptureNarators,
-        "run verses":       scriptures.ScriptureNarators,
-        "use verses":       scriptures.ScriptureNarators,
-        "exec verses":      scriptures.ScriptureNarators,
-        "start verses":     scriptures.ScriptureNarators,
-        "launch verses":    scriptures.ScriptureNarators,
-        "exploit verses":   scriptures.ScriptureNarators,
-        "execute verses":   scriptures.ScriptureNarators,
+    "9":               func() {autoExecuteFunc(Distro, "uninstall")},
+    "run 9":           func() {autoExecuteFunc(Distro, "uninstall")},
+    "use 9":           func() {autoExecuteFunc(Distro, "uninstall")},
+    "exec 9":          func() {autoExecuteFunc(Distro, "uninstall")},
+    "start 9":         func() {autoExecuteFunc(Distro, "uninstall")},
+    "launch 9":        func() {autoExecuteFunc(Distro, "uninstall")},
+    "exploit 9":       func() {autoExecuteFunc(Distro, "uninstall")},
+    "execute 9":       func() {autoExecuteFunc(Distro, "uninstall")},
+    "run credits":     func() {autoExecuteFunc(Distro, "uninstall")},
+    "use credits":     func() {autoExecuteFunc(Distro, "uninstall")},
+    "exec credits":    func() {autoExecuteFunc(Distro, "uninstall")},
+    "start credits":   func() {autoExecuteFunc(Distro, "uninstall")},
+    "launch credits":  func() {autoExecuteFunc(Distro, "uninstall")},
+    "exploit credits": func() {autoExecuteFunc(Distro, "uninstall")},
+    "execute credits": func() {autoExecuteFunc(Distro, "uninstall")},
 
-        "? 99":             menus.HelpInfoVerses,
-        "verses":           menus.HelpInfoVerses,
-        "info 99":          menus.HelpInfoVerses,
-        "help 99":          menus.HelpInfoVerses,
-        "info verses":      menus.HelpInfoVerses,
-        "help verses":      menus.HelpInfoVerses,
+    "? 9":              menus.HelpInfoUninstaller,
+    "info 9":           menus.HelpInfoUninstaller,
+    "help 9":           menus.HelpInfoUninstaller,
+    "credits":          menus.HelpInfoUninstaller,
+    "info credits":     menus.HelpInfoUninstaller,
+    "help credits":     menus.HelpInfoUninstaller,
+
+    "99":               scriptures.ScriptureNarators,
+    "run 99":           scriptures.ScriptureNarators,
+    "use 99":           scriptures.ScriptureNarators,
+    "exec 99":          scriptures.ScriptureNarators,
+    "start 99":         scriptures.ScriptureNarators,
+    "launch 99":        scriptures.ScriptureNarators,
+    "exploit 99":       scriptures.ScriptureNarators,
+    "execute 99":       scriptures.ScriptureNarators,
+    "run verses":       scriptures.ScriptureNarators,
+    "use verses":       scriptures.ScriptureNarators,
+    "exec verses":      scriptures.ScriptureNarators,
+    "start verses":     scriptures.ScriptureNarators,
+    "launch verses":    scriptures.ScriptureNarators,
+    "exploit verses":   scriptures.ScriptureNarators,
+    "execute verses":   scriptures.ScriptureNarators,
+
+    "? 99":             menus.HelpInfoVerses,
+    "verses":           menus.HelpInfoVerses,
+    "info 99":          menus.HelpInfoVerses,
+    "help 99":          menus.HelpInfoVerses,
+    "info verses":      menus.HelpInfoVerses,
+    "help verses":      menus.HelpInfoVerses,
 
     }
     if action, exists := commandMap[cmd]; exists {
@@ -412,8 +433,13 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
         "distro": &Distro,
-        "module": &Module,
+        "proxies": &Proxy,
+        "func":  &Function,
+        "module": &Function,
+        "function": &Function,
+
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -423,7 +449,6 @@ func handleSetCommand(parts []string) {
     }
 }
 
-
 func handleUnsetCommand(parts []string) {
     if len(parts) < 2 {
         menus.HelpInfoSet()
@@ -431,31 +456,47 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
         "distro": &Distro,
-        "module": &Module,
+        "proxies": &Proxy,
+        "func":  &Function,
+        "module": &Function,
+        "function": &Function,
     }
+
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key] // Reset to default
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
+        if *ptr != "" {
+            fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
+        }else{
+            fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        }
     } else {
         menus.HelpInfoSet()
     }
 }
 
-func executeModule() {
-    if Module == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter MODULE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+func executeFunction() {
+    if Function == ""{
+        fmt.Printf("\n%s[!] %sMissing required parameter FUNCTION. Use %s'show functions' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
     if Distro == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'show distros' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
-    SetupsModules(Module, Distro)
+    SetupsFunction(Function, Distro)
 }
 
-func SetupsModules(module string, args ...interface{}) {
-    fmt.Printf("\nDISTRO => %s\nMODULE => %s\n", Distro, module)
+// Helper functions
+func autoExecuteFunc(distro string, function string) {
+    Distro = distro
+    Function = function
+    executeFunction()
+}
+
+func SetupsFunction(Function string, args ...interface{}) {
+    fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         utils.SetProxy(Proxy)
@@ -469,10 +510,10 @@ func SetupsModules(module string, args ...interface{}) {
            //"auto": ,
     }
 
-    if action, exists := commands[module]; exists {
+    if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sInvalid module %s. Use %s'help' %sfor available modules.\n", bcolors.YELLOW, bcolors.ENDC, module, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid FUNCTION %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
     }
 }
 
@@ -495,7 +536,6 @@ func Installer(Distro string) {
     }
 }
 
-
 func InstallFoundationTools(commands []string) {
     for _, cmd := range commands {
         subprocess.Popen(cmd)
@@ -515,17 +555,16 @@ func InstallGithubTools() {
 }
 
 func UpdateAfricana() {
-    fmt.Printf("%s[!] %safricana already installed. Updating it ...\n", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[!] %safricana already installed. Updating it ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
     subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
-    fmt.Printf("%s[*] %sAfricana succesfully updated ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.GREEN, bcolors.ENDC)
     return
 }
 
 func KaliSetups() {
-    fmt.Printf("%s[>] %sInstalling africana in kali\n", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.GREEN, bcolors.ENDC)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
-        fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
@@ -537,9 +576,9 @@ func KaliSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
-        fmt.Printf("%s[>] %sInstalling third party tools\n", bcolors.YELLOW, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
         InstallGithubTools()
-        fmt.Printf("%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
     } else {
         UpdateAfricana()
         return
@@ -547,9 +586,8 @@ func KaliSetups() {
 }
 
 func UbuntuSetups() {
-    fmt.Printf("%s[>] %sInstalling africana in ubuntu\n", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in ubuntu ...\n", bcolors.GREEN, bcolors.ENDC)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
-        fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
@@ -563,36 +601,34 @@ func UbuntuSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
-        fmt.Printf("%s[>] %sInstalling third party tools\n", bcolors.YELLOW, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
         InstallGithubTools()
-        fmt.Printf("%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
     } else {
         UpdateAfricana()
     }
 }
 
 func ArchSetups() {
-    fmt.Printf("%s[>] %sInstalling africana in arch\n", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in arch\n", bcolors.GREEN, bcolors.ENDC)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
-        fmt.Printf("%s[>] %sInstalling foundation tools\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `pacman -Syu --noconfirm`,
             `pacman -S --noconfirm zsh git curl wget go`,
         }
         InstallFoundationTools(foundationCommands)
         BlackArchSetups()
-        fmt.Printf("%s[>] %sInstalling third party tools\n", bcolors.YELLOW, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
         InstallGithubTools()
-        fmt.Printf("%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
     } else {
         UpdateAfricana()
     }
 }
 
 func BlackArchSetups() {
-    fmt.Printf("%s[>] %sInstalling blackarch tools ...\n", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling blackarch tools ...\n", bcolors.GREEN, bcolors.ENDC)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
-        fmt.Printf("%s[>] %sInstalling foundation tools ...\n", bcolors.YELLOW, bcolors.ENDC)
         foundationCommands := []string{
             `curl -O https://blackarch.org/strap.sh`,
             `chmod +x strap.sh`,
@@ -603,9 +639,9 @@ func BlackArchSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
-        fmt.Printf("%s[>] %sInstalling third party tools ...\n", bcolors.YELLOW, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools ...\n", bcolors.GREEN, bcolors.ENDC)
         InstallGithubTools()
-        fmt.Printf("%s[*] %sAfricana fully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana fully installed ...\n", bcolors.GREEN, bcolors.ENDC)
     } else {
         UpdateAfricana()
     }
@@ -626,12 +662,12 @@ func AutoSetups() {
 }
 
 func Uninstaller() {
-    fmt.Printf("%s[!] %sUninstalling africana ...\n", bcolors.RED, bcolors.ENDC)
+    fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.RED, bcolors.ENDC)
     if _, err := os.Stat(ToolsDir); !os.IsNotExist(err) {
         subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/africana`)
-        fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.GREEN, bcolors.ENDC)
         os.Exit(0)
     } else {
-        fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.YELLOW, bcolors.ENDC)
+        fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.GREEN, bcolors.ENDC)
     }
 }

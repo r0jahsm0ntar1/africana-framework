@@ -19,7 +19,7 @@ import(
 )
 
 var (
-    Input, Proxy, Module string
+    Input, Proxy, Function string
     scanner  = bufio.NewScanner(os.Stdin)
 )
 
@@ -33,9 +33,9 @@ var torrString = []string{
     "DNSPort 5353",
 }
 
-func Anonsurf() {
+func Torsocks() {
     for {
-        fmt.Printf("%s%safr3%s anonsurf(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "securities_setup.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s torsocks(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "securities_setup.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
         Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
         buildParts := strings.Fields(Input)
@@ -57,7 +57,7 @@ func Anonsurf() {
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
-            executeModule()
+            executeFunction()
         default:
             utils.SystemShell(Input)
         }
@@ -67,341 +67,356 @@ func Anonsurf() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-        "? info":           menus.HelpInfo,
-        "help info":        menus.HelpInfo,
+    "? info":           menus.HelpInfo,
+    "help info":        menus.HelpInfo,
 
-        "v":                banners.Version,
-        "version":          banners.Version,
+    "v":                banners.Version,
+    "version":          banners.Version,
 
-        "s":                utils.Sleep,
-        "sleep":            utils.Sleep,
+    "s":                utils.Sleep,
+    "sleep":            utils.Sleep,
 
-        "o":                utils.ListJunks,
-        "junks":            utils.ListJunks,
-        "outputs":          utils.ListJunks,
-        "clear junks":      utils.ClearJunks,
-        "clear outputs":    utils.ClearJunks,
+    "o":                utils.ListJunks,
+    "junks":            utils.ListJunks,
+    "outputs":          utils.ListJunks,
+    "clear junks":      utils.ClearJunks,
+    "clear outputs":    utils.ClearJunks,
 
-        "logs":             subprocess.LogHistory,
-        "history":          subprocess.LogHistory,
-        "clear logs":       subprocess.ClearHistory,
-        "clear history":    subprocess.ClearHistory,
+    "logs":             subprocess.LogHistory,
+    "history":          subprocess.LogHistory,
+    "clear logs":       subprocess.ClearHistory,
+    "clear history":    subprocess.ClearHistory,
 
-        "? run":            menus.HelpInfoRun,
-        "h run":            menus.HelpInfoRun,
-        "info run":         menus.HelpInfoRun,
-        "help run":         menus.HelpInfoRun,
-        "? use":            menus.HelpInfoRun,
-        "h use":            menus.HelpInfoRun,
-        "info use":         menus.HelpInfoRun,
-        "help use":         menus.HelpInfoRun,
-        "? exec":           menus.HelpInfoRun,
-        "h exec":           menus.HelpInfoRun,
-        "info exec":        menus.HelpInfoRun,
-        "help exec":        menus.HelpInfoRun,
-        "? start":          menus.HelpInfoRun,
-        "h start":          menus.HelpInfoRun,
-        "info start":       menus.HelpInfoRun,
-        "help start":       menus.HelpInfoRun,
-        "? launch":         menus.HelpInfoRun,
-        "h launch":         menus.HelpInfoRun,
-        "info launch":      menus.HelpInfoRun,
-        "help launch":      menus.HelpInfoRun,
-        "? exploit":        menus.HelpInfoRun,
-        "h exploit":        menus.HelpInfoRun,
-        "info exploit":     menus.HelpInfoRun,
-        "help exploit":     menus.HelpInfoRun,
-        "? execute":        menus.HelpInfoRun,
-        "h execute":        menus.HelpInfoRun,
-        "info execute":     menus.HelpInfoRun,
-        "help execute":     menus.HelpInfoRun,
+    "? run":            menus.HelpInfoRun,
+    "h run":            menus.HelpInfoRun,
+    "info run":         menus.HelpInfoRun,
+    "help run":         menus.HelpInfoRun,
+    "? use":            menus.HelpInfoRun,
+    "h use":            menus.HelpInfoRun,
+    "info use":         menus.HelpInfoRun,
+    "help use":         menus.HelpInfoRun,
+    "? exec":           menus.HelpInfoRun,
+    "h exec":           menus.HelpInfoRun,
+    "info exec":        menus.HelpInfoRun,
+    "help exec":        menus.HelpInfoRun,
+    "? start":          menus.HelpInfoRun,
+    "h start":          menus.HelpInfoRun,
+    "info start":       menus.HelpInfoRun,
+    "help start":       menus.HelpInfoRun,
+    "? launch":         menus.HelpInfoRun,
+    "h launch":         menus.HelpInfoRun,
+    "info launch":      menus.HelpInfoRun,
+    "help launch":      menus.HelpInfoRun,
+    "? exploit":        menus.HelpInfoRun,
+    "h exploit":        menus.HelpInfoRun,
+    "info exploit":     menus.HelpInfoRun,
+    "help exploit":     menus.HelpInfoRun,
+    "? execute":        menus.HelpInfoRun,
+    "h execute":        menus.HelpInfoRun,
+    "info execute":     menus.HelpInfoRun,
+    "help execute":     menus.HelpInfoRun,
 
-        "set":              menus.HelpInfoSet,
-        "h set":            menus.HelpInfoSet,
-        "info set":         menus.HelpInfoSet,
-        "help set":         menus.HelpInfoSet,
+    "set":              menus.HelpInfoSet,
+    "h set":            menus.HelpInfoSet,
+    "info set":         menus.HelpInfoSet,
+    "help set":         menus.HelpInfoSet,
 
-        "tips":             menus.HelpInfoTips,
-        "h tips":           menus.HelpInfoTips,
-        "? tips":           menus.HelpInfoTips,
-        "info tips":        menus.HelpInfoTips,
-        "help tips":        menus.HelpInfoTips,
+    "tips":             menus.HelpInfoTips,
+    "h tips":           menus.HelpInfoTips,
+    "? tips":           menus.HelpInfoTips,
+    "info tips":        menus.HelpInfoTips,
+    "help tips":        menus.HelpInfoTips,
 
-        "show":             menus.HelpInfoShow,
-        "? show":           menus.HelpInfoShow,
-        "h show":           menus.HelpInfoShow,
-        "info show":        menus.HelpInfoShow,
-        "help show":        menus.HelpInfoShow,
+    "show":             menus.HelpInfoShow,
+    "? show":           menus.HelpInfoShow,
+    "h show":           menus.HelpInfoShow,
+    "info show":        menus.HelpInfoShow,
+    "help show":        menus.HelpInfoShow,
 
-        "info list":        menus.HelpInfoList,
-        "help list":        menus.HelpInfoList,
-        "use list":         menus.HelpInfoList,
-        "list":             menus.HelpInfoList,
+    "info list":        menus.HelpInfoList,
+    "help list":        menus.HelpInfoList,
+    "use list":         menus.HelpInfoList,
+    "list":             menus.HelpInfoList,
 
-        "? options":        menus.HelpInfOptions,
-        "info options":     menus.HelpInfOptions,
-        "help options":     menus.HelpInfOptions,
+    "? options":        menus.HelpInfOptions,
+    "info options":     menus.HelpInfOptions,
+    "help options":     menus.HelpInfOptions,
 
-        "banner":           banners.RandomBanners,
-        "g":                utils.BrowseTutarilas,
-        "t":                utils.BrowseTutarilas,
-        "guide":            utils.BrowseTutarilas,
-        "tutarial":         utils.BrowseTutarilas,
-        "h":                menus.HelpInfoMenuZero,
-        "?":                menus.HelpInfoMenuZero,
-        "00":               menus.HelpInfoMenuZero,
-        "help":             menus.HelpInfoMenuZero,
-        "f":                menus.HelpInfoFeatures,
-        "use f":            menus.HelpInfoFeatures,
-        "features":         menus.HelpInfoFeatures,
-        "use features":     menus.HelpInfoFeatures,
+    "banner":           banners.RandomBanners,
+    "g":                utils.BrowseTutarilas,
+    "t":                utils.BrowseTutarilas,
+    "guide":            utils.BrowseTutarilas,
+    "tutarial":         utils.BrowseTutarilas,
+    "h":                menus.HelpInfoMenuZero,
+    "?":                menus.HelpInfoMenuZero,
+    "00":               menus.HelpInfoMenuZero,
+    "help":             menus.HelpInfoMenuZero,
+    "f":                menus.HelpInfoFeatures,
+    "use f":            menus.HelpInfoFeatures,
+    "features":         menus.HelpInfoFeatures,
+    "use features":     menus.HelpInfoFeatures,
 
-        //Chameleons//
-        "info":             menus.HelpInfoAnonsurf,
+    //Chameleons//
+    "info":             menus.HelpInfoTorsocks,
 
-        "m":                menus.MenuTwo,
-        "menu":             menus.MenuTwo,
+    "m":                menus.MenuTwo,
+    "menu":             menus.MenuTwo,
 
-        "option":           menus.AnonsurfOptions,
-        "options":          menus.AnonsurfOptions,
-        "show option":      menus.AnonsurfOptions,
-        "show options":     menus.AnonsurfOptions,
+    "option":           menus.TorsocksOptions,
+    "options":          menus.TorsocksOptions,
+    "show option":      menus.TorsocksOptions,
+    "show options":     menus.TorsocksOptions,
 
-        "modules":          menus.ListAnonsurfModules,
-        "show all":         menus.ListAnonsurfModules,
-        "list all":         menus.ListAnonsurfModules,
-        "list modules":     menus.ListAnonsurfModules,
-        "show modules":     menus.ListAnonsurfModules,
+    "show all":         menus.ListTorsocksFunctions,
+    "list all":         menus.ListTorsocksFunctions,
 
-        "1":                func() {AnonimityModules("setups")},
-        "run 1":            func() {AnonimityModules("setups")},
-        "use 1":            func() {AnonimityModules("setups")},
-        "exec 1":           func() {AnonimityModules("setups")},
-        "start 1":          func() {AnonimityModules("setups")},
-        "launch 1":         func() {AnonimityModules("setups")},
-        "exploit 1":        func() {AnonimityModules("setups")},
-        "execute 1":        func() {AnonimityModules("setups")},
-        "run setups":       func() {AnonimityModules("setups")},
-        "use setups":       func() {AnonimityModules("setups")},
-        "exec setups":      func() {AnonimityModules("setups")},
-        "start setups":     func() {AnonimityModules("setups")},
-        "launch setups":    func() {AnonimityModules("setups")},
-        "exploit setups":   func() {AnonimityModules("setups")},
-        "execute setups":   func() {AnonimityModules("setups")},
+    "func":             menus.ListTorsocksFunctions,
+    "funcs":            menus.ListTorsocksFunctions,
+    "functions":        menus.ListTorsocksFunctions,
+    "show func":        menus.ListTorsocksFunctions,
+    "list funcs":       menus.ListTorsocksFunctions,
+    "show funcs":       menus.ListTorsocksFunctions,
+    "show function":    menus.ListTorsocksFunctions,
+    "list function":    menus.ListTorsocksFunctions,
+    "list functions":   menus.ListTorsocksFunctions,
+    "show functions":   menus.ListTorsocksFunctions,
 
-        "? 1":              menus.HelpInfoAnonsurfSetups,
-        "info 1":           menus.HelpInfoAnonsurfSetups,
-        "help 1":           menus.HelpInfoAnonsurfSetups,
-        "setups":           menus.HelpInfoAnonsurfSetups,
-        "info setups":      menus.HelpInfoAnonsurfSetups,
-        "help setups":      menus.HelpInfoAnonsurfSetups,
+    "module":           menus.ListTorsocksFunctions,
+    "modules":          menus.ListTorsocksFunctions,
+    "list module":      menus.ListTorsocksFunctions,
+    "show module":      menus.ListTorsocksFunctions,
+    "list modules":     menus.ListTorsocksFunctions,
+    "show modules":     menus.ListTorsocksFunctions,
 
-        "2":                func() {AnonimityModules("start")},
-        "run 2":            func() {AnonimityModules("start")},
-        "use 2":            func() {AnonimityModules("start")},
-        "exec 2":           func() {AnonimityModules("start")},
-        "start 2":          func() {AnonimityModules("start")},
-        "launch 2":         func() {AnonimityModules("start")},
-        "exploit 2":        func() {AnonimityModules("start")},
-        "execute 2":        func() {AnonimityModules("start")},
-        "run anonsurf":     func() {AnonimityModules("start")},
-        "use anonsurf":     func() {AnonimityModules("start")},
-        "exec anonsurf":    func() {AnonimityModules("start")},
-        "start anonsurf":   func() {AnonimityModules("start")}, 
-        "launch anonsurf":  func() {AnonimityModules("start")},
-        "exploit anonsurf": func() {AnonimityModules("start")},
-        "execute anonsurf": func() {AnonimityModules("start")},
+    "1":                func() {AnonimityFunctions("setups")},
+    "run 1":            func() {AnonimityFunctions("setups")},
+    "use 1":            func() {AnonimityFunctions("setups")},
+    "exec 1":           func() {AnonimityFunctions("setups")},
+    "start 1":          func() {AnonimityFunctions("setups")},
+    "launch 1":         func() {AnonimityFunctions("setups")},
+    "exploit 1":        func() {AnonimityFunctions("setups")},
+    "execute 1":        func() {AnonimityFunctions("setups")},
+    "run setups":       func() {AnonimityFunctions("setups")},
+    "use setups":       func() {AnonimityFunctions("setups")},
+    "exec setups":      func() {AnonimityFunctions("setups")},
+    "start setups":     func() {AnonimityFunctions("setups")},
+    "launch setups":    func() {AnonimityFunctions("setups")},
+    "exploit setups":   func() {AnonimityFunctions("setups")},
+    "execute setups":   func() {AnonimityFunctions("setups")},
 
-        "? 2":              menus.HelpInfoAnonsurfStart,
-        "info 2":           menus.HelpInfoAnonsurfStart,
-        "help 2":           menus.HelpInfoAnonsurfStart,
-        "anonsurf":         menus.HelpInfoAnonsurfStart,
-        "info anonsurf":    menus.HelpInfoAnonsurfStart,
-        "help anonsurf":    menus.HelpInfoAnonsurfStart,
+    "? 1":              menus.HelpInfoTorsocksSetups,
+    "info 1":           menus.HelpInfoTorsocksSetups,
+    "help 1":           menus.HelpInfoTorsocksSetups,
+    "setups":           menus.HelpInfoTorsocksSetups,
+    "info setups":      menus.HelpInfoTorsocksSetups,
+    "help setups":      menus.HelpInfoTorsocksSetups,
 
-        "3":                func() {AnonimityModules("exitnode")},
-        "run 3":            func() {AnonimityModules("exitnode")},
-        "use 3":            func() {AnonimityModules("exitnode")},
-        "exec 3":           func() {AnonimityModules("exitnode")},
-        "start 3":          func() {AnonimityModules("exitnode")},
-        "launch 3":         func() {AnonimityModules("exitnode")},
-        "exploit 3":        func() {AnonimityModules("exitnode")},
-        "execute 3":        func() {AnonimityModules("exitnode")},
-        "run networks":     func() {AnonimityModules("exitnode")},
-        "use networks":     func() {AnonimityModules("exitnode")},
-        "exec networks":    func() {AnonimityModules("exitnode")},
-        "start networks":   func() {AnonimityModules("exitnode")},
-        "launch networks":  func() {AnonimityModules("exitnode")},
-        "exploit networks": func() {AnonimityModules("exitnode")},
-        "execute networks": func() {AnonimityModules("exitnode")},
+    "2":                func() {AnonimityFunctions("vanish")},
+    "run 2":            func() {AnonimityFunctions("vanish")},
+    "use 2":            func() {AnonimityFunctions("vanish")},
+    "exec 2":           func() {AnonimityFunctions("vanish")},
+    "start 2":          func() {AnonimityFunctions("vanish")},
+    "launch 2":         func() {AnonimityFunctions("vanish")},
+    "exploit 2":        func() {AnonimityFunctions("vanish")},
+    "execute 2":        func() {AnonimityFunctions("vanish")},
+    "run vanish":       func() {AnonimityFunctions("vanish")},
+    "use vanish":       func() {AnonimityFunctions("vanish")},
+    "exec vanish":      func() {AnonimityFunctions("vanish")},
+    "start vanish":     func() {AnonimityFunctions("vanish")}, 
+    "launch vanish":    func() {AnonimityFunctions("vanish")},
+    "exploit vanish":   func() {AnonimityFunctions("vanish")},
+    "execute vanish":   func() {AnonimityFunctions("vanish")},
 
-        "? 3":              menus. HelpInfoAnonsurfExitnode,
-        "info 3":           menus. HelpInfoAnonsurfExitnode,
-        "help 3":           menus. HelpInfoAnonsurfExitnode,
-        "networks":         menus. HelpInfoAnonsurfExitnode,
-        "info networks":    menus. HelpInfoAnonsurfExitnode,
-        "help networks":    menus. HelpInfoAnonsurfExitnode,
+    "? 2":              menus.HelpInfoTorsocksVanish,
+    "info 2":           menus.HelpInfoTorsocksVanish,
+    "help 2":           menus.HelpInfoTorsocksVanish,
+    "vanish":           menus.HelpInfoTorsocksVanish,
+    "info vanish":      menus.HelpInfoTorsocksVanish, 
+    "help vanish":      menus.HelpInfoTorsocksVanish,
 
-        "4":                func() {AnonimityModules("status")},
-        "run 4":            func() {AnonimityModules("status")},
-        "use 4":            func() {AnonimityModules("status")},
-        "exec 4":           func() {AnonimityModules("status")},
-        "start 4":          func() {AnonimityModules("status")},
-        "launch 4":         func() {AnonimityModules("status")},
-        "exploit 4":        func() {AnonimityModules("status")},
-        "execute 4":        func() {AnonimityModules("status")},
-        "run exploits":     func() {AnonimityModules("status")},
-        "use exploits":     func() {AnonimityModules("status")},
-        "exec exploits":    func() {AnonimityModules("status")},
-        "start exploits":   func() {AnonimityModules("status")},
-        "launch exploits":  func() {AnonimityModules("status")},
-        "exploit exploits": func() {AnonimityModules("status")},
-        "execute exploits": func() {AnonimityModules("status")},
+    "3":                func() {AnonimityFunctions("exitnode")},
+    "run 3":            func() {AnonimityFunctions("exitnode")},
+    "use 3":            func() {AnonimityFunctions("exitnode")},
+    "exec 3":           func() {AnonimityFunctions("exitnode")},
+    "start 3":          func() {AnonimityFunctions("exitnode")},
+    "launch 3":         func() {AnonimityFunctions("exitnode")},
+    "exploit 3":        func() {AnonimityFunctions("exitnode")},
+    "execute 3":        func() {AnonimityFunctions("exitnode")},
+    "run exitnode":     func() {AnonimityFunctions("exitnode")},
+    "use exitnode":     func() {AnonimityFunctions("exitnode")},
+    "exec exitnode":    func() {AnonimityFunctions("exitnode")},
+    "start exitnode":   func() {AnonimityFunctions("exitnode")},
+    "launch exitnode":  func() {AnonimityFunctions("exitnode")},
+    "exploit exitnode": func() {AnonimityFunctions("exitnode")},
+    "execute exitnode": func() {AnonimityFunctions("exitnode")},
 
-        "? 4":              menus.HelpInfoAnonsurfStatus,
-        "info 4":           menus.HelpInfoAnonsurfStatus,
-        "help 4":           menus.HelpInfoAnonsurfStatus,
-        "exploits":         menus.HelpInfoAnonsurfStatus,
-        "info exploits":    menus.HelpInfoAnonsurfStatus,
-        "help exploits":    menus.HelpInfoAnonsurfStatus,
+    "? 3":              menus. HelpInfoTorsocksExitnode,
+    "info 3":           menus. HelpInfoTorsocksExitnode,
+    "help 3":           menus. HelpInfoTorsocksExitnode,
+    "exitnode":         menus. HelpInfoTorsocksExitnode,
+    "info exitnode":    menus. HelpInfoTorsocksExitnode,
+    "help exitnode":    menus. HelpInfoTorsocksExitnode,
 
-        "5":                func() {AnonimityModules("ipaddress")},
-        "run 5":            func() {AnonimityModules("ipaddress")},
-        "use 5":            func() {AnonimityModules("ipaddress")},
-        "exec 5":           func() {AnonimityModules("ipaddress")},
-        "start 5":          func() {AnonimityModules("ipaddress")},
-        "launch 5":         func() {AnonimityModules("ipaddress")},
-        "exploit 5":        func() {AnonimityModules("ipaddress")},
-        "execute 5":        func() {AnonimityModules("ipaddress")},
-        "run wireless":     func() {AnonimityModules("ipaddress")},
-        "use wireless":     func() {AnonimityModules("ipaddress")},
-        "exec wireless":    func() {AnonimityModules("ipaddress")},
-        "start wireless":   func() {AnonimityModules("ipaddress")},
-        "launch wireless":  func() {AnonimityModules("ipaddress")},
-        "exploit wireless": func() {AnonimityModules("ipaddress")},
-        "execute wireless": func() {AnonimityModules("ipaddress")},
+    "4":                func() {AnonimityFunctions("status")},
+    "run 4":            func() {AnonimityFunctions("status")},
+    "use 4":            func() {AnonimityFunctions("status")},
+    "exec 4":           func() {AnonimityFunctions("status")},
+    "start 4":          func() {AnonimityFunctions("status")},
+    "launch 4":         func() {AnonimityFunctions("status")},
+    "exploit 4":        func() {AnonimityFunctions("status")},
+    "execute 4":        func() {AnonimityFunctions("status")},
+    "run status":       func() {AnonimityFunctions("status")},
+    "use status":       func() {AnonimityFunctions("status")},
+    "exec status":      func() {AnonimityFunctions("status")},
+    "start status":     func() {AnonimityFunctions("status")},
+    "launch status":    func() {AnonimityFunctions("status")},
+    "exploit status":   func() {AnonimityFunctions("status")},
+    "execute status":   func() {AnonimityFunctions("status")},
 
-        "? 5":              menus.HelpInfoAnonsurfIpaddress,
-        "info 5":           menus.HelpInfoAnonsurfIpaddress,
-        "help 5":           menus.HelpInfoAnonsurfIpaddress,
-        "wireless":         menus.HelpInfoAnonsurfIpaddress,
-        "info wireless":    menus.HelpInfoAnonsurfIpaddress,
-        "help wireless":    menus.HelpInfoAnonsurfIpaddress,
+    "? 4":              menus.HelpInfoTorsocksStatus,
+    "info 4":           menus.HelpInfoTorsocksStatus,
+    "help 4":           menus.HelpInfoTorsocksStatus,
+    "status":           menus.HelpInfoTorsocksStatus,
+    "info status":      menus.HelpInfoTorsocksStatus,
+    "help status":      menus.HelpInfoTorsocksStatus,
 
-        "6":                func() {AnonimityModules("restore")},
-        "run 6":            func() {AnonimityModules("restore")},
-        "use 6":            func() {AnonimityModules("restore")},
-        "exec 6":           func() {AnonimityModules("restore")},
-        "start 6":          func() {AnonimityModules("restore")},
-        "launch 6":         func() {AnonimityModules("restore")},
-        "exploit 6":        func() {AnonimityModules("restore")},
-        "execute 6":        func() {AnonimityModules("restore")},
-        "run crackers":     func() {AnonimityModules("restore")},
-        "use crackers":     func() {AnonimityModules("restore")},
-        "exec crackers":    func() {AnonimityModules("restore")},
-        "start crackers":   func() {AnonimityModules("restore")},
-        "launch crackers":  func() {AnonimityModules("restore")},
-        "exploit crackers": func() {AnonimityModules("restore")},
-        "execute crackers": func() {AnonimityModules("restore")},
+    "5":                func() {AnonimityFunctions("ipaddress")},
+    "run 5":            func() {AnonimityFunctions("ipaddress")},
+    "use 5":            func() {AnonimityFunctions("ipaddress")},
+    "exec 5":           func() {AnonimityFunctions("ipaddress")},
+    "start 5":          func() {AnonimityFunctions("ipaddress")},
+    "launch 5":         func() {AnonimityFunctions("ipaddress")},
+    "exploit 5":        func() {AnonimityFunctions("ipaddress")},
+    "execute 5":        func() {AnonimityFunctions("ipaddress")},
+    "run ipaddress":    func() {AnonimityFunctions("ipaddress")},
+    "use ipaddress":    func() {AnonimityFunctions("ipaddress")},
+    "exec ipaddress":   func() {AnonimityFunctions("ipaddress")},
+    "start ipaddress":  func() {AnonimityFunctions("ipaddress")},
+    "launch ipaddress": func() {AnonimityFunctions("ipaddress")},
+    "exploit ipaddress":func() {AnonimityFunctions("ipaddress")},
+    "execute ipaddress":func() {AnonimityFunctions("ipaddress")},
 
-        "? 6":              menus.HelpInfoAnonsurfRestore,
-        "info 6":           menus.HelpInfoAnonsurfRestore,
-        "help 6":           menus.HelpInfoAnonsurfRestore,
-        "crackers":         menus.HelpInfoAnonsurfRestore,
-        "info crackers":    menus.HelpInfoAnonsurfRestore,
-        "help crackers":    menus.HelpInfoAnonsurfRestore,
+    "? 5":              menus.HelpInfoTorsocksIpaddress,
+    "info 5":           menus.HelpInfoTorsocksIpaddress,
+    "help 5":           menus.HelpInfoTorsocksIpaddress,
+    "ipaddress":        menus.HelpInfoTorsocksIpaddress,
+    "info ipaddress":   menus.HelpInfoTorsocksIpaddress,
+    "help ipaddress":   menus.HelpInfoTorsocksIpaddress,
 
-        "7":                func() {AnonimityModules("reload")},
-        "run 7":            func() {AnonimityModules("reload")},
-        "use 7":            func() {AnonimityModules("reload")},
-        "exec 7":           func() {AnonimityModules("reload")},
-        "start 7":          func() {AnonimityModules("reload")},
-        "launch 7":         func() {AnonimityModules("reload")},
-        "exploit 7":        func() {AnonimityModules("reload")},
-        "execute 7":        func() {AnonimityModules("reload")},
-        "run phishers":     func() {AnonimityModules("reload")},
-        "use phishers":     func() {AnonimityModules("reload")},
-        "exec phishers":    func() {AnonimityModules("reload")},
-        "start phishers":   func() {AnonimityModules("reload")},
-        "launch phishers":  func() {AnonimityModules("reload")},
-        "exploit phishers": func() {AnonimityModules("reload")},
-        "execute phishers": func() {AnonimityModules("reload")},
+    "6":                func() {AnonimityFunctions("restore")},
+    "run 6":            func() {AnonimityFunctions("restore")},
+    "use 6":            func() {AnonimityFunctions("restore")},
+    "exec 6":           func() {AnonimityFunctions("restore")},
+    "start 6":          func() {AnonimityFunctions("restore")},
+    "launch 6":         func() {AnonimityFunctions("restore")},
+    "exploit 6":        func() {AnonimityFunctions("restore")},
+    "execute 6":        func() {AnonimityFunctions("restore")},
+    "run restore":      func() {AnonimityFunctions("restore")},
+    "use restore":      func() {AnonimityFunctions("restore")},
+    "exec restore":     func() {AnonimityFunctions("restore")},
+    "start restore":    func() {AnonimityFunctions("restore")},
+    "launch restore":   func() {AnonimityFunctions("restore")},
+    "exploit restore":  func() {AnonimityFunctions("restore")},
+    "execute restore":  func() {AnonimityFunctions("restore")},
 
-        "? 7":              menus.HelpInfoAnonsurfReload,
-        "info 7":           menus.HelpInfoAnonsurfReload,
-        "help 7":           menus.HelpInfoAnonsurfReload,
-        "phishers":         menus.HelpInfoAnonsurfReload,
-        "info phishers":    menus.HelpInfoAnonsurfReload,
-        "help phishers":    menus.HelpInfoAnonsurfReload,
+    "? 6":              menus.HelpInfoTorsocksRestore,
+    "info 6":           menus.HelpInfoTorsocksRestore,
+    "help 6":           menus.HelpInfoTorsocksRestore,
+    "restore":          menus.HelpInfoTorsocksRestore,
+    "info restore":     menus.HelpInfoTorsocksRestore,
+    "help restore":     menus.HelpInfoTorsocksRestore,
 
-        "8":                func() {AnonimityModules("chains")},
-        "run 8":            func() {AnonimityModules("chains")},
-        "use 8":            func() {AnonimityModules("chains")},
-        "exec 8":           func() {AnonimityModules("chains")},
-        "start 8":          func() {AnonimityModules("chains")},
-        "launch 8":         func() {AnonimityModules("chains")},
-        "exploit 8":        func() {AnonimityModules("chains")},
-        "execute 8":        func() {AnonimityModules("chains")},
-        "run websites":     func() {AnonimityModules("chains")},
-        "use websites":     func() {AnonimityModules("chains")},
-        "exec websites":    func() {AnonimityModules("chains")},
-        "start websites":   func() {AnonimityModules("chains")},
-        "launch websites":  func() {AnonimityModules("chains")},
-        "exploit websites": func() {AnonimityModules("chains")},
-        "execute websites": func() {AnonimityModules("chains")},
+    "7":                func() {AnonimityFunctions("reload")},
+    "run 7":            func() {AnonimityFunctions("reload")},
+    "use 7":            func() {AnonimityFunctions("reload")},
+    "exec 7":           func() {AnonimityFunctions("reload")},
+    "start 7":          func() {AnonimityFunctions("reload")},
+    "launch 7":         func() {AnonimityFunctions("reload")},
+    "exploit 7":        func() {AnonimityFunctions("reload")},
+    "execute 7":        func() {AnonimityFunctions("reload")},
+    "run phishers":     func() {AnonimityFunctions("reload")},
+    "use phishers":     func() {AnonimityFunctions("reload")},
+    "exec phishers":    func() {AnonimityFunctions("reload")},
+    "start phishers":   func() {AnonimityFunctions("reload")},
+    "launch phishers":  func() {AnonimityFunctions("reload")},
+    "exploit phishers": func() {AnonimityFunctions("reload")},
+    "execute phishers": func() {AnonimityFunctions("reload")},
 
-        "? 8":              menus.HelpInfoAnonsurfChains,
-        "info 8":           menus.HelpInfoAnonsurfChains,
-        "help 8":           menus.HelpInfoAnonsurfChains,
-        "websites":         menus.HelpInfoAnonsurfChains,
-        "info websites":    menus.HelpInfoAnonsurfChains,
-        "help websites":    menus.HelpInfoAnonsurfChains,
+    "? 7":              menus.HelpInfoTorsocksReload,
+    "info 7":           menus.HelpInfoTorsocksReload,
+    "help 7":           menus.HelpInfoTorsocksReload,
+    "phishers":         menus.HelpInfoTorsocksReload,
+    "info phishers":    menus.HelpInfoTorsocksReload,
+    "help phishers":    menus.HelpInfoTorsocksReload,
 
-        "9":               func() {AnonimityModules("stop")},
-        "run 9":           func() {AnonimityModules("stop")},
-        "use 9":           func() {AnonimityModules("stop")},
-        "exec 9":          func() {AnonimityModules("stop")},
-        "start 9":         func() {AnonimityModules("stop")},
-        "launch 9":        func() {AnonimityModules("stop")},
-        "exploit 9":       func() {AnonimityModules("stop")},
-        "execute 9":       func() {AnonimityModules("stop")},
-        "run credits":     func() {AnonimityModules("stop")},
-        "use credits":     func() {AnonimityModules("stop")},
-        "exec credits":    func() {AnonimityModules("stop")},
-        "start credits":   func() {AnonimityModules("stop")},
-        "launch credits":  func() {AnonimityModules("stop")},
-        "exploit credits": func() {AnonimityModules("stop")},
-        "execute credits": func() {AnonimityModules("stop")},
+    "8":                func() {AnonimityFunctions("chains")},
+    "run 8":            func() {AnonimityFunctions("chains")},
+    "use 8":            func() {AnonimityFunctions("chains")},
+    "exec 8":           func() {AnonimityFunctions("chains")},
+    "start 8":          func() {AnonimityFunctions("chains")},
+    "launch 8":         func() {AnonimityFunctions("chains")},
+    "exploit 8":        func() {AnonimityFunctions("chains")},
+    "execute 8":        func() {AnonimityFunctions("chains")},
+    "run chains":       func() {AnonimityFunctions("chains")},
+    "use chains":       func() {AnonimityFunctions("chains")},
+    "exec chains":      func() {AnonimityFunctions("chains")},
+    "start chains":     func() {AnonimityFunctions("chains")},
+    "launch chains":    func() {AnonimityFunctions("chains")},
+    "exploit chains":   func() {AnonimityFunctions("chains")},
+    "execute chains":   func() {AnonimityFunctions("chains")},
 
-        "? 9":              menus.HelpInfoAnonsurfStop,
-        "info 9":           menus.HelpInfoAnonsurfStop,
-        "help 9":           menus.HelpInfoAnonsurfStop,
-        "credits":          menus.HelpInfoAnonsurfStop,
-        "info credits":     menus.HelpInfoAnonsurfStop,
-        "help credits":     menus.HelpInfoAnonsurfStop,
+    "? 8":              menus.HelpInfoTorsocksChains,
+    "info 8":           menus.HelpInfoTorsocksChains,
+    "help 8":           menus.HelpInfoTorsocksChains,
+    "chains":           menus.HelpInfoTorsocksChains,
+    "info chains":      menus.HelpInfoTorsocksChains,
+    "help chains":      menus.HelpInfoTorsocksChains,
 
-        "99":               scriptures.ScriptureNarators,
-        "run 99":           scriptures.ScriptureNarators,
-        "use 99":           scriptures.ScriptureNarators,
-        "exec 99":          scriptures.ScriptureNarators,
-        "start 99":         scriptures.ScriptureNarators,
-        "launch 99":        scriptures.ScriptureNarators,
-        "exploit 99":       scriptures.ScriptureNarators,
-        "execute 99":       scriptures.ScriptureNarators,
-        "run verses":       scriptures.ScriptureNarators,
-        "use verses":       scriptures.ScriptureNarators,
-        "exec verses":      scriptures.ScriptureNarators,
-        "start verses":     scriptures.ScriptureNarators,
-        "launch verses":    scriptures.ScriptureNarators,
-        "exploit verses":   scriptures.ScriptureNarators,
-        "execute verses":   scriptures.ScriptureNarators,
+    "9":                func() {AnonimityFunctions("stop")},
+    "run 9":            func() {AnonimityFunctions("stop")},
+    "use 9":            func() {AnonimityFunctions("stop")},
+    "exec 9":           func() {AnonimityFunctions("stop")},
+    "start 9":          func() {AnonimityFunctions("stop")},
+    "launch 9":         func() {AnonimityFunctions("stop")},
+    "exploit 9":        func() {AnonimityFunctions("stop")},
+    "execute 9":        func() {AnonimityFunctions("stop")},
+    "run stop":         func() {AnonimityFunctions("stop")},
+    "use stop":         func() {AnonimityFunctions("stop")},
+    "exec stop":        func() {AnonimityFunctions("stop")},
+    "start stop":       func() {AnonimityFunctions("stop")},
+    "launch stop":      func() {AnonimityFunctions("stop")},
+    "exploit stop":     func() {AnonimityFunctions("stop")},
+    "execute stop":     func() {AnonimityFunctions("stop")},
 
-        "? 99":             menus.HelpInfoVerses,
-        "verses":           menus.HelpInfoVerses,
-        "info 99":          menus.HelpInfoVerses,
-        "help 99":          menus.HelpInfoVerses,
-        "info verses":      menus.HelpInfoVerses,
-        "help verses":      menus.HelpInfoVerses,
+    "? 9":              menus.HelpInfoTorsocksStop,
+    "info 9":           menus.HelpInfoTorsocksStop,
+    "help 9":           menus.HelpInfoTorsocksStop,
+    "stop":             menus.HelpInfoTorsocksStop,
+    "info stop":        menus.HelpInfoTorsocksStop,
+    "help stop":        menus.HelpInfoTorsocksStop,
+
+    "99":               scriptures.ScriptureNarators,
+    "run 99":           scriptures.ScriptureNarators,
+    "use 99":           scriptures.ScriptureNarators,
+    "exec 99":          scriptures.ScriptureNarators,
+    "start 99":         scriptures.ScriptureNarators,
+    "launch 99":        scriptures.ScriptureNarators,
+    "exploit 99":       scriptures.ScriptureNarators,
+    "execute 99":       scriptures.ScriptureNarators,
+    "run verses":       scriptures.ScriptureNarators,
+    "use verses":       scriptures.ScriptureNarators,
+    "exec verses":      scriptures.ScriptureNarators,
+    "start verses":     scriptures.ScriptureNarators,
+    "launch verses":    scriptures.ScriptureNarators,
+    "exploit verses":   scriptures.ScriptureNarators,
+    "execute verses":   scriptures.ScriptureNarators,
+
+    "? 99":             menus.HelpInfoVerses,
+    "verses":           menus.HelpInfoVerses,
+    "info 99":          menus.HelpInfoVerses,
+    "help 99":          menus.HelpInfoVerses,
+    "info verses":      menus.HelpInfoVerses,
+    "help verses":      menus.HelpInfoVerses,
 
     }
     if action, exists := commandMap[cmd]; exists {
@@ -418,8 +433,10 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "proxy": &Proxy,
-        "module": &Module,
+        "proxies": &Proxy,
+        "func": &Function,
+        "module": &Function,
+        "function": &Function,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -436,8 +453,10 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "proxy": &Proxy,
-        "module": &Module,
+        "proxies": &Proxy,
+        "func": &Function,
+        "module": &Function,
+        "function": &Function,
     }
     if ptr, exists := unsetValues[key]; exists {
         *ptr = ""
@@ -447,16 +466,23 @@ func handleUnsetCommand(parts []string) {
     }
 }
 
-func executeModule() {
-    if Module == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter MODULE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+func executeFunction() {
+    if Function == ""{
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
-    AnonimityModules(Module)
+    AnonimityFunctions(Function)
 }
 
-func AnonimityModules(module string, args ...interface{}) {
-    fmt.Printf("\nMODULE => %s\n", module)
+// Helper functions
+func autoExecuteFunc(distro string, function string) {
+    //Distro = distro
+    //Function = function
+    executeFunction()
+}
+
+func AnonimityFunctions(Function string, args ...interface{}) {
+    fmt.Printf("\nFunction => %s\n", Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         utils.SetProxy(Proxy)
@@ -474,16 +500,16 @@ func AnonimityModules(module string, args ...interface{}) {
           "stop": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
     }
 
-    if action, exists := commands[module]; exists {
+    if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sInvalid module %s. Use %s'help' %sfor available modules.\n", bcolors.YELLOW, bcolors.ENDC, module, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
     }
 }
 
 func configTorrc() {
-    if strings.Contains(flaG(), "anonsurf") {
-        fmt.Print(bcolors.DARKCYAN + "\n              Anonsurf: " + bcolors.ENDC + "is already running ...\n" + bcolors.ENDC)
+    if strings.Contains(flaG(), "torsocks") {
+        fmt.Print(bcolors.DARKCYAN + "\n              Torsocks: " + bcolors.ENDC + "is already running ...\n" + bcolors.ENDC)
         //os.Exit(1)
     }
 
@@ -509,7 +535,7 @@ func configTorrc() {
     } else {
         fmt.Println(bcolors.BLUE + "\n(" + bcolors.ORANGE + "Configuring Torrc ..." + bcolors.ENDC)
         time.Sleep(400 * time.Millisecond)
-        cmd := exec.Command("cp", "/etc/tor/torrc", "/etc/tor/torrc.bak_anonsurf")
+        cmd := exec.Command("cp", "/etc/tor/torrc", "/etc/tor/torrc.bak_torsocks")
         cmd.Run()
         file, err := os.Create("/etc/tor/torrc")
         if err != nil {
@@ -703,7 +729,7 @@ func resolvConfig(rSwitch int) int {
         if !found {
             fmt.Println(bcolors.BLUE + "(" + bcolors.ORANGE + "Configuring resolv.conf.." + bcolors.ENDC)
             time.Sleep(400 * time.Millisecond)
-            cmd := exec.Command("cp", "/etc/resolv.conf", "/etc/resolv.conf.backup_anonsurf")
+            cmd := exec.Command("cp", "/etc/resolv.conf", "/etc/resolv.conf.backup_torsocks")
             cmd.Run()
             file, err := os.Create("/etc/resolv.conf")
             if err != nil {
@@ -729,9 +755,9 @@ func resolvConfig(rSwitch int) int {
 
 func termiNate() {
     trigger := 0
-    if _, err := os.Stat("/etc/resolv.conf.backup_anonsurf"); err == nil {
+    if _, err := os.Stat("/etc/resolv.conf.backup_torsocks"); err == nil {
         trigger++
-        cmd := exec.Command("mv", "/etc/resolv.conf.backup_anonsurf", "/etc/resolv.conf")
+        cmd := exec.Command("mv", "/etc/resolv.conf.backup_torsocks", "/etc/resolv.conf")
         cmd.Stdin = strings.NewReader("yes\n")
         cmd.Run()
         fmt.Print(bcolors.BLUE + "\n(" + bcolors.ORANGE + "Reverting to default resolv.conf..\n" + bcolors.ENDC)
@@ -739,9 +765,9 @@ func termiNate() {
         fmt.Print("                                                    " + bcolors.GREEN + "Done " + bcolors.ORANGE + "✔" + bcolors.BLUE +")\n" + bcolors.ENDC)
     }
 
-    if _, err := os.Stat("/etc/tor/torrc.bak_anonsurf"); err == nil {
+    if _, err := os.Stat("/etc/tor/torrc.bak_torsocks"); err == nil {
         trigger++
-        cmd := exec.Command("mv", "/etc/tor/torrc.bak_anonsurf", "/etc/tor/torrc")
+        cmd := exec.Command("mv", "/etc/tor/torrc.bak_torsocks", "/etc/tor/torrc")
         cmd.Stdin = strings.NewReader("yes\n")
         cmd.Run()
         fmt.Print(bcolors.BLUE + "(" + bcolors.ORANGE + "Dropping torrc file & restoring default..\n" + bcolors.ENDC)
@@ -749,13 +775,13 @@ func termiNate() {
         fmt.Print("                                                    " + bcolors.GREEN + "Done " + bcolors.ORANGE + "✔" + bcolors.BLUE +")\n" + bcolors.ENDC)
     }
 
-    if strings.Contains(flaG(), "anonsurf") {
+    if strings.Contains(flaG(), "torsocks") {
         trigger++
         fmt.Print(bcolors.BLUE + "(" + bcolors.ORANGE + "Restoring Default Iptables rules..\n" + bcolors.ENDC)
-        if _, err := os.Stat("/etc/iptables_rules_anonsurf.bak"); err == nil {
-            cmd := exec.Command("iptables-restore", "<", "/etc/iptables_rules_anonsurf.bak")
+        if _, err := os.Stat("/etc/iptables_rules_torsocks.bak"); err == nil {
+            cmd := exec.Command("iptables-restore", "<", "/etc/iptables_rules_torsocks.bak")
             cmd.Run()
-            os.Remove("/etc/iptables_rules_anonsurf.bak")
+            os.Remove("/etc/iptables_rules_torsocks.bak")
         } else {
             resetToDefault(true, true)
         }
@@ -763,7 +789,7 @@ func termiNate() {
     }
 
     if trigger == 0 {
-        fmt.Printf("\n%s%sNo instances of anonsurf have been executed%s\n", bcolors.RED, bcolors.BOLD, bcolors.ENDC)
+        fmt.Printf("\n%s%sNo instances of torsocks have been executed%s\n", bcolors.RED, bcolors.BOLD, bcolors.ENDC)
         fmt.Printf("%s%s[Exiting ...]%s\n", bcolors.GREEN, bcolors.BOLD, bcolors.ENDC)
         //os.Exit(1)
     } else {
@@ -775,8 +801,8 @@ func termiNate() {
 }
 
 func torCircuit() {
-    if !strings.Contains(flaG(), "anonsurf") {
-        fmt.Printf("\n%sYou gotta start anonsurf first%s\n", bcolors.Colors(), bcolors.ENDC)
+    if !strings.Contains(flaG(), "torsocks") {
+        fmt.Printf("\n%sYou gotta start torsocks first%s\n", bcolors.Colors(), bcolors.ENDC)
         //os.Exit(1)
     }
     exec.Command("service", "tor", "reload").Run()
@@ -836,7 +862,7 @@ func configFirewall() {
     if strings.TrimSpace(firewallGreen) == "0" {
         fmt.Printf(" %sDefault rules are configured, skipping..%s\n", bcolors.BLUE, bcolors.ENDC)
     } else {
-        cmd := exec.Command("iptables-save", ">", "/etc/iptables_rules_anonsurf.bak")
+        cmd := exec.Command("iptables-save", ">", "/etc/iptables_rules_torsocks.bak")
         cmd.Run()
         fmt.Print("                                                    " + bcolors.GREEN + "Done " + bcolors.ORANGE + "✔" + bcolors.BLUE +")\n" + bcolors.ENDC)
     }
@@ -883,7 +909,7 @@ iptables -t raw -X
 iptables -t nat -A OUTPUT -d $_virt_addr -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports $_trans_port
 
 # nat dns requests to Tor
-iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $_dns_port -m comment --comment "anonsurf_triggered"
+iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $_dns_port -m comment --comment "torsocks_triggered"
 
 # Don't nat the Tor process, the loopback, or the local network
 iptables -t nat -A OUTPUT -m owner --uid-owner $_tor_uid -j RETURN

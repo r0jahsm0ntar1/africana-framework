@@ -6,8 +6,9 @@ import(
     "bcolors"
 )
 var (
-    Lhost = LhostIp
-    LhostIp, _ = utils.GetDefaultIP()
+    Lhost, _ = utils.GetDefaultIP()
+    Gateway, _ = utils.GetDefaultGatewayIP()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
 )
 
 func MenuZero() { 
@@ -33,14 +34,14 @@ func MenuOne() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %skali
-%s 2. %sarch
-%s 3. %subuntu
+%s 1. %sauto
+%s 2. %skali
+%s 3. %sarch
 %s 4. %smacos
-%s 5. %sandroid
-%s 6. %swindows
-%s 7. %supdate
-%s 8. %sauto
+%s 5. %subuntu
+%s 6. %sandroid
+%s 7. %swindows
+%s 8. %supdates
 %s 9. %suninstall
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
@@ -52,15 +53,15 @@ func MenuTwo() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sinstall
-%s 2. %sstart anonymizing
-%s 3. %sconnect to a different exit-node
-%s 4. %scheck if using tor
-%s 5. %scheck current IP address
-%s 6. %sback up & resets Iptables to default
-%s 7. %sreload anonsurf
-%s 8. %sview outgoing traffick
-%s 9. %sget back to the surface-web
+%s 1. %ssetups
+%s 2. %svanish
+%s 3. %sstatus
+%s 4. %storip
+%s 5. %schains
+%s 6. %sreload
+%s 7. %sexitnode
+%s 8. %srestore
+%s 9. %sstop
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
@@ -79,7 +80,7 @@ func MenuThree() {
 %s 6. %sSniff packets
 %s 7. %sLaunch killer Responder
 %s 8. %sLaunch M.I.B
-%s 9. %sStart XSS Injection
+%s 9. %sStart XSS Injection 
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
@@ -121,18 +122,18 @@ func MenuThreeFour() {
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
-func MenuFour() {
+func MenuFouR() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sandroids
-%s 2. %siphones
+%s 1. %slinux
+%s 2. %smackos
 %s 3. %swindows
-%s 4. %smackos
-%s 5. %slinux
+%s 4. %siphones
+%s 5. %sandroids
 %s 6. %swebsites
-%s 7. %sbackdoor
-%s 8. %sevasions
+%s 7. %sevasions
+%s 8. %sbackdoors
 %s 9. %slisteners
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
@@ -140,210 +141,22 @@ func MenuFour() {
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
-func MenuFourOne() {
+func MenuFour() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sandrorat
-%s 2. %steardroid
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourTwo() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sto add
-%s 2. %sto add
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourThree() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sblackjack
+%s 1. %sghost
 %s 2. %sshellz
-%s 3. %spowerjoker
-%s 4. %smeterpeter
-%s 5. %shavoc C2
-%s 6. %sshikataganai
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
+%s 3. %slistener
+%s 4. %sandrorat
+%s 5. %steardroid
+%s 6. %sblackjack
+%s 7. %shoaxshell
+%s 8. %snoisemaker
+%s 9. %scodebreaker
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourFour() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sseashell.
-%s 2. %sto add
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourFive() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sto add
-%s 2. %sto add
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-
-func MenuFourSix() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sto add
-%s 2. %sto add
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourSeven() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %snoisemakers
-%s 2. %scodebreakers
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourEight() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sgh0x0st
-%s 2. %schameleon
-%s 3. %sto add
-%s 4. %sto add
-%s 5. %sto add
-%s 6. %sto add
-%s 7. %sto add
-%s 8. %sto add
-%s 9. %sto add
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourNine() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sblackjack
-%s 2. %sshellzgen
-%s 3. %spowerjoker
-%s 4. %smeterpeter
-%s 5. %shavoc
-%s 6. %steardroid
-%s 7. %sandroidrat
-%s 8. %schameleon
-%s 9. %sgh0x0st
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourSevenOne() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %sncat
-%s 2. %sblackjack
-%s 3. %smetasploit
-%s 4. %sMeterPeter
-%s 5. %s.
-%s 6. %s.
-%s 7. %s.
-%s 8. %s.
-%s 9. %s.
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func MenuFourSevenTwo() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %slync.ico                                   %s 10. %svlc.ico
-%s 2. %sexcel.ico                                  %s 11. %sword.ico
-%s 3. %saccess.ico                                 %s 12. %svisio.ico
-%s 4. %sautorun.ico
-%s 5. %spdf.ico
-%s 6. %sproject.ico
-%s 7. %spublisher.ico
-%s 8. %spowerpoint.ico
-%s 9. %srat.ico
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func MenuFive() {
@@ -432,8 +245,8 @@ func MenuSixTwo() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %saircrack_ng
-%s 2. %sjohn
+%s 1. %sjohn
+%s 2. %saircrack_ng
 %s 3. %sto add
 %s 4. %sto add
 %s 5. %sto add
@@ -574,7 +387,7 @@ func MenuEightFive() {
     fmt.Println(bcolors.BLUE + "[ 5. Run only recon & vuln scan security checks.........🦍] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 6. Run CVE scans on the target host...................🍹] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 7. Search for(critical vulns & easy to exploit)......🍄] " + bcolors.ENDC)
-    fmt.Println(bcolors.BLUE + "[ 8. Automate all modules & security checks on target...🤖] " + bcolors.ENDC)
+    fmt.Println(bcolors.BLUE + "[ 8. Automate all Functions & security checks on target...🤖] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 9. View scaned Nettacker report list..................🥝] " + bcolors.ENDC)
     fmt.Println(bcolors.BLUE + "[ 0. Go back............................................🧬] " + bcolors.ENDC)
     fmt.Println(bcolors.Colors() + ` ¯\_(ツ)_/¯                     ` + bcolors.YELLOW + "🎱99. " + bcolors.DARKCYAN + "Guide! " + bcolors.YELLOW + "🎲00. " + bcolors.DARKCYAN + "Help!" + bcolors.BLUE + "📜)" + bcolors.ENDC)
@@ -588,7 +401,7 @@ func HelpEightFive() {
     fmt.Println(bcolors.YELLOW + "    Vuln scansec checks " + bcolors.ENDC + ": 5. Check for known vulnerbilities on the website that are easy to exploit." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "              CVE scans " + bcolors.ENDC + ": 6. Scan the website for a collection of discovered CVES ready and easy to attack." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "        Critical vulns  " + bcolors.ENDC + ": 7. The scanner will scan for critical & easy to exploit bugs like SQLinjection, XSS and Others." + bcolors.ENDC)
-    fmt.Println(bcolors.YELLOW + "   Automate all modules " + bcolors.ENDC + ": 8. For lazy hackers this option got your needs. It will compine all the above tacticks to one and show you findings." + bcolors.ENDC)
+    fmt.Println(bcolors.YELLOW + " Automate all Functions " + bcolors.ENDC + ": 8. For lazy hackers this option got your needs. It will compine all the above tacticks to one and show you findings." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "     View scanned report" + bcolors.ENDC + ": 9. Show all logs of scanned domains with findings." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + " Exit & Go to Main Menu " + bcolors.ENDC + ": 0. Exit and go back to previous menu." + bcolors.ENDC)
     fmt.Println(bcolors.YELLOW + "   Current working Menu " + bcolors.ENDC + ": 99. Print current working menu and its options." + bcolors.ENDC)
@@ -698,90 +511,88 @@ func HelpInfoMenuMain() {
 Usage: ./africana [options]
 
 Common options:
-    -a, --auto           Start africana in automation mode 'start from main menu'
+    -a, --auto          Start africana in automation mode 'start from main menu'
 
 Setup options:
-    -i, --install        Launch Installation menu to install neede dependencies
-    -u, --update         Update africana and africana-base tools
+    -i, --install       Launch Installation menu to install neede dependencies
+    -u, --update        Update africana and africana-base tools
 
 Framework options:
-    -l, -L, --logs       Show logs in terminal
-    -v, -V, --version    Show version
+    -l, -L, --logs      Show logs in terminal
+    -v, -V, --version   Show version
 
 Console options:
-    -t, --anonsurf       Launch anonsurf menu to torify your system.
-    -n, --networks       Start internal network attacks.
-    -m, --exploits       Generate undetectebal RATs(Launch c2s for all systems. Evasions also included)
-    -w, --wireless       From wifi, bluetooth and other wireles attack vectors.
-    -p, --crackers       Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
-    -f, --phishers       Perform Phishing attacks.
-    -x, --websites       Launch Web Penetration engines.
-    -c, --credits        Show who developes africana(& third party tools developers)
-    -b, --verses         Launch Bible verses in an uniform way manner as used in the framework.
-    -g, --guide          Watch tutarials on YouTube: %shttps://youtube.com/@RojahsMontari%s.
-    -h, --help           Show this message.
-
-`, bcolors.BOLD, bcolors.ENDC)
+    -t, --torsocks      Launch torsocks menu to torify your system.
+    -n, --networks      Start internal network attacks.
+    -e, --exploits      Generate undetectebal R.A.Ts and (Launch c2s for all systems. Evasions also included)
+    -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors.
+    -c, --crackers      Crack(NTLMS, HASHES, PCAPS) & bruteforce(SSH, FTP, SMB, RPC etc.)
+    -p, --phishers      Perform almost all advanced Phishing attacks.
+    -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
+    -k, --credits       Show who developes and mentains africana-framework and (third party tools developers)
+    -b, --verses        Launch Bible verses in an uniform way manner as used in the framework.
+    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
+    -h, --help          Show this message.
+`, bcolors.DARKGREEN, bcolors.ENDC, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpInfoMenuZero() {
-    fmt.Printf(`%s
-    Command       Description%s
-    -------       -----------
-    ?                 Help menu. Alias to (help)
-    banner            Display an awesome africana banner
-    clear             Clear the working screen or (flag 'history' clear history)
-    exit              Exit the console
-    features          Display the list of not yet released features that can be opted in to
-    guide             Watch tutarials on YouTube: https://youtube.com/@RojahsMontari
-    history           Show command history
-    menu              Print the menu of the current phase. Alias to letter(m)
-    modules           Print all list of modules in the phase given
-    quit              Exit the console
-    set               Sets a context-specific variable to a value
-    sleep             Do nothing for the specified number of seconds
-    tips              Show a list of useful productivity tips
-    version           Show the framework and console library version numbers
+    fmt.Printf(`
+    %sCommand             Description%s
+    -------             -----------
+    ?                   Help menu. Alias to (h, help)
+    banner              Display an awesome africana banner
+    clear               Clear the working screen or (flag 'history' clear history)
+    exit                Exit the console
+    features            Display the list of not yet released features that can be opted in to
+    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
+    history             Show command history
+    menu                Print the menu of the current phase. Alias to letter(m)
+    quit                Exit the console
+    set                 Sets a context-specific variable to a value
+    sleep               Do nothing for the specified number of seconds
+    tips                Show a list of useful productivity tips
+    version             Show the framework and console library version numbers
 
-%sModule Commands%s
+%sFunction Commands%s
 ---------------
 
-    %sCommand      Description%s
-    -------      -----------
-    advanced       Displays advanced options for one or more modules
-    back           Move back from the current context
-    info           Displays information about one or more modules
-    list           List the module stack
-    options        Displays global options or for one or more modules
-    run            Run a selected module
-    search         Searches module names and descriptions
-    show           Displays modules of a given type, or all modules
-    use            Interact with a module by name or search term
+    %sCommand             Description%s
+    -------             -----------
+    advanced            Displays advanced options for one or more modules
+    back                Move back from the current context
+    info                Displays information about one or more modules
+    list                List the Function stack
+    options             Displays global options or for one or more modules
+    run                 Run a selected Function
+    search              Searches Function names and descriptions
+    show                Displays modules of a given type, or all modules
+    use                 Interact with a module by name or search term/index
 
 %sDeveloper Commands%s
 ------------------
 
-    %sCommand      Description%s
-    -------      -----------
-    bash           Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
-    logs           Display framework.log paged to the end if possible
-    time           Time how long it takes to run a particular command
+    %sCommand             Description%s
+    -------             -----------
+    bash                 Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
+    logs                 Display framework.log paged to the end if possible
+    time                 Time how long it takes to run a particular command
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoRun() {
     fmt.Printf(`
-Usage: run [module]
+Usage: run [Function]
 
-Run a module
+Run a Function
     show modules to list modules or <show all>
 
 %sCommand      Description%s
 -------      -----------
-run enables you to Interact with a module by name or search term/index.
+run enables you to Interact with a Function by name or search term/index.
       alias to "use", "exec", "start", "launch", "exploit", "execute".
 
 Examples:
@@ -797,7 +608,7 @@ Usage: options
 Examples:
     options alias to [show options]
 
-Just like show options command, options shows commands in which a sub module can run in a given submenu.
+Just like show options command, options shows commands in which a sub Function can run in a given submenu.
 
 `)
 }
@@ -809,22 +620,22 @@ Usage: show [all], [modules], [options]
 Examples:
   show modules
 
-%s[*]%s Valid parameters for the "show" command are:  all, modules, options
-%s[*]%s Additional module-specific parameters are: missing, advanced
+%s[*]%s Valid parameters for the %s"show" %scommand are: all, modules, options
+%s[*]%s Additional module-specific parameters are: missing, advanced, evasion, targets, actions
 
-`, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+`, bcolors.BLUE, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
 
 func HelpInfoUse() {
     fmt.Printf(`
 Usage: use <name|term>
 
-Just like start & run, use enables you to Interact with a module by name or search term/index.
-If a module name is not found, it will be treated as a search term.
+Just like start & run, use enables you to Interact with a Function by name or search term/index.
+If a Function name is not found, it will be treated as a search term.
 An index from the previous search results can be selected if desired.
 
 Examples:
-  use setups, anonsurf, networks, exploits, wireless, phishers, websites, credits, verses
+  use setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
 
   use setups
   use <name>
@@ -836,12 +647,12 @@ func HelpInfoStart() {
     fmt.Printf(`
 Usage: start <name|term>
 
-Just like use & run, start enables you to Interact with a module by name or search term/index.
-If a module name is not found, it will be treated as a search term.
+Just like use & run, start enables you to Interact with a Function by name or search term/index.
+If a Function name is not found, it will be treated as a search term.
 An index from the previous search results can be selected if desired.
 
 Examples:
-  start setups, anonsurf, networks, exploits, wireless, phishers, websites, credits, verses
+  start setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
 
   start setups
   start <name>
@@ -853,14 +664,14 @@ func HelpInfoList() {
     fmt.Printf(`
 Usage: list <name|term>
 
-Show all modules or sub-modules in a specific face you are. If you are in modules
-setups, list modules command, will list all sub-modules available in that module.
+Show all modules or sub-Functions in a specific face you are. If you are in modules
+setups, list modules command, will list all sub-modules available in that Function.
 
 Examples:
   list modules
 
 %s[*]%s Valid parameters for the "list" command are: modules, all
-%s[*]%s Additional module-specific parameters are: missing, advanced
+%s[*]%s Additional Function-specific parameters are: missing, advanced
 
 `, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
 }
@@ -872,7 +683,7 @@ Usage: set [options] [name] [value]
 Set the given option to value. If value is omitted, print the current value.
 If both are omitted, print options that are currently set.
 
-If run from a module context, this will set the value in the module's
+If run from a Function context, this will set the value in the Function's
 datastore: Use -g to operate on the global datastore.
 
 If setting a PAYLOAD, this command can take an index from 'show payloads'.
@@ -888,25 +699,25 @@ OPTIONS:
 
 func HelpInfo() {
     fmt.Printf(`
-Usage: info <module name>
+Usage: info <Function name>
 
 Examples:
-  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
+  info setups, torsocks, internals, exploits, wireless, phishers, webs, verses
 
-Queries the supplied module or modules for information. If no module is given,
-show info for the currently active module.
+Queries the supplied Function or modules for information. If no Function is given,
+show info for the currently active Function.
 
 `)
 }
 
 func HelpInfoTips() {
     fmt.Printf(`
-Usage: getips <module name>
+Usage: getips <Function name>
 
 Examples:
-  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
+  info setups, torsocks, internals, exploits, wireless, phishers, webs, verses
 
-Gives you special information about a module and how to successfully use it in
+Gives you special information about a Function and how to successfully use it in
 real life scenario.
 
 `)
@@ -923,12 +734,12 @@ Prints feature plans for africana. Ex. modules to be added, what to be corrected
 
 func HelpSetupsInfo() {
     fmt.Printf(`
-Usage: info <module name>
+Usage: info <Function name>
 
 Examples:
-  info setups, anonsurf, internals, exploits, wireless, phishers, webs, verses
+  info setups, torsocks, internals, exploits, wireless, phishers, webs, verses
 
-Queries the supplied module or modules for information. If no module is given, show info for the currently active module.
+Queries the supplied Function or modules for information. If no Function is given, show info for the currently active Function.
 
 `)
 }
@@ -938,7 +749,7 @@ func HelpUsageSetups() {
 Usage: run [setups]
 
 Description:
-  This module enables you to Install, uninstall, update & mentain africana
+  This Function enables you to Install, uninstall, update & mentain africana
 
 `)
 }
@@ -947,317 +758,84 @@ func HelpInfoExecute() {
     fmt.Printf(`
 %sOptions%s:
 -------
-    %srun%s : Launch the selected module. Alias to (start, execute)
+    %srun%s : Launch the selected Function. Alias to (start, execute)
 
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func ListMainModules() {
+func ListMainFunctions() {
     fmt.Printf(`
-%sMain modules%s:
--------------
+%sMain Functions%s:
+--------------
 
-  # %sName           Description%s
-  - ----           -----------
-  %s1.%s setups        : Install, Uninstall africana-framework.
-  %s2.%s anonsurf      : Launch anonsurf menu to torify your system.
-  %s3.%s networks      : Start internal network attacks.
-  %s4.%s exploits      : Generate undetectebal RATs (Launch c2s for all systems. Evasions also included)
-  %s5.%s wireless      : From wifi, bluetooth and other wireles attack vectors.
-  %s6.%s crackers      : Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
-  %s7.%s phishers      : Perform Phishing attacks.
-  %s8.%s websites      : Launch Web Penetration engines.
-  %s9.%s credits       : Show who developes africana (& third party tools developers)
-  %s99.%s verses       : Launch Bible verses in an uniform way manner as used in the framework.
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s   setups%s: Install, Update, Repair or Uninstall africana-framework.
+  %s2. %s torsocks%s: Configure the system for strictly tight anonymity.(fix dns leak, changemac in auto boot)
+  %s3. %s networks%s: Start internal network attacks. From sniffing, injecting packets to hooking hosts.
+  %s4. %s exploits%s: Generate undetectebal R.A.Ts and (Launch next gen c2s to attack all systems. Evasions also included)
+  %s5. %s wireless%s: From wifies, bluetooths, cantools and other wireless networks attack vectors.
+  %s6. %s crackers%s: Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+  %s7. %s phishers%s: Perform almost all kinds of Phishing attacks. With OPT Bypass.
+  %s8. %s websites%s: Launch Web Penetration testing engines with full free bugbounty automation kit.
+  %s9. %s  credits%s: Show who developes and mentains africana-framework with (third party tools developers)
+  %s99.%s   verses%s: Launch Bible verses in an uniform way manner as used in the framework.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+%sex. %s%susage%s:
+--  ------
+
+    set module setups or -> use setups
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoMain() {
     fmt.Printf(`
-       Name: main
-     Module: main
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: main
+   %sFunction%s: src/core/africana
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
-Provided by:
-  Created by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Distros
+   -> 0   All Distros
 
-Description:
-  This module contains all africana-framework sub modules
-
-%sMain modules%s:
--------------
-
-  # %sName           Description%s
-  - ----           -----------
-  %s1.%s setups        : Install, Uninstall africana-framework.
-  %s2.%s anonsurf      : Launch anonsurf menu to torify your system.
-  %s3.%s networks      : Start internal network attacks.
-  %s4.%s exploits      : Generate undetectebal RATs (Launch c2s for all systems. Evasions also included)
-  %s5.%s wireless      : From wifi, bluetooth and other wireles attack vectors.
-  %s6.%s crackers      : Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
-  %s7.%s phishers      : Perform Phishing attacks.
-  %s8.%s websites      : Launch Web Penetration engines.
-  %s9.%s credits       : Show who developes africana (& third party tools developers)
-  %s99.%s verses       : Launch Bible verses in an uniform way manner as used in the framework.
-
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+%sDescription%s:
+-----------
+  This is the main module containing all africana-framework functions.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+ ListMainFunctions()
 }
 
-func HelpInfoPmanager() {
+func MainOptions() {
     fmt.Printf(`
-       Name: install, update, setups
-     Module: src/core/setups
-   Platform: All
-       Arch: x64, x86, amd_64, android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+%sModule options %s(main/africana_run.fn):
 
-Provided by:
-  Created by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Distros
-
-Description:
-  This module enables you to Install, uninstall, update & mentain africana
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpInfoAnonsurf() {
-    fmt.Printf(`
-       Name: anonsurf
-     Module: src/securities/anonsurf
-   Platform: Linux/ Android/ Mack/ Windows
-       Arch: x64_x86
- Privileged: Yes
-    License: Africana Framework License (BSD)
-       Rank: Best
-  Disclosed: 2024-03-14
-
-Provided by:
-  r0jahsm0ntar1
-  Rojahs Montari <rojahsmontari@gmail.com>
-
-Available targets:
-      Id  Name
-      --  ----
-      1   kali
-      2   arch
-      3   ubuntu
-      4   macos
-      5   android
-      6   windows
-
-Check supported:
-  Yes
-
-Basic options:
-  Name           Current Setting  Required  Description
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  module         none             yes       The module to run. ex.(setups, start, exitnode, status, ipaddress, restore, reload, chains, stop)
+  module         none             yes       Module to interact with. supported modules. -> (setups, torsocks, networks, exploits, wireless, crackers, phishers, websites, credits, verse).
+                                            Integer support.   -> (1 2 3 4 5 6 7 8 9 0 and 99)
+%sex. %s%susage%s:
+--  ------
+  set module setups or -> use 1, use setups, execute 1, execute setups .etc
 
-Usage:
-  set module start
-  run (start, execute, exec, launch)
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-Description:
-  Anonsurf is a tool derived from -. It configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in to completely anonimize your system through Tor network.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func AnonsurfOptions() { 
-    fmt.Printf(`
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  module         none             yes       The module to run. ex.(setups, start, exitnode, status, ipaddress, restore, reload, chains, stop)
-
-Usage:
-  set module start
-  run (start, execute, exec, launch)
-
-Description:
-  Anonsurf is a tool derived from -. It configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in to completely anonimize your system through Tor network.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpInfoNetworks() {
-    fmt.Printf(`
-       Name: Networks
-     Module: /src/internals
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by _
-   Edited by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All linux/ macos
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  Interface      eth0             Yes       Set default interface to use for attacking
-  Target         none             Yes       Set target to be attacked
-  Discover       Auto             Auto      Start scanning for connected devices in the network
-  Port discovery Auto             Auto      Scan set Target for open ports
-  Vuln Scan      Auto             Auto      Launch vulnerbility scanner on the selected target
-  Active Dir     Auto             Auto      Recon for Active Directory on the selected target
-  Exploit        Auto             Auto      Launch Exploit attacks on Active Directory services on the target
-  Sniff          Auto             Auto      Sniff all Internal Packets
-  Responder      Auto             Auto      Start responder with IPv6 Support ready and set accordingly to attack
-                                            Local machines pricesly.
-  M.I.B          Auto             Auto      Start Beefxss/ Bettercap & Ettercap For man in the browser attacks.
-  XSS Injection  Auto             Auto      Not yet implimented.
-
-Description:
-  Networks is a module enriched with creative attacking faces to help redtemers in successfully attacking local area networks with ease.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpInfoExploits() {
-    fmt.Printf(`
-       Name: exploit
-     Module: /src/exploit
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by _
-   Edited by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Distros
-
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  LHOST          eth0             yes       The listen address (an interface may be specified)
-  LPORT          9999             yes       The listen port
-
-Malware sub modules:
---------------------
-
-  #   Name         Description
-  -   ----         -----------
-
-  1 androids      : This module Generates android exploits and launches Listeners.
-  2 iphones       : Contains Iphone c2s and malware generation engines.
-  3 windows       : Lethal C2s that generates obfsicated powershell exploits and handles variety of reverse connection.
-  4 mackos        : A collection of mackos c2s with backdoor generators.
-  5 guineas       : C2s for Linux based distros with backdoor generators.
-  6 websites      : Backdoors for backends with their listeners
-  7 backdoors     : These module contains a collection of persisten mechanisims for variety Distros.
-  8 stealths      : Colections of malware evasion tools.
-  9 listeners     : Launch a backdoor listener for any reverse shells.
-
-Malware sub modules:
-  blackjack, shellzgen, powerjoker, meterpeter, havoc, teardroid, androidrat, chameleon, gh0x0st
-
-Description:
-  exploit is a module enriched with insane frameworks and c2s to help redtemers in successfully Perform attacks with ease avading most AVS.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func HelpInfoWireless() {
-    fmt.Printf(`
-       Name: Wireless
-     Module: /src/wireless
-   Platform: All linux/ Macos
-       Arch: x64, x86
- Privileged: Yes
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
-
-Provided by:
-  Created by _
-   Edited by r0jahsm0ntar1
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All linux/ macos
-
-Check supported:
-
-Basic options:
---------------
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  FACE           wlan0            Yes       Set default interface to use for attacking
-  SSID           E.T.M            No        The ssid name to be used while spoofing targets
-  MODULE         _____            Yes       The module to be used eg. wifite, fluxion, bettercap, airgeddon, wifipumpkin(3)
-
-%sWireless modules%s:
------------------
-
-  # %sName           Description%s
-  - ----             -----------
-  %s1.%s wifite        : Wifite is a tool to audit WEP or WPA encrypted wireless networks.
-  %s2.%s fluxion       : Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s3.%s bettercap     : Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks.
-  %s4.%s airgeddon     : Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s5.%s wifipumpkin   : wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
-  %s6.%s wifipumpkin3  : This option runs wifipumpkin3 in manual mode where africana sets everything for you.
-
-Description:
-  Wireless is a module enriched with creative attacking faces to help redtemers in successfully attacking wireless networks with ease.
-
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoCrackers() {
     fmt.Printf(`
        Name: Crackers
-     Module: /src/crackers
+     module: /src/crackers
    Platform: All linux/ Macos
        Arch: x64, x86
  Privileged: Yes
@@ -1286,15 +864,13 @@ Basic options:
 Description:
   Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
 
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`)
 }
 
 func HelpInfoPhishers() {
     fmt.Printf(`
        Name: Phishers
-     Module: /src/phishers
+     module: /src/phishers
    Platform: All linux/ Macos
        Arch: x64, x86
  Privileged: Yes
@@ -1328,7 +904,7 @@ Description:
 func HelpInfoWebsites() {
     fmt.Printf(`
        Name: Websites
-     Module: /src/websites
+     module: /src/websites
    Platform: All linux/ Macos
        Arch: x64, x86
  Privileged: Yes
@@ -1361,7 +937,7 @@ Description:
 func HelpInfoCredits() {
     fmt.Printf(`
        Name: Credits
-     Module: /src/credits
+     module: /src/credits
    Platform: All Distros
        Arch: x64, x86
  Privileged: Yes
@@ -1392,7 +968,7 @@ Description:
 func HelpInfoVerses() {
     fmt.Printf(`
        Name: Verses
-     Module: /src/verses
+     module: /src/verses
    Platform: All Distros
        Arch: x64, x86
  Privileged: Yes
@@ -1420,44 +996,105 @@ Description:
 `)
 }
 
+func HelpInfoSetups() {
+    fmt.Printf(`
+       %sName%s: setups
+   %sFunction%s: src/core/setups
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  This modules enables you to Install, uninstall, update & mentain africana-framework.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+     ListSetupsDistros()
+}
+
 func ListSetupsDistros() {
     fmt.Printf(`
-%sDistros%s:
---------
+%sSupported Distros%s:
+--------- -------
 
-  # %sName           Description%s
-  - ----           -----------
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s     kali%s: Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
+  %s2. %s     arch%s: Tools will be installed in any Arch-Linux Distros using Blackarch repo.
+  %s3. %s   ubuntu%s: This function will install africana-framework in Ubuntu-Linux.
+  %s4. %s    macos%s: Under development. Install africana on MackingTosh systems.
+  %s5. %s  android%s: Install africana-framework in Termux using chroot environment.
+  %s6. %s  windows%s: Under development. But can run if tools well installed using commando vm.
 
-  %s1. %skali          : Installs africana-framework in Kali-Linux
-  %s2. %sarch          : Tools will be installed in any arch-linux distro
-  %s3. %subuntu        : This Module installs africana-framework in Ubuntu-Linux
-  %s4. %smacos         : Under development. Install africana on macking tosh systems
-  %s5. %sandroid       : Install africana-framework in Tmux using chroot environment
-  %s6. %swindows       : Under development. But can run if tools well installed using commando vm
+%sex. %s%susage%s:
+--  ------
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+  set distro kali
+  set function install -> other functions include (update, repair and uninstall)
+  run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func ListSetupsModules() {
+func ListSetupsFunction() {
     fmt.Printf(`
-%sSetup modules%s:
---------------
+%sSetups functions%s:
+----------------
 
-  # %sName           Description%s
-  - ----           -----------
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s     auto%s: Auto detect system and do the necessary.
+  %s2. %s   repair%s: Repair africana-framework if broken or with issues.
+  %s3. %s   update%s: Get new release of africana-framework from github and install it.
+  %s4. %s  install%s: Installs africana in selected distro.
 
-  %s1. %sinstall       : Installs africana-framework in Kali-Linux
-  %s2. %supdate        : Get new release of africana-framework
-  %s3. %srepair        : Repair africana-framework
-  %s4. %suninstall     : Comletely remove africana-framework
-  %s5. %sauto          : Under development. Auto detect system and do the necessary
+%sex. %s%susage%s:
+--  ------
+  set distro kali
+  set function install
+  run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
+
+func SetupsOptions() {
+    fmt.Printf(`
+%sModule options %s(setups/setups_launcher.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  distro         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
+  function       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
+  run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
+
+%sex. %s%susage%s:
+--  ------
+  set distro kali
+  set function install
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
 
 func SetupOptions() {
     fmt.Printf(`
-Use: run [submodule]
+Use: run [function]
    example: run kali, start kali or kali
    
   commands: run, show, start, list
@@ -1473,7 +1110,7 @@ Description:
 func HelpInfoKali() {
     fmt.Printf(`
        Name: kali
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1499,7 +1136,7 @@ Description:
 func HelpInfoArch() {
     fmt.Printf(`
        Name: arch
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1526,7 +1163,7 @@ Description:
 func HelpInfoUbuntu() {
     fmt.Printf(`
        Name: ubuntu
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1553,7 +1190,7 @@ Description:
 func HelpInfoMacos() {
     fmt.Printf(`
        Name: macos
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1580,7 +1217,7 @@ Description:
 func HelpInfoWindows() {
     fmt.Printf(`
        Name: windows
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1597,7 +1234,7 @@ Available targets:
   =>  0   All windows
 
 Description:
-  Under development. But can run if tools well installed. Just give me time. To intergarte this module
+  Under development. But can run if tools well installed. Just give me time. To intergarte this Function
   with commando vm for windows.
 
 `)
@@ -1606,7 +1243,7 @@ Description:
 func HelpInfoAndroid() {
     fmt.Printf(`
        Name: android
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1623,7 +1260,7 @@ Available targets:
   =>  0   Android
 
 Description:
-  It is a module to install africana-framework in android devices. Kali-linux will be installed in
+  It is a Function to install africana-framework in android devices. Kali-linux will be installed in
   termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
 
 `)
@@ -1632,7 +1269,7 @@ Description:
 func HelpInfoUpdate() {
     fmt.Printf(`
        Name: update
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1649,88 +1286,15 @@ Available targets:
   =>  0   all
 
 Description:
-  It is a module to update africana-framework
+  It is a Function to update africana-framework
 
 `)
-}
-
-func HelpInfoSetups() {
-    fmt.Println(`
-       Name: setups
-     Module: src/core/setups
-   Platform: Linux/ Android/ Mack/ Windows
-       Arch: x64_x86
- Privileged: Yes
-    License: Africana Framework License (BSD)
-       Rank: Best
-  Disclosed: 2024-03-14
-
-Provided by:
-  r0jahsm0ntar1
-  Rojahs Montari <rojahsmontari@gmail.com>
-
-Available targets:
-      Id  Name
-      --  ----
-      1   kali
-      2   arch
-      3   ubuntu
-      4   macos
-      5   android
-      6   windows
-
-Check supported:
-  Yes
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-  distro         none             yes       The target distibution to set africana-frame work
-  module         none             yes       The module to run. ex.(install uninstall or update)
-
-Description:
-  This module will set up africana-framework in the given system as intended.
-
-Usage:
-  set distro kali                 (arch, ubuntu, macos, android, windows)
-  set module install              (update, uninstall)
-  run                             (start, execute, exec, launch)
- 
-View the full module info with the info -d command.
-`)
-}
-
-func SetupsOptions() { 
-    fmt.Printf(`
-Module options (setups/setups_launcher.fn):
-
-Basic options:
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-  distro         none             yes       The target distibution to set africana-frame work
-  module         none             yes       The module to run. ex.(install uninstall or update)
-
-Usage:
-  set distro kali    (arch, ubuntu, macos, android, windows)
-  set module install (update, uninstall)
-  run                (start, execute, exec, launch)
-
-Target:
-
-   Id  Name
-   --  ----
-   0   all
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
 }
 
 func HelpInfoTermLogs() {
     fmt.Printf(`
        Name: termlogs
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1747,7 +1311,7 @@ Available targets:
   =>  0   All Distros
 
 Description:
-  This module will show you all logs in your terminal that has been recorded from the last time you cleaned the log folder.
+  This Function will show you all logs in your terminal that has been recorded from the last time you cleaned the log folder.
 
 `)
 }
@@ -1755,7 +1319,7 @@ Description:
 func HelpInfoBrowserLogs() {
     fmt.Printf(`
        Name: browserlogs
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1772,7 +1336,7 @@ Available targets:
   =>  0   All Distros
 
 Description:
-  This module will show you all logs in the browser that has been recorded from the last time you cleaned the log folder.
+  This Function will show you all logs in the browser that has been recorded from the last time you cleaned the log folder.
 
 `)
 }
@@ -1780,7 +1344,7 @@ Description:
 func HelpInfoClearLogs() {
     fmt.Printf(`
        Name: clearlogs
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1797,7 +1361,7 @@ Available targets:
   =>  0   All Distros
 
 Description:
-  This module will clear all your logs that has been recorded from the last time you cleaned the log folder.
+  This Function will clear all your logs that has been recorded from the last time you cleaned the log folder.
 
 `)
 }
@@ -1805,7 +1369,7 @@ Description:
 func HelpInfoUninstaller() {
     fmt.Printf(`
        Name: uninstall
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1830,7 +1394,7 @@ Description:
 func HelpInfoAuto() {
     fmt.Printf(`
        Name: auto
-     Module: src/core/setups
+   Function: src/core/setups
    Platform: All
        Arch: x64, x86, amd_64, android
  Privileged: No
@@ -1852,30 +1416,100 @@ Description:
 `)
 }
 
-func ListAnonsurfModules() {
+func ListTorsocksFunctions() {
     fmt.Printf(`
-%sAnonsurf modules%s:
-----------------
+%sTorsocks Functions%s:
+-------- ---------
 
-  # %sName           Description%s
-  - ----           -----------
-  %s1.%s setups        : Installs dnsmasq, squid, privoxy and tor (also set configs)
-  %s2.%s start         : Start anonymizing system through tor network
-  %s3.%s exitnode      : Connect to a different exit-node
-  %s4.%s status        : Check if using tor (Show if all anononimty services are up and running)
-  %s5.%s ipaddress     : Check current IP address
-  %s6.%s restore       : Back up & resets Iptables to default
-  %s7.%s reload        : Completely restart anonsurf & connect to a different exit-node
-  %s8.%s chains        : View traffic logs from squid, privoxy, to tor
-  %s9.%s stop          : Exit & get back to the surface-web
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s   setups%s: Installs dnsmasq, squid, privoxy and tor (also set configs).
+  %s2. %s   vanish%s: Start anonymizing the system through tor network.
+  %s3. %s   status%s: Check if using tor (Show if all anononimty services are up and running).
+  %s4. %s    torip%s: Check current tor IP address.
+  %s5. %s   chains%s: View traffic logs from squid, privoxy, to tor.
+  %s6. %s   reload%s: Completely restart torsocks & connect to a different exit-node.
+  %s7. %s exitnode%s: Connect to a different exit-node.
+  %s8. %s  restore%s: Backup and resets Iptables to default.
+  %s9. %s     stop%s: Get back to the surface-web.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+%sex. %s%susage%s:
+--  ------
+
+    set function vanish
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoAnonsurfSetups() {
+func HelpInfoTorsocks() {
+    fmt.Printf(`
+       %sName%s: torsocks
+   %sFunction%s: src/securities/torsocks
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: Yes
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024-03-14
+
+%sProvided by%s: <rojahsmontari@gmail.com>
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sBasic options%s:
+  Name           Current Setting  Required  Description
+  ----           ---------------  --------  -----------
+  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
+
+%sex. %s%susage%s:
+--  ------
+  set function start
+  run                                     alias to -> (start, execute, exec, launch)
+
+%sDescription%s:
+-----------
+
+  Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in order to completely anonimize your system through Tor network.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListTorsocksFunctions()
+}
+
+
+func TorsocksOptions() {
+    fmt.Printf(`
+%sModule options %s(src/securities/torrsocks_setup.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  function       none             yes       The function to execute. ex.      -> (setups, start, exitnode, status, ipaddress, restore, reload, chains, stop)
+  run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set function start
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+func HelpInfoTorsocksSetups() {
     fmt.Printf(`
        Name: setups
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -1899,16 +1533,16 @@ Basic options:
   setups         none             Yes       Installs tor, dnsmasq, squid, privoxy & also set configs
 
 Description:
-  This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go 
+  This Function will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go 
   through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
 
 `)
 }
 
-func HelpInfoAnonsurfStart() {
+func HelpInfoTorsocksVanish() {
     fmt.Printf(`
        Name: start
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -1932,16 +1566,16 @@ Basic options:
   start          none             Yes       Start anonymizing
 
 Description:
-  This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. 
+  This Function will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. 
   It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.
 
 `)
 }
 
-func HelpInfoAnonsurfExitnode() {
+func HelpInfoTorsocksExitnode() {
     fmt.Printf(`
        Name: exitnode
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -1965,15 +1599,15 @@ Basic options:
   exitnode       none             Yes       Shuffle exit-node
 
 Description:
-  This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, this module can help to find a fast one.
+  This Function will shufle the exit nodes to new ones. If you see your nrtwork is slow, this Function can help to find a fast one.
 
 `)
 }
 
-func HelpInfoAnonsurfStatus() {
+func HelpInfoTorsocksStatus() {
     fmt.Printf(`
        Name: status
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -1997,16 +1631,16 @@ Basic options:
   status         none             Yes       Check if using tor (Show if all anononimty services are up and running)
 
 Description:
-  This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if
+  This Function will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if
   all traffic goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
 
 `)
 }
 
-func HelpInfoAnonsurfIpaddress() {
+func HelpInfoTorsocksIpaddress() {
     fmt.Printf(`
        Name: ipaddress
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -2030,16 +1664,16 @@ Basic options:
   ipaddress      none             Yes       Check current external IP address
 
 Description:
-  This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
+  This Function will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
   configured, then you will get a congratulation mesage from tor website.
 
 `)
 }
 
-func HelpInfoAnonsurfRestore() {
+func HelpInfoTorsocksRestore() {
     fmt.Printf(`
        Name: restore
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -2063,16 +1697,16 @@ Basic options:
   restore        none             Yes       Back up & resets Iptables to default
 
 Description:
-  This module will restore your Iptables to default. If the module was killed instantly and IPTABLES were not set as intended, this module
+  This Function will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, this Function
   will help you fix the lack off internet connection.
 
 `)
 }
 
-func HelpInfoAnonsurfReload() {
+func HelpInfoTorsocksReload() {
     fmt.Printf(`
        Name: reload
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -2093,18 +1727,18 @@ Check supported:
 Basic options:
   Name           Current Setting  Required  Description
   ----           ---------------  --------  -----------
-  reload         none             Yes       Restart anonsurf & connect to a different exit-node
+  reload         none             Yes       Restart torsocks & connect to a different exit-node
 
 Description:
-  For a better security, this module enables you to shuffle into different exit nodes in a tor proxy network.
+  For a better security, this Function enables you to shuffle into different exit nodes in a tor proxy network.
 
 `)
 }
 
-func HelpInfoAnonsurfChains() {
+func HelpInfoTorsocksChains() {
     fmt.Printf(`
        Name: chains
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -2128,15 +1762,15 @@ Basic options:
   chains         none            Yes       View traffic logs from squid, privoxy, to tor
 
 Description:
-  This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
+  This Function will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
 
 `)
 }
 
-func HelpInfoAnonsurfStop() {
+func HelpInfoTorsocksStop() {
     fmt.Printf(`
        Name: stop
-     Module: src/anonsurf
+   Function: src/torsocks
    Platform: Windows
        Arch: x64, x86
  Privileged: Yes
@@ -2160,37 +1794,102 @@ Basic options:
   stop           none               Yes       Exit and Get back to the surface-web
 
 Description:
-  This module will stop macchanger, dnsmasq, squid, privoxy, tor then restore Iptables, and other edited configs back to default.
+  This Function will stop macchanger, dnsmasq, squid, privoxy, tor then restore Iptables, and other edited configs back to default.
   This will live your system as it was without proxies and anyone can intercept your connections even your ISP.
 
 `)
 }
 
-func ListInternalModules() {
+func ListInternalFunctions() {
     fmt.Printf(`
-Setups Modules
------- -------
+%setworks Functions%s:
+-------- ---------
 
-  #  Module       Description
-  -  ------       -----------
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %sdiscover%s:  Discover all devices connected to the network. Lets you locate targets.
+  %s2. %sportscan%s:  Get open ports on the target you have set.
+  %s3. %svulnscan%s:  Perform vulnerbility scan on open ports of the target you have set.
+  %s4. %senumscan%s:  Digg for S.M.B deep information on the target set.
+  %s5. %ssmbexplo%s:  Launch known vulnerbility exploits on the target's S.M.B services.
+  %s6. %spsniffer%s:  Sniff all Packets from connected devices to the router(Perform M.I.T.M).
+  %s7. %sresponder%s: Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6.
+  %s8. %sbeefninja%s: Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks).
+  %s9. %sxsshooker%s: Get Shell through XSS Injection to packets in the wire.(To come).
 
-  1 discover      : Discover Targets
-  2 portscan      : Port discovery on the target
-  3 vulnscan      : Vuln' Scan the Target
-  4 enumscan      : S.M.B enumration on the target
-  5 smbexplo      : Exploit S.M.B on target
-  6 psniffer      : Sniff Internal Packets
-  7 responder     : Lunch Responder with IPv6 Support
-  8 beefninja     : Start Beef & Bettercap For M.I.B
-  9 xsshooker     : Get Shell through XSS Injection
+%sex. %s%susage%s:
+--  ------
 
-`)
+    set function discover
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoNetworks() {
+    fmt.Printf(`
+       %sName%s: Networks
+   %sFunction%s: src/internals
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  This is the Network module that contains all internal networks attacks functions.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListInternalFunctions()
+}
+
+func NetworksOptions() {
+    fmt.Printf(`
+%sModule options %s(src/internals/networks_pentest.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  MODE           single           yes       Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask.
+  IFACE          eth0             yes       Interface to use for penetration testing.
+  RHOST          none             yes       Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on.
+  PASSWD         Jesus            yes       The password to set for beef-xss login page with the default user:beef
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed if you need to use (responder, beefninja and xsshooker to handle reverse calls.
+  GATEWAY        ->               yes       %sDefault%s: %s%s%s. The default roouter ipaddres. Will be needed when running functions like (beefninja).
+  SPOOFER        ettercap         yes       The tool to be used for spoofing target host to our domain. the other (bettercap).
+  PROXIES        none             no        Just incase you want to run your traffic through proxies. -> (discover, portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja, xsshooker).
+  FAKEDNS        *                yes       Dns to be resolved when performing dns spoof. Mainly needed when beefninja function is at hand.
+  FUNCTION       none             yes       The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja).
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set function start
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC,       bcolors.BOLD, bcolors.ENDC, bcolors.YELLOW, Lhost, bcolors.ENDC,           bcolors.BOLD, bcolors.ENDC, bcolors.YELLOW, Gateway, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoDiscover() {
     fmt.Printf(`
        Name: discover
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2214,7 +1913,7 @@ Basic options:
   1 discover     none             No        Discover Targets
 
 Description:
-  This module will scann for all connected devices in the network given using bettercap then arrange the targets
+  This Function will scann for all connected devices in the network given using bettercap then arrange the targets
   in a table for you to select one to attack further
 
 `)
@@ -2223,7 +1922,7 @@ Description:
 func HelpInfoPortScan() {
     fmt.Printf(`
        Name: portscan
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2247,7 +1946,7 @@ Basic options:
   2 portscan     none             No        Port discovery on the target
 
 Description:
-  This module will scan all open ports of the target to reveal open ports. The tool used is nmap
+  This Function will scan all open ports of the target to reveal open ports. The tool used is nmap
   command = nmap -p- Target
 
 `)
@@ -2256,7 +1955,7 @@ Description:
 func HelpInfoVulnScan() {
     fmt.Printf(`
        Name: vulnscan
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2280,7 +1979,7 @@ Basic options:
   2 vulnscan     none             No        Vuln' Scan the Target
 
 Description:
-  This module will Scan for known vulnerbility on the target that may be an easy win
+  This Function will Scan for known vulnerbility on the target that may be an easy win
 
 `)
 }
@@ -2288,7 +1987,7 @@ Description:
 func HelpInfoEnumScan() {
     fmt.Printf(`
        Name: enumscan
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2312,7 +2011,7 @@ Basic options:
   4 enumscan     none             No        S.M.B enumration on the target
 
 Description:
-  This module will Automate active directory ports, scan them and check if there are vulnerbilities and shares that could be exploited further
+  This Function will Automate active directory ports, scan them and check if there are vulnerbilities and shares that could be exploited further
 
 `)
 }
@@ -2320,7 +2019,7 @@ Description:
 func HelpInfoExplScan() {
     fmt.Printf(`
        Name: smbexplo
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2344,7 +2043,7 @@ Basic options:
   5 smbexplo     none             No        Exploit S.M.B on target
 
 Description:
-  This module will Scout the target active directory services and try to auto exploit them
+  This Function will Scout the target active directory services and try to auto exploit them
 
 `)
 }
@@ -2352,7 +2051,7 @@ Description:
 func HelpInfoPsniffer() {
     fmt.Printf(`
        Name: psniffer
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2376,7 +2075,7 @@ Basic options:
   6 psniffer     none             No        Sniff Internal Packets
 
 Description:
-  This module will sniff all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https
+  This Function will sniff all traffic from the connected devices to the router showing you on terminal. From tcp, udp, http and https
 
 `)
 }
@@ -2384,7 +2083,7 @@ Description:
 func HelpInfoResponder() {
     fmt.Printf(`
        Name: responder
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2408,15 +2107,43 @@ Basic options:
   7 responder    none             No        Lunch Responder with IPv6 Support
 
 Description:
-  This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version
+  This Function will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version
 
 `)
+}
+
+func OptionsResponder() {
+    fmt.Printf(`
+%sModule Options %s(src/networks/responder.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Browsers
+
+%sex. %s%susage%s:
+--  ------
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoBeefNinja() {
     fmt.Printf(`
        Name: beefninja
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2440,15 +2167,44 @@ Basic options:
   8 beefninja    none             No        Start Beef & Bettercap For M.I.B
 
 Description:
-  This module will Launch a Combination of both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you
+  This Function will Launch a Combination of both beef and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you
 
 `)
+}
+
+func OptionsBeefNinja() {
+    fmt.Printf(`
+%sModule Options %s(src/networks/beefninja.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Browsers
+
+%sex. %s%susage%s:
+--  ------
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoXssHoocker() {
     fmt.Printf(`
        Name: xsshooker
-     Module: src/internals
+   Function: src/internals
    Platform: All
        Arch: x64, x86
  Privileged: Yes
@@ -2472,542 +2228,746 @@ Basic options:
   9 xsshooker    none             No        Get Shell through XSS Injection
 
 Description:
-  This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.
+  This Function will try to Get you a revers Shell through XSS Injection. Still Working on this Option.
 
 `)
 }
 
-
-func ListExploitsModules() {
+func OptionsXssHoocker() {
     fmt.Printf(`
-Malware sub modules:
---------------------
+%sModule Options %s(src/internals/xsshooker.fn):
 
-  #   Name         Description
-  -   ----         -----------
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
-  1 ghost         : It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
-  2 shellz        : Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
-  3 blackjack     : It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
-  4 meterpeter    : Is a powershell rich C2 written in pure powershell. It is just like metasploit but with powerfull evasion techniques.
-  5 powerjoker    : A simple but lethal C2 that generates obfsicated powershell exploits and handles variety of reverse connection.
-  6 androidrat    : It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
-  7 teardroid     : Andoird C2. Needs alot of online configuration but the best for now.
-  8 chameleon     : A good evasion tool for powershell scripts. Already configured for you.
-  9 listener      : Launch any of your disearable c2 with costumized LHOST, LPORT etc.
+%sSupported Distros%s:
+-----------------
 
-`)
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+func ListExploitsFunctions() {
+    fmt.Printf(`
+%setworks Functions%s:
+-------- ---------
+
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %s      ghost%s: It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
+  %s2. %s     shellz%s: Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
+  %s3. %s   listener%s: Launch any of your disearable c2 with costumized LHOST, LPORT etc.
+  %s4. %s   androrat%s: It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  %s5. %s  teardroid%s: Andoird C2. Needs alot of online configuration but the best for now.
+  %s6. %s  blackjack%s: It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
+  %s7. %s  hoaxshell%s: A Killer FUD that bypasses most avs.
+  %s8. %s noisemaker%s: Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims.
+  %s9. %scodebreaker%s: Just like noisemake but the persisten mechanisim is through regestry keys.
+
+%sex. %s%susage%s:
+--  ------
+
+    set function discover
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoExploits() {
+    fmt.Printf(`
+       %sName%s: Exploits
+   %sFunction%s: src/exploits
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  This is the Exploits module that contains all c2, backdoors and obfsicatorsfunctions.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListExploitsFunctions()
+}
+
+func ExploitsOptions() {
+    fmt.Printf(`
+%sModule Options %s(src/exploits/backdoor_pentest.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  C2             blackjack        yes       The default c2 to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
+  ICON           vlc              yes       Icon to be used while generating backdoors using (noisemakers and codebreakers)
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
+  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
+  FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, noisemaker, codebreaker).
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set function start
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoBlackJack() {
     fmt.Printf(`
-       Name: BlackJack
-     Module: /root/.afr3/africana-base/blackjack
-   Platform: Windows
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: blackjack
+   %sFunction%s: src/exploits/blackajck.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by t3l3machus
-   Edited by r0jahsm0ntar1
+%sProvided by%s: t3l3machus
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
+%sDescription%s:
+-----------
+  It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
+
 
 func HelpInfoShellz() {
     fmt.Printf(`
-       Name: Shellz
-     Module: /root/.afr3/africana-base/shellz
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: shellz
+   %sFunction%s: src/exploits/shellz.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by 
-   Edited by r0jahsm0ntar1
+%sProvided by%s: sandres
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a tool that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoPowerJoker() {
+func HelpInfoHoaxShell() {
     fmt.Printf(`
-       Name: powerjoker
-     Module: /root/.afr3/africana-base/powerjoker
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: hoaxshell
+   %sFunction%s: src/exploits/hoaxshell.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s: t3l3machus
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
+%sDescription%s:
+-----------
+  It is a tool like villein or blackjack that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoMeterPeter() {
+func HelpInfoNoiseMaker() {
     fmt.Printf(`
-       Name: meterpeter
-     Module: /root/.afr3/africana-base/meterpeter
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: noisemaker
+   %sFunction%s: src/exploits/noisemaker.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s: t3l3machus
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoHavoc() {
     fmt.Printf(`
-       Name: havoc
-     Module: /usr/share/havoc
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: havoc
+   %sFunction%s: src/exploits/havoc.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s: t3l3machus
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
+  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoTearNdroid() {
     fmt.Printf(`
-       Name: tearndroid
-     Module: /root/.afr3/africana-base/tearndroid
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: tearndroid
+   %sFunction%s: src/exploits/teandroid.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Androids
+   -> 0   All Androids
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that enables the redteam to gain and control all android phones. It supports sms dumping, camera viewing e.t.c
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
-}
-
-func HelpInfoAndroRat() {
-    fmt.Printf(`
-       Name: androrat
-     Module: src/exploits/androrat.fn
-   Platform: All
-       Arch: android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
-
-Provided by:
-  Created by _
-
-Module options (exploit/android/andro_rat):
-
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
-  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.afr3/output/)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
-
-Available targets:
-      Id  Name
-      --  ----
-  =>  0   All Androids
-
-Description:
-  This module generates an android backdoor and launches a c2 listener for call back connections.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func AndroRatOptions() {
-    fmt.Printf(`
-Module options (exploit/android/andro_rat):
-
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
-  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.afr3/output/)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
-
-Exploit target:
-
-   Id  Name
-   --  ----
-   0   Automatic Target
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func AndroRatMenu() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %srun -> run the module (alias to "run", "start", "launch", "exploit", "execute")
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func BlackJackMenu() {
-    fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
-
-%s 1. %srun -> run the module (alias to "run", "start", "launch", "exploit", "execute")
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func BlackJackOptions() {
     fmt.Printf(`
-Module options (exploit/windows/blackjack_c2):
+%sModule Options %s(src/exploits/blackjack_c2.fn):
 
-  Name           Current Setting  Required  Description
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
 
-  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  HPORT          3333             No        HTTP smuggler port.
-  LISTENER       tcp              Yes       Choose listener type (tcp or http/https)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
-
-Exploit target:
+%sSupported Distros%s:
+-----------------
 
    Id  Name
    --  ----
-   0   Automatic Target
+   0   All Distros
 
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+%sex. %s%susage%s:
+--  ------
+  set LHOST 127.0.0.1
+  run
 
-`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoChameLeon() {
-    fmt.Printf(`
-       Name: chameleon
-     Module: /root/.afr3/africana-base/chameleon
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+     fmt.Printf(`
+       %sName%s: chameleon
+   %sFunction%s: src/exploits/chameleon.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s: t3l3machus
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  script         none             Yes       Script to be obfsicated ex. .ps1 script
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  SCRIPT         none             yes       Full location of the powershell script to be obfsicated.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoGhost() {
     fmt.Printf(`
-       Name: ghost
-     Module: /root/.afr3/africana-base/ghost
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: ghost
+   %sFunction%s: src/exploits/ghost.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Windows Evaluation
+   -> 0   All Windows
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  script         none             Yes       Script to be obfsicated ex. .ps1 script
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  SCRIPT         none             yes       Powershell script to obfsicate inorder to bypass AVs.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that enables redteamers to obfsicate powershell maleares for them to be staelthy and bypass AVS.
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoSeaShell() {
     fmt.Printf(`
-       Name: seashell
-     Module: /root/.afr3/africana-base/mackrat
-   Platform: All
-       Arch: x64, x86
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Insane
-  Disclosed: 2024
+       %sName%s: seashell
+   %sFunction%s: src/exploits/seashell.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by
-   Edited by r0jahsm0ntar1
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All MACKOS
+   -> 0   All IOS
 
-Check supported:
-
-Basic options:
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LISTENER       TCP /HTTPS       yes       The local port to listen on.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-Description:
-  It is a module that enables the redteam to gain and control all iphones & macos. It supports sms dumping, camera viewing e.t.c
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func ListAndroidModules() {
+func HelpInfoListener() {
     fmt.Printf(`
-android modules:
----------------
+       %sName%s: listener
+   %sFunction%s: src/exploits/listener.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-  #   Name         Description
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-  1 teardroid        : Geneartes a sighned android backdoor and launches a c2.
-  2 androrat         : Generate android backdoor and launches a c2.
-  3 to add
-  4 to add
-  5 to add
-  6 to add
-  7 to add
-  8 to add
-  9 to add
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Windows
 
-`)
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoCodeBreaker() {
+    fmt.Printf(`
+       %sName%s: codebreaker
+   %sFunction%s: src/exploits/noisemaker.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Windows
+
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
 func HelpInfoTearDroid() {
     fmt.Printf(`
-       Name: teardroid
-     Module: src/exploits/tear_droid.fn
-   Platform: All
-       Arch: android
- Privileged: No
-    License: Africana Framework License(BSD)
-       Rank: Normal
-  Disclosed: 2024
+       %sName%s: tearndroid
+   %sFunction%s: src/exploits/tearndroid.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
 
-Provided by:
-  Created by _
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
-Module options (exploit/android/tear_droid.fn):
-
-  Name           Current Setting  Required  Description
-  ----           ---------------  --------  -----------
-
-  LHOST          eth0 IP          Yes       Local host machine IP for reverse connections. (default = %s)
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
-  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.afr3/output/)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
-
-Available targets:
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Androids
+   -> 0   All Androids
 
-Description:
-  This module generates an android backdoor and launches a c2 listener for call back connections.
-
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
-
-`, LhostIp, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
-}
-
-func ListWirelessModules() {
-    fmt.Printf(`
-%sWireless modules%s:
-----------------
-
-  # %sName           Description%s
-  - ----             -----------
-  %s1.%s wifite        : Wifite is a tool to audit WEP or WPA encrypted wireless networks.
-  %s2.%s fluxion       : Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s3.%s bettercap     : Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks.
-  %s4.%s airgeddon     : Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s5.%s wifipumpkin   : wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
-  %s6.%s wifipumpkin3  : This option runs wifipumpkin3 in manual mode where africana sets everything for you.
-
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
-}
-
-func WirelessOptions() { 
-    fmt.Printf(`
-Module options (src/wireless.fn):
-
-  Name           Current Setting  Required  Description
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-  iface          wlan0            Yes       Wireless iface to use durring the attacks
-  LPORT          9999             Yes       Listening local host machine port for reverse connections.
-  BUILD          ----             Yes       Backdoor out put name after being generated. (default = africana_backdoor.apk)
-  OUTPUT         ----             Yes       The place for your generated backdoor. (default =  ~/.afr3/output/)
-  EXECUTE        ----             Yes       run the module (alias to "run", "start", "launch", "exploit")
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-Available targets:
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoAndroRat() {
+    fmt.Printf(`
+       %sName%s: androrat
+   %sFunction%s: src/exploits/androrat.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2025
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
       Id  Name
       --  ----
-  =>  0   All Wireless networks
+   -> 0   All Windows
 
-Description:
-  This module enables redteams in performing various wireless attacks.
+%sBasic options%s:
+----- --------
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
 
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+%sDescription%s:
+-----------
+  It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+
+func AndroRatOptions() {
+    fmt.Printf(`
+%sModule Options %s(src/exploits/androrat_c2.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  LHOST          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
+  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
+  OUTPUT         ->               yes       %sDefault%s: %s%s%s%s. Location you want your generated backdoor to be placed.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+}
+
+func ListWirelessFunctions() {
+    fmt.Printf(`
+%setworks Functions%s:
+-------- ---------
+
+  # %sName       Description%s
+  - ----       -----------
+  %s1. %swifite      %s: Wifite is a tool to audit WEP or WPA encrypted wireless networks.
+  %s2. %sfluxion     %s: Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  %s3. %sbettercap   %s: Bettercap is a tool to audit Internal network & wirekless network like, WEP or WPA encrypted wireless networks.
+  %s4. %sairgeddon   %s: Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
+  %s5. %swifipumpkin %s: wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
+  %s6. %sKillerpukin %s: This option runs wifipumpkin3 in manual mode where africana sets everything for you.
+  %s7. %sTo add      %s:
+  %s8. %sTo add      %s:
+  %s9. %sTo add      %s:
+
+%sex. %s%susage%s:
+--  ------
+
+    set function wifite
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoWireless() {
+    fmt.Printf(`
+       %sName%s: wireless
+   %sFunction%s: src/wireless
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sSuported Distros%s:
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  This is the wireless module containing all wireless pentesting functions.
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+    ListWirelessFunctions()
+}
+
+func WirelessOptions() {
+    fmt.Printf(`
+%sModule Options %s(src/wirelss/wireless_pentest.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  IFACE          ->               yes       %sDefault%s: %s%s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LPORT          9999             yes       Listener port to handle beacons.
+  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
+  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  ------
+  set IFACE wlan0
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ITALIC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoWifite() {
     fmt.Printf(`
        Name: wifite
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3042,7 +3002,7 @@ Description:
 func HelpInfoFluxion() {
     fmt.Printf(`
        Name: fluxion
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3076,7 +3036,7 @@ Description:
 func HelpInfoBetterCap() {
     fmt.Printf(`
        Name: bettercap
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3111,7 +3071,7 @@ Description:
 func HelpInfoAirGeddon() {
     fmt.Printf(`
        Name: airgeddon
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3145,7 +3105,7 @@ Description:
 func HelpInfoWifiPumpkin() {
     fmt.Printf(`
        Name: wifipumpkin
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3180,7 +3140,7 @@ Description:
 func HelpInfoWifiPumpkin3() {
     fmt.Printf(`
        Name: wifipumpkin
-     Module: src/wireless
+   Function: src/wireless
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3212,26 +3172,26 @@ Description:
 `)
 }
 
-func ListCrackersModules() {
+func ListCrackersFunctions() {
     fmt.Printf(`
-Crackers modules:
+Crackers Functions:
 ----------------
 
   #   Name         Description
   -   ----         -----------
 
   1 online        : It contains password bruteforcers that attack online services like ssh, ftp, smb, rdp, ldap, http, https etc.
-                     Submodules: include hydra, rainbow.
+                     SubFunctions: include hydra, rainbow.
 
   2 offline       : Supports all cracking offline encrypted files like .zip, .rar, .pcap, .ntlm, .MD4, .MD5, SHA1-SHA3, Kerberos etc.
-                     Submodules: include hashcat, aircrack-ng.
+                     SubFunctions: include hashcat, aircrack-ng.
 
 `)
 }
 
-func ListPhishersModules() {
+func ListPhishersFunctions() {
     fmt.Printf(`
-Phishers modules:
+Phishers Functions:
 ----------------
 
   #   Name         Description
@@ -3253,7 +3213,7 @@ Phishers modules:
 func HelpInfoGophish() {
     fmt.Printf(`
        Name: gophish
-     Module: /usr/share/gophish
+   Function: /usr/share/gophish
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3278,7 +3238,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3286,7 +3246,7 @@ Description:
 func HelpInfoGoodGinx() { 
     fmt.Printf(`
        Name: goodginx
-     Module: /usr/share/eginx
+   Function: /usr/share/eginx
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3311,7 +3271,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3319,7 +3279,7 @@ Description:
 func HelpInfoZphisher() {
     fmt.Printf(`
        Name: zphisher
-     Module: /root/.afr3/africana-base/zphisher
+   Function: /root/.afr3/africana-base/zphisher
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3344,7 +3304,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3352,7 +3312,7 @@ Description:
 func HelpInfoBlackEye() {
     fmt.Printf(`
        Name: blackeye
-     Module: /root/.afr3/africana-base/phishers/blackeye
+   Function: /root/.afr3/africana-base/phishers/blackeye
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3377,7 +3337,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3385,7 +3345,7 @@ Description:
 func HelpInfoAdvnPhish() {
     fmt.Printf(`
        Name: advnphish
-     Module: /root/.afr3/africana-base/phishers/advnphish
+   Function: /root/.afr3/africana-base/phishers/advnphish
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3410,7 +3370,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3418,7 +3378,7 @@ Description:
 func HelpInfoDarkPhish() { 
     fmt.Printf(`
        Name: darkphish
-     Module: /root/.afr3/africana-base/phishers/darkphish
+   Function: /root/.afr3/africana-base/phishers/darkphish
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3443,7 +3403,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3451,7 +3411,7 @@ Description:
 func HelpInfoShellPhish() {
     fmt.Printf(`
        Name: shellphish
-     Module: /root/.afr3/africana-base/phishers/shellphish
+   Function: /root/.afr3/africana-base/phishers/shellphish
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3476,7 +3436,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3484,7 +3444,7 @@ Description:
 func HelpInfoSetToolkit() {
     fmt.Printf(`
        Name: setoolkit
-     Module: /root/.afr3/africana-base/phishers/set
+   Function: /root/.afr3/africana-base/phishers/set
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3509,7 +3469,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }
@@ -3517,7 +3477,7 @@ Description:
 func HelpInfoTheHackerChoice() {
     fmt.Printf(`
        Name: thehackerchoice
-     Module: /root/.afr3/africana-base/phishers/thehackerchoice
+   Function: /root/.afr3/africana-base/phishers/thehackerchoice
    Platform: All
        Arch: x64, x86
  Privileged: No
@@ -3542,7 +3502,7 @@ Basic options:
   none           _______________  ________  ___________
 
 Description:
-  It is a module that enables the redteamers to perform phising attacks on various bases.
+  It is a Function that enables the redteamers to perform phising attacks on various bases.
 
 `)
 }

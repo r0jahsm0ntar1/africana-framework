@@ -183,7 +183,7 @@ func AskForProxy(Proxy string) *url.URL {
         proxyStr := strings.TrimSpace(Proxy)
         proxyURL, err := url.Parse(proxyStr)
         if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
-            fmt.Printf("%s[!] %sInvalid URL format. eg. http://localhost:80).\n", bcolors.RED, bcolors.ENDC)
+            fmt.Printf("%s[!] %sInvalid PROXY format. eg. http://localhost:80).\n", bcolors.RED, bcolors.ENDC)
             return nil
         }
 

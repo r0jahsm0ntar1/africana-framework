@@ -7,15 +7,15 @@ import(
     "math/rand"
 )
 var (
-    version = "3.0.3-dev"
+    version = "v3.0.3-dev"
 )
 
 type Banners struct{}
 
 func Version() {
     fmt.Printf(`
-%sFramework %s: %s
-%sConsole   %s: %s
+    %sFramework %s: %s
+      %sConsole %s: %s
 
 `, bcolors.GREEN, bcolors.ENDC, version, bcolors.GREEN, bcolors.ENDC, version)
 }
@@ -73,7 +73,6 @@ func GraphicsLarge() {
         |    '._//'   |
        .'             '.
     _,'                 ',_%s
-
 `, bcolors.Colors(), bcolors.ENDC)
 
     case 4:
@@ -204,10 +203,10 @@ func GraphicsTinny() {
 
 func GraphicsTorNet() {
     fmt.Printf(`%s
-        \                                       _|
-       _ \   __ \   _ \  __ \   __| |   |  __| |
-      ___ \  |   | (   | |   |\__ \ |   | |    __|
-    _/    _\_|  _|\___/ _|  _|____/\__,_|_|   _|%s%s%s
+ |                             |
+ __|  _ \   __| __|  _ \   __| |  /  __|
+ |   (   | |  \__ \ (   | (      < \__ \
+\__|\___/ _|  ____/\___/ \___|_|\_\____/%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
 }
 

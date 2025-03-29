@@ -19,18 +19,18 @@ var (
     Xhost string
     Yhost string
     Proxy string
-    Module string
+    Function string
 
     scanner  = bufio.NewScanner(os.Stdin)
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
-   "proxy": "",
+   "proxies": "",
    "rhost": "",
    "rhosts": "",
    "target": "",
-   "module": "",
+   "function": "",
    "wordlist": WordList,
 }
 
@@ -58,7 +58,7 @@ func WebPentest() {
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
-            executeModule()
+            executeFunction()
         default:
             utils.SystemShell(Input)
         }
@@ -68,111 +68,127 @@ func WebPentest() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-        "? info":           menus.HelpInfo,
-        "help info":        menus.HelpInfo,
+    "? info":           menus.HelpInfo,
+    "help info":        menus.HelpInfo,
 
-        "v":                banners.Version,
-        "version":          banners.Version,
+    "v":                banners.Version,
+    "version":          banners.Version,
 
-        "s":                utils.Sleep,
-        "sleep":            utils.Sleep,
+    "s":                utils.Sleep,
+    "sleep":            utils.Sleep,
 
-        "o":                utils.ListJunks,
-        "junks":            utils.ListJunks,
-        "outputs":          utils.ListJunks,
-        "clear junks":      utils.ClearJunks,
-        "clear outputs":    utils.ClearJunks,
+    "o":                utils.ListJunks,
+    "junks":            utils.ListJunks,
+    "outputs":          utils.ListJunks,
+    "clear junks":      utils.ClearJunks,
+    "clear outputs":    utils.ClearJunks,
 
-        "logs":             subprocess.LogHistory,
-        "history":          subprocess.LogHistory,
-        "clear logs":       subprocess.ClearHistory,
-        "clear history":    subprocess.ClearHistory,
+    "logs":             subprocess.LogHistory,
+    "history":          subprocess.LogHistory,
+    "clear logs":       subprocess.ClearHistory,
+    "clear history":    subprocess.ClearHistory,
 
-        "? run":            menus.HelpInfoRun,
-        "h run":            menus.HelpInfoRun,
-        "info run":         menus.HelpInfoRun,
-        "help run":         menus.HelpInfoRun,
-        "? use":            menus.HelpInfoRun,
-        "h use":            menus.HelpInfoRun,
-        "info use":         menus.HelpInfoRun,
-        "help use":         menus.HelpInfoRun,
-        "? exec":           menus.HelpInfoRun,
-        "h exec":           menus.HelpInfoRun,
-        "info exec":        menus.HelpInfoRun,
-        "help exec":        menus.HelpInfoRun,
-        "? start":          menus.HelpInfoRun,
-        "h start":          menus.HelpInfoRun,
-        "info start":       menus.HelpInfoRun,
-        "help start":       menus.HelpInfoRun,
-        "? launch":         menus.HelpInfoRun,
-        "h launch":         menus.HelpInfoRun,
-        "info launch":      menus.HelpInfoRun,
-        "help launch":      menus.HelpInfoRun,
-        "? exploit":        menus.HelpInfoRun,
-        "h exploit":        menus.HelpInfoRun,
-        "info exploit":     menus.HelpInfoRun,
-        "help exploit":     menus.HelpInfoRun,
-        "? execute":        menus.HelpInfoRun,
-        "h execute":        menus.HelpInfoRun,
-        "info execute":     menus.HelpInfoRun,
-        "help execute":     menus.HelpInfoRun,
+    "? run":            menus.HelpInfoRun,
+    "h run":            menus.HelpInfoRun,
+    "info run":         menus.HelpInfoRun,
+    "help run":         menus.HelpInfoRun,
+    "? use":            menus.HelpInfoRun,
+    "h use":            menus.HelpInfoRun,
+    "info use":         menus.HelpInfoRun,
+    "help use":         menus.HelpInfoRun,
+    "? exec":           menus.HelpInfoRun,
+    "h exec":           menus.HelpInfoRun,
+    "info exec":        menus.HelpInfoRun,
+    "help exec":        menus.HelpInfoRun,
+    "? start":          menus.HelpInfoRun,
+    "h start":          menus.HelpInfoRun,
+    "info start":       menus.HelpInfoRun,
+    "help start":       menus.HelpInfoRun,
+    "? launch":         menus.HelpInfoRun,
+    "h launch":         menus.HelpInfoRun,
+    "info launch":      menus.HelpInfoRun,
+    "help launch":      menus.HelpInfoRun,
+    "? exploit":        menus.HelpInfoRun,
+    "h exploit":        menus.HelpInfoRun,
+    "info exploit":     menus.HelpInfoRun,
+    "help exploit":     menus.HelpInfoRun,
+    "? execute":        menus.HelpInfoRun,
+    "h execute":        menus.HelpInfoRun,
+    "info execute":     menus.HelpInfoRun,
+    "help execute":     menus.HelpInfoRun,
 
-        "set":              menus.HelpInfoSet,
-        "h set":            menus.HelpInfoSet,
-        "info set":         menus.HelpInfoSet,
-        "help set":         menus.HelpInfoSet,
+    "set":              menus.HelpInfoSet,
+    "h set":            menus.HelpInfoSet,
+    "info set":         menus.HelpInfoSet,
+    "help set":         menus.HelpInfoSet,
 
-        "tips":             menus.HelpInfoTips,
-        "h tips":           menus.HelpInfoTips,
-        "? tips":           menus.HelpInfoTips,
-        "info tips":        menus.HelpInfoTips,
-        "help tips":        menus.HelpInfoTips,
+    "tips":             menus.HelpInfoTips,
+    "h tips":           menus.HelpInfoTips,
+    "? tips":           menus.HelpInfoTips,
+    "info tips":        menus.HelpInfoTips,
+    "help tips":        menus.HelpInfoTips,
 
-        "show":             menus.HelpInfoShow,
-        "? show":           menus.HelpInfoShow,
-        "h show":           menus.HelpInfoShow,
-        "info show":        menus.HelpInfoShow,
-        "help show":        menus.HelpInfoShow,
+    "show":             menus.HelpInfoShow,
+    "? show":           menus.HelpInfoShow,
+    "h show":           menus.HelpInfoShow,
+    "info show":        menus.HelpInfoShow,
+    "help show":        menus.HelpInfoShow,
 
-        "info list":        menus.HelpInfoList,
-        "help list":        menus.HelpInfoList,
-        "use list":         menus.HelpInfoList,
-        "list":             menus.HelpInfoList,
+    "info list":        menus.HelpInfoList,
+    "help list":        menus.HelpInfoList,
+    "use list":         menus.HelpInfoList,
+    "list":             menus.HelpInfoList,
 
-        "? options":        menus.HelpInfOptions,
-        "info options":     menus.HelpInfOptions,
-        "help options":     menus.HelpInfOptions,
+    "? options":        menus.HelpInfOptions,
+    "info options":     menus.HelpInfOptions,
+    "help options":     menus.HelpInfOptions,
 
-        "banner":           banners.RandomBanners,
-        "g":                utils.BrowseTutarilas,
-        "t":                utils.BrowseTutarilas,
-        "guide":            utils.BrowseTutarilas,
-        "tutarial":         utils.BrowseTutarilas,
-        "h":                menus.HelpInfoMenuZero,
-        "?":                menus.HelpInfoMenuZero,
-        "00":               menus.HelpInfoMenuZero,
-        "help":             menus.HelpInfoMenuZero,
-        "f":                menus.HelpInfoFeatures,
-        "use f":            menus.HelpInfoFeatures,
-        "features":         menus.HelpInfoFeatures,
-        "use features":     menus.HelpInfoFeatures,
+    "banner":           banners.RandomBanners,
+    "g":                utils.BrowseTutarilas,
+    "t":                utils.BrowseTutarilas,
+    "guide":            utils.BrowseTutarilas,
+    "tutarial":         utils.BrowseTutarilas,
+    "h":                menus.HelpInfoMenuZero,
+    "?":                menus.HelpInfoMenuZero,
+    "00":               menus.HelpInfoMenuZero,
+    "help":             menus.HelpInfoMenuZero,
+    "f":                menus.HelpInfoFeatures,
+    "use f":            menus.HelpInfoFeatures,
+    "features":         menus.HelpInfoFeatures,
+    "use features":     menus.HelpInfoFeatures,
 
-        //Chameleons//
-        "info":             menus.HelpInfoMain,
+    //Chameleons//
+    "info":             menus.HelpInfoMain,
 
-        "m":                menus.MenuEight,
-        "menu":             menus.MenuEight,
+    "m":                menus.MenuEight,
+    "menu":             menus.MenuEight,
 
-        "option":           menus.HelpInfOptions,
-        "options":          menus.HelpInfOptions,
-        "show option":      menus.HelpInfOptions,
-        "show options":     menus.HelpInfOptions,
+    "option":           menus.HelpInfOptions,
+    "options":          menus.HelpInfOptions,
+    "show option":      menus.HelpInfOptions,
+    "show options":     menus.HelpInfOptions,
 
-        "modules":          menus.ListMainModules,
-        "show all":         menus.ListMainModules,
-        "list all":         menus.ListMainModules,
-        "list modules":     menus.ListMainModules,
-        "show modules":     menus.ListMainModules,
+    "show all":         menus.ListMainFunctions,
+    "list all":         menus.ListMainFunctions,
+
+    "func":             menus.ListMainFunctions,
+    "funcs":            menus.ListMainFunctions,
+    "functions":        menus.ListMainFunctions,
+    "show func":        menus.ListMainFunctions,
+    "list funcs":       menus.ListMainFunctions,
+    "show funcs":       menus.ListMainFunctions,
+    "show function":    menus.ListMainFunctions,
+    "list function":    menus.ListMainFunctions,
+    "list functions":   menus.ListMainFunctions,
+    "show functions":   menus.ListMainFunctions,
+
+    "module":           menus.ListMainFunctions,
+    "modules":          menus.ListMainFunctions,
+    "list module":      menus.ListMainFunctions,
+    "show module":      menus.ListMainFunctions,
+    "list modules":     menus.ListMainFunctions,
+    "show modules":     menus.ListMainFunctions,
+
     }
     if action, exists := commandMap[cmd]; exists {
         action()
@@ -188,13 +204,17 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-       "proxy": &Proxy,
+
        "rhost": &Rhost,
        "rhosts": &Rhost,
        "target": &Rhost,
-       "module": &Module,
+       "proxies": &Proxy,
+       "func": &Function,
+       "module": &Function,
+       "function": &Function,
        "wordlist": &WordList,
     }
+
     if ptr, exists := setValues[key]; exists {
         *ptr = value
         fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
@@ -210,32 +230,46 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-       "proxy": &Proxy,
+
        "rhost": &Rhost,
        "rhosts": &Rhost,
        "target": &Rhost,
-       "module": &Module,
+       "proxies": &Proxy,
+       "func": &Function,
+       "module": &Function,
+       "function": &Function,
        "wordlist": &WordList,
     }
+
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key] // Reset to default
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
+        if *ptr != "" {
+            fmt.Printf("%s => %s\n", strings.ToUpper(key), *ptr)
+        }else{
+            fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        }
     } else {
         menus.HelpInfoSet()
     }
 }
 
-
-func executeModule() {
-    if Module == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter MODULE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+func executeFunction() {
+    if Function == ""{
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
     if Rhost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
     }
-    WebPenModules(Module, Rhost)
+    WebPenFunctions(Function, Rhost)
+}
+
+// Helper functions
+func autoExecuteFunc(distro string, function string) {
+    //Distro = distro
+    //Function = function
+    executeFunction()
 }
 
 func formatRhost(Rhost string) {
@@ -252,8 +286,8 @@ func formatRhost(Rhost string) {
     }
 }
 
-func WebPenModules(module string, args ...interface{}) {
-    fmt.Printf("\nRHOST => %s\nMODULE => %s\n", Rhost, module)
+func WebPenFunctions(Function string, args ...interface{}) {
+    fmt.Printf("\nRHOST => %s\nFunction => %s\n", Rhost, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         utils.SetProxy(Proxy)
@@ -271,10 +305,10 @@ func WebPenModules(module string, args ...interface{}) {
         "autoscan": func() {AutoScan(Rhost)},
     }
 
-    if action, exists := commands[module]; exists {
+    if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sInvalid module %s. Use %s'help' %sfor available modules.\n", bcolors.YELLOW, bcolors.ENDC, module, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
     }
 }
 
