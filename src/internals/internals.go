@@ -12,6 +12,7 @@ import(
     "os/exec"
     "bcolors"
     "subprocess"
+    "scriptures"
 )
 
 var(
@@ -83,8 +84,9 @@ func NetworkPentest() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-    "? info":           menus.HelpInfo,
-    "help info":        menus.HelpInfo,
+    "? info":               menus.HelpInfo,
+    "h info":               menus.HelpInfo,
+    "help info":            menus.HelpInfo,
 
     "v":                banners.Version,
     "version":          banners.Version,
@@ -107,18 +109,23 @@ func executeCommand(cmd string) bool {
     "h run":            menus.HelpInfoRun,
     "info run":         menus.HelpInfoRun,
     "help run":         menus.HelpInfoRun,
-    "? use":            menus.HelpInfoRun,
-    "h use":            menus.HelpInfoRun,
-    "info use":         menus.HelpInfoRun,
-    "help use":         menus.HelpInfoRun,
+
+    "use":              menus.HelpInfoUse,
+    "? use":            menus.HelpInfoUse,
+    "h use":            menus.HelpInfoUse,
+    "info use":         menus.HelpInfoUse,
+    "help use":         menus.HelpInfoUse,
+
     "? exec":           menus.HelpInfoRun,
     "h exec":           menus.HelpInfoRun,
     "info exec":        menus.HelpInfoRun,
     "help exec":        menus.HelpInfoRun,
-    "? start":          menus.HelpInfoRun,
-    "h start":          menus.HelpInfoRun,
-    "info start":       menus.HelpInfoRun,
-    "help start":       menus.HelpInfoRun,
+
+    "? start":          menus.HelpInfoStart,
+    "h start":          menus.HelpInfoStart,
+    "info start":       menus.HelpInfoStart,
+    "help start":       menus.HelpInfoStart,
+
     "? launch":         menus.HelpInfoRun,
     "h launch":         menus.HelpInfoRun,
     "info launch":      menus.HelpInfoRun,
@@ -154,7 +161,12 @@ func executeCommand(cmd string) bool {
     "use list":         menus.HelpInfoList,
     "list":             menus.HelpInfoList,
 
+    "h option":         menus.HelpInfOptions,
+    "? option":         menus.HelpInfOptions,
+    "h options":        menus.HelpInfOptions,
     "? options":        menus.HelpInfOptions,
+    "info option":      menus.HelpInfOptions,
+    "help option":      menus.HelpInfOptions,
     "info options":     menus.HelpInfOptions,
     "help options":     menus.HelpInfOptions,
 
@@ -203,6 +215,236 @@ func executeCommand(cmd string) bool {
     "show module":      menus.ListInternalFunctions,
     "list modules":     menus.ListInternalFunctions,
     "show modules":     menus.ListInternalFunctions,
+
+    "1":                    func() {IpNeighbour()},
+    "run 1":                func() {IpNeighbour()},
+    "use 1":                func() {IpNeighbour()},
+    "exec 1":               func() {IpNeighbour()},
+    "start 1":              func() {IpNeighbour()},
+    "launch 1":             func() {IpNeighbour()},
+    "exploit 1":            func() {IpNeighbour()},
+    "execute 1":            func() {IpNeighbour()},
+    "run discover":            func() {IpNeighbour()},
+    "use discover":            func() {IpNeighbour()},
+    "exec discover":           func() {IpNeighbour()},
+    "start discover":          func() {IpNeighbour()},
+    "launch discover":         func() {IpNeighbour()},
+    "exploit discover":        func() {IpNeighbour()},
+    "execute discover":        func() {IpNeighbour()},
+
+    "? 1":                  menus.HelpInfoDiscover,
+    "info 1":               menus.HelpInfoDiscover,
+    "help 1":               menus.HelpInfoDiscover,
+    "discover":                menus.HelpInfoDiscover,
+    "info discover":           menus.HelpInfoDiscover,
+    "help discover":           menus.HelpInfoDiscover,
+
+    "2":                    func() {NmapPortScan(Rhost)},
+    "run 2":                func() {NmapPortScan(Rhost)},
+    "use 2":                func() {NmapPortScan(Rhost)},
+    "exec 2":               func() {NmapPortScan(Rhost)},
+    "start 2":              func() {NmapPortScan(Rhost)},
+    "launch 2":             func() {NmapPortScan(Rhost)},
+    "exploit 2":            func() {NmapPortScan(Rhost)},
+    "execute 2":            func() {NmapPortScan(Rhost)},
+    "run portscan":           func() {NmapPortScan(Rhost)},
+    "use portscan":           func() {NmapPortScan(Rhost)},
+    "exec portscan":          func() {NmapPortScan(Rhost)},
+    "start portscan":         func() {NmapPortScan(Rhost)},
+    "launch portscan":        func() {NmapPortScan(Rhost)},
+    "exploit portscan":       func() {NmapPortScan(Rhost)},
+    "execute portscan":       func() {NmapPortScan(Rhost)},
+
+    "? 2":                  menus.HelpInfoPortScan,
+    "info 2":               menus.HelpInfoPortScan,
+    "help 2":               menus.HelpInfoPortScan,
+    "portscan":               menus.HelpInfoPortScan,
+    "info portscan":          menus.HelpInfoPortScan,
+    "help portscan":          menus.HelpInfoPortScan,
+
+    "3":                    func() {NmapVulnScan(Rhost)},
+    "run 3":                func() {NmapVulnScan(Rhost)},
+    "use 3":                func() {NmapVulnScan(Rhost)},
+    "exec 3":               func() {NmapVulnScan(Rhost)},
+    "start 3":              func() {NmapVulnScan(Rhost)},
+    "launch 3":             func() {NmapVulnScan(Rhost)},
+    "exploit 3":            func() {NmapVulnScan(Rhost)},
+    "execute 3":            func() {NmapVulnScan(Rhost)},
+    "run vulnscan":         func() {NmapVulnScan(Rhost)},
+    "use vulnscan":         func() {NmapVulnScan(Rhost)},
+    "exec vulnscan":        func() {NmapVulnScan(Rhost)},
+    "start vulnscan":       func() {NmapVulnScan(Rhost)},
+    "launch vulnscan":      func() {NmapVulnScan(Rhost)},
+    "exploit vulnscan":     func() {NmapVulnScan(Rhost)},
+    "execute vulnscan":     func() {NmapVulnScan(Rhost)},
+
+    "? 3":                  menus.HelpInfoVulnScan,
+    "info 3":               menus.HelpInfoVulnScan,
+    "help 3":               menus.HelpInfoVulnScan,
+    "vulnscan":             menus.HelpInfoVulnScan,
+    "info vulnscan":        menus.HelpInfoVulnScan,
+    "help vulnscan":        menus.HelpInfoVulnScan,
+
+    "4":                    func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "run 4":                func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "use 4":                func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "exec 4":               func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "start 4":              func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "launch 4":             func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "exploit 4":            func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "execute 4":            func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "run enumscan":         func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "use enumscan":         func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "exec enumscan":        func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "start enumscan":       func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "launch enumscan":      func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "exploit enumscan":     func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+    "execute enumscan":     func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
+
+    "? 4":                  menus.HelpInfoEnumScan,
+    "info 4":               menus.HelpInfoEnumScan,
+    "help 4":               menus.HelpInfoEnumScan,
+    "enumscan":             menus.HelpInfoEnumScan,
+    "info enumscan":        menus.HelpInfoEnumScan,
+    "help enumscan":        menus.HelpInfoEnumScan,
+
+    "5":                    func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "run 5":                func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "use 5":                func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "exec 5":               func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "start 5":              func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "launch 5":             func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "exploit 5":            func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "execute 5":            func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "run smbexplo":        func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "use smbexplo":        func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "exec smbexplo":       func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "start smbexplo":      func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "launch smbexplo":     func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "exploit smbexplo":    func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+    "execute smbexplo":    func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
+
+    "? 5":                  menus.HelpInfoSmbExplo,
+    "info 5":               menus.HelpInfoSmbExplo,
+    "help 5":               menus.HelpInfoSmbExplo,
+    "smbexplo":            menus.HelpInfoSmbExplo,
+    "info smbexplo":       menus.HelpInfoSmbExplo,
+    "help smbexplo":       menus.HelpInfoSmbExplo,
+
+    "6":                    func() {PacketSniffer(Mode, Rhost)},
+    "run 6":                func() {PacketSniffer(Mode, Rhost)},
+    "use 6":                func() {PacketSniffer(Mode, Rhost)},
+    "exec 6":               func() {PacketSniffer(Mode, Rhost)},
+    "start 6":              func() {PacketSniffer(Mode, Rhost)},
+    "launch 6":             func() {PacketSniffer(Mode, Rhost)},
+    "exploit 6":            func() {PacketSniffer(Mode, Rhost)},
+    "execute 6":            func() {PacketSniffer(Mode, Rhost)},
+    "run psniffer":        func() {PacketSniffer(Mode, Rhost)},
+    "use psniffer":        func() {PacketSniffer(Mode, Rhost)},
+    "exec psniffer":       func() {PacketSniffer(Mode, Rhost)},
+    "start psniffer":      func() {PacketSniffer(Mode, Rhost)},
+    "launch psniffer":     func() {PacketSniffer(Mode, Rhost)},
+    "exploit psniffer":    func() {PacketSniffer(Mode, Rhost)},
+    "execute psniffer":    func() {PacketSniffer(Mode, Rhost)},
+
+    "? 6":                  menus.HelpInfoPSniffer,
+    "info 6":               menus.HelpInfoPSniffer,
+    "help 6":               menus.HelpInfoPSniffer,
+    "psniffer":            menus.HelpInfoPSniffer,
+    "info psniffer":       menus.HelpInfoPSniffer,
+    "help psniffer":       menus.HelpInfoPSniffer,
+
+    "7":                    func() {KillerResponder(Iface, Lhost)},
+    "run 7":                func() {KillerResponder(Iface, Lhost)},
+    "use 7":                func() {KillerResponder(Iface, Lhost)},
+    "exec 7":               func() {KillerResponder(Iface, Lhost)},
+    "start 7":              func() {KillerResponder(Iface, Lhost)},
+    "launch 7":             func() {KillerResponder(Iface, Lhost)},
+    "exploit 7":            func() {KillerResponder(Iface, Lhost)},
+    "execute 7":            func() {KillerResponder(Iface, Lhost)},
+    "run responder":        func() {KillerResponder(Iface, Lhost)},
+    "use responder":        func() {KillerResponder(Iface, Lhost)},
+    "exec responder":       func() {KillerResponder(Iface, Lhost)},
+    "start responder":      func() {KillerResponder(Iface, Lhost)},
+    "launch responder":     func() {KillerResponder(Iface, Lhost)},
+    "exploit responder":    func() {KillerResponder(Iface, Lhost)},
+    "execute responder":    func() {KillerResponder(Iface, Lhost)},
+
+    "? 7":                  menus.HelpInfoResponder,
+    "info 7":               menus.HelpInfoResponder,
+    "help 7":               menus.HelpInfoResponder,
+    "responder":             menus.HelpInfoResponder,
+    "info responder":        menus.HelpInfoResponder,
+    "help responder":        menus.HelpInfoResponder,
+
+    "8":                    func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "run 8":                func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "use 8":                func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "exec 8":               func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "start 8":              func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "launch 8":             func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "exploit 8":            func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "execute 8":            func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "run beefninja":       func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "use beefninja":       func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "exec beefninja":      func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "start beefninja":     func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "launch beefninja":    func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "exploit beefninja":   func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+    "execute beefninja":   func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
+
+    "? 8":                  menus.HelpInfoBeefNinja,
+    "info 8":               menus.HelpInfoBeefNinja,
+    "help 8":               menus.HelpInfoBeefNinja,
+    "beefninja":           menus.HelpInfoBeefNinja,
+    "info beefninja":      menus.HelpInfoBeefNinja,
+    "help beefninja":      menus.HelpInfoBeefNinja,
+
+    "9":                    func() {XssHooker(Rhost)},
+    "run 9":                func() {XssHooker(Rhost)},
+    "use 9":                func() {XssHooker(Rhost)},
+    "exec 9":               func() {XssHooker(Rhost)},
+    "start 9":              func() {XssHooker(Rhost)},
+    "launch 9":             func() {XssHooker(Rhost)},
+    "exploit 9":            func() {XssHooker(Rhost)},
+    "execute 9":            func() {XssHooker(Rhost)},
+    "run xsshooker":      func() {XssHooker(Rhost)},
+    "use xsshooker":      func() {XssHooker(Rhost)},
+    "exec xsshooker":     func() {XssHooker(Rhost)},
+    "start xsshooker":    func() {XssHooker(Rhost)},
+    "launch xsshooker":   func() {XssHooker(Rhost)},
+    "exploit xsshooker":  func() {XssHooker(Rhost)},
+    "execute xsshooker":  func() {XssHooker(Rhost)},
+
+    "? 9":                  menus.HelpInfoXssHoocker,
+    "info 9":               menus.HelpInfoXssHoocker,
+    "help 9":               menus.HelpInfoXssHoocker,
+    "xsshooker":              menus.HelpInfoXssHoocker,
+    "info xsshooker":         menus.HelpInfoXssHoocker,
+    "help xsshooker":         menus.HelpInfoXssHoocker,
+
+    "99":                   scriptures.ScriptureNarators,
+    "run 99":               scriptures.ScriptureNarators,
+    "use 99":               scriptures.ScriptureNarators,
+    "exec 99":              scriptures.ScriptureNarators,
+    "start 99":             scriptures.ScriptureNarators,
+    "launch 99":            scriptures.ScriptureNarators,
+    "exploit 99":           scriptures.ScriptureNarators,
+    "execute 99":           scriptures.ScriptureNarators,
+    "run verses":           scriptures.ScriptureNarators,
+    "use verses":           scriptures.ScriptureNarators,
+    "exec verses":          scriptures.ScriptureNarators,
+    "start verses":         scriptures.ScriptureNarators,
+    "launch verses":        scriptures.ScriptureNarators,
+    "exploit verses":       scriptures.ScriptureNarators,
+    "execute verses":       scriptures.ScriptureNarators,
+
+    "? 99":                 menus.HelpInfoVerses,
+    "verses":               menus.HelpInfoVerses,
+    "info 99":              menus.HelpInfoVerses,
+    "help 99":              menus.HelpInfoVerses,
+    "info verses":          menus.HelpInfoVerses,
+    "help verses":          menus.HelpInfoVerses,
 
     }
     if action, exists := commandMap[cmd]; exists {
@@ -321,7 +563,7 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
         "psniffer":  func() {PacketSniffer(Mode, Rhost)},
         "responder": func() {KillerResponder(Iface, Lhost)},
         "beefninja": func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
-        "xsshooker": func() {Enum4linux(Rhost)},
+        "xsshooker": func() {XssHooker(Rhost)},
 
     }
 
@@ -369,6 +611,10 @@ func NmapVulnScan(Rhost string) {
 }
 
 func SmbVulnScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n\n%s[>] %sSMB vuln scan target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
     subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, Rhost)
     return
@@ -411,6 +657,16 @@ func RpcEnumScan(Rhost string) {
     }
     fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
     subprocess.Popen(`rpcclient -U "" -N %s`, Rhost)
+    return
+}
+
+func XssHooker(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
+    fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    subprocess.Popen(`toxssin.py [-h] -u URL -c CERTFILE -k KEYFILE [-p PORT] [-s SCRIPT_NAME] [-e ELEMENTS] [-f FREQUENCY] [-a COOKIE_AGE] [-t] [-g] [-v] [-q] %s`, Rhost)
     return
 }
 

@@ -68,8 +68,9 @@ func WebPentest() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-    "? info":           menus.HelpInfo,
-    "help info":        menus.HelpInfo,
+    "? info":               menus.HelpInfo,
+    "h info":               menus.HelpInfo,
+    "help info":            menus.HelpInfo,
 
     "v":                banners.Version,
     "version":          banners.Version,
@@ -92,18 +93,23 @@ func executeCommand(cmd string) bool {
     "h run":            menus.HelpInfoRun,
     "info run":         menus.HelpInfoRun,
     "help run":         menus.HelpInfoRun,
-    "? use":            menus.HelpInfoRun,
-    "h use":            menus.HelpInfoRun,
-    "info use":         menus.HelpInfoRun,
-    "help use":         menus.HelpInfoRun,
+
+    "use":              menus.HelpInfoUse,
+    "? use":            menus.HelpInfoUse,
+    "h use":            menus.HelpInfoUse,
+    "info use":         menus.HelpInfoUse,
+    "help use":         menus.HelpInfoUse,
+
     "? exec":           menus.HelpInfoRun,
     "h exec":           menus.HelpInfoRun,
     "info exec":        menus.HelpInfoRun,
     "help exec":        menus.HelpInfoRun,
-    "? start":          menus.HelpInfoRun,
-    "h start":          menus.HelpInfoRun,
-    "info start":       menus.HelpInfoRun,
-    "help start":       menus.HelpInfoRun,
+
+    "? start":          menus.HelpInfoStart,
+    "h start":          menus.HelpInfoStart,
+    "info start":       menus.HelpInfoStart,
+    "help start":       menus.HelpInfoStart,
+
     "? launch":         menus.HelpInfoRun,
     "h launch":         menus.HelpInfoRun,
     "info launch":      menus.HelpInfoRun,
@@ -139,7 +145,12 @@ func executeCommand(cmd string) bool {
     "use list":         menus.HelpInfoList,
     "list":             menus.HelpInfoList,
 
+    "h option":         menus.HelpInfOptions,
+    "? option":         menus.HelpInfOptions,
+    "h options":        menus.HelpInfOptions,
     "? options":        menus.HelpInfOptions,
+    "info option":      menus.HelpInfOptions,
+    "help option":      menus.HelpInfOptions,
     "info options":     menus.HelpInfOptions,
     "help options":     menus.HelpInfOptions,
 
@@ -158,7 +169,7 @@ func executeCommand(cmd string) bool {
     "use features":     menus.HelpInfoFeatures,
 
     //Chameleons//
-    "info":             menus.HelpInfoMain,
+    "info":             menus.HelpInfoWebsites,
 
     "m":                menus.MenuEight,
     "menu":             menus.MenuEight,
@@ -168,26 +179,26 @@ func executeCommand(cmd string) bool {
     "show option":      menus.HelpInfOptions,
     "show options":     menus.HelpInfOptions,
 
-    "show all":         menus.ListMainFunctions,
-    "list all":         menus.ListMainFunctions,
+    "show all":         menus.ListWebsitesFunctions,
+    "list all":         menus.ListWebsitesFunctions,
 
-    "func":             menus.ListMainFunctions,
-    "funcs":            menus.ListMainFunctions,
-    "functions":        menus.ListMainFunctions,
-    "show func":        menus.ListMainFunctions,
-    "list funcs":       menus.ListMainFunctions,
-    "show funcs":       menus.ListMainFunctions,
-    "show function":    menus.ListMainFunctions,
-    "list function":    menus.ListMainFunctions,
-    "list functions":   menus.ListMainFunctions,
-    "show functions":   menus.ListMainFunctions,
+    "func":             menus.ListWebsitesFunctions,
+    "funcs":            menus.ListWebsitesFunctions,
+    "functions":        menus.ListWebsitesFunctions,
+    "show func":        menus.ListWebsitesFunctions,
+    "list funcs":       menus.ListWebsitesFunctions,
+    "show funcs":       menus.ListWebsitesFunctions,
+    "show function":    menus.ListWebsitesFunctions,
+    "list function":    menus.ListWebsitesFunctions,
+    "list functions":   menus.ListWebsitesFunctions,
+    "show functions":   menus.ListWebsitesFunctions,
 
-    "module":           menus.ListMainFunctions,
-    "modules":          menus.ListMainFunctions,
-    "list module":      menus.ListMainFunctions,
-    "show module":      menus.ListMainFunctions,
-    "list modules":     menus.ListMainFunctions,
-    "show modules":     menus.ListMainFunctions,
+    "module":           menus.ListWebsitesFunctions,
+    "modules":          menus.ListWebsitesFunctions,
+    "list module":      menus.ListWebsitesFunctions,
+    "show module":      menus.ListWebsitesFunctions,
+    "list modules":     menus.ListWebsitesFunctions,
+    "show modules":     menus.ListWebsitesFunctions,
 
     }
     if action, exists := commandMap[cmd]; exists {
@@ -313,8 +324,6 @@ func WebPenFunctions(Function string, args ...interface{}) {
         fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
     }
 }
-
-
 
 func EnumScan(Rhost string) {
     fmt.Printf("\n%s[*] %sPerforming enumscan scan ...\n", bcolors.GREEN, bcolors.ENDC)

@@ -39,7 +39,7 @@ func Run() {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf("%s%safr3%s%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+            fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
             scanner.Scan()
             Input := strings.TrimSpace(strings.ToLower(scanner.Text()))
             switch Input {
@@ -65,7 +65,7 @@ func Run() {
 func africanaAutoMode() {
     menus.MenuZero()
     for {
-        fmt.Printf("%s%safr3%s%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
         Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
         buildParts := strings.Fields(Input)
@@ -138,8 +138,9 @@ func africanaFrameworAuto() {
 func executeCommandAuto(cmd string) bool {
     commandMap := map[string]func(){
 
-    "? info":           menus.HelpInfo,
-    "help info":        menus.HelpInfo,
+    "? info":               menus.HelpInfo,
+    "h info":               menus.HelpInfo,
+    "help info":            menus.HelpInfo,
 
     "v":                banners.Version,
     "version":          banners.Version,
@@ -162,18 +163,23 @@ func executeCommandAuto(cmd string) bool {
     "h run":            menus.HelpInfoRun,
     "info run":         menus.HelpInfoRun,
     "help run":         menus.HelpInfoRun,
-    "? use":            menus.HelpInfoRun,
-    "h use":            menus.HelpInfoRun,
-    "info use":         menus.HelpInfoRun,
-    "help use":         menus.HelpInfoRun,
+
+    "use":              menus.HelpInfoUse,
+    "? use":            menus.HelpInfoUse,
+    "h use":            menus.HelpInfoUse,
+    "info use":         menus.HelpInfoUse,
+    "help use":         menus.HelpInfoUse,
+
     "? exec":           menus.HelpInfoRun,
     "h exec":           menus.HelpInfoRun,
     "info exec":        menus.HelpInfoRun,
     "help exec":        menus.HelpInfoRun,
-    "? start":          menus.HelpInfoRun,
-    "h start":          menus.HelpInfoRun,
-    "info start":       menus.HelpInfoRun,
-    "help start":       menus.HelpInfoRun,
+
+    "? start":          menus.HelpInfoStart,
+    "h start":          menus.HelpInfoStart,
+    "info start":       menus.HelpInfoStart,
+    "help start":       menus.HelpInfoStart,
+
     "? launch":         menus.HelpInfoRun,
     "h launch":         menus.HelpInfoRun,
     "info launch":      menus.HelpInfoRun,
@@ -209,7 +215,12 @@ func executeCommandAuto(cmd string) bool {
     "use list":         menus.HelpInfoList,
     "list":             menus.HelpInfoList,
 
+    "h option":         menus.HelpInfOptions,
+    "? option":         menus.HelpInfOptions,
+    "h options":        menus.HelpInfOptions,
     "? options":        menus.HelpInfOptions,
+    "info option":      menus.HelpInfOptions,
+    "help option":      menus.HelpInfOptions,
     "info options":     menus.HelpInfOptions,
     "help options":     menus.HelpInfOptions,
 
@@ -513,7 +524,7 @@ func executeCommandAuto(cmd string) bool {
 //Manual mode
 func africanaManualMode() {
     for {
-        fmt.Printf("%s%safr3%s%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
         Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
         buildParts := strings.Fields(Input)
@@ -545,8 +556,9 @@ func africanaManualMode() {
 func executeCommand(cmd string) bool {
     commandMap := map[string]func(){
 
-    "? info":           menus.HelpInfo,
-    "help info":        menus.HelpInfo,
+    "? info":               menus.HelpInfo,
+    "h info":               menus.HelpInfo,
+    "help info":            menus.HelpInfo,
 
     "v":                banners.Version,
     "version":          banners.Version,
@@ -569,18 +581,23 @@ func executeCommand(cmd string) bool {
     "h run":            menus.HelpInfoRun,
     "info run":         menus.HelpInfoRun,
     "help run":         menus.HelpInfoRun,
-    "? use":            menus.HelpInfoRun,
-    "h use":            menus.HelpInfoRun,
-    "info use":         menus.HelpInfoRun,
-    "help use":         menus.HelpInfoRun,
+
+    "? use":            menus.HelpInfoUse,
+    "h use":            menus.HelpInfoUse,
+    "info use":         menus.HelpInfoUse,
+    "help use":         menus.HelpInfoUse,
+
+
     "? exec":           menus.HelpInfoRun,
     "h exec":           menus.HelpInfoRun,
     "info exec":        menus.HelpInfoRun,
     "help exec":        menus.HelpInfoRun,
-    "? start":          menus.HelpInfoRun,
-    "h start":          menus.HelpInfoRun,
-    "info start":       menus.HelpInfoRun,
-    "help start":       menus.HelpInfoRun,
+
+    "? start":          menus.HelpInfoStart,
+    "h start":          menus.HelpInfoStart,
+    "info start":       menus.HelpInfoStart,
+    "help start":       menus.HelpInfoStart,
+
     "? launch":         menus.HelpInfoRun,
     "h launch":         menus.HelpInfoRun,
     "info launch":      menus.HelpInfoRun,
@@ -616,7 +633,12 @@ func executeCommand(cmd string) bool {
     "use list":         menus.HelpInfoList,
     "list":             menus.HelpInfoList,
 
+    "h option":         menus.HelpInfOptions,
+    "? option":         menus.HelpInfOptions,
+    "h options":        menus.HelpInfOptions,
     "? options":        menus.HelpInfOptions,
+    "info option":      menus.HelpInfOptions,
+    "help option":      menus.HelpInfOptions,
     "info options":     menus.HelpInfOptions,
     "help options":     menus.HelpInfOptions,
 

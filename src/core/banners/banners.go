@@ -203,10 +203,10 @@ func GraphicsTinny() {
 
 func GraphicsTorNet() {
     fmt.Printf(`%s
- |                             |
- __|  _ \   __| __|  _ \   __| |  /  __|
- |   (   | |  \__ \ (   | (      < \__ \
-\__|\___/ _|  ____/\___/ \___|_|\_\____/%s%s%s
+ _                       _ 
+| |_ ___ ___ ___ ___ ___| |_ ___ 
+|  _| . |  _|_ -| . |  _| '_|_ -|
+|_| |___|_| |___|___|___|_,_|___|%s%s%s
 `, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
 }
 
