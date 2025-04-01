@@ -26,7 +26,7 @@ var(
     scanner = bufio.NewScanner(os.Stdin)
     Gateway, _ = utils.GetDefaultGatewayIP()
     Input, Rhost, Proxy, Function, Target string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -47,10 +47,10 @@ var defaultValues = map[string]string{
 
 func PhishingPentest() {
     for {
-        fmt.Printf("%s%s%safr3%s phishers(%s%s%s)%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "phishing_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s phishers(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "phishing_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -88,6 +88,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -443,10 +448,8 @@ func executeCommand(cmd string) bool {
     "help verses":          menus.HelpInfoVerses,
 
 
-
-
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }

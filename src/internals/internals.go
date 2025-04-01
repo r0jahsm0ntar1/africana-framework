@@ -27,7 +27,7 @@ var(
     scanner = bufio.NewScanner(os.Stdin)
     Gateway, _ = utils.GetDefaultGatewayIP()
     Name, Input, Rhost, Target, Proxy, Function  string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -52,10 +52,10 @@ var defaultValues = map[string]string{
 
 func NetworkPentest() {
     for {
-        fmt.Printf("%s%safr3%s networks(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "internal_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s networks(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "internal_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -93,6 +93,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -255,12 +260,12 @@ func executeCommand(cmd string) bool {
     "exploit portscan":       func() {NmapPortScan(Rhost)},
     "execute portscan":       func() {NmapPortScan(Rhost)},
 
-    "? 2":                  menus.HelpInfoPortScan,
-    "info 2":               menus.HelpInfoPortScan,
-    "help 2":               menus.HelpInfoPortScan,
-    "portscan":               menus.HelpInfoPortScan,
-    "info portscan":          menus.HelpInfoPortScan,
-    "help portscan":          menus.HelpInfoPortScan,
+    "? 2":                  menus.HelpInfoInPortScan,
+    "info 2":               menus.HelpInfoInPortScan,
+    "help 2":               menus.HelpInfoInPortScan,
+    "portscan":               menus.HelpInfoInPortScan,
+    "info portscan":          menus.HelpInfoInPortScan,
+    "help portscan":          menus.HelpInfoInPortScan,
 
     "3":                    func() {NmapVulnScan(Rhost)},
     "run 3":                func() {NmapVulnScan(Rhost)},
@@ -278,12 +283,12 @@ func executeCommand(cmd string) bool {
     "exploit vulnscan":     func() {NmapVulnScan(Rhost)},
     "execute vulnscan":     func() {NmapVulnScan(Rhost)},
 
-    "? 3":                  menus.HelpInfoVulnScan,
-    "info 3":               menus.HelpInfoVulnScan,
-    "help 3":               menus.HelpInfoVulnScan,
-    "vulnscan":             menus.HelpInfoVulnScan,
-    "info vulnscan":        menus.HelpInfoVulnScan,
-    "help vulnscan":        menus.HelpInfoVulnScan,
+    "? 3":                  menus.HelpInfoInVulnScan,
+    "info 3":               menus.HelpInfoInVulnScan,
+    "help 3":               menus.HelpInfoInVulnScan,
+    "vulnscan":             menus.HelpInfoInVulnScan,
+    "info vulnscan":        menus.HelpInfoInVulnScan,
+    "help vulnscan":        menus.HelpInfoInVulnScan,
 
     "4":                    func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
     "run 4":                func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
@@ -301,12 +306,12 @@ func executeCommand(cmd string) bool {
     "exploit enumscan":     func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
     "execute enumscan":     func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
 
-    "? 4":                  menus.HelpInfoEnumScan,
-    "info 4":               menus.HelpInfoEnumScan,
-    "help 4":               menus.HelpInfoEnumScan,
-    "enumscan":             menus.HelpInfoEnumScan,
-    "info enumscan":        menus.HelpInfoEnumScan,
-    "help enumscan":        menus.HelpInfoEnumScan,
+    "? 4":                  menus.HelpInfoInEnumScan,
+    "info 4":               menus.HelpInfoInEnumScan,
+    "help 4":               menus.HelpInfoInEnumScan,
+    "enumscan":             menus.HelpInfoInEnumScan,
+    "info enumscan":        menus.HelpInfoInEnumScan,
+    "help enumscan":        menus.HelpInfoInEnumScan,
 
     "5":                    func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
     "run 5":                func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
@@ -447,7 +452,7 @@ func executeCommand(cmd string) bool {
     "help verses":          menus.HelpInfoVerses,
 
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }
@@ -661,12 +666,8 @@ func RpcEnumScan(Rhost string) {
 }
 
 func XssHooker(Rhost string) {
-    if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
-        return
-    }
-    fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
-    subprocess.Popen(`toxssin.py [-h] -u URL -c CERTFILE -k KEYFILE [-p PORT] [-s SCRIPT_NAME] [-e ELEMENTS] [-f FREQUENCY] [-a COOKIE_AGE] [-t] [-g] [-v] [-q] %s`, Rhost)
+    fmt.Printf("\n\n%s[>] %sperforming M.I.B attacks: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    subprocess.Popen(`cd %s/networks/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p %s -v`, ToolsDir, Lhost, CertPath, KeyPath, "443")
     return
 }
 
@@ -681,6 +682,10 @@ func SmbExploit(Rhost string, Lhost string, Lport string) {
 }
 
 func PacketSniffer(Mode string, Rhost string) {
+    if _, err := exec.LookPath("bettercap"); err != nil {
+        fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.RED, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        return
+    }
     if Rhost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
         return
@@ -700,6 +705,10 @@ func PacketSniffer(Mode string, Rhost string) {
 
 func KillerResponder(Iface string, Lhost string) {
     filePath := "/etc/responder/Responder.conf.bak_africana"
+    if _, err := exec.LookPath("responder"); err != nil {
+        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.RED, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        return
+    }
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`cp /etc/responder/Responder.conf /etc/responder/Responder.conf.bak_africana`)
 

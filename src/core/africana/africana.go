@@ -41,7 +41,7 @@ func Run() {
         for {
             fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
             scanner.Scan()
-            Input := strings.TrimSpace(strings.ToLower(scanner.Text()))
+            Input := strings.TrimSpace(scanner.Text())
             switch Input {
             case "y", "yes":
                 utils.ClearScreen()
@@ -67,8 +67,8 @@ func africanaAutoMode() {
     for {
         fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -81,9 +81,10 @@ func africanaAutoMode() {
         case "e", "q", "exit", "quit":
             os.Exit(0)
         case "0", "b", "back":
-            return
+            //
         case "set":
-            handleSetCommand(buildParts); executeFunctionAuto()
+            handleSetCommand(buildParts)
+            executeFunctionAuto()
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
@@ -147,6 +148,11 @@ func executeCommandAuto(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -508,7 +514,7 @@ func executeCommandAuto(cmd string) bool {
     "info verses":      menus.HelpInfoVerses,
     "help verses":      menus.HelpInfoVerses,
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }
@@ -516,18 +522,13 @@ func executeCommandAuto(cmd string) bool {
 }
 
 
-
-
-
-
-
 //Manual mode
 func africanaManualMode() {
     for {
         fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -540,9 +541,10 @@ func africanaManualMode() {
         case "e", "q", "exit", "quit":
             os.Exit(0)
         case "0", "b", "back":
-            return
+            //
         case "set":
-            handleSetCommand(buildParts); executeFunction()
+            handleSetCommand(buildParts)
+            executeFunction()
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
@@ -565,6 +567,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -927,7 +934,7 @@ func executeCommand(cmd string) bool {
     "help verses":      menus.HelpInfoVerses,
 
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }

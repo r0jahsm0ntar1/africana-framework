@@ -35,10 +35,10 @@ var torrString = []string{
 
 func Torsocks() {
     for {
-        fmt.Printf("%s%safr3%s torsocks(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "securities_setup.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s torsocks(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "securities_setup.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -76,6 +76,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -431,7 +436,7 @@ func executeCommand(cmd string) bool {
     "help verses":      menus.HelpInfoVerses,
 
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }

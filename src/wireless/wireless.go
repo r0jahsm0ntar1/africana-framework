@@ -25,7 +25,7 @@ var (
     LhostIp, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
     Input, Rhost, Proxy, Function, Script string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -44,10 +44,10 @@ var defaultValues = map[string]string{
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%safr3%s wireless(%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "wireless_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s wireless(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "wireless_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -85,6 +85,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -439,7 +444,7 @@ func executeCommand(cmd string) bool {
     "help verses":      menus.HelpInfoVerses,
 
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }
@@ -540,7 +545,7 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
         "bettercap": func() {Bettercap(Iface)},
         "airgeddon": func() {AirGeddon()},
       "wifipumpkin": func() {WifiPumpkin()},
-     "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)}, 
+     "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)},
     }
 
     if action, exists := commands[Function]; exists {
@@ -581,7 +586,7 @@ func WifiPumpkin3(Iface string, Ssid string) {
 }
 
 func Wifite(Iface string) {
-    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic /usr/share/WordList/rockyou.txt --require-fakeauth --nodeauth --pmkid-timeout 120`, Iface)
+    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, Iface, RokyPath)
 }
 
 func Bettercap(Iface string) {

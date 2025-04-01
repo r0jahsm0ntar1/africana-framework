@@ -9,7 +9,7 @@ var (
     Interfaces, _ = utils.Ifaces()
     Lhost, _ = utils.GetDefaultIP()
     Gateway, _ = utils.GetDefaultGatewayIP()
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 func MenuZero() { 
@@ -120,6 +120,7 @@ func MenuFour() {
 %s 7. %shoaxshell
 %s 8. %snoisemaker
 %s 9. %scodebreaker
+
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
 `, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
@@ -1499,7 +1500,7 @@ func HelpInfoDiscover() {
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoPortScan() {
+func HelpInfoInPortScan() {
     fmt.Printf(`
        %sName%s: portscan
    %sFunction%s: src/securities/portscan.fn
@@ -1536,7 +1537,7 @@ func HelpInfoPortScan() {
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoVulnScan() {
+func HelpInfoInVulnScan() {
     fmt.Printf(`
        %sName%s: vulnscan
    %sFunction%s: src/securities/vulnscan.fn
@@ -1573,7 +1574,7 @@ func HelpInfoVulnScan() {
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-func HelpInfoEnumScan() {
+func HelpInfoInEnumScan() {
     fmt.Printf(`
        %sName%s: enumscan
    %sFunction%s: src/securities/enumscan.fn
@@ -3253,15 +3254,15 @@ func ListWebsitesFunctions() {
   # %sName       Description%s
   - ----       -----------
 
-  %s1. %s      enum%s: Querry server for Subdomain. Uses (Amass, Assetfinder, Subfinder, Sublist3r, and Findomain to gather subdomains).
-  %s2. %s  dnsrecon%s: Start DNS enumeration, Combine results and save DNS.
-  %s3. %s  portscan%s: Start full portscsn on the server.
-  %s4. %s  techscan%s: Discover all tech the server is running.
-  %s5. %s  fuzzscan%s: Digg for root files from the server.
-  %s6. %s  leakscan%s: Try and find Sensitive data exposure.
-  %s7. %s  vulnscan%s: Perform vulnerbility scan on the server.
-  %s8. %s  asetscan%s: Launch Web Penetration testing engines with full free bugbounty automation kit.
-  %s9. %s      auto%s: Use bugbounty strategy combine all the above commands and run againist the server.
+  %s1. %s    netmap%s: Network Mapping and portscaning.
+  %s2. %s  enumscan%s: Subdomain enumeration.
+  %s3. %s  dnsrecon%s: Dns and asn lookup.
+  %s4. %s  techscan%s: Web technology detection.
+  %s5. %s  asetscan%s: Wayback and asset discovery.
+  %s6. %s  fuzzscan%s: Digg for root files from the server.
+  %s7. %s  leakscan%s: Secret and leak detection.
+  %s8. %s  vulnscan%s: Vulnerability scanning (XSS, SQLi, CSRF, SSRF, IDOR).
+  %s9. %s    bounty%s: Bug bounty hunting techniques.
 
 %sex. %s%susage%s:
 --  ------
@@ -3301,18 +3302,325 @@ func HelpInfoWebsites() {
     ListWebsitesFunctions()
 }
 
+func HelpInfoEnumScan() {
+    fmt.Printf(`
+       %sName%s: enumscan
+   %sFunction%s: src/websites/enum_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module enumscan or -> use enumscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 
+func HelpInfoDnsRecon() {
+    fmt.Printf(`
+       %sName%s: dnsrecon
+   %sFunction%s: src/websites/dns_recon.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module dnsrecon or -> use dnsrecon
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 
+func HelpInfoPortScan() {
+    fmt.Printf(`
+       %sName%s: portscan
+   %sFunction%s: src/websites/port_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module portscan or -> use portscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoTechScan() {
+    fmt.Printf(`
+       %sName%s: techscan
+   %sFunction%s: src/websites/tech_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module techscan or -> use techscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 
+func HelpInfoFuzzScan() {
+    fmt.Printf(`
+       %sName%s: fuzzscan
+   %sFunction%s: src/websites/fuzz_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module fuzzscan or -> use fuzzscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoLeakScan() {
+    fmt.Printf(`
+       %sName%s: leakscan
+   %sFunction%s: src/websites/leak_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module leakscan or -> use leakscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 
+func HelpInfoVulnScan() {
+    fmt.Printf(`
+       %sName%s: vulnscan
+   %sFunction%s: src/websites/vuln_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module vulnscan or -> use vulnscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func HelpInfoAsetScan() {
+    fmt.Printf(`
+       %sName%s: asetscan
+   %sFunction%s: src/websites/aset_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
+
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
+
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module asetscan or -> use asetscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 
+func HelpInfoAutoScan() {
+    fmt.Printf(`
+       %sName%s: autoscan
+   %sFunction%s: src/websites/auto_scan.fn
+   %sPlatform%s: All
+       %sArch%s: x64, x86, amd_64, android
+ %sPrivileged%s: No
+    %sLicense%s: Africana Framework License(BSD)
+       %sRank%s: Normal
+  %sDisclosed%s: 2024
 
+%sProvided by%s:
+ %sCreated by%s: r0jahsm0ntar1
 
+%sTested Distros%s:
+------ -------
+      Id  Name
+      --  ----
+   -> 0   All Distros
+
+%sDescription%s:
+-----------
+  Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane enumscan with ease.
+  It consists off recons, vulners, ddos among others.
+
+%sex. %s%susage%s:
+--  ------
+
+    set module autoscan or -> use autoscan
+    set rhosts https://example.com
+    run
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
 
 func HelpInfoCredits() {
     fmt.Printf(`
@@ -3367,9 +3675,6 @@ func HelpInfoVerses() {
 
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
-
-
-
 
 func UpsentTools() {
     fmt.Println(bcolors.YELLOW + "\n[!] " + bcolors.ENDC + "Choice selected not implimented yet!, but comming soon!" + bcolors.ENDC)

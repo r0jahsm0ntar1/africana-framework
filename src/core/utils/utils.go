@@ -24,7 +24,7 @@ import(
 
 var (
     cmd *exec.Cmd
-    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList, KyPath string
+    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList, RokyPath string
 
 )
 
@@ -347,33 +347,36 @@ func Sealing() {
 }
 
 // DirLocations returns the paths for certificates, output, and tools directories
-func DirLocations() (string, string, string, string, string, string) {
+func DirLocations() (string, string, string, string, string, string, string) {
     if subprocess.IsRoot() {
         CertDir = "/root/.afr3/certs"
         OutPutDir = "/root/.afr3/output"
         ToolsDir = "/root/.afr3/africana-base"
+        RokyPath  = "/usr/share/wordlists/rockyou.txt"
         KeyPath = filepath.Join(CertDir, "africana-key.pem")
         CertPath = filepath.Join(CertDir, "africana-cert.pem")
         WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
+
     } else {
         homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
-            return "", "", "", "", "", ""
+            return "", "", "", "", "", "", ""
         }
+        RokyPath  = "/usr/share/wordlists/rockyou.txt"
         CertDir = filepath.Join(homeDir, ".afr3", "certs")
-        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
-        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
         KeyPath = filepath.Join(CertDir, "africana-key.pem")
+        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
         CertPath = filepath.Join(CertDir, "africana-cert.pem")
+        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
         WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
     }
-    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList
+    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
 }
 
 // InitializePaths sets the correct paths based on whether the  is root or not
 func InitiLize() {
-    CertDir, OutPutDir, _, _, _, _ := DirLocations()
-    KyPath  = "/usr/share/wordlist/rockyou.txt"
+    CertDir, OutPutDir, _, _, _, _, _ := DirLocations()
+    RokyPath  = "/usr/share/wordlists/rockyou.txt"
 
     // Create directories if they don't exist
     for _, dir := range []string{CertDir, OutPutDir} {
@@ -387,15 +390,14 @@ func InitiLize() {
     if _, err := os.Stat(CertPath); os.IsNotExist(err) {
         GenerateSelfSignedCert(CertPath, KeyPath)
     }
-
     // Handle rockyou.txt.gz for Linux
     if runtime.GOOS == "linux" {
-        gzFilePath := KyPath + ".gz"
-        if _, err := os.Stat(KyPath); os.IsNotExist(err) {
+        gzFilePath := RokyPath + ".gz"
+        if _, err := os.Stat(RokyPath); os.IsNotExist(err) {
             if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
                 return
             }
-            command := fmt.Sprintf("gunzip %s", gzFilePath)
+            command := fmt.Sprintf("gunzip -d -9 %s", gzFilePath)
             subprocess.Popen(command)
         }
     }

@@ -16,7 +16,7 @@ import(
 var (
     scanner = bufio.NewScanner(os.Stdin)
     Input, Proxy, Distro, Function string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -28,10 +28,10 @@ var defaultValues = map[string]string{
 
 func SetupsLauncher() {
     for {
-        fmt.Printf("%s%s%safr3%s systems(%s%s%s)%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, "setups_launcher.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s systems(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "setups_launcher.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
-        Input = strings.TrimSpace(strings.ToLower(scanner.Text()))
-        buildParts := strings.Fields(Input)
+        Input = strings.TrimSpace(scanner.Text())
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -69,6 +69,11 @@ func executeCommand(cmd string) bool {
 
     "s":                utils.Sleep,
     "sleep":            utils.Sleep,
+
+    "c":                utils.ClearScreen,
+    "clear":            utils.ClearScreen,
+    "clear screen":      utils.ClearScreen,
+    "screen clear":     utils.ClearScreen,
 
     "o":                utils.ListJunks,
     "junks":            utils.ListJunks,
@@ -430,7 +435,7 @@ func executeCommand(cmd string) bool {
     "help verses":      menus.HelpInfoVerses,
 
     }
-    if action, exists := commandMap[cmd]; exists {
+    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
         action()
         return true
     }
@@ -470,7 +475,7 @@ func handleUnsetCommand(parts []string) {
 
         "distro": &Distro,
         "proxies": &Proxy,
-        "func":  &Function,
+        "func": &Function,
         "module": &Function,
         "function": &Function,
     }
@@ -532,18 +537,33 @@ func SetupsFunction(Function string, args ...interface{}) {
 
 func Installer(Distro string) {
     switch Distro {
-    case "1", "kali":
-        KaliSetups()
-    case "2", "arch":
+    case "1", "arch":
         ArchSetups()
-    case "3", "ubuntu":
-        UbuntuSetups()
-    case "4", "macos":
+        return
+    case "2", "kali":
+        KaliSetups()
+        return
+    case "3", "macos":
         MacosSetups()
+        return
+    case "4", "ubuntu":
+        UbuntuSetups()
+        return
     case "5", "android":
         AndroidSetups()
+        return
     case "6", "windows":
         WindowsSetups()
+        return
+    case "7", "update":
+        UpdateAfricana()
+        return
+    case "8", "repair":
+        UpdateAfricana()
+        return
+    case "9", "uninstall":
+        Uninstaller()
+        return
     default:
         fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.RED, bcolors.ENDC, Distro, bcolors.DARKGREEN, bcolors.ENDC)
     }
