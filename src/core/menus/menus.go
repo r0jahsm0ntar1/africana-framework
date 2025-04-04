@@ -458,7 +458,7 @@ func HelpInfoTips() {
 %sex. %s%susage%s:
 --  ------
 
-  info setups, torsocks, internals, exploits, wireless, phishers, webs, verses.
+  info setups, torsocks, networks, exploits, wireless, phishers, webs, verses.
 
 %sDescription%s:
 -----------
@@ -501,7 +501,7 @@ func ListMainFunctions() {
   # %sName       Description%s
   - ----       -----------
   %s1. %s    setups%s: Install, Update, Repair or Uninstall africana-framework.
-  %s2. %s  torsocks%s: Configure the system for strictly tight anonymity.(fix dns leak, changemac in auto boot)
+  %s2. %s  torsocks%s: Configure the system for strictly tight anonimity.(fix dns leak, changemac in auto boot)
   %s3. %s  networks%s: Start internal network attacks. From sniffing, injecting packets to hooking hosts.
   %s4. %s  exploits%s: Generate undetectebal R.A.Ts and (Launch next gen c2s to attack all systems. Evasions also included)
   %s5. %s  wireless%s: From wifies, bluetooths, cantools and other wireless networks attack vectors.
@@ -1405,7 +1405,7 @@ func ListInternalFunctions() {
 func HelpInfoNetworks() {
     fmt.Printf(`
        %sName%s: Networks
-   %sFunction%s: src/internals
+   %sFunction%s: src/networks
    %sPlatform%s: All
        %sArch%s: x64, x86, amd_64, android
  %sPrivileged%s: No
@@ -1430,7 +1430,7 @@ func HelpInfoNetworks() {
 
 func NetworksOptions() {
     fmt.Printf(`
-%sModule options %s(src/internals/networks_pentest.fn):
+%sModule options %s(src/networks/networks_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
@@ -1855,7 +1855,7 @@ func HelpInfoXssHoocker() {
 
 func OptionsXssHoocker() {
     fmt.Printf(`
-%sModule Options %s(src/internals/xsshooker.fn):
+%sModule Options %s(src/networks/xsshooker.fn):
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------

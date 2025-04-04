@@ -294,14 +294,8 @@ func ClearJunks() {
 }
 
 // Sleep pauses the execution for a specified duration (in seconds)
-func Sleep(){ //(seconds int) {
-    //if seconds < 0 {
-    //    fmt.Println("Error: Duration cannot be negative.")
-    //    return
-    //}
-    // Pause execution for the specified duration
-    //time.Sleep(time.Duration(seconds) * time.Second)
-    //fmt.Printf("Slept for %d seconds.\n", seconds)
+func Sleep() {
+    subprocess.Popen("sleep")
 }
 
 // GetAgreementPath returns the path to the agreement file based on the 's privilege level

@@ -49,7 +49,7 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 
     fmt.Printf(`
 %s%s%sInternal network attack vectors%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   internals := bcolors.ENDC + `
+   networks := bcolors.ENDC + `
 3. bettercap
 4. nmap
 5. metasploit
@@ -59,7 +59,7 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 9. responder
 10 toxssin
 ` + bcolors.ENDC
-    for _, i := range internals {
+    for _, i := range networks {
         fmt.Print(string(i))
         time.Sleep(3 * time.Millisecond)
     }

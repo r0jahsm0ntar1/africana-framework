@@ -1,5 +1,7 @@
 module main.go
 
+go 1.24.1
+
 replace credits => ./src/credits/
 
 replace utils => ./src/core/utils/
@@ -14,9 +16,9 @@ replace phishers => ./src/phishers/
 
 replace exploits => ./src/exploits/
 
-replace setups => ./src/core/setups/
+replace networks => ./src/networks/
 
-replace internals => ./src/internals/
+replace setups => ./src/core/setups/
 
 replace bcolors => ./src/core/bcolors/
 
@@ -42,8 +44,8 @@ require (
 	crackers v0.0.0-00010101000000-000000000000 // indirect
 	credits v0.0.0-00010101000000-000000000000 // indirect
 	exploits v0.0.0-00010101000000-000000000000 // indirect
-	internals v0.0.0-00010101000000-000000000000 // indirect
 	menus v0.0.0-00010101000000-000000000000 // indirect
+	networks v0.0.0-00010101000000-000000000000 // indirect
 	phishers v0.0.0-00010101000000-000000000000 // indirect
 	scriptures v0.0.0-00010101000000-000000000000 // indirect
 	securities v0.0.0-00010101000000-000000000000 // indirect

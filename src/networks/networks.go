@@ -1,4 +1,4 @@
-package internals
+package networks
 
 import(
     "os"
@@ -50,9 +50,9 @@ var defaultValues = map[string]string{
     "output": OutPutDir,
 }
 
-func NetworkPentest() {
+func NetworksPentest() {
     for {
-        fmt.Printf("%s%safr3%s networks(%s%s%s%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.RED, "internal_pentest.fn", bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s networks(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, Function, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
