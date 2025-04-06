@@ -606,10 +606,10 @@ func ListSetupsDistros() {
   # %sName       Description%s
   - ----       -----------
 
-  %s1. %s      arch%s: Tools will be installed in any Arch-Linux Distros using Blackarch repo.
-  %s2. %s      kali%s: Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
-  %s3. %s     macos%s: Under development. Install africana on MackingTosh systems.
-  %s4. %s    ubuntu%s: This module will install africana-framework in Ubuntu-Linux.
+  %s1. %s      kali%s: Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
+  %s2. %s    ubuntu%s: This module will install africana-framework in Ubuntu-Linux.
+  %s3. %s      arch%s: Tools will be installed in any Arch-Linux Distros using Blackarch repo.
+  %s4. %s     macos%s: Under development. Install africana on MackingTosh systems.
   %s5. %s   android%s: Install africana-framework in Termux using chroot environment.
   %s6. %s   windows%s: Under development. But can run if tools well installed using commando vm.
 
@@ -630,10 +630,10 @@ func ListSetupsFunction() {
 
   # %sName       Description%s
   - ----       -----------
-  %s1. %s      auto%s: Auto detect system and do the necessary.
-  %s2. %s    repair%s: Repair africana-framework if broken or with issues.
-  %s3. %s    update%s: Get new release of africana-framework from github and install it.
-  %s4. %s   install%s: Installs africana in selected distro.
+  %s1. %s   install%s: Installs africana in selected distro.
+  %s2. %s    update%s: Get new release of africana-framework from github and install it.
+  %s3. %s    repair%s: Repair africana-framework if broken or with issues.
+  %s4. %s      auto%s: Auto detect system and do the necessary.
   %s5. %s uninstall%s: Completely uninstall africana-framework from system.
 
 %sex. %s%susage%s:

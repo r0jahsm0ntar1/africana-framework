@@ -4,6 +4,7 @@ import(
     "os"
     "net"
     "fmt"
+    "sync"
     "time"
     "os/exec"
     "bcolors"
@@ -11,13 +12,13 @@ import(
     "runtime"
     "net/url"
     "math/big"
-    "path/filepath"
     "io/ioutil"
     "subprocess"
     "crypto/rand"
     "crypto/x509"
     "crypto/ecdsa"
     "encoding/pem"
+    "path/filepath"
     "crypto/elliptic"
     "crypto/x509/pkix"
 )
@@ -28,11 +29,88 @@ var (
 
 )
 
+type Spinner struct {
+    active    bool
+    done      chan struct{}
+    wg        sync.WaitGroup
+    mu        sync.Mutex
+    frames    []string
+    baseText  string
+}
+
 type InterfaceInfo struct {
     Name        string
     HardwareAddr string
     Flags       net.Flags
     Addresses   []string
+}
+
+func StartSpinner() *Spinner {
+    return &Spinner{
+        frames: []string{"|", "/", "-", "\\"},
+        baseText:  "[+] starting the africana framework console ...",
+        done:      make(chan struct{}),
+    }
+}
+
+func (s *Spinner) capitalizeLetter(text string, pos int) string {
+    if pos < 0 || pos >= len(text) {
+        return text
+    }
+
+    runes := []rune(text)
+    if runes[pos] >= 'a' && runes[pos] <= 'z' {
+        runes[pos] = runes[pos] - 32
+    }
+    return string(runes)
+}
+
+func (s *Spinner) Start() {
+    s.mu.Lock()
+    s.active = true
+    s.mu.Unlock()
+
+    s.wg.Add(1)
+    go func() {
+        defer s.wg.Done()
+        charIdx := 0
+        letterPos := 0
+
+        for {
+            select {
+            case <-s.done:
+                fmt.Printf("\r%-60s", "")
+                //fmt.Println()
+                return
+            default:
+                s.mu.Lock()
+                spinChar := s.frames[charIdx%len(s.frames)]
+                displayText := s.capitalizeLetter(s.baseText, letterPos)
+                displayMsg := fmt.Sprintf("\r%s%s", displayText, spinChar)
+                s.mu.Unlock()
+
+                fmt.Print(displayMsg)
+                charIdx++
+
+                // Faster letter progression
+                if charIdx%1 == 0 {
+                    letterPos = (letterPos + 1) % len(s.baseText)
+                }
+                time.Sleep(99 * time.Millisecond)
+            }
+        }
+    }()
+}
+
+func (s *Spinner) Stop() {
+    s.mu.Lock()
+    defer s.mu.Unlock()
+
+    if s.active {
+        close(s.done)
+        s.wg.Wait()
+        s.active = false
+    }
 }
 
 // ClearScreen clears the terminal screen

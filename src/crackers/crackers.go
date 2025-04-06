@@ -24,8 +24,8 @@ var defaultValues = map[string]string{
     "rhost": "",
     "rhosts": "",
     "function": "",
-    "password": WordPass,
     "output": OutPutDir,
+    "password": WordPass,
     "wordlist": WordList,
 }
 
@@ -306,10 +306,6 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
         fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
     }
 }
-
-
-
-
 
 
 //Online crackers

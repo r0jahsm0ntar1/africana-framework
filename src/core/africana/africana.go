@@ -44,9 +44,8 @@ func Run() {
             Input := strings.TrimSpace(scanner.Text())
             switch Input {
             case "y", "yes":
-                utils.ClearScreen()
                 utils.Sealing()
-                utils.InitiLize()
+                utils.ClearScreen()
                 Genesis()
                 return
             case "n", "q", "no", "exit", "quit":
@@ -56,7 +55,6 @@ func Run() {
             }
         }
     } else {
-        utils.InitiLize()
         Genesis()
     }
 }
@@ -1046,7 +1044,12 @@ func africanaManual() {
 
 func Genesis() {
     if len(os.Args) < 2 {
-        utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); banners.Version(); africanaManualMode()
+        utils.InitiLize()
+        scriptures.Verse()
+        setups.CheckTools()
+        banners.GraphicsLarge()
+        banners.Version()
+        africanaManualMode()
         return
     }
 
@@ -1055,41 +1058,41 @@ func Genesis() {
         "--version":        banners.Version,
         "-u":               setups.UpdateAfricana,
         "--update":         setups.UpdateAfricana,
-        "-0":               func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutoMode()},
-        "-a":               func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutoMode()},
-        "--auto":           func() {utils.ClearScreen(); scriptures.Verse(); banners.GraphicsLarge(); africanaAutoMode()},
-        "-1":               func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
-        "-i":               func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
-        "--install":        func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
-        "-2":               func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
-        "-t":               func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
-        "--torsocks":       func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
-        "-3":               func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
-        "-n":               func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
-        "--networks":       func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
-        "-4":               func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
-        "-e":               func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
-        "--exploits":       func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
-        "-5":               func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
-        "-w":               func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
-        "--wireless":       func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
-        "-6":               func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
-        "-p":               func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
-        "--crackers":       func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
-        "-7":               func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
-        "-f":               func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
-        "--phishers":       func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
-        "-8":               func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
-        "-x":               func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
-        "--websites":       func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
-        "-9":               credits.Creditors,
-        "-c":               credits.Creditors,
-        "--credits":        credits.Creditors,
-        "-99":              scriptures.ScriptureNarators,
-        "-b":               scriptures.ScriptureNarators,
-        "--scriptures":     scriptures.ScriptureNarators,
-        "-g":               func() {banners.RandomBanners(); utils.BrowseTutarilas()},
-        "--guide":          func() {banners.RandomBanners(); utils.BrowseTutarilas()},
+        "-0":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); africanaAutoMode()},
+        "-a":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); africanaAutoMode()},
+        "--auto":           func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); africanaAutoMode()},
+        "-1":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuOne(); setups.SetupsLauncher(); africanaAutoMode()},
+        "-i":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuOne(); setups.SetupsLauncher(); africanaAutoMode()},
+        "--install":        func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuOne(); setups.SetupsLauncher(); africanaAutoMode()},
+        "-2":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuTwo(); securities.Torsocks(); africanaAutoMode()},
+        "-t":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuTwo(); securities.Torsocks(); africanaAutoMode()},
+        "--torsocks":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuTwo(); securities.Torsocks(); africanaAutoMode()},
+        "-3":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuThree(); networks.NetworksPentest(); africanaAutoMode()},
+        "-n":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuThree(); networks.NetworksPentest(); africanaAutoMode()},
+        "--networks":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuThree(); networks.NetworksPentest(); africanaAutoMode()},
+        "-4":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFour(); exploits.ExploitsPentest(); africanaAutoMode()},
+        "-e":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFour(); exploits.ExploitsPentest(); africanaAutoMode()},
+        "--exploits":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFour(); exploits.ExploitsPentest(); africanaAutoMode()},
+        "-5":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFive(); wireless.WirelessPentest(); africanaAutoMode()},
+        "-w":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFive(); wireless.WirelessPentest(); africanaAutoMode()},
+        "--wireless":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuFive(); wireless.WirelessPentest(); africanaAutoMode()},
+        "-6":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSix(); crackers.CrackersPentest(); africanaAutoMode()},
+        "-p":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSix(); crackers.CrackersPentest(); africanaAutoMode()},
+        "--crackers":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSix(); crackers.CrackersPentest(); africanaAutoMode()},
+        "-7":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSeven(); phishers.PhishingPentest(); africanaAutoMode()},
+        "-f":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSeven(); phishers.PhishingPentest(); africanaAutoMode()},
+        "--phishers":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuSeven(); phishers.PhishingPentest(); africanaAutoMode()},
+        "-8":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuEight(); webattackers.WebsitesPentest(); africanaAutoMode()},
+        "-x":               func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuEight(); webattackers.WebsitesPentest(); africanaAutoMode()},
+        "--websites":       func() {scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); menus.MenuEight(); webattackers.WebsitesPentest(); africanaAutoMode()},
+        "-9":               func() {credits.Creditors(); africanaAutoMode()},
+        "-c":               func() {credits.Creditors(); africanaAutoMode()},
+        "--credits":        func() {credits.Creditors(); africanaAutoMode()},
+        "-99":              func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "-b":               func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "--scriptures":     func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "-g":               func() {banners.RandomBanners(); utils.BrowseTutarilas(); africanaAutoMode()},
+        "--guide":          func() {banners.RandomBanners(); utils.BrowseTutarilas(); africanaAutoMode()},
         "-00":              menus.HelpInfoMenuMain,
         "-h":               menus.HelpInfoMenuMain,
         "?":                menus.HelpInfoMenuMain,

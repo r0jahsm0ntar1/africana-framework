@@ -543,15 +543,15 @@ func WebPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func() {
+          "netmap": func() {PortScan(Rhost)},
         "enumscan": func() {EnumScan(Rhost)},
         "dnsrecon": func() {DnsRecon(Rhost)},
-        "portscan": func() {PortScan(Rhost)},
         "techscan": func() {TechScan(Rhost)},
+        "asetscan": func() {AssetScan(Rhost)},
         "fuzzscan": func() {FuzzScan(Rhost)},
         "leakscan": func() {LeakScan(Rhost)},
         "vulnscan": func() {VulnScan(Rhost)},
-        "asetscan": func() {AssetScan(Rhost)},
-        "autoscan": func() {AutoScan(Rhost)},
+          "bounty": func() {AutoScan(Rhost)},
     }
 
     if action, exists := commands[Function]; exists {

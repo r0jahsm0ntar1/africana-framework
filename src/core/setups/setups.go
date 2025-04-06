@@ -3,6 +3,8 @@ package setups
 import(
     "os"
     "fmt"
+    "time"
+    "os/exec"
     "bufio"
     "menus"
     "utils"
@@ -24,6 +26,35 @@ var defaultValues = map[string]string{
     "module": "",
     "proxies": "",
     "function": "",
+}
+
+var (
+    projectDiscoveryTools = map[string]string{
+        "subfinder":    "github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
+        "dnsx":         "github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+        "naabu":        "github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
+        "httpx":        "github.com/projectdiscovery/httpx/cmd/httpx@latest",
+        "katana":       "github.com/projectdiscovery/katana/cmd/katana@latest",
+        "uncover":      "github.com/projectdiscovery/uncover/cmd/uncover@latest",
+        "mapcidr":      "github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest",
+        "asnmap":       "github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
+        "tlsx":         "github.com/projectdiscovery/tlsx/cmd/tlsx@latest",
+        "interactsh":   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
+        "nuclei":       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
+        "notify":       "github.com/projectdiscovery/notify/cmd/notify@latest",
+        "gau":          "github.com/lc/gau/v2/cmd/gau@latest",
+        "waybackurls":  "github.com/tomnomnom/waybackurls@latest",
+        "dalfox":       "github.com/hahwul/dalfox/v2@latest",
+        "hakrawler":    "github.com/hakluke/hakrawler@latest",
+        "assetfinder":  "github.com/tomnomnom/assetfinder@latest",
+        "anew":         "github.com/tomnomnom/anew@latest",
+        "gf":           "github.com/tomnomnom/gf@latest",
+    }
+)
+
+type ToolStatus struct {
+    Present bool
+    Package string
 }
 
 func SetupsLauncher() {
@@ -572,6 +603,92 @@ func Installer(Distro string) {
 func InstallFoundationTools(commands []string) {
     for _, cmd := range commands {
         subprocess.Popen(cmd)
+    }
+}
+
+func checkTools() (map[string]ToolStatus, map[string]string) {
+    status := make(map[string]ToolStatus)
+    missing := make(map[string]string)
+
+    for tool, pkg := range projectDiscoveryTools {
+        if isInstalled(tool) {
+            status[tool] = ToolStatus{Present: true, Package: pkg}
+        } else {
+            status[tool] = ToolStatus{Present: false, Package: pkg}
+            missing[tool] = pkg
+        }
+        time.Sleep(100 * time.Millisecond)
+    }
+    return status, missing
+}
+
+func isInstalled(tool string) bool {
+    _, err := exec.LookPath(tool)
+    return err == nil
+}
+
+func installTools(tools map[string]string) {
+    for tool, pkg := range tools {
+        fmt.Printf("Installing %-15s", tool)
+        subprocess.Popen("go install %s", pkg)
+        time.Sleep(200 * time.Millisecond)
+    }
+}
+
+func printToolStatus(status map[string]ToolStatus) {
+    fmt.Printf("\nTools Status%s%s", bcolors.ENDC, ":\n\n")
+    maxLen := 0
+    for tool := range status {
+        if len(tool) > maxLen {
+            maxLen = len(tool)
+        }
+    }
+    
+    for tool, stat := range status {
+        padding := strings.Repeat(" ", maxLen-len(tool))
+        if stat.Present {
+            fmt.Printf("  %s+ %s%s%s > %sok%s ...\n", bcolors.GREEN, bcolors.ENDC, tool, padding, bcolors.GREEN, bcolors.ENDC)
+            time.Sleep(180 * time.Millisecond)
+        } else {
+            fmt.Printf("  %s- %s%s%s > %smissing%s\n", bcolors.YELLOW, bcolors.ENDC, tool, padding, bcolors.ORANGE, bcolors.ENDC)
+            time.Sleep(180 * time.Millisecond)
+        }
+    }
+}
+
+func CheckTools() {
+    spinner := utils.StartSpinner()
+    spinner.Start()
+
+    time.Sleep(300 * time.Millisecond)
+    toolStatus, missingTools := checkTools()
+    time.Sleep(500 * time.Millisecond)
+    spinner.Stop()
+
+    printToolStatus(toolStatus)
+
+    if len(missingTools) == 0 {
+        fmt.Printf("\n%s[+] %sAll tools are installed and ready ...", bcolors.GREEN, bcolors.ENDC)
+        return
+    }
+
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Printf("\n%s[+] %sLaunch setups to install missing tools? (y/n): ", bcolors.GREEN, bcolors.ENDC)
+    response, _ := reader.ReadString('\n')
+
+    if strings.ToLower(strings.TrimSpace(response)) == "y" {
+        fmt.Println()
+        //installTools(missingTools)
+        SetupsLauncher()
+        if len(missingTools) == 0 {
+            fmt.Printf("\n%s[+] %sInstallation complete!", bcolors.GREEN, bcolors.ENDC)
+            return
+        } else {
+            printToolStatus(toolStatus)
+            return
+        }
+    } else {
+        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.RED, bcolors.ENDC)
     }
 }
 
