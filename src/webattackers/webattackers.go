@@ -180,10 +180,10 @@ func executeCommand(cmd string) bool {
     "m":                menus.MenuEight,
     "menu":             menus.MenuEight,
 
-    "option":           menus.HelpInfOptions,
-    "options":          menus.HelpInfOptions,
-    "show option":      menus.HelpInfOptions,
-    "show options":     menus.HelpInfOptions,
+    "option":           menus.WebsitesOptions,
+    "options":          menus.WebsitesOptions,
+    "show option":      menus.WebsitesOptions,
+    "show options":     menus.WebsitesOptions,
 
     "show all":         menus.ListWebsitesFunctions,
     "list all":         menus.ListWebsitesFunctions,
@@ -206,14 +206,38 @@ func executeCommand(cmd string) bool {
     "list modules":     menus.ListWebsitesFunctions,
     "show modules":     menus.ListWebsitesFunctions,
 
-    "1":                    func() {EnumScan(Rhost)},
-    "run 1":                func() {EnumScan(Rhost)},
-    "use 1":                func() {EnumScan(Rhost)},
-    "exec 1":               func() {EnumScan(Rhost)},
-    "start 1":              func() {EnumScan(Rhost)},
-    "launch 1":             func() {EnumScan(Rhost)},
-    "exploit 1":            func() {EnumScan(Rhost)},
-    "execute 1":            func() {EnumScan(Rhost)},
+
+    "1":                    func() {PortScan(Rhost)},
+    "run 1":                func() {PortScan(Rhost)},
+    "use 1":                func() {PortScan(Rhost)},
+    "exec 1":               func() {PortScan(Rhost)},
+    "start 1":              func() {PortScan(Rhost)},
+    "launch 1":             func() {PortScan(Rhost)},
+    "exploit 1":            func() {PortScan(Rhost)},
+    "execute 1":            func() {PortScan(Rhost)},
+    "run netmap":         func() {PortScan(Rhost)},
+    "use netmap":         func() {PortScan(Rhost)},
+    "exec netmap":        func() {PortScan(Rhost)},
+    "start netmap":       func() {PortScan(Rhost)},
+    "launch netmap":      func() {PortScan(Rhost)},
+    "exploit netmap":     func() {PortScan(Rhost)},
+    "execute netmap":     func() {PortScan(Rhost)},
+
+    "? 1":                  menus.HelpInfoPortScan,
+    "info 1":               menus.HelpInfoPortScan,
+    "help 1":               menus.HelpInfoPortScan,
+    "netmap":             menus.HelpInfoPortScan,
+    "info netmap":        menus.HelpInfoPortScan,
+    "help netmap":        menus.HelpInfoPortScan,
+
+    "2":                    func() {EnumScan(Rhost)},
+    "run 2":                func() {EnumScan(Rhost)},
+    "use 2":                func() {EnumScan(Rhost)},
+    "exec 2":               func() {EnumScan(Rhost)},
+    "start 2":              func() {EnumScan(Rhost)},
+    "launch 2":             func() {EnumScan(Rhost)},
+    "exploit 2":            func() {EnumScan(Rhost)},
+    "execute 2":            func() {EnumScan(Rhost)},
     "run enumscan":            func() {EnumScan(Rhost)},
     "use enumscan":            func() {EnumScan(Rhost)},
     "exec enumscan":           func() {EnumScan(Rhost)},
@@ -222,21 +246,21 @@ func executeCommand(cmd string) bool {
     "exploit enumscan":        func() {EnumScan(Rhost)},
     "execute enumscan":        func() {EnumScan(Rhost)},
 
-    "? 1":                  menus.HelpInfoEnumScan,
-    "info 1":               menus.HelpInfoEnumScan,
-    "help 1":               menus.HelpInfoEnumScan,
+    "? 2":                  menus.HelpInfoEnumScan,
+    "info 2":               menus.HelpInfoEnumScan,
+    "help 2":               menus.HelpInfoEnumScan,
     "enumscan":                menus.HelpInfoEnumScan,
     "info enumscan":           menus.HelpInfoEnumScan,
     "help enumscan":           menus.HelpInfoEnumScan,
 
-    "2":                    func() {DnsRecon(Rhost)},
-    "run 2":                func() {DnsRecon(Rhost)},
-    "use 2":                func() {DnsRecon(Rhost)},
-    "exec 2":               func() {DnsRecon(Rhost)},
-    "start 2":              func() {DnsRecon(Rhost)},
-    "launch 2":             func() {DnsRecon(Rhost)},
-    "exploit 2":            func() {DnsRecon(Rhost)},
-    "execute 2":            func() {DnsRecon(Rhost)},
+    "3":                    func() {DnsRecon(Rhost)},
+    "run 3":                func() {DnsRecon(Rhost)},
+    "use 3":                func() {DnsRecon(Rhost)},
+    "exec 3":               func() {DnsRecon(Rhost)},
+    "start 3":              func() {DnsRecon(Rhost)},
+    "launch 3":             func() {DnsRecon(Rhost)},
+    "exploit 3":            func() {DnsRecon(Rhost)},
+    "execute 3":            func() {DnsRecon(Rhost)},
     "run dnsrecon":           func() {DnsRecon(Rhost)},
     "use dnsrecon":           func() {DnsRecon(Rhost)},
     "exec dnsrecon":          func() {DnsRecon(Rhost)},
@@ -245,35 +269,13 @@ func executeCommand(cmd string) bool {
     "exploit dnsrecon":       func() {DnsRecon(Rhost)},
     "execute dnsrecon":       func() {DnsRecon(Rhost)},
 
-    "? 2":                  menus.HelpInfoDnsRecon,
-    "info 2":               menus.HelpInfoDnsRecon,
-    "help 2":               menus.HelpInfoDnsRecon,
+    "? 3":                  menus.HelpInfoDnsRecon,
+    "info 3":               menus.HelpInfoDnsRecon,
+    "help 3":               menus.HelpInfoDnsRecon,
     "dnsrecon":               menus.HelpInfoDnsRecon,
     "info dnsrecon":          menus.HelpInfoDnsRecon,
     "help dnsrecon":          menus.HelpInfoDnsRecon,
 
-    "3":                    func() {PortScan(Rhost)},
-    "run 3":                func() {PortScan(Rhost)},
-    "use 3":                func() {PortScan(Rhost)},
-    "exec 3":               func() {PortScan(Rhost)},
-    "start 3":              func() {PortScan(Rhost)},
-    "launch 3":             func() {PortScan(Rhost)},
-    "exploit 3":            func() {PortScan(Rhost)},
-    "execute 3":            func() {PortScan(Rhost)},
-    "run portscan":         func() {PortScan(Rhost)},
-    "use portscan":         func() {PortScan(Rhost)},
-    "exec portscan":        func() {PortScan(Rhost)},
-    "start portscan":       func() {PortScan(Rhost)},
-    "launch portscan":      func() {PortScan(Rhost)},
-    "exploit portscan":     func() {PortScan(Rhost)},
-    "execute portscan":     func() {PortScan(Rhost)},
-
-    "? 3":                  menus.HelpInfoPortScan,
-    "info 3":               menus.HelpInfoPortScan,
-    "help 3":               menus.HelpInfoPortScan,
-    "portscan":             menus.HelpInfoPortScan,
-    "info portscan":        menus.HelpInfoPortScan,
-    "help portscan":        menus.HelpInfoPortScan,
 
     "4":                    func() {TechScan(Rhost)},
     "run 4":                func() {TechScan(Rhost)},
@@ -298,83 +300,14 @@ func executeCommand(cmd string) bool {
     "info techscan":        menus.HelpInfoTechScan,
     "help techscan":        menus.HelpInfoTechScan,
 
-    "5":                    func() {FuzzScan(Rhost)},
-    "run 5":                func() {FuzzScan(Rhost)},
-    "use 5":                func() {FuzzScan(Rhost)},
-    "exec 5":               func() {FuzzScan(Rhost)},
-    "start 5":              func() {FuzzScan(Rhost)},
-    "launch 5":             func() {FuzzScan(Rhost)},
-    "exploit 5":            func() {FuzzScan(Rhost)},
-    "execute 5":            func() {FuzzScan(Rhost)},
-    "run fuzzscan":        func() {FuzzScan(Rhost)},
-    "use fuzzscan":        func() {FuzzScan(Rhost)},
-    "exec fuzzscan":       func() {FuzzScan(Rhost)},
-    "start fuzzscan":      func() {FuzzScan(Rhost)},
-    "launch fuzzscan":     func() {FuzzScan(Rhost)},
-    "exploit fuzzscan":    func() {FuzzScan(Rhost)},
-    "execute fuzzscan":    func() {FuzzScan(Rhost)},
-
-    "? 5":                  menus.HelpInfoFuzzScan,
-    "info 5":               menus.HelpInfoFuzzScan,
-    "help 5":               menus.HelpInfoFuzzScan,
-    "fuzzscan":            menus.HelpInfoFuzzScan,
-    "info fuzzscan":       menus.HelpInfoFuzzScan,
-    "help fuzzscan":       menus.HelpInfoFuzzScan,
-
-    "6":                    func() {LeakScan(Rhost)},
-    "run 6":                func() {LeakScan(Rhost)},
-    "use 6":                func() {LeakScan(Rhost)},
-    "exec 6":               func() {LeakScan(Rhost)},
-    "start 6":              func() {LeakScan(Rhost)},
-    "launch 6":             func() {LeakScan(Rhost)},
-    "exploit 6":            func() {LeakScan(Rhost)},
-    "execute 6":            func() {LeakScan(Rhost)},
-    "run leakscan":        func() {LeakScan(Rhost)},
-    "use leakscan":        func() {LeakScan(Rhost)},
-    "exec leakscan":       func() {LeakScan(Rhost)},
-    "start leakscan":      func() {LeakScan(Rhost)},
-    "launch leakscan":     func() {LeakScan(Rhost)},
-    "exploit leakscan":    func() {LeakScan(Rhost)},
-    "execute leakscan":    func() {LeakScan(Rhost)},
-
-    "? 6":                  menus.HelpInfoLeakScan,
-    "info 6":               menus.HelpInfoLeakScan,
-    "help 6":               menus.HelpInfoLeakScan,
-    "leakscan":            menus.HelpInfoLeakScan,
-    "info leakscan":       menus.HelpInfoLeakScan,
-    "help leakscan":       menus.HelpInfoLeakScan,
-
-    "7":                    func() {VulnScan(Rhost)},
-    "run 7":                func() {VulnScan(Rhost)},
-    "use 7":                func() {VulnScan(Rhost)},
-    "exec 7":               func() {VulnScan(Rhost)},
-    "start 7":              func() {VulnScan(Rhost)},
-    "launch 7":             func() {VulnScan(Rhost)},
-    "exploit 7":            func() {VulnScan(Rhost)},
-    "execute 7":            func() {VulnScan(Rhost)},
-    "run vulnscan":        func() {VulnScan(Rhost)},
-    "use vulnscan":        func() {VulnScan(Rhost)},
-    "exec vulnscan":       func() {VulnScan(Rhost)},
-    "start vulnscan":      func() {VulnScan(Rhost)},
-    "launch vulnscan":     func() {VulnScan(Rhost)},
-    "exploit vulnscan":    func() {VulnScan(Rhost)},
-    "execute vulnscan":    func() {VulnScan(Rhost)},
-
-    "? 7":                  menus.HelpInfoVulnScan,
-    "info 7":               menus.HelpInfoVulnScan,
-    "help 7":               menus.HelpInfoVulnScan,
-    "vulnscan":             menus.HelpInfoVulnScan,
-    "info vulnscan":        menus.HelpInfoVulnScan,
-    "help vulnscan":        menus.HelpInfoVulnScan,
-
-    "8":                    func() {AssetScan(Rhost)},
-    "run 8":                func() {AssetScan(Rhost)},
-    "use 8":                func() {AssetScan(Rhost)},
-    "exec 8":               func() {AssetScan(Rhost)},
-    "start 8":              func() {AssetScan(Rhost)},
-    "launch 8":             func() {AssetScan(Rhost)},
-    "exploit 8":            func() {AssetScan(Rhost)},
-    "execute 8":            func() {AssetScan(Rhost)},
+    "5":                    func() {AssetScan(Rhost)},
+    "run 5":                func() {AssetScan(Rhost)},
+    "use 5":                func() {AssetScan(Rhost)},
+    "exec 5":               func() {AssetScan(Rhost)},
+    "start 5":              func() {AssetScan(Rhost)},
+    "launch 5":             func() {AssetScan(Rhost)},
+    "exploit 5":            func() {AssetScan(Rhost)},
+    "execute 5":            func() {AssetScan(Rhost)},
     "run asetscan":       func() {AssetScan(Rhost)},
     "use asetscan":       func() {AssetScan(Rhost)},
     "exec asetscan":      func() {AssetScan(Rhost)},
@@ -383,12 +316,83 @@ func executeCommand(cmd string) bool {
     "exploit asetscan":   func() {AssetScan(Rhost)},
     "execute asetscan":   func() {AssetScan(Rhost)},
 
-    "? 8":                  menus.HelpInfoAsetScan,
-    "info 8":               menus.HelpInfoAsetScan,
-    "help 8":               menus.HelpInfoAsetScan,
+    "? 5":                  menus.HelpInfoAsetScan,
+    "info 5":               menus.HelpInfoAsetScan,
+    "help 5":               menus.HelpInfoAsetScan,
     "asetscan":           menus.HelpInfoAsetScan,
     "info asetscan":      menus.HelpInfoAsetScan,
     "help asetscan":      menus.HelpInfoAsetScan,
+
+
+    "6":                    func() {FuzzScan(Rhost)},
+    "run 6":                func() {FuzzScan(Rhost)},
+    "use 6":                func() {FuzzScan(Rhost)},
+    "exec 6":               func() {FuzzScan(Rhost)},
+    "start 6":              func() {FuzzScan(Rhost)},
+    "launch 6":             func() {FuzzScan(Rhost)},
+    "exploit 6":            func() {FuzzScan(Rhost)},
+    "execute 6":            func() {FuzzScan(Rhost)},
+    "run fuzzscan":        func() {FuzzScan(Rhost)},
+    "use fuzzscan":        func() {FuzzScan(Rhost)},
+    "exec fuzzscan":       func() {FuzzScan(Rhost)},
+    "start fuzzscan":      func() {FuzzScan(Rhost)},
+    "launch fuzzscan":     func() {FuzzScan(Rhost)},
+    "exploit fuzzscan":    func() {FuzzScan(Rhost)},
+    "execute fuzzscan":    func() {FuzzScan(Rhost)},
+
+    "? 6":                  menus.HelpInfoFuzzScan,
+    "info 6":               menus.HelpInfoFuzzScan,
+    "help 6":               menus.HelpInfoFuzzScan,
+    "fuzzscan":            menus.HelpInfoFuzzScan,
+    "info fuzzscan":       menus.HelpInfoFuzzScan,
+    "help fuzzscan":       menus.HelpInfoFuzzScan,
+
+    "7":                    func() {LeakScan(Rhost)},
+    "run 7":                func() {LeakScan(Rhost)},
+    "use 7":                func() {LeakScan(Rhost)},
+    "exec 7":               func() {LeakScan(Rhost)},
+    "start 7":              func() {LeakScan(Rhost)},
+    "launch 7":             func() {LeakScan(Rhost)},
+    "exploit 7":            func() {LeakScan(Rhost)},
+    "execute 7":            func() {LeakScan(Rhost)},
+    "run leakscan":        func() {LeakScan(Rhost)},
+    "use leakscan":        func() {LeakScan(Rhost)},
+    "exec leakscan":       func() {LeakScan(Rhost)},
+    "start leakscan":      func() {LeakScan(Rhost)},
+    "launch leakscan":     func() {LeakScan(Rhost)},
+    "exploit leakscan":    func() {LeakScan(Rhost)},
+    "execute leakscan":    func() {LeakScan(Rhost)},
+
+    "? 7":                  menus.HelpInfoLeakScan,
+    "info 7":               menus.HelpInfoLeakScan,
+    "help 7":               menus.HelpInfoLeakScan,
+    "leakscan":            menus.HelpInfoLeakScan,
+    "info leakscan":       menus.HelpInfoLeakScan,
+    "help leakscan":       menus.HelpInfoLeakScan,
+
+    "8":                    func() {VulnScan(Rhost)},
+    "run 8":                func() {VulnScan(Rhost)},
+    "use 8":                func() {VulnScan(Rhost)},
+    "exec 8":               func() {VulnScan(Rhost)},
+    "start 8":              func() {VulnScan(Rhost)},
+    "launch 8":             func() {VulnScan(Rhost)},
+    "exploit 8":            func() {VulnScan(Rhost)},
+    "execute 8":            func() {VulnScan(Rhost)},
+    "run vulnscan":        func() {VulnScan(Rhost)},
+    "use vulnscan":        func() {VulnScan(Rhost)},
+    "exec vulnscan":       func() {VulnScan(Rhost)},
+    "start vulnscan":      func() {VulnScan(Rhost)},
+    "launch vulnscan":     func() {VulnScan(Rhost)},
+    "exploit vulnscan":    func() {VulnScan(Rhost)},
+    "execute vulnscan":    func() {VulnScan(Rhost)},
+
+    "? 8":                  menus.HelpInfoVulnScan,
+    "info 8":               menus.HelpInfoVulnScan,
+    "help 8":               menus.HelpInfoVulnScan,
+    "vulnscan":             menus.HelpInfoVulnScan,
+    "info vulnscan":        menus.HelpInfoVulnScan,
+    "help vulnscan":        menus.HelpInfoVulnScan,
+
 
     "9":                    func() {AutoScan(Rhost)},
     "run 9":                func() {AutoScan(Rhost)},
@@ -398,20 +402,20 @@ func executeCommand(cmd string) bool {
     "launch 9":             func() {AutoScan(Rhost)},
     "exploit 9":            func() {AutoScan(Rhost)},
     "execute 9":            func() {AutoScan(Rhost)},
-    "run autoscan":      func() {AutoScan(Rhost)},
-    "use autoscan":      func() {AutoScan(Rhost)},
-    "exec autoscan":     func() {AutoScan(Rhost)},
-    "start autoscan":    func() {AutoScan(Rhost)},
-    "launch autoscan":   func() {AutoScan(Rhost)},
-    "exploit autoscan":  func() {AutoScan(Rhost)},
-    "execute autoscan":  func() {AutoScan(Rhost)},
+    "run bounty":      func() {AutoScan(Rhost)},
+    "use bounty":      func() {AutoScan(Rhost)},
+    "exec bounty":     func() {AutoScan(Rhost)},
+    "start bounty":    func() {AutoScan(Rhost)},
+    "launch bounty":   func() {AutoScan(Rhost)},
+    "exploit bounty":  func() {AutoScan(Rhost)},
+    "execute bounty":  func() {AutoScan(Rhost)},
 
     "? 9":                  menus.HelpInfoAutoScan,
     "info 9":               menus.HelpInfoAutoScan,
     "help 9":               menus.HelpInfoAutoScan,
-    "autoscan":              menus.HelpInfoAutoScan,
-    "info autoscan":         menus.HelpInfoAutoScan,
-    "help autoscan":         menus.HelpInfoAutoScan,
+    "bounty":              menus.HelpInfoAutoScan,
+    "info bounty":         menus.HelpInfoAutoScan,
+    "help bounty":         menus.HelpInfoAutoScan,
 
     "99":                   scriptures.ScriptureNarators,
     "run 99":               scriptures.ScriptureNarators,
@@ -562,48 +566,105 @@ func WebPenFunctions(Function string, args ...interface{}) {
 }
 
 func EnumScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming enumscan scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("subfinder -all -d %s; amass enum -d %s; findomain -t %s; chaos-client -d %s; shuffledns -d %s; alterx -l %s", Rhost, Rhost, Rhost, Rhost, Rhost, Rhost)
 }
 
 func DnsRecon(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming dnsrecon scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("dnsx -l %s; asnmap -d %s; cdncheck -l %s", Rhost, Rhost, Rhost)
 }
 
 func PortScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming full port scan ...\n", bcolors.GREEN, bcolors.ENDC)
-    subprocess.Popen("naabu -nmap-cli 'nmap -v -sV -sC' -host %s", Rhost)
+    subprocess.Popen("naabu -nmap-cli 'nmap --spoof-mac Cisco -T4 -sV -sC -Pn -v' -host %s", Rhost)
 }
 
 func TechScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming tech detection scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen(`httpx -l %s; aquatone -out %s; httprobe -l %s; gowitness -l %s`, Rhost, Rhost, Rhost, Rhost)
 }
 
 func FuzzScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming fuzz scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("dirsearch -l ips_alive --full-url --recursive --exclude-sizes=0B --random-agent -e 7z,archive,ashx,asp,aspx,back,backup,backup-sql,backup.db,backup.sql,bak,bak.zip,bakup,bin,bkp,bson,bz2,core,csv,data,dataset,db,db-backup,db-dump,db.7z,db.bz2,db.gz,db.tar,db.tar.gz,db.zip,dbs.bz2,dll,dmp,dump,dump.7z,dump.db,dump.z,dump.zip,exported,gdb,gdb.dump,gz,gzip,ib,ibd,iso,jar,java,json,jsp,jspf,jspx,ldf,log,lz,lz4,lzh,mongo,neo4j,old,pg.dump,phtm,phtml,psql,rar,rb,rdb,rdb.bz2,rdb.gz,rdb.tar,rdb.tar.gz,rdb.zip,redis,save,sde,sdf,snap,sql,sql.7z,sql.bak,sql.bz2,sql.db,sql.dump,sql.gz,sql.lz,sql.rar,sql.tar.gz,sql.tar.z,sql.xz,sql.z,sql.zip,sqlite,sqlite.bz2,sqlite.gz,sqlite.tar,sqlite.tar.gz,sqlite.zip,sqlite3,sqlitedb,swp,tar,tar.bz2,tar.gz,tar.z,temp,tml,vbk,vhd,war,xhtml,xml,xz,z,zip,conf,config,bak,backup,swp,old,db,sql,asp,aspx~,asp~,py,py~,rb~,php,php~,bkp,cache,cgi,inc,js,json,jsp~,lock,wadl -o output.txt")
 }
 
 func LeakScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming leak scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("gitleaks detect -v; trufflehog filesystem --no-update --json; semgrep -l")
 }
 
 func AssetScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming asset scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("waybackurls %s; gau %s; urlfinder -l %s; gospider -s %s")
 }
 
 func VulnScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming vuln scan ...\n", bcolors.GREEN, bcolors.ENDC)
     subprocess.Popen("nuclei -l %s; jaeles -l %s; ffuf -u %s; uncover -l %s; cvemap -l %s; dalfox -b -u %s; qsreplace -l %s")
 }
 
 func AutoScan(Rhost string) {
+    if Rhost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        return
+    }
     fmt.Printf("\n%s[*] %sPerforming auto scan ...\n", bcolors.GREEN, bcolors.ENDC)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

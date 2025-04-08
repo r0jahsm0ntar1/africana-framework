@@ -2,6 +2,7 @@ package utils
 
 import(
     "os"
+    "io"
     "net"
     "fmt"
     "sync"
@@ -16,6 +17,7 @@ import(
     "subprocess"
     "crypto/rand"
     "crypto/x509"
+    "unicode/utf8"
     "crypto/ecdsa"
     "encoding/pem"
     "path/filepath"
@@ -29,15 +31,6 @@ var (
 
 )
 
-type Spinner struct {
-    active    bool
-    done      chan struct{}
-    wg        sync.WaitGroup
-    mu        sync.Mutex
-    frames    []string
-    baseText  string
-}
-
 type InterfaceInfo struct {
     Name        string
     HardwareAddr string
@@ -45,28 +38,170 @@ type InterfaceInfo struct {
     Addresses   []string
 }
 
-func StartSpinner() *Spinner {
-    return &Spinner{
-        frames: []string{"|", "/", "-", "\\"},
-        baseText:  "[+] starting the africana framework console ...",
-        done:      make(chan struct{}),
+type Spinner struct {
+    mu         sync.Mutex
+    active     bool
+    done       chan struct{}
+    wg         sync.WaitGroup
+    spinChars  []string
+    baseText   string
+    textEffect func(string, int, int) string
+    speed      time.Duration
+    step       int
+    writer     io.Writer
+    taskDone   chan struct{}
+}
+
+type Option func(*Spinner)
+
+
+// SpinnerStyles contains predefined spinner animation styles
+var SpinnerStyles = map[string][]string{
+    "classic":    {"|", "/", "-", "\\"},
+    "dots":       {"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"},
+    "bar":        {"▁", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃"},
+    "arrow":      {"←", "↖", "↑", "↗", "→", "↘", "↓", "↙"},
+    "bouncing":   {"[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]"},
+    "vertical":   {"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂"},
+    "horizontal": {"⠁", "⠂", "⠄", "⡀", "⢀", "⠠", "⠐", "⠈"},
+    "circle":     {"◐", "◓", "◑", "◒"},
+    "clock":      {"🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛"},
+    "moon":       {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
+    "triangle":   {"◢", "◣", "◤", "◥"},
+    "square":     {"◰", "◳", "◲", "◱"},
+    "fancy":      {"✦", "✧", "★", "✪", "✯", "✵", "✸", "✹"},
+}
+
+// TextEffects contains advanced text animation effects
+var TextEffects = map[string]func(string, int, int) string{
+    "typewriter": func(text string, pos, _ int) string {
+        if pos >= len(text) {
+            return text
+        }
+        return text[:pos] + "█"
+    },
+    "wave": func(text string, _, step int) string {
+        runes := []rune(text)
+        for i := range runes {
+            if (i+step)%4 == 0 {
+                runes[i] = toUpper(runes[i])
+            } else {
+                runes[i] = toLower(runes[i])
+            }
+        }
+        return string(runes)
+    },
+    "bounce": func(text string, pos, _ int) string {
+        runes := []rune(text)
+        if pos < len(runes) {
+            runes[pos] = toUpper(runes[pos])
+        }
+        return string(runes)
+    },
+    "randomcase": func(text string, _, step int) string {
+        runes := []rune(text)
+        for i := range runes {
+            if (i+step)%3 == 0 {
+                runes[i] = toUpper(runes[i])
+            } else {
+                runes[i] = toLower(runes[i])
+            }
+        }
+        return string(runes)
+    },
+    "fadein": func(text string, _, step int) string {
+        visibleChars := (step % (len(text) + 3)) - 2
+        if visibleChars < 0 {
+            return ""
+        }
+        if visibleChars > len(text) {
+            return text
+        }
+        return text[:visibleChars]
+    },
+    "neon": func(text string, pos, _ int) string {
+        runes := []rune(text)
+        if pos < len(runes) {
+            return string(runes[:pos]) + "✨" + string(runes[pos:]) + "✨"
+        }
+        return text
+    },
+    "plain": func(text string, _, _ int) string {
+        return text
+    },
+}
+
+func toUpper(r rune) rune {
+    if r >= 'a' && r <= 'z' {
+        return r - 32
+    }
+    return r
+}
+
+func toLower(r rune) rune {
+    if r >= 'A' && r <= 'Z' {
+        return r + 32
+    }
+    return r
+}
+
+func New(options ...Option) *Spinner {
+    s := &Spinner{
+        spinChars:  SpinnerStyles["classic"],
+        baseText:   "Processing ",
+        textEffect: TextEffects["plain"],
+        speed:      100 * time.Millisecond,
+        done:       make(chan struct{}),
+        writer:     os.Stdout,
+    }
+
+    for _, option := range options {
+        option(s)
+    }
+
+    return s
+}
+
+func WithStyle(styleName string) Option {
+    return func(s *Spinner) {
+        if style, ok := SpinnerStyles[styleName]; ok {
+            s.spinChars = style
+        }
     }
 }
 
-func (s *Spinner) capitalizeLetter(text string, pos int) string {
-    if pos < 0 || pos >= len(text) {
-        return text
+func WithText(text string) Option {
+    return func(s *Spinner) {
+        s.baseText = text
     }
+}
 
-    runes := []rune(text)
-    if runes[pos] >= 'a' && runes[pos] <= 'z' {
-        runes[pos] = runes[pos] - 32
+func WithEffect(effectName string) Option {
+    return func(s *Spinner) {
+        if effect, ok := TextEffects[effectName]; ok {
+            s.textEffect = effect
+        }
     }
-    return string(runes)
+}
+
+func WithSpeed(speed time.Duration) Option {
+    return func(s *Spinner) {
+        s.speed = speed
+    }
+}
+
+func WithWriter(w io.Writer) Option {
+    return func(s *Spinner) {
+        s.writer = w
+    }
 }
 
 func (s *Spinner) Start() {
     s.mu.Lock()
+    if s.active {
+        s.mu.Unlock()
+        return
+    }
     s.active = true
     s.mu.Unlock()
 
@@ -79,26 +214,74 @@ func (s *Spinner) Start() {
         for {
             select {
             case <-s.done:
-                fmt.Printf("\r%-60s", "")
-                //fmt.Println()
+                fmt.Fprintf(s.writer, "\r%-60s\n", "")
                 return
             default:
                 s.mu.Lock()
-                spinChar := s.frames[charIdx%len(s.frames)]
-                displayText := s.capitalizeLetter(s.baseText, letterPos)
+                spinChar := s.spinChars[charIdx%len(s.spinChars)]
+                displayText := s.textEffect(s.baseText, letterPos, s.step)
                 displayMsg := fmt.Sprintf("\r%s%s", displayText, spinChar)
                 s.mu.Unlock()
 
-                fmt.Print(displayMsg)
+                fmt.Fprint(s.writer, displayMsg)
                 charIdx++
+                s.step++
 
-                // Faster letter progression
                 if charIdx%1 == 0 {
-                    letterPos = (letterPos + 1) % len(s.baseText)
+                    letterPos = (letterPos + 1) % utf8.RuneCountInString(s.baseText)
                 }
-                time.Sleep(99 * time.Millisecond)
+                time.Sleep(s.speed)
             }
         }
+    }()
+}
+
+func (s *Spinner) StartWithTask(task func()) {
+    s.mu.Lock()
+    if s.active {
+        s.mu.Unlock()
+        return
+    }
+    s.active = true
+    s.taskDone = make(chan struct{})
+    s.mu.Unlock()
+
+    s.wg.Add(1)
+    go func() {
+        defer s.wg.Done()
+        charIdx := 0
+        letterPos := 0
+
+        for {
+            select {
+            case <-s.done:
+                fmt.Fprintf(s.writer, "\r%-60s\n", "")
+                return
+            case <-s.taskDone:
+                fmt.Fprintf(s.writer, "\r%-60s\n", "")
+                return
+            default:
+                s.mu.Lock()
+                spinChar := s.spinChars[charIdx%len(s.spinChars)]
+                displayText := s.textEffect(s.baseText, letterPos, s.step)
+                displayMsg := fmt.Sprintf("\r%s%s", displayText, spinChar)
+                s.mu.Unlock()
+
+                fmt.Fprint(s.writer, displayMsg)
+                charIdx++
+                s.step++
+
+                if charIdx%1 == 0 {
+                    letterPos = (letterPos + 1) % utf8.RuneCountInString(s.baseText)
+                }
+                time.Sleep(s.speed)
+            }
+        }
+    }()
+
+    go func() {
+        task()
+        close(s.taskDone)
     }()
 }
 

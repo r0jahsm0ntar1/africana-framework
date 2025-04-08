@@ -128,7 +128,6 @@ func MenuFour() {
 
 func MenuFive() {
     fmt.Printf(`
-
 %s%s%sSelect a number from the table below.%s
 
 %s 1. %swifite
@@ -206,12 +205,11 @@ func MenuSevenOne() {
 
 func MenuEight() {
     fmt.Printf(`
-
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sSubdomain enumeration
-%s 2. %sDns and asn lookup
-%s 3. %sNetwork Mapping
+%s 1. %sNetwork Mapping
+%s 2. %sSubdomain enumeration
+%s 3. %sDns and asn lookup
 %s 4. %sWeb technology detection
 %s 5. %sWayback and asset discovery
 %s 6. %sFuzzing and Scanning
@@ -273,7 +271,7 @@ func HelpInfoMenuZero() {
     version             Show the framework and console library version numbers
 
 %sFunction Commands%s
----------------
+-----------------
 
     %sCommand             Description%s
     -------             -----------
@@ -3242,10 +3240,6 @@ func HelpInfoThc() {
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
 }
 
-
-
-
-
 func ListWebsitesFunctions() {
     fmt.Printf(`
 %sWebsites Functions%s:
@@ -3620,6 +3614,38 @@ func HelpInfoAutoScan() {
     run
 
 `, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+}
+
+func WebsitesOptions() {
+    fmt.Printf(`
+%sModule Options %s(src/websites/bugbounty_pentest.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+
+  RHOST          none             yes       Target host to be attacked.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  FUNCTION       none             yes       The module or function to run. (ex. netmap, dnsrecon, techscan, asetscan, fuzzscan, leakscan, vulnscan, bounty)
+  USERNAME       root             yes       Single user name to attack on a give service.
+  PASSWORD       password         yes       Single password to use while attacking agiven name or password
+  WORDLIST       rockyou.txt      yes       Alist of user names or passwords to be used. -> (Give full path)
+
+%sSupported Distros%s:
+-----------------
+
+   Id  Name
+   --  ----
+   0   Websites
+
+%sex. %s%susage%s:
+--  ------
+  set function netmap
+  set rhost example.com
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
 }
 
 func HelpInfoCredits() {

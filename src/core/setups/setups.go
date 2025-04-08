@@ -29,6 +29,88 @@ var defaultValues = map[string]string{
 }
 
 var (
+    // System tools and packages
+    systemTools = map[string]string{
+        "jq":              "jq",
+        "npm":             "npm",
+        "tor":             "tor",
+        "aha":             "aha",
+        "ftp":             "ftp",
+        "ncat":            "ncat",
+        "gcc":             "gcc",
+        "gawk":            "gawk",
+        "tmux":            "tmux",
+        "mdk4":            "mdk4",
+        "mdk3":            "mdk3",
+        "nmap":            "nmap",
+        "playit":          "playit",
+        "rlwrap":          "rlwrap",
+        "squid":           "squid",
+        "privoxy":         "privoxy",
+        "iptables":        "iptables",
+        "dnsmasq":         "dnsmasq",
+        "openssh-client":  "openssh-client",
+        "libpcap-dev":     "libpcap-dev",
+        "openssh-server":  "openssh-server",
+        "powershell":      "powershell",
+        "golang-go":       "golang-go",
+        "docker.io":       "docker.io",
+        "python3":         "python3",
+        "python3-pip":     "python3-pip",
+        "build-essential": "build-essential",
+        "libssl-dev":      "libssl-dev",
+        "libffi-dev":      "libffi-dev",
+        "python3-dev":     "python3-dev",
+        "python3-venv":    "python3-venv",
+        "python3-pycurl":  "python3-pycurl",
+        "python3-geoip":   "python3-geoip",
+        "python3-whois":   "python3-whois",
+        "python3-requests": "python3-requests",
+        "python3-scapy":   "python3-scapy",
+        "libgeoip1t64":    "libgeoip1t64",
+        "libgeoip-dev":    "libgeoip-dev",
+        "aircrack-ng":     "aircrack-ng",
+        "cowpatty":        "cowpatty",
+        "dhcpd":           "dhcpd",
+        "hostapd":         "hostapd",
+        "lighttpd":        "lighttpd",
+        "net-tools":       "net-tools",
+        "macchanger":      "macchanger",
+        "dsniff":          "dsniff",
+        "openssl":         "openssl",
+        "php-cgi":         "php-cgi",
+        "xterm":           "xterm",
+        "rfkill":          "rfkill",
+        "unzip":           "unzip",
+        "hydra":           "hydra",
+        "wine32":          "wine32:i386",
+    }
+
+    // Security tools
+    securityTools = map[string]string{
+        "gophish":        "gophish",
+        "wifipumpkin3":   "wifipumpkin3",
+        "wifite":         "wifite",
+        "airgeddon":      "airgeddon",
+        "nuclei":         "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
+        "nikto":          "nikto",
+        "smbmap":         "smbmap",
+        "dnsrecon":       "dnsrecon",
+        "metasploit-framework": "metasploit-framework",
+        "gobuster":       "gobuster",
+        "feroxbuster":    "feroxbuster",
+        "uniscan":        "uniscan",
+        "sqlmap":         "sqlmap",
+        "commix":         "commix",
+        "dnsenum":        "dnsenum",
+        "sslscan":        "sslscan",
+        "whatweb":        "whatweb",
+        "wapiti":         "wapiti",
+        "xsser":          "xsser",
+        "netexec":        "netexec",
+    }
+
+    // Project discovery tools
     projectDiscoveryTools = map[string]string{
         "subfinder":    "github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
         "dnsx":         "github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
@@ -40,7 +122,6 @@ var (
         "asnmap":       "github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
         "tlsx":         "github.com/projectdiscovery/tlsx/cmd/tlsx@latest",
         "interactsh":   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
-        "nuclei":       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
         "notify":       "github.com/projectdiscovery/notify/cmd/notify@latest",
         "gau":          "github.com/lc/gau/v2/cmd/gau@latest",
         "waybackurls":  "github.com/tomnomnom/waybackurls@latest",
@@ -51,11 +132,6 @@ var (
         "gf":           "github.com/tomnomnom/gf@latest",
     }
 )
-
-type ToolStatus struct {
-    Present bool
-    Package string
-}
 
 func SetupsLauncher() {
     for {
@@ -600,95 +676,148 @@ func Installer(Distro string) {
     }
 }
 
-func InstallFoundationTools(commands []string) {
-    for _, cmd := range commands {
-        subprocess.Popen(cmd)
+func CheckTools() {
+    // Create spinner with custom options
+    spinner := utils.New(
+        utils.WithStyle("classic"),
+        utils.WithText("[+] starting the africana framework console ..."),
+        utils.WithEffect("bounce"),
+    )
+    spinner.Start()
+    time.Sleep(300 * time.Millisecond)
+    missingTools := UpsentTools()
+    time.Sleep(500 * time.Millisecond)
+    spinner.Stop()
+
+    // Show missing tools by category
+    totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"])
+    if totalMissing == 0 {
+        //fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.GREEN, bcolors.ENDC)
+        return
     }
-}
 
-func checkTools() (map[string]ToolStatus, map[string]string) {
-    status := make(map[string]ToolStatus)
-    missing := make(map[string]string)
-
-    for tool, pkg := range projectDiscoveryTools {
-        if isInstalled(tool) {
-            status[tool] = ToolStatus{Present: true, Package: pkg}
-        } else {
-            status[tool] = ToolStatus{Present: false, Package: pkg}
-            missing[tool] = pkg
+    if len(missingTools["system"]) > 0 {
+        fmt.Printf("%s[!] %s%sMissing system tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        for tool := range missingTools["system"] {
+            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            time.Sleep(90 * time.Millisecond)
         }
-        time.Sleep(100 * time.Millisecond)
     }
-    return status, missing
+
+    if len(missingTools["security"]) > 0 {
+        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        for tool := range missingTools["security"] {
+            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            time.Sleep(90 * time.Millisecond)
+        }
+    }
+
+    if len(missingTools["discovery"]) > 0 {
+        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        for tool := range missingTools["discovery"] {
+            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            time.Sleep(90 * time.Millisecond)
+        }
+    }
+
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.YELLOW, bcolors.ENDC)
+    response, _ := reader.ReadString('\n')
+
+    if strings.ToLower(strings.TrimSpace(response)) == "y" || strings.ToLower(strings.TrimSpace(response)) == "yes" {
+        fmt.Println(); SetupsLauncher()
+        return
+    } else {
+        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.RED, bcolors.ENDC)
+    }
 }
 
 func isInstalled(tool string) bool {
     _, err := exec.LookPath(tool)
-    return err == nil
+    if err != nil {
+        // For some packages that don't have direct binaries, try dpkg
+        cmd := exec.Command("dpkg", "-s", tool)
+        if cmd.Run() == nil {
+            return true
+        }
+        return false
+    }
+    return true
 }
 
-func installTools(tools map[string]string) {
-    for tool, pkg := range tools {
-        fmt.Printf("Installing %-15s", tool)
-        subprocess.Popen("go install %s", pkg)
-        time.Sleep(200 * time.Millisecond)
+func UpsentTools() map[string]map[string]string {
+    missing := make(map[string]map[string]string)
+    missing["system"] = make(map[string]string)
+    missing["security"] = make(map[string]string)
+    missing["discovery"] = make(map[string]string)
+
+    // Check system tools
+    for tool, pkg := range systemTools {
+        if !isInstalled(tool) {
+            time.Sleep(50 * time.Millisecond)
+            missing["system"][tool] = pkg
+        }
+    }
+
+    // Check security tools
+    for tool, pkg := range securityTools {
+        if !isInstalled(tool) {
+            time.Sleep(50 * time.Millisecond)
+            missing["security"][tool] = pkg
+        }
+    }
+
+    // Check project discovery tools
+    for tool, pkg := range projectDiscoveryTools {
+        if !isInstalled(tool) {
+            time.Sleep(50 * time.Millisecond)
+            missing["discovery"][tool] = pkg
+        }
+    }
+    return missing
+}
+
+func installTools(tools map[string]map[string]string) {
+    // Install system tools first
+    if len(tools["system"]) > 0 {
+        fmt.Printf("\n🔧 Installing system tools:")
+        for tool, pkg := range tools["system"] {
+            fmt.Printf("  - Installing %-20s", tool)
+            subprocess.Popen("sudo apt install -y %s", pkg)
+            time.Sleep(200 * time.Millisecond)
+        }
+    }
+
+    // Install security tools
+    if len(tools["security"]) > 0 {
+        fmt.Printf("\n🔧 Installing security tools:")
+        for tool, pkg := range tools["security"] {
+            fmt.Printf("  - Installing %-20s", tool)
+            if strings.HasPrefix(pkg, "github.com") {
+                // Go-based tool
+                subprocess.Popen("go install %s", pkg)
+            } else {
+                // System package
+                subprocess.Popen("sudo apt install -y %s", pkg)
+            }
+            time.Sleep(200 * time.Millisecond)
+        }
+    }
+
+    // Install project discovery tools
+    if len(tools["discovery"]) > 0 {
+        fmt.Printf("\n🔧 Installing project discovery tools:")
+        for tool, pkg := range tools["discovery"] {
+            fmt.Printf("  - Installing %-20s", tool)
+            subprocess.Popen("go install %s", pkg)
+            time.Sleep(200 * time.Millisecond)
+        }
     }
 }
 
-func printToolStatus(status map[string]ToolStatus) {
-    fmt.Printf("\nTools Status%s%s", bcolors.ENDC, ":\n\n")
-    maxLen := 0
-    for tool := range status {
-        if len(tool) > maxLen {
-            maxLen = len(tool)
-        }
-    }
-    
-    for tool, stat := range status {
-        padding := strings.Repeat(" ", maxLen-len(tool))
-        if stat.Present {
-            fmt.Printf("  %s+ %s%s%s > %sok%s ...\n", bcolors.GREEN, bcolors.ENDC, tool, padding, bcolors.GREEN, bcolors.ENDC)
-            time.Sleep(180 * time.Millisecond)
-        } else {
-            fmt.Printf("  %s- %s%s%s > %smissing%s\n", bcolors.YELLOW, bcolors.ENDC, tool, padding, bcolors.ORANGE, bcolors.ENDC)
-            time.Sleep(180 * time.Millisecond)
-        }
-    }
-}
-
-func CheckTools() {
-    spinner := utils.StartSpinner()
-    spinner.Start()
-
-    time.Sleep(300 * time.Millisecond)
-    toolStatus, missingTools := checkTools()
-    time.Sleep(500 * time.Millisecond)
-    spinner.Stop()
-
-    printToolStatus(toolStatus)
-
-    if len(missingTools) == 0 {
-        fmt.Printf("\n%s[+] %sAll tools are installed and ready ...", bcolors.GREEN, bcolors.ENDC)
-        return
-    }
-
-    reader := bufio.NewReader(os.Stdin)
-    fmt.Printf("\n%s[+] %sLaunch setups to install missing tools? (y/n): ", bcolors.GREEN, bcolors.ENDC)
-    response, _ := reader.ReadString('\n')
-
-    if strings.ToLower(strings.TrimSpace(response)) == "y" {
-        fmt.Println()
-        //installTools(missingTools)
-        SetupsLauncher()
-        if len(missingTools) == 0 {
-            fmt.Printf("\n%s[+] %sInstallation complete!", bcolors.GREEN, bcolors.ENDC)
-            return
-        } else {
-            printToolStatus(toolStatus)
-            return
-        }
-    } else {
-        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.RED, bcolors.ENDC)
+func InstallFoundationTools(commands []string) {
+    for _, cmd := range commands {
+        subprocess.Popen(cmd)
     }
 }
 
@@ -714,6 +843,7 @@ func UpdateAfricana() {
 
 func KaliSetups() {
     fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.GREEN, bcolors.ENDC)
+    missingTools := UpsentTools()
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
             `apt-get update -y`,
@@ -726,6 +856,7 @@ func KaliSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
+        installTools(missingTools)
         fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
         InstallGithubTools()
         fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
