@@ -1894,6 +1894,7 @@ func ListExploitsFunctions() {
   %s8. %s noisemaker%s > Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims.
   %s9. %scodebreaker%s > Just like noisemake but the persisten mechanisim is through regestry keys.
   %s3. %s   listener%s > Launch any of your disearable c2 with costumized LHOST, LPORT etc.
+
 %sex. %s%susage%s:
 --  ------
 

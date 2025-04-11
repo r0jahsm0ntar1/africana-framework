@@ -9,9 +9,8 @@ import(
     "time"
 
 
-	"bytes"
-	"encoding/base64"
-
+    "bytes"
+    "encoding/base64"
 
     "os/exec"
     "bcolors"
@@ -663,6 +662,108 @@ func InitiLize() {
     }
 }
 
+// EnhancedCopy copies files/directories with overwrite support
+func Copy(src, dst string) error {
+    srcInfo, err := os.Stat(src)
+    if err != nil {
+        return fmt.Errorf("could not stat source: %w", err)
+    }
+
+    if srcInfo.IsDir() {
+        return enhancedCopyDir(src, dst)
+    }
+    return enhancedCopyFile(src, dst, true) // true = allow overwrite
+}
+
+// enhancedCopyFile handles file copying with overwrite control
+func enhancedCopyFile(src, dst string, overwrite bool) error {
+    // If destination exists and is a directory, append source filename
+    dstInfo, err := os.Stat(dst)
+    if err == nil && dstInfo.IsDir() {
+        dst = filepath.Join(dst, filepath.Base(src))
+    }
+
+    // Check if destination exists and overwrite is disabled
+    if _, err := os.Stat(dst); err == nil && !overwrite {
+        return fmt.Errorf("destination exists (overwrite disabled): %s", dst)
+    }
+
+    // Ensure parent directory exists
+    if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
+        return fmt.Errorf("failed to create parent directory: %w", err)
+    }
+
+    // Open source file
+    in, err := os.Open(src)
+    if err != nil {
+        return fmt.Errorf("failed to open source: %w", err)
+    }
+    defer in.Close()
+
+    // Create destination file (truncates if exists)
+    out, err := os.Create(dst)
+    if err != nil {
+        return fmt.Errorf("failed to create destination: %w", err)
+    }
+    defer out.Close()
+
+    // Copy with buffer for better performance
+    if _, err := io.Copy(out, in); err != nil {
+        return fmt.Errorf("copy failed: %w", err)
+    }
+
+    // Preserve permissions and timestamps
+    srcInfo, err := os.Stat(src)
+    if err != nil {
+        return fmt.Errorf("failed to get source info: %w", err)
+    }
+    if err := os.Chmod(dst, srcInfo.Mode()); err != nil {
+        return fmt.Errorf("failed to set permissions: %w", err)
+    }
+    if err := os.Chtimes(dst, srcInfo.ModTime(), srcInfo.ModTime()); err != nil {
+        return fmt.Errorf("failed to set timestamps: %w", err)
+    }
+    return nil
+}
+
+// enhancedCopyDir handles directory copying
+func enhancedCopyDir(srcDir, dstDir string) error {
+    srcInfo, err := os.Stat(srcDir)
+    if err != nil {
+        return fmt.Errorf("could not stat source dir: %w", err)
+    }
+
+    // Create destination directory
+    if err := os.MkdirAll(dstDir, srcInfo.Mode()); err != nil {
+        return fmt.Errorf("failed to create destination dir: %w", err)
+    }
+
+    // Read source directory
+    entries, err := os.ReadDir(srcDir)
+    if err != nil {
+        return fmt.Errorf("failed to read source dir: %w", err)
+    }
+
+    // Copy each entry
+    for _, entry := range entries {
+        srcPath := filepath.Join(srcDir, entry.Name())
+        dstPath := filepath.Join(dstDir, entry.Name())
+
+        if entry.IsDir() {
+            if err := enhancedCopyDir(srcPath, dstPath); err != nil {
+                return err
+            }
+        } else {
+            if err := enhancedCopyFile(srcPath, dstPath, true); err != nil {
+                return err
+            }
+        }
+    }
+
+    // Preserve directory timestamps
+    return os.Chtimes(dstDir, srcInfo.ModTime(), srcInfo.ModTime())
+}
+
 func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
     // Read the file content
     content, err := ioutil.ReadFile(filePath)
@@ -684,3 +785,4 @@ func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
     encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
     return encoded, nil
 }
+
