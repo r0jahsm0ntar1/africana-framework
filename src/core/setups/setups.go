@@ -135,7 +135,7 @@ var (
 
 func SetupsLauncher() {
     for {
-        fmt.Printf("%s%safr3%s packages(%score/setups_%s.fn%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, Function, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s packages(%score/setups_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -601,11 +601,11 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter FUNCTION. Use %s'show functions' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameter FUNCTION. Use %s'show functions' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     if Distro == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'show distros' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'show distros' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     SetupsFunction(Function, Distro)
@@ -638,7 +638,7 @@ func SetupsFunction(Function string, args ...interface{}) {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sInvalid FUNCTION %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid FUNCTION %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
     }
 }
 
@@ -672,7 +672,7 @@ func Installer(Distro string) {
         Uninstaller()
         return
     default:
-        fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.RED, bcolors.ENDC, Distro, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.Red, bcolors.Endc, Distro, bcolors.Green, bcolors.Endc)
     }
 }
 
@@ -692,43 +692,43 @@ func CheckTools() {
     // Show missing tools by category
     totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"])
     if totalMissing == 0 {
-        //fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.GREEN, bcolors.ENDC)
+        //fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
         return
     }
 
     if len(missingTools["system"]) > 0 {
-        fmt.Printf("%s[!] %s%sMissing system tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        fmt.Printf("%s[!] %s%sMissing system tools.%s\n\n", bcolors.Red, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["system"] {
-            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
 
     if len(missingTools["security"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n\n", bcolors.Red, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["security"] {
-            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
 
     if len(missingTools["discovery"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n\n", bcolors.RED, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n\n", bcolors.Red, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["discovery"] {
-            fmt.Printf("  %s+ %s%s ...\n", bcolors.GREEN, bcolors.ENDC, tool)
+            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
 
     reader := bufio.NewReader(os.Stdin)
-    fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.YELLOW, bcolors.ENDC)
+    fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
     response, _ := reader.ReadString('\n')
 
     if strings.ToLower(strings.TrimSpace(response)) == "y" || strings.ToLower(strings.TrimSpace(response)) == "yes" {
-        fmt.Println(); SetupsLauncher()
+        SetupsLauncher()
         return
     } else {
-        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.RED, bcolors.ENDC)
+        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.Red, bcolors.Endc)
     }
 }
 
@@ -834,15 +834,15 @@ func InstallGithubTools() {
 }
 
 func UpdateAfricana() {
-    fmt.Printf("\n%s[!] %safricana already installed. Updating it ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[!] %safricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
     subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
-    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return
 }
 
 func KaliSetups() {
-    fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
@@ -857,9 +857,9 @@ func KaliSetups() {
         }
         InstallFoundationTools(foundationCommands)
         installTools(missingTools)
-        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
         return
@@ -867,7 +867,7 @@ func KaliSetups() {
 }
 
 func UbuntuSetups() {
-    fmt.Printf("\n%s[>] %sInstalling africana in ubuntu ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in ubuntu ...\n", bcolors.Green, bcolors.Endc)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
             `apt-get update -y`,
@@ -882,16 +882,16 @@ func UbuntuSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
-        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
     }
 }
 
 func ArchSetups() {
-    fmt.Printf("\n%s[>] %sInstalling africana in arch\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling africana in arch\n", bcolors.Green, bcolors.Endc)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
             `pacman -Syu --noconfirm`,
@@ -899,16 +899,16 @@ func ArchSetups() {
         }
         InstallFoundationTools(foundationCommands)
         BlackArchSetups()
-        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
     }
 }
 
 func BlackArchSetups() {
-    fmt.Printf("\n%s[>] %sInstalling blackarch tools ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n%s[>] %sInstalling blackarch tools ...\n", bcolors.Green, bcolors.Endc)
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
             `curl -O https://blackarch.org/strap.sh`,
@@ -920,9 +920,9 @@ func BlackArchSetups() {
             `winecfg /v win11`,
         }
         InstallFoundationTools(foundationCommands)
-        fmt.Printf("\n%s[>] %sInstalling third party tools ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[>] %sInstalling third party tools ...\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana fully installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana fully installed ...\n", bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
     }
@@ -943,12 +943,12 @@ func AutoSetups() {
 }
 
 func Uninstaller() {
-    fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.RED, bcolors.ENDC)
+    fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.Red, bcolors.Endc)
     if _, err := os.Stat(ToolsDir); !os.IsNotExist(err) {
         subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/africana`)
-        fmt.Printf("\n%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
         os.Exit(0)
     } else {
-        fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.Green, bcolors.Endc)
     }
 }

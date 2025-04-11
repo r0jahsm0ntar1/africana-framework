@@ -39,7 +39,7 @@ func Run() {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+            fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc)
             scanner.Scan()
             Input := strings.TrimSpace(scanner.Text())
             switch Input {
@@ -63,7 +63,7 @@ func Run() {
 func africanaAutoMode() {
     menus.MenuZero()
     for {
-        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -95,7 +95,7 @@ func africanaAutoMode() {
 
 func executeFunctionAuto() {
     if Function == "" {
-        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     africanaFrameworAuto()
@@ -130,7 +130,7 @@ func africanaFrameworAuto() {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
     }
 }
 
@@ -523,7 +523,7 @@ func executeCommandAuto(cmd string) bool {
 //Manual mode
 func africanaManualMode() {
     for {
-        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -1002,7 +1002,7 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == "" {
-        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     africanaManual()
@@ -1038,7 +1038,7 @@ func africanaManual() {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
     }
 }
 

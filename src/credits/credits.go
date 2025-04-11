@@ -42,14 +42,14 @@ func Contributors() {
     readFileLetterByLetter(filename, delay)
 
     fmt.Printf(`%s%s%s
-Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-    fmt.Printf(bcolors.ENDC + `
+Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+    fmt.Printf(bcolors.Endc + `
 1. torsocks
-` + bcolors.ENDC)
+` + bcolors.Endc)
 
     fmt.Printf(`
-%s%s%sInternal network attack vectors%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   networks := bcolors.ENDC + `
+%s%s%sInternal network attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+   networks := bcolors.Endc + `
 3. bettercap
 4. nmap
 5. metasploit
@@ -58,15 +58,15 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 8. beef-xss
 9. responder
 10 toxssin
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, i := range networks {
         fmt.Print(string(i))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sBackdoor & c2 attack vectors%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   exploits := bcolors.ENDC + `
+%s%s%sBackdoor & c2 attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+   exploits := bcolors.Endc + `
 1. Blackjack by t3l3machus
 2. ShellzGen by 4ndr34z
 3. PowerJoker
@@ -76,54 +76,54 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 7. AndroidRAT
 8. Chameleon
 9. Gh0x0st
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, m := range exploits {
         fmt.Print(string(m))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sWireless networks attack vectors%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   wireless := bcolors.ENDC + `
+%s%s%sWireless networks attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+   wireless := bcolors.Endc + `
 1. Wifite
 2. Wifipumpkin3
 3. Airgeddon
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, w := range wireless {
         fmt.Print(string(w))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sCrackers for Passwords, Hash & .Pcap%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   crackers := bcolors.ENDC + `
+%s%s%sCrackers for Passwords, Hash & .Pcap%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+   crackers := bcolors.Endc + `
 1. Aircrack_ng
 2. John
 3. Hash-Buster by Somdev Sangwan
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, c := range crackers {
         fmt.Print(string(c))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sSocial-engineering attacks%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-   phishers := bcolors.ENDC + `
+%s%s%sSocial-engineering attacks%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+   phishers := bcolors.Endc + `
 1. Gophish
 2. Good Ginx
 3. AdvPhishing
 4. Setoolkit by David Kennedy
 5. Anonphisher
 6. Cyberphish
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, p := range phishers {
         fmt.Print(string(p))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sWebsite attack vectors%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-        webs := bcolors.ENDC + `
+%s%s%sWebsite attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+        webs := bcolors.Endc + `
 1. Musker   A.I Proxies
 2. wafw00f
 3. Dnsrecon
@@ -145,15 +145,15 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 19. Jok3r by koutto
 20. Osmedeus by j3ssie
 21. Ufonet by epsylon
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, w := range webs {
         fmt.Print(string(w))
         time.Sleep(3 * time.Millisecond)
     }
 
     fmt.Printf(`
-%s%s%sCode of conduct%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
-    caution := bcolors.ENDC + `
+%s%s%sCode of conduct%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+    caution := bcolors.Endc + `
 [ Africana-framework is written purely for Good & not evil]
 [ The author of africana-framework is Rojahs Montari from.]
 [ cyberafrics a cybersecurity organisation in Africa Kenya]
@@ -162,7 +162,7 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 [ Life Tip.: Defeat the devil by fasting & praying........]
 [ Email....: rojahsmontari@gmail.com......................]
 [ YouTube..: https://youtube.com/@RojahsMontari...........]
-` + bcolors.ENDC
+` + bcolors.Endc
     for _, c := range caution {
         fmt.Print(string(c))
         time.Sleep(3 * time.Millisecond)
@@ -171,7 +171,7 @@ Torsocks & anonimity%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.END
 
 func Developer() {
     fmt.Printf(`
-%s%s%sAbout the author%s`, bcolors.BOLD, bcolors.UNDERL, bcolors.BLUE, bcolors.ENDC)
+%s%s%sAbout the author%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
     developer := `
 [ I am Rojahs Montari a Devoted Christian & Pentester.....]
 [ One might describe me as an erudite.....................]
@@ -195,7 +195,7 @@ func Developer() {
     }
     fmt.Printf(`%s%s
      The devil has no power over you Christian soldier.%s
-`, bcolors.DARKGREEN, bcolors.BLINK, bcolors.ENDC)
+`, bcolors.Green, bcolors.Blink, bcolors.Endc)
 }
 
 func Creditors() {

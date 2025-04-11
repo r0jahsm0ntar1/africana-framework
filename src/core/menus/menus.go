@@ -28,7 +28,7 @@ func MenuZero() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s99. %s%s%s%sGet Bonus Packages.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuOne() {
@@ -47,7 +47,7 @@ func MenuOne() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuTwo() {
@@ -66,7 +66,7 @@ func MenuTwo() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuThree() {
@@ -85,7 +85,7 @@ func MenuThree() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuFouR() {
@@ -104,7 +104,7 @@ func MenuFouR() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuFour() {
@@ -123,7 +123,7 @@ func MenuFour() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuFive() {
@@ -142,18 +142,16 @@ func MenuFive() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuSix() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-  %sOnline Crackers%s:%s    Offline Crackers%s:
-  ----------------    -----------------
-  %s1. %ssh               %s10. %spcap
-  %s2. %sftp              %s11. %sntlm
-  %s3. %ssmb              %s12. %shash
+  %s1. %ssh                             %s10. %spcap
+  %s2. %sftp                            %s11. %sntlm
+  %s3. %ssmb                            %s12. %shash
   %s4. %srdp
   %s5. %sldap
   %s6. %ssmtp
@@ -163,7 +161,7 @@ func MenuSix() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuSeven() {
@@ -182,7 +180,7 @@ func MenuSeven() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuSevenOne() {
@@ -200,7 +198,7 @@ func MenuSevenOne() {
 %s 9. %sto add
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func MenuEight() {
@@ -219,7 +217,7 @@ func MenuEight() {
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.UNDERL, bcolors.BOLD, bcolors.ITALIC, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.ITALIC, bcolors.BOLD, bcolors.UNDERL, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func HelpInfoMenuMain() {
@@ -249,7 +247,7 @@ Console options:
     -b, --verses        Launch Bible verses in an uniform way manner as used in the framework.
     -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
     -h, --help          Show this help message and exit.
-`, bcolors.DARKGREEN, bcolors.ENDC, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC)
+`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func HelpInfoMenuZero() {
@@ -296,7 +294,7 @@ func HelpInfoMenuZero() {
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.ITALIC, bcolors.UNDERL, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoRun() {
@@ -316,7 +314,7 @@ run          Enables you to Interact with a Function by name or search term/inde
 
   run setups or execute setups
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfOptions() {
@@ -331,7 +329,7 @@ func HelpInfOptions() {
 
 Just like show options command, options shows commands in which a sub Function can run in a given sub menu.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoShow() {
@@ -346,7 +344,7 @@ func HelpInfoShow() {
 %s[*]%s Valid parameters for the %s"show" %scommand are: all, modules, options
 %s[*]%s Additional module-specific parameters are: missing, advanced, evasion, targets, actions
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Blue, bcolors.Endc)
 }
 
 func HelpInfoUse() {
@@ -364,7 +362,7 @@ name is not found, it will be treated as a search term. An index from the previo
   use setups
   use <name>
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoStart() {
@@ -383,7 +381,7 @@ results can be selected if desired.
   start setups
   start <name>
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoList() {
@@ -401,7 +399,7 @@ list modules command, will list all sub-modules available in that Function.
 %s[*]%s Valid parameters for the "list" command are: modules, functions or all.
 %s[*]%s Additional Function-specific parameters are: missing, advanced.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc)
 }
 
 func HelpInfoSet() {
@@ -428,7 +426,7 @@ If setting a PAYLOAD, this command can take an index from 'show payloads'.
   set module exploits
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfo() {
@@ -446,7 +444,7 @@ func HelpInfo() {
 
   Queries the supplied Function or modules for information. If no Function is given, show info for the currently active Function.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTips() {
@@ -463,7 +461,7 @@ func HelpInfoTips() {
   Gives you special information about a Function and how to successfully use it in.
 real life scenario.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoFeatures() {
@@ -479,7 +477,7 @@ func HelpInfoFeatures() {
 
 Prints feature plans for africana. Ex. modules to be added, what to be corrected.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoExecute() {
@@ -488,33 +486,33 @@ func HelpInfoExecute() {
 -------
     %srun%s : Launch the selected Function. Alias to (start, execute)
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func ListMainFunctions() {
     fmt.Printf(`
-%sMain Functions%s:
---------------
+%sMain Modules%s:
+---- -------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s    setups%s: Install, Update, Repair or Uninstall africana-framework.
-  %s2. %s  torsocks%s: Configure the system for strictly tight anonimity.(fix dns leak, changemac in auto boot)
-  %s3. %s  networks%s: Start internal network attacks. From sniffing, injecting packets to hooking hosts.
-  %s4. %s  exploits%s: Generate undetectebal R.A.Ts and (Launch next gen c2s to attack all systems. Evasions also included)
-  %s5. %s  wireless%s: From wifies, bluetooths, cantools and other wireless networks attack vectors.
-  %s6. %s  crackers%s: Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
-  %s7. %s  phishers%s: Perform almost all kinds of Phishing attacks. With OPT Bypass.
-  %s8. %s  websites%s: Launch Web Penetration testing engines with full free bugbounty automation kit.
-  %s9. %s   credits%s: Show who developes and mentains africana-framework with (third party tools developers)
-  %s99.%s    verses%s: Launch Bible verses in an uniform way manner as used in the framework.
+  # %sName      Description%s
+  - ----      -----------
+  %s1. %s  setups %s> Install, Update, Repair or Uninstall africana-framework.
+  %s2. %storsocks %s> Configure the system for strictly tight anonimity.(fix dns leak, changemac in auto boot)
+  %s3. %snetworks %s> Start internal network attacks. From sniffing, injecting packets to hooking hosts.
+  %s4. %sexploits %s> Generate undetectebal R.A.Ts and (Launch next gen c2s to attack all systems. Evasions also included)
+  %s5. %swireless %s> From wifies, bluetooths, cantools and other wireless networks attack vectors.
+  %s6. %scrackers %s> Crack (NTLMS, HASHES, PCAPS) & bruteforce (SSH, FTP, SMB, RPC etc.)
+  %s7. %sphishers %s> Perform almost all kinds of Phishing attacks. With OPT Bypass.
+  %s8. %swebsites %s> Launch Web Penetration testing engines with full free bugbounty automation kit.
+  %s9. %s credits %s> Show who developes and mentains africana-framework with (third party tools developers)
+  %s99.%s  verses %s> Launch Bible verses in an uniform way manner as used in the framework.
 
 %sex. %s%susage%s:
 --  ------
 
     set module setups or -> use setups
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoMain() {
@@ -540,7 +538,7 @@ func HelpInfoMain() {
 -----------
   This is the main module containing all africana-framework functions.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
  ListMainFunctions()
 }
 
@@ -564,7 +562,7 @@ func MainOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 
@@ -592,7 +590,7 @@ func HelpInfoSetups() {
 -----------
   This modules enables you to Install, uninstall, update & mentain africana-framework.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
      ListSetupsDistros()
 }
 
@@ -601,15 +599,15 @@ func ListSetupsDistros() {
 %sSupported Distros%s:
 --------- -------
 
-  # %sName       Description%s
-  - ----       -----------
+  # %sName     Description%s
+  - ----     -----------
 
-  %s1. %s      kali%s: Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
-  %s2. %s    ubuntu%s: This module will install africana-framework in Ubuntu-Linux.
-  %s3. %s      arch%s: Tools will be installed in any Arch-Linux Distros using Blackarch repo.
-  %s4. %s     macos%s: Under development. Install africana on MackingTosh systems.
-  %s5. %s   android%s: Install africana-framework in Termux using chroot environment.
-  %s6. %s   windows%s: Under development. But can run if tools well installed using commando vm.
+  %s1. %s   kali %s> Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
+  %s2. %s ubuntu %s> This module will install africana-framework in Ubuntu-Linux.
+  %s3. %s   arch %s> Tools will be installed in any Arch-Linux Distros using Blackarch repo.
+  %s4. %s  macos %s> Under development. Install africana on MackingTosh systems.
+  %s5. %sandroid %s> Install africana-framework in Termux using chroot environment.
+  %s6. %swindows %s> Under development. But can run if tools well installed using commando vm.
 
 %sex. %s%susage%s:
 --  ------
@@ -618,21 +616,22 @@ func ListSetupsDistros() {
   set function install -> other functions include (update, repair and uninstall)
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    ListSetupsFunction()
 }
 
 func ListSetupsFunction() {
     fmt.Printf(`
-%sSetups functions%s:
-----------------
+%sSetups Modules%s:
+------ -------
 
   # %sName       Description%s
   - ----       -----------
-  %s1. %s   install%s: Installs africana in selected distro.
-  %s2. %s    update%s: Get new release of africana-framework from github and install it.
-  %s3. %s    repair%s: Repair africana-framework if broken or with issues.
-  %s4. %s      auto%s: Auto detect system and do the necessary.
-  %s5. %s uninstall%s: Completely uninstall africana-framework from system.
+  %s1. %s  install %s> Installs africana in selected distro.
+  %s2. %s   update %s> Get new release of africana-framework from github and install it.
+  %s3. %s   repair %s> Repair africana-framework if broken or with issues.
+  %s4. %s     auto %s> Auto detect system and do the necessary.
+  %s5. %suninstall %s> Completely uninstall africana-framework from system.
 
 %sex. %s%susage%s:
 --  ------
@@ -642,7 +641,7 @@ func ListSetupsFunction() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC    , bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc    , bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func SetupsOptions() {
@@ -663,7 +662,7 @@ func SetupsOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoKali() {
@@ -689,7 +688,7 @@ func HelpInfoKali() {
 -----------
   It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoArch() {
@@ -715,7 +714,7 @@ func HelpInfoArch() {
 -----------
   It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoUbuntu() {
@@ -741,7 +740,7 @@ func HelpInfoUbuntu() {
 -----------
   It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoMacos() {
@@ -767,7 +766,7 @@ func HelpInfoMacos() {
 -----------
   It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoWindows() {
@@ -793,7 +792,7 @@ func HelpInfoWindows() {
 -----------
   It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAndroid() {
@@ -819,7 +818,7 @@ func HelpInfoAndroid() {
 -----------
   It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoUpdate() {
@@ -845,7 +844,7 @@ func HelpInfoUpdate() {
 -----------
   It is a Function to update and mentain africana-framework.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoUninstaller() {
@@ -871,7 +870,7 @@ func HelpInfoUninstaller() {
 -----------
   It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAuto() {
@@ -897,7 +896,7 @@ func HelpInfoAuto() {
 -----------
   It is a Function to auto select distro and install africana with all it's dependencies.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoRepair() {
@@ -923,7 +922,7 @@ func HelpInfoRepair() {
 -----------
   It is a function repairs africana incase it is broken.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoClearLogs() {
@@ -949,7 +948,7 @@ func HelpInfoClearLogs() {
 -----------
   This module will clear all your logs that has been recorded from the last time you cleaned the log folder..
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -976,7 +975,7 @@ func ListTorsocksFunctions() {
     set function vanish
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocks() {
@@ -1012,7 +1011,7 @@ func HelpInfoTorsocks() {
 -----------
 
   Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy & Squid to work together in order to completely anonimize your system through Tor network.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListTorsocksFunctions()
 }
 
@@ -1040,7 +1039,7 @@ func TorsocksOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoTorsocksSetups() {
@@ -1077,7 +1076,7 @@ func HelpInfoTorsocksSetups() {
 
   This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through
   privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksVanish() {
@@ -1114,7 +1113,7 @@ func HelpInfoTorsocksVanish() {
 
   This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor.
   It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksStatus() {
@@ -1151,7 +1150,7 @@ func HelpInfoTorsocksStatus() {
 
   This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that 
   goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksTorIp() {
@@ -1188,7 +1187,7 @@ func HelpInfoTorsocksTorIp() {
 
   This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
   configured, then you will get a congratulation mesage from tor website.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksChains() {
@@ -1224,7 +1223,7 @@ func HelpInfoTorsocksChains() {
 -----------
 
   This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksReload() {
@@ -1260,7 +1259,7 @@ func HelpInfoTorsocksReload() {
 -----------
 
   This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -1297,7 +1296,7 @@ func HelpInfoTorsocksExitnode() {
 -----------
 
   This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksRestore() {
@@ -1334,7 +1333,7 @@ func HelpInfoTorsocksRestore() {
 
   This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module
   will help you fix the lack off internet connection.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTorsocksStop() {
@@ -1371,25 +1370,25 @@ func HelpInfoTorsocksStop() {
 
   This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module
   will help you fix the lack off internet connection.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func ListInternalFunctions() {
     fmt.Printf(`
-%setworks Functions%s:
+%sNetworks Functions%s:
 -------- ---------
 
   # %sName       Description%s
   - ----       -----------
-  %s1. %sdiscover %s: Discover all devices connected to the network. Lets you locate targets.
-  %s2. %sportscan %s: Get open ports on the target you have set.
-  %s3. %svulnscan %s: Perform vulnerbility scan on open ports of the target you have set.
-  %s4. %senumscan %s: Recon for S.M.B deep information on the target set.
-  %s5. %ssmbexplo %s: Launch known vulnerbility exploits on the target's S.M.B services.
-  %s6. %spsniffer %s: Sniff all Packets from connected devices to the router(Perform M.I.T.M).
-  %s7. %sresponder%s: Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6.
-  %s8. %sbeefninja%s: Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks).
-  %s9. %sxsshooker%s: Get Shell through XSS Injection to packets in the wire.(To come).
+  %s1. %sdiscover  %s: Discover all devices connected to the network. Lets you locate targets.
+  %s2. %sportscan  %s: Get open ports on the target you have set.
+  %s3. %svulnscan  %s: Perform vulnerbility scan on open ports of the target you have set.
+  %s4. %senumscan  %s: Recon for S.M.B deep information on the target set.
+  %s5. %ssmbexplo  %s: Launch known vulnerbility exploits on the target's S.M.B services.
+  %s6. %spsniffer  %s: Sniff all Packets from connected devices to the router(Perform M.I.T.M).
+  %s7. %sresponder %s: Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6.
+  %s8. %sbeefninja %s: Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks).
+  %s9. %sxsshooker %s: Get Shell through XSS Injection to packets in the wire.(To come).
 
 %sex. %s%susage%s:
 --  ------
@@ -1397,7 +1396,7 @@ func ListInternalFunctions() {
     set function discover
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoNetworks() {
@@ -1422,7 +1421,7 @@ func HelpInfoNetworks() {
 %sDescription%s:
 -----------
   This is the Network module that contains all internal networks attacks functions.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListInternalFunctions()
 }
 
@@ -1457,7 +1456,7 @@ func NetworksOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC,       bcolors.BOLD, bcolors.ENDC, bcolors.YELLOW, Lhost, bcolors.ENDC,           bcolors.BOLD, bcolors.ENDC, bcolors.YELLOW, Gateway, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc,       bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc,           bcolors.Bold, bcolors.Endc, bcolors.Yellow, Gateway, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoDiscover() {
@@ -1495,7 +1494,7 @@ func HelpInfoDiscover() {
   This module will scan for all connected devices in the network given using bettercap then arrange the targets
   in a table for you to select one to attack further.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoInPortScan() {
@@ -1532,7 +1531,7 @@ func HelpInfoInPortScan() {
 
   This module will scan all open ports of the target to reveal open ports.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoInVulnScan() {
@@ -1569,7 +1568,7 @@ func HelpInfoInVulnScan() {
 
   This module will Perform vulnerbility scan on open ports of the target you have set.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoInEnumScan() {
@@ -1606,7 +1605,7 @@ func HelpInfoInEnumScan() {
 
   This module will Digg for S.M.B deep information on the target set.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoSmbExplo() {
@@ -1643,7 +1642,7 @@ func HelpInfoSmbExplo() {
 
   This module will Launch known vulnerbility exploits on the target's S.M.B services.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoPSniffer() {
@@ -1680,7 +1679,7 @@ func HelpInfoPSniffer() {
 
   This module will Sniff all Packets from connected devices to the router(Perform M.I.T.M).
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoResponder() {
@@ -1717,7 +1716,7 @@ func HelpInfoResponder() {
 
   This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func OptionsResponder() {
@@ -1745,7 +1744,7 @@ func OptionsResponder() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoBeefNinja() {
@@ -1782,7 +1781,7 @@ func HelpInfoBeefNinja() {
 
   This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func OptionsBeefNinja() {
@@ -1811,7 +1810,7 @@ func OptionsBeefNinja() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoXssHoocker() {
@@ -1848,7 +1847,7 @@ func HelpInfoXssHoocker() {
 
   This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func OptionsXssHoocker() {
@@ -1876,7 +1875,7 @@ func OptionsXssHoocker() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func ListExploitsFunctions() {
@@ -1884,25 +1883,24 @@ func ListExploitsFunctions() {
 %setworks Functions%s:
 -------- ---------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s      ghost%s: It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
-  %s2. %s     shellz%s: Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
-  %s3. %s   listener%s: Launch any of your disearable c2 with costumized LHOST, LPORT etc.
-  %s4. %s   androrat%s: It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
-  %s5. %s  teardroid%s: Andoird C2. Needs alot of online configuration but the best for now.
-  %s6. %s  blackjack%s: It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
-  %s7. %s  hoaxshell%s: A Killer FUD that bypasses most avs.
-  %s8. %s noisemaker%s: Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims.
-  %s9. %scodebreaker%s: Just like noisemake but the persisten mechanisim is through regestry keys.
-
+  # %sName         Description%s
+  - ----         -----------
+  %s4. %s   androrat%s > It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
+  %s5. %s  teardroid%s > Andoird C2. Needs alot of online configuration but the best for now.
+  %s6. %s  blackjack%s > It is a tool derived from villain. It supports both tcp, http & https reverse shells. Supports evasions & bypasses almost all avs.
+  %s7. %s  hoaxshell%s > A Killer FUD that bypasses most avs.
+  %s2. %s     shellz%s > Supports all distro reverse shells generation that supports both tcp, https & https connection. Launches variety of listeners.
+  %s1. %s      ghost%s > It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
+  %s8. %s noisemaker%s > Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims.
+  %s9. %scodebreaker%s > Just like noisemake but the persisten mechanisim is through regestry keys.
+  %s3. %s   listener%s > Launch any of your disearable c2 with costumized LHOST, LPORT etc.
 %sex. %s%susage%s:
 --  ------
 
   set function discover
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoExploits() {
@@ -1928,7 +1926,7 @@ func HelpInfoExploits() {
 -----------
   This is the Exploits module that contains all c2, backdoors and obfsicatorsfunctions.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListExploitsFunctions()
 }
 
@@ -1964,7 +1962,7 @@ func ExploitsOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoBlackJack() {
@@ -1999,7 +1997,7 @@ func HelpInfoBlackJack() {
 -----------
   It is a tool derived from villain framework. It supports both tcp, http & https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -2035,7 +2033,7 @@ func HelpInfoShellz() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoHoaxShell() {
@@ -2070,7 +2068,7 @@ func HelpInfoHoaxShell() {
 -----------
   It is a tool like villein or blackjack that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoNoiseMaker() {
@@ -2107,7 +2105,7 @@ func HelpInfoNoiseMaker() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoHavoc() {
@@ -2144,7 +2142,7 @@ func HelpInfoHavoc() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTearNdroid() {
@@ -2180,7 +2178,7 @@ func HelpInfoTearNdroid() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func BlackJackOptions() {
@@ -2210,7 +2208,7 @@ func BlackJackOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoChameLeon() {
@@ -2247,7 +2245,7 @@ func HelpInfoChameLeon() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoGhost() {
@@ -2284,7 +2282,7 @@ func HelpInfoGhost() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoSeaShell() {
@@ -2320,7 +2318,7 @@ func HelpInfoSeaShell() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoListener() {
@@ -2356,7 +2354,7 @@ func HelpInfoListener() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoCodeBreaker() {
@@ -2393,7 +2391,7 @@ func HelpInfoCodeBreaker() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTearDroid() {
@@ -2429,7 +2427,7 @@ func HelpInfoTearDroid() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAndroRat() {
@@ -2465,7 +2463,7 @@ func HelpInfoAndroRat() {
 -----------
   It is a tool that supports both tcp, http & https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -2498,7 +2496,7 @@ func AndroRatOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, Lhost, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, OutPutDir, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func ListWirelessFunctions() {
@@ -2524,7 +2522,7 @@ func ListWirelessFunctions() {
     set function wifite
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoWireless() {
@@ -2550,7 +2548,7 @@ func HelpInfoWireless() {
 -----------
   This is the wireless module containing all wireless pentesting functions.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListWirelessFunctions()
 }
 
@@ -2577,11 +2575,12 @@ func WirelessOptions() {
 %sex. %s%susage%s:
 --  ------
   set IFACE wlan0
+  set FUNCTION wifite
   run
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.ORANGE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightYellow, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoWifite() {
@@ -2621,7 +2620,7 @@ func HelpInfoWifite() {
   set function wifite
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoFluxion() {
@@ -2661,7 +2660,7 @@ func HelpInfoFluxion() {
   set function fluxion
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoBetterCap() {
@@ -2702,7 +2701,7 @@ func HelpInfoBetterCap() {
   set mode auto
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAirGeddon() {
@@ -2742,7 +2741,7 @@ func HelpInfoAirGeddon() {
   set function airgeddon
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoWifiPumpkin() {
@@ -2785,7 +2784,7 @@ func HelpInfoWifiPumpkin() {
   set ssid ----
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoCrackers() {
@@ -2812,7 +2811,7 @@ func HelpInfoCrackers() {
 -----------
   Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListCrackersFunctions()
 }
 
@@ -2850,7 +2849,7 @@ func ListCrackersFunctions() {
   set wordlist -> (Give full path)
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -2885,7 +2884,7 @@ func CrackersOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func ListPhishersFunctions() {
@@ -2911,7 +2910,7 @@ func ListPhishersFunctions() {
     set function gophish
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoPhishers() {
@@ -2937,7 +2936,7 @@ func HelpInfoPhishers() {
 %sDescription%s:
 -----------
   Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListPhishersFunctions()
 }
 
@@ -2971,7 +2970,7 @@ func HelpInfoGoPhish() {
   set function gophish
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoGoodGinx() { 
@@ -3004,7 +3003,7 @@ func HelpInfoGoodGinx() {
   set function goodginx
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoZPhisher() {
@@ -3037,7 +3036,7 @@ func HelpInfoZPhisher() {
   set function zphisher
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoBlackEye() {
@@ -3070,7 +3069,7 @@ func HelpInfoBlackEye() {
   set function blackeye
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3104,7 +3103,7 @@ func HelpInfoAdvPhisher() {
   set function advphisher
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3138,7 +3137,7 @@ func HelpInfoDarkPhish() {
   set function darkphish
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoShellPhish() {
@@ -3171,7 +3170,7 @@ func HelpInfoShellPhish() {
   set function shellphish
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoSetoolKit() {
@@ -3204,7 +3203,7 @@ func HelpInfoSetoolKit() {
   set function setoolkit
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoThc() {
@@ -3237,7 +3236,7 @@ func HelpInfoThc() {
   set function thc
   run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func ListWebsitesFunctions() {
@@ -3265,7 +3264,7 @@ func ListWebsitesFunctions() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ORANGE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.BrightYellow, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoWebsites() {
@@ -3292,7 +3291,7 @@ func HelpInfoWebsites() {
 -----------
   Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease.
   It consists off recons, vulners, ddos among others.
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListWebsitesFunctions()
 }
 
@@ -3328,7 +3327,7 @@ func HelpInfoEnumScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3364,7 +3363,7 @@ func HelpInfoDnsRecon() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3400,7 +3399,7 @@ func HelpInfoPortScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTechScan() {
@@ -3435,7 +3434,7 @@ func HelpInfoTechScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3471,7 +3470,7 @@ func HelpInfoFuzzScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoLeakScan() {
@@ -3506,7 +3505,7 @@ func HelpInfoLeakScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3542,7 +3541,7 @@ func HelpInfoVulnScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAsetScan() {
@@ -3577,7 +3576,7 @@ func HelpInfoAsetScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -3613,7 +3612,7 @@ func HelpInfoAutoScan() {
     set rhosts https://example.com
     run
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func WebsitesOptions() {
@@ -3645,7 +3644,7 @@ func WebsitesOptions() {
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoCredits() {
@@ -3672,7 +3671,7 @@ func HelpInfoCredits() {
 -----------
   Credits is a module to print on third party tools with their authors. It enables africana to acknowledge each developer for his/her hard work.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoVerses() {
@@ -3699,9 +3698,9 @@ func HelpInfoVerses() {
 -----------
   Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge our LORD GOD JESUS CHRIST for Creating everything including you, me & everything.
 
-`, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func UpsentTools() {
-    fmt.Println(bcolors.YELLOW + "\n[!] " + bcolors.ENDC + "Choice selected not implimented yet!, but comming soon!" + bcolors.ENDC)
+    fmt.Println(bcolors.Yellow + "\n[!] " + bcolors.Endc + "Choice selected not implimented yet!, but comming soon!" + bcolors.Endc)
 }

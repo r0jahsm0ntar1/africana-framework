@@ -44,7 +44,7 @@ var defaultValues = map[string]string{
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%safr3%s wireless(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.RED, Function, bcolors.ENDC, bcolors.GREEN, bcolors.ENDC)
+        fmt.Printf("%s%safr3%s wireless(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -514,11 +514,11 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     if Iface == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         return
     }
     WirelessPenFunctions(Function, Iface)
@@ -551,7 +551,7 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sFailed to validate Function: %s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, Function, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sFailed to validate Function: %s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, Function, bcolors.Endc)
     }
 }
 
@@ -575,7 +575,7 @@ func WifiPumpkin() {
 
 func WifiPumpkin3(Iface string, Ssid string) {
      if Ssid == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.RED, bcolors.ENDC, bcolors.DARKGREEN, Function, Iface, bcolors.ENDC)
+        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, Function, Iface, bcolors.Endc)
         return
     }
     filePath := "/root/.config/wifipumpkin3/"

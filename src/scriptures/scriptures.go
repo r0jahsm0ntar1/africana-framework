@@ -1024,7 +1024,7 @@ func CommandMents() {
 %s 8. %sYou shall not steal.
 %s 9. %sYou shall not bear false witness.
 %s10. %sYou shall not covet.
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC, bcolors.BLUE, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc)
 }
 
 func ScriptureNarators() {
@@ -1033,10 +1033,10 @@ func ScriptureNarators() {
 Bible verse desktop (vrsoft.org). Copyright Public Domain. Language English.
 Scripture taken from the King James Version.%s
 
-`, bcolors.ITALIC, bcolors.UNDERL, bcolors.BOLD, bcolors.ENDC)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc)
     rand.Seed(time.Now().UnixNano())
     for _, verse := range verses {
-        PrintVerse(bcolors.ORANGE + verse + bcolors.ENDC)
+        PrintVerse(bcolors.BrightYellow + verse + bcolors.Endc)
     }
 }
 
@@ -1044,7 +1044,7 @@ func Verse() {
     rand.Seed(time.Now().UnixNano())
     verseIndex := rand.Intn(1000) + 1
     if message, exists := verses[verseIndex]; exists {
-        fmt.Printf("%s[+] %s%s%s%s%s%s%s\n", bcolors.GREEN, bcolors.ENDC, bcolors.Colors(), message, bcolors.ENDC, bcolors.BLINK,  `.🕊️`, bcolors.ENDC)
+        fmt.Printf("%s[+] %s%s%s%s%s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.Colors(), message, bcolors.Endc, bcolors.Blink,  `.🕊️`, bcolors.Endc)
     }
 }
 

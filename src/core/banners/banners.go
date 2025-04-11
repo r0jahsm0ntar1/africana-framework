@@ -7,17 +7,17 @@ import(
     "math/rand"
 )
 var (
-    version = "v3.0.3-dev"
+    version = "3.0.3-dev"
 )
 
 type Banners struct{}
 
 func Version() {
     fmt.Printf(`
-    %sFramework %s: %s
-      %sConsole %s: %s
+     %sFramework%s: %s
+       %sConsole%s: %s
 
-`, bcolors.GREEN, bcolors.ENDC, version, bcolors.GREEN, bcolors.ENDC, version)
+`, bcolors.Green, bcolors.Endc, version, bcolors.Green, bcolors.Endc, version)
 }
 
 func GraphicsLarge() {
@@ -39,7 +39,7 @@ func GraphicsLarge() {
             / //
             |//
             \(\%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 2:
         fmt.Printf(`%s
@@ -55,7 +55,7 @@ func GraphicsLarge() {
        \ \\'\   | |/ /
         \ \\ \  | |\/
          '" '"  '""%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 3:
         fmt.Printf(`%s
@@ -73,7 +73,7 @@ func GraphicsLarge() {
         |    '._//'   |
        .'             '.
     _,'                 ',_%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 4:
         fmt.Printf(`%s
@@ -91,7 +91,7 @@ func GraphicsLarge() {
       '._ ,  '   /_
          ; ,''-,;' ''-
           ''-..__''--'%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 5:
         fmt.Printf(`%s
@@ -105,7 +105,7 @@ func GraphicsLarge() {
      |  __|_
      '-/_==_\
       /_____\\%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 6:
         fmt.Printf(`%s
@@ -121,7 +121,7 @@ func GraphicsLarge() {
     |  *    *  ||
     |__________||
      '----------'%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
 
     case 7:
         fmt.Printf(`%s
@@ -139,7 +139,7 @@ func GraphicsLarge() {
                  '._,\/ ._\
                    '._// ./'-._ 
                      '-._-_-_.-'%s
-`, bcolors.Colors(), bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Endc)
     }
 }
 
@@ -154,7 +154,7 @@ func GraphicsTinny() {
     (oo)____
     (__)    )\
        ||--|| *%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
 
     case 2:
         fmt.Printf(`%s
@@ -167,7 +167,7 @@ func GraphicsTinny() {
     || ||
     |\_/|
     \___/%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
 
     case 3:
         fmt.Printf(`%s
@@ -177,7 +177,7 @@ func GraphicsTinny() {
         .',./'/   )/
     ()=///=))))==()
       /%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
 
     case 4:
         fmt.Printf(`%s
@@ -186,7 +186,7 @@ func GraphicsTinny() {
     '.'  /  |  \  '.'
      '. /   |   \ .'
        '-.__|__.-'%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
 
     case 5:
         fmt.Printf(`%s
@@ -197,7 +197,7 @@ func GraphicsTinny() {
    (   / _/    /' o O| ,_( ))___     ('
     '-|   )_  /o_O_'_(  \'    _ '\    ) 
       '""""'            ='---<___/---'"'%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
     }
 }
 
@@ -207,7 +207,7 @@ func GraphicsTorNet() {
 | |_ ___ ___ ___ ___ ___| |_ ___ 
 |  _| . |  _|_ -| . |  _| '_|_ -|
 |_| |___|_| |___|___|___|_,_|___|%s%s%s
-`, bcolors.Colors(), bcolors.RED, bcolors.ITALIC, bcolors.ENDC)
+`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
 }
 
 func RandomBanners() {

@@ -7,6 +7,12 @@ import(
     "fmt"
     "sync"
     "time"
+
+
+	"bytes"
+	"encoding/base64"
+
+
     "os/exec"
     "bcolors"
     "strings"
@@ -26,7 +32,7 @@ import(
 )
 
 var (
-    cmd *exec.Cmd
+    cmd *exec.Cmd 
     flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList, RokyPath string
 
 )
@@ -298,7 +304,6 @@ func (s *Spinner) Stop() {
 
 // ClearScreen clears the terminal screen
 func ClearScreen() {
-    var cmd *exec.Cmd
     if runtime.GOOS == "windows" {
         cmd = exec.Command("cmd", "/c", "cls")
     } else {
@@ -307,13 +312,13 @@ func ClearScreen() {
 
     cmd.Stdout = os.Stdout
     if err := cmd.Run(); err != nil {
-        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.RED, bcolors.ENDC, err)
+        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.Red, bcolors.Endc, err)
     }
 }
 
 // SystemShell executes a shell command
 func SystemShell(Input string) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BLUE, bcolors.ENDC, Input)
+    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.Blue, bcolors.Endc, Input)
     subprocess.Popen(Input)
 }
 
@@ -474,7 +479,7 @@ func AskForProxy(Proxy string) (*url.URL, error) {
 func SetProxy(Proxy string) error {
     proxyURL, err := AskForProxy(Proxy)
     if err != nil {
-        fmt.Printf("\n%s[!] %s%s\n", bcolors.RED, bcolors.ENDC, err)
+        fmt.Printf("\n%s[!] %s%s\n", bcolors.Red, bcolors.Endc, err)
         return err
     }
     
@@ -505,9 +510,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.RED, bcolors.ENDC, fileName, err)
+            fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.Red, bcolors.Endc, fileName, err)
         } else {
-            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.GREEN, bcolors.ENDC, bcolors.BLUE, fileName, bcolors.ENDC)
+            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.Blue, fileName, bcolors.Endc)
         }
     }
 }
@@ -520,10 +525,10 @@ func BrowseTutarilas() {
     case "windows":
         command = `start "" "https://youtube.com/@RojahsMontari"`
     default:
-        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.RED, bcolors.ENDC)
+        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.Red, bcolors.Endc)
         return
     }
-    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(command)
 }
 
@@ -550,7 +555,7 @@ func ListJunks() {
 // ClearJunks clears all junk files in the output directory
 func ClearJunks() {
     subprocess.Popen(`rm -rf /root/.afr3/output/*`)
-    fmt.Printf("%s[*] %s Succesfully cleared All junks.", bcolors.GREEN, bcolors.ENDC)
+    fmt.Printf("%s[*] %s Succesfully cleared All junks.", bcolors.Green, bcolors.Endc)
     return
 }
 
@@ -636,7 +641,7 @@ func InitiLize() {
     // Create directories if they don't exist
     for _, dir := range []string{CertDir, OutPutDir} {
         if err := os.MkdirAll(dir, os.ModePerm); err != nil {
-            fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.RED, bcolors.ENDC, dir, err)
+            fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.Red, bcolors.Endc, dir, err)
             return
         }
     }
@@ -656,4 +661,26 @@ func InitiLize() {
             subprocess.Popen(command)
         }
     }
+}
+
+func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
+    // Read the file content
+    content, err := ioutil.ReadFile(filePath)
+    if err != nil {
+        return "", err
+    }
+
+    // Clean any potential BOM or null characters (optional but good practice)
+    cleaned := string(bytes.Trim(content, "\x00"))
+
+    // Convert to UTF-16LE
+    buf := new(bytes.Buffer)
+    for _, r := range cleaned {
+        buf.WriteByte(byte(r))        // Low byte
+        buf.WriteByte(byte(r >> 8))   // High byte
+    }
+
+    // Encode to Base64 (same as `base64 -w 0`)
+    encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
+    return encoded, nil
 }
