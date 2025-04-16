@@ -42,13 +42,13 @@ func Contributors() {
     readFileLetterByLetter(filename, delay)
 
     fmt.Printf(`%s%s%s
-Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
     fmt.Printf(bcolors.Endc + `
 1. torsocks
 ` + bcolors.Endc)
 
     fmt.Printf(`
-%s%s%sInternal network attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sInternal network attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    networks := bcolors.Endc + `
 3. bettercap
 4. nmap
@@ -65,7 +65,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sBackdoor & c2 attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sBackdoor & c2 attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    exploits := bcolors.Endc + `
 1. Blackjack by t3l3machus
 2. ShellzGen by 4ndr34z
@@ -83,7 +83,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sWireless networks attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sWireless networks attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    wireless := bcolors.Endc + `
 1. Wifite
 2. Wifipumpkin3
@@ -95,7 +95,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sCrackers for Passwords, Hash & .Pcap%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sCrackers for Passwords, Hash & .Pcap%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    crackers := bcolors.Endc + `
 1. Aircrack_ng
 2. John
@@ -107,7 +107,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sSocial-engineering attacks%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sSocial-engineering attacks%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    phishers := bcolors.Endc + `
 1. Gophish
 2. Good Ginx
@@ -122,7 +122,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sWebsite attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sWebsite attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
         webs := bcolors.Endc + `
 1. Musker   A.I Proxies
 2. wafw00f
@@ -152,7 +152,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
     }
 
     fmt.Printf(`
-%s%s%sCode of conduct%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sCode of conduct%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
     caution := bcolors.Endc + `
 [ Africana-framework is written purely for Good & not evil]
 [ The author of africana-framework is Rojahs Montari from.]
@@ -171,7 +171,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.End
 
 func Developer() {
     fmt.Printf(`
-%s%s%sAbout the author%s`, bcolors.Bold, bcolors.Underl, bcolors.Blue, bcolors.Endc)
+%s%s%sAbout the author%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
     developer := `
 [ I am Rojahs Montari a Devoted Christian & Pentester.....]
 [ One might describe me as an erudite.....................]

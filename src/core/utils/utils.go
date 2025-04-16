@@ -7,11 +7,7 @@ import(
     "fmt"
     "sync"
     "time"
-
-
     "bytes"
-    "encoding/base64"
-
     "os/exec"
     "bcolors"
     "strings"
@@ -27,6 +23,7 @@ import(
     "encoding/pem"
     "path/filepath"
     "crypto/elliptic"
+    "encoding/base64"
     "crypto/x509/pkix"
 )
 
@@ -311,13 +308,13 @@ func ClearScreen() {
 
     cmd.Stdout = os.Stdout
     if err := cmd.Run(); err != nil {
-        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.BrightRed, bcolors.Endc, err)
     }
 }
 
 // SystemShell executes a shell command
 func SystemShell(Input string) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.Blue, bcolors.Endc, Input)
+    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
     subprocess.Popen(Input)
 }
 
@@ -478,7 +475,7 @@ func AskForProxy(Proxy string) (*url.URL, error) {
 func SetProxy(Proxy string) error {
     proxyURL, err := AskForProxy(Proxy)
     if err != nil {
-        fmt.Printf("\n%s[!] %s%s\n", bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("\n%s[!] %s%s\n", bcolors.BrightRed, bcolors.Endc, err)
         return err
     }
     
@@ -509,9 +506,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
-            fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.Red, bcolors.Endc, fileName, err)
+            fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.BrightRed, bcolors.Endc, fileName, err)
         } else {
-            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.Blue, fileName, bcolors.Endc)
+            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, fileName, bcolors.Endc)
         }
     }
 }
@@ -524,7 +521,7 @@ func BrowseTutarilas() {
     case "windows":
         command = `start "" "https://youtube.com/@RojahsMontari"`
     default:
-        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.Red, bcolors.Endc)
+        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
         return
     }
     fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
@@ -640,7 +637,7 @@ func InitiLize() {
     // Create directories if they don't exist
     for _, dir := range []string{CertDir, OutPutDir} {
         if err := os.MkdirAll(dir, os.ModePerm); err != nil {
-            fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.Red, bcolors.Endc, dir, err)
+            fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.BrightRed, bcolors.Endc, dir, err)
             return
         }
     }

@@ -40,7 +40,7 @@ func Covenant() {
 [ toolset. By hitting yes (only one time), you agree to...]
 [ the terms of service and that you will only use this....]
 [ tool for lawful purposes only.........................🎲]
-%s`, bcolors.Green, bcolors.Red, bcolors.Endc)
+%s`, bcolors.Green, bcolors.BrightRed, bcolors.Endc)
     fmt.Println(bcolors.Endc + `
 ¯\_(ツ)_/¯ ` + bcolors.Cyan + `🥥Do you agree to the terms of service... ` + bcolors.Yellow + `(y/n)
 ` + bcolors.Endc)

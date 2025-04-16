@@ -66,7 +66,7 @@ func creatLogDir() {
     }
 
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError creating log directory ... %s%s_", bcolors.Red, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sError creating log directory ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
         return
     }
@@ -125,13 +125,13 @@ func executeFullCommand(command string) {
     }()
 
     if err := cmd.Start(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s%s_", bcolors.Red, bcolors.Blue, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s%s_", bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s%s_", bcolors.Red, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 
@@ -150,7 +150,7 @@ func openLogFile() {
 
     logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s%s_", bcolors.Red, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 }
@@ -193,9 +193,9 @@ func changeDirectory(newDir string) {
 
     if stat, err := os.Stat(newDir); err == nil && stat.IsDir() {
         currentDir = newDir
-        fmt.Printf("%s[*] %sChanged directory to: %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.Blue, currentDir, bcolors.Endc)
+        fmt.Printf("%s[*] %sChanged directory to: %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, currentDir, bcolors.Endc)
     } else {
-        fmt.Printf("%s[!] %sInvalid directory: %s%s%s\n", bcolors.Red, bcolors.Endc, bcolors.Blue, newDir, bcolors.Endc)
+        fmt.Printf("%s[!] %sInvalid directory: %s%s%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightBlue, newDir, bcolors.Endc)
     }
 }
 
@@ -213,7 +213,7 @@ func LogHistory() {
     defer file.Close()
 
     scanner := bufio.NewScanner(file)
-    fmt.Printf("%s[*] %sexec: history\n\n", bcolors.Blue, bcolors.Endc)
+    fmt.Printf("%s[*] %sexec: history\n\n", bcolors.BrightBlue, bcolors.Endc)
     lineNumber := 1
     for scanner.Scan() {
         fmt.Printf("%d  %s\n", lineNumber, scanner.Text())
@@ -226,9 +226,9 @@ func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Printf("%s[!] %sError clearing history:", bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("%s[!] %sError clearing history:", bcolors.BrightRed, bcolors.Endc, err)
     } else {
-        fmt.Printf("%s[*] %sexec: clear history\n\n%s[*] %sHistory cleared ...\n", bcolors.Blue, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s[*] %sexec: clear history\n\n%s[*] %sHistory cleared ...\n", bcolors.BrightBlue, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         openLogFile()
     }
 }

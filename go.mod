@@ -1,7 +1,5 @@
 module main.go
 
-go 1.24.1
-
 replace credits => ./src/credits/
 
 replace utils => ./src/core/utils/

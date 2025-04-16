@@ -47,7 +47,7 @@ var defaultValues = map[string]string{
 
 func PhishingPentest() {
     for {
-        fmt.Printf("%s%safr3%s phishers(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%safr3%s phishers(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -526,7 +526,7 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     PhishingPenFunctions(Function)
@@ -688,7 +688,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
 
 func NinjaBettercap(Lhost string, Gateway string, FakeDns string, Rhost string, Iface string, Target string) {
     if Target == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Target) {
@@ -699,14 +699,14 @@ func NinjaBettercap(Lhost string, Gateway string, FakeDns string, Rhost string, 
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, Iface)
         subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
     default:
-        fmt.Printf("\n%s[!] %sMissing required parameter TARGET. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter TARGET. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
 func NinjaPhish(Spoofer string, Lhost string, Gateway string, FakeDns string, Rhost string, Iface string, Target string) {
     if Spoofer == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Spoofer) {
@@ -715,7 +715,7 @@ func NinjaPhish(Spoofer string, Lhost string, Gateway string, FakeDns string, Rh
     case "bettercap":
          NinjaBettercap(Lhost, Gateway, FakeDns, Rhost, Iface, Target)
     default:
-        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
      }
 }

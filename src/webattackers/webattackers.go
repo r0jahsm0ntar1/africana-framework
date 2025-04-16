@@ -37,7 +37,7 @@ var defaultValues = map[string]string{
 
 func WebsitesPentest() {
     for {
-        fmt.Printf("%s%safr3%s websites(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%safr3%s websites(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -506,11 +506,11 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     WebPenFunctions(Function, Rhost)
@@ -567,7 +567,7 @@ func WebPenFunctions(Function string, args ...interface{}) {
 
 func EnumScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming enumscan scan ...\n", bcolors.Green, bcolors.Endc)
@@ -576,7 +576,7 @@ func EnumScan(Rhost string) {
 
 func DnsRecon(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming dnsrecon scan ...\n", bcolors.Green, bcolors.Endc)
@@ -585,7 +585,7 @@ func DnsRecon(Rhost string) {
 
 func PortScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming full port scan ...\n", bcolors.Green, bcolors.Endc)
@@ -594,7 +594,7 @@ func PortScan(Rhost string) {
 
 func TechScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming tech detection scan ...\n", bcolors.Green, bcolors.Endc)
@@ -603,7 +603,7 @@ func TechScan(Rhost string) {
 
 func FuzzScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming fuzz scan ...\n", bcolors.Green, bcolors.Endc)
@@ -612,7 +612,7 @@ func FuzzScan(Rhost string) {
 
 func LeakScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming leak scan ...\n", bcolors.Green, bcolors.Endc)
@@ -621,7 +621,7 @@ func LeakScan(Rhost string) {
 
 func AssetScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming asset scan ...\n", bcolors.Green, bcolors.Endc)
@@ -630,7 +630,7 @@ func AssetScan(Rhost string) {
 
 func VulnScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming vuln scan ...\n", bcolors.Green, bcolors.Endc)
@@ -639,7 +639,7 @@ func VulnScan(Rhost string) {
 
 func AutoScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n%s[*] %sPerforming auto scan ...\n", bcolors.Green, bcolors.Endc)
@@ -836,7 +836,7 @@ func Jok3r5(Rhost string) {
 }
 
 func Jok3r6(Rhost string) {
-    fmt.Printf("\n%s[*] %sPerforming security checks on " + bcolors.Red + "\nTarget: " + bcolors.Yellow + "%s \n" + bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[*] %sPerforming security checks on " + bcolors.BrightRed + "\nTarget: " + bcolors.Yellow + "%s \n" + bcolors.Endc, Rhost)
     subprocess.Popen(`cd %s/websites/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast`, ToolsDir, Rhost)
 }
 

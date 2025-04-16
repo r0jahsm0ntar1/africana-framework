@@ -31,7 +31,7 @@ var defaultValues = map[string]string{
 
 func CrackersPentest() {
     for {
-        fmt.Printf("%s%safr3%s crackers(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%safr3%s crackers(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -268,11 +268,11 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     CrackersPenFunctions(Function, Rhost)
@@ -310,25 +310,25 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
 
 //Online crackers
 func HydraSsh() {
-    fmt.Print(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Print(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Print(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Print(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Print(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Print(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Print(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Print(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Print(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Print(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Print(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Print(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Print(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Print(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Print(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Print(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -339,15 +339,15 @@ func HydraSsh() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SSHcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -361,25 +361,25 @@ func HydraSsh() {
 }
 
 func HydraFtp() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPcracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -390,15 +390,15 @@ func HydraFtp() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "FTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -412,25 +412,25 @@ func HydraFtp() {
 }
 
 func HydraSmb() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -441,15 +441,15 @@ func HydraSmb() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMBCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -463,25 +463,25 @@ func HydraSmb() {
 }
 
 func HydraRdp() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -492,15 +492,15 @@ func HydraRdp() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "RDPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -514,25 +514,25 @@ func HydraRdp() {
 }
 
 func HydraLdap() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -543,15 +543,15 @@ func HydraLdap() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "LDAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -565,25 +565,25 @@ func HydraLdap() {
 }
 
 func HydraSmtp() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -594,15 +594,15 @@ func HydraSmtp() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -616,25 +616,25 @@ func HydraSmtp() {
 }
 
 func HydraSnmtp() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -645,15 +645,15 @@ func HydraSnmtp() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "SNMTPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -667,25 +667,25 @@ func HydraSnmtp() {
 }
 
 func HydraTelnet() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -696,15 +696,15 @@ func HydraTelnet() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "TELNETCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -718,25 +718,25 @@ func HydraTelnet() {
 }
 
 func HydraHttps() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.Red + "Single  or " + bcolors.Yellow + "2. " + bcolors.Red + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "use " + bcolors.Yellow + "1. " + bcolors.BrightRed + "Single  or " + bcolors.Yellow + "2. " + bcolors.BrightRed + "Wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
     case "1":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "admin" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Name := scanner.Text()
         if Name == "" {
             Name = "admin"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -747,15 +747,15 @@ func HydraHttps() {
         fmt.Println()
         return
     case "2":
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + " Names to Crack " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         Names := scanner.Text()
         if Names == "" {
             Names = "/usr/share/WordList/rockyou.txt"
         }
-        fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-        fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HTTPSCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+        fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
         scanner.Scan()
         WordPass := scanner.Text()
         if WordPass == "" {
@@ -769,8 +769,8 @@ func HydraHttps() {
 }
 
 func CyberBrute() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "All/SCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "All/SCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "TARGET " + bcolors.Magenta + "To attack" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     Rhost := scanner.Text()
     subprocess.Popen(`cd /root/.afr3/africana-base/crackers/cyberbrute; bash cyberbrute.sh %s`, Rhost)
@@ -778,8 +778,8 @@ func CyberBrute() {
 }
 
 func HashBuster() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HASHCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Full path to your hash " + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "HASHCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Full path to your hash " + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     fmt.Scan(&Hashes)
     subprocess.Popen(`cd /root/.afr3/africana-base/crackers/hash-buster; python3 cracker.py -t 10 %s`, Hashes)
     fmt.Println()
@@ -787,11 +787,11 @@ func HashBuster() {
 
 //Offline Crackers
 func AirCrackng() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Full path to your .pcap " + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Full path to your .pcap " + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     fmt.Scan(&Pcap)
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     WordList := scanner.Text()
     if WordList == "" {
@@ -802,11 +802,11 @@ func AirCrackng() {
 }
 
 func JohnCrackng() {
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Full path to your .pcap " + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Full path to your .pcap " + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     fmt.Scan(&Pcap)
-    fmt.Printf(bcolors.Blue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.Red + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.Blue + ")" + bcolors.Endc)
-    fmt.Printf(bcolors.Blue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╭─(" + bcolors.Endc + "africana:" + bcolors.Cyan + "framework:" + bcolors.Grey + bcolors.Italic + "PCAPCracker " + bcolors.Endc + bcolors.Italic + "set " + bcolors.BrightRed + "Path to Pass wordlist " + bcolors.Magenta + "default " + bcolors.Endc + "= " + bcolors.Yellow + bcolors.Italic + "Rockyou.txt" + bcolors.Endc + bcolors.BrightBlue + ")" + bcolors.Endc)
+    fmt.Printf(bcolors.BrightBlue + "\n╰─🐼" + bcolors.Green + "> " + bcolors.Endc)
     scanner.Scan()
     WordList := scanner.Text()
     if WordList == "" {

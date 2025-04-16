@@ -2,8 +2,8 @@ package bcolors
 
 import (
     "fmt"
-    "math/rand"
     "runtime"
+    "math/rand"
 )
 
 var (
@@ -176,7 +176,7 @@ func XtermGrayscale(level int) string {
     if level < 0 || level > 23 {
         return Endc
     }
-    return XTERM_FG[232+level]
+    return XTERM_FG[232 + level]
 }
 
 // XtermBgGrayscale returns a grayscale xterm background color (0-23)
@@ -184,5 +184,5 @@ func XtermBgGrayscale(level int) string {
     if level < 0 || level > 23 {
         return Endc
     }
-    return XTERM_BG[232+level]
+    return XTERM_BG[232 + level]
 }

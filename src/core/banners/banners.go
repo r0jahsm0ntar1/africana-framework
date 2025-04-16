@@ -17,7 +17,7 @@ func Version() {
      %sFramework%s: %s
        %sConsole%s: %s
 
-`, bcolors.Green, bcolors.Endc, version, bcolors.Green, bcolors.Endc, version)
+`, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
 }
 
 func GraphicsLarge() {
@@ -153,8 +153,8 @@ func GraphicsTinny() {
     ,__,
     (oo)____
     (__)    )\
-       ||--|| *%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+       ||--|| *%s
+`, bcolors.Colors(), bcolors.Endc)
 
     case 2:
         fmt.Printf(`%s
@@ -166,8 +166,8 @@ func GraphicsTinny() {
     || |/
     || ||
     |\_/|
-    \___/%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+    \___/%s
+`, bcolors.Colors(), bcolors.Endc)
 
     case 3:
         fmt.Printf(`%s
@@ -176,8 +176,8 @@ func GraphicsTinny() {
           /   .)/\ ')
         .',./'/   )/
     ()=///=))))==()
-      /%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+      /%s
+`, bcolors.Colors(), bcolors.Endc)
 
     case 4:
         fmt.Printf(`%s
@@ -185,8 +185,8 @@ func GraphicsTinny() {
     :  .' / | \ '.  :
     '.'  /  |  \  '.'
      '. /   |   \ .'
-       '-.__|__.-'%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+       '-.__|__.-'%s
+`, bcolors.Colors(), bcolors.Endc)
 
     case 5:
         fmt.Printf(`%s
@@ -196,8 +196,8 @@ func GraphicsTinny() {
     )   / \=    /O o\     _
    (   / _/    /' o O| ,_( ))___     ('
     '-|   )_  /o_O_'_(  \'    _ '\    ) 
-      '""""'            ='---<___/---'"'%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+      '""""'            ='---<___/---'"'%s
+`, bcolors.Colors(), bcolors.Endc)
     }
 }
 
@@ -206,8 +206,8 @@ func GraphicsTorNet() {
  _                       _ 
 | |_ ___ ___ ___ ___ ___| |_ ___ 
 |  _| . |  _|_ -| . |  _| '_|_ -|
-|_| |___|_| |___|___|___|_,_|___|%s%s%s
-`, bcolors.Colors(), bcolors.Red, bcolors.Italic, bcolors.Endc)
+|_| |___|_| |___|___|___|_,_|___|%s
+`, bcolors.Colors(), bcolors.Endc)
 }
 
 func RandomBanners() {

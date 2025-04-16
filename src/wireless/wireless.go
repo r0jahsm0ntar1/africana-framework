@@ -42,9 +42,14 @@ var defaultValues = map[string]string{
     "output": OutPutDir,
 }
 
+type stringMatcher struct {
+    names  []string
+    action func()
+}
+
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%safr3%s wireless(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%safr3%s wireless(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -74,379 +79,81 @@ func WirelessPentest() {
 }
 
 func executeCommand(cmd string) bool {
-    commandMap := map[string]func(){
+    commandGroups := []stringMatcher{
+        // Info/Help commands
+        {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
+        {[]string{"v", "version"}, banners.Version},
+        {[]string{"s", "sleep"}, utils.Sleep},
+        {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
+        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
+        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
 
-    "? info":               menus.HelpInfo,
-    "h info":               menus.HelpInfo,
-    "help info":            menus.HelpInfo,
+        // Run/exec commands
+        {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-    "v":                banners.Version,
-    "version":          banners.Version,
+        // Set commands
+        {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
+        {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-    "s":                utils.Sleep,
-    "sleep":            utils.Sleep,
+        // Other commands
+        {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
+        {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
+        {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
+        {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
+        {[]string{"banner"}, banners.RandomBanners},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
+        {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-    "c":                utils.ClearScreen,
-    "clear":            utils.ClearScreen,
-    "clear screen":      utils.ClearScreen,
-    "screen clear":     utils.ClearScreen,
+        // Setup commands
+        {[]string{"info"}, menus.HelpInfoWireless},
+        {[]string{"m", "menu"}, menus.MenuFive},
+        {[]string{"option", "options", "show option", "show options"}, menus.WirelessOptions},
+        {[]string{"show all", "list all"}, menus.ListWirelessFunctions},
+        {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions"}, menus.ListWirelessFunctions},
+        {[]string{"module", "modules", "list module", "show module", "list modules", "show modules"}, menus.ListWirelessFunctions},
+        {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
 
-    "o":                utils.ListJunks,
-    "junks":            utils.ListJunks,
-    "outputs":          utils.ListJunks,
-    "clear junks":      utils.ClearJunks,
-    "clear outputs":    utils.ClearJunks,
+        // Distro commands (install)
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run wifite", "use wifite", "exec wifite", "start wifite", "launch wifite", "exploit wifite", "execute wifite"}, func() { WirelessPenFunctions("wifite") }},
+        {[]string{"? 1", "info 1", "help 1", "wifite", "info wifite", "help wifite"}, menus.HelpInfoWifite},
 
-    "logs":             subprocess.LogHistory,
-    "history":          subprocess.LogHistory,
-    "clear logs":       subprocess.ClearHistory,
-    "clear history":    subprocess.ClearHistory,
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run fluxion", "use fluxion", "exec fluxion", "start fluxion", "launch fluxion", "exploit fluxion", "execute fluxion"}, func() { WirelessPenFunctions("kali", "install") }},
+        {[]string{"? 2", "info 2", "help 2", "fluxion", "info fluxion", "help fluxion"}, menus.HelpInfoFluxion},
 
-    "? run":            menus.HelpInfoRun,
-    "h run":            menus.HelpInfoRun,
-    "info run":         menus.HelpInfoRun,
-    "help run":         menus.HelpInfoRun,
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run bettercap", "use bettercap", "exec bettercap", "start bettercap", "launch bettercap", "exploit bettercap", "execute bettercap"}, func() { WirelessPenFunctions("bettercap", "install") }},
+        {[]string{"? 3", "info 3", "help 3", "bettercap", "info bettercap", "help bettercap"}, menus.HelpInfoBetterCap},
 
-    "use":              menus.HelpInfoUse,
-    "? use":            menus.HelpInfoUse,
-    "h use":            menus.HelpInfoUse,
-    "info use":         menus.HelpInfoUse,
-    "help use":         menus.HelpInfoUse,
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run airgeddon", "use airgeddon", "exec airgeddon", "start airgeddon", "launch airgeddon", "exploit airgeddon", "execute airgeddon"}, func() { WirelessPenFunctions("airgeddon", "install") }},
+        {[]string{"? 4", "info 4", "help 4", "airgeddon", "info airgeddon", "help airgeddon"}, menus.HelpInfoAirGeddon},
 
-    "? exec":           menus.HelpInfoRun,
-    "h exec":           menus.HelpInfoRun,
-    "info exec":        menus.HelpInfoRun,
-    "help exec":        menus.HelpInfoRun,
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wifipumpkin", "use wifipumpkin", "exec wifipumpkin", "start wifipumpkin", "launch wifipumpkin", "exploit wifipumpkin", "execute wifipumpkin"}, func() { WirelessPenFunctions("wifipumpkin", "install") }},
+        {[]string{"? 5", "info 5", "help 5", "wifipumpkin", "info wifipumpkin", "help wifipumpkin"}, menus.HelpInfoWifiPumpkin},
 
-    "? start":          menus.HelpInfoStart,
-    "h start":          menus.HelpInfoStart,
-    "info start":       menus.HelpInfoStart,
-    "help start":       menus.HelpInfoStart,
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run wifipumpkin3", "use wifipumpkin3", "exec wifipumpkin3", "start wifipumpkin3", "launch wifipumpkin3", "exploit wifipumpkin3", "execute wifipumpkin3"}, func() { WirelessPenFunctions("wifipumpkin3", "install") }},
+        {[]string{"? 6", "info 6", "help 6", "wifipumpkin3", "info wifipumpkin3", "help wifipumpkin3"}, menus.HelpInfoWifiPumpkin},
 
-    "? launch":         menus.HelpInfoRun,
-    "h launch":         menus.HelpInfoRun,
-    "info launch":      menus.HelpInfoRun,
-    "help launch":      menus.HelpInfoRun,
-    "? exploit":        menus.HelpInfoRun,
-    "h exploit":        menus.HelpInfoRun,
-    "info exploit":     menus.HelpInfoRun,
-    "help exploit":     menus.HelpInfoRun,
-    "? execute":        menus.HelpInfoRun,
-    "h execute":        menus.HelpInfoRun,
-    "info execute":     menus.HelpInfoRun,
-    "help execute":     menus.HelpInfoRun,
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run upsent", "use upsent", "exec upsent", "start upsent", "launch upsent", "exploit upsent", "execute upsent"}, func() { WirelessPenFunctions("upsent", "install") }},
+        {[]string{"? 7", "info 7", "help 7", "upsent", "info upsent", "help upsent"}, menus.UpsentTools},
 
-    "set":              menus.HelpInfoSet,
-    "h set":            menus.HelpInfoSet,
-    "info set":         menus.HelpInfoSet,
-    "help set":         menus.HelpInfoSet,
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run upsent2", "use upsent2", "exec upsent2", "start upsent2", "launch upsent2", "exploit upsent2", "execute upsent2"}, func() { WirelessPenFunctions("upsent2", "install") }},
+        {[]string{"? 8", "info 8", "help 8", "upsent2", "info upsent2", "help upsent2"}, menus.UpsentTools},
 
-    "tips":             menus.HelpInfoTips,
-    "h tips":           menus.HelpInfoTips,
-    "? tips":           menus.HelpInfoTips,
-    "info tips":        menus.HelpInfoTips,
-    "help tips":        menus.HelpInfoTips,
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run upsent3", "use upsent3", "exec upsent3", "start upsent3", "launch upsent3", "exploit upsent3", "execute upsent3"}, func() { WirelessPenFunctions("upsent3", "install") }},
+        {[]string{"? 9", "info 9", "help 9", "upsent3", "info upsent3", "help upsent3"}, menus.UpsentTools},
 
-    "show":             menus.HelpInfoShow,
-    "? show":           menus.HelpInfoShow,
-    "h show":           menus.HelpInfoShow,
-    "info show":        menus.HelpInfoShow,
-    "help show":        menus.HelpInfoShow,
-
-    "info list":        menus.HelpInfoList,
-    "help list":        menus.HelpInfoList,
-    "use list":         menus.HelpInfoList,
-    "list":             menus.HelpInfoList,
-
-    "h option":         menus.HelpInfOptions,
-    "? option":         menus.HelpInfOptions,
-    "h options":        menus.HelpInfOptions,
-    "? options":        menus.HelpInfOptions,
-    "info option":      menus.HelpInfOptions,
-    "help option":      menus.HelpInfOptions,
-    "info options":     menus.HelpInfOptions,
-    "help options":     menus.HelpInfOptions,
-
-    "banner":           banners.RandomBanners,
-    "g":                utils.BrowseTutarilas,
-    "t":                utils.BrowseTutarilas,
-    "guide":            utils.BrowseTutarilas,
-    "tutarial":         utils.BrowseTutarilas,
-    "h":                menus.HelpInfoMenuZero,
-    "?":                menus.HelpInfoMenuZero,
-    "00":               menus.HelpInfoMenuZero,
-    "help":             menus.HelpInfoMenuZero,
-    "f":                menus.HelpInfoFeatures,
-    "use f":            menus.HelpInfoFeatures,
-    "features":         menus.HelpInfoFeatures,
-    "use features":     menus.HelpInfoFeatures,
-
-    //Chameleons//
-    "info":             menus.HelpInfoWireless,
-
-    "m":                menus.MenuFive,
-    "menu":             menus.MenuFive,
-
-    "option":           menus.WirelessOptions,
-    "options":          menus.WirelessOptions,
-    "show option":      menus.WirelessOptions,
-    "show options":     menus.WirelessOptions,
-
-    "show all":         menus.ListWirelessFunctions,
-    "list all":         menus.ListWirelessFunctions,
-
-    "func":             menus.ListWirelessFunctions,
-    "funcs":            menus.ListWirelessFunctions,
-    "functions":        menus.ListWirelessFunctions,
-    "show func":        menus.ListWirelessFunctions,
-    "list funcs":       menus.ListWirelessFunctions,
-    "show funcs":       menus.ListWirelessFunctions,
-    "show function":    menus.ListWirelessFunctions,
-    "list function":    menus.ListWirelessFunctions,
-    "list functions":   menus.ListWirelessFunctions,
-    "show functions":   menus.ListWirelessFunctions,
-
-    "module":           menus.ListWirelessFunctions,
-    "modules":          menus.ListWirelessFunctions,
-    "list module":      menus.ListWirelessFunctions,
-    "show module":      menus.ListWirelessFunctions,
-    "list modules":     menus.ListWirelessFunctions,
-    "show modules":     menus.ListWirelessFunctions,
-
-    "1":                func() {WirelessPenFunctions("wifite")},
-    "run 1":            func() {WirelessPenFunctions("wifite")},
-    "use 1":            func() {WirelessPenFunctions("wifite")},
-    "exec 1":           func() {WirelessPenFunctions("wifite")},
-    "start 1":          func() {WirelessPenFunctions("wifite")},
-    "launch 1":         func() {WirelessPenFunctions("wifite")},
-    "exploit 1":        func() {WirelessPenFunctions("wifite")},
-    "execute 1":        func() {WirelessPenFunctions("wifite")},
-    "run wifite":       func() {WirelessPenFunctions("wifite")},
-    "use wifite":       func() {WirelessPenFunctions("wifite")},
-    "exec wifite":      func() {WirelessPenFunctions("wifite")},
-    "start wifite":     func() {WirelessPenFunctions("wifite")},
-    "launch wifite":    func() {WirelessPenFunctions("wifite")},
-    "exploit wifite":   func() {WirelessPenFunctions("wifite")},
-    "execute wifite":   func() {WirelessPenFunctions("wifite")},
-
-    "? 1":              menus.HelpInfoWifite,
-    "info 1":           menus.HelpInfoWifite,
-    "help 1":           menus.HelpInfoWifite,
-    "setups":           menus.HelpInfoWifite,
-    "info setups":      menus.HelpInfoWifite,
-    "help setups":      menus.HelpInfoWifite,
-
-    "2":                func() {WirelessPenFunctions("fluxion")},
-    "run 2":            func() {WirelessPenFunctions("fluxion")},
-    "use 2":            func() {WirelessPenFunctions("fluxion")},
-    "exec 2":           func() {WirelessPenFunctions("fluxion")},
-    "start 2":          func() {WirelessPenFunctions("fluxion")},
-    "launch 2":         func() {WirelessPenFunctions("fluxion")},
-    "exploit 2":        func() {WirelessPenFunctions("fluxion")},
-    "execute 2":        func() {WirelessPenFunctions("fluxion")},
-    "run fluxion":      func() {WirelessPenFunctions("fluxion")},
-    "use fluxion":      func() {WirelessPenFunctions("fluxion")},
-    "exec fluxion":     func() {WirelessPenFunctions("fluxion")},
-    "start fluxion":    func() {WirelessPenFunctions("fluxion")},
-    "launch fluxion":   func() {WirelessPenFunctions("fluxion")},
-    "exploit fluxion":  func() {WirelessPenFunctions("fluxion")},
-    "execute fluxion":  func() {WirelessPenFunctions("fluxion")},
-
-    "? 2":              menus.HelpInfoFluxion,
-    "info 2":           menus.HelpInfoFluxion,
-    "help 2":           menus.HelpInfoFluxion,
-    "torsocks":         menus.HelpInfoFluxion,
-    "info torsocks":    menus.HelpInfoFluxion,
-    "help torsocks":    menus.HelpInfoFluxion,
-
-    "3":                    func() {WirelessPenFunctions("bettercap")},
-    "run 3":                func() {WirelessPenFunctions("bettercap")},
-    "use 3":                func() {WirelessPenFunctions("bettercap")},
-    "exec 3":               func() {WirelessPenFunctions("bettercap")},
-    "start 3":              func() {WirelessPenFunctions("bettercap")},
-    "launch 3":             func() {WirelessPenFunctions("bettercap")},
-    "exploit 3":            func() {WirelessPenFunctions("bettercap")},
-    "execute 3":            func() {WirelessPenFunctions("bettercap")},
-    "run bettercap":        func() {WirelessPenFunctions("bettercap")},
-    "use bettercap":        func() {WirelessPenFunctions("bettercap")},
-    "exec bettercap":       func() {WirelessPenFunctions("bettercap")},
-    "start bettercap":      func() {WirelessPenFunctions("bettercap")},
-    "launch bettercap":     func() {WirelessPenFunctions("bettercap")},
-    "exploit bettercap":    func() {WirelessPenFunctions("bettercap")},
-    "execute bettercap":    func() {WirelessPenFunctions("bettercap")},
-
-    "? 3":              menus.HelpInfoBetterCap,
-    "info 3":           menus.HelpInfoBetterCap,
-    "help 3":           menus.HelpInfoBetterCap,
-    "networks":         menus.HelpInfoBetterCap,
-    "info networks":    menus.HelpInfoBetterCap,
-    "help networks":    menus.HelpInfoBetterCap,
-
-    "4":                    func() {WirelessPenFunctions("airgeddon")},
-    "run 4":                func() {WirelessPenFunctions("airgeddon")},
-    "use 4":                func() {WirelessPenFunctions("airgeddon")},
-    "exec 4":               func() {WirelessPenFunctions("airgeddon")},
-    "start 4":              func() {WirelessPenFunctions("airgeddon")},
-    "launch 4":             func() {WirelessPenFunctions("airgeddon")},
-    "exploit 4":            func() {WirelessPenFunctions("airgeddon")},
-    "execute 4":            func() {WirelessPenFunctions("airgeddon")},
-    "run airgeddon":        func() {WirelessPenFunctions("airgeddon")},
-    "use airgeddon":        func() {WirelessPenFunctions("airgeddon")},
-    "exec airgeddon":       func() {WirelessPenFunctions("airgeddon")},
-    "start airgeddon":      func() {WirelessPenFunctions("airgeddon")},
-    "launch airgeddon":     func() {WirelessPenFunctions("airgeddon")},
-    "exploit airgeddon":    func() {WirelessPenFunctions("airgeddon")},
-    "execute airgeddon":    func() {WirelessPenFunctions("airgeddon")},
-
-    "? 4":              menus.HelpInfoAirGeddon,
-    "info 4":           menus.HelpInfoAirGeddon,
-    "help 4":           menus.HelpInfoAirGeddon,
-    "exploits":         menus.HelpInfoAirGeddon,
-    "info exploits":    menus.HelpInfoAirGeddon,
-    "help exploits":    menus.HelpInfoAirGeddon,
-
-    "5":                    func() {WirelessPenFunctions("wifipumpkin")},
-    "run 5":                func() {WirelessPenFunctions("wifipumpkin")},
-    "use 5":                func() {WirelessPenFunctions("wifipumpkin")},
-    "exec 5":               func() {WirelessPenFunctions("wifipumpkin")},
-    "start 5":              func() {WirelessPenFunctions("wifipumpkin")},
-    "launch 5":             func() {WirelessPenFunctions("wifipumpkin")},
-    "exploit 5":            func() {WirelessPenFunctions("wifipumpkin")},
-    "execute 5":            func() {WirelessPenFunctions("wifipumpkin")},
-    "run wifipumpkin":      func() {WirelessPenFunctions("wifipumpkin")},
-    "use wifipumpkin":      func() {WirelessPenFunctions("wifipumpkin")},
-    "exec wifipumpkin":     func() {WirelessPenFunctions("wifipumpkin")},
-    "start wifipumpkin":    func() {WirelessPenFunctions("wifipumpkin")},
-    "launch wifipumpkin":   func() {WirelessPenFunctions("wifipumpkin")},
-    "exploit wifipumpkin":  func() {WirelessPenFunctions("wifipumpkin")},
-    "execute wifipumpkin":  func() {WirelessPenFunctions("wifipumpkin")},
-
-    "? 5":              menus.HelpInfoWifiPumpkin,
-    "info 5":           menus.HelpInfoWifiPumpkin,
-    "help 5":           menus.HelpInfoWifiPumpkin,
-    "wireless":         menus.HelpInfoWifiPumpkin,
-    "info wireless":    menus.HelpInfoWifiPumpkin,
-    "help wireless":    menus.HelpInfoWifiPumpkin,
-
-    "6":                    func() {WirelessPenFunctions("WifiPumpkin3")},
-    "run 6":                func() {WirelessPenFunctions("WifiPumpkin3")},
-    "use 6":                func() {WirelessPenFunctions("WifiPumpkin3")},
-    "exec 6":               func() {WirelessPenFunctions("WifiPumpkin3")},
-    "start 6":              func() {WirelessPenFunctions("WifiPumpkin3")},
-    "launch 6":             func() {WirelessPenFunctions("WifiPumpkin3")},
-    "exploit 6":            func() {WirelessPenFunctions("WifiPumpkin3")},
-    "execute 6":            func() {WirelessPenFunctions("WifiPumpkin3")},
-    "run WifiPumpkin3":     func() {WirelessPenFunctions("WifiPumpkin3")},
-    "use WifiPumpkin3":     func() {WirelessPenFunctions("WifiPumpkin3")},
-    "exec WifiPumpkin3":    func() {WirelessPenFunctions("WifiPumpkin3")},
-    "start WifiPumpkin3":   func() {WirelessPenFunctions("WifiPumpkin3")},
-    "launch WifiPumpkin3":  func() {WirelessPenFunctions("WifiPumpkin3")},
-    "exploit WifiPumpkin3": func() {WirelessPenFunctions("WifiPumpkin3")},
-    "execute WifiPumpkin3": func() {WirelessPenFunctions("WifiPumpkin3")},
-
-    "? 6":              menus.HelpInfoWifiPumpkin,
-    "info 6":           menus.HelpInfoWifiPumpkin,
-    "help 6":           menus.HelpInfoWifiPumpkin,
-    "crackers":         menus.HelpInfoWifiPumpkin,
-    "info crackers":    menus.HelpInfoWifiPumpkin,
-    "help crackers":    menus.HelpInfoWifiPumpkin,
-
-    "7":                func() {menus.UpsentTools()},
-    "run 7":            func() {menus.UpsentTools()},
-    "use 7":            func() {menus.UpsentTools()},
-    "exec 7":           func() {menus.UpsentTools()},
-    "start 7":          func() {menus.UpsentTools()},
-    "launch 7":         func() {menus.UpsentTools()},
-    "exploit 7":        func() {menus.UpsentTools()},
-    "execute 7":        func() {menus.UpsentTools()},
-    "run phishers":     func() {menus.UpsentTools()},
-    "use phishers":     func() {menus.UpsentTools()},
-    "exec phishers":    func() {menus.UpsentTools()},
-    "start phishers":   func() {menus.UpsentTools()},
-    "launch phishers":  func() {menus.UpsentTools()},
-    "exploit phishers": func() {menus.UpsentTools()},
-    "execute phishers": func() {menus.UpsentTools()},
-
-    "? 7":              menus.UpsentTools,
-    "info 7":           menus.UpsentTools,
-    "help 7":           menus.UpsentTools,
-    "phishers":         menus.UpsentTools,
-    "info phishers":    menus.UpsentTools,
-    "help phishers":    menus.UpsentTools,
-
-    "8":                func() {menus.UpsentTools()},
-    "run 8":            func() {menus.UpsentTools()},
-    "use 8":            func() {menus.UpsentTools()},
-    "exec 8":           func() {menus.UpsentTools()},
-    "start 8":          func() {menus.UpsentTools()},
-    "launch 8":         func() {menus.UpsentTools()},
-    "exploit 8":        func() {menus.UpsentTools()},
-    "execute 8":        func() {menus.UpsentTools()},
-    "run websites":     func() {menus.UpsentTools()},
-    "use websites":     func() {menus.UpsentTools()},
-    "exec websites":    func() {menus.UpsentTools()},
-    "start websites":   func() {menus.UpsentTools()},
-    "launch websites":  func() {menus.UpsentTools()},
-    "exploit websites": func() {menus.UpsentTools()},
-    "execute websites": func() {menus.UpsentTools()},
-
-    "? 8":              menus.UpsentTools,
-    "info 8":           menus.UpsentTools,
-    "help 8":           menus.UpsentTools,
-    "websites":         menus.UpsentTools,
-    "info websites":    menus.UpsentTools,
-    "help websites":    menus.UpsentTools,
-
-    "9":               menus.UpsentTools,
-    "run 9":           menus.UpsentTools,
-    "use 9":           menus.UpsentTools,
-    "exec 9":          menus.UpsentTools,
-    "start 9":         menus.UpsentTools,
-    "launch 9":        menus.UpsentTools,
-    "exploit 9":       menus.UpsentTools,
-    "execute 9":       menus.UpsentTools,
-    "run credits":     menus.UpsentTools,
-    "use credits":     menus.UpsentTools,
-    "exec credits":    menus.UpsentTools,
-    "start credits":   menus.UpsentTools,
-    "launch credits":  menus.UpsentTools,
-    "exploit credits": menus.UpsentTools,
-    "execute credits": menus.UpsentTools,
-
-    "? 9":              menus.UpsentTools,
-    "info 9":           menus.UpsentTools,
-    "help 9":           menus.UpsentTools,
-    "credits":          menus.UpsentTools,
-    "info credits":     menus.UpsentTools,
-    "help credits":     menus.UpsentTools,
-
-    "99":               scriptures.ScriptureNarators,
-    "run 99":           scriptures.ScriptureNarators,
-    "use 99":           scriptures.ScriptureNarators,
-    "exec 99":          scriptures.ScriptureNarators,
-    "start 99":         scriptures.ScriptureNarators,
-    "launch 99":        scriptures.ScriptureNarators,
-    "exploit 99":       scriptures.ScriptureNarators,
-    "execute 99":       scriptures.ScriptureNarators,
-    "run verses":       scriptures.ScriptureNarators,
-    "use verses":       scriptures.ScriptureNarators,
-    "exec verses":      scriptures.ScriptureNarators,
-    "start verses":     scriptures.ScriptureNarators,
-    "launch verses":    scriptures.ScriptureNarators,
-    "exploit verses":   scriptures.ScriptureNarators,
-    "execute verses":   scriptures.ScriptureNarators,
-
-    "? 99":             menus.HelpInfoVerses,
-    "verses":           menus.HelpInfoVerses,
-    "info 99":          menus.HelpInfoVerses,
-    "help 99":          menus.HelpInfoVerses,
-    "info verses":      menus.HelpInfoVerses,
-    "help verses":      menus.HelpInfoVerses,
-
+        {[]string{"99", "run 99", "use 99", "exec 99", "start 99", "launch 99", "exploit 99", "execute 99", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"? 99", "verses", "info 99", "help 99", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
-    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
-        action()
-        return true
+
+    cmdLower := strings.ToLower(cmd)
+    for _, group := range commandGroups {
+        for _, name := range group.names {
+            if name == cmdLower {
+                group.action()
+                return true
+            }
+        }
     }
     return false
 }
@@ -514,11 +221,11 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     if Iface == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     WirelessPenFunctions(Function, Iface)
@@ -551,7 +258,7 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        fmt.Printf("\n%s[!] %sFailed to validate Function: %s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, Function, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate Function: %s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, bcolors.Endc)
     }
 }
 
@@ -575,7 +282,7 @@ func WifiPumpkin() {
 
 func WifiPumpkin3(Iface string, Ssid string) {
      if Ssid == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, Function, Iface, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, Iface, bcolors.Endc)
         return
     }
     filePath := "/root/.config/wifipumpkin3/"

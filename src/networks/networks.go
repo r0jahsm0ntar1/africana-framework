@@ -52,8 +52,7 @@ var defaultValues = map[string]string{
 
 func NetworksPentest() {
     for {
-        
-        fmt.Printf("%s%safr3%s networks(%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Red, Function, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%safr3%s networks(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -534,7 +533,7 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == ""{
-        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameter Function. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     NetworkPenFunctions(Function, Iface, Gateway, Lhost, Rhost, Mode, FakeDns, Spoofer)
@@ -588,7 +587,7 @@ func IpNeighbour() {
 
 func NaabuPortScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -598,7 +597,7 @@ func NaabuPortScan(Rhost string) {
 
 func NmapPortScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -608,7 +607,7 @@ func NmapPortScan(Rhost string) {
 
 func NmapVulnScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %svuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -618,7 +617,7 @@ func NmapVulnScan(Rhost string) {
 
 func SmbVulnScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %sSMB vuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -628,7 +627,7 @@ func SmbVulnScan(Rhost string) {
 
 func Enum4linux(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -638,7 +637,7 @@ func Enum4linux(Rhost string) {
 
 func EnumNxc(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -648,7 +647,7 @@ func EnumNxc(Rhost string) {
 
 func SmbMapScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -658,7 +657,7 @@ func SmbMapScan(Rhost string) {
 
 func RpcEnumScan(Rhost string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -674,7 +673,7 @@ func XssHooker(Rhost string) {
 
 func SmbExploit(Rhost string, Lhost string, Lport string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     fmt.Printf("\n\n%s[>] %sexploiting smb on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
@@ -684,11 +683,11 @@ func SmbExploit(Rhost string, Lhost string, Lport string) {
 
 func PacketSniffer(Mode string, Rhost string) {
     if _, err := exec.LookPath("bettercap"); err != nil {
-        fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Mode) {
@@ -699,7 +698,7 @@ func PacketSniffer(Mode string, Rhost string) {
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
         subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
@@ -707,7 +706,7 @@ func PacketSniffer(Mode string, Rhost string) {
 func KillerResponder(Iface string, Lhost string) {
     filePath := "/etc/responder/Responder.conf.bak_africana"
     if _, err := exec.LookPath("responder"); err != nil {
-        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
@@ -733,7 +732,7 @@ func KillerResponder(Iface string, Lhost string) {
 
 func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Mode) {
@@ -810,7 +809,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -890,7 +889,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -899,14 +898,14 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
 func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Rhost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
@@ -953,7 +952,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
             subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, Lhost, Iface, Rhost)
@@ -963,7 +962,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
     case "all":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
         if _, err := exec.LookPath("beef-xss"); err != nil {
-            fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.Red, bcolors.Endc)
+            fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.BrightRed, bcolors.Endc)
             return
         }
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
@@ -1007,7 +1006,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.Blue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -1016,14 +1015,14 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Mode, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
 func BeefInjector(Spoofer string, Mode string, Lhost string, Rhost string, Iface string, Passwd string, FakeDns string, Gateway string) {
     if Spoofer == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
@@ -1033,7 +1032,7 @@ func BeefInjector(Spoofer string, Mode string, Lhost string, Rhost string, Iface
     case "bettercap":
         BeefBettercap(Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.Red, bcolors.Endc, bcolors.Red, Spoofer, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Spoofer, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }

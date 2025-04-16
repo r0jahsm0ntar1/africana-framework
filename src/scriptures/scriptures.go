@@ -1024,7 +1024,7 @@ func CommandMents() {
 %s 8. %sYou shall not steal.
 %s 9. %sYou shall not bear false witness.
 %s10. %sYou shall not covet.
-`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc, bcolors.Blue, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
 }
 
 func ScriptureNarators() {
@@ -1044,7 +1044,7 @@ func Verse() {
     rand.Seed(time.Now().UnixNano())
     verseIndex := rand.Intn(1000) + 1
     if message, exists := verses[verseIndex]; exists {
-        fmt.Printf("%s[+] %s%s%s%s%s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.Colors(), message, bcolors.Endc, bcolors.Blink,  `.🕊️`, bcolors.Endc)
+        fmt.Printf("%s[+] %s%s%s%s%s\n", bcolors.BrightGreen, bcolors.Endc, message, bcolors.Blink, `.🕊️`, bcolors.Endc)
     }
 }
 
