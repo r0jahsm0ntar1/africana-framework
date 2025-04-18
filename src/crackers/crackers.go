@@ -29,6 +29,11 @@ var defaultValues = map[string]string{
     "wordlist": WordList,
 }
 
+type stringMatcher struct {
+    names  []string
+    action func()
+}
+
 func CrackersPentest() {
     for {
         fmt.Printf("%s%safr3%s crackers(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)

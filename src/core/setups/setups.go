@@ -4,13 +4,14 @@ import(
     "os"
     "fmt"
     "time"
-    "os/exec"
     "bufio"
     "menus"
     "utils"
+    "os/exec"
     "strings"
     "bcolors"
     "banners"
+    "runtime"
     "scriptures"
     "subprocess"
 )
@@ -88,7 +89,7 @@ var (
         "php-cgi":         "php-cgi",
         "xterm":           "xterm",
         "rfkill":          "rfkill",
-        "unzip":           "unzip",
+        "gunzip":          "gunzip",
         "hydra":           "hydra",
         "wine32":          "wine32:i386",
     }
@@ -477,9 +478,9 @@ func UpsentTools() map[string]map[string]string {
 func InstallTools(tools map[string]map[string]string) {
     // Install system tools first
     if len(tools["system"]) > 0 {
-        fmt.Printf("\n[+] Installing system tools:")
+        fmt.Printf("\n%sInstalling system tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["system"] {
-            fmt.Printf("  - Installing %-20s", tool)
+            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("sudo apt install -y %s", pkg)
             time.Sleep(200 * time.Millisecond)
         }
@@ -487,9 +488,9 @@ func InstallTools(tools map[string]map[string]string) {
 
     // Install security tools
     if len(tools["security"]) > 0 {
-        fmt.Printf("\n[+] Installing security tools:")
+        fmt.Printf("\n%sInstalling security tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["security"] {
-            fmt.Printf("  - Installing %-20s", tool)
+            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             if strings.HasPrefix(pkg, "github.com") {
                 // Go-based tool
                 subprocess.Popen("go install %s", pkg)
@@ -503,15 +504,27 @@ func InstallTools(tools map[string]map[string]string) {
 
     // Install project discovery tools
     if len(tools["discovery"]) > 0 {
-        fmt.Printf("\n[+] Installing project discovery tools:")
+        fmt.Printf("\n%sInstalling project discovery tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["discovery"] {
-            fmt.Printf("  - Installing %-20s", tool)
+            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("go install %s", pkg)
             time.Sleep(200 * time.Millisecond)
         }
     }
-}
 
+    // Handle rockyou.txt.gz for Linux
+    RokyPath  = "/usr/share/wordlists/rockyou.txt"
+    if runtime.GOOS == "linux" {
+        gzFilePath := RokyPath + ".gz"
+        if _, err := os.Stat(RokyPath); os.IsNotExist(err) {
+            if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
+                return
+            }
+            command := fmt.Sprintf("gunzip -d -9 %s", gzFilePath)
+            subprocess.Popen(command)
+        }
+    }
+}
 
 func Venv(PyEnvName string) {
     subprocess.Popen(`cd ~/.afr3/; python3 -m virtualenv %s --system-site-packages; echo -n "\n source ~/.afr3/%s/bin/activate" >> ~/.zshrc; source ~/.zshrc`, PyEnvName, PyEnvName)
@@ -550,8 +563,8 @@ func KaliSetups() {
         foundationCommands := []string{
             `apt-get update -y`,
             `apt-get install zsh git curl wget -y`,
-            `cd /etc/apt/trusted.gpg.d/; curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
-            `cd /etc/apt/sources.list.d/; curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
+            `cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
+            `cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
         }

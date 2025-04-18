@@ -35,15 +35,15 @@ func MenuOne() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %sarch      -> Using blackarch repos.
-%s 2. %skali      -> Using apt-get.
-%s 3. %smacos     -> Install in Docker image.
-%s 4. %subuntu    -> Install in docker due to package breackages.
-%s 5. %sandroid   -> Will use termux and install in chroot environment.
-%s 6. %swindows   -> Still working on it. Africana will use commando vm.
-%s 7. %supdate    -> Git pull . will be used to get new version of africana.
-%s 8. %srepair    -> Will check for issues and try to fix.
-%s 9. %suninstall -> All installed africana packages will be uninstalled.
+%s 1. %skali       > Using apt-get.
+%s 2. %subuntu     > Install in docker due to package breackages.
+%s 3. %sarch       > Using blackarch repos.
+%s 4. %smacos      > Install in Docker image.
+%s 5. %sandroid    > Will use termux and install in chroot environment.
+%s 6. %swindows    > Still working on it. Africana will use commando vm.
+%s 7. %supdate     > Git pull . will be used to get new version of africana.
+%s 8. %srepair     > Will check for issues and try to fix.
+%s 9. %suninstall  > All installed africana packages will be uninstalled.
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 
@@ -54,15 +54,15 @@ func MenuTwo() {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
 
-%s 1. %ssetups    -> Will install all necesary packages and configure them.
-%s 2. %svanish    -> Start anonimity through tor.
-%s 3. %sstatus    -> Check if all anonimity softwares are up and running.
-%s 4. %storip     -> Check for external tor IP and status.
-%s 5. %schains    -> Display all outgoing traffick through proxies.
-%s 6. %sreload    -> Restart all tor services and reconnect afresh.
-%s 7. %sexitnode  -> Change your current exit node.
-%s 8. %srestore   -> Bring back all default Iptables and other configs files.
-%s 9. %sstop      -> Disconect from tor network and Kill all anonimty services.
+%s 1. %ssetups     > Will install all necesary packages and configure them.
+%s 2. %svanish     > Start anonimity through tor.
+%s 3. %sstatus     > Check if all anonimity softwares are up and running.
+%s 4. %storip      > Check for external tor IP and status.
+%s 5. %schains     > Display all outgoing traffick through proxies.
+%s 6. %sreload     > Restart all tor services and reconnect afresh.
+%s 7. %sexitnode   > Change your current exit node.
+%s 8. %srestore    > Bring back all default Iptables and other configs files.
+%s 9. %sstop       > Disconect from tor network and Kill all anonimty services.
 
 %s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
 

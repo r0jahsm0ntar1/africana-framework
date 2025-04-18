@@ -34,6 +34,11 @@ var defaultValues = map[string]string{
     "proxies": "",
 }
 
+type stringMatcher struct {
+    names  []string
+    action func()
+}
+
 func Run() {
     if _, err := os.Stat(agreementDir); os.IsNotExist(err) {
         utils.ClearScreen()
