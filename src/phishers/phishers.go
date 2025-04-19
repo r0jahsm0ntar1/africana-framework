@@ -52,7 +52,7 @@ type stringMatcher struct {
 
 func PhishingPentest() {
     for {
-        fmt.Printf("%s%safr3%s phishers(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%safr3%s phishers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -82,381 +82,78 @@ func PhishingPentest() {
 }
 
 func executeCommand(cmd string) bool {
-    commandMap := map[string]func(){
+    commandGroups := []stringMatcher{
+        // Info/Help commands
+        {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
+        {[]string{"v", "version"}, banners.Version},
+        {[]string{"s", "sleep"}, utils.Sleep},
+        {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
+        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
+        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
 
-    "? info":               menus.HelpInfo,
-    "h info":               menus.HelpInfo,
-    "help info":            menus.HelpInfo,
+        // Run/exec commands
+        {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-    "v":                banners.Version,
-    "version":          banners.Version,
+        // Set commands
+        {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
+        {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-    "s":                utils.Sleep,
-    "sleep":            utils.Sleep,
+        // Other commands
+        {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
+        {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
+        {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
+        {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
+        {[]string{"banner"}, banners.RandomBanners},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
+        {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-    "c":                utils.ClearScreen,
-    "clear":            utils.ClearScreen,
-    "clear screen":      utils.ClearScreen,
-    "screen clear":     utils.ClearScreen,
+        // Setup commands
+        {[]string{"info"}, menus.HelpInfoPhishers},
+        {[]string{"m", "menu"}, menus.MenuSeven},
+        {[]string{"option", "options", "show option", "show options"}, menus.PhishersOptions},
+        {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListPhishersFunctions},
 
-    "o":                utils.ListJunks,
-    "junks":            utils.ListJunks,
-    "outputs":          utils.ListJunks,
-    "clear junks":      utils.ClearJunks,
-    "clear outputs":    utils.ClearJunks,
+        // Commands executions
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run gophish", "use gophish", "exec gophish", "start gophish", "launch gophish", "exploit gophish", "execute gophish"}, func() { GoPhish() }},
+        {[]string{"? 1", "info 1", "help 1", "gophish", "info gophish", "help gophish"}, menus.HelpInfoGoPhish},
 
-    "logs":             subprocess.LogHistory,
-    "history":          subprocess.LogHistory,
-    "clear logs":       subprocess.ClearHistory,
-    "clear history":    subprocess.ClearHistory,
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run goodginx", "use goodginx", "exec goodginx", "start goodginx", "launch goodginx", "exploit goodginx", "execute goodginx"}, func() { GoodGinx() }},
+        {[]string{"? 2", "info 2", "help 2", "goodginx", "info goodginx", "help goodginx"}, menus.HelpInfoGoodGinx},
 
-    "? run":            menus.HelpInfoRun,
-    "h run":            menus.HelpInfoRun,
-    "info run":         menus.HelpInfoRun,
-    "help run":         menus.HelpInfoRun,
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run zphisher", "use zphisher", "exec zphisher", "start zphisher", "launch zphisher", "exploit zphisher", "execute zphisher"}, func() { ZPhisher() }},
+        {[]string{"? 3", "info 3", "help 3", "zphisher", "info zphisher", "help zphisher"}, menus.HelpInfoZPhisher},
 
-    "use":              menus.HelpInfoUse,
-    "? use":            menus.HelpInfoUse,
-    "h use":            menus.HelpInfoUse,
-    "info use":         menus.HelpInfoUse,
-    "help use":         menus.HelpInfoUse,
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run blackeye", "use blackeye", "exec blackeye", "start blackeye", "launch blackeye", "exploit blackeye", "execute blackeye"}, func() { BlackEye() }},
+        {[]string{"? 4", "info 4", "help 4", "blackeye", "info blackeye", "help blackeye"}, menus.HelpInfoBlackEye},
 
-    "? exec":           menus.HelpInfoRun,
-    "h exec":           menus.HelpInfoRun,
-    "info exec":        menus.HelpInfoRun,
-    "help exec":        menus.HelpInfoRun,
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run advphisher", "use advphisher", "exec advphisher", "start advphisher", "launch advphisher", "exploit advphisher", "execute advphisher"}, func() { AdvPhisher() }},
+        {[]string{"? 5", "info 5", "help 5", "advphisher", "info advphisher", "help advphisher"}, menus.HelpInfoAdvPhisher},
 
-    "? start":          menus.HelpInfoStart,
-    "h start":          menus.HelpInfoStart,
-    "info start":       menus.HelpInfoStart,
-    "help start":       menus.HelpInfoStart,
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run darkphish", "use darkphish", "exec darkphish", "start darkphish", "launch darkphish", "exploit darkphish", "execute darkphish"}, func() { DarkPhish() }},
+        {[]string{"? 6", "info 6", "help 6", "darkphish", "info darkphish", "help darkphish"}, menus.HelpInfoDarkPhish},
 
-    "? launch":         menus.HelpInfoRun,
-    "h launch":         menus.HelpInfoRun,
-    "info launch":      menus.HelpInfoRun,
-    "help launch":      menus.HelpInfoRun,
-    "? exploit":        menus.HelpInfoRun,
-    "h exploit":        menus.HelpInfoRun,
-    "info exploit":     menus.HelpInfoRun,
-    "help exploit":     menus.HelpInfoRun,
-    "? execute":        menus.HelpInfoRun,
-    "h execute":        menus.HelpInfoRun,
-    "info execute":     menus.HelpInfoRun,
-    "help execute":     menus.HelpInfoRun,
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run shellphish", "use shellphish", "exec shellphish", "start shellphish", "launch shellphish", "exploit shellphish", "execute shellphish"}, func() { ShellPhish() }},
+        {[]string{"? 7", "info 7", "help 7", "shellphish", "info shellphish", "help shellphish"}, menus.HelpInfoShellPhish},
 
-    "set":              menus.HelpInfoSet,
-    "h set":            menus.HelpInfoSet,
-    "info set":         menus.HelpInfoSet,
-    "help set":         menus.HelpInfoSet,
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run setoolkit", "use setoolkit", "exec setoolkit", "start setoolkit", "launch setoolkit", "exploit setoolkit", "execute setoolkit"}, func() { SetoolKit() }},
+        {[]string{"? 8", "info 8", "help 8", "setoolkit", "info setoolkit", "help setoolkit"}, menus.HelpInfoSetoolKit},
 
-    "tips":             menus.HelpInfoTips,
-    "h tips":           menus.HelpInfoTips,
-    "? tips":           menus.HelpInfoTips,
-    "info tips":        menus.HelpInfoTips,
-    "help tips":        menus.HelpInfoTips,
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run thc", "use thc", "exec thc", "start thc", "launch thc", "exploit thc", "execute thc"}, func() { Thc() }},
+        {[]string{"? 9", "info 9", "help 9", "thc", "info thc", "help thc"}, menus.HelpInfoThc},
 
-    "show":             menus.HelpInfoShow,
-    "? show":           menus.HelpInfoShow,
-    "h show":           menus.HelpInfoShow,
-    "info show":        menus.HelpInfoShow,
-    "help show":        menus.HelpInfoShow,
-
-    "info list":        menus.HelpInfoList,
-    "help list":        menus.HelpInfoList,
-    "use list":         menus.HelpInfoList,
-    "list":             menus.HelpInfoList,
-
-    "h option":         menus.HelpInfOptions,
-    "? option":         menus.HelpInfOptions,
-    "h options":        menus.HelpInfOptions,
-    "? options":        menus.HelpInfOptions,
-    "info option":      menus.HelpInfOptions,
-    "help option":      menus.HelpInfOptions,
-    "info options":     menus.HelpInfOptions,
-    "help options":     menus.HelpInfOptions,
-
-    "banner":           banners.RandomBanners,
-    "g":                utils.BrowseTutarilas,
-    "t":                utils.BrowseTutarilas,
-    "guide":            utils.BrowseTutarilas,
-    "tutarial":         utils.BrowseTutarilas,
-    "h":                menus.HelpInfoMenuZero,
-    "?":                menus.HelpInfoMenuZero,
-    "00":               menus.HelpInfoMenuZero,
-    "help":             menus.HelpInfoMenuZero,
-    "f":                menus.HelpInfoFeatures,
-    "use f":            menus.HelpInfoFeatures,
-    "features":         menus.HelpInfoFeatures,
-    "use features":     menus.HelpInfoFeatures,
-
-    //Chameleons//
-    "info":             menus.HelpInfoPhishers,
-
-    "m":                menus.MenuSeven,
-    "menu":             menus.MenuSeven,
-
-    "option":           menus.HelpInfOptions,
-    "options":          menus.HelpInfOptions,
-    "show option":      menus.HelpInfOptions,
-    "show options":     menus.HelpInfOptions,
-
-    "show all":         menus.ListPhishersFunctions,
-    "list all":         menus.ListPhishersFunctions,
-
-    "func":             menus.ListPhishersFunctions,
-    "funcs":            menus.ListPhishersFunctions,
-    "functions":        menus.ListPhishersFunctions,
-    "show func":        menus.ListPhishersFunctions,
-    "list funcs":       menus.ListPhishersFunctions,
-    "show funcs":       menus.ListPhishersFunctions,
-    "show function":    menus.ListPhishersFunctions,
-    "list function":    menus.ListPhishersFunctions,
-    "list functions":   menus.ListPhishersFunctions,
-    "show functions":   menus.ListPhishersFunctions,
-
-    "module":           menus.ListPhishersFunctions,
-    "modules":          menus.ListPhishersFunctions,
-    "list module":      menus.ListPhishersFunctions,
-    "show module":      menus.ListPhishersFunctions,
-    "list modules":     menus.ListPhishersFunctions,
-    "show modules":     menus.ListPhishersFunctions,
-
-
-    "1":                    func() {GoPhish()},
-    "run 1":                func() {GoPhish()},
-    "use 1":                func() {GoPhish()},
-    "exec 1":               func() {GoPhish()},
-    "start 1":              func() {GoPhish()},
-    "launch 1":             func() {GoPhish()},
-    "exploit 1":            func() {GoPhish()},
-    "execute 1":            func() {GoPhish()},
-    "run gophish":            func() {GoPhish()},
-    "use gophish":            func() {GoPhish()},
-    "exec gophish":           func() {GoPhish()},
-    "start gophish":          func() {GoPhish()},
-    "launch gophish":         func() {GoPhish()},
-    "exploit gophish":        func() {GoPhish()},
-    "execute gophish":        func() {GoPhish()},
-
-    "? 1":                  menus.HelpInfoGoPhish,
-    "info 1":               menus.HelpInfoGoPhish,
-    "help 1":               menus.HelpInfoGoPhish,
-    "gophish":                menus.HelpInfoGoPhish,
-    "info gophish":           menus.HelpInfoGoPhish,
-    "help gophish":           menus.HelpInfoGoPhish,
-
-    "2":                    func() {GoodGinx()},
-    "run 2":                func() {GoodGinx()},
-    "use 2":                func() {GoodGinx()},
-    "exec 2":               func() {GoodGinx()},
-    "start 2":              func() {GoodGinx()},
-    "launch 2":             func() {GoodGinx()},
-    "exploit 2":            func() {GoodGinx()},
-    "execute 2":            func() {GoodGinx()},
-    "run goodginx":           func() {GoodGinx()},
-    "use goodginx":           func() {GoodGinx()},
-    "exec goodginx":          func() {GoodGinx()},
-    "start goodginx":         func() {GoodGinx()},
-    "launch goodginx":        func() {GoodGinx()},
-    "exploit goodginx":       func() {GoodGinx()},
-    "execute goodginx":       func() {GoodGinx()},
-
-    "? 2":                  menus.HelpInfoGoodGinx,
-    "info 2":               menus.HelpInfoGoodGinx,
-    "help 2":               menus.HelpInfoGoodGinx,
-    "goodginx":               menus.HelpInfoGoodGinx,
-    "info goodginx":          menus.HelpInfoGoodGinx,
-    "help goodginx":          menus.HelpInfoGoodGinx,
-
-    "3":                    func() {ZPhisher()},
-    "run 3":                func() {ZPhisher()},
-    "use 3":                func() {ZPhisher()},
-    "exec 3":               func() {ZPhisher()},
-    "start 3":              func() {ZPhisher()},
-    "launch 3":             func() {ZPhisher()},
-    "exploit 3":            func() {ZPhisher()},
-    "execute 3":            func() {ZPhisher()},
-    "run zphisher":         func() {ZPhisher()},
-    "use zphisher":         func() {ZPhisher()},
-    "exec zphisher":        func() {ZPhisher()},
-    "start zphisher":       func() {ZPhisher()},
-    "launch zphisher":      func() {ZPhisher()},
-    "exploit zphisher":     func() {ZPhisher()},
-    "execute zphisher":     func() {ZPhisher()},
-
-    "? 3":                  menus.HelpInfoZPhisher,
-    "info 3":               menus.HelpInfoZPhisher,
-    "help 3":               menus.HelpInfoZPhisher,
-    "zphisher":             menus.HelpInfoZPhisher,
-    "info zphisher":        menus.HelpInfoZPhisher,
-    "help zphisher":        menus.HelpInfoZPhisher,
-
-    "4":                    func() {BlackEye()},
-    "run 4":                func() {BlackEye()},
-    "use 4":                func() {BlackEye()},
-    "exec 4":               func() {BlackEye()},
-    "start 4":              func() {BlackEye()},
-    "launch 4":             func() {BlackEye()},
-    "exploit 4":            func() {BlackEye()},
-    "execute 4":            func() {BlackEye()},
-    "run blackeye":         func() {BlackEye()},
-    "use blackeye":         func() {BlackEye()},
-    "exec blackeye":        func() {BlackEye()},
-    "start blackeye":       func() {BlackEye()},
-    "launch blackeye":      func() {BlackEye()},
-    "exploit blackeye":     func() {BlackEye()},
-    "execute blackeye":     func() {BlackEye()},
-
-    "? 4":                  menus.HelpInfoBlackEye,
-    "info 4":               menus.HelpInfoBlackEye,
-    "help 4":               menus.HelpInfoBlackEye,
-    "blackeye":             menus.HelpInfoBlackEye,
-    "info blackeye":        menus.HelpInfoBlackEye,
-    "help blackeye":        menus.HelpInfoBlackEye,
-
-    "5":                    func() {AdvPhisher()},
-    "run 5":                func() {AdvPhisher()},
-    "use 5":                func() {AdvPhisher()},
-    "exec 5":               func() {AdvPhisher()},
-    "start 5":              func() {AdvPhisher()},
-    "launch 5":             func() {AdvPhisher()},
-    "exploit 5":            func() {AdvPhisher()},
-    "execute 5":            func() {AdvPhisher()},
-    "run advphisher":        func() {AdvPhisher()},
-    "use advphisher":        func() {AdvPhisher()},
-    "exec advphisher":       func() {AdvPhisher()},
-    "start advphisher":      func() {AdvPhisher()},
-    "launch advphisher":     func() {AdvPhisher()},
-    "exploit advphisher":    func() {AdvPhisher()},
-    "execute advphisher":    func() {AdvPhisher()},
-
-    "? 5":                  menus.HelpInfoAdvPhisher,
-    "info 5":               menus.HelpInfoAdvPhisher,
-    "help 5":               menus.HelpInfoAdvPhisher,
-    "advnphish":            menus.HelpInfoAdvPhisher,
-    "info advnphish":       menus.HelpInfoAdvPhisher,
-    "help advnphish":       menus.HelpInfoAdvPhisher,
-
-    "6":                    func() {DarkPhish()},
-    "run 6":                func() {DarkPhish()},
-    "use 6":                func() {DarkPhish()},
-    "exec 6":               func() {DarkPhish()},
-    "start 6":              func() {DarkPhish()},
-    "launch 6":             func() {DarkPhish()},
-    "exploit 6":            func() {DarkPhish()},
-    "execute 6":            func() {DarkPhish()},
-    "run darkphish":        func() {DarkPhish()},
-    "use darkphish":        func() {DarkPhish()},
-    "exec darkphish":       func() {DarkPhish()},
-    "start darkphish":      func() {DarkPhish()},
-    "launch darkphish":     func() {DarkPhish()},
-    "exploit darkphish":    func() {DarkPhish()},
-    "execute darkphish":    func() {DarkPhish()},
-
-    "? 6":                  menus.HelpInfoDarkPhish,
-    "info 6":               menus.HelpInfoDarkPhish,
-    "help 6":               menus.HelpInfoDarkPhish,
-    "darkphish":            menus.HelpInfoDarkPhish,
-    "info darkphish":       menus.HelpInfoDarkPhish,
-    "help darkphish":       menus.HelpInfoDarkPhish,
-
-    "7":                    func() {ShellPhish()},
-    "run 7":                func() {ShellPhish()},
-    "use 7":                func() {ShellPhish()},
-    "exec 7":               func() {ShellPhish()},
-    "start 7":              func() {ShellPhish()},
-    "launch 7":             func() {ShellPhish()},
-    "exploit 7":            func() {ShellPhish()},
-    "execute 7":            func() {ShellPhish()},
-    "run shellphish":        func() {ShellPhish()},
-    "use shellphish":        func() {ShellPhish()},
-    "exec shellphish":       func() {ShellPhish()},
-    "start shellphish":      func() {ShellPhish()},
-    "launch shellphish":     func() {ShellPhish()},
-    "exploit shellphish":    func() {ShellPhish()},
-    "execute shellphish":    func() {ShellPhish()},
-
-    "? 7":                  menus.HelpInfoShellPhish,
-    "info 7":               menus.HelpInfoShellPhish,
-    "help 7":               menus.HelpInfoShellPhish,
-    "shellphish":             menus.HelpInfoShellPhish,
-    "info shellphish":        menus.HelpInfoShellPhish,
-    "help shellphish":        menus.HelpInfoShellPhish,
-
-    "8":                    func() {SetoolKit()},
-    "run 8":                func() {SetoolKit()},
-    "use 8":                func() {SetoolKit()},
-    "exec 8":               func() {SetoolKit()},
-    "start 8":              func() {SetoolKit()},
-    "launch 8":             func() {SetoolKit()},
-    "exploit 8":            func() {SetoolKit()},
-    "execute 8":            func() {SetoolKit()},
-    "run setoolkit":       func() {SetoolKit()},
-    "use setoolkit":       func() {SetoolKit()},
-    "exec setoolkit":      func() {SetoolKit()},
-    "start setoolkit":     func() {SetoolKit()},
-    "launch setoolkit":    func() {SetoolKit()},
-    "exploit setoolkit":   func() {SetoolKit()},
-    "execute setoolkit":   func() {SetoolKit()},
-
-    "? 8":                  menus.HelpInfoSetoolKit,
-    "info 8":               menus.HelpInfoSetoolKit,
-    "help 8":               menus.HelpInfoSetoolKit,
-    "setoolkit":           menus.HelpInfoSetoolKit,
-    "info setoolkit":      menus.HelpInfoSetoolKit,
-    "help setoolkit":      menus.HelpInfoSetoolKit,
-
-    "9":                    func() {Thc()},
-    "run 9":                func() {Thc()},
-    "use 9":                func() {Thc()},
-    "exec 9":               func() {Thc()},
-    "start 9":              func() {Thc()},
-    "launch 9":             func() {Thc()},
-    "exploit 9":            func() {Thc()},
-    "execute 9":            func() {Thc()},
-    "run thc":      func() {Thc()},
-    "use thc":      func() {Thc()},
-    "exec thc":     func() {Thc()},
-    "start thc":    func() {Thc()},
-    "launch thc":   func() {Thc()},
-    "exploit thc":  func() {Thc()},
-    "execute thc":  func() {Thc()},
-
-    "? 9":                  menus.HelpInfoThc,
-    "info 9":               menus.HelpInfoThc,
-    "help 9":               menus.HelpInfoThc,
-    "thc":              menus.HelpInfoThc,
-    "info thc":         menus.HelpInfoThc,
-    "help thc":         menus.HelpInfoThc,
-
-    "99":                   scriptures.ScriptureNarators,
-    "run 99":               scriptures.ScriptureNarators,
-    "use 99":               scriptures.ScriptureNarators,
-    "exec 99":              scriptures.ScriptureNarators,
-    "start 99":             scriptures.ScriptureNarators,
-    "launch 99":            scriptures.ScriptureNarators,
-    "exploit 99":           scriptures.ScriptureNarators,
-    "execute 99":           scriptures.ScriptureNarators,
-    "run verses":           scriptures.ScriptureNarators,
-    "use verses":           scriptures.ScriptureNarators,
-    "exec verses":          scriptures.ScriptureNarators,
-    "start verses":         scriptures.ScriptureNarators,
-    "launch verses":        scriptures.ScriptureNarators,
-    "exploit verses":       scriptures.ScriptureNarators,
-    "execute verses":       scriptures.ScriptureNarators,
-
-    "? 99":                 menus.HelpInfoVerses,
-    "verses":               menus.HelpInfoVerses,
-    "info 99":              menus.HelpInfoVerses,
-    "help 99":              menus.HelpInfoVerses,
-    "info verses":          menus.HelpInfoVerses,
-    "help verses":          menus.HelpInfoVerses,
-
-
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
-    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
-        action()
-        return true
+
+    cmdLower := strings.ToLower(cmd)
+    for _, group := range commandGroups {
+        for _, name := range group.names {
+            if name == cmdLower {
+                group.action()
+                return true
+            }
+        }
     }
     return false
 }
@@ -605,7 +302,7 @@ func ShellPhish() {
 }
 
 func DarkPhish() {
-    subprocess.Popen(`cd %s/phishers/DarkPhish/; python3 dark-phish.py`, ToolsDir)
+    subprocess.Popen(`cd %s/phishers/darkphish/; python3 dark-phish.py`, ToolsDir)
 }
 
 func AdvPhisher() {

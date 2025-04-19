@@ -42,7 +42,7 @@ type stringMatcher struct {
 
 func WebsitesPentest() {
     for {
-        fmt.Printf("%s%safr3%s websites(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%safr3%s websites(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -422,14 +422,14 @@ func executeCommand(cmd string) bool {
     "info bounty":         menus.HelpInfoAutoScan,
     "help bounty":         menus.HelpInfoAutoScan,
 
-    "99":                   scriptures.ScriptureNarators,
-    "run 99":               scriptures.ScriptureNarators,
-    "use 99":               scriptures.ScriptureNarators,
-    "exec 99":              scriptures.ScriptureNarators,
-    "start 99":             scriptures.ScriptureNarators,
-    "launch 99":            scriptures.ScriptureNarators,
-    "exploit 99":           scriptures.ScriptureNarators,
-    "execute 99":           scriptures.ScriptureNarators,
+    "10":                   scriptures.ScriptureNarators,
+    "run 10":               scriptures.ScriptureNarators,
+    "use 10":               scriptures.ScriptureNarators,
+    "exec 10":              scriptures.ScriptureNarators,
+    "start 10":             scriptures.ScriptureNarators,
+    "launch 10":            scriptures.ScriptureNarators,
+    "exploit 10":           scriptures.ScriptureNarators,
+    "execute 10":           scriptures.ScriptureNarators,
     "run verses":           scriptures.ScriptureNarators,
     "use verses":           scriptures.ScriptureNarators,
     "exec verses":          scriptures.ScriptureNarators,
@@ -438,10 +438,10 @@ func executeCommand(cmd string) bool {
     "exploit verses":       scriptures.ScriptureNarators,
     "execute verses":       scriptures.ScriptureNarators,
 
-    "? 99":                 menus.HelpInfoVerses,
+    "? 10":                 menus.HelpInfoVerses,
     "verses":               menus.HelpInfoVerses,
-    "info 99":              menus.HelpInfoVerses,
-    "help 99":              menus.HelpInfoVerses,
+    "info 10":              menus.HelpInfoVerses,
+    "help 10":              menus.HelpInfoVerses,
     "info verses":          menus.HelpInfoVerses,
     "help verses":          menus.HelpInfoVerses,
 

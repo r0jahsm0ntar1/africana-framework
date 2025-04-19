@@ -43,7 +43,7 @@ type InterfaceInfo struct {
 type Spinner struct {
     mu         sync.Mutex
     active     bool
-    done       chan struct{}
+    stopChan   chan struct{}
     wg         sync.WaitGroup
     spinChars  []string
     baseText   string
@@ -51,11 +51,10 @@ type Spinner struct {
     speed      time.Duration
     step       int
     writer     io.Writer
-    taskDone   chan struct{}
+    taskWg     sync.WaitGroup
 }
 
 type Option func(*Spinner)
-
 
 // SpinnerStyles contains predefined spinner animation styles
 var SpinnerStyles = map[string][]string{
@@ -137,6 +136,9 @@ func toUpper(r rune) rune {
     if r >= 'a' && r <= 'z' {
         return r - 32
     }
+    if r >= 'A' && r <= 'Z' {
+        return r + 32
+    }
     return r
 }
 
@@ -144,16 +146,19 @@ func toLower(r rune) rune {
     if r >= 'A' && r <= 'Z' {
         return r + 32
     }
+    if r >= 'a' && r <= 'z' {
+        return r - 32
+    }
     return r
 }
 
 func New(options ...Option) *Spinner {
     s := &Spinner{
         spinChars:  SpinnerStyles["classic"],
-        baseText:   "Processing ",
+        baseText:   "[+] Starting the africana framework console ...",
         textEffect: TextEffects["plain"],
-        speed:      100 * time.Millisecond,
-        done:       make(chan struct{}),
+        speed:      90 * time.Millisecond,
+        stopChan:   make(chan struct{}),
         writer:     os.Stdout,
     }
 
@@ -200,42 +205,49 @@ func WithWriter(w io.Writer) Option {
 
 func (s *Spinner) Start() {
     s.mu.Lock()
+    defer s.mu.Unlock()
+
     if s.active {
-        s.mu.Unlock()
         return
     }
+
     s.active = true
-    s.mu.Unlock()
+    s.stopChan = make(chan struct{})
 
     s.wg.Add(1)
-    go func() {
-        defer s.wg.Done()
-        charIdx := 0
-        letterPos := 0
+    go s.spin()
+}
 
-        for {
-            select {
-            case <-s.done:
-                fmt.Fprintf(s.writer, "\r%-60s\n", "")
-                return
-            default:
-                s.mu.Lock()
-                spinChar := s.spinChars[charIdx%len(s.spinChars)]
-                displayText := s.textEffect(s.baseText, letterPos, s.step)
-                displayMsg := fmt.Sprintf("\r%s%s", displayText, spinChar)
-                s.mu.Unlock()
+func (s *Spinner) spin() {
+    defer s.wg.Done()
 
-                fmt.Fprint(s.writer, displayMsg)
-                charIdx++
-                s.step++
+    charIdx := 0
+    letterPos := 0
+    ticker := time.NewTicker(s.speed)
+    defer ticker.Stop()
 
-                if charIdx%1 == 0 {
-                    letterPos = (letterPos + 1) % utf8.RuneCountInString(s.baseText)
-                }
-                time.Sleep(s.speed)
+    for {
+        select {
+        case <-s.stopChan:
+            // Clear the line before exiting
+            fmt.Fprint(s.writer, "\r\033[K")
+            return
+        case <-ticker.C:
+            s.mu.Lock()
+            spinChar := s.spinChars[charIdx%len(s.spinChars)]
+            displayText := s.textEffect(s.baseText, letterPos, s.step)
+            displayMsg := fmt.Sprintf("\r%s %s", displayText, spinChar)
+            s.mu.Unlock()
+
+            fmt.Fprint(s.writer, displayMsg)
+            charIdx++
+            s.step++
+
+            if charIdx%1 == 0 {
+                letterPos = (letterPos + 1) % utf8.RuneCountInString(s.baseText)
             }
         }
-    }()
+    }
 }
 
 func (s *Spinner) StartWithTask(task func()) {
@@ -244,46 +256,26 @@ func (s *Spinner) StartWithTask(task func()) {
         s.mu.Unlock()
         return
     }
+
     s.active = true
-    s.taskDone = make(chan struct{})
+    s.stopChan = make(chan struct{})
     s.mu.Unlock()
 
+    // Start the spinner
     s.wg.Add(1)
+    go s.spin()
+
+    // Run the task in a separate goroutine and track its completion
+    s.taskWg.Add(1)
     go func() {
-        defer s.wg.Done()
-        charIdx := 0
-        letterPos := 0
-
-        for {
-            select {
-            case <-s.done:
-                fmt.Fprintf(s.writer, "\r%-60s\n", "")
-                return
-            case <-s.taskDone:
-                fmt.Fprintf(s.writer, "\r%-60s\n", "")
-                return
-            default:
-                s.mu.Lock()
-                spinChar := s.spinChars[charIdx%len(s.spinChars)]
-                displayText := s.textEffect(s.baseText, letterPos, s.step)
-                displayMsg := fmt.Sprintf("\r%s%s", displayText, spinChar)
-                s.mu.Unlock()
-
-                fmt.Fprint(s.writer, displayMsg)
-                charIdx++
-                s.step++
-
-                if charIdx%1 == 0 {
-                    letterPos = (letterPos + 1) % utf8.RuneCountInString(s.baseText)
-                }
-                time.Sleep(s.speed)
-            }
-        }
+        defer s.taskWg.Done()
+        task()
     }()
 
+    // Start a goroutine to stop the spinner when the task completes
     go func() {
-        task()
-        close(s.taskDone)
+        s.taskWg.Wait()
+        s.Stop()
     }()
 }
 
@@ -292,7 +284,7 @@ func (s *Spinner) Stop() {
     defer s.mu.Unlock()
 
     if s.active {
-        close(s.done)
+        close(s.stopChan)
         s.wg.Wait()
         s.active = false
     }

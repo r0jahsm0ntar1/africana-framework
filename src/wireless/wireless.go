@@ -49,7 +49,7 @@ type stringMatcher struct {
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%safr3%s wireless(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%safr3%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -109,12 +109,9 @@ func executeCommand(cmd string) bool {
         {[]string{"info"}, menus.HelpInfoWireless},
         {[]string{"m", "menu"}, menus.MenuFive},
         {[]string{"option", "options", "show option", "show options"}, menus.WirelessOptions},
-        {[]string{"show all", "list all"}, menus.ListWirelessFunctions},
-        {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions"}, menus.ListWirelessFunctions},
-        {[]string{"module", "modules", "list module", "show module", "list modules", "show modules"}, menus.ListWirelessFunctions},
-        {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
+        {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWirelessFunctions},
 
-        // Distro commands (install)
+        // Commands executions
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run wifite", "use wifite", "exec wifite", "start wifite", "launch wifite", "exploit wifite", "execute wifite"}, func() { WirelessPenFunctions("wifite") }},
         {[]string{"? 1", "info 1", "help 1", "wifite", "info wifite", "help wifite"}, menus.HelpInfoWifite},
 
@@ -142,8 +139,8 @@ func executeCommand(cmd string) bool {
         {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run upsent3", "use upsent3", "exec upsent3", "start upsent3", "launch upsent3", "exploit upsent3", "execute upsent3"}, func() { WirelessPenFunctions("upsent3", "install") }},
         {[]string{"? 9", "info 9", "help 9", "upsent3", "info upsent3", "help upsent3"}, menus.UpsentTools},
 
-        {[]string{"99", "run 99", "use 99", "exec 99", "start 99", "launch 99", "exploit 99", "execute 99", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
-        {[]string{"? 99", "verses", "info 99", "help 99", "info verses", "help verses"}, menus.HelpInfoVerses},
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
 
     cmdLower := strings.ToLower(cmd)

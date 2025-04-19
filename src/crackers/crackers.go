@@ -4,11 +4,13 @@ import(
     "os"
     "fmt"
     "utils"
+    "credits"
     "bufio"
     "menus"
     "banners"
     "strings"
     "bcolors"
+    "scriptures"
     "subprocess"
 )
 
@@ -36,7 +38,7 @@ type stringMatcher struct {
 
 func CrackersPentest() {
     for {
-        fmt.Printf("%s%safr3%s crackers(%ssrc/pentest_%s%s%s%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightRed, bcolors.BrightYellow, bcolors.Italic, Function, bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%safr3%s crackers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -66,149 +68,78 @@ func CrackersPentest() {
 }
 
 func executeCommand(cmd string) bool {
-    commandMap := map[string]func(){
+    commandGroups := []stringMatcher{
+        // Info/Help commands
+        {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
+        {[]string{"v", "version"}, banners.Version},
+        {[]string{"s", "sleep"}, utils.Sleep},
+        {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
+        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
+        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
 
-    "? info":               menus.HelpInfo,
-    "h info":               menus.HelpInfo,
-    "help info":            menus.HelpInfo,
+        // Run/exec commands
+        {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-    "v":                banners.Version,
-    "version":          banners.Version,
+        // Set commands
+        {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
+        {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-    "s":                utils.Sleep,
-    "sleep":            utils.Sleep,
+        // Other commands
+        {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
+        {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
+        {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
+        {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
+        {[]string{"banner"}, banners.RandomBanners},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
+        {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-    "c":                utils.ClearScreen,
-    "clear":            utils.ClearScreen,
-    "clear screen":      utils.ClearScreen,
-    "screen clear":     utils.ClearScreen,
+        // Setup commands
+        {[]string{"info"}, menus.HelpInfoCrackers},
+        {[]string{"m", "menu"}, menus.MenuSix},
+        {[]string{"option", "options", "show option", "show options"}, menus.CrackersOptions},
+        {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListCrackersFunctions},
 
-    "o":                utils.ListJunks,
-    "junks":            utils.ListJunks,
-    "outputs":          utils.ListJunks,
-    "clear junks":      utils.ClearJunks,
-    "clear outputs":    utils.ClearJunks,
+        // Commands executions
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run ssh", "use ssh", "exec ssh", "start ssh", "launch ssh", "exploit ssh", "execute ssh"}, func() { HydraSsh() }},
+        {[]string{"? 1", "info 1", "help 1", "ssh", "info ssh", "help ssh"}, menus.CrackersOptions},
 
-    "logs":             subprocess.LogHistory,
-    "history":          subprocess.LogHistory,
-    "clear logs":       subprocess.ClearHistory,
-    "clear history":    subprocess.ClearHistory,
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run ftp", "use ftp", "exec ftp", "start ftp", "launch ftp", "exploit ftp", "execute ftp"}, func() { HydraFtp() }},
+        {[]string{"? 2", "info 2", "help 2", "ftp", "info ftp", "help ftp"}, menus.CrackersOptions},
 
-    "? run":            menus.HelpInfoRun,
-    "h run":            menus.HelpInfoRun,
-    "info run":         menus.HelpInfoRun,
-    "help run":         menus.HelpInfoRun,
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() { HydraSmb() }},
+        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.CrackersOptions},
 
-    "use":              menus.HelpInfoUse,
-    "? use":            menus.HelpInfoUse,
-    "h use":            menus.HelpInfoUse,
-    "info use":         menus.HelpInfoUse,
-    "help use":         menus.HelpInfoUse,
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() { menus.MenuZero() }},
+        {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.CrackersOptions},
 
-    "? exec":           menus.HelpInfoRun,
-    "h exec":           menus.HelpInfoRun,
-    "info exec":        menus.HelpInfoRun,
-    "help exec":        menus.HelpInfoRun,
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() { menus.MenuZero() }},
+        {[]string{"? 5", "info 5", "help 5", "wireless", "info wireless", "help wireless"}, menus.CrackersOptions},
 
-    "? start":          menus.HelpInfoStart,
-    "h start":          menus.HelpInfoStart,
-    "info start":       menus.HelpInfoStart,
-    "help start":       menus.HelpInfoStart,
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() { menus.MenuZero() }},
+        {[]string{"? 6", "info 6", "help 6", "crackers", "info crackers", "help crackers"}, menus.CrackersOptions},
 
-    "? launch":         menus.HelpInfoRun,
-    "h launch":         menus.HelpInfoRun,
-    "info launch":      menus.HelpInfoRun,
-    "help launch":      menus.HelpInfoRun,
-    "? exploit":        menus.HelpInfoRun,
-    "h exploit":        menus.HelpInfoRun,
-    "info exploit":     menus.HelpInfoRun,
-    "help exploit":     menus.HelpInfoRun,
-    "? execute":        menus.HelpInfoRun,
-    "h execute":        menus.HelpInfoRun,
-    "info execute":     menus.HelpInfoRun,
-    "help execute":     menus.HelpInfoRun,
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() { menus.MenuZero() }},
+        {[]string{"? 7", "info 7", "help 7", "phishers", "info phishers", "help phishers"}, menus.CrackersOptions},
 
-    "set":              menus.HelpInfoSet,
-    "h set":            menus.HelpInfoSet,
-    "info set":         menus.HelpInfoSet,
-    "help set":         menus.HelpInfoSet,
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() { menus.MenuZero() }},
+        {[]string{"? 8", "info 8", "help 8", "websites", "info websites", "help websites"}, menus.CrackersOptions},
 
-    "tips":             menus.HelpInfoTips,
-    "h tips":           menus.HelpInfoTips,
-    "? tips":           menus.HelpInfoTips,
-    "info tips":        menus.HelpInfoTips,
-    "help tips":        menus.HelpInfoTips,
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() { credits.Creditors() }},
+        {[]string{"? 9", "info 9", "help 9", "credits", "info credits", "help credits"}, menus.CrackersOptions},
 
-    "show":             menus.HelpInfoShow,
-    "? show":           menus.HelpInfoShow,
-    "h show":           menus.HelpInfoShow,
-    "info show":        menus.HelpInfoShow,
-    "help show":        menus.HelpInfoShow,
-
-    "info list":        menus.HelpInfoList,
-    "help list":        menus.HelpInfoList,
-    "use list":         menus.HelpInfoList,
-    "list":             menus.HelpInfoList,
-
-    "h option":         menus.HelpInfOptions,
-    "? option":         menus.HelpInfOptions,
-    "h options":        menus.HelpInfOptions,
-    "? options":        menus.HelpInfOptions,
-    "info option":      menus.HelpInfOptions,
-    "help option":      menus.HelpInfOptions,
-    "info options":     menus.HelpInfOptions,
-    "help options":     menus.HelpInfOptions,
-
-    "banner":           banners.RandomBanners,
-    "g":                utils.BrowseTutarilas,
-    "t":                utils.BrowseTutarilas,
-    "guide":            utils.BrowseTutarilas,
-    "tutarial":         utils.BrowseTutarilas,
-    "h":                menus.HelpInfoMenuZero,
-    "?":                menus.HelpInfoMenuZero,
-    "00":               menus.HelpInfoMenuZero,
-    "help":             menus.HelpInfoMenuZero,
-    "f":                menus.HelpInfoFeatures,
-    "use f":            menus.HelpInfoFeatures,
-    "features":         menus.HelpInfoFeatures,
-    "use features":     menus.HelpInfoFeatures,
-
-    //Chameleons//
-    "info":             menus.HelpInfoCrackers,
-
-    "m":                menus.MenuSix,
-    "menu":             menus.MenuSix,
-
-    "option":           menus.CrackersOptions,
-    "options":          menus.CrackersOptions,
-    "show option":      menus.CrackersOptions,
-    "show options":     menus.CrackersOptions,
-
-    "show all":         menus.ListCrackersFunctions,
-    "list all":         menus.ListCrackersFunctions,
-
-    "func":             menus.ListCrackersFunctions,
-    "funcs":            menus.ListCrackersFunctions,
-    "functions":        menus.ListCrackersFunctions,
-    "show func":        menus.ListCrackersFunctions,
-    "list funcs":       menus.ListCrackersFunctions,
-    "show funcs":       menus.ListCrackersFunctions,
-    "show function":    menus.ListCrackersFunctions,
-    "list function":    menus.ListCrackersFunctions,
-    "list functions":   menus.ListCrackersFunctions,
-    "show functions":   menus.ListCrackersFunctions,
-
-    "module":           menus.ListCrackersFunctions,
-    "modules":          menus.ListCrackersFunctions,
-    "list module":      menus.ListCrackersFunctions,
-    "show module":      menus.ListCrackersFunctions,
-    "list modules":     menus.ListCrackersFunctions,
-    "show modules":     menus.ListCrackersFunctions,
-
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
-    if action, exists := commandMap[strings.ToLower(cmd)]; exists {
-        action()
-        return true
+
+    cmdLower := strings.ToLower(cmd)
+    for _, group := range commandGroups {
+        for _, name := range group.names {
+            if name == cmdLower {
+                group.action()
+                return true
+            }
+        }
     }
     return false
 }
