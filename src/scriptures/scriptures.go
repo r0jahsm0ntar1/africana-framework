@@ -1027,8 +1027,21 @@ func CommandMents() {
 `, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
 }
 
+func TheLordsPrayer() {
+    fmt.Printf(`
+%s%s%sThe Lord's Prayer From (KJV). Matthew 6:9-13:%s%s%s
+
+Our Father which art in heaven, Hallowed be thy name.
+Thy kingdom come, Thy will be done in earth, as it is in heaven.
+Give us this day our daily bread.
+And forgive us our debts, as we forgive our debtors.
+And lead us not into temptation, but deliver us from evil:
+For thine is the kingdom, and the power, and the glory, for ever. Amen.
+`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
+}
+
 func ScriptureNarators() {
-    CommandMents()
+    CommandMents(); TheLordsPrayer()
     fmt.Printf(`%s%s%s
 Bible verse desktop (vrsoft.org). Copyright Public Domain. Language English.
 Scripture taken from the King James Version.%s
