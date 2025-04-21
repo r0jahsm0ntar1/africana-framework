@@ -439,6 +439,44 @@ func executeFunction() {
     africanaManual()
 }
 
+// Levenshtein distance function for fuzzy matching
+func levenshtein(a, b string) int {
+    la := len(a)
+    lb := len(b)
+    d := make([][]int, la+1)
+    for i := 0; i <= la; i++ {
+        d[i] = make([]int, lb+1)
+        d[i][0] = i
+    }
+    for j := 1; j <= lb; j++ {
+        d[0][j] = j
+    }
+    for i := 1; i <= la; i++ {
+        for j := 1; j <= lb; j++ {
+            cost := 0
+            if a[i-1] != b[j-1] {
+                cost = 1
+            }
+            d[i][j] = min(
+                d[i-1][j]+1,
+                d[i][j-1]+1,
+                d[i-1][j-1]+cost,
+            )
+        }
+    }
+    return d[la][lb]
+}
+
+func min(nums ...int) int {
+    m := nums[0]
+    for _, n := range nums {
+        if n < m {
+            m = n
+        }
+    }
+    return m
+}
+
 func africanaManual() {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
@@ -449,7 +487,7 @@ func africanaManual() {
 
     // Command mapping with both text and numeric support
     commands := map[string]func(){
-        // Text commands
+        // Text commands (raw names without spaces)
         "setups":   func() { setups.SetupsLauncher() },
         "torsocks": func() { securities.Torsocks() },
         "networks": func() { networks.NetworksPentest() },
@@ -471,7 +509,21 @@ func africanaManual() {
         "7": func() { phishers.PhishingPentest() },
         "8": func() { webattackers.WebsitesPentest() },
         "9": func() { credits.Creditors() },
-       "10": func() { scriptures.ScriptureNarators() }, // Bonus number
+        "99": func() { scriptures.ScriptureNarators() },
+    }
+
+    // Display names with spaces for formatting (only used for printing)
+    prettyNames := map[string]string{
+        "setups":   "  setups",
+        "torsocks": "torsocks",
+        "networks": "networks",
+        "exploits": "exploits",
+        "wireless": "wireless",
+        "crackers": "crackers",
+        "phishers": "phishers",
+        "websites": "websites",
+        "credits":  " credits",
+        "verses":   " verses",
     }
 
     // Create reverse mapping for error messages
@@ -485,15 +537,23 @@ func africanaManual() {
         "7":   "phishers",
         "8":   "websites",
         "9":   "credits",
-       "10":  "verses",
+        "99":  "verses",
+    }
+
+    // Create text command list for typo checking (raw names)
+    textCommands := []string{
+        "setups", "torsocks", "networks", "exploits", "wireless",
+        "crackers", "phishers", "websites", "credits", "verses",
     }
 
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        // Try to find if input was a number not in our map
+        // Check if input was a number not in our map
         if _, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %s is invalid. Valid numbers are:\n\n", bcolors.Yellow, bcolors.Endc, Function)
+            fmt.Printf("\n%s[!] %sNumber %s is invalid. Valid numbers are:\n", 
+                bcolors.Yellow, bcolors.Endc, Function)
+            
             // Print available number mappings
             nums := make([]int, 0, len(commandNames))
             for k := range commandNames {
@@ -502,14 +562,43 @@ func africanaManual() {
                 }
             }
             sort.Ints(nums)
-
+            
             for _, n := range nums {
                 key := strconv.Itoa(n)
-                fmt.Printf(" %s%s. %s%-3s %s> %s\n", bcolors.BrightBlue, key, bcolors.Yellow, commandNames[key], bcolors.Endc, getCommandDescription(commandNames[key]))
+                cmd := commandNames[key]
+                fmt.Printf("  %s%s. %s%-10s%s> %s\n",
+                    bcolors.BrightBlue, key,
+                    bcolors.BrightYellow, prettyNames[cmd],
+                    bcolors.Endc, getCommandDescription(cmd))
             }
-            fmt.Println()
         } else {
-            fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+            // Check if input was a text command with typo
+            foundSimilar := false
+            lowerInput := strings.ToLower(Function)
+            
+            for _, cmd := range textCommands {
+                lowerCmd := strings.ToLower(cmd)
+                if strings.HasPrefix(lowerCmd, lowerInput) || 
+                   strings.Contains(lowerCmd, lowerInput) ||
+                   levenshtein(lowerInput, lowerCmd) <= 2 {
+                    fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", 
+                        bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
+                    foundSimilar = true
+                    break
+                }
+            }
+
+            if !foundSimilar {
+                fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", 
+                    bcolors.Yellow, bcolors.Endc, Function)
+                
+                // Print available text commands with beautiful alignment
+                for _, cmd := range textCommands {
+                    fmt.Printf("  %s%-10s%s> %s\n",
+                        bcolors.BrightYellow, prettyNames[cmd],
+                        bcolors.Endc, getCommandDescription(cmd))
+                }
+            }
         }
     }
 }
@@ -517,17 +606,16 @@ func africanaManual() {
 // Helper function to get descriptions
 func getCommandDescription(cmd string) string {
     descriptions := map[string]string{
-
-        "setups": "Install, Update, Repair or Uninstall africana-framework",
-        "torsocks": "Configure the system for strictly tight anonymity",
-        "networks": "Start internal network attacks",
-        "exploits": "Generate undetectable R.A.Ts and launch C2s",
-        "wireless": "Wireless networks attack vectors",
-        "crackers": "Crack hashes and bruteforce services",
-        "phishers": "Perform advanced Phishing attacks",
-        "websites": "Launch Web penetration testing engines",
-        "credits": "Show developers and third party tools creators",
-        "verses": "Bible verses integration",
+        "setups":   "Install/Update framework components",
+        "torsocks": "Configure Tor and proxy settings",
+        "networks": "Network penetration testing tools",
+        "exploits": "Exploit development framework",
+        "wireless": "Wireless network attacks",
+        "crackers": "Password cracking utilities", 
+        "phishers": "Phishing campaign tools",
+        "websites": "Web application testing",
+        "credits":  "Developer credits and info",
+        "verses":   "Biblical scripture integration",
     }
     return descriptions[cmd]
 }
