@@ -10,6 +10,7 @@ import(
     "bytes"
     "os/exec"
     "bcolors"
+    "bufio"
     "strings"
     "runtime"
     "net/url"
@@ -33,6 +34,8 @@ var (
 
 )
 
+type Option func(*Spinner)
+
 type InterfaceInfo struct {
     Name        string
     HardwareAddr string
@@ -52,11 +55,9 @@ type Spinner struct {
     step       int
     writer     io.Writer
     taskWg     sync.WaitGroup
+    bufWriter  *bufio.Writer
 }
 
-type Option func(*Spinner)
-
-// SpinnerStyles contains predefined spinner animation styles
 var SpinnerStyles = map[string][]string{
     "classic":    {"|", "/", "-", "\\"},
     "dots":       {"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"},
@@ -73,21 +74,37 @@ var SpinnerStyles = map[string][]string{
     "fancy":      {"✦", "✧", "★", "✪", "✯", "✵", "✸", "✹"},
 }
 
-// TextEffects contains advanced text animation effects
+func toUpper(r rune) rune {
+    if r >= 'a' && r <= 'z' {
+        return r - 32
+    }
+    return r
+}
+
+func toLower(r rune) rune {
+    if r >= 'A' && r <= 'Z' {
+        return r + 32
+    }
+    return r
+}
+
+// Improved wave effect that preserves original case patterns
 var TextEffects = map[string]func(string, int, int) string{
-    "typewriter": func(text string, pos, _ int) string {
-        if pos >= len(text) {
-            return text
-        }
-        return text[:pos] + "█"
-    },
     "wave": func(text string, _, step int) string {
         runes := []rune(text)
         for i := range runes {
-            if (i+step)%4 == 0 {
-                runes[i] = toUpper(runes[i])
-            } else {
-                runes[i] = toLower(runes[i])
+            // Only modify characters that are letters
+            if (runes[i] >= 'a' && runes[i] <= 'z') || (runes[i] >= 'A' && runes[i] <= 'Z') {
+                // Alternate case based on position and step
+                if (i+step)%4 == 0 {
+                    if runes[i] >= 'a' && runes[i] <= 'z' {
+                        runes[i] = toUpper(runes[i])
+                    } // else leave uppercase as is
+                } else {
+                    if runes[i] >= 'A' && runes[i] <= 'Z' {
+                        runes[i] = toLower(runes[i])
+                    } // else leave lowercase as is
+                }
             }
         }
         return string(runes)
@@ -95,7 +112,14 @@ var TextEffects = map[string]func(string, int, int) string{
     "bounce": func(text string, pos, _ int) string {
         runes := []rune(text)
         if pos < len(runes) {
-            runes[pos] = toUpper(runes[pos])
+            // Only modify if it's a letter
+            if (runes[pos] >= 'a' && runes[pos] <= 'z') || (runes[pos] >= 'A' && runes[pos] <= 'Z') {
+                if runes[pos] >= 'a' && runes[pos] <= 'z' {
+                    runes[pos] = toUpper(runes[pos])
+                } else {
+                    runes[pos] = toLower(runes[pos])
+                }
+            }
         }
         return string(runes)
     },
@@ -120,6 +144,12 @@ var TextEffects = map[string]func(string, int, int) string{
         }
         return text[:visibleChars]
     },
+    "typewriter": func(text string, pos, _ int) string {
+        if pos >= len(text) {
+            return text
+        }
+        return text[:pos] + "█"
+    },
     "neon": func(text string, pos, _ int) string {
         runes := []rune(text)
         if pos < len(runes) {
@@ -130,26 +160,6 @@ var TextEffects = map[string]func(string, int, int) string{
     "plain": func(text string, _, _ int) string {
         return text
     },
-}
-
-func toUpper(r rune) rune {
-    if r >= 'a' && r <= 'z' {
-        return r - 32
-    }
-    if r >= 'A' && r <= 'Z' {
-        return r + 32
-    }
-    return r
-}
-
-func toLower(r rune) rune {
-    if r >= 'A' && r <= 'Z' {
-        return r + 32
-    }
-    if r >= 'a' && r <= 'z' {
-        return r - 32
-    }
-    return r
 }
 
 func New(options ...Option) *Spinner {
@@ -164,6 +174,12 @@ func New(options ...Option) *Spinner {
 
     for _, option := range options {
         option(s)
+    }
+
+    // Wrap the writer in a buffered writer if it's not already
+    if _, ok := s.writer.(*bufio.Writer); !ok {
+        s.bufWriter = bufio.NewWriter(s.writer)
+        s.writer = s.bufWriter
     }
 
     return s
@@ -229,8 +245,7 @@ func (s *Spinner) spin() {
     for {
         select {
         case <-s.stopChan:
-            // Clear the line before exiting
-            fmt.Fprint(s.writer, "\r\033[K")
+            s.clearLine()
             return
         case <-ticker.C:
             s.mu.Lock()
@@ -239,7 +254,10 @@ func (s *Spinner) spin() {
             displayMsg := fmt.Sprintf("\r%s %s", displayText, spinChar)
             s.mu.Unlock()
 
+            s.clearLine()
             fmt.Fprint(s.writer, displayMsg)
+            s.flush()
+
             charIdx++
             s.step++
 
@@ -261,20 +279,13 @@ func (s *Spinner) StartWithTask(task func()) {
     s.stopChan = make(chan struct{})
     s.mu.Unlock()
 
-    // Start the spinner
     s.wg.Add(1)
     go s.spin()
 
-    // Run the task in a separate goroutine and track its completion
     s.taskWg.Add(1)
     go func() {
         defer s.taskWg.Done()
         task()
-    }()
-
-    // Start a goroutine to stop the spinner when the task completes
-    go func() {
-        s.taskWg.Wait()
         s.Stop()
     }()
 }
@@ -283,10 +294,27 @@ func (s *Spinner) Stop() {
     s.mu.Lock()
     defer s.mu.Unlock()
 
-    if s.active {
-        close(s.stopChan)
-        s.wg.Wait()
-        s.active = false
+    if !s.active {
+        return
+    }
+
+    close(s.stopChan)
+    s.wg.Wait()
+    s.clearLine()
+    s.flush()
+    s.active = false
+}
+
+func (s *Spinner) clearLine() {
+    fmt.Fprint(s.writer, "\r\033[K")
+}
+
+func (s *Spinner) flush() {
+    if s.bufWriter != nil {
+        s.bufWriter.Flush()
+    }
+    if f, ok := s.writer.(interface{ Flush() error }); ok {
+        f.Flush()
     }
 }
 

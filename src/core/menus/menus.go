@@ -593,10 +593,10 @@ func HelpInfoExecute() {
 }
 
 func MainOptions() {
-	options := []string{
-		"  MODULE         none             yes       Select a module or function to interact with.",
-	}
-	generateOptions("main/africana_run.fn", options)
+    options := []string{
+        "  MODULE         none             yes       Select a module or function to interact with.",
+    }
+    generateOptions("main/africana_run.fn", options)
     info := ModuleHelpInfo{
         Example:          "    set module verses\n    run\n",
     }
@@ -635,6 +635,7 @@ func HelpInfoSetups() {
 func ListSetupsDistros() {
     fmt.Printf(`
 %sSupported Distros%s:
+--------- --------
 --------- -------
 
   # %sName     Description%s
@@ -687,9 +688,9 @@ func SetupsOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ------- -------  --------  -----------
-  distro         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
-  function       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
-  run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
+  DISTRO         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
+  FUNCTION       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
+  RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
 
 %sex. %s%susage%s:
 --  -----
@@ -716,7 +717,8 @@ func HelpInfoKali() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Kali-Linux
@@ -742,7 +744,8 @@ func HelpInfoArch() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Arch-Linux
@@ -768,7 +771,8 @@ func HelpInfoUbuntu() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Ubuntu-Linux
@@ -794,7 +798,8 @@ func HelpInfoMacos() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Macintosh
@@ -820,7 +825,8 @@ func HelpInfoWindows() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Windows
@@ -846,7 +852,8 @@ func HelpInfoAndroid() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   Android
@@ -872,7 +879,8 @@ func HelpInfoUpdate() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All
@@ -898,7 +906,8 @@ func HelpInfoUninstall() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All
@@ -924,7 +933,8 @@ func HelpInfoAuto() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All
@@ -950,7 +960,8 @@ func HelpInfoRepair() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All
@@ -976,7 +987,8 @@ func HelpInfoClearLogs() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All
@@ -1029,7 +1041,8 @@ func HelpInfoTorsocks() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1064,6 +1077,7 @@ func TorsocksOptions() {
   run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
 
 %sSupported Distros%s:
+--------- --------
 ----------- -----
 
    Id  Name
@@ -1094,7 +1108,8 @@ func HelpInfoTorsocksSetups() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1131,7 +1146,8 @@ func HelpInfoTorsocksVanish() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1168,7 +1184,8 @@ func HelpInfoTorsocksStatus() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1205,7 +1222,8 @@ func HelpInfoTorsocksTorIp() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1242,7 +1260,8 @@ func HelpInfoTorsocksChains() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1278,7 +1297,8 @@ func HelpInfoTorsocksReload() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1315,7 +1335,8 @@ func HelpInfoTorsocksExitnode() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1351,7 +1372,8 @@ func HelpInfoTorsocksRestore() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1388,7 +1410,8 @@ func HelpInfoTorsocksStop() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1451,7 +1474,8 @@ func HelpInfoNetworks() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1481,7 +1505,7 @@ func NetworksOptions() {
   FUNCTION       none             yes       The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja).
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -1511,7 +1535,8 @@ func HelpInfoDiscover() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1549,7 +1574,8 @@ func HelpInfoInPortScan() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1586,7 +1612,8 @@ func HelpInfoInVulnScan() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1623,7 +1650,8 @@ func HelpInfoInEnumScan() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1660,7 +1688,8 @@ func HelpInfoSmbExplo() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1697,7 +1726,8 @@ func HelpInfoPSniffer() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1734,7 +1764,8 @@ func HelpInfoResponder() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1769,7 +1800,7 @@ func OptionsResponder() {
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -1799,7 +1830,8 @@ func HelpInfoBeefNinja() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1835,7 +1867,7 @@ func OptionsBeefNinja() {
   SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -1865,7 +1897,8 @@ func HelpInfoXssHoocker() {
 %sProvided by%s: <rojahsmontari@gmail.com>
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1900,7 +1933,7 @@ func OptionsXssHoocker() {
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -1956,7 +1989,8 @@ func HelpInfoExploits() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -1988,7 +2022,7 @@ func ExploitsOptions() {
   FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, noisemaker, codebreaker).
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -1996,7 +2030,8 @@ func ExploitsOptions() {
 
 %sex. %s%susage%s:
 --  -----
-  set function start
+  show functions
+  set function blackjack
   run
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
@@ -2018,7 +2053,8 @@ func HelpInfoBlackJack() {
 %sProvided by%s: t3l3machus
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2054,7 +2090,8 @@ func HelpInfoShellz() {
 %sProvided by%s: sandres
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2089,7 +2126,8 @@ func HelpInfoHoaxShell() {
 %sProvided by%s: t3l3machus
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2124,7 +2162,8 @@ func HelpInfoNoiseMaker() {
 %sProvided by%s: t3l3machus
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2161,7 +2200,8 @@ func HelpInfoHavoc() {
 %sProvided by%s: t3l3machus
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2198,7 +2238,8 @@ func HelpInfoTearNdroid() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Androids
@@ -2234,7 +2275,7 @@ func BlackJackOptions() {
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -2264,7 +2305,8 @@ func HelpInfoChameLeon() {
 %sProvided by%s: t3l3machus
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2301,7 +2343,8 @@ func HelpInfoGhost() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2338,7 +2381,8 @@ func HelpInfoSeaShell() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All IOS
@@ -2374,7 +2418,8 @@ func HelpInfoListener() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2410,7 +2455,8 @@ func HelpInfoCodeBreaker() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2447,7 +2493,8 @@ func HelpInfoTearDroid() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Androids
@@ -2483,7 +2530,8 @@ func HelpInfoAndroRat() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Windows
@@ -2522,7 +2570,7 @@ func AndroRatOptions() {
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -2578,7 +2626,8 @@ func HelpInfoWireless() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Distros
@@ -2605,7 +2654,7 @@ func WirelessOptions() {
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -2636,7 +2685,8 @@ func HelpInfoWifite() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Wi-fi
@@ -2676,7 +2726,8 @@ func HelpInfoFluxion() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Wi-fi
@@ -2716,7 +2767,8 @@ func HelpInfoBetterCap() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Wi-fi
@@ -2757,7 +2809,8 @@ func HelpInfoAirGeddon() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Wi-fi
@@ -2797,7 +2850,8 @@ func HelpInfoWifiPumpkin() {
 %sProvided by%s:
  %sCreated by%s: r0jahsm0ntar1
 
-%sSuported Distros%s:
+%sSupported Distros%s:
+--------- --------
       Id  Name
       --  ----
    -> 0   All Wi-fi
@@ -2939,7 +2993,7 @@ func PhishersOptions() {
   WORDLIST       rockyou.txt      yes       Alist of user names or passwords to be used.
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
@@ -3700,7 +3754,7 @@ func WebsitesOptions() {
   WORDLIST       rockyou.txt      yes       Alist of user names or passwords to be used. -> (Give full path)
 
 %sSupported Distros%s:
------------------
+--------- --------
 
    Id  Name
    --  ----
