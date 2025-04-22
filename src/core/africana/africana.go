@@ -6,7 +6,6 @@ import(
     "utils"
     "menus"
     "bufio"
-    "sort"
     "setups"
     "strconv"
     "credits"
@@ -140,21 +139,7 @@ func africanaFrameworAuto() {
         "7": func() { menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero() },
         "8": func() { menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero() },
         "9": func() { credits.Creditors() },
-       "10": func() { scriptures.ScriptureNarators() }, // Bonus number
-    }
-
-    // Create reverse mapping for error messages
-    commandNames := map[string]string{
-        "1":   "setups",
-        "2":   "torsocks",
-        "3":   "networks",
-        "4":   "exploits",
-        "5":   "wireless",
-        "6":   "crackers",
-        "7":   "phishers",
-        "8":   "websites",
-        "9":   "credits",
-        "10":  "verses",
+       "10": func() { scriptures.ScriptureNarators() },
     }
 
     if action, exists := commands[Function]; exists {
@@ -163,20 +148,7 @@ func africanaFrameworAuto() {
         // Try to find if input was a number not in our map
         if _, err := strconv.Atoi(Function); err == nil {
             fmt.Printf("\n%s[!] %sNumber %s is invalid. Valid numbers are:\n", bcolors.Yellow, bcolors.Endc, Function)
-            // Print available number mappings
-            nums := make([]int, 0, len(commandNames))
-            for k := range commandNames {
-                if n, err := strconv.Atoi(k); err == nil {
-                    nums = append(nums, n)
-                }
-            }
-            sort.Ints(nums)
-
-            for _, n := range nums {
-                key := strconv.Itoa(n)
-                fmt.Printf(" %s%s. %s%-3s %s> %s\n", bcolors.BrightBlue, key, bcolors.Yellow, commandNames[key], bcolors.Endc, getCommandDescription(commandNames[key]))
-            }
-            fmt.Println()
+            menus.ListMainFunctions()
         } else {
             fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
         }
@@ -433,7 +405,8 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == "" {
-        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", 
+            bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     africanaManual()
@@ -449,178 +422,67 @@ func africanaManual() {
 
     // Command mapping with both text and numeric support
     commands := map[string]func(){
-        // Text commands (raw names without spaces)
-        "setups":   func() { setups.SetupsLauncher() },
-        "torsocks": func() { securities.Torsocks() },
-        "networks": func() { networks.NetworksPentest() },
-        "exploits": func() { exploits.ExploitsPentest() },
-        "wireless": func() { wireless.WirelessPentest() },
-        "crackers": func() { crackers.CrackersPentest() },
-        "phishers": func() { phishers.PhishingPentest() },
-        "websites": func() { webattackers.WebsitesPentest() },
-        "credits":  func() { credits.Creditors() },
-        "verses":   func() { scriptures.ScriptureNarators() },
-        
-        // Numeric shortcuts (1-9)
-        "1": func() { setups.SetupsLauncher() },
-        "2": func() { securities.Torsocks() },
-        "3": func() { networks.NetworksPentest() },
-        "4": func() { exploits.ExploitsPentest() },
-        "5": func() { wireless.WirelessPentest() },
-        "6": func() { crackers.CrackersPentest() },
-        "7": func() { phishers.PhishingPentest() },
-        "8": func() { webattackers.WebsitesPentest() },
-        "9": func() { credits.Creditors() },
-        "10": func() { scriptures.ScriptureNarators() },
+        // Text commands
+        "setups":   setups.SetupsLauncher,
+        "torsocks": securities.Torsocks,
+        "networks": networks.NetworksPentest,
+        "exploits": exploits.ExploitsPentest,
+        "wireless": wireless.WirelessPentest,
+        "crackers": crackers.CrackersPentest,
+        "phishers": phishers.PhishingPentest,
+        "websites": webattackers.WebsitesPentest,
+        "credits":  credits.Creditors,
+        "verses":   scriptures.ScriptureNarators,
+
+        // Numeric shortcuts
+        "1":  setups.SetupsLauncher,
+        "2":  securities.Torsocks,
+        "3":  networks.NetworksPentest,
+        "4":  exploits.ExploitsPentest,
+        "5":  wireless.WirelessPentest,
+        "6":  crackers.CrackersPentest,
+        "7":  phishers.PhishingPentest,
+        "8":  webattackers.WebsitesPentest,
+        "9":  credits.Creditors,
+        "10": scriptures.ScriptureNarators,
     }
 
-    // Display names with spaces for formatting (only used for printing)
-    prettyNames := map[string]string{
-        "setups":   "  setups",
-        "torsocks": "torsocks",
-        "networks": "networks",
-        "exploits": "exploits",
-        "wireless": "wireless",
-        "crackers": "crackers",
-        "phishers": "phishers",
-        "websites": "websites",
-        "credits":  " credits",
-        "verses":   " verses",
-    }
-
-    // Create reverse mapping for error messages
-    commandNames := map[string]string{
-        "1":   "setups",
-        "2":   "torsocks",
-        "3":   "networks",
-        "4":   "exploits",
-        "5":   "wireless",
-        "6":   "crackers",
-        "7":   "phishers",
-        "8":   "websites",
-        "9":   "credits",
-        "10":  "verses",
-    }
-
-    // Create text command list for typo checking (raw names)
+    // Command list for typo checking
     textCommands := []string{
-        "setups", "torsocks", "networks", "exploits", "wireless",
+        "setups", "torsocks", "networks", "exploits", "wireless", 
         "crackers", "phishers", "websites", "credits", "verses",
     }
 
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        // Check if input was a number not in our map
-        if _, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %s is invalid. Valid numbers are:\n", 
-                bcolors.Yellow, bcolors.Endc, Function)
-            
-            // Print available number mappings
-            nums := make([]int, 0, len(commandNames))
-            for k := range commandNames {
-                if n, err := strconv.Atoi(k); err == nil {
-                    nums = append(nums, n)
-                }
-            }
-            sort.Ints(nums)
-            
-            for _, n := range nums {
-                key := strconv.Itoa(n)
-                cmd := commandNames[key]
-                fmt.Printf("  %s%s. %s%-3s %s> %s\n",
-                    bcolors.BrightBlue, key,
-                    bcolors.Yellow, prettyNames[cmd],
-                    bcolors.Endc, getCommandDescription(cmd))
-            }
-            fmt.Println()
-        } else {
-            // Check if input was a text command with typo
-            foundSimilar := false
-            lowerInput := strings.ToLower(Function)
-            
-            for _, cmd := range textCommands {
-                lowerCmd := strings.ToLower(cmd)
-                if strings.HasPrefix(lowerCmd, lowerInput) || 
-                   strings.Contains(lowerCmd, lowerInput) ||
-                   levenshtein(lowerInput, lowerCmd) <= 2 {
-                    fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", 
-                        bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
-                    foundSimilar = true
-                    break
-                }
-            }
+        // Check if input was a number
+        if num, err := strconv.Atoi(Function); err == nil {
+            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", 
+                bcolors.Yellow, bcolors.Endc, num)
+            menus.ListMainFunctions()
+            return
+        }
 
-            if !foundSimilar {
-                fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", 
-                    bcolors.Yellow, bcolors.Endc, Function)
-                
-                // Print available text commands with beautiful alignment
-                for _, cmd := range textCommands {
-                    fmt.Printf(" %s%-3s %s> %s\n",
-                        bcolors.Yellow, prettyNames[cmd],
-                        bcolors.Endc, getCommandDescription(cmd))
-                }
-                fmt.Println()
+        // Check for similar commands
+        lowerInput := strings.ToLower(Function)
+        for _, cmd := range textCommands {
+            lowerCmd := strings.ToLower(cmd)
+            if strings.HasPrefix(lowerCmd, lowerInput) || 
+               strings.Contains(lowerCmd, lowerInput) ||
+               utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+                fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", 
+                    bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
+                return
             }
         }
+
+        fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", 
+            bcolors.Yellow, bcolors.Endc, Function)
+        menus.ListMainFunctions()
     }
 }
 
-// Helper function to get descriptions
-func getCommandDescription(cmd string) string {
-    descriptions := map[string]string{
-        "setups":   "Install/Update framework components",
-        "torsocks": "Configure Tor and proxy settings",
-        "networks": "Network penetration testing tools",
-        "exploits": "Exploit development framework",
-        "wireless": "Wireless network attacks",
-        "crackers": "Password cracking utilities", 
-        "phishers": "Phishing campaign tools",
-        "websites": "Web application testing",
-        "credits":  "Developer credits and info",
-        "verses":   "Biblical scripture integration",
-    }
-    return descriptions[cmd]
-}
-
-// Levenshtein distance function for fuzzy matching
-func levenshtein(a, b string) int {
-    la := len(a)
-    lb := len(b)
-    d := make([][]int, la+1)
-    for i := 0; i <= la; i++ {
-        d[i] = make([]int, lb+1)
-        d[i][0] = i
-    }
-    for j := 1; j <= lb; j++ {
-        d[0][j] = j
-    }
-    for i := 1; i <= la; i++ {
-        for j := 1; j <= lb; j++ {
-            cost := 0
-            if a[i-1] != b[j-1] {
-                cost = 1
-            }
-            d[i][j] = min(
-                d[i-1][j]+1,
-                d[i][j-1]+1,
-                d[i-1][j-1]+cost,
-            )
-        }
-    }
-    return d[la][lb]
-}
-
-func min(nums ...int) int {
-    m := nums[0]
-    for _, n := range nums {
-        if n < m {
-            m = n
-        }
-    }
-    return m
-}
 
 func Genesis() {
     if len(os.Args) < 2 {
@@ -629,7 +491,7 @@ func Genesis() {
     }
 
     commandMap := createCommandMap()
-    
+
     if action, exists := commandMap[os.Args[1]]; exists {
         action()
     } else {
@@ -638,19 +500,11 @@ func Genesis() {
 }
 
 func launchDefaultMode() {
-    scriptures.Verse()
-    utils.InitiLize()
-    setups.CheckTools()
-    banners.GraphicsLarge()
-    banners.Version()
-    africanaManualMode()
+    scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); banners.Version(); africanaManualMode()
 }
 
 func launchAutoModeWithMenu(menuFunc func(), actionFunc func()) {
-    scriptures.Verse()
-    utils.InitiLize()
-    setups.CheckTools()
-    banners.GraphicsLarge()
+    scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge()
     if menuFunc != nil {
         menuFunc()
     }
@@ -663,88 +517,76 @@ func launchAutoModeWithMenu(menuFunc func(), actionFunc func()) {
 func createCommandMap() map[string]func() {
     return map[string]func(){
         // Version commands
-        "-v":        banners.Version,
-        "--version": banners.Version,
+        "-v":         banners.Version,
+        "--version":  banners.Version,
         
         // Update commands
-        "-u":        setups.UpdateAfricana,
-        "--update":  setups.UpdateAfricana,
+        "-u":         setups.UpdateAfricana,
+        "--update":   setups.UpdateAfricana,
         
         // Auto mode commands
-        "-0":        func() { launchAutoModeWithMenu(nil, nil) },
-        "-a":        func() { launchAutoModeWithMenu(nil, nil) },
-        "--auto":    func() { launchAutoModeWithMenu(nil, nil) },
+        "-0":         func() { launchAutoModeWithMenu(nil, nil) },
+        "-a":         func() { launchAutoModeWithMenu(nil, nil) },
+        "--auto":     func() { launchAutoModeWithMenu(nil, nil) },
         
         // Installation commands
-        "-1":        func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
-        "-i":        func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
-        "--install": func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
+        "-1":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
+        "-i":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
+        "--install":  func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
         
         // Torsocks commands
-        "-2":        func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
-        "-t":        func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
+        "-2":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
+        "-t":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
         "--torsocks": func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
         
         // Networks commands
-        "-3":        func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
-        "-n":        func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
+        "-3":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
+        "-n":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
         "--networks": func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
         
         // Exploits commands
-        "-4":        func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
-        "-e":        func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
+        "-4":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
+        "-e":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
         "--exploits": func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
         
         // Wireless commands
-        "-5":        func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
-        "-w":        func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
+        "-5":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
+        "-w":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
         "--wireless": func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
         
         // Crackers commands
-        "-6":        func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
-        "-p":        func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
+        "-6":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
+        "-c":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
         "--crackers": func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
         
         // Phishers commands
-        "-7":        func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
-        "-f":        func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
+        "-7":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
+        "-p":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
         "--phishers": func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
         
         // Websites commands
-        "-8":        func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
-        "-x":        func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
+        "-8":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
+        "-x":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
         "--websites": func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
         
         // Credits commands
-        "-9":        func() { credits.Creditors(); africanaAutoMode() },
-        "-c":        func() { credits.Creditors(); africanaAutoMode() },
-        "--credits": func() { credits.Creditors(); africanaAutoMode() },
+        "-9":         func() { credits.Creditors(); africanaAutoMode() },
+        "-k":         func() { credits.Creditors(); africanaAutoMode() },
+        "--credits":  func() { credits.Creditors(); africanaAutoMode() },
         
         // Verses commands
-        "-10":       func() { scriptures.ScriptureNarators(); africanaAutoMode() },
-        "-s":        func() { scriptures.ScriptureNarators(); africanaAutoMode() },
-        "--verses":  func() { scriptures.ScriptureNarators(); africanaAutoMode() },
+        "-10":        func() { scriptures.ScriptureNarators(); africanaAutoMode() },
+        "-s":         func() { scriptures.ScriptureNarators(); africanaAutoMode() },
+        "--verses":   func() { scriptures.ScriptureNarators(); africanaAutoMode() },
         
         // Guide commands
-        "-g":        func() { banners.RandomBanners(); utils.BrowseTutarilas() },
-        "--guide":   func() { banners.RandomBanners(); utils.BrowseTutarilas() },
-        
+        "-g":         func() { banners.RandomBanners(); utils.BrowseTutarilas() },
+        "--guide":    func() { banners.RandomBanners(); utils.BrowseTutarilas() },
+
         // Quiet mode commands
-        "-q":        func() { 
-            scriptures.Verse()
-            utils.InitiLize()
-            banners.GraphicsTinny()
-            banners.Version()
-            africanaManualMode()
-        },
-        "--quite":   func() { 
-            scriptures.Verse()
-            utils.InitiLize()
-            banners.GraphicsTinny()
-            banners.Version()
-            africanaManualMode()
-        },
-        
+        "-q":         func() { scriptures.Verse(); utils.InitiLize(); banners.GraphicsTinny(); banners.Version(); africanaManualMode() },
+        "--quite":    func() { scriptures.Verse(); utils.InitiLize(); banners.GraphicsTinny(); banners.Version(); africanaManualMode() },
+
         // Help commands
         "-00":       menus.HelpInfoMenuMain,
         "-h":        menus.HelpInfoMenuMain,

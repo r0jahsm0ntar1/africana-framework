@@ -785,6 +785,54 @@ func DirLocations() (string, string, string, string, string, string, string) {
     return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
 }
 
+// Levenshtein computes the edit distance between two strings (case-insensitive).
+func Levenshtein(a, b string) int {
+    a, b = strings.ToLower(a), strings.ToLower(b)
+    ar, br := []rune(a), []rune(b)
+    la, lb := len(ar), len(br)
+
+    if la == 0 {
+        return lb
+    }
+    if lb == 0 {
+        return la
+    }
+
+    prevRow := make([]int, lb+1)
+    currRow := make([]int, lb+1)
+
+    for j := 0; j <= lb; j++ {
+        prevRow[j] = j
+    }
+
+    for i := 1; i <= la; i++ {
+        currRow[0] = i
+        for j := 1; j <= lb; j++ {
+            cost := 0
+            if ar[i-1] != br[j-1] {
+                cost = 1
+            }
+            currRow[j] = min(
+                currRow[j-1] + 1,      // Insert
+                prevRow[j] + 1,        // Delete
+                prevRow[j-1] + cost,   // Replace
+            )
+        }
+        prevRow, currRow = currRow, prevRow
+    }
+    return prevRow[lb]
+}
+
+func min(nums ...int) int {
+    m := nums[0]
+    for _, n := range nums {
+        if n < m {
+            m = n
+        }
+    }
+    return m
+}
+
 // InitializePaths sets the correct paths based on whether the  is root or not
 func InitiLize() {
     CertDir, OutPutDir, _, _, _, _, _ := DirLocations()

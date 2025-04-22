@@ -2900,11 +2900,11 @@ func HelpInfoCrackersModules(Module string) {
 
 func CrackersOptions() {
     options := []string{
-        "MODE           none             yes       Attack mode (online/offline)",
-        "RHOST          none             yes       Target host",
-        "WORDLIST       rockyou.txt      yes       Path to wordlist",
-        "USERNAME       root             yes       Single username to test",
-        "PASSWORD       password         yes       Single password to test",
+        "MODE           none             yes       Attack mode (online/offline)\n",
+        "RHOST          none             yes       Target host\n",
+        "WORDLIST       rockyou.txt      yes       Path to wordlist\n",
+        "USERNAME       root             yes       Single username to test\n",
+        "PASSWORD       password         yes       Single password to test\n\n",
     }
     generateOptions("src/crackers/passwords_pentest.fn", options)
 }
