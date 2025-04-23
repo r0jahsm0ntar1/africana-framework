@@ -405,8 +405,7 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == "" {
-        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", 
-            bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     africanaManual()
@@ -449,8 +448,7 @@ func africanaManual() {
 
     // Command list for typo checking
     textCommands := []string{
-        "setups", "torsocks", "networks", "exploits", "wireless", 
-        "crackers", "phishers", "websites", "credits", "verses",
+        "setups", "torsocks", "networks", "exploits", "wireless", "crackers", "phishers", "websites", "credits", "verses",
     }
 
     if action, exists := commands[Function]; exists {
@@ -458,8 +456,7 @@ func africanaManual() {
     } else {
         // Check if input was a number
         if num, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", 
-                bcolors.Yellow, bcolors.Endc, num)
+            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
             menus.ListMainFunctions()
             return
         }
@@ -471,14 +468,12 @@ func africanaManual() {
             if strings.HasPrefix(lowerCmd, lowerInput) || 
                strings.Contains(lowerCmd, lowerInput) ||
                utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-                fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", 
-                    bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
+                fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
                 return
             }
         }
 
-        fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", 
-            bcolors.Yellow, bcolors.Endc, Function)
+        fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", bcolors.Yellow, bcolors.Endc, Function)
         menus.ListMainFunctions()
     }
 }
