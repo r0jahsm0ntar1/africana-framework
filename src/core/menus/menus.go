@@ -1439,25 +1439,34 @@ func ListInternalFunctions() {
 %sNetworks Functions%s:
 -------- ---------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %sdiscover  %s> Discover all devices connected to the network. Lets you locate targets.
-  %s2. %sportscan  %s> Get open ports on the target you have set.
-  %s3. %svulnscan  %s> Perform vulnerbility scan on open ports of the target you have set.
-  %s4. %senumscan  %s> Recon for S.M.B deep information on the target set.
-  %s5. %ssmbexplo  %s> Launch known vulnerbility exploits on the target's S.M.B services.
-  %s6. %spsniffer  %s> Sniff all Packets from connected devices to the router(Perform M.I.T.M).
-  %s7. %sresponder %s> Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6.
-  %s8. %sbeefninja %s> Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks).
-  %s9. %sxsshooker %s> Get Shell through XSS Injection to packets in the wire.(To come).
+  # %sName      Description%s
+  - ----      -----------
+`,
+        bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-%sex. %s%susage%s:
---  -----
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  reconx", "Discover all devices connected to the network. Lets you locate targets."},
+        {"portscan", "Get open ports on the target you have set."},
+        {"vulnscan", "Perform vulnerbility scan on open ports of the target you have set."},
+        {"enumscan", "Recon for S.M.B deep information on the target set."},
+        {"smbexplo", "Launch known vulnerbility exploits on the target's S.M.B services."},
+        {"psniffer", "Sniff all Packets from connected devices to the router(Perform M.I.T.M)."},
+        {"respondx", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
+        {"beefkill", "Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks)."},
+        {" xsshook", "Get Shell through XSS Injection to packets in the wire.(To come)."},
+    }
 
-    set function discover
-    run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module discover\n    run\n",
+    }
+    modulesUsage(info)
 }
 
 func HelpInfoNetworks() {

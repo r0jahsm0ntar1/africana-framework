@@ -120,7 +120,7 @@ func executeCommand(cmd string) bool {
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListInternalFunctions},
 
         // Commands executions
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run discover", "use discover", "exec discover", "start discover", "launch discover", "exploit discover", "execute discover"}, func() { IpNeighbour() }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run discover", "use discover", "exec discover", "start discover", "launch discover", "exploit discover", "execute discover"}, func() { DiscoverIps() }},
         {[]string{"? 1", "info 1", "help 1", "discover", "info discover", "help discover"}, menus.HelpInfoDiscover},
 
         {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run portscan", "use portscan", "exec portscan", "start portscan", "launch portscan", "exploit portscan", "execute portscan"}, func() { NmapPortScan(Rhost) }},
@@ -264,15 +264,15 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
 
     commands := map[string]func() {
 
-        "discover":  func() {IpNeighbour()},
-        "portscan":  func() {NmapPortScan(Rhost)},
-        "vulnscan":  func() {NmapVulnScan(Rhost)},
-        "enumscan":  func() {SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost)},
-        "smbexplo":  func() {SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport)},
-        "psniffer":  func() {PacketSniffer(Mode, Rhost)},
-        "responder": func() {KillerResponder(Iface, Lhost)},
-        "beefninja": func() {BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway)},
-        "xsshooker": func() {XssHooker(Rhost)},
+        "discover":  func() { DiscoverIps() },
+        "portscan":  func() { NmapPortScan(Rhost) },
+        "vulnscan":  func() { NmapVulnScan(Rhost) },
+        "enumscan":  func() { SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost) },
+        "smbexplo":  func() { SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport) },
+        "psniffer":  func() { PacketSniffer(Mode, Rhost) },
+        "responder": func() { KillerResponder(Iface, Lhost) },
+        "beefninja": func() { BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway) },
+        "xsshooker": func() { XssHooker(Rhost) },
 
     }
 
@@ -286,6 +286,12 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
 func IpNeighbour() {
     fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`ip -h -s -d -a -c=auto -t neighbour`)
+    return
+}
+
+func DiscoverIps() {
+    fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
+    subprocess.Popen(`bettercap -eval "set net.probe on; set net.recon on; set net.scan on; net.show"`)
     return
 }
 
