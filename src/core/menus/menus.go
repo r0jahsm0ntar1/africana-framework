@@ -1454,7 +1454,7 @@ func ListInternalFunctions() {
         {"enumscan", "Recon for S.M.B deep information on the target set."},
         {"smbexplo", "Launch known vulnerbility exploits on the target's S.M.B services."},
         {"psniffer", "Sniff all Packets from connected devices to the router(Perform M.I.T.M)."},
-        {"respondx", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
+        {"responder", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
         {"beefkill", "Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks)."},
         {" xsshook", "Get Shell through XSS Injection to packets in the wire.(To come)."},
     }
