@@ -1,6 +1,14 @@
-![image](https://www.flaticon.com/free-icon/globe_12871706)
+# Africana Framework
+[![Golang](https://pkg.go.dev/static/frontend/badge/badge.svg)](https://www.python.org/) 
+<img src="https://img.shields.io/badge/PowerShell-%E2%89%A5%20v3.0-blue">
+<img src="https://img.shields.io/badge/Developed%20on-kali%20linux-blueviolet">
+[![License](https://img.shields.io/badge/License-CC%20Attr--NonCommercial%204.0-red)](https://github.com/r0jahsm0ntar1/africana-framework/blob/main/readme/license)
+<img src="https://img.shields.io/badge/Maintained%3F-Yes-96c40f">
 
-# Africana Framework is Made simple but Lethal!
+## Purpose
+Africana Framework is an open-source, community-driven cybersecurity toolkit designed for ethical penetration testing and vulnerability assessment. It automates the detection of security flaws across a wide range of network and web technologies, including internal networks, Wi-Fi, system anonymity, and web bug hunting. The framework aims to empower security professionals and researchers, particularly within Africa, to identify and mitigate security risks effectively. (Africana instances running on different machines).
+
+The framework's main features include:
 
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
