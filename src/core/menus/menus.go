@@ -14,20 +14,20 @@ var (
 )
 
 type ModuleHelpInfo struct {
-    Name         string
-    Function     string
-    Platform     string
-    Arch         string
-    Privileged   string
-    License      string
-    Rank         string
-    Disclosed    string
-    ProvidedBy   string
-    CreatedBy    string
+    Name          string
+    Function      string
+    Platform      string
+    Arch          string
+    Privileged    string
+    License       string
+    Rank          string
+    Disclosed     string
+    ProvidedBy    string
+    CreatedBy     string
     TestedDistros string
-    Description  string
-    Example      string
-    Options      string
+    Description   string
+    Example       string
+    Options       string
 }
 
 func modulesHelp(info ModuleHelpInfo) {
@@ -109,7 +109,7 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
 `, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc,  bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
     } else {
         fmt.Printf(`
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s99. %s%s%s%sGet Bonus Packages.%s
+%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s10. %s%s%s%sGet Bonus Packages.%s
 
 `, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc)
     }
@@ -148,14 +148,14 @@ func MenuZero() {
 
 func MenuOne() {
     items := []string{
-        "Install africana tools in Kali",
-        "Install africana tools in Ubuntu",
-        "Install africana tools in arch",
-        "Install africana tools in macos",
-        "Install africana tools in android",
-        "Install africana tools in windows",
-        "Install africana tools in update",
-        "Repair africana if has issues",
+        "Install in Kali",
+        "Install in Ubuntu",
+        "Install in Arch",
+        "Install in Macos",
+        "Install in Android",
+        "Install in Windows",
+        "Update africana & All it's tools",
+        "Repair africana if it is brocken",
         "UnInstall africana from your distro",
     }
     generateMenu(items, "", true)
@@ -329,32 +329,32 @@ func ListMainFunctions() {
 
 func HelpInfoMenuMain() {
     fmt.Printf(`
-Usage: ./africana [options]
+Usage: ./afrconsole [options]
 
 Common options:
-    -a, --auto          Start africana in automation mode 'start from main menu'
+    -a, --auto          Start africana in automation mode 'guide by menu'
 
 Setup options:
-    -i, --install       Launch installation menu to install neede dependencies
-    -u, --update        Update africana and africana-base tools
+    -i, --install       Launch installation menu to install needed dependencies
+    -u, --update        Update africana framework and and all it's tools
 
 Framework options:
     -l, -L, --logs      Show logs in terminal
     -v, -V, --version   Show version
 
 Console options:
-    -t, --torsocks      Launch torsocks menu to torify your system.
-    -n, --networks      Start internal network attacks.
+    -t, --torsocks      Launch torsocks menu to torify your system
+    -n, --networks      Start internal network attacks
     -e, --exploits      Generate undetectebal R.A.Ts and (Launch c2s for all systems. Evasions also included)
-    -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors.
+    -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors
     -c, --crackers      Crack(NTLMS, HASHES, PCAPS) and bruteforce(SSH, FTP, SMB, RPC etc.)
-    -p, --phishers      Perform almost all advanced Phishing attacks.
-    -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
+    -p, --phishers      Perform almost all advanced Phishing attacks
+    -x, --websites      Launch Web Penetration engines with free bugbounty automation function
     -k, --credits       Show who developes and mentains africana-framework and (third party tools developers)
-    -s, --verses        Scirptures. Launch Bible verses in an uniform way manner as used in the framework.
-    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
-    -q, --quite         Start africana without banner and tools checking.
-    -h, --help          Show this help message and exit.
+    -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework
+    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s
+    -q, --quite         Start africana without banner and missing tools checking
+    -h, --help          Show this help message and exit
 
 `, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
@@ -365,7 +365,7 @@ func HelpInfoMenuZero() {
     -------             -----------
     ?                   Help menu. Alias to (h, help)
     banner              Display an awesome africana banner
-    clear               Clear the working screen or (flag 'history' clear history)
+    clear               Clear the working screen or use with flag ('history' to clear history)
     exit                Exit the console
     features            Display the list of not yet released features that can be opted in to
     guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
@@ -397,7 +397,8 @@ func HelpInfoMenuZero() {
 
     %sCommand             Description%s
     -------             -----------
-    bash                 Start Intaractive shell in africana(other flags 'sh, zsh, cmd, powershell')
+    bash                 Start Intaractive shell in africana. Alias to ('sh, zsh, cmd, powershell')
+    junks                Display what is in the output directory
     logs                 Display framework.log paged to the end if possible
     time                 Time how long it takes to run a particular command
 
@@ -604,82 +605,83 @@ func MainOptions() {
 }
 
 func HelpInfoSetups() {
-    fmt.Printf(`
-       %sName%s: setups
-   %sFunction%s: src/core/setups
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sTested Distros%s:
------- -------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sDescription%s:
------------
-  This modules enables you to Install, uninstall, update and mentain africana-framework.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-     ListSetupsDistros()
-     ListSetupsFunction()
+    info := ModuleHelpInfo{
+        Name:          "setups",
+        Function:      "src/core/setups",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This modules enables you to Install, uninstall, update and mentain africana-framework.",
+    }
+    modulesHelp(info)
+    ListSetupsFunction()
 }
 
 func ListSetupsDistros() {
     fmt.Printf(`
 %sSupported Distros%s:
---------- --------
---------- -------
+--------- ---------
 
-  # %sName     Description%s
-  - ----     -----------
+  # %sName      Description%s
+  - ----      -----------
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-  %s1. %s   kali %s> Necessary tools will be installed in in Kali-Linux(Debian distros). (Use this it is stable)
-  %s2. %s ubuntu %s> This module will install africana-framework in Ubuntu-Linux.
-  %s3. %s   arch %s> Tools will be installed in any Arch-Linux Distros using Blackarch repo.
-  %s4. %s  macos %s> Under development. Install africana on MackingTosh systems.
-  %s5. %sandroid %s> Install africana-framework in Termux using chroot environment.
-  %s6. %swindows %s> Under development. But can run if tools well installed using commando vm.
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"   kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
+        {" ubuntu", "This module will install africana-framework in Ubuntu-Linux"},
+        {"   arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
+        {"  macos", "Under development. Install africana on MackingTosh systems"},
+        {"android", "Install africana-framework in Termux using chroot environment"},
+        {"windows", "Under development. But can run if tools well installed using commando vm"},
+    }
 
-%sex. %s%susage%s:
---  -----
-
-  set distro kali
-  set function install -> other functions include (update, repair and uninstall)
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set distro kali\n    set module install\n   run\n",
+    }
+    modulesUsage(info)
 }
+
 
 func ListSetupsFunction() {
     fmt.Printf(`
-%sSetups Modules%s:
------- -------
+%sSetups Functions%s:
+------ ---------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s  install %s> Installs africana in selected distro.
-  %s2. %s   update %s> Get new release of africana-framework from github and install it.
-  %s3. %s   repair %s> Repair africana-framework if broken or with issues.
-  %s4. %s     auto %s> Auto detect system and do the necessary.
-  %s5. %suninstall %s> Completely uninstall africana-framework from system.
+  # %sName      Description%s
+  - ----      -----------
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-%sex. %s%susage%s:
---  -----
-  set distro kali
-  set function install
-  run
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  install", "Installs africana in selected distro"},
+        {"   update", "Get new release of africana-framework from github and install it"},
+        {"   repair", "Repair africana-framework if broken or with issues"},
+        {"     auto", "Auto detect system and do the necessary"},
+        {"uninstall", "Completely uninstall africana-framework from system"},
+    }
 
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc    , bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module install\n    run\n",
+    }
+    modulesUsage(info)
 }
 
 func SetupsOptions() {
@@ -704,300 +706,196 @@ View the full module info with the %s'info'%s, or %s'info -d'%s command.
 }
 
 func HelpInfoKali() {
-    fmt.Printf(`
-       %sName%s: kali
-   %sFunction%s: src/core/setups_kali.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Kali-Linux
-
-%sDescription%s:
------------
-  It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "kali",
+        Function:      "src/core/setups_kali.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.",
+    }
+    modulesHelp(info)
 }
 
+
 func HelpInfoArch() {
-    fmt.Printf(`
-       %sName%s: arch
-   %sFunction%s: src/core/setups_arch.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Arch-Linux
-
-%sDescription%s:
------------
-  It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "arch",
+        Function:      "src/core/setups_arch.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoUbuntu() {
-    fmt.Printf(`
-       %sName%s: ubuntu
-   %sFunction%s: src/core/setups_ubuntu.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Ubuntu-Linux
-
-%sDescription%s:
------------
-  It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "ubuntu",
+        Function:      "src/core/setups_ubuntu.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoMacos() {
-    fmt.Printf(`
-       %sName%s: macos
-   %sFunction%s: src/core/setups_macos.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Macintosh
-
-%sDescription%s:
------------
-  It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "macos",
+        Function:      "src/core/setups_macos.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
+    }
+    modulesHelp(info)
 }
 
+
 func HelpInfoWindows() {
-    fmt.Printf(`
-       %sName%s: windows
-   %sFunction%s: src/core/setups_windows.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Windows
-
-%sDescription%s:
------------
-  It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "windows",
+        Function:      "src/core/setups_windows.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoAndroid() {
-    fmt.Printf(`
-       %sName%s: android
-   %sFunction%s: src/core/setups_android.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   Android
-
-%sDescription%s:
------------
-  It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "android",
+        Function:      "src/core/setups_android.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.",
+    }
+    modulesHelp(info)
 }
 
+
 func HelpInfoUpdate() {
-    fmt.Printf(`
-       %sName%s: update
-   %sFunction%s: src/core/setups_update.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All
-
-%sDescription%s:
------------
-  It is a Function to update and mentain africana-framework.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "update",
+        Function:      "src/core/setups_update.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a Function to update and mentain africana-framework.",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoUninstall() {
-    fmt.Printf(`
-       %sName%s: uninstall
-   %sFunction%s: src/core/setups_uninstall.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All
-
-%sDescription%s:
------------
-  It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "uninstall",
+        Function:      "src/core/setups_uninstall.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoAuto() {
-    fmt.Printf(`
-       %sName%s: auto
-   %sFunction%s: src/core/setups/auto_manage.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All
-
-%sDescription%s:
------------
-  It is a Function to auto select distro and install africana with all it's dependencies.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "auto",
+        Function:      "src/core/setups_auto.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a Function to auto select distro and install africana with all it's dependencies.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoRepair() {
-    fmt.Printf(`
-       %sName%s: repair
-   %sFunction%s: src/core/setups/repair.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All
-
-%sDescription%s:
------------
-  It is a function repairs africana incase it is broken.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "repair",
+        Function:      "src/core/setups_repair.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "It is a function repairs africana incase it is broken.",
+    }
+    modulesHelp(info)
 }
 
+
 func HelpInfoClearLogs() {
-    fmt.Printf(`
-       %sName%s: clearlogs
-   %sFunction%s: src/core/utils/clear_logs.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All
-
-%sDescription%s:
------------
-  This module will clear all your logs that has been recorded from the last time you cleaned the log folder..
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "clearlogs",
+        Function:      "src/core/setups_clearlogs.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will clear all your logs that has been recorded from the last time you cleaned the log folder.",
+    }
+    modulesHelp(info)
 }
 
 
@@ -1006,63 +904,50 @@ func ListTorsocksFunctions() {
 %sTorsocks Functions%s:
 -------- ---------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s   setups %s> Installs dnsmasq, squid, privoxy and tor (also set configs).
-  %s2. %s   vanish %s> Start anonymizing the system through tor network.
-  %s3. %s   status %s> Check if using tor (Show if all anononimty services are up and running).
-  %s4. %s    torip %s> Check current tor IP address.
-  %s5. %s   chains %s> View traffic logs from squid, privoxy, to tor.
-  %s6. %s   reload %s> Completely restart torsocks and connect to a different exit-node.
-  %s7. %s exitnode %s> Connect to a different exit-node.
-  %s8. %s  restore %s> Backup and resets Iptables to default.
-  %s9. %s     stop %s> Get back to the surface-web.
+  # %sName      Description%s
+  - ----      -----------
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-%sex. %s%susage%s:
---  -----
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  setups", "Installs dnsmasq, squid, privoxy and tor (also set configs)"},
+        {"  vanish", "Start anonymizing the system through tor network"},
+        {"  status", "Check if using tor (Show if all anononimty services are up and running)"},
+        {"   torip", "Check current tor IP address"},
+        {"  chains", "View traffic logs from squid, privoxy, to tor"},
+        {"  reload", "Completely restart torsocks and connect to a different exit-node"},
+        {"exitnode", "Connect to a different exit-node"},
+        {" restore", "Backup and resets Iptables to default"},
+        {"    stop", "Get back to the surface-web"},
+    }
 
-    set function vanish
-    run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module discover\n    run\n",
+    }
+    modulesUsage(info)
 }
 
 func HelpInfoTorsocks() {
-    fmt.Printf(`
-       %sName%s: torsocks
-   %sFunction%s: src/securities/torsocks
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-
-  set function start
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "torsocks",
+        Function:      "src/securities/torsocks.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
+    }
+    modulesHelp(info)
     ListTorsocksFunctions()
 }
 
@@ -1078,7 +963,6 @@ func TorsocksOptions() {
 
 %sSupported Distros%s:
 --------- --------
------------ -----
 
    Id  Name
    --  ----
@@ -1095,344 +979,167 @@ View the full module info with the %s'info'%s, or %s'info -d'%s command.
 }
 
 func HelpInfoTorsocksSetups() {
-    fmt.Printf(`
-       %sName%s: setups
-   %sFunction%s: src/securities/setups.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function setups
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through
-  privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "setups",
+        Function:      "src/securities/setups.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoTorsocksVanish() {
-    fmt.Printf(`
-       %sName%s: vanish
-   %sFunction%s: src/securities/vanish.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function vanish
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor.
-  It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "vanish",
+        Function:      "src/securities/vanish.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.",
+    }
+    modulesHelp(info)
 }
+
+
 
 func HelpInfoTorsocksStatus() {
-    fmt.Printf(`
-       %sName%s: status
-   %sFunction%s: src/securities/status.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function status
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that 
-  goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "status",
+        Function:      "src/securities/status.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoTorsocksTorIp() {
-    fmt.Printf(`
-       %sName%s: torip
-   %sFunction%s: src/securities/torip.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function torip
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly
-  configured, then you will get a congratulation mesage from tor website.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "torip",
+        Function:      "src/securities/torip.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly configured, then you will get a congratulation mesage from tor website.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoTorsocksChains() {
-    fmt.Printf(`
-       %sName%s: chains
-   %sFunction%s: src/securities/chains.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function chains
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "chains",
+        Function:      "src/securities/chains.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoTorsocksReload() {
-    fmt.Printf(`
-       %sName%s: reload
-   %sFunction%s: src/securities/reload.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function reload
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "reload",
+        Function:      "src/securities/reload.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will stop all tor services and restart again acuring new exitnodes and torchains.",
+    }
+    modulesHelp(info)
 }
+
 
 
 func HelpInfoTorsocksExitnode() {
-    fmt.Printf(`
-       %sName%s: exitnode
-   %sFunction%s: src/securities/exitnode.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function exitnode
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "exitnode",
+        Function:      "src/securities/exitnode.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoTorsocksRestore() {
-    fmt.Printf(`
-       %sName%s: restore
-   %sFunction%s: src/securities/restore.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function restore
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module
-  will help you fix the lack off internet connection.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "restore",
+        Function:      "src/securities/restore.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
+    }
+    modulesHelp(info)
 }
+
 
 func HelpInfoTorsocksStop() {
-    fmt.Printf(`
-       %sName%s: stop
-   %sFunction%s: src/securities/stop.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: Yes
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024-03-14
-
-%sProvided by%s: <rojahsmontari@gmail.com>
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sBasic options%s:
-  Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
-  function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
-
-%sex. %s%susage%s:
---  -----
-  set function stop
-  run                                     alias to -> (start, execute, exec, launch)
-
-%sDescription%s:
------------
-
-  This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module
-  will help you fix the lack off internet connection.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "stop",
+        Function:      "src/securities/stop.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
+    }
+    modulesHelp(info)
 }
+
 
 func ListInternalFunctions() {
     fmt.Printf(`
@@ -1448,15 +1155,15 @@ func ListInternalFunctions() {
         name string
         desc string
     }{
-        {"  reconx", "Discover all devices connected to the network. Lets you locate targets."},
+        {"discover", "Discover all devices connected to the network. Lets you locate targets."},
         {"portscan", "Get open ports on the target you have set."},
         {"vulnscan", "Perform vulnerbility scan on open ports of the target you have set."},
         {"enumscan", "Recon for S.M.B deep information on the target set."},
-        {"smbexplo", "Launch known vulnerbility exploits on the target's S.M.B services."},
+        {"smbexpl0", "Launch known vulnerbility exploits on the target's S.M.B services."},
         {"psniffer", "Sniff all Packets from connected devices to the router(Perform M.I.T.M)."},
-        {"responder", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
+        {"respond4", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
         {"beefkill", "Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks)."},
-        {" xsshook", "Get Shell through XSS Injection to packets in the wire.(To come)."},
+        {"toxssin1", "Get Shell through XSS Injection to packets in the wire.(To come)."},
     }
 
     for i, item := range items {
@@ -3022,28 +2729,37 @@ View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
 func ListPhishersFunctions() {
     fmt.Printf(`
-%setworks Functions%s:
+%sPhishers Functions%s:
 -------- ---------
 
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s   gophish %s> It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default  is: admin, Default password is: kali-gophish.
-  %s2. %s  goodginx %s> Goodginx is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP.
-  %s3. %s  zphisher %s> A nice framework with alot of templets. Also bypasses OTP with ngrock support.
-  %s4. %sadvphisher %s> Wide range of phishing templets.
-  %s5. %sshellphish %s> Supports otp bypass. Wide range of phishing templets.
-  %s6. %s darkphish %s> Bypasses OTP with Wide range of phishing templets.
-  %s7. %s setoolkit %s> This tool is equiped with alot of social engeneering. Supports cloning of actual websites.
-  %s8. %s  blackeye %s> Writen in bash and full of phishing templets. Just check it out.
-  %s9. %s       thc %s> This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing.
+  # %sName        Description%s
+  - ----        -----------
+`,
+        bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-%sex. %s%susage%s:
---  -----
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"gophish   ", "It is a phishing framework with a Web UI https://127.0.0.1:3333. Africana will launch it for you. Default  is: admin, Default password is: kali-gophish."},
+        {"goodginx  ", "Goodginx is an advanced phishing framework with insane configurations.Default name evilginx2. Bypasses alot of security features like OTP."},
+        {"zphisher  ", "A nice framework with alot of templets. Also bypasses OTP with ngrock support."},
+        {"blackeye  ", "Writen in bash and full of phishing templets. Just check it out."},
+        {"advphisher", "Wide range of phishing templets."},
+        {"darkphish ", "Bypasses OTP with Wide range of phishing templets."},
+        {"shellphish", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
+        {"setoolkit ", "This tool is equiped with alot of social engeneering. Supports cloning of actual websites."},
+        {"thc       ", "This tool creates a templete of your interest imidietly but needs you to start your server and generate a link for phishing."},
+    }
 
-    set function gophish
-    run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module gophish\n    run\n",
+    }
+    modulesUsage(info)
 }
 
 func HelpInfoPhishers() {
@@ -3377,18 +3093,18 @@ func ListWebsitesFunctions() {
 %sWebsites Functions%s:
 -------- ---------
 
-  # %sName       Description%s
-  - ----       -----------
+  # %sName      Description%s
+  - ----      -----------
 
-  %s1. %s    netmap %s> Network Mapping and portscaning.
-  %s2. %s  enumscan %s> Subdomain enumeration.
-  %s3. %s  dnsrecon %s> Dns and asn lookup.
-  %s4. %s  techscan %s> Web technology detection.
-  %s5. %s  asetscan %s> Wayback and asset discovery.
-  %s6. %s  fuzzscan %s> Digg for root files from the server.
-  %s7. %s  leakscan %s> Secret and leak detection.
-  %s8. %s  vulnscan %s> Vulnerability scanning (XSS, SQLi, CSRF, SSRF, IDOR).
-  %s9. %s    bounty %s> Bug bounty hunting techniques.
+  %s1. %s  netmap %s> Network Mapping and portscaning.
+  %s2. %senumscan %s> Subdomain enumeration.
+  %s3. %sdnsrecon %s> Dns and asn lookup.
+  %s4. %stechscan %s> Web technology detection.
+  %s5. %sasetscan %s> Wayback and asset discovery.
+  %s6. %sfuzzscan %s> Digg for root files from the server.
+  %s7. %sleakscan %s> Secret and leak detection.
+  %s8. %svulnscan %s> Vulnerability scanning (XSS, SQLi, CSRF, SSRF, IDOR).
+  %s9. %s  bounty %s> Bug bounty hunting techniques.
 
 %sex. %s%susage%s:
 --  -----

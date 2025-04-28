@@ -9,6 +9,7 @@ import(
     "menus"
     "regexp"
     "banners"
+    "strconv"
     "strings"
     "bcolors"
     "os/exec"
@@ -76,8 +77,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -210,23 +215,57 @@ func AnonimityFunctions(Function string, args ...interface{}) {
         }
     }
 
-    commands := map[string]func() {
+    // Command mapping with direct function references
+    commands := map[string]func(){
         "setups": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
-         "start": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
+        "start": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
         "status": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()},
-      "exitnode": func() {banners.GraphicsTorNet(); fmt.Println(); torCircuit()},
-         "torip": func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
-       "restore": func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
+        "exitnode": func() {banners.GraphicsTorNet(); fmt.Println(); torCircuit()},
+        "torip": func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
+        "restore": func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
         "chains": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()},
         "reload": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
-          "stop": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
+        "stop": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
+
+        // Numeric shortcuts
+        "1": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
+        "2": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
+        "3": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()},
+        "4": func() {banners.GraphicsTorNet(); fmt.Println(); torCircuit()},
+        "5": func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
+        "6": func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
+        "7": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()},
+        "8": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
+        "9": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
     }
+
+    // Command list for typo checking
+    textCommands := []string{"setups", "start", "status", "exitnode", "torip", "restore", "chains", "reload", "stop"}
 
     if action, exists := commands[Function]; exists {
         action()
-    } else {
-        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+        return
     }
+
+    // Check if input was a number
+    if num, err := strconv.Atoi(Function); err == nil {
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListTorsocksFunctions()
+        return
+    }
+
+    // Check for similar commands
+    lowerInput := strings.ToLower(Function)
+    for _, cmd := range textCommands {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListTorsocksFunctions()
 }
 
 func configTorrc() {
@@ -768,5 +807,3 @@ iptables -t raw -X
         fmt.Printf("%s Successfully reset Iptables to default :)%s\n", bcolors.BrightBlue, bcolors.Endc)
     }
 }
-
-

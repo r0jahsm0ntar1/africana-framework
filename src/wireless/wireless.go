@@ -9,6 +9,7 @@ import(
     "strings"
     "banners"
     "bcolors"
+    "strconv"
     "scriptures"
     "subprocess"
 )
@@ -85,8 +86,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -236,6 +241,7 @@ func autoExecuteFunc(distro string, function string) {
 }
 
 func WirelessPenFunctions(Function string, args ...interface{}) {
+    fmt.Printf("\nRHOST => %s\nFunction => %s\n", Rhost, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -243,6 +249,7 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
         }
     }
 
+    // Command mapping with direct function references
     commands := map[string]func(){
            "wifite": func() {Wifite(Iface)},
           "fluxion": func() {Fluxion()},
@@ -250,15 +257,44 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
         "airgeddon": func() {AirGeddon()},
       "wifipumpkin": func() {WifiPumpkin()},
      "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)},
+
+        // Numeric shortcuts
+        "1": func() {Wifite(Iface)},
+        "2": func() {Fluxion()},
+        "3": func() {Bettercap(Iface)},
+        "4": func() {AirGeddon()},
+        "5": func() {WifiPumpkin()},
+        "6": func() {WifiPumpkin3(Iface, Ssid)},
     }
+
+    // Command list for typo checking
+    textCommands := []string{"wifite", "fluxion", "bettercap", "airgeddon", "wifipumpkin"}
 
     if action, exists := commands[Function]; exists {
         action()
-    } else {
-        fmt.Printf("\n%s[!] %sFailed to validate Function: %s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, bcolors.Endc)
+        return
     }
-}
 
+    // Check if input was a number
+    if num, err := strconv.Atoi(Function); err == nil {
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListWirelessFunctions()
+        return
+    }
+
+    // Check for similar commands
+    lowerInput := strings.ToLower(Function)
+    for _, cmd := range textCommands {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListWirelessFunctions()
+}
 
 func AirGeddon() {
     subprocess.Popen(`airgeddon`)

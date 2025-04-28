@@ -15,7 +15,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
 
     file, err := os.Open(filename)
     if err != nil {
-        fmt.Printf("Error opening file:", err)
+        fmt.Printf("%s[!] %sError opening file: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
     defer file.Close()
@@ -32,7 +32,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
     }
 
     if err := scanner.Err(); err != nil {
-        fmt.Printf("Error reading file:", err)
+        fmt.Printf("%s[!] %sError reading file: ", bcolors.BrightRed, bcolors.Endc, err)
     }
 }
 
@@ -159,7 +159,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolo
 [ cyberafrics a cybersecurity organisation in Africa Kenya]
 [ What is there 4 U 2 gain the whole world & loose your...]
 [ soul? Be smart your Creator has good plans for you......]
-[ Life Tip.: Defeat the devil by fasting & praying........]
+[ The devil has no power over you Christian soldier.......]
 [ Email....: rojahsmontari@gmail.com......................]
 [ YouTube..: https://youtube.com/@RojahsMontari...........]
 ` + bcolors.Endc
@@ -188,14 +188,15 @@ func Developer() {
 
 [ Great thanks to my Family & my one & only loving wife ..]
 [ Naomi Waceke for her love and emotional support.........]
+
 `
     for _, d := range developer {
         fmt.Print(string(d))
         time.Sleep(3 * time.Millisecond)
     }
-    fmt.Printf(`%s%s
-     The devil has no power over you Christian soldier.%s
-`, bcolors.Green, bcolors.Blink, bcolors.Endc)
+    fmt.Printf(`Life Tip.: %s%sDefeat the devil by fasting and praying ...%s
+
+`, bcolors.BrightGreen, bcolors.Blink, bcolors.Endc)
 }
 
 func Creditors() {

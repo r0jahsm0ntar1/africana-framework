@@ -57,7 +57,7 @@ func Run() {
             case "n", "q", "no", "exit", "quit":
                 os.Exit(0)
             default:
-                fmt.Printf("Choices are (y|n|yes|no)")
+                fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
             }
         }
     } else {
@@ -126,10 +126,10 @@ func africanaFrameworAuto() {
         "crackers": func() { menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero() },
         "phishers": func() { menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero() },
         "websites": func() { menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero() },
-        "credits":  func() { credits.Creditors() },
-        "verses":   func() { scriptures.ScriptureNarators() },
-        
-        // Numeric shortcuts (1-9)
+        "credits":  func() { credits.Creditors(); menus.MenuZero() },
+        "verses":   func() { scriptures.ScriptureNarators(); menus.MenuZero() },
+
+        // Numeric shortcuts (1-10)
         "1": func() { menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero() },
         "2": func() { menus.MenuTwo(); securities.Torsocks(); menus.MenuZero() },
         "3": func() { menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero() },
@@ -138,20 +138,37 @@ func africanaFrameworAuto() {
         "6": func() { menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero() },
         "7": func() { menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero() },
         "8": func() { menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero() },
-        "9": func() { credits.Creditors() },
-       "10": func() { scriptures.ScriptureNarators() },
+        "9": func() { credits.Creditors(); menus.MenuZero() },
+       "10": func() { scriptures.ScriptureNarators(); menus.MenuZero() },
+    }
+
+    // Command list for typo checking
+    textCommands := []string{
+        "setups", "torsocks", "networks", "exploits", "wireless", "crackers", "phishers", "websites", "credits", "verses",
     }
 
     if action, exists := commands[Function]; exists {
         action()
     } else {
-        // Try to find if input was a number not in our map
-        if _, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %s is invalid. Valid numbers are:\n", bcolors.Yellow, bcolors.Endc, Function)
+        // Check if input was a number
+        if num, err := strconv.Atoi(Function); err == nil {
+            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
             menus.ListMainFunctions()
-        } else {
-            fmt.Printf("\n%s[!] %sFunction %s is invalid. Use %s'help' %sfor available modules.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+            return
         }
+
+        // Check for similar commands
+        lowerInput := strings.ToLower(Function)
+        for _, cmd := range textCommands {
+            lowerCmd := strings.ToLower(cmd)
+            if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+                fmt.Printf("\n%s[!] %sModule '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+                return
+            }
+        }
+
+        fmt.Printf("\n%s[!] %sModule %s is invalid. Available commands are:\n", bcolors.Yellow, bcolors.Endc, Function)
+        menus.ListMainFunctions()
     }
 }
 
@@ -162,8 +179,12 @@ func executeCommandAuto(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -272,8 +293,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -465,19 +490,16 @@ func africanaManual() {
         lowerInput := strings.ToLower(Function)
         for _, cmd := range textCommands {
             lowerCmd := strings.ToLower(cmd)
-            if strings.HasPrefix(lowerCmd, lowerInput) || 
-               strings.Contains(lowerCmd, lowerInput) ||
-               utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-                fmt.Printf("\n%s[!] %sCommand %s is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
+            if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+                fmt.Printf("\n%s[!] %sModule '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
                 return
             }
         }
 
-        fmt.Printf("\n%s[!] %sCommand %s is invalid. Available commands are:\n", bcolors.Yellow, bcolors.Endc, Function)
+        fmt.Printf("\n%s[!] %sModule %s is invalid. Available commands are:\n", bcolors.Yellow, bcolors.Endc, Function)
         menus.ListMainFunctions()
     }
 }
-
 
 func Genesis() {
     if len(os.Args) < 2 {
@@ -514,61 +536,61 @@ func createCommandMap() map[string]func() {
         // Version commands
         "-v":         banners.Version,
         "--version":  banners.Version,
-        
+
         // Update commands
         "-u":         setups.UpdateAfricana,
         "--update":   setups.UpdateAfricana,
-        
+
         // Auto mode commands
         "-0":         func() { launchAutoModeWithMenu(nil, nil) },
         "-a":         func() { launchAutoModeWithMenu(nil, nil) },
         "--auto":     func() { launchAutoModeWithMenu(nil, nil) },
-        
+
         // Installation commands
         "-1":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
         "-i":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
         "--install":  func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
-        
+
         // Torsocks commands
         "-2":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
         "-t":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
         "--torsocks": func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
-        
+
         // Networks commands
         "-3":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
         "-n":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
         "--networks": func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
-        
+
         // Exploits commands
         "-4":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
         "-e":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
         "--exploits": func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
-        
+
         // Wireless commands
         "-5":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
         "-w":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
         "--wireless": func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
-        
+
         // Crackers commands
         "-6":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
         "-c":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
         "--crackers": func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
-        
+
         // Phishers commands
         "-7":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
         "-p":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
         "--phishers": func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
-        
+
         // Websites commands
         "-8":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
         "-x":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
         "--websites": func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
-        
+
         // Credits commands
         "-9":         func() { credits.Creditors(); africanaAutoMode() },
         "-k":         func() { credits.Creditors(); africanaAutoMode() },
         "--credits":  func() { credits.Creditors(); africanaAutoMode() },
-        
+
         // Verses commands
         "-10":        func() { scriptures.ScriptureNarators(); africanaAutoMode() },
         "-s":         func() { scriptures.ScriptureNarators(); africanaAutoMode() },

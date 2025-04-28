@@ -9,6 +9,7 @@ import (
     "banners"
     "strings"
     "bcolors"
+    "strconv"
     "scriptures"
     "subprocess"
 )
@@ -78,8 +79,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -246,7 +251,8 @@ func WebPenFunctions(Function string, args ...interface{}) {
         }
     }
 
-    commands := map[string]func() {
+    // Command mapping with direct function references
+    commands := map[string]func(){
           "netmap": func() {PortScan(Rhost)},
         "enumscan": func() {EnumScan(Rhost)},
         "dnsrecon": func() {DnsRecon(Rhost)},
@@ -256,13 +262,46 @@ func WebPenFunctions(Function string, args ...interface{}) {
         "leakscan": func() {LeakScan(Rhost)},
         "vulnscan": func() {VulnScan(Rhost)},
           "bounty": func() {AutoScan(Rhost)},
+
+        // Numeric shortcuts
+        "1": func() {PortScan(Rhost)},
+        "2": func() {EnumScan(Rhost)},
+        "3": func() {DnsRecon(Rhost)},
+        "4": func() {TechScan(Rhost)},
+        "5": func() {AssetScan(Rhost)},
+        "6": func() {FuzzScan(Rhost)},
+        "7": func() {LeakScan(Rhost)},
+        "8": func() {VulnScan(Rhost)},
+        "9": func() {AutoScan(Rhost)},
     }
+
+    // Command list for typo checking
+    textCommands := []string{"netmap", "enumscan", "dnsrecon", "techscan", "asetscan", "fuzzscan", "leakscan", "vulnscan", "bounty"}
 
     if action, exists := commands[Function]; exists {
         action()
-    } else {
-        fmt.Printf("\n%s[!] %sInvalid Function %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+        return
     }
+
+    // Check if input was a number
+    if num, err := strconv.Atoi(Function); err == nil {
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListWebsitesFunctions()
+        return
+    }
+
+    // Check for similar commands
+    lowerInput := strings.ToLower(Function)
+    for _, cmd := range textCommands {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListWebsitesFunctions()
 }
 
 func EnumScan(Rhost string) {

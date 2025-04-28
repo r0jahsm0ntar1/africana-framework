@@ -75,8 +75,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -235,9 +239,11 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
         "ssh": HydraSsh,
         "ftp": HydraFtp,
         "smb": HydraSmb,
-        "1":   HydraSsh,
-        "2":   HydraFtp,
-        "3":   HydraSmb,
+
+        // Numeric shortcuts
+        "1": HydraSsh,
+        "2": HydraFtp,
+        "3": HydraSmb,
     }
 
     // Command list for typo checking
@@ -250,8 +256,8 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
 
     // Check if input was a number
     if num, err := strconv.Atoi(Function); err == nil {
-        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
-        menus.ListMainFunctions()
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListCrackersFunctions()
         return
     }
 
@@ -259,18 +265,15 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     lowerInput := strings.ToLower(Function)
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
-        if strings.HasPrefix(lowerCmd, lowerInput) ||
-           strings.Contains(lowerCmd, lowerInput) ||
-           utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-            fmt.Printf("\n%s[!] %sCommand '%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, cmd, bcolors.Endc)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
             return
         }
     }
 
-    fmt.Printf("\n%s[!] %sCommand '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
-    menus.ListMainFunctions()
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListCrackersFunctions()
 }
-
 
 //Offline Crackers
 func AirCrackng() {

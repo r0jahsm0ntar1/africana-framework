@@ -1,18 +1,24 @@
-EXE = africana
+#Africana-Framework builder. Run make
+
 SRC = .
+EXE = afrconsole
 LDFLAGS = -ldflags="-s -w"
 
 linux:
-	GOOS=linux go build -v -x -o $(EXE)_linux $(LDFLAGS) $(SRC)
-
-windows:
-	GOOS=windows go build -v -x -o $(EXE)_win.exe $(LDFLAGS) $(SRC)
+	GOOS=linux go build -v -x -o $(EXE) $(LDFLAGS) $(SRC)
+	echo "[+] building completed for linux distros ..."
 
 macos:
-	GOOS=darwin go build -v -x -o $(EXE)_macos $(LDFLAGS) $(SRC)
+	GOOS=darwin go build -v -x -o $(EXE) $(LDFLAGS) $(SRC)
+	echo "[+] building completed for darwin distros ..."
 
-all: windows macos linux
-	echo "done."
+windows:
+	GOOS=windows go build -v -x -o $(EXE).exe $(LDFLAGS) $(SRC)
+	echo "[+] building completed for windows distros ..."
+
+all: linux macos windows
+	echo "[+] building completed for all supported distros ..."
 
 clean:
-	rm -f $(EXE)_win.exe $(EXE)_macos $(EXE)_linux
+	rm -f $(EXE).exe $(EXE)
+	echo "[+] cleaning completed ..."

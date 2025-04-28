@@ -7,6 +7,7 @@ import(
     "bufio"
     "menus"
     "utils"
+    "strconv"
     "os/exec"
     "strings"
     "bcolors"
@@ -114,54 +115,54 @@ var (
         "uuid-dev":                     "uuid-dev",
         "wine32":                       "wine32:i386",
         "xterm":                        "xterm",
-        "zlib1g-dev":                  "zlib1g-dev",
-        "zsh":                         "zsh",
+        "zlib1g-dev":                   "zlib1g-dev",
+        "zsh":                          "zsh",
     }
 
     // Security tools
     securityTools = map[string]string{
-        "airgeddon":               "airgeddon",
-        "commix":                  "commix",
-        "dnsenum":                 "dnsenum",
-        "dnsrecon":                "dnsrecon",
-        "feroxbuster":             "feroxbuster",
-        "gobuster":                "gobuster",
-        "gophish":                 "gophish",
-        "metasploit-framework":    "metasploit-framework",
-        "netexec":                 "netexec",
-        "nikto":                   "nikto",
-        "nuclei":                  "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
-        "smbmap":                  "smbmap",
-        "sqlmap":                  "sqlmap",
-        "sslscan":                 "sslscan",
-        "uniscan":                 "uniscan",
-        "wapiti":                  "wapiti",
-        "whatweb":                 "whatweb",
-        "wifipumpkin3":            "wifipumpkin3",
-        "wifite":                  "wifite",
-        "xsser":                   "xsser",
+        "airgeddon":                    "airgeddon",
+        "commix":                       "commix",
+        "dnsenum":                      "dnsenum",
+        "dnsrecon":                     "dnsrecon",
+        "feroxbuster":                  "feroxbuster",
+        "gobuster":                     "gobuster",
+        "gophish":                      "gophish",
+        "metasploit-framework":         "metasploit-framework",
+        "netexec":                      "netexec",
+        "nikto":                        "nikto",
+        "nuclei":                       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
+        "smbmap":                       "smbmap",
+        "sqlmap":                       "sqlmap",
+        "sslscan":                      "sslscan",
+        "uniscan":                      "uniscan",
+        "wapiti":                       "wapiti",
+        "whatweb":                      "whatweb",
+        "wifipumpkin3":                 "wifipumpkin3",
+        "wifite":                       "wifite",
+        "xsser":                        "xsser",
     }
 
     // Project discovery tools
     projectDiscoveryTools = map[string]string{
-        "anew":          "github.com/tomnomnom/anew@latest",
-        "assetfinder":   "github.com/tomnomnom/assetfinder@latest",
-        "asnmap":        "github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
-        "dalfox":        "github.com/hahwul/dalfox/v2@latest",
-        "dnsx":          "github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
-        "gau":           "github.com/lc/gau/v2/cmd/gau@latest",
-        "gf":            "github.com/tomnomnom/gf@latest",
-        "hakrawler":     "github.com/hakluke/hakrawler@latest",
-        "httpx":         "github.com/projectdiscovery/httpx/cmd/httpx@latest",
-        "interactsh":    "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
-        "katana":        "github.com/projectdiscovery/katana/cmd/katana@latest",
-        "mapcidr":       "github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest",
-        "naabu":         "github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
-        "notify":        "github.com/projectdiscovery/notify/cmd/notify@latest",
-        "subfinder":     "github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
-        "tlsx":          "github.com/projectdiscovery/tlsx/cmd/tlsx@latest",
-        "uncover":       "github.com/projectdiscovery/uncover/cmd/uncover@latest",
-        "waybackurls":   "github.com/tomnomnom/waybackurls@latest",
+        "anew":                         "github.com/tomnomnom/anew@latest",
+        "assetfinder":                  "github.com/tomnomnom/assetfinder@latest",
+        "asnmap":                       "github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
+        "dalfox":                       "github.com/hahwul/dalfox/v2@latest",
+        "dnsx":                         "github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+        "gau":                          "github.com/lc/gau/v2/cmd/gau@latest",
+        "gf":                           "github.com/tomnomnom/gf@latest",
+        "hakrawler":                    "github.com/hakluke/hakrawler@latest",
+        "httpx":                        "github.com/projectdiscovery/httpx/cmd/httpx@latest",
+        "interactsh":                   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
+        "katana":                       "github.com/projectdiscovery/katana/cmd/katana@latest",
+        "mapcidr":                      "github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest",
+        "naabu":                        "github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
+        "notify":                       "github.com/projectdiscovery/notify/cmd/notify@latest",
+        "subfinder":                    "github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
+        "tlsx":                         "github.com/projectdiscovery/tlsx/cmd/tlsx@latest",
+        "uncover":                      "github.com/projectdiscovery/uncover/cmd/uncover@latest",
+        "waybackurls":                  "github.com/tomnomnom/waybackurls@latest",
     }
 )
 
@@ -203,8 +204,12 @@ func executeCommand(cmd string) bool {
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
-        {[]string{"o", "junks", "outputs", "clear junks", "clear outputs"}, utils.ListJunks},
-        {[]string{"logs", "history", "clear logs", "clear history"}, subprocess.LogHistory},
+
+        //History/Junk commands
+        {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
+        {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
+        {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
+        {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
         // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
@@ -347,6 +352,7 @@ func autoExecuteFunc(distro string, function string) {
 
 func SetupsFunction(Function string, args ...interface{}) {
     fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
+    fmt.Printf("\nFunction => %s\n", Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -354,19 +360,54 @@ func SetupsFunction(Function string, args ...interface{}) {
         }
     }
 
-    commands := map[string]func() {
+    // Command mapping with direct function references
+    commands := map[string]func(){
         "install": func() {Installer(Distro)},
          "update": func() {UpdateAfricana()},
          "repair": func() {UpdateAfricana()},
       "uninstall": func() {Uninstaller()},
            //"auto": ,
+
+        // Numeric shortcuts
+        "1": func() { KaliSetups()},
+        "2": func() { UbuntuSetups()},
+        "3": func() { ArchSetups()},
+        "4": func() { MacosSetups()},
+        "5": func() { AndroidSetups()},
+        "6": func() { WindowsSetups()},
+        "7": func() { UpdateAfricana()},
+        "8": func() { UpdateAfricana()},
+        "9": func() { Uninstaller()},
+           //"auto": ,
     }
+
+    // Command list for typo checking
+    textCommands := []string{"install", "update", "repair", "uninstall"}
 
     if action, exists := commands[Function]; exists {
         action()
-    } else {
-        fmt.Printf("\n%s[!] %sInvalid FUNCTION %s. Use %s'help' %sfor available Functions.\n", bcolors.Yellow, bcolors.Endc, Function, bcolors.Green, bcolors.Endc)
+        return
     }
+
+    // Check if input was a number
+    if num, err := strconv.Atoi(Function); err == nil {
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        menus.ListSetupsFunction()
+        return
+    }
+
+    // Check for similar commands
+    lowerInput := strings.ToLower(Function)
+    for _, cmd := range textCommands {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, Function)
+    menus.ListSetupsFunction()
 }
 
 func Installer(Distro string) {
@@ -442,7 +483,7 @@ func CheckTools() {
     response, _ := reader.ReadString('\n')
 
     if strings.ToLower(strings.TrimSpace(response)) == "y" || strings.ToLower(strings.TrimSpace(response)) == "yes" {
-        SetupsLauncher()
+        fmt.Println(); SetupsLauncher()
         return
     } else {
         fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.BrightRed, bcolors.Endc)
@@ -566,9 +607,8 @@ func InstallGithubTools() {
     }
 }
 
-
 func UpdateAfricana() {
-    fmt.Printf("\n%s[!] %safricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
     subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)

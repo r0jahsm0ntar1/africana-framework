@@ -1,17 +1,17 @@
 package subprocess
 
 import (
-    "bufio"
-    "fmt"
     "os"
-    "os/exec"
-    "os/signal"
-    "path/filepath"
-    "runtime"
-    "strings"
+    "fmt"
     "sync"
+    "bufio"
+    "os/exec"
     "os/user"
     "bcolors"
+    "runtime"
+    "strings"
+    "os/signal"
+    "path/filepath"
 )
 
 var (
@@ -200,7 +200,7 @@ func changeDirectory(newDir string) {
 }
 
 // LogHistory prints the command history
-func LogHistory() {
+func ShowHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
         return
@@ -216,7 +216,7 @@ func LogHistory() {
     fmt.Printf("%s[*] %sexec: history\n\n", bcolors.BrightBlue, bcolors.Endc)
     lineNumber := 1
     for scanner.Scan() {
-        fmt.Printf("%d  %s\n", lineNumber, scanner.Text())
+        fmt.Printf("%s%d. %s%s\n", bcolors.BrightBlue, lineNumber, bcolors.Endc, scanner.Text())
         lineNumber++
     }
 }

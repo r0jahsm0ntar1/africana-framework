@@ -176,7 +176,7 @@ func New(options ...Option) *Spinner {
     }
 
     s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
-    
+
     if _, ok := s.writer.(*bufio.Writer); !ok {
         s.bufWriter = bufio.NewWriter(s.writer)
         s.writer = s.bufWriter
@@ -252,7 +252,7 @@ func (s *Spinner) spin() {
         case <-ticker.C:
             s.mu.Lock()
             s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
-            
+
             spinChar := s.spinChars[charIdx%len(s.spinChars)]
             displayText := s.textEffect(s.currentText, letterPos, s.step)
             displayMsg := fmt.Sprintf("\r%s %s", displayText, spinChar)
@@ -354,7 +354,7 @@ func SystemShell(Input string) {
 func GenerateSelfSignedCert(certPath, keyPath string) {
     priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
     if err != nil {
-        fmt.Printf("Error generating key:", err)
+        fmt.Printf("%s[!] %sError generating key: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
 
@@ -362,7 +362,7 @@ func GenerateSelfSignedCert(certPath, keyPath string) {
     notAfter := notBefore.Add(365 * 24 * time.Hour)
     serialNumber, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
     if err != nil {
-        fmt.Printf("Error generating serial number:", err)
+        fmt.Printf("%s[!] %sError generating serial number: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
 
@@ -380,27 +380,27 @@ func GenerateSelfSignedCert(certPath, keyPath string) {
 
     certDER, err := x509.CreateCertificate(rand.Reader, &template, &template, &priv.PublicKey, priv)
     if err != nil {
-        fmt.Printf("Error creating certificate:", err)
+        fmt.Printf("%s[!] %sError creating certificate: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
 
     keyFile, err := os.OpenFile(keyPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
     if err != nil {
-        fmt.Printf("Error creating key file:", err)
+        fmt.Printf("%s[!] %sError creating key file: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
     defer keyFile.Close()
 
     privBytes, err := x509.MarshalECPrivateKey(priv)
     if err != nil {
-        fmt.Printf("Error marshaling private key:", err)
+        fmt.Printf("%s[!] %sError marshaling private key: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
     pem.Encode(keyFile, &pem.Block{Type: "EC PRIVATE KEY", Bytes: privBytes})
 
     certFile, err := os.Create(certPath)
     if err != nil {
-        fmt.Printf("Error creating certificate file:", err)
+        fmt.Printf("%s[!] %sError creating certificate file: ", bcolors.BrightRed, bcolors.Endc, err)
         return
     }
     defer certFile.Close()
@@ -568,22 +568,19 @@ func BrowserLogs() {
     return
 }
 
-// ClearLogs clears all logs
-func ClearLogs() {
-    subprocess.Popen(`ls /root/.afr3/logs/; ls /root/.afr3/output/; rm -rf /root/.afr3/logs/*; rm -rf /root/.afr3/output/*`)
-    return
-}
 
 // ListJunks lists all junk files in the output directory
 func ListJunks() {
-    subprocess.Popen(`ls /root/.afr3/output`)
+    fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
+    subprocess.Popen("ls -a /root/.afr3/output")
     return
 }
 
 // ClearJunks clears all junk files in the output directory
 func ClearJunks() {
+    fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
     subprocess.Popen(`rm -rf /root/.afr3/output/*`)
-    fmt.Printf("%s[*] %s Succesfully cleared All junks.", bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
 
