@@ -1,6 +1,6 @@
-       ![image] (https://cdn-icons-png.flaticon.com/128/12871/12871706.png)
+![image] (https://cdn-icons-png.flaticon.com/128/11586/11586336.png)
 
-#vAfricana Framework is Made simple but Lethal!
+# Africana Framework is Made simple but Lethal!
 
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
