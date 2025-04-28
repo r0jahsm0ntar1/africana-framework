@@ -1,4 +1,4 @@
-![image] (https://cdn-icons-png.flaticon.com/128/11586/11586336.png)
+![image](https://www.flaticon.com/free-icon/globe_12871706)
 
 # Africana Framework is Made simple but Lethal!
 
