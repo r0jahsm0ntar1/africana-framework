@@ -40,15 +40,11 @@
 Before you begin, ensure you have met the following requirements:
 **Golang:** Africana is written in Golang, so make sure you have it installed on your machine.
 
-```bash
-sudo apt update -y
-sudo apt install golang git apt -y
-```
 ## Installation Ubuntu, Kali & all Debian based distros;
 
 ```bash
 sudo apt update -y
-sudo apt install golang -y
+sudo apt install git golang -y
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
@@ -57,13 +53,13 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; mv africana_linux /usr/local/bin/africana; africana -i
+make; mv afrconsole /usr/local/bin/africana; afrconsole -h
 ```
 
 ## Installation in all Arch based distros;
 ```bash
 sudo pacman -Syu
-sudo pacman -Sy golang git
+sudo pacman -Sy git golang
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
@@ -72,7 +68,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo make; mv africana_linux /usr/local/bin/africana; africana -i
+make; mv afrconsole /usr/local/bin/africana; afrconsole -h
 ```
 ## Installation in tmux on Android based distros;
 ```bash
@@ -94,12 +90,12 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-sudo make; mv africana_linux /usr/local/bin/africana; africana -i
+make; mv afrconsole /usr/local/bin/africana; afrconsole -h
 ```
 
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
-sudo africana
+sudo afrconsole
 ```
 
 ## For Python version. Prerequisites try; DEPRICATED USE GO VERSION
@@ -124,7 +120,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs --d
 cd africana-framework
 ```
 ```bash
-sudo python3 installer.py
+python3 installer.py
 ```
 
 ## Installation in all Arch based distros;
