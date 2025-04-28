@@ -5,10 +5,10 @@
 [![License](https://img.shields.io/badge/License-CC%20Attr--NonCommercial%204.0-red)](https://github.com/r0jahsm0ntar1/africana-framework/blob/main/readme/license)
 <img src="https://img.shields.io/badge/Maintained%3F-Yes-96c40f">
 
-## Purpose
+## Purpose:
 Africana Framework is an open-source, community-driven cybersecurity toolkit designed for ethical penetration testing and vulnerability assessment. It automates the detection of security flaws across a wide range of network and web technologies, including internal networks, Wi-Fi, system anonymity, and web bug hunting. The framework aims to empower security professionals and researchers, particularly within Africa, to identify and mitigate security risks effectively. (Africana instances running on different machines).
 
-The framework's main features include:
+##          The framework's main features include:
 
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
@@ -23,9 +23,6 @@ The framework's main features include:
     |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix, Osmedeus etc.
     +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
 
-* Africana-framework is a REDTEAM Penetration Testing Framework written in pure Go lang & Pure Python3. 
-* It aims to make penetration testing easier for testers by covering a wide range of attack vectors including;
- web exploitation, WiFi attacks, phishing, malware generation, social engineering attacks, password cracking, and internal network attacks.
 
 # Disclaimer: 
 🚧 Hacking is addictive😂, Yoh! "With Great power."👀 You know the drill. 🚧
