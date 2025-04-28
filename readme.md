@@ -6,9 +6,9 @@
 <img src="https://img.shields.io/badge/Maintained%3F-Yes-96c40f">
 
 ## Purpose:
-Africana Framework is an open-source, community-driven cybersecurity toolkit designed for ethical penetration testing and vulnerability assessment. It automates the detection of security flaws across a wide range of network and web technologies, including internal networks, Wi-Fi, system anonymity, and web bug hunting. The framework aims to empower security professionals and researchers, particularly within Africa, to identify and mitigate security risks effectively. (Africana instances running on different machines).
+Africana Framework is an open-source, community-driven cybersecurity toolkit designed for ethical penetration testing and vulnerability assessment. It automates the detection of security flaws across a wide range of network and web technologies, including internal networks, Wi-Fi, system anonymity, and web bug hunting. The framework aims to empower security professionals and researchers to identify and mitigate security risks effectively. (Africana instances running on different machines).
 
-##          The framework's main features include:
+##The framework's main features include:
 
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
