@@ -9,7 +9,7 @@
 Africana Framework is an open-source, community-driven cybersecurity toolkit designed for ethical penetration testing and vulnerability assessment. It automates the detection of security flaws across a wide range of network and web technologies, including all networks, system anonymity, and web bug hunting. The framework aims to empower security professionals and researchers to identify and mitigate security risks effectively. (Africana instances running on different machines).
 
 ##The framework's main features include:
-
+```
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
     |    |    |    |    |    |    |    |    |            [Africana Topographical Map]
@@ -22,7 +22,7 @@ Africana Framework is an open-source, community-driven cybersecurity toolkit des
     |    |    + ------------------------------ 7. Social Engenearing Attacks With Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher. Others Will Be Added.
     |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix, Osmedeus etc.
     +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
-
+```
 
 # Disclaimer: 
 🚧 Hacking is addictive😂, Yoh! "With Great power."👀 You know the drill. 🚧
@@ -146,9 +146,9 @@ sudo python3 installer.py
 ```bash
 sudo africana
 ```
-![image](https://github.com/r0jahsm0ntar1/africana-framework/assets/108395400/0d58991f-a8b3-4fd9-966c-db84480e7d9c)
 
 ## About the Author
+```
                        .--,
                    ,.-( (o)\
                   /   .)/\ ')
@@ -167,6 +167,7 @@ Addicted to |_____|___|___|___|___|_____|__|__|_| |_|___|_|
 |    I Then Furthered My Skills By Research, Practice & Expirience.   |
 |     Self employed, Cybersecurity Consoltant, Software Engineer.     |
 +---------------------------------------------------------------------+
+```
 
-  ## 💰 You can help me by Donating
+## 💰 You can help me by Donating
 [![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/r0jahsm0ntar1) [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/r0jahsm0ntar1) [![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://patreon.com/r0jahsm0ntar1) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/r0jahsm0ntar1) 
