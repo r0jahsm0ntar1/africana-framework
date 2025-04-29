@@ -470,7 +470,10 @@ func CheckTools() {
             time.Sleep(90 * time.Millisecond)
         }
     }
+    userChoice()
+}
 
+func userChoice() {
     fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
     scanner.Scan()
     Input := strings.TrimSpace(scanner.Text())
@@ -482,6 +485,8 @@ func CheckTools() {
         fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.BrightRed, bcolors.Endc)
     default:
         fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
+        userChoice()
+        return
     }
 }
 
