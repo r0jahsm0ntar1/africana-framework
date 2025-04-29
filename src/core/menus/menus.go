@@ -46,9 +46,9 @@ func modulesHelp(info ModuleHelpInfo) {
 
 %sTested Distros%s:
 ------ -------
-      Id  Name
-      --  ----
-   -> 0   %s
+   Id  Name
+   --  ----
+-> 0   %s
 
 %sDescription%s:
 -----------
@@ -121,9 +121,7 @@ func generateOptions(modulePath string, options []string) {
 %sModule options %s(%s):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
-`,
-        bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
+  ----           ------- -------  --------  -----------`,bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
 
     for _, opt := range options {
         fmt.Printf(opt)
@@ -296,10 +294,8 @@ func ListMainFunctions() {
 %sMain Modules%s:
 ---- -------
 
-  # %sName      Description%s
-  - ----      -----------
-`,
-        bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -627,20 +623,19 @@ func ListSetupsDistros() {
 %sSupported Distros%s:
 --------- ---------
 
-  # %sName      Description%s
-  - ----      -----------
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
-        {"   kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
-        {" ubuntu", "This module will install africana-framework in Ubuntu-Linux"},
-        {"   arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
-        {"  macos", "Under development. Install africana on MackingTosh systems"},
-        {"android", "Install africana-framework in Termux using chroot environment"},
-        {"windows", "Under development. But can run if tools well installed using commando vm"},
+        {"    kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
+        {"  ubuntu", "This module will install africana-framework in Ubuntu-Linux"},
+        {"    arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
+        {"   macos", "Under development. Install africana on MackingTosh systems"},
+        {" android", "Install africana-framework in Termux using chroot environment"},
+        {" windows", "Under development. But can run if tools well installed using commando vm"},
     }
 
     for i, item := range items {
@@ -648,7 +643,7 @@ func ListSetupsDistros() {
   %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
-        Example:          "    set distro kali\n    set module install\n   run\n",
+        Example:          "    set distro kali\n    set module install\n    run\n",
     }
     modulesUsage(info)
 }
@@ -659,19 +654,18 @@ func ListSetupsFunction() {
 %sSetups Functions%s:
 ------ ---------
 
-  # %sName      Description%s
-  - ----      -----------
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
-        {"  install", "Installs africana in selected distro"},
-        {"   update", "Get new release of africana-framework from github and install it"},
-        {"   repair", "Repair africana-framework if broken or with issues"},
-        {"     auto", "Auto detect system and do the necessary"},
-        {"uninstall", "Completely uninstall africana-framework from system"},
+        {" install", "Installs africana in selected distro"},
+        {"  update", "Get new release of africana-framework from github and install it"},
+        {"  repair", "Repair africana-framework if broken or with issues"},
+        {"    auto", "Auto detect system and do the necessary"},
+        {"  delete", "Completely uninstall africana-framework from system. alias to 'uninstall'"},
     }
 
     for i, item := range items {
@@ -904,9 +898,8 @@ func ListTorsocksFunctions() {
 %sTorsocks Functions%s:
 -------- ---------
 
-  # %sName      Description%s
-  - ----      -----------
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -963,7 +956,6 @@ func TorsocksOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -1146,10 +1138,8 @@ func ListInternalFunctions() {
 %sNetworks Functions%s:
 -------- ---------
 
-  # %sName      Description%s
-  - ----      -----------
-`,
-        bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -1222,7 +1212,6 @@ func NetworksOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -1517,7 +1506,6 @@ func OptionsResponder() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Browsers
@@ -1584,7 +1572,6 @@ func OptionsBeefNinja() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Browsers
@@ -1650,7 +1637,6 @@ func OptionsXssHoocker() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -1739,7 +1725,6 @@ func ExploitsOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -1992,7 +1977,6 @@ func BlackJackOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -2287,7 +2271,6 @@ func AndroRatOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -2371,7 +2354,6 @@ func WirelessOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -2616,42 +2598,33 @@ func HelpInfoCrackersModules(Module string) {
 
 func CrackersOptions() {
     options := []string{
-        "MODE           none             yes       Attack mode (online/offline)\n",
-        "RHOST          none             yes       Target host\n",
-        "WORDLIST       rockyou.txt      yes       Path to wordlist\n",
-        "USERNAME       root             yes       Single username to test\n",
-        "PASSWORD       password         yes       Single password to test\n\n",
+        "\n  MODE           none             yes       Attack mode (online/offline)\n",
+        "  RHOST          none             yes       Target host\n",
+        "  WORDLIST       rockyou.txt      yes       Path to wordlist\n",
+        "  USERNAME       root             yes       Single username to test\n",
+        "  PASSWORD       password         yes       Single password to test\n\n",
     }
     generateOptions("src/crackers/passwords_pentest.fn", options)
 }
 
 func HelpInfoCrackers() {
-    fmt.Printf(`
-       %sName%s: crackers
-   %sFunction%s: src/core/crackers.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sTested Distros%s:
------- -------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sDescription%s:
------------
-  Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+    info := ModuleHelpInfo{
+        Name:          "crackers",
+        Function:      "src/crackers.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
+    }
+    modulesHelp(info)
     ListCrackersFunctions()
 }
+
 
 func ListCrackersFunctions() {
     fmt.Printf(`
@@ -2663,7 +2636,6 @@ func ListCrackersFunctions() {
 
   %sOnline Crackers%s:
   ------ --------
-
   %s1. %s         ssh %s> Automated Bruteforcer for SSH using rockyou.txt wordlists.
   %s2. %s         ftp %s> Bruteforcer for FTP using rockyou.txt wordlists.
   %s3. %s         smb %s> Hydra Bruteforcer for SMB using rockyou.txt wordlists.
@@ -2676,14 +2648,12 @@ func ListCrackersFunctions() {
 
   %sOffline Crackers%s:
   ------- --------
-
   %s1. %s        pcap %s> Crack captured .pcap files. Full location is needed.
   %s2. %s        ntlm %s> Crack ntlm file using default wordlists.
   %s3. %s        hash %s> Auto identify hash and start bruteforcing for passwords.
 
 %sex. %s%susage%s:
 --  -----
-
   set function ssh
   set mode online
   set wordlist -> (Give full path)
@@ -2710,7 +2680,6 @@ func PhishersOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   All Distros
@@ -2732,10 +2701,8 @@ func ListPhishersFunctions() {
 %sPhishers Functions%s:
 -------- ---------
 
-  # %sName        Description%s
-  - ----        -----------
-`,
-        bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName          Description%s
+  - ----          ----------- `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -3480,7 +3447,6 @@ func WebsitesOptions() {
 
 %sSupported Distros%s:
 --------- --------
-
    Id  Name
    --  ----
    0   Websites

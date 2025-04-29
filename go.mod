@@ -1,5 +1,7 @@
 module main.go
 
+go 1.24.2
+
 replace credits => ./src/credits/
 
 replace utils => ./src/core/utils/
@@ -28,14 +30,14 @@ replace agreements => ./src/agreements/
 
 replace scriptures => ./src/scriptures/
 
-replace africana => ./src/core/africana/
-
 replace webattackers => ./src/webattackers/
 
 replace subprocess => ./src/core/subprocess/
 
+replace afrconsole => ./src/core/afrconsole/
+
 require (
-	africana v0.0.0-00010101000000-000000000000 // indirect
+	afrconsole v0.0.0-00010101000000-000000000000 // indirect
 	agreements v0.0.0-00010101000000-000000000000 // indirect
 	banners v0.0.0-00010101000000-000000000000 // indirect
 	bcolors v0.0.0-00010101000000-000000000000 // indirect

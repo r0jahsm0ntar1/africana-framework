@@ -19,16 +19,17 @@ import(
 
 var (
     PyEnvName = "africana-venv"
+    Input, Proxy, Function string
+    Distro, _ = utils.GetLinuxDistroID()
     scanner = bufio.NewScanner(os.Stdin)
-    Input, Proxy, Distro, Function string
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
-    "distro": "",
     "module": "",
     "proxies": "",
     "function": "",
+    "distro": Distro,
     "pyenvname": PyEnvName,
 }
 
@@ -54,9 +55,6 @@ var (
         "gcc":                          "gcc",
         "gdb":                          "gdb",
         "github-desktop":               "github-desktop",
-        //"gnome-shell-extension-manager": "gnome-shell-extension-manager",
-        //"gnome-shell-extensions":       "gnome-shell-extensions",
-        //"gnome-tweaks":                 "gnome-tweaks",
         "golang-go":                    "golang-go",
         "gstreamer1.0-libav":           "gstreamer1.0-libav",
         "gunzip":                       "gunzip",
@@ -111,7 +109,6 @@ var (
         "tk-dev":                       "tk-dev",
         "tmux":                         "tmux",
         "tor":                          "tor",
-        //"ubuntu-restricted-extras":      "ubuntu-restricted-extras",
         "uuid-dev":                     "uuid-dev",
         "wine32":                       "wine32:i386",
         "xterm":                        "xterm",
@@ -336,10 +333,6 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sMissing required parameter FUNCTION. Use %s'show functions' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    if Distro == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters DISTRO. Use %s'show distros' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        return
-    }
     SetupsFunction(Function, Distro)
 }
 
@@ -352,7 +345,6 @@ func autoExecuteFunc(distro string, function string) {
 
 func SetupsFunction(Function string, args ...interface{}) {
     fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
-    fmt.Printf("\nFunction => %s\n", Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -362,27 +354,27 @@ func SetupsFunction(Function string, args ...interface{}) {
 
     // Command mapping with direct function references
     commands := map[string]func(){
-        "install": func() {Installer(Distro)},
-         "update": func() {UpdateAfricana()},
-         "repair": func() {UpdateAfricana()},
-      "uninstall": func() {Uninstaller()},
-           //"auto": ,
+           "auto": func() { AutoSetups() },
+        "install": func() { Installer(Distro) },
+         "update": func() { UpdateAfricana() },
+         "repair": func() { UpdateAfricana() },
+      "uninstall": func() { Uninstaller() },
 
         // Numeric shortcuts
-        "1": func() { KaliSetups()},
-        "2": func() { UbuntuSetups()},
-        "3": func() { ArchSetups()},
-        "4": func() { MacosSetups()},
-        "5": func() { AndroidSetups()},
-        "6": func() { WindowsSetups()},
-        "7": func() { UpdateAfricana()},
-        "8": func() { UpdateAfricana()},
-        "9": func() { Uninstaller()},
-           //"auto": ,
+        "0": func() { AutoSetups() },
+        "1": func() { KaliSetups() },
+        "2": func() { UbuntuSetups() },
+        "3": func() { ArchSetups() },
+        "4": func() { MacosSetups() },
+        "5": func() { AndroidSetups() },
+        "6": func() { WindowsSetups() },
+        "7": func() { UpdateAfricana() },
+        "8": func() { UpdateAfricana() },
+        "9": func() { Uninstaller() },
     }
 
     // Command list for typo checking
-    textCommands := []string{"install", "update", "repair", "uninstall"}
+    textCommands := []string{"auto", "install", "update", "repair", "uninstall"}
 
     if action, exists := commands[Function]; exists {
         action()
@@ -413,6 +405,7 @@ func SetupsFunction(Function string, args ...interface{}) {
 func Installer(Distro string) {
     matchers := []stringMatcher{
 
+        {[]string{"0", "auto"}, AutoSetups},
         {[]string{"1", "arch"}, ArchSetups},
         {[]string{"2", "kali"}, KaliSetups},
         {[]string{"3", "macos"}, MacosSetups},
@@ -450,7 +443,7 @@ func CheckTools() {
     // Show missing tools by category
     totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"])
     if totalMissing == 0 {
-        //fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
         return
     }
 
@@ -478,15 +471,17 @@ func CheckTools() {
         }
     }
 
-    reader := bufio.NewReader(os.Stdin)
     fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
-    response, _ := reader.ReadString('\n')
-
-    if strings.ToLower(strings.TrimSpace(response)) == "y" || strings.ToLower(strings.TrimSpace(response)) == "yes" {
-        fmt.Println(); SetupsLauncher()
+    scanner.Scan()
+    Input := strings.TrimSpace(scanner.Text())
+    switch Input {
+    case "y", "yes":
+       AutoSetups()
         return
-    } else {
-        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.BrightRed, bcolors.Endc)
+    case "n", "q", "no", "exit", "quit":
+        os.Exit(0)
+    default:
+        fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
     }
 }
 
@@ -586,6 +581,33 @@ func InstallTools(tools map[string]map[string]string) {
     }
 }
 
+// Map Linux distros to specific tasks
+var linuxTaskMap = map[string]func(){
+    "kali": func() {
+        fmt.Printf("%s[+] %sKali distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        KaliSetups()
+    },
+    "debian": func() {
+        fmt.Printf("%s[+] %sDebian distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        KaliSetups()
+    },
+    "ubuntu": func() {
+        fmt.Printf("%s[+] %sUbuntu distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        UbuntuSetups()
+    },
+    "fedora": func() {
+        fmt.Printf("%s[+] %sFedora distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+    },
+    "arch": func() {
+        fmt.Printf("%s[+] %sArch distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        ArchSetups()
+    },
+    "alpine": func() {
+        fmt.Printf("%s[+] %sAlpine distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+    },
+    // Add more distros as needed
+}
+
 func Venv(PyEnvName string) {
     subprocess.Popen(`cd ~/.afr3/; python3 -m virtualenv %s --system-site-packages; echo -n "\n source ~/.afr3/%s/bin/activate" >> ~/.zshrc; source ~/.zshrc`, PyEnvName, PyEnvName)
 }
@@ -607,12 +629,34 @@ func InstallGithubTools() {
     }
 }
 
-func UpdateAfricana() {
-    fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
-    subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
-    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
-    return
+func AutoSetups() {
+    osName := runtime.GOOS
+
+    switch osName {
+    case "linux":
+        if utils.DetectAndroid() {
+            fmt.Printf("%s[+] %sAndroid Detected ...", bcolors.BrightGreen, bcolors.Endc)
+            AndroidSetups()
+        } else {
+            // Detect the distro
+            distroID, err := utils.GetLinuxDistroID()
+            if err != nil {
+                fmt.Printf("%s[!] %sLinux OS detected but distro detection failed: %v\n", bcolors.BrightRed, bcolors.Endc, err)
+            } else if task, ok := linuxTaskMap[distroID]; ok {
+                task()
+            } else {
+                fmt.Printf("%s[!] %sUnknown or unsupported Linux distro: %s", bcolors.BrightRed, bcolors.Endc, distroID)
+            }
+        }
+    case "windows":
+        fmt.Printf("%s[+] %sWindows distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        // Windows-specific task
+    case "darwin":
+        fmt.Printf("%s[+] %smacOS distro detected ...", bcolors.BrightGreen, bcolors.Endc)
+        // macOS-specific task
+    default:
+        fmt.Printf("%s[!] %sUnsupported or unknown OS: %s", bcolors.BrightRed, bcolors.Endc, osName)
+    }
 }
 
 func KaliSetups() {
@@ -652,6 +696,7 @@ func UbuntuSetups() {
             `cd /etc/apt/sources.list.d/; curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
+            `apt-get install -y  ubuntu-restricted-extras, gnome-shell-extension-manager, gnome-shell-extensions, gnome-tweaks`,
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
@@ -685,6 +730,14 @@ func ArchSetups() {
     }
 }
 
+func UpdateAfricana() {
+    fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
+    subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
+    subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
+    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
+    return
+}
+
 func AndroidSetups() {
     // Placeholder for Windows setup logic
 }
@@ -694,9 +747,6 @@ func MacosSetups() {
 
 func WindowsSetups() {
     // Placeholder for Windows setup logic
-}
-
-func AutoSetups() {
 }
 
 func Uninstaller() {

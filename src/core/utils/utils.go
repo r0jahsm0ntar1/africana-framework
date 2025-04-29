@@ -755,6 +755,34 @@ func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
     return encoded, nil
 }
 
+// getLinuxDistroID attempts to parse /etc/os-release and get the ID
+func GetLinuxDistroID() (string, error) {
+    file, err := os.Open("/etc/os-release")
+    if err != nil {
+        return "", err
+    }
+    defer file.Close()
+
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+        line := scanner.Text()
+        if strings.HasPrefix(line, "ID=") {
+            return strings.Trim(strings.TrimPrefix(line, "ID="), `"`), nil
+        }
+    }
+
+    return "", fmt.Errorf("could not determine Linux distro")
+}
+
+func DetectAndroid() bool {
+    // Android typically has GOOS=linux, but some clues can help
+    // like the presence of `/system/build.prop`
+    if _, err := os.Stat("/system/build.prop"); err == nil {
+        return true
+    }
+    return false
+}
+
 // DirLocations returns the paths for certificates, output, and tools directories
 func DirLocations() (string, string, string, string, string, string, string) {
     if subprocess.IsRoot() {
