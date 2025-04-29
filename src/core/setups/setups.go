@@ -477,9 +477,9 @@ func CheckTools() {
     switch Input {
     case "y", "yes":
        AutoSetups()
-        return
+       return
     case "n", "q", "no", "exit", "quit":
-        os.Exit(0)
+        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.BrightRed, bcolors.Endc)
     default:
         fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
     }
