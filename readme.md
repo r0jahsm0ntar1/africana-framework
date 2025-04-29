@@ -1,8 +1,8 @@
 # Africana Framework
-[![Golang](https://pkg.go.dev/static/frontend/badge/badge.svg)](https://www.python.org/) 
+[![Golang](https://pkg.go.dev/static/frontend/badge/badge.svg)](https://go.dev/)
 <img src="https://img.shields.io/badge/PowerShell-%E2%89%A5%20v3.0-blue">
 <img src="https://img.shields.io/badge/Developed%20on-kali%20linux-blueviolet">
-[![License](https://img.shields.io/badge/License-CC%20Attr--NonCommercial%204.0-red)](https://github.com/r0jahsm0ntar1/africana-framework/blob/main/readme/license)
+[![License](https://img.shields.io/badge/License-CC%20Attr--NonCommercial%204.0-red)](https://github.com/r0jahsm0ntar1/africana-framework/blob/main/readme/license.md)
 <img src="https://img.shields.io/badge/Maintained%3F-Yes-96c40f">
 
 ## Purpose:
@@ -12,16 +12,17 @@ Africana Framework is an open-source, community-driven cybersecurity toolkit des
 ```
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
-    |    |    |    |    |    |    |    |    |            [Africana Topographical Map]
+    |    |    |    |    |    |    |    |    |  Africana Topographical Map ...
     |    |    |    |    |    |    |    |    +- 1. Install, Uninstall or Update Africana Framework.
     |    |    |    |    |    |    |    +------ 2. System Security Configuration With Tor, Privoxy, Squid, Macchanger, Dnsleak. etc.
     |    |    |    |    |    |    +----------- 3. Local Network Pentesting With Bettercap, Nmap, Metasploit, Responder, Smbmap. etc.
-    |    |    |    |    |    +---------------- 4. C2 & Revershell Generation Engines With Shelz, Shakamura, Ncat, Rlwrap, Jocker. etc.
+    |    |    |    |    |    +---------------- 4. C2 & Revershell Generation Engines Like: Villain, Hoaxshell, Noisemaker, Codebreaker etc.
     |    |    |    |    +--------------------- 5. Wifi Attack Vectors Both Automated & Manual. With Wifite, Airgeddon, Bettercap, Wifipumpkin3.
     |    |    |    + ------------------------- 6. Password, Hash Cracking With AirCrack-ng, John And Hashcat More Will Be Added As The Tool Grows.
     |    |    + ------------------------------ 7. Social Engenearing Attacks With Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher. Others Will Be Added.
     |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix, Osmedeus etc.
-    +----------------------------------------- 9. About The Author Of Africana And Free Pentesting Tricks, Materials. Very Nice Essential Things Just Try Nine.
+    +----------------------------------------- 9. About the author of Africana and free pentesting tricks, Materials.
+    []---------------------------------------- 10. That one place you really need to be. Very nice essential things just try ten.
 ```
 
 # Disclaimer: 
