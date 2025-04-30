@@ -442,7 +442,7 @@ func PacketSniffer(Mode string, Rhost string) {
     switch strings.ToLower(Mode) {
     case "single":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
-        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
+        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
     case "all":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
         subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
