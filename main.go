@@ -1,9 +1,9 @@
 package main
 
 import(
-    "afrconsole"
+    "africana"
 )
 
 func main() {
-    afrconsole.Start()
+    africana.Run()
 }
