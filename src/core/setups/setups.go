@@ -625,8 +625,8 @@ func InstallFoundationTools(commands []string) {
 
 func InstallGithubTools() {
     githubCommands := []string{
-        `cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/afr_base.git --depth 1`,
-        `python3 -m pip install -r /root/.afr3/afr_base/requirements.txt`,
+        `cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1`,
+        `python3 -m pip install -r /root/.afr3/africana-base/requirements.txt`,
     }
 
     for _, cmd := range githubCommands {
@@ -734,7 +734,7 @@ func ArchSetups() {
 
 func UpdateAfricana() {
     fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`cd /root/.afr3/afr_base; git pull .`)
+    subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
     subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return

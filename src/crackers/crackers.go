@@ -287,12 +287,12 @@ func JohnCrackng() {
 }
 
 func CyberBrute() {
-    subprocess.Popen(`cd /root/.afr3/afr_base/crackers/cyberbrute; bash cyberbrute.sh %s`, Rhost)
+    subprocess.Popen(`cd /root/.afr3/africana-base/crackers/cyberbrute; bash cyberbrute.sh %s`, Rhost)
     fmt.Println()
 }
 
 func HashBuster() {
-    subprocess.Popen(`cd /root/.afr3/afr_base/crackers/hash-buster; python3 cracker.py -t 10 %s`, Hashes)
+    subprocess.Popen(`cd /root/.afr3/africana-base/crackers/hash-buster; python3 cracker.py -t 10 %s`, Hashes)
     fmt.Println()
 }
 
