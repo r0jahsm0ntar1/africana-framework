@@ -1,4 +1,4 @@
-package africana
+package console
 
 import(
     "os"
@@ -40,7 +40,7 @@ type stringMatcher struct {
     action func()
 }
 
-func Run() {
+func Start() {
     if _, err := os.Stat(agreementDir); os.IsNotExist(err) {
         utils.ClearScreen()
         agreements.Covenant()

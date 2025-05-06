@@ -450,7 +450,7 @@ func CheckTools() {
     if len(missingTools["system"]) > 0 {
         fmt.Printf("%s[!] %s%sMissing system tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["system"] {
-            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
+            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
@@ -458,7 +458,7 @@ func CheckTools() {
     if len(missingTools["security"]) > 0 {
         fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["security"] {
-            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
+            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
@@ -466,7 +466,7 @@ func CheckTools() {
     if len(missingTools["discovery"]) > 0 {
         fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["discovery"] {
-            fmt.Printf("  - %s%s ...\n", bcolors.Endc, tool)
+            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
         }
     }
@@ -540,7 +540,7 @@ func InstallTools(tools map[string]map[string]string) {
     if len(tools["system"]) > 0 {
         fmt.Printf("\n%sInstalling system tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["system"] {
-            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
+            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("sudo apt install -y %s", pkg)
             time.Sleep(200 * time.Millisecond)
         }
@@ -550,7 +550,7 @@ func InstallTools(tools map[string]map[string]string) {
     if len(tools["security"]) > 0 {
         fmt.Printf("\n%sInstalling security tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["security"] {
-            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
+            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             if strings.HasPrefix(pkg, "github.com") {
                 // Go-based tool
                 subprocess.Popen("go install %s", pkg)
@@ -566,7 +566,7 @@ func InstallTools(tools map[string]map[string]string) {
     if len(tools["discovery"]) > 0 {
         fmt.Printf("\n%sInstalling project discovery tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["discovery"] {
-            fmt.Printf("\n%s[+]  %s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
+            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("go install %s", pkg)
             time.Sleep(200 * time.Millisecond)
         }
@@ -625,8 +625,8 @@ func InstallFoundationTools(commands []string) {
 
 func InstallGithubTools() {
     githubCommands := []string{
-        `cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1`,
-        `python3 -m pip install -r /root/.afr3/africana-base/requirements.txt`,
+        `cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/afr_base.git --depth 1`,
+        `python3 -m pip install -r /root/.afr3/afr_base/requirements.txt`,
     }
 
     for _, cmd := range githubCommands {
@@ -669,12 +669,12 @@ func KaliSetups() {
     missingTools := UpsentTools()
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
-            `apt-get update -y`,
-            `apt-get install zsh git curl wget -y`,
+            `wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg`,
             `cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
             `cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
             `apt-get update -y`,
+            `apt-get install zsh git curl -y`,
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
@@ -693,15 +693,12 @@ func UbuntuSetups() {
     missingTools := UpsentTools()
     if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
-            `apt-get update -y`,
-            `apt-get install zsh git curl wget -y`,
-            `wget "https://archive.kali.org/archive-key.asc"; apt-key add ./archive-key.asc; rm -rf ./archive-key.asc`,
-            `echo -n "Package: *" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin: release a=kali-rolling" >> /etc/apt/preferences.d/kali.pref; echo -n "Pin-Priority: 50" >> /etc/apt/preferences.d/kali.pref`,
-            `cd /etc/apt/trusted.gpg.d/; curl -vSL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
-            `cd /etc/apt/sources.list.d/; curl -vSL https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
+            `wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg`,
+            `cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
+            `cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
             `dpkg --add-architecture i386`,
-            `apt-get update -y`,
-            `apt-get install -y  ubuntu-restricted-extras, gnome-shell-extension-manager, gnome-shell-extensions, gnome-tweaks`,
+            `add-apt-repository multiverse`,
+            `apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks`,
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
@@ -737,7 +734,7 @@ func ArchSetups() {
 
 func UpdateAfricana() {
     fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
+    subprocess.Popen(`cd /root/.afr3/afr_base; git pull .`)
     subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return

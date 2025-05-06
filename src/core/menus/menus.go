@@ -121,7 +121,8 @@ func generateOptions(modulePath string, options []string) {
 %sModule options %s(%s):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------`,bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
+  ----           ---------------  --------  -----------
+`,bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
 
     for _, opt := range options {
         fmt.Printf(opt)

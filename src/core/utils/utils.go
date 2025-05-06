@@ -788,10 +788,10 @@ func DirLocations() (string, string, string, string, string, string, string) {
     if subprocess.IsRoot() {
         CertDir = "/root/.afr3/certs"
         OutPutDir = "/root/.afr3/output"
-        ToolsDir = "/root/.afr3/africana-base"
+        ToolsDir = "/root/.afr3/afr_base"
         RokyPath  = "/usr/share/wordlists/rockyou.txt"
-        KeyPath = filepath.Join(CertDir, "africana-key.pem")
-        CertPath = filepath.Join(CertDir, "africana-cert.pem")
+        KeyPath = filepath.Join(CertDir, "afr_key.pem")
+        CertPath = filepath.Join(CertDir, "afr_cert.pem")
         WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
 
     } else {
@@ -801,10 +801,10 @@ func DirLocations() (string, string, string, string, string, string, string) {
         }
         RokyPath  = "/usr/share/wordlists/rockyou.txt"
         CertDir = filepath.Join(homeDir, ".afr3", "certs")
-        KeyPath = filepath.Join(CertDir, "africana-key.pem")
+        KeyPath = filepath.Join(CertDir, "afr_key.pem")
         OutPutDir = filepath.Join(homeDir, ".afr3", "output")
-        CertPath = filepath.Join(CertDir, "africana-cert.pem")
-        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
+        CertPath = filepath.Join(CertDir, "afr_cert.pem")
+        ToolsDir = filepath.Join(homeDir, ".afr3", "afr_base")
         WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
     }
     return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList

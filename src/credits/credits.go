@@ -37,7 +37,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
 }
 
 func Contributors() {
-    filename := "/root/.afr3/africana-base/cheetsheets/hacktricks.txt"
+    filename := "/root/.afr3/afr_base/cheetsheets/hacktricks.txt"
     delay := 0 * time.Millisecond
     readFileLetterByLetter(filename, delay)
 
