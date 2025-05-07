@@ -601,8 +601,8 @@ func createCommandMap() map[string]func() {
         "--guide":    func() { banners.RandomBanners(); utils.BrowseTutarilas() },
 
         // Quiet mode commands
-        "-q":         func() { scriptures.Verse(); utils.InitiLize(); banners.GraphicsTinny(); banners.Version(); africanaManualMode() },
-        "--quite":    func() { scriptures.Verse(); utils.InitiLize(); banners.GraphicsTinny(); banners.Version(); africanaManualMode() },
+        "-q":         func() { scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode() },
+        "--quite":    func() { scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode() },
 
         // Help commands
         "-00":       menus.HelpInfoMenuMain,

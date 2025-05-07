@@ -23,9 +23,9 @@ var(
 
 var defaultValues = map[string]string{
 
-    "proxies": "",
     "rhost": "",
     "rhosts": "",
+    "proxies": "",
     "function": "",
     "output": OutPutDir,
     "password": WordPass,
