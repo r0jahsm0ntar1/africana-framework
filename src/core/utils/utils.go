@@ -786,9 +786,9 @@ func DetectAndroid() bool {
 // DirLocations returns the paths for certificates, output, and tools directories
 func DirLocations() (string, string, string, string, string, string, string) {
     if subprocess.IsRoot() {
-        CertDir = "/root/.afr3/certs"
-        OutPutDir = "/root/.afr3/output"
-        ToolsDir = "/root/.afr3/africana-base"
+        CertDir = "/root/.afr3/certs/"
+        OutPutDir = "/root/.afr3/output/"
+        ToolsDir = "/root/.afr3/africana-base/"
         RokyPath  = "/usr/share/wordlists/rockyou.txt"
         KeyPath = filepath.Join(CertDir, "afr_key.pem")
         CertPath = filepath.Join(CertDir, "afr_cert.pem")

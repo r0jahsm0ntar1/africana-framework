@@ -684,7 +684,7 @@ func SetupsOptions() {
 %sModule options %s(setups/setups_launcher.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   DISTRO         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
   FUNCTION       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
   RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
@@ -951,7 +951,7 @@ func TorsocksOptions() {
 %sModule options %s(src/securities/torrsocks_setup.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           --------- -----  --------  -----------
+  ----           ---------------  --------  -----------
   function       none             yes       The function to execute. ex.      -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)
   run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
 
@@ -1199,7 +1199,7 @@ func NetworksOptions() {
 %sModule options %s(src/networks/networks_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           single           yes       Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask.
   IFACE          eth0             yes       Interface to use for penetration testing.
   RHOST          none             yes       Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on.
@@ -1249,7 +1249,7 @@ func HelpInfoDiscover() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1288,7 +1288,7 @@ func HelpInfoInPortScan() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1326,7 +1326,7 @@ func HelpInfoInVulnScan() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1364,7 +1364,7 @@ func HelpInfoInEnumScan() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1402,7 +1402,7 @@ func HelpInfoSmbExplo() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1440,7 +1440,7 @@ func HelpInfoPSniffer() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1478,7 +1478,7 @@ func HelpInfoResponder() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1499,7 +1499,7 @@ func OptionsResponder() {
 %sModule Options %s(src/networks/responder.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -1543,7 +1543,7 @@ func HelpInfoBeefNinja() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1564,7 +1564,7 @@ func OptionsBeefNinja() {
 %sModule Options %s(src/networks/beefninja.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -1609,7 +1609,7 @@ func HelpInfoXssHoocker() {
 
 %sBasic options%s:
   Name           Current Setting  Required  Description
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   function     none             yes       The function to execute. ex. -> (setups, vanish, status, torip, chains, reload, exitnode, restore and stop)
 
 %sex. %s%susage%s:
@@ -1630,7 +1630,7 @@ func OptionsXssHoocker() {
 %sModule Options %s(src/networks/xsshooker.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -1672,7 +1672,7 @@ func ListExploitsFunctions() {
 %sex. %s%susage%s:
 --  -----
 
-  set function discover
+  set function hoaxshell
   run
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
@@ -1711,7 +1711,7 @@ func ExploitsOptions() {
 %sModule Options %s(src/exploits/backdoor_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   C2             blackjack        yes       The default c2 to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
   ICON           vlc              yes       Icon to be used while generating backdoors using (noisemakers and codebreakers)
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
@@ -1764,7 +1764,7 @@ func HelpInfoBlackJack() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -1801,7 +1801,7 @@ func HelpInfoShellz() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -1837,7 +1837,7 @@ func HelpInfoHoaxShell() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -1873,7 +1873,7 @@ func HelpInfoNoiseMaker() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -1911,7 +1911,7 @@ func HelpInfoHavoc() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -1949,7 +1949,7 @@ func HelpInfoTearNdroid() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -1968,7 +1968,7 @@ func BlackJackOptions() {
 %sModule Options %s(src/exploits/blackjack_c2.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2015,7 +2015,7 @@ func HelpInfoChameLeon() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2053,7 +2053,7 @@ func HelpInfoGhost() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2091,7 +2091,7 @@ func HelpInfoSeaShell() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2128,7 +2128,7 @@ func HelpInfoListener() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2165,7 +2165,7 @@ func HelpInfoCodeBreaker() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
@@ -2203,7 +2203,7 @@ func HelpInfoTearDroid() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2240,7 +2240,7 @@ func HelpInfoAndroRat() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2260,7 +2260,7 @@ func AndroRatOptions() {
 %sModule Options %s(src/exploits/androrat_c2.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2345,7 +2345,7 @@ func WirelessOptions() {
 %sModule Options %s(src/wirelss/wireless_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   IFACE          ->               yes       %sDefault%s: %swlan0%s. Mainly needed when generating backdoors and launching C2s.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2393,7 +2393,7 @@ func HelpInfoWifite() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
   WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
@@ -2434,7 +2434,7 @@ func HelpInfoFluxion() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
   WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
@@ -2475,7 +2475,7 @@ func HelpInfoBetterCap() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
   WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
@@ -2517,7 +2517,7 @@ func HelpInfoAirGeddon() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
   WORDLISTS      rockyou.txt      yes       Wordlist location for cracking captured handshakes.
@@ -2558,7 +2558,7 @@ func HelpInfoWifiPumpkin() {
 %sBasic options%s:
 ----- --------
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   SSID           ->               yes       The fake name of your wifi for the clients to see. Default = 'End times ministries'
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
@@ -2669,7 +2669,7 @@ func PhishersOptions() {
 %sModule Options %s(src/phishers/phishers_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
 
   MODE           none             yes       Mode to use. modes are(online or offline) Online attack for remote services. Offline attack for local files.
   RHOST          none             yes       Target host to be attacked.
@@ -3437,7 +3437,7 @@ func WebsitesOptions() {
 %sModule Options %s(src/websites/bugbounty_pentest.fn):
 
   %sName           Current Setting  Required  Description%s
-  ----           ------- -------  --------  -----------
+  ----           ---------------  --------  -----------
 
   RHOST          none             yes       Target host to be attacked.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
