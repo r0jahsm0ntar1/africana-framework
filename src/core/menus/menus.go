@@ -199,9 +199,9 @@ func MenuFour() {
         "hoaxshell",
         "shellz",
         "ghost",
+        "chameleon",
         "noisemaker",
         "codebreaker",
-        "listener",
     }
     generateMenu(items, "", true)
 }
@@ -305,7 +305,7 @@ func ListMainFunctions() {
         {"  setups", "Install, Update, Repair or Uninstall africana-framework"},
         {"torsocks", "Configure the system for strictly tight anonymity"},
         {"networks", "Start internal network attacks"},
-        {"exploits", "Generate undetectable R.A.Ts and launch C2s"},
+        {"exploits", "Generate undetectable R.A.Ts and launch listeners"},
         {"wireless", "Wireless networks attack vectors"},
         {"crackers", "Crack hashes and bruteforce services"},
         {"phishers", "Perform advanced Phishing attacks"},
@@ -342,7 +342,7 @@ Framework options:
 Console options:
     -t, --torsocks      Launch torsocks menu to torify your system
     -n, --networks      Start internal network attacks
-    -e, --exploits      Generate undetectebal R.A.Ts and (Launch c2s for all systems. Evasions also included)
+    -e, --exploits      Generate undetectebal R.A.Ts and (Launch listeners for all systems. Evasions also included)
     -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors
     -c, --crackers      Crack(NTLMS, HASHES, PCAPS) and bruteforce(SSH, FTP, SMB, RPC etc.)
     -p, --phishers      Perform almost all advanced Phishing attacks
@@ -1501,7 +1501,7 @@ func OptionsResponder() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
@@ -1566,7 +1566,7 @@ func OptionsBeefNinja() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
@@ -1632,7 +1632,7 @@ func OptionsXssHoocker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
 
@@ -1654,28 +1654,89 @@ View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
 func ListExploitsFunctions() {
     fmt.Printf(`
-%sNetworks Functions%s:
+%sExploits Functions%s:
 -------- ---------
 
-  # %sName         Description%s
-  - ----         -----------
-  %s1. %s   androrat %s> It is another Android C2. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions.
-  %s2. %s  teardroid %s> Andoird C2. Needs alot of online configuration but the best for now.
-  %s3. %s  blackjack %s> It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs.
-  %s4. %s  hoaxshell %s> A Killer FUD that bypasses most avs.
-  %s5. %s     shellz %s> Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners.
-  %s6. %s      ghost %s> It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it.
-  %s7. %s noisemaker %s> Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims.
-  %s8. %scodebreaker %s> Just like noisemake but the persisten mechanisim is through regestry keys.
-  %s9. %s   listener %s> Launch any of your disearable c2 with costumized LHOST, LPORT etc.
+  # %sName           Description%s
+  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
-%sex. %s%susage%s:
---  -----
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"   androrat", "It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
+        {"  teardroid", "Andoird Listener. Needs alot of online configuration but the best for now"},
+        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
+        {"     shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
+        {"      ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"  chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+        {" noisemaker", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
+        {"codebreaker", "Just like noisemake but the persisten mechanisim is through regestry keys"},
+    }
 
-  set function hoaxshell
-  run
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module hoaxshell\n    run\n",
+    }
+    modulesUsage(info)
+}
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func ListListenersFunctions() {
+    fmt.Printf(`
+%sListeners Functions%s:
+--------- ---------
+
+  # %sName           Description%s
+  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
+        {"       ncat", "Starts ncat to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with noisemaker or codebreaker modules"},
+        {" metasploit", "Launches metasploit to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with noisemaker or codebreaker modules"},
+    }
+
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set module noisemaker\n    set listener blackjack\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListObfscatorsFunctions() {
+    fmt.Printf(`
+%sObfscators Functions%s:
+---------- ---------
+
+  # %sName     Description%s
+  - ----     -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+    }
+
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set script Full_path_to_your .ps1\n    run\n",
+    }
+    modulesUsage(info)
 }
 
 func HelpInfoExploits() {
@@ -1700,7 +1761,7 @@ func HelpInfoExploits() {
 
 %sDescription%s:
 -----------
-  This is the Exploits module that contains all c2, backdoors and obfsicatorsfunctions.
+  This is the Exploits module that contains all Listener, backdoors and obfsicatorsfunctions.
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListExploitsFunctions()
@@ -1712,16 +1773,16 @@ func ExploitsOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  C2             blackjack        yes       The default c2 to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
   ICON           vlc              yes       Icon to be used while generating backdoors using (noisemakers and codebreakers)
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
-  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
+  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghost & chameleon).
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
+  LISTENER       blackjack        yes       The default Listener to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
   FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, noisemaker, codebreaker).
 
 %sSupported Distros%s:
@@ -1732,13 +1793,30 @@ func ExploitsOptions() {
 
 %sex. %s%susage%s:
 --  -----
-  show functions
+  show function
   set function blackjack
   run
 
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func HelpInfoChameleon() {
+    info := ModuleHelpInfo{
+        Name:          "exploits",
+        Function:      "src/exploits/chameleon.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
+    }
+    modulesHelp(info)
 }
 
 func HelpInfoBlackJack() {
@@ -1765,7 +1843,7 @@ func HelpInfoBlackJack() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -1802,7 +1880,7 @@ func HelpInfoShellz() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -1838,7 +1916,7 @@ func HelpInfoHoaxShell() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
@@ -1875,7 +1953,7 @@ func HelpInfoNoiseMaker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -1913,7 +1991,7 @@ func HelpInfoHavoc() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -1950,7 +2028,7 @@ func HelpInfoTearNdroid() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -1965,11 +2043,11 @@ func HelpInfoTearNdroid() {
 
 func BlackJackOptions() {
     fmt.Printf(`
-%sModule Options %s(src/exploits/blackjack_c2.fn):
+%sModule Options %s(src/exploits/blackjack_listener.fn):
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
@@ -2016,7 +2094,7 @@ func HelpInfoChameLeon() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2054,7 +2132,7 @@ func HelpInfoGhost() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Powershell script to obfsicate inorder to bypass AVs.
@@ -2092,7 +2170,7 @@ func HelpInfoSeaShell() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2129,7 +2207,7 @@ func HelpInfoListener() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2167,7 +2245,7 @@ func HelpInfoCodeBreaker() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   ICON           vlc              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2204,7 +2282,7 @@ func HelpInfoTearDroid() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2241,7 +2319,7 @@ func HelpInfoAndroRat() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
@@ -2257,11 +2335,11 @@ func HelpInfoAndroRat() {
 
 func AndroRatOptions() {
     fmt.Printf(`
-%sModule Options %s(src/exploits/androrat_c2.fn):
+%sModule Options %s(src/exploits/androrat_listener.fn):
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching C2s.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
@@ -2346,7 +2424,7 @@ func WirelessOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  IFACE          ->               yes       %sDefault%s: %swlan0%s. Mainly needed when generating backdoors and launching C2s.
+  IFACE          ->               yes       %sDefault%s: %swlan0%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
