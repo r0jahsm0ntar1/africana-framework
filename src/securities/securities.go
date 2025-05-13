@@ -72,26 +72,22 @@ func Torsocks() {
 
 func executeCommand(cmd string) bool {
     commandGroups := []stringMatcher{
-        // Info/Help commands
+
         {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
 
-        //History/Junk commands
         {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
         {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
         {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
         {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
-        // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-        // Set commands
         {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
         {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-        // Other commands
         {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
         {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
@@ -101,13 +97,11 @@ func executeCommand(cmd string) bool {
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-        // Setup commands
         {[]string{"info"}, menus.HelpInfoTorsocks},
         {[]string{"m", "menu"}, menus.MenuTwo},
         {[]string{"option", "options", "show option", "show options"}, menus.TorsocksOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListTorsocksFunctions},
 
-        // Commands executions
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() { AnonimityFunctions("setups") }},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoTorsocksSetups},
 
@@ -160,8 +154,10 @@ func handleSetCommand(parts []string) {
     setValues := map[string]*string{
         "proxies": &Proxy,
         "func": &Function,
+        "funcs": &Function,
         "module": &Function,
         "function": &Function,
+        "functions": &Function,
     }
     if ptr, exists := setValues[key]; exists {
         *ptr = value
@@ -180,8 +176,10 @@ func handleUnsetCommand(parts []string) {
     unsetValues := map[string]*string{
         "proxies": &Proxy,
         "func": &Function,
+        "funcs": &Function,
         "module": &Function,
         "function": &Function,
+        "functions": &Function,
     }
     if ptr, exists := unsetValues[key]; exists {
         *ptr = ""
@@ -199,7 +197,6 @@ func executeFunction() {
     AnonimityFunctions(Function)
 }
 
-// Helper functions
 func autoExecuteFunc(distro string, function string) {
     //Distro = distro
     //Function = function
@@ -211,11 +208,10 @@ func AnonimityFunctions(Function string, args ...interface{}) {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
-            // Error already printed by SetProxy
+            //
         }
     }
 
-    // Command mapping with direct function references
     commands := map[string]func(){
         "setups": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
         "start": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
@@ -227,7 +223,6 @@ func AnonimityFunctions(Function string, args ...interface{}) {
         "reload": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
         "stop": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
 
-        // Numeric shortcuts
         "1": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
         "2": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
         "3": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()},
@@ -239,7 +234,6 @@ func AnonimityFunctions(Function string, args ...interface{}) {
         "9": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
     }
 
-    // Command list for typo checking
     textCommands := []string{"setups", "start", "status", "exitnode", "torip", "restore", "chains", "reload", "stop"}
 
     if action, exists := commands[Function]; exists {
@@ -247,14 +241,12 @@ func AnonimityFunctions(Function string, args ...interface{}) {
         return
     }
 
-    // Check if input was a number
     if num, err := strconv.Atoi(Function); err == nil {
         fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
         menus.ListTorsocksFunctions()
         return
     }
 
-    // Check for similar commands
     lowerInput := strings.ToLower(Function)
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)

@@ -8,9 +8,9 @@ import(
     "sync"
     "time"
     "bytes"
+    "bufio"
     "os/exec"
     "bcolors"
-    "bufio"
     "strings"
     "runtime"
     "net/url"
@@ -330,7 +330,6 @@ func (s *Spinner) UpdateText(format string, a ...interface{}) {
     s.currentText = fmt.Sprintf(format, a...)
 }
 
-// ClearScreen clears the terminal screen
 func ClearScreen() {
     if runtime.GOOS == "windows" {
         cmd = exec.Command("cmd", "/c", "cls")
@@ -344,13 +343,11 @@ func ClearScreen() {
     }
 }
 
-// SystemShell executes a shell command
 func SystemShell(Input string) {
     fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
     subprocess.Popen(Input)
 }
 
-// GenerateSelfSignedCert generates a self-signed certificate
 func GenerateSelfSignedCert(certPath, keyPath string) {
     priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
     if err != nil {
@@ -407,7 +404,6 @@ func GenerateSelfSignedCert(certPath, keyPath string) {
     pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certDER})
 }
 
-// GetDefaultIP returns the default IP address of the system
 func GetDefaultIP() (string, error) {
     interfaces, err := net.Interfaces()
     if err != nil {
@@ -437,7 +433,6 @@ func GetDefaultIP() (string, error) {
     return "", fmt.Errorf("no active network interface found")
 }
 
-// Ifaces lists all network interfaces and their addresses
 func Ifaces() ([]InterfaceInfo, error) {
     interfaces, err := net.Interfaces()
     if err != nil {
@@ -455,7 +450,6 @@ func Ifaces() ([]InterfaceInfo, error) {
 
         addrs, err := iface.Addrs()
         if err != nil {
-            // You can choose to continue or return the error
             continue
         }
 
@@ -469,7 +463,6 @@ func Ifaces() ([]InterfaceInfo, error) {
     return result, nil
 }
 
-// GetDefaultGatewayIP returns the default gateway IP address
 func GetDefaultGatewayIP() (string, error) {
     var cmd *exec.Cmd
     if runtime.GOOS == "windows" {
@@ -488,7 +481,6 @@ func GetDefaultGatewayIP() (string, error) {
     return gatewayIP, nil
 }
 
-// AskForProxy validates and parses a proxy URL
 func AskForProxy(Proxy string) (*url.URL, error) {
     proxyStr := strings.TrimSpace(Proxy)
     proxyURL, err := url.Parse(proxyStr)
@@ -503,7 +495,6 @@ func AskForProxy(Proxy string) (*url.URL, error) {
     return proxyURL, nil
 }
 
-// SetProxy sets the system proxy
 func SetProxy(Proxy string) error {
     proxyURL, err := AskForProxy(Proxy)
     if err != nil {
@@ -520,7 +511,6 @@ func SetProxy(Proxy string) error {
     return nil
 }
 
-// replaceStringsInFile replaces strings in a file
 func replaceStringsInFile(fileName string, replacements map[string]string) error {
     content, err := ioutil.ReadFile(fileName)
     if err != nil {
@@ -533,7 +523,6 @@ func replaceStringsInFile(fileName string, replacements map[string]string) error
     return ioutil.WriteFile(fileName, []byte(textContent), 0644)
 }
 
-// Editors replaces strings in multiple files
 func Editors(filesToReplacements map[string]map[string]string) {
     for fileName, replacements := range filesToReplacements {
         err := replaceStringsInFile(fileName, replacements)
@@ -545,7 +534,6 @@ func Editors(filesToReplacements map[string]map[string]string) {
     }
 }
 
-// BrowseTutarilas opens a YouTube tutorial link in the default browser
 func BrowseTutarilas() {
     switch runtime.GOOS {
     case "linux", "darwin":
@@ -560,7 +548,6 @@ func BrowseTutarilas() {
     subprocess.Popen(command)
 }
 
-// BrowserLogs moves logs to a web directory and opens them in a browser
 func BrowserLogs() {
     subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr3/logs/; cat *.log | aha --black > /var/www/html/index.html`)
     subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null; php -S 0.0.0:80`)
@@ -568,15 +555,12 @@ func BrowserLogs() {
     return
 }
 
-
-// ListJunks lists all junk files in the output directory
 func ListJunks() {
     fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
     subprocess.Popen("ls -a /root/.afr3/output")
     return
 }
 
-// ClearJunks clears all junk files in the output directory
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
     subprocess.Popen(`rm -rf /root/.afr3/output/*`)
@@ -584,12 +568,10 @@ func ClearJunks() {
     return
 }
 
-// Sleep pauses the execution for a specified duration (in seconds)
 func Sleep() {
     subprocess.Popen("sleep")
 }
 
-// GetAgreementPath returns the path to the agreement file based on the 's privilege level
 func GetAgreementPath() string {
     baseDir := "/root/.afr3/agreements/"
     if !subprocess.IsRoot() {
@@ -602,17 +584,14 @@ func GetAgreementPath() string {
     return filepath.Join(baseDir, "covenant.txt")
 }
 
-// Agreements creates the agreement file if it doesn't exist
 func Agreements(filePath string) {
     dirPath := filepath.Dir(filePath)
 
-    // Create the directory if it doesn't exist
     if err := os.MkdirAll(dirPath, os.ModePerm); err != nil {
         fmt.Printf("[!] Error creating directory: %v\n", err)
         return
     }
 
-    // Create the agreement file if it doesn't exist
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         if err := ioutil.WriteFile(filePath, []byte("user accepted to the agreement."), os.ModePerm); err != nil {
             fmt.Printf("[!] Error writing file: %v\n", err)
@@ -621,7 +600,6 @@ func Agreements(filePath string) {
     }
 }
 
-// Sealing ensures the agreement file exists
 func Sealing() {
     filePath := GetAgreementPath()
     if filePath == "" {
@@ -631,7 +609,6 @@ func Sealing() {
     Agreements(filePath)
 }
 
-// EnhancedCopy copies files/directories with overwrite support
 func Copy(src, dst string) error {
     srcInfo, err := os.Stat(src)
     if err != nil {
@@ -641,47 +618,39 @@ func Copy(src, dst string) error {
     if srcInfo.IsDir() {
         return enhancedCopyDir(src, dst)
     }
-    return enhancedCopyFile(src, dst, true) // true = allow overwrite
+    return enhancedCopyFile(src, dst, true)
 }
 
-// enhancedCopyFile handles file copying with overwrite control
 func enhancedCopyFile(src, dst string, overwrite bool) error {
-    // If destination exists and is a directory, append source filename
     dstInfo, err := os.Stat(dst)
     if err == nil && dstInfo.IsDir() {
         dst = filepath.Join(dst, filepath.Base(src))
     }
 
-    // Check if destination exists and overwrite is disabled
     if _, err := os.Stat(dst); err == nil && !overwrite {
         return fmt.Errorf("destination exists (overwrite disabled): %s", dst)
     }
 
-    // Ensure parent directory exists
     if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
         return fmt.Errorf("failed to create parent directory: %w", err)
     }
 
-    // Open source file
     in, err := os.Open(src)
     if err != nil {
         return fmt.Errorf("failed to open source: %w", err)
     }
     defer in.Close()
 
-    // Create destination file (truncates if exists)
     out, err := os.Create(dst)
     if err != nil {
         return fmt.Errorf("failed to create destination: %w", err)
     }
     defer out.Close()
 
-    // Copy with buffer for better performance
     if _, err := io.Copy(out, in); err != nil {
         return fmt.Errorf("copy failed: %w", err)
     }
 
-    // Preserve permissions and timestamps
     srcInfo, err := os.Stat(src)
     if err != nil {
         return fmt.Errorf("failed to get source info: %w", err)
@@ -695,25 +664,21 @@ func enhancedCopyFile(src, dst string, overwrite bool) error {
     return nil
 }
 
-// enhancedCopyDir handles directory copying
 func enhancedCopyDir(srcDir, dstDir string) error {
     srcInfo, err := os.Stat(srcDir)
     if err != nil {
         return fmt.Errorf("could not stat source dir: %w", err)
     }
 
-    // Create destination directory
     if err := os.MkdirAll(dstDir, srcInfo.Mode()); err != nil {
         return fmt.Errorf("failed to create destination dir: %w", err)
     }
 
-    // Read source directory
     entries, err := os.ReadDir(srcDir)
     if err != nil {
         return fmt.Errorf("failed to read source dir: %w", err)
     }
 
-    // Copy each entry
     for _, entry := range entries {
         srcPath := filepath.Join(srcDir, entry.Name())
         dstPath := filepath.Join(dstDir, entry.Name())
@@ -729,33 +694,27 @@ func enhancedCopyDir(srcDir, dstDir string) error {
         }
     }
 
-    // Preserve directory timestamps
     return os.Chtimes(dstDir, srcInfo.ModTime(), srcInfo.ModTime())
 }
 
 func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
-    // Read the file content
     content, err := ioutil.ReadFile(filePath)
     if err != nil {
         return "", err
     }
 
-    // Clean any potential BOM or null characters (optional but good practice)
     cleaned := string(bytes.Trim(content, "\x00"))
 
-    // Convert to UTF-16LE
     buf := new(bytes.Buffer)
     for _, r := range cleaned {
-        buf.WriteByte(byte(r))        // Low byte
-        buf.WriteByte(byte(r >> 8))   // High byte
+        buf.WriteByte(byte(r))
+        buf.WriteByte(byte(r >> 8))
     }
 
-    // Encode to Base64 (same as `base64 -w 0`)
     encoded := base64.StdEncoding.EncodeToString(buf.Bytes())
     return encoded, nil
 }
 
-// getLinuxDistroID attempts to parse /etc/os-release and get the ID
 func GetLinuxDistroID() (string, error) {
     file, err := os.Open("/etc/os-release")
     if err != nil {
@@ -775,20 +734,17 @@ func GetLinuxDistroID() (string, error) {
 }
 
 func DetectAndroid() bool {
-    // Android typically has GOOS=linux, but some clues can help
-    // like the presence of `/system/build.prop`
     if _, err := os.Stat("/system/build.prop"); err == nil {
         return true
     }
     return false
 }
 
-// DirLocations returns the paths for certificates, output, and tools directories
 func DirLocations() (string, string, string, string, string, string, string) {
     if subprocess.IsRoot() {
-        CertDir = "/root/.afr3/certs/"
-        OutPutDir = "/root/.afr3/output/"
-        ToolsDir = "/root/.afr3/africana-base/"
+        CertDir = "/root/.afr3/certs"
+        OutPutDir = "/root/.afr3/output"
+        ToolsDir = "/root/.afr3/africana-base"
         RokyPath  = "/usr/share/wordlists/rockyou.txt"
         KeyPath = filepath.Join(CertDir, "afr_key.pem")
         CertPath = filepath.Join(CertDir, "afr_cert.pem")
@@ -810,7 +766,6 @@ func DirLocations() (string, string, string, string, string, string, string) {
     return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
 }
 
-// Levenshtein computes the edit distance between two strings (case-insensitive).
 func Levenshtein(a, b string) int {
     a, b = strings.ToLower(a), strings.ToLower(b)
     ar, br := []rune(a), []rune(b)
@@ -838,9 +793,9 @@ func Levenshtein(a, b string) int {
                 cost = 1
             }
             currRow[j] = min(
-                currRow[j-1] + 1,      // Insert
-                prevRow[j] + 1,        // Delete
-                prevRow[j-1] + cost,   // Replace
+                currRow[j-1] + 1,
+                prevRow[j] + 1,
+                prevRow[j-1] + cost,
             )
         }
         prevRow, currRow = currRow, prevRow
@@ -858,11 +813,9 @@ func min(nums ...int) int {
     return m
 }
 
-// InitializePaths sets the correct paths based on whether the  is root or not
 func InitiLize() {
     CertDir, OutPutDir, _, _, _, _, _ := DirLocations()
 
-    // Create directories if they don't exist
     for _, dir := range []string{CertDir, OutPutDir} {
         if err := os.MkdirAll(dir, os.ModePerm); err != nil {
             fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.BrightRed, bcolors.Endc, dir, err)
@@ -870,7 +823,6 @@ func InitiLize() {
         }
     }
 
-    // Generate self-signed certificate if it doesn't exist
     if _, err := os.Stat(CertPath); os.IsNotExist(err) {
         GenerateSelfSignedCert(CertPath, KeyPath)
     }

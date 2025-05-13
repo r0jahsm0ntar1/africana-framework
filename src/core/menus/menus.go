@@ -91,7 +91,6 @@ func modulesUsage(info ModuleHelpInfo) {
     }
 }
 
-// Generic menu template
 func generateMenu(menuItems []string, helpText string, backOption bool) {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
@@ -115,7 +114,6 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
     }
 }
 
-// Common options template
 func generateOptions(modulePath string, options []string) {
     fmt.Printf(`
 %sModule options %s(%s):
@@ -129,7 +127,6 @@ func generateOptions(modulePath string, options []string) {
     }
 }
 
-// Specific menu implementations
 func MenuZero() {
     items := []string{
         "Install, Update and View Logs",
@@ -270,7 +267,6 @@ func MenuEight() {
     generateMenu(items, "", true)
 }
 
-// Example usage for main module
 func HelpInfoMain() {
     info := ModuleHelpInfo{
         Name:          "main",
@@ -1738,6 +1734,25 @@ func ListObfscatorsFunctions() {
     }
     modulesUsage(info)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 func HelpInfoExploits() {
     fmt.Printf(`

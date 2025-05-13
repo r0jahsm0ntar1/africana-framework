@@ -39,7 +39,6 @@ type stringMatcher struct {
 }
 
 var (
-    // System tools and packages
     systemTools = map[string]string{
         "aha":                          "aha",
         "aircrack-ng":                  "aircrack-ng",
@@ -114,9 +113,9 @@ var (
         "xterm":                        "xterm",
         "zlib1g-dev":                   "zlib1g-dev",
         "zsh":                          "zsh",
+        "go-winres":                    "github.com/tc-hib/go-winres@latest",
     }
 
-    // Security tools
     securityTools = map[string]string{
         "airgeddon":                    "airgeddon",
         "commix":                       "commix",
@@ -140,7 +139,6 @@ var (
         "xsser":                        "xsser",
     }
 
-    // Project discovery tools
     projectDiscoveryTools = map[string]string{
         "anew":                         "github.com/tomnomnom/anew@latest",
         "assetfinder":                  "github.com/tomnomnom/assetfinder@latest",
@@ -196,26 +194,22 @@ func SetupsLauncher() {
 
 func executeCommand(cmd string) bool {
     commandGroups := []stringMatcher{
-        // Info/Help commands
+
         {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
 
-        //History/Junk commands
         {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
         {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
         {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
         {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
-        // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-        // Set commands
         {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
         {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-        // Other commands
         {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
         {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
@@ -225,14 +219,12 @@ func executeCommand(cmd string) bool {
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-        // Setup commands
         {[]string{"info"}, menus.HelpInfoSetups},
         {[]string{"m", "menu"}, menus.MenuOne},
         {[]string{"option", "options", "show option", "show options"}, menus.SetupsOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListSetupsFunction},
         {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
 
-        // Commands executions
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run kali", "use kali", "exec kali", "start kali", "launch kali", "exploit kali", "execute kali"}, func() { autoExecuteFunc("kali", "install") }},
         {[]string{"? 1", "info 1", "help 1", "kali", "info kali", "help kali"}, menus.HelpInfoKali},
 
@@ -289,6 +281,7 @@ func handleSetCommand(parts []string) {
         "func":  &Function,
         "module": &Function,
         "function": &Function,
+        "functions": &Function,
         "pyenvname": &PyEnvName,
 
     }
@@ -311,8 +304,10 @@ func handleUnsetCommand(parts []string) {
         "distro": &Distro,
         "proxies": &Proxy,
         "func": &Function,
+        "funcs": &Function,
         "module": &Function,
         "function": &Function,
+        "functions": &Function,
         "pyenvname": &PyEnvName,
     }
 
@@ -336,7 +331,6 @@ func executeFunction() {
     SetupsFunction(Function, Distro)
 }
 
-// Helper functions
 func autoExecuteFunc(distro string, function string) {
     Distro = distro
     Function = function
@@ -348,19 +342,17 @@ func SetupsFunction(Function string, args ...interface{}) {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
-            // Error already printed by SetProxy
+            //
         }
     }
 
-    // Command mapping with direct function references
     commands := map[string]func(){
-           "auto": func() { AutoSetups() },
+        "auto": func() { AutoSetups() },
         "install": func() { Installer(Distro) },
-         "update": func() { UpdateAfricana() },
-         "repair": func() { UpdateAfricana() },
-      "uninstall": func() { Uninstaller() },
+        "update": func() { UpdateAfricana() },
+        "repair": func() { UpdateAfricana() },
+        "uninstall": func() { Uninstaller() },
 
-        // Numeric shortcuts
         "0": func() { AutoSetups() },
         "1": func() { KaliSetups() },
         "2": func() { UbuntuSetups() },
@@ -373,7 +365,6 @@ func SetupsFunction(Function string, args ...interface{}) {
         "9": func() { Uninstaller() },
     }
 
-    // Command list for typo checking
     textCommands := []string{"auto", "install", "update", "repair", "uninstall"}
 
     if action, exists := commands[Function]; exists {
@@ -381,14 +372,12 @@ func SetupsFunction(Function string, args ...interface{}) {
         return
     }
 
-    // Check if input was a number
     if num, err := strconv.Atoi(Function); err == nil {
         fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
         menus.ListSetupsFunction()
         return
     }
 
-    // Check for similar commands
     lowerInput := strings.ToLower(Function)
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
@@ -431,7 +420,6 @@ func Installer(Distro string) {
 }
 
 func CheckTools() {
-    // Create spinner with custom options
     spinner := utils.New(
         utils.WithStyle("classic"),
         utils.WithEffect("bounce"),
@@ -440,7 +428,6 @@ func CheckTools() {
     missingTools := UpsentTools()
     spinner.Stop()
 
-    // Show missing tools by category
     totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"])
     if totalMissing == 0 {
         fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
@@ -493,7 +480,6 @@ func userChoice() {
 func isInstalled(tool string) bool {
     _, err := exec.LookPath(tool)
     if err != nil {
-        // For some packages that don't have direct binaries, try dpkg
         cmd := exec.Command("dpkg", "-s", tool)
         if cmd.Run() == nil {
             return true
@@ -509,26 +495,23 @@ func UpsentTools() map[string]map[string]string {
     missing["security"] = make(map[string]string)
     missing["discovery"] = make(map[string]string)
 
-    // Check system tools
     for tool, pkg := range systemTools {
         if !isInstalled(tool) {
-            time.Sleep(50 * time.Millisecond)
+            time.Sleep(45 * time.Millisecond)
             missing["system"][tool] = pkg
         }
     }
 
-    // Check security tools
     for tool, pkg := range securityTools {
         if !isInstalled(tool) {
-            time.Sleep(50 * time.Millisecond)
+            time.Sleep(45 * time.Millisecond)
             missing["security"][tool] = pkg
         }
     }
 
-    // Check project discovery tools
     for tool, pkg := range projectDiscoveryTools {
         if !isInstalled(tool) {
-            time.Sleep(50 * time.Millisecond)
+            time.Sleep(45 * time.Millisecond)
             missing["discovery"][tool] = pkg
         }
     }
@@ -536,43 +519,37 @@ func UpsentTools() map[string]map[string]string {
 }
 
 func InstallTools(tools map[string]map[string]string) {
-    // Install system tools first
     if len(tools["system"]) > 0 {
         fmt.Printf("\n%sInstalling system tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["system"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("sudo apt install -y %s", pkg)
-            time.Sleep(200 * time.Millisecond)
+            time.Sleep(180 * time.Millisecond)
         }
     }
 
-    // Install security tools
     if len(tools["security"]) > 0 {
         fmt.Printf("\n%sInstalling security tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["security"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             if strings.HasPrefix(pkg, "github.com") {
-                // Go-based tool
                 subprocess.Popen("go install %s", pkg)
             } else {
-                // System package
                 subprocess.Popen("sudo apt install -y %s", pkg)
             }
-            time.Sleep(200 * time.Millisecond)
+            time.Sleep(180 * time.Millisecond)
         }
     }
 
-    // Install project discovery tools
     if len(tools["discovery"]) > 0 {
         fmt.Printf("\n%sInstalling project discovery tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["discovery"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             subprocess.Popen("go install %s", pkg)
-            time.Sleep(200 * time.Millisecond)
+            time.Sleep(180 * time.Millisecond)
         }
     }
 
-    // Handle rockyou.txt.gz for Linux
     RokyPath  = "/usr/share/wordlists/rockyou.txt"
     if runtime.GOOS == "linux" {
         gzFilePath := RokyPath + ".gz"
@@ -586,7 +563,6 @@ func InstallTools(tools map[string]map[string]string) {
     }
 }
 
-// Map Linux distros to specific tasks
 var linuxTaskMap = map[string]func(){
     "kali": func() {
         fmt.Printf("%s[+] %sKali distro detected ...", bcolors.BrightGreen, bcolors.Endc)
@@ -643,7 +619,6 @@ func AutoSetups() {
             fmt.Printf("%s[+] %sAndroid Detected ...", bcolors.BrightGreen, bcolors.Endc)
             AndroidSetups()
         } else {
-            // Detect the distro
             distroID, err := utils.GetLinuxDistroID()
             if err != nil {
                 fmt.Printf("%s[!] %sLinux OS detected but distro detection failed: %v\n", bcolors.BrightRed, bcolors.Endc, err)
@@ -655,10 +630,8 @@ func AutoSetups() {
         }
     case "windows":
         fmt.Printf("%s[+] %sWindows distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        // Windows-specific task
     case "darwin":
         fmt.Printf("%s[+] %smacOS distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        // macOS-specific task
     default:
         fmt.Printf("%s[!] %sUnsupported or unknown OS: %s", bcolors.BrightRed, bcolors.Endc, osName)
     }

@@ -22,7 +22,6 @@ var (
     flag, shell, process, initialDir, currentDir string
 )
 
-// Initialize package variables and setup logging directory
 func init() {
     switch runtime.GOOS {
     case "windows":
@@ -40,12 +39,10 @@ func init() {
     }
 }
 
-// IsRoot checks if the current user is root
 func IsRoot() bool {
     return os.Geteuid() == 0
 }
 
-// GetHomeDir returns the current user's home directory
 func GetHomeDir() string {
     usr, err := user.Current()
     if err != nil {
@@ -55,7 +52,6 @@ func GetHomeDir() string {
     return usr.HomeDir
 }
 
-// createLogDir creates the log directory if it doesn't exist
 func creatLogDir() {
     if !IsRoot() {
         homeDir := GetHomeDir()
@@ -72,7 +68,6 @@ func creatLogDir() {
     }
 }
 
-// Popen executes a shell command and logs it
 func Popen(command string, args ...interface{}) {
     creatLogDir(); openLogFile()
     if len(args) > 0 {
@@ -106,7 +101,6 @@ func Popen(command string, args ...interface{}) {
     }
 }
 
-// executeFullCommand executes a single shell command
 func executeFullCommand(command string) {
     cmd := exec.Command(shell, flag, command)
     cmd.Stdin = os.Stdin
@@ -139,7 +133,6 @@ func executeFullCommand(command string) {
     close(sigs)
 }
 
-// openLogFile opens the log file for writing
 func openLogFile() {
     mu.Lock()
     defer mu.Unlock()
@@ -155,7 +148,6 @@ func openLogFile() {
     }
 }
 
-// logCommand logs a command to the log file
 func logCommand(command string) {
     mu.Lock()
     defer mu.Unlock()
@@ -169,7 +161,6 @@ func logCommand(command string) {
     }
 }
 
-// CloseLogFile closes the log file
 func CloseLogFile() {
     mu.Lock()
     defer mu.Unlock()
@@ -179,7 +170,6 @@ func CloseLogFile() {
     }
 }
 
-// changeDirectory changes the current working directory
 func changeDirectory(newDir string) {
     if newDir == "" || newDir == "~" {
         newDir = "/root"
@@ -199,7 +189,6 @@ func changeDirectory(newDir string) {
     }
 }
 
-// LogHistory prints the command history
 func ShowHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     if _, err := os.Stat(logFilePath); os.IsNotExist(err) {
@@ -221,7 +210,6 @@ func ShowHistory() {
     }
 }
 
-// ClearHistory clears the command history
 func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     err := os.Remove(logFilePath)

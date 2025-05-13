@@ -74,26 +74,22 @@ func WebsitesPentest() {
 
 func executeCommand(cmd string) bool {
     commandGroups := []stringMatcher{
-        // Info/Help commands
+
         {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
         {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
 
-        //History/Junk commands
         {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
         {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
         {[]string{"c log", "c logs", "c history", "c histories", "clear log", "clear logs", "clear history", "clear histories"}, subprocess.ClearHistory},
         {[]string{"junk", "junks", "output", "outputs", "show junk", "show junks", "show output", "show outputs", "l junk", "l junks", "l output", "l outputs", "list junk", "list junks", "list output", "list outputs"}, utils.ListJunks},
 
-        // Run/exec commands
         {[]string{"? run", "h run", "info run", "help run", "? exec", "h exec", "info exec", "help exec", "? launch", "h launch", "info launch", "help launch", "? exploit", "h exploit", "info exploit", "help exploit", "? execute", "h execute", "info execute", "help execute"}, menus.HelpInfoRun},
 
-        // Set commands
         {[]string{"set", "h set", "info set", "help set"}, menus.HelpInfoSet},
         {[]string{"use", "? use", "h use", "info use", "help use"}, menus.HelpInfoUse},
 
-        // Other commands
         {[]string{"tips", "h tips", "? tips", "info tips", "help tips"}, menus.HelpInfoTips},
         {[]string{"show", "? show", "h show", "info show", "help show"}, menus.HelpInfoShow},
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
@@ -103,13 +99,11 @@ func executeCommand(cmd string) bool {
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-        // Setup commands
         {[]string{"info"}, menus.HelpInfoWebsites},
         {[]string{"m", "menu"}, menus.MenuEight},
         {[]string{"option", "options", "show option", "show options"}, menus.WebsitesOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWebsitesFunctions},
 
-        // Commands executions
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run netmap", "use netmap", "exec netmap", "start netmap", "launch netmap", "exploit netmap", "execute netmap"}, func() { PortScan(Rhost) }},
         {[]string{"? 1", "info 1", "help 1", "netmap", "info netmap", "help netmap"}, menus.HelpInfoPortScan},
 
@@ -169,6 +163,7 @@ func handleSetCommand(parts []string) {
        "module": &Function,
        "function": &Function,
        "wordlist": &WordList,
+       "functions": &Function,
     }
 
     if ptr, exists := setValues[key]; exists {
@@ -195,6 +190,7 @@ func handleUnsetCommand(parts []string) {
        "module": &Function,
        "function": &Function,
        "wordlist": &WordList,
+       "functions": &Function,
     }
 
     if ptr, exists := unsetValues[key]; exists {
@@ -221,7 +217,6 @@ func executeFunction() {
     WebPenFunctions(Function, Rhost)
 }
 
-// Helper functions
 func autoExecuteFunc(distro string, function string) {
     //Distro = distro
     //Function = function
@@ -247,11 +242,10 @@ func WebPenFunctions(Function string, args ...interface{}) {
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
-            // Error already printed by SetProxy
+            //
         }
     }
 
-    // Command mapping with direct function references
     commands := map[string]func(){
           "netmap": func() {PortScan(Rhost)},
         "enumscan": func() {EnumScan(Rhost)},
@@ -263,7 +257,6 @@ func WebPenFunctions(Function string, args ...interface{}) {
         "vulnscan": func() {VulnScan(Rhost)},
           "bounty": func() {AutoScan(Rhost)},
 
-        // Numeric shortcuts
         "1": func() {PortScan(Rhost)},
         "2": func() {EnumScan(Rhost)},
         "3": func() {DnsRecon(Rhost)},
@@ -275,7 +268,6 @@ func WebPenFunctions(Function string, args ...interface{}) {
         "9": func() {AutoScan(Rhost)},
     }
 
-    // Command list for typo checking
     textCommands := []string{"netmap", "enumscan", "dnsrecon", "techscan", "asetscan", "fuzzscan", "leakscan", "vulnscan", "bounty"}
 
     if action, exists := commands[Function]; exists {
@@ -283,14 +275,12 @@ func WebPenFunctions(Function string, args ...interface{}) {
         return
     }
 
-    // Check if input was a number
     if num, err := strconv.Atoi(Function); err == nil {
         fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
         menus.ListWebsitesFunctions()
         return
     }
 
-    // Check for similar commands
     lowerInput := strings.ToLower(Function)
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
