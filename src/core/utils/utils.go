@@ -681,6 +681,18 @@ func isDirEmpty(dir string) (bool, error) {
     return err == io.EOF, nil
 }
 
+func Move(src, dst string) error {
+    err := os.Rename(src, dst)
+    if err == nil {
+        return nil
+    }
+
+    if err = Copy(src, dst); err != nil {
+        return err
+    }
+    return os.Remove(src)
+}
+
 func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
     content, err := ioutil.ReadFile(filePath)
     if err != nil {
