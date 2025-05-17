@@ -170,18 +170,14 @@ func New(options ...Option) *Spinner {
         stopChan:   make(chan struct{}),
         writer:     os.Stdout,
     }
-
     for _, option := range options {
         option(s)
     }
-
     s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
-
     if _, ok := s.writer.(*bufio.Writer); !ok {
         s.bufWriter = bufio.NewWriter(s.writer)
         s.writer = s.bufWriter
     }
-
     return s
 }
 
@@ -528,9 +524,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
             fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.BrightRed, bcolors.Endc, fileName, err)
-        } else {
-            fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, fileName, bcolors.Endc)
-        }
+        } //else {
+            //fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, fileName, bcolors.Endc)
+        //}
     }
 }
 
@@ -610,91 +606,79 @@ func Sealing() {
 }
 
 func Copy(src, dst string) error {
+    if src == "" || dst == "" || src == dst {
+        return fmt.Errorf("invalid path: src=%q, dst=%q", src, dst)
+    }
+
     srcInfo, err := os.Stat(src)
     if err != nil {
-        return fmt.Errorf("could not stat source: %w", err)
+        return fmt.Errorf("stat source failed: %w", err)
     }
 
     if srcInfo.IsDir() {
-        return enhancedCopyDir(src, dst)
+        return copyDir(src, dst, srcInfo)
     }
-    return enhancedCopyFile(src, dst, true)
+    return copyFile(src, dst, srcInfo)
 }
 
-func enhancedCopyFile(src, dst string, overwrite bool) error {
-    dstInfo, err := os.Stat(dst)
-    if err == nil && dstInfo.IsDir() {
-        dst = filepath.Join(dst, filepath.Base(src))
+func copyDir(src, dst string, srcInfo os.FileInfo) error {
+    if empty, err := isDirEmpty(dst); err == nil && !empty {
+        return fmt.Errorf("destination directory exists and is not empty")
     }
 
-    if _, err := os.Stat(dst); err == nil && !overwrite {
-        return fmt.Errorf("destination exists (overwrite disabled): %s", dst)
+    if err := os.MkdirAll(dst, srcInfo.Mode()); err != nil {
+        return fmt.Errorf("create directory failed: %w", err)
     }
 
-    if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-        return fmt.Errorf("failed to create parent directory: %w", err)
-    }
-
-    in, err := os.Open(src)
+    entries, err := os.ReadDir(src)
     if err != nil {
-        return fmt.Errorf("failed to open source: %w", err)
-    }
-    defer in.Close()
-
-    out, err := os.Create(dst)
-    if err != nil {
-        return fmt.Errorf("failed to create destination: %w", err)
-    }
-    defer out.Close()
-
-    if _, err := io.Copy(out, in); err != nil {
-        return fmt.Errorf("copy failed: %w", err)
+        return err
     }
 
-    srcInfo, err := os.Stat(src)
-    if err != nil {
-        return fmt.Errorf("failed to get source info: %w", err)
-    }
-    if err := os.Chmod(dst, srcInfo.Mode()); err != nil {
-        return fmt.Errorf("failed to set permissions: %w", err)
-    }
-    if err := os.Chtimes(dst, srcInfo.ModTime(), srcInfo.ModTime()); err != nil {
-        return fmt.Errorf("failed to set timestamps: %w", err)
+    for _, entry := range entries {
+        srcPath := filepath.Join(src, entry.Name())
+        dstPath := filepath.Join(dst, entry.Name())
+        
+        if err := Copy(srcPath, dstPath); err != nil {
+            return err
+        }
     }
     return nil
 }
 
-func enhancedCopyDir(srcDir, dstDir string) error {
-    srcInfo, err := os.Stat(srcDir)
+func copyFile(src, dst string, srcInfo os.FileInfo) error {
+    srcFile, err := os.Open(src)
     if err != nil {
-        return fmt.Errorf("could not stat source dir: %w", err)
+        return err
     }
+    defer srcFile.Close()
 
-    if err := os.MkdirAll(dstDir, srcInfo.Mode()); err != nil {
-        return fmt.Errorf("failed to create destination dir: %w", err)
-    }
-
-    entries, err := os.ReadDir(srcDir)
+    dstFile, err := os.Create(dst)
     if err != nil {
-        return fmt.Errorf("failed to read source dir: %w", err)
+        return err
+    }
+    defer dstFile.Close()
+
+    if _, err := io.Copy(dstFile, srcFile); err != nil {
+        return err
     }
 
-    for _, entry := range entries {
-        srcPath := filepath.Join(srcDir, entry.Name())
-        dstPath := filepath.Join(dstDir, entry.Name())
+    return os.Chmod(dst, srcInfo.Mode())
+}
 
-        if entry.IsDir() {
-            if err := enhancedCopyDir(srcPath, dstPath); err != nil {
-                return err
-            }
-        } else {
-            if err := enhancedCopyFile(srcPath, dstPath, true); err != nil {
-                return err
-            }
+func isDirEmpty(dir string) (bool, error) {
+    f, err := os.Open(dir)
+    if err != nil {
+        if os.IsNotExist(err) {
+            return true, nil
         }
+        return false, err
     }
 
-    return os.Chtimes(dstDir, srcInfo.ModTime(), srcInfo.ModTime())
+    defer f.Close()
+
+    _, err = f.Readdirnames(1)
+    return err == io.EOF, nil
 }
 
 func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
@@ -738,32 +722,6 @@ func DetectAndroid() bool {
         return true
     }
     return false
-}
-
-func DirLocations() (string, string, string, string, string, string, string) {
-    if subprocess.IsRoot() {
-        CertDir = "/root/.afr3/certs"
-        OutPutDir = "/root/.afr3/output"
-        ToolsDir = "/root/.afr3/africana-base"
-        RokyPath  = "/usr/share/wordlists/rockyou.txt"
-        KeyPath = filepath.Join(CertDir, "afr_key.pem")
-        CertPath = filepath.Join(CertDir, "afr_cert.pem")
-        WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
-
-    } else {
-        homeDir := subprocess.GetHomeDir()
-        if homeDir == "" {
-            return "", "", "", "", "", "", ""
-        }
-        RokyPath  = "/usr/share/wordlists/rockyou.txt"
-        CertDir = filepath.Join(homeDir, ".afr3", "certs")
-        KeyPath = filepath.Join(CertDir, "afr_key.pem")
-        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
-        CertPath = filepath.Join(CertDir, "afr_cert.pem")
-        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
-        WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
-    }
-    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
 }
 
 func Levenshtein(a, b string) int {
@@ -811,6 +769,32 @@ func min(nums ...int) int {
         }
     }
     return m
+}
+
+func DirLocations() (string, string, string, string, string, string, string) {
+    if subprocess.IsRoot() {
+        CertDir = "/root/.afr3/certs"
+        OutPutDir = "/root/.afr3/output"
+        ToolsDir = "/root/.afr3/africana-base"
+        RokyPath  = "/usr/share/wordlists/rockyou.txt"
+        KeyPath = filepath.Join(CertDir, "afr_key.pem")
+        CertPath = filepath.Join(CertDir, "afr_cert.pem")
+        WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
+
+    } else {
+        homeDir := subprocess.GetHomeDir()
+        if homeDir == "" {
+            return "", "", "", "", "", "", ""
+        }
+        RokyPath  = "/usr/share/wordlists/rockyou.txt"
+        CertDir = filepath.Join(homeDir, ".afr3", "certs")
+        KeyPath = filepath.Join(CertDir, "afr_key.pem")
+        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
+        CertPath = filepath.Join(CertDir, "afr_cert.pem")
+        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
+        WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
+    }
+    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
 }
 
 func InitiLize() {

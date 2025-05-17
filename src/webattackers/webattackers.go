@@ -247,7 +247,7 @@ func WebPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-          "netmap": func() {PortScan(Rhost)},
+        "netmap": func() {PortScan(Rhost)},
         "enumscan": func() {EnumScan(Rhost)},
         "dnsrecon": func() {DnsRecon(Rhost)},
         "techscan": func() {TechScan(Rhost)},
@@ -255,7 +255,7 @@ func WebPenFunctions(Function string, args ...interface{}) {
         "fuzzscan": func() {FuzzScan(Rhost)},
         "leakscan": func() {LeakScan(Rhost)},
         "vulnscan": func() {VulnScan(Rhost)},
-          "bounty": func() {AutoScan(Rhost)},
+        "bounty": func() {AutoScan(Rhost)},
 
         "1": func() {PortScan(Rhost)},
         "2": func() {EnumScan(Rhost)},
@@ -294,14 +294,34 @@ func WebPenFunctions(Function string, args ...interface{}) {
     menus.ListWebsitesFunctions()
 }
 
+
+
+
+
+
+
+
 func EnumScan(Rhost string) {
     if Rhost == "" {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming enumscan scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("subfinder -all -d %s; amass enum -d %s; findomain -t %s; chaos-client -d %s; shuffledns -d %s; alterx -l %s", Rhost, Rhost, Rhost, Rhost, Rhost, Rhost)
+
+    for _, cmd := range []string{
+        fmt.Sprintf("subfinder -all -d %s -o /root/.afr3/output/subfinder_%s.txt", Rhost, Rhost),
+        fmt.Sprintf("amass enum -d %s -o /root/.afr3/output/amass_%s.txt", Rhost, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
+
+
+
+
+
+
+
+
 
 func DnsRecon(Rhost string) {
     if Rhost == "" {

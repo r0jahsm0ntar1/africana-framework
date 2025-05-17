@@ -247,12 +247,12 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-           "wifite": func() {Wifite(Iface)},
-          "fluxion": func() {Fluxion()},
+         "wifite": func() {Wifite(Iface)},
+        "fluxion": func() {Fluxion()},
         "bettercap": func() {Bettercap(Iface)},
         "airgeddon": func() {AirGeddon()},
-      "wifipumpkin": func() {WifiPumpkin()},
-     "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)},
+        "wifipumpkin": func() {WifiPumpkin()},
+        "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)},
 
         "1": func() {Wifite(Iface)},
         "2": func() {Fluxion()},

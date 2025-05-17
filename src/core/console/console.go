@@ -493,7 +493,7 @@ func Genesis() {
 }
 
 func launchDefaultMode() {
-    scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsLarge(); banners.Version(); africanaManualMode()
+    scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsTinny(); banners.GraphicsIntro(); africanaManualMode()
 }
 
 func launchAutoModeWithMenu(menuFunc func(), actionFunc func()) {

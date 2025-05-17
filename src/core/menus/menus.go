@@ -197,8 +197,8 @@ func MenuFour() {
         "shellz",
         "ghost",
         "chameleon",
-        "noisemaker",
-        "codebreaker",
+        "dllbackdoor",
+        "regbackdoor",
     }
     generateMenu(items, "", true)
 }
@@ -627,12 +627,12 @@ func ListSetupsDistros() {
         name string
         desc string
     }{
-        {"    kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
-        {"  ubuntu", "This module will install africana-framework in Ubuntu-Linux"},
-        {"    arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
-        {"   macos", "Under development. Install africana on MackingTosh systems"},
-        {" android", "Install africana-framework in Termux using chroot environment"},
-        {" windows", "Under development. But can run if tools well installed using commando vm"},
+        {"kali", "    Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
+        {"ubuntu", "  This module will install africana-framework in Ubuntu-Linux"},
+        {"arch", "    Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
+        {"macos", "   Under development. Install africana on MackingTosh systems"},
+        {"android", " Install africana-framework in Termux using chroot environment"},
+        {"windows", " Under development. But can run if tools well installed using commando vm"},
     }
 
     for i, item := range items {
@@ -658,11 +658,11 @@ func ListSetupsFunction() {
         name string
         desc string
     }{
-        {" install", "Installs africana in selected distro"},
-        {"  update", "Get new release of africana-framework from github and install it"},
-        {"  repair", "Repair africana-framework if broken or with issues"},
-        {"    auto", "Auto detect system and do the necessary"},
-        {"  delete", "Completely uninstall africana-framework from system. alias to 'uninstall'"},
+        {"install", "Installs africana in selected distro"},
+        {"update", " Get new release of africana-framework from github and install it"},
+        {"repair", " Repair africana-framework if broken or with issues"},
+        {"auto", "   Auto detect system and do the necessary"},
+        {"delete", " Completely uninstall africana-framework from system. alias to 'uninstall'"},
     }
 
     for i, item := range items {
@@ -1660,15 +1660,15 @@ func ListExploitsFunctions() {
         name string
         desc string
     }{
-        {"   androrat", "It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
-        {"  teardroid", "Andoird Listener. Needs alot of online configuration but the best for now"},
-        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
-        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
-        {"     shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
-        {"      ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
-        {"  chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
-        {" noisemaker", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
-        {"codebreaker", "Just like noisemake but the persisten mechanisim is through regestry keys"},
+        {"androrat", "   It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
+        {"teardroid", "  Andoird Listener. Needs alot of online configuration but the best for now"},
+        {"blackjack", "  It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"hoaxshell", "  A Killer FUD that bypasses most avs"},
+        {"shellz", "     Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
+        {"ghost", "      It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"chameleon", "  It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"dllbackdoor", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
+        {"regbackdoor", "Just like noisemake but the persisten mechanisim is through regestry keys"},
     }
 
     for i, item := range items {
@@ -1695,8 +1695,8 @@ func ListListenersFunctions() {
     }{
         {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
         {"  hoaxshell", "A Killer FUD that bypasses most avs"},
-        {"       ncat", "Starts ncat to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with noisemaker or codebreaker modules"},
-        {" metasploit", "Launches metasploit to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with noisemaker or codebreaker modules"},
+        {"       ncat", "Starts ncat to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
+        {" metasploit", "Launches metasploit to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
     }
 
     for i, item := range items {
@@ -1704,7 +1704,7 @@ func ListListenersFunctions() {
   %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
-        Example:          "    set module noisemaker\n    set listener blackjack\n    run\n",
+        Example:          "    set module dllbackdoor\n    set listener blackjack\n    run\n",
     }
     modulesUsage(info)
 }
@@ -1736,9 +1736,39 @@ func ListObfscatorsFunctions() {
 }
 
 
+func ListIcons() {
+    fmt.Printf(`
+%sList of Icons%s:
+---- -- -----
 
+  # %sName          Description%s
+  - ----          -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"access","   Microsoft access document icon for your output malware"},
+        {"autorun","  Autorun standard icon to disguise your malicious malware"},
+        {"excel","    Microsoft excel document icon for your output malware"},
+        {"pdf","      Standard .pdf icon for your malicious backdoor"},
+        {"project","  Another icon found in microsoft office tools"},
+        {"publisher","Microsoft publisher document icon for your output malware"},
+        {"redrat","   A simple icon for a rat. This will fortunetly look suspicious"},
+        {"visio","    Microsoft access document icon for your output malware"},
+        {"vlc","      An icon that will output your malware as a vlc vidoe player"},
+        {"word","    Microsoft word document icon for your output malware"},
+    }
 
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s %s: %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set icon access\n",
+    }
+    modulesUsage(info)
+}
 
 
 
@@ -1788,17 +1818,17 @@ func ExploitsOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  ICON           vlc              yes       Icon to be used while generating backdoors using (noisemakers and codebreakers)
+  ICON           vlc              yes       Icon to be used while generating backdoors using (DllBackDoor and RegBackDoor). Try 'show icons' to see all supported icons.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
+  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, dllbackdoor and regbackdoor)
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghost & chameleon).
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.
   PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
   LISTENER       blackjack        yes       The default Listener to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
-  FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, noisemaker, codebreaker).
+  FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, dllbackdoor, regbackdoor).
 
 %sSupported Distros%s:
 --------- --------
@@ -1943,10 +1973,10 @@ func HelpInfoHoaxShell() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-func HelpInfoNoiseMaker() {
+func HelpInfoDllBackDoor() {
     fmt.Printf(`
-       %sName%s: noisemaker
-   %sFunction%s: src/exploits/noisemaker.fn
+       %sName%s: dllbackdoor
+   %sFunction%s: src/exploits/dllbackdoor.fn
    %sPlatform%s: All
        %sArch%s: x64, x86, amd_64, android
  %sPrivileged%s: No
@@ -2235,10 +2265,10 @@ func HelpInfoListener() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-func HelpInfoCodeBreaker() {
+func HelpInfoRegBackDoor() {
     fmt.Printf(`
-       %sName%s: codebreaker
-   %sFunction%s: src/exploits/noisemaker.fn
+       %sName%s: regbackdoor
+   %sFunction%s: src/exploits/dllbackdoor.fn
    %sPlatform%s: All
        %sArch%s: x64, x86, amd_64, android
  %sPrivileged%s: No
@@ -2357,7 +2387,7 @@ func AndroRatOptions() {
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, noisemaker and codebreaker)
+  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, dllbackdoor and regbackdoor)
   SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
   OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROXIES        none             no        Just incase you want to run your traffic through proxies.

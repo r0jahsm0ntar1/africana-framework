@@ -20,6 +20,16 @@ func Version() {
 `, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
 }
 
+func GraphicsIntro() {
+    fmt.Printf(`
+       =[ africana framework                              ]
++ -- --=[ Made simple but lethal                          ]
++ -- --=[ Created by Dr. r0jahsm0ntar1                    ]
++ -- --=[ Follow on GitHub, HTB, X, YT: @RojahsMontari    ]
+`)
+    Version()
+}
+
 func GraphicsLarge() {
     rand.Seed(time.Now().UnixNano())
     gbanner := rand.Intn(7) + 1

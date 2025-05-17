@@ -17,6 +17,18 @@ import(
     "subprocess"
 )
 
+
+const (
+    CHAR         = "├──"
+    CHAR1         = "└──"
+    SPACE_PREFIX = "   "
+)
+
+type stringMatcher struct {
+    names  []string
+    action func()
+}
+
 var (
     PyEnvName = "africana-venv"
     Input, Proxy, Function string
@@ -31,11 +43,6 @@ var defaultValues = map[string]string{
     "function": "",
     "distro": Distro,
     "pyenvname": PyEnvName,
-}
-
-type stringMatcher struct {
-    names  []string
-    action func()
 }
 
 var (
@@ -419,6 +426,7 @@ func Installer(Distro string) {
     fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.Red, bcolors.Endc, Distro, bcolors.Green, bcolors.Endc)
 }
 
+
 func CheckTools() {
     spinner := utils.New(
         utils.WithStyle("classic"),
@@ -435,7 +443,7 @@ func CheckTools() {
     }
 
     if len(missingTools["system"]) > 0 {
-        fmt.Printf("%s[!] %s%sMissing system tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+        fmt.Printf("%s[!] %s%sMissing system tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["system"] {
             fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
@@ -443,7 +451,7 @@ func CheckTools() {
     }
 
     if len(missingTools["security"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["security"] {
             fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
@@ -451,7 +459,7 @@ func CheckTools() {
     }
 
     if len(missingTools["discovery"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
         for tool := range missingTools["discovery"] {
             fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
             time.Sleep(90 * time.Millisecond)
@@ -459,6 +467,7 @@ func CheckTools() {
     }
     userChoice()
 }
+
 
 func userChoice() {
     fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
