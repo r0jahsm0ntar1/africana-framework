@@ -784,42 +784,38 @@ func min(nums ...int) int {
 }
 
 func DirLocations() (string, string, string, string, string, string, string) {
-    if subprocess.IsRoot() {
-        CertDir = "/root/.afr3/certs"
-        OutPutDir = "/root/.afr3/output"
-        ToolsDir = "/root/.afr3/africana-base"
-        RokyPath  = "/usr/share/wordlists/rockyou.txt"
-        KeyPath = filepath.Join(CertDir, "afr_key.pem")
-        CertPath = filepath.Join(CertDir, "afr_cert.pem")
-        WordList = filepath.Join(ToolsDir, "wordlists", "everything.txt")
-
-    } else {
-        homeDir := subprocess.GetHomeDir()
-        if homeDir == "" {
+    baseDir := "/root/.afr3"
+    if !subprocess.IsRoot() {
+        if homeDir := subprocess.GetHomeDir(); homeDir != "" {
+            baseDir = filepath.Join(homeDir, ".afr3")
+        } else {
             return "", "", "", "", "", "", ""
         }
-        RokyPath  = "/usr/share/wordlists/rockyou.txt"
-        CertDir = filepath.Join(homeDir, ".afr3", "certs")
-        KeyPath = filepath.Join(CertDir, "afr_key.pem")
-        OutPutDir = filepath.Join(homeDir, ".afr3", "output")
-        CertPath = filepath.Join(CertDir, "afr_cert.pem")
-        ToolsDir = filepath.Join(homeDir, ".afr3", "africana-base")
-        WordList = filepath.Join(homeDir, "wordlists", "everything.txt")
     }
-    return CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList
+
+    certDir := filepath.Join(baseDir, "certs")
+    toolsDir := filepath.Join(baseDir, "africana-base")
+    return certDir,
+        filepath.Join(baseDir, "output"),
+        filepath.Join(certDir, "afr_key.pem"),
+        filepath.Join(certDir, "afr_cert.pem"),
+        toolsDir,
+        "/usr/share/wordlists/rockyou.txt",
+        filepath.Join(toolsDir, "wordlists", "everything.txt")
 }
 
 func InitiLize() {
-    CertDir, OutPutDir, _, _, _, _, _ := DirLocations()
+    certDir, outDir, keyPath, certPath, _, _, _ := DirLocations()
 
-    for _, dir := range []string{CertDir, OutPutDir} {
-        if err := os.MkdirAll(dir, os.ModePerm); err != nil {
-            fmt.Printf("%s[!] %sError creating directory %s: %s\n", bcolors.BrightRed, bcolors.Endc, dir, err)
+    for _, dir := range []string{certDir, outDir} {
+        if err := os.MkdirAll(dir, 0755); err != nil {
+            fmt.Printf("%s[!] %sError creating %s: %v%s\n", 
+                bcolors.BrightRed, bcolors.Endc, dir, err, bcolors.Endc)
             return
         }
     }
 
-    if _, err := os.Stat(CertPath); os.IsNotExist(err) {
-        GenerateSelfSignedCert(CertPath, KeyPath)
+    if _, err := os.Stat(certPath); os.IsNotExist(err) {
+        GenerateSelfSignedCert(certPath, keyPath)
     }
 }

