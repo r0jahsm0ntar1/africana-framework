@@ -424,6 +424,7 @@ func CheckTools() {
     spinner := utils.New(
         utils.WithStyle("classic"),
         utils.WithEffect("bounce"),
+        //utils.WithClearOnStop(false),
     )
     spinner.Start()
     missingTools := UpsentTools()

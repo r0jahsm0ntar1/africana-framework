@@ -195,7 +195,6 @@ func Developer() {
         time.Sleep(3 * time.Millisecond)
     }
     fmt.Printf(`Life Tip.: %s%sDefeat the devil by fasting and praying ...%s
-
 `, bcolors.BrightGreen, bcolors.Blink, bcolors.Endc)
 }
 

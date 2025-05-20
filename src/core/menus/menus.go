@@ -1820,7 +1820,7 @@ func ExploitsOptions() {
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  ICON           vlc              yes       Icon to be used while generating backdoors using (DllBackDoor and RegBackDoor). Try 'show icons' to see all supported icons.
+  ICON           pdf              yes       Icon to be used while generating backdoors using (DllBackDoor and RegBackDoor). Try 'show icons' to see all supported icons.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -1999,7 +1999,7 @@ func HelpInfoDllBackDoor() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  ICON           pdf              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2037,7 +2037,7 @@ func HelpInfoHavoc() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  ICON           pdf              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
@@ -2291,7 +2291,7 @@ func HelpInfoRegBackDoor() {
 ----- --------
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  ICON           vlc              yes       The icon to use to disguise your backdoor with.
+  ICON           pdf              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
   LPORT          9999             yes       Listener port to handle beacons.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.

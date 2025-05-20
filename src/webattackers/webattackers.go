@@ -309,7 +309,7 @@ func EnumScan(Rhost string) {
 
     for _, cmd := range []string{
         fmt.Sprintf("subfinder -all -d %s -o /root/.afr3/output/subfinder_%s.txt", Rhost, Rhost),
-        fmt.Sprintf("amass enum -d %s -o /root/.afr3/output/amass_%s.txt", Rhost, Rhost),
+        fmt.Sprintf("amass enum -v -active -brute -d %s -o  /root/.afr3/output/amass_%s.txt", Rhost, Rhost),
     } {
         subprocess.Popen(cmd)
     }
