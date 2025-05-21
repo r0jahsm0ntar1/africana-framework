@@ -44,343 +44,345 @@ type InterfaceInfo struct {
 type Option func(*Spinner)
 
 type Spinner struct {
-	mu          sync.Mutex
-	active      bool
-	stopChan    chan struct{}
-	wg          sync.WaitGroup
-	spinChars   []string
-	baseFormat  string
-	baseArgs    []interface{}
-	currentText string
-	textEffect  func(string, int, int) string
-	speed       time.Duration
-	step        int
-	writer      io.Writer
-	taskWg      sync.WaitGroup
-	bufWriter   *bufio.Writer
-	clearOnStop bool
+    mu          sync.Mutex
+    active      bool
+    stopChan    chan struct{}
+    wg          sync.WaitGroup
+    spinChars   []string
+    baseFormat  string
+    baseArgs    []interface{}
+    currentText string
+    textEffect  func(string, int, int) string
+    speed       time.Duration
+    step        int
+    writer      io.Writer
+    taskWg      sync.WaitGroup
+    bufWriter   *bufio.Writer
+    clearOnStop bool
+    noCursor    bool
+    isWindows   bool
 }
 
 var SpinnerStyles = map[string][]string{
-	"classic":    {"|", "/", "-", "\\"},
-	"dots":       {"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"},
-	"bar":        {"▁", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃"},
-	"arrow":      {"←", "↖", "↑", "↗", "→", "↘", "↓", "↙"},
-	"bouncing":   {"[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]"},
-	"vertical":   {"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂"},
-	"horizontal": {"⠁", "⠂", "⠄", "⡀", "⢀", "⠠", "⠐", "⠈"},
-	"circle":     {"◐", "◓", "◑", "◒"},
-	"clock":      {"🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛"},
-	"moon":       {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
-	"triangle":   {"◢", "◣", "◤", "◥"},
-	"square":     {"◰", "◳", "◲", "◱"},
-	"fancy":      {"✦", "✧", "★", "✪", "✯", "✵", "✸", "✹"},
+    "classic":    {"|", "/", "-", "\\"},
+    "triangle":   {"◢", "◣", "◤", "◥"},
+    "circle":     {"◐", "◓", "◑", "◒"},
+    "square":     {"◰", "◳", "◲", "◱"},
+    "horizontal": {"⠁", "⠂", "⠄", "⡀", "⢀", "⠠", "⠐", "⠈"},
+    "dots":       {"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"},
+    "fancy":      {"✦", "✧", "★", "✪", "✯", "✵", "✸", "✹"},
+    "arrow":      {"←", "↖", "↑", "↗", "→", "↘", "↓", "↙"},
+    "moon":       {"🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"},
+    "bar":        {"▁", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃"},
+    "vertical":   {"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂"},
+    "clock":      {"🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛"},
+    "bouncing":   {"[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]"},
 }
 
 func toUpper(r rune) rune {
-	if r >= 'a' && r <= 'z' {
-		return r - 32
-	}
-	return r
+    if r >= 'a' && r <= 'z' {
+        return r - 32
+    }
+    return r
 }
 
 func toLower(r rune) rune {
-	if r >= 'A' && r <= 'Z' {
-		return r + 32
-	}
-	return r
+    if r >= 'A' && r <= 'Z' {
+        return r + 32
+    }
+    return r
 }
 
 var TextEffects = map[string]func(string, int, int) string{
-	"wave": func(text string, _, step int) string {
-		runes := []rune(text)
-		for i := range runes {
-			if (runes[i] >= 'a' && runes[i] <= 'z') || (runes[i] >= 'A' && runes[i] <= 'Z') {
-				if (i+step)%4 == 0 {
-					if runes[i] >= 'a' && runes[i] <= 'z' {
-						runes[i] = toUpper(runes[i])
-					}
-				} else {
-					if runes[i] >= 'A' && runes[i] <= 'Z' {
-						runes[i] = toLower(runes[i])
-					}
-				}
-			}
-		}
-		return string(runes)
-	},
-	"bounce": func(text string, pos, _ int) string {
-		runes := []rune(text)
-		if pos < len(runes) {
-			if (runes[pos] >= 'a' && runes[pos] <= 'z') || (runes[pos] >= 'A' && runes[pos] <= 'Z') {
-				if runes[pos] >= 'a' && runes[pos] <= 'z' {
-					runes[pos] = toUpper(runes[pos])
-				} else {
-					runes[pos] = toLower(runes[pos])
-				}
-			}
-		}
-		return string(runes)
-	},
-	"randomcase": func(text string, _, step int) string {
-		runes := []rune(text)
-		for i := range runes {
-			if (i+step)%3 == 0 {
-				runes[i] = toUpper(runes[i])
-			} else {
-				runes[i] = toLower(runes[i])
-			}
-		}
-		return string(runes)
-	},
-	"fadein": func(text string, _, step int) string {
-		visibleChars := (step % (len(text) + 3)) - 2
-		if visibleChars < 0 {
-			return ""
-		}
-		if visibleChars > len(text) {
-			return text
-		}
-		return text[:visibleChars]
-	},
-	"typewriter": func(text string, pos, _ int) string {
-		if pos >= len(text) {
-			return text
-		}
-		return text[:pos] + "█"
-	},
-	"neon": func(text string, pos, _ int) string {
-		runes := []rune(text)
-		if pos < len(runes) {
-			return string(runes[:pos]) + "✨" + string(runes[pos:]) + "✨"
-		}
-		return text
-	},
-	"plain": func(text string, _, _ int) string {
-		return text
-	},
+    "wave": func(text string, _, step int) string {
+        runes := []rune(text)
+        for i := range runes {
+            if (runes[i] >= 'a' && runes[i] <= 'z') || (runes[i] >= 'A' && runes[i] <= 'Z') {
+                if (i+step)%4 == 0 {
+                    if runes[i] >= 'a' && runes[i] <= 'z' {
+                        runes[i] = toUpper(runes[i])
+                    }
+                } else {
+                    if runes[i] >= 'A' && runes[i] <= 'Z' {
+                        runes[i] = toLower(runes[i])
+                    }
+                }
+            }
+        }
+        return string(runes)
+    },
+    "bounce": func(text string, pos, _ int) string {
+        runes := []rune(text)
+        if pos < len(runes) {
+            if (runes[pos] >= 'a' && runes[pos] <= 'z') || (runes[pos] >= 'A' && runes[pos] <= 'Z') {
+                if runes[pos] >= 'a' && runes[pos] <= 'z' {
+                    runes[pos] = toUpper(runes[pos])
+                } else {
+                    runes[pos] = toLower(runes[pos])
+                }
+            }
+        }
+        return string(runes)
+    },
+    "randomcase": func(text string, _, step int) string {
+        runes := []rune(text)
+        for i := range runes {
+            if (i+step)%3 == 0 {
+                runes[i] = toUpper(runes[i])
+            } else {
+                runes[i] = toLower(runes[i])
+            }
+        }
+        return string(runes)
+    },
+    "fadein": func(text string, _, step int) string {
+        visibleChars := (step % (len(text) + 3)) - 2
+        if visibleChars < 0 {
+            return ""
+        }
+        if visibleChars > len(text) {
+            return text
+        }
+        return text[:visibleChars]
+    },
+    "typewriter": func(text string, pos, _ int) string {
+        if pos >= len(text) {
+            return text
+        }
+        return text[:pos] + "█"
+    },
+    "neon": func(text string, pos, _ int) string {
+        runes := []rune(text)
+        if pos < len(runes) {
+            return string(runes[:pos]) + "✨" + string(runes[pos:]) + "✨"
+        }
+        return text
+    },
+    "plain": func(text string, _, _ int) string {
+        return text
+    },
 }
 
 func New(options ...Option) *Spinner {
-	s := &Spinner{
-		spinChars:   SpinnerStyles["classic"],
-		baseFormat:  "[+] Starting the africana framework console ...",
-		baseArgs:    nil,
-		textEffect:  TextEffects["plain"],
-		speed:       90 * time.Millisecond,
-		stopChan:    make(chan struct{}),
-		writer:      os.Stdout,
-		clearOnStop: true,
-	}
-	for _, option := range options {
-		option(s)
-	}
-	s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
-	if _, ok := s.writer.(*bufio.Writer); !ok {
-		s.bufWriter = bufio.NewWriter(s.writer)
-		s.writer = s.bufWriter
-	}
-	return s
+    s := &Spinner{
+        spinChars:   SpinnerStyles["classic"],
+        baseFormat:  "[+] Starting the africana framework console ...",
+        baseArgs:    nil,
+        textEffect:  TextEffects["plain"],
+        speed:       100 * time.Millisecond,
+        stopChan:    make(chan struct{}),
+        writer:      os.Stdout,
+        clearOnStop: true,
+        noCursor:    true,
+        isWindows:   runtime.GOOS == "windows",
+    }
+    for _, option := range options {
+        option(s)
+    }
+    s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
+    if _, ok := s.writer.(*bufio.Writer); !ok {
+        s.bufWriter = bufio.NewWriter(s.writer)
+        s.writer = s.bufWriter
+    }
+    return s
 }
 
 func WithStyle(styleName string) Option {
-	return func(s *Spinner) {
-		if style, ok := SpinnerStyles[styleName]; ok {
-			s.spinChars = style
-		}
-	}
+    return func(s *Spinner) {
+        if style, ok := SpinnerStyles[styleName]; ok {
+            s.spinChars = style
+        }
+    }
 }
 
 func WithText(text string, a ...interface{}) Option {
-	return func(s *Spinner) {
-		s.baseFormat = text
-		s.baseArgs = a
-		s.currentText = fmt.Sprintf(text, a...)
-	}
+    return func(s *Spinner) {
+        s.baseFormat = text
+        s.baseArgs = a
+        s.currentText = fmt.Sprintf(text, a...)
+    }
 }
 
 func WithEffect(effectName string) Option {
-	return func(s *Spinner) {
-		if effect, ok := TextEffects[effectName]; ok {
-			s.textEffect = effect
-		}
-	}
+    return func(s *Spinner) {
+        if effect, ok := TextEffects[effectName]; ok {
+            s.textEffect = effect
+        }
+    }
 }
 
 func WithSpeed(speed time.Duration) Option {
-	return func(s *Spinner) {
-		s.speed = speed
-	}
+    return func(s *Spinner) {
+        s.speed = speed
+    }
 }
 
 func WithWriter(w io.Writer) Option {
-	return func(s *Spinner) {
-		s.writer = w
-	}
+    return func(s *Spinner) {
+        s.writer = w
+    }
 }
 
 func WithClearOnStop(clear bool) Option {
-	return func(s *Spinner) {
-		s.clearOnStop = clear
-	}
+    return func(s *Spinner) {
+        s.clearOnStop = clear
+    }
+}
+
+func WithCursorHidden(hide bool) Option {
+    return func(s *Spinner) {
+        s.noCursor = hide
+    }
+}
+
+func (s *Spinner) hideCursor() {
+    if s.noCursor {
+        if s.isWindows {
+            fmt.Fprint(s.writer, "\x1b[?25l")
+        } else {
+            fmt.Fprint(s.writer, "\033[?25l")
+        }
+        s.flush()
+    }
+}
+
+func (s *Spinner) showCursor() {
+    if s.noCursor {
+        if s.isWindows {
+            fmt.Fprint(s.writer, "\x1b[?25h")
+        } else {
+            fmt.Fprint(s.writer, "\033[?25h")
+        }
+        s.flush()
+    }
 }
 
 func (s *Spinner) Start() {
-	s.mu.Lock()
-	defer s.mu.Unlock()
+    s.mu.Lock()
+    defer s.mu.Unlock()
 
-	if s.active {
-		return
-	}
+    if s.active {
+        return
+    }
 
-	s.active = true
-	s.stopChan = make(chan struct{})
+    s.active = true
+    s.stopChan = make(chan struct{})
+    //s.hideCursor()
 
-	s.wg.Add(1)
-	go s.spin()
+    s.wg.Add(1)
+    go s.spin()
 }
 
 func (s *Spinner) spin() {
-	defer s.wg.Done()
+    defer s.wg.Done()
+    //defer s.showCursor()
 
-	charIdx := 0
-	letterPos := 0
-	ticker := time.NewTicker(s.speed)
-	defer ticker.Stop()
+    charIdx := 0
+    letterPos := 0
+    ticker := time.NewTicker(s.speed)
+    defer ticker.Stop()
 
-	for {
-		select {
-		case <-s.stopChan:
-			if s.clearOnStop {
-				s.clearLine()
-			} else {
-				// When stopping with clearOnStop false, print just the text
-				fmt.Fprint(s.writer, "\r"+s.currentText)
-			}
-			return
-		case <-ticker.C:
-			s.mu.Lock()
-			s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
+    for {
+        select {
+        case <-s.stopChan:
+            if s.clearOnStop {
+                s.clearLine()
+            } else {
+                fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
+            }
+            return
+        case <-ticker.C:
+            s.mu.Lock()
+            s.currentText = fmt.Sprintf(s.baseFormat, s.baseArgs...)
 
-			spinChar := s.spinChars[charIdx%len(s.spinChars)]
-			displayText := s.textEffect(s.currentText, letterPos, s.step)
-			displayMsg := fmt.Sprintf("\r%s %s", displayText, spinChar)
-			s.mu.Unlock()
+            spinChar := s.spinChars[charIdx%len(s.spinChars)]
+            displayText := s.textEffect(s.currentText, letterPos, s.step)
+            displayMsg := fmt.Sprintf("\r%s %s", displayText, spinChar)
+            s.mu.Unlock()
 
-			s.clearLine()
-			fmt.Fprint(s.writer, displayMsg)
-			s.flush()
+            s.clearLine()
+            fmt.Fprint(s.writer, displayMsg)
+            s.flush()
 
-			charIdx++
-			s.step++
+            charIdx++
+            s.step++
 
-			if charIdx%1 == 0 {
-				letterPos = (letterPos + 1) % utf8.RuneCountInString(s.currentText)
-			}
-		}
-	}
+            if charIdx%1 == 0 {
+                letterPos = (letterPos + 1) % utf8.RuneCountInString(s.currentText)
+            }
+        }
+    }
 }
 
 func (s *Spinner) StartWithTask(task func()) {
-	s.mu.Lock()
-	if s.active {
-		s.mu.Unlock()
-		return
-	}
+    s.mu.Lock()
+    if s.active {
+        s.mu.Unlock()
+        return
+    }
 
-	s.active = true
-	s.stopChan = make(chan struct{})
-	s.mu.Unlock()
+    s.active = true
+    s.stopChan = make(chan struct{})
+    //s.hideCursor()
+    s.mu.Unlock()
 
-	s.wg.Add(1)
-	go s.spin()
+    s.wg.Add(1)
+    go s.spin()
 
-	s.taskWg.Add(1)
-	go func() {
-		defer s.taskWg.Done()
-		task()
-		s.Stop()
-	}()
+    s.taskWg.Add(1)
+    go func() {
+        defer s.taskWg.Done()
+        task()
+        s.Stop()
+    }()
 }
 
 func (s *Spinner) Stop() {
-	s.mu.Lock()
-	defer s.mu.Unlock()
+    s.mu.Lock()
+    defer s.mu.Unlock()
 
-	if !s.active {
-		return
-	}
+    if !s.active {
+        return
+    }
 
-	close(s.stopChan)
-	s.wg.Wait()
-	if s.clearOnStop {
-		s.clearLine()
-	} else {
-		// Only clear the spinner character if clearOnStop is false
-		fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
-	}
-	s.flush()
-	s.active = false
+    close(s.stopChan)
+    s.wg.Wait()
+    
+    if s.clearOnStop {
+        s.clearLine()
+    } else {
+        fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
+    }
+    
+    //s.showCursor()
+    s.flush()
+    s.active = false
 }
 
 func (s *Spinner) clearLine() {
-	const (
-		cr   = "\r"
-		clr  = "\033[K"
-		ansi = cr + clr
-	)
-
-	fmt.Fprint(s.writer, ansi)
-
-	if runtime.GOOS == "windows" {
-		width := 80
-		if f, ok := s.writer.(*os.File); ok {
-			if info, err := getTerminalWidth(f); err == nil {
-				width = info.width
-			}
-		}
-		fmt.Fprint(s.writer, cr)
-		fmt.Fprint(s.writer, strings.Repeat(" ", width))
-		fmt.Fprint(s.writer, cr)
-	}
+    if s.isWindows {
+        width := 80
+        fmt.Fprint(s.writer, "\r"+strings.Repeat(" ", width)+"\r")
+    } else {
+        fmt.Fprint(s.writer, "\033[2K\r")
+    }
 }
 
 func (s *Spinner) flush() {
-	if s.bufWriter != nil {
-		s.bufWriter.Flush()
-	}
-	if f, ok := s.writer.(interface{ Flush() error }); ok {
-		f.Flush()
-	}
+    if s.bufWriter != nil {
+        s.bufWriter.Flush()
+    }
+    if f, ok := s.writer.(interface{ Flush() error }); ok {
+        f.Flush()
+    }
 }
 
 func (s *Spinner) UpdateText(format string, a ...interface{}) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-	s.baseFormat = format
-	s.baseArgs = a
-	s.currentText = fmt.Sprintf(format, a...)
-}
-
-type terminalInfo struct {
-	width int
-}
-
-func getTerminalWidth(f *os.File) (terminalInfo, error) {
-	info := terminalInfo{width: 80}
-
-	if runtime.GOOS == "windows" {
-		return info, nil
-	}
-
-	if width, err := getUnixTerminalWidth(f); err == nil {
-		info.width = width
-	}
-	return info, nil
-}
-
-func getUnixTerminalWidth(f *os.File) (int, error) {
-	return 80, nil
+    s.mu.Lock()
+    defer s.mu.Unlock()
+    s.baseFormat = format
+    s.baseArgs = a
+    s.currentText = fmt.Sprintf(format, a...)
 }
 
 func ClearScreen() {

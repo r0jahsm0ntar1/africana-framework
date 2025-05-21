@@ -294,42 +294,37 @@ func WebPenFunctions(Function string, args ...interface{}) {
     menus.ListWebsitesFunctions()
 }
 
-
-
-
-
-
-
-
 func EnumScan(Rhost string) {
     if Rhost == "" {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
+    fmt.Printf("\n%s[*] %sPerforming initial enumeration scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+
     for _, cmd := range []string{
-        fmt.Sprintf("subfinder -all -d %s -o /root/.afr3/output/subfinder_%s.txt", Rhost, Rhost),
-        fmt.Sprintf("amass enum -v -active -brute -d %s -o  /root/.afr3/output/amass_%s.txt", Rhost, Rhost),
+        fmt.Sprintf("subfinder -all -d %s -o %s/subfinder_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("amass enum -v -active -brute -d %s -o %s/amass_%s.txt", Rhost, OutPutDir, Rhost),
     } {
         subprocess.Popen(cmd)
     }
 }
-
-
-
-
-
-
-
-
 
 func DnsRecon(Rhost string) {
     if Rhost == "" {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming dnsrecon scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("dnsx -l %s; asnmap -d %s; cdncheck -l %s", Rhost, Rhost, Rhost)
+
+    fmt.Printf("\n%s[*] %sPerforming DNS reconnaissance scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+
+    for _, cmd := range []string{
+        fmt.Sprintf("dnsx -l %s -o %s/dnsx_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("asnmap -d %s -o %s/asnmap_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("cdncheck -l %s -o %s/cdncheck_%s.txt", Rhost, OutPutDir, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
 
 func PortScan(Rhost string) {
@@ -337,8 +332,10 @@ func PortScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming full port scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("naabu -nmap-cli 'nmap --spoof-mac Cisco -T4 -sV -sC -Pn -v' -host %s", Rhost)
+    fmt.Printf("\n%s[*] %sPerforming full port scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    
+    cmd := fmt.Sprintf("naabu -nmap-cli 'nmap --spoof-mac Cisco -T4 -sV -sC -Pn -v' -host %s -o %s/naabu_%s.txt", Rhost, OutPutDir, Rhost)
+    subprocess.Popen(cmd)
 }
 
 func TechScan(Rhost string) {
@@ -346,8 +343,16 @@ func TechScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming tech detection scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`httpx -l %s; aquatone -out %s; httprobe -l %s; gowitness -l %s`, Rhost, Rhost, Rhost, Rhost)
+    fmt.Printf("\n%s[*] %sPerforming tech detection scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    
+    for _, cmd := range []string{
+        fmt.Sprintf("httpx -title -status-code -tech-detect -follow-redirects -u %s -o %s/httpx_%s.txt", Rhost, OutPutDir, Rhost),
+        //fmt.Sprintf("aquatone -out %s/aquatone_%s", OutPutDir, Rhost),
+        //fmt.Sprintf("httprobe -l %s -o %s/httprobe_%s.txt", Rhost, OutPutDir, Rhost),
+        //fmt.Sprintf("gowitness -l %s -o %s/gowitness_%s", Rhost, OutPutDir, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
 
 func FuzzScan(Rhost string) {
@@ -355,8 +360,10 @@ func FuzzScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming fuzz scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("dirsearch -l ips_alive --full-url --recursive --exclude-sizes=0B --random-agent -e 7z,archive,ashx,asp,aspx,back,backup,backup-sql,backup.db,backup.sql,bak,bak.zip,bakup,bin,bkp,bson,bz2,core,csv,data,dataset,db,db-backup,db-dump,db.7z,db.bz2,db.gz,db.tar,db.tar.gz,db.zip,dbs.bz2,dll,dmp,dump,dump.7z,dump.db,dump.z,dump.zip,exported,gdb,gdb.dump,gz,gzip,ib,ibd,iso,jar,java,json,jsp,jspf,jspx,ldf,log,lz,lz4,lzh,mongo,neo4j,old,pg.dump,phtm,phtml,psql,rar,rb,rdb,rdb.bz2,rdb.gz,rdb.tar,rdb.tar.gz,rdb.zip,redis,save,sde,sdf,snap,sql,sql.7z,sql.bak,sql.bz2,sql.db,sql.dump,sql.gz,sql.lz,sql.rar,sql.tar.gz,sql.tar.z,sql.xz,sql.z,sql.zip,sqlite,sqlite.bz2,sqlite.gz,sqlite.tar,sqlite.tar.gz,sqlite.zip,sqlite3,sqlitedb,swp,tar,tar.bz2,tar.gz,tar.z,temp,tml,vbk,vhd,war,xhtml,xml,xz,z,zip,conf,config,bak,backup,swp,old,db,sql,asp,aspx~,asp~,py,py~,rb~,php,php~,bkp,cache,cgi,inc,js,json,jsp~,lock,wadl -o output.txt")
+    fmt.Printf("\n%s[*] %sPerforming fuzz scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    cmd := fmt.Sprintf("gobuster dir -u %s -w /root/.afr3/africana-base/wordlists/everything.txt -x 7z,zip,tar,gz,bz2,sql,bak,backup,old,db,json,xml,conf,config,asp,aspx,php,jsp -t 50 -k -o %s/gobuster_%s.txt", Rhost, OutPutDir, Rhost)
+    //cmd := fmt.Sprintf("dirsearch -l %s --full-url --recursive --exclude-sizes=0B --random-agent -e 7z,archive,ashx,asp,aspx,back,backup,backup-sql,backup.db,backup.sql,bak,bak.zip,bakup,bin,bkp,bson,bz2,core,csv,data,dataset,db,db-backup,db-dump,db.7z,db.bz2,db.gz,db.tar,db.tar.gz,db.zip,dbs.bz2,dll,dmp,dump,dump.7z,dump.db,dump.z,dump.zip,exported,gdb,gdb.dump,gz,gzip,ib,ibd,iso,jar,java,json,jsp,jspf,jspx,ldf,log,lz,lz4,lzh,mongo,neo4j,old,pg.dump,phtm,phtml,psql,rar,rb,rdb,rdb.bz2,rdb.gz,rdb.tar,rdb.tar.gz,rdb.zip,redis,save,sde,sdf,snap,sql,sql.7z,sql.bak,sql.bz2,sql.db,sql.dump,sql.gz,sql.lz,sql.rar,sql.tar.gz,sql.tar.z,sql.xz,sql.z,sql.zip,sqlite,sqlite.bz2,sqlite.gz,sqlite.tar,sqlite.tar.gz,sqlite.zip,sqlite3,sqlitedb,swp,tar,tar.bz2,tar.gz,tar.z,temp,tml,vbk,vhd,war,xhtml,xml,xz,z,zip,conf,config,bak,backup,swp,old,db,sql,asp,aspx~,asp~,py,py~,rb~,php,php~,bkp,cache,cgi,inc,js,json,jsp~,lock,wadl -o %s/dirsearch_%s.txt", Rhost, OutPutDir, Rhost)
+    subprocess.Popen(cmd)
 }
 
 func LeakScan(Rhost string) {
@@ -364,8 +371,15 @@ func LeakScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming leak scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("gitleaks detect -v; trufflehog filesystem --no-update --json; semgrep -l")
+    fmt.Printf("\n%s[*] %sPerforming leak scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    
+    for _, cmd := range []string{
+        fmt.Sprintf("gitleaks detect -v --report-path %s/gitleaks_%s.json", OutPutDir, Rhost),
+        fmt.Sprintf("trufflehog filesystem --no-update --json --output %s/trufflehog_%s.json", OutPutDir, Rhost),
+        fmt.Sprintf("semgrep -l --output %s/semgrep_%s.json", OutPutDir, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
 
 func AssetScan(Rhost string) {
@@ -373,8 +387,16 @@ func AssetScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming asset scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("waybackurls %s; gau %s; urlfinder -l %s; gospider -s %s")
+    fmt.Printf("\n%s[*] %sPerforming asset scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    
+    for _, cmd := range []string{
+        fmt.Sprintf("waybackurls %s > %s/waybackurls_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("gau %s > %s/gau_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("urlfinder -l %s -o %s/urlfinder_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("gospider -s %s -o %s/gospider_%s", Rhost, OutPutDir, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
 
 func VulnScan(Rhost string) {
@@ -382,8 +404,19 @@ func VulnScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming vuln scan ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("nuclei -l %s; jaeles -l %s; ffuf -u %s; uncover -l %s; cvemap -l %s; dalfox -b -u %s; qsreplace -l %s")
+    fmt.Printf("\n%s[*] %sPerforming vuln scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    
+    for _, cmd := range []string{
+        fmt.Sprintf("nuclei -l %s -o %s/nuclei_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("jaeles -l %s -o %s/jaeles_%s", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("ffuf -u %s -o %s/ffuf_%s.json", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("uncover -l %s -o %s/uncover_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("cvemap -l %s -o %s/cvemap_%s.json", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("dalfox -b -u %s -o %s/dalfox_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("qsreplace -l %s -o %s/qsreplace_%s.txt", Rhost, OutPutDir, Rhost),
+    } {
+        subprocess.Popen(cmd)
+    }
 }
 
 func AutoScan(Rhost string) {
@@ -391,13 +424,22 @@ func AutoScan(Rhost string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[*] %sPerforming auto scan ...\n", bcolors.Green, bcolors.Endc)
+    
+    fmt.Printf("\n%s[*] %sStarting automated bug bounty workflow for %s%s%s\n", 
+        bcolors.Green, bcolors.Endc, bcolors.BrightGreen, Rhost, bcolors.Endc)
+
+    EnumScan(Rhost)
+    DnsRecon(Rhost)
+    PortScan(Rhost)
+    TechScan(Rhost)
+    AssetScan(Rhost)
+    FuzzScan(Rhost)
+    LeakScan(Rhost)
+    VulnScan(Rhost)
+    
+    fmt.Printf("\n%s[*] %sBug bounty workflow completed! Results saved in %s%s%s\n", 
+        bcolors.Green, bcolors.Endc, bcolors.BrightGreen, OutPutDir, bcolors.Endc)
 }
-
-
-
-
-
 
 
 

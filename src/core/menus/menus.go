@@ -144,15 +144,15 @@ func MenuZero() {
 
 func MenuOne() {
     items := []string{
-        "Install in Kali",
-        "Install in Ubuntu",
-        "Install in Arch",
-        "Install in Macos",
-        "Install in Android",
-        "Install in Windows",
-        "Update africana & All it's tools",
-        "Repair africana if it is brocken",
-        "UnInstall africana from your distro",
+        "Kali",
+        "Ubuntu",
+        "Arch",
+        "Macos",
+        "Android",
+        "Windows",
+        "Update",
+        "Repair",
+        "UnInstall",
     }
     generateMenu(items, "", true)
 }
@@ -261,7 +261,7 @@ func MenuEight() {
         "Wayback and asset discovery",
         "Fuzzing and Scanning",
         "Secret and leak detection",
-        "ulnerability scanning (XSS, SQLi, CSRF, SSRF, IDOR)",
+        "Vulnerability scanning (XSS, SQLi, CSRF, SSRF, IDOR)",
         "Automation (Bug bounty hunting techniques)",
     }
     generateMenu(items, "", true)
@@ -651,18 +651,18 @@ func ListSetupsFunction() {
 %sSetups Functions%s:
 ------ ---------
 
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sName       Description%s
+  - ----       -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
         {"install", "Installs africana in selected distro"},
-        {"update", " Get new release of africana-framework from github and install it"},
-        {"repair", " Repair africana-framework if broken or with issues"},
-        {"auto", "   Auto detect system and do the necessary"},
-        {"delete", " Completely uninstall africana-framework from system. alias to 'uninstall'"},
+        {" update", "Get new release of africana-framework from github and install it"},
+        {" repair", "Repair africana-framework if broken or with issues"},
+        {"   auto", "Auto detect system and do the necessary"},
+        {" delete", "Completely uninstall africana-framework from system. alias to 'uninstall'"},
     }
 
     for i, item := range items {
@@ -1660,15 +1660,15 @@ func ListExploitsFunctions() {
         name string
         desc string
     }{
-        {"androrat", "   It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
-        {"teardroid", "  Andoird Listener. Needs alot of online configuration but the best for now"},
-        {"blackjack", "  It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
-        {"hoaxshell", "  A Killer FUD that bypasses most avs"},
-        {"shellz", "     Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
-        {"ghost", "      It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
-        {"chameleon", "  It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"   androrat", "It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
+        {"  teardroid", "Andoird Listener. Needs alot of online configuration but the best for now"},
+        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
+        {"     shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
+        {"      ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"  chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
         {"dllbackdoor", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
-        {"regbackdoor", "Just like noisemake but the persisten mechanisim is through regestry keys"},
+        {"regbackdoor", "Just like dllbackdoor but the persisten mechanisim is through regestry keys"},
     }
 
     for i, item := range items {
@@ -1809,7 +1809,6 @@ func HelpInfoExploits() {
 %sDescription%s:
 -----------
   This is the Exploits module that contains all Listener, backdoors and obfsicatorsfunctions.
-
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListExploitsFunctions()
 }
