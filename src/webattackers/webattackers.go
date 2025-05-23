@@ -347,9 +347,9 @@ func TechScan(Rhost string) {
     
     for _, cmd := range []string{
         fmt.Sprintf("httpx -title -status-code -tech-detect -follow-redirects -u %s -o %s/httpx_%s.txt", Rhost, OutPutDir, Rhost),
-        //fmt.Sprintf("aquatone -out %s/aquatone_%s", OutPutDir, Rhost),
-        //fmt.Sprintf("httprobe -l %s -o %s/httprobe_%s.txt", Rhost, OutPutDir, Rhost),
-        //fmt.Sprintf("gowitness -l %s -o %s/gowitness_%s", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("aquatone -out %s/aquatone_%s", OutPutDir, Rhost),
+        fmt.Sprintf("httprobe -l %s -o %s/httprobe_%s.txt", Rhost, OutPutDir, Rhost),
+        fmt.Sprintf("gowitness -l %s -o %s/gowitness_%s", Rhost, OutPutDir, Rhost),
     } {
         subprocess.Popen(cmd)
     }
@@ -362,7 +362,6 @@ func FuzzScan(Rhost string) {
     }
     fmt.Printf("\n%s[*] %sPerforming fuzz scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
     cmd := fmt.Sprintf("gobuster dir -u %s -w /root/.afr3/africana-base/wordlists/everything.txt -x 7z,zip,tar,gz,bz2,sql,bak,backup,old,db,json,xml,conf,config,asp,aspx,php,jsp -t 50 -k -o %s/gobuster_%s.txt", Rhost, OutPutDir, Rhost)
-    //cmd := fmt.Sprintf("dirsearch -l %s --full-url --recursive --exclude-sizes=0B --random-agent -e 7z,archive,ashx,asp,aspx,back,backup,backup-sql,backup.db,backup.sql,bak,bak.zip,bakup,bin,bkp,bson,bz2,core,csv,data,dataset,db,db-backup,db-dump,db.7z,db.bz2,db.gz,db.tar,db.tar.gz,db.zip,dbs.bz2,dll,dmp,dump,dump.7z,dump.db,dump.z,dump.zip,exported,gdb,gdb.dump,gz,gzip,ib,ibd,iso,jar,java,json,jsp,jspf,jspx,ldf,log,lz,lz4,lzh,mongo,neo4j,old,pg.dump,phtm,phtml,psql,rar,rb,rdb,rdb.bz2,rdb.gz,rdb.tar,rdb.tar.gz,rdb.zip,redis,save,sde,sdf,snap,sql,sql.7z,sql.bak,sql.bz2,sql.db,sql.dump,sql.gz,sql.lz,sql.rar,sql.tar.gz,sql.tar.z,sql.xz,sql.z,sql.zip,sqlite,sqlite.bz2,sqlite.gz,sqlite.tar,sqlite.tar.gz,sqlite.zip,sqlite3,sqlitedb,swp,tar,tar.bz2,tar.gz,tar.z,temp,tml,vbk,vhd,war,xhtml,xml,xz,z,zip,conf,config,bak,backup,swp,old,db,sql,asp,aspx~,asp~,py,py~,rb~,php,php~,bkp,cache,cgi,inc,js,json,jsp~,lock,wadl -o %s/dirsearch_%s.txt", Rhost, OutPutDir, Rhost)
     subprocess.Popen(cmd)
 }
 
@@ -372,7 +371,6 @@ func LeakScan(Rhost string) {
         return
     }
     fmt.Printf("\n%s[*] %sPerforming leak scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    
     for _, cmd := range []string{
         fmt.Sprintf("gitleaks detect -v --report-path %s/gitleaks_%s.json", OutPutDir, Rhost),
         fmt.Sprintf("trufflehog filesystem --no-update --json --output %s/trufflehog_%s.json", OutPutDir, Rhost),
@@ -425,8 +423,7 @@ func AutoScan(Rhost string) {
         return
     }
     
-    fmt.Printf("\n%s[*] %sStarting automated bug bounty workflow for %s%s%s\n", 
-        bcolors.Green, bcolors.Endc, bcolors.BrightGreen, Rhost, bcolors.Endc)
+    fmt.Printf("\n%s[*] %sStarting automated bug bounty workflow for %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightGreen, Rhost, bcolors.Endc)
 
     EnumScan(Rhost)
     DnsRecon(Rhost)
@@ -436,9 +433,8 @@ func AutoScan(Rhost string) {
     FuzzScan(Rhost)
     LeakScan(Rhost)
     VulnScan(Rhost)
-    
-    fmt.Printf("\n%s[*] %sBug bounty workflow completed! Results saved in %s%s%s\n", 
-        bcolors.Green, bcolors.Endc, bcolors.BrightGreen, OutPutDir, bcolors.Endc)
+
+    fmt.Printf("\n%s[*] %sBug bounty workflow completed! Results saved in %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightGreen, OutPutDir, bcolors.Endc)
 }
 
 

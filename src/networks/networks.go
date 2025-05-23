@@ -23,6 +23,7 @@ var(
     Iface  = "eth0"
     Passwd = "Jesus"
     Spoofer = "ettercap"
+    Proxies = "non"
 
     Lhost, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
@@ -115,7 +116,8 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoNetworks},
         {[]string{"m", "menu"}, menus.MenuThree},
-        {[]string{"option", "options", "show option", "show options"}, menus.NetworksOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() { menus.NetworksOptions(Mode, Iface, Rhost, Passwd, Lhost, Gateway, Spoofer, Proxies, FakeDns, Function) }},
+
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListInternalFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run discover", "use discover", "exec discover", "start discover", "launch discover", "exploit discover", "execute discover"}, func() { DiscoverIps() }},

@@ -4,6 +4,7 @@ import (
     "fmt"
     "utils"
     "bcolors"
+    "strings"
 )
 
 var (
@@ -30,6 +31,83 @@ type ModuleHelpInfo struct {
     Options       string
 }
 
+type TableConfig struct {
+    NameWidth    int
+    SettingWidth int
+    ReqWidth     int
+}
+
+var DefaultTableConfig = TableConfig{
+    NameWidth:    15,
+    SettingWidth: 18,
+    ReqWidth:     9,
+}
+
+func FormatRow(config TableConfig, name, value, required, desc string) string {
+    return fmt.Sprintf(
+        "  %-*s  %-*s  %-*s  %s",
+        config.NameWidth, name,
+        config.SettingWidth, value,
+        config.ReqWidth, required,
+        desc,
+    )
+}
+
+func FormatModuleHeader(modulePath string) string {
+    return fmt.Sprintf(
+        "\n%sModule Options %s(%s%s%s):\n",
+        bcolors.Bold, bcolors.Endc,
+        bcolors.Green, modulePath, bcolors.Endc,
+    )
+}
+
+func FormatColumnHeaders(config TableConfig) string {
+    return FormatRow(config, "Name", "Current Setting", "Required", "Description") + "\n" +
+        FormatRow(config, "----", "---------------", "--------", "-----------")
+}
+
+func FormatFooter() string {
+    return fmt.Sprintf(`
+%sSupported Distros%s:
+--------- --------
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %susage%s:
+--  -----
+  show options
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s or %s'info -d'%s command.
+`,
+        bcolors.Bold, bcolors.Endc,
+        bcolors.BrightBlue, bcolors.Bold, bcolors.Endc,
+        bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc,
+    )
+}
+
+func FormatModuleOptions(modulePath string, config TableConfig, rows [][]string) string {
+    var builder strings.Builder
+
+    builder.WriteString(FormatModuleHeader(modulePath))
+    builder.WriteString("\n")
+    builder.WriteString(FormatColumnHeaders(config))
+    builder.WriteString("\n")
+
+    for _, row := range rows {
+        if len(row) == 4 {
+            builder.WriteString(FormatRow(config, row[0], row[1], row[2], row[3]))
+            builder.WriteString("\n")
+        }
+    }
+
+    builder.WriteString(FormatFooter())
+
+    return builder.String()
+}
+
 func modulesHelp(info ModuleHelpInfo) {
     fmt.Printf(`
        %sName%s: %s
@@ -53,19 +131,7 @@ func modulesHelp(info ModuleHelpInfo) {
 %sDescription%s:
 -----------
   %s
-`,
-        bcolors.Bold, bcolors.Endc, info.Name,
-        bcolors.Bold, bcolors.Endc, info.Function,
-        bcolors.Bold, bcolors.Endc, info.Platform,
-        bcolors.Bold, bcolors.Endc, info.Arch,
-        bcolors.Bold, bcolors.Endc, info.Privileged,
-        bcolors.Bold, bcolors.Endc, info.License,
-        bcolors.Bold, bcolors.Endc, info.Rank,
-        bcolors.Bold, bcolors.Endc, info.Disclosed,
-        bcolors.Bold, bcolors.Endc, info.ProvidedBy,
-        bcolors.Bold, bcolors.Endc, info.CreatedBy,
-        bcolors.Bold, bcolors.Endc, info.TestedDistros,
-        bcolors.Bold, bcolors.Endc, info.Description)
+`, bcolors.Bold, bcolors.Endc, info.Name, bcolors.Bold, bcolors.Endc, info.Function, bcolors.Bold, bcolors.Endc, info.Platform, bcolors.Bold, bcolors.Endc, info.Arch, bcolors.Bold, bcolors.Endc, info.Privileged, bcolors.Bold, bcolors.Endc, info.License, bcolors.Bold, bcolors.Endc, info.Rank, bcolors.Bold, bcolors.Endc, info.Disclosed, bcolors.Bold, bcolors.Endc, info.ProvidedBy, bcolors.Bold, bcolors.Endc, info.CreatedBy, bcolors.Bold, bcolors.Endc, info.TestedDistros, bcolors.Bold, bcolors.Endc, info.Description)
 
     if info.Options != "" {
         fmt.Printf("\n%sOptions%s:\n%s\n", bcolors.Bold, bcolors.Endc, info.Options)
@@ -236,7 +302,6 @@ func MenuSix() {
     generateMenu(items, "", true)
 }
 
-
 func MenuSeven() {
     items := []string{
         "gophish",
@@ -267,6 +332,281 @@ func MenuEight() {
     generateMenu(items, "", true)
 }
 
+func ListMainFunctions() {
+    fmt.Printf(`
+%sMain Modules%s:
+---- -------
+
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  setups", "Manage framework installation, updates, dependencies and complete removal."},
+        {"torsocks", "Enforce Tor network routing for all traffic with leak protection."},
+        {"networks", "Conduct MITM, DNS spoofing and network vulnerability assessments."},
+        {"exploits", "Create stealth payloads and establish encrypted C2 connections."},
+        {"wireless", "Perform WPA2 cracking, rogue AP attacks and spectrum analysis."},
+        {"crackers", "Bruteforce services and crack hashes using advanced techniques."},
+        {"phishers", "Deploy convincing phishing sites with automated data capture."},
+        {"websites", "Scan for vulnerabilities and exploit web application flaws."},
+        {" credits", "View acknowledgments for contributors and integrated tools."},
+        {"  verses", "Access scriptural references for ethical hacking guidance."},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example: "    set module verses\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListSetupsDistros() {
+    fmt.Printf(`
+%sSupported Distros%s:
+--------- ---------
+
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"    kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable."},
+        {"  ubuntu", "This module will install africana-framework in Ubuntu-Linux."},
+        {"    arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo."},
+        {"   macos", "Under development. Install africana on MackingTosh systems."},
+        {" android", "Install africana-framework in Termux using chroot environment."},
+        {" windows", "Under development. But can run if tools well installed using commando vm."},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set distro kali\n    set module install\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListSetupsFunction() {
+    fmt.Printf(`
+%sSetups Functions%s:
+------ ---------
+
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {" install", "Installs africana in selected distro."},
+        {"  update", "Get new release of africana-framework from github and install it."},
+        {"  repair", "Repair africana-framework if broken or with issues."},
+        {"    auto", "Auto detect system and do the necessary."},
+        {"  delete", "Completely uninstall africana-framework from system. alias to 'uninstall'."},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set module install\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListTorsocksFunctions() {
+    fmt.Printf(`
+%sTorsocks Functions%s:
+-------- ---------
+
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  setups", "Installs dnsmasq, squid, privoxy and tor (also set configs)"},
+        {"  vanish", "Start anonymizing the system through tor network"},
+        {"  status", "Check if using tor (Show if all anononimty services are up and running)"},
+        {"   torip", "Check current tor IP address"},
+        {"  chains", "View traffic logs from squid, privoxy, to tor"},
+        {"  reload", "Completely restart torsocks and connect to a different exit-node"},
+        {"exitnode", "Connect to a different exit-node"},
+        {" restore", "Backup and resets Iptables to default"},
+        {"    stop", "Get back to the surface-web"},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set module discover\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListInternalFunctions() {
+    fmt.Printf(`
+%sNetworks Functions%s:
+-------- ---------
+
+  # %sName        Description%s
+  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"discover", "Discover all devices connected to the network. Lets you locate targets."},
+        {"portscan", "Get open ports on the target you have set."},
+        {"vulnscan", "Perform vulnerbility scan on open ports of the target you have set."},
+        {"enumscan", "Recon for S.M.B deep information on the target set."},
+        {"smbexpl0", "Launch known vulnerbility exploits on the target's S.M.B services."},
+        {"psniffer", "Sniff all Packets from connected devices to the router(Perform M.I.T.M)."},
+        {"respond4", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
+        {"beefkill", "Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks)."},
+        {"toxssin1", "Get Shell through XSS Injection to packets in the wire.(To come)."},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set module discover\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListExploitsFunctions() {
+    fmt.Printf(`
+%sExploits Functions%s:
+-------- ---------
+
+  # %sName           Description%s
+  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"   androrat", "It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
+        {"  teardroid", "Andoird Listener. Needs alot of online configuration but the best for now"},
+        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
+        {"     shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
+        {"      ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"  chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"dllbackdoor", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
+        {"regbackdoor", "Just like dllbackdoor but the persisten mechanisim is through regestry keys"},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set module hoaxshell\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListListenersFunctions() {
+    fmt.Printf(`
+%sListeners Functions%s:
+--------- ---------
+
+  # %sName           Description%s
+  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
+        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
+        {"       ncat", "Starts ncat to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
+        {" metasploit", "Launches metasploit to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set module dllbackdoor\n    set listener blackjack\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+func ListObfscatorsFunctions() {
+    fmt.Printf(`
+%sObfscators Functions%s:
+---------- ---------
+
+  # %sName     Description%s
+  - ----     -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
+        {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
+    info := ModuleHelpInfo{
+        Example:          "    set script Full_path_to_your .ps1\n    run\n",
+    }
+    modulesUsage(info)
+}
+
+
+func ListIcons() {
+    fmt.Printf(`
+%sList of Icons%s:
+---- -- -----
+
+  # %sName          Description%s
+  - ----          -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"    access","Microsoft access document icon for your output malware"},
+        {"   autorun","Autorun standard icon to disguise your malicious malware"},
+        {"     excel","Microsoft excel document icon for your output malware"},
+        {"       pdf","Standard .pdf icon for your malicious backdoor"},
+        {"   project","Another icon found in microsoft office tools"},
+        {" publisher","Microsoft publisher document icon for your output malware"},
+        {"    redrat","A simple icon for a rat. This will fortunetly look suspicious"},
+        {"     visio","Microsoft access document icon for your output malware"},
+        {"       vlc","An icon that will output your malware as a vlc vidoe player"},
+        {"     word","Microsoft word document icon for your output malware"},
+        {" defender","Microsoft defender icon for your output malware"},
+        {"kaspersky","Kapersky antivirus icon for your output malware"},
+    }
+
+    for i, item := range items {
+        fmt.Printf(`
+  %s%d. %s%-3s%s > %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Example:          "    set icon access\n",
+    }
+    modulesUsage(info)
+}
+
 func HelpInfoMain() {
     info := ModuleHelpInfo{
         Name:          "main",
@@ -286,317 +626,6 @@ func HelpInfoMain() {
 }
 
 
-func ListMainFunctions() {
-    fmt.Printf(`
-%sMain Modules%s:
----- -------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"  setups", "Install, Update, Repair or Uninstall africana-framework"},
-        {"torsocks", "Configure the system for strictly tight anonymity"},
-        {"networks", "Start internal network attacks"},
-        {"exploits", "Generate undetectable R.A.Ts and launch listeners"},
-        {"wireless", "Wireless networks attack vectors"},
-        {"crackers", "Crack hashes and bruteforce services"},
-        {"phishers", "Perform advanced Phishing attacks"},
-        {"websites", "Launch Web penetration testing engines"},
-        {" credits", "Show developers and third party tools creators"},
-        {" verses", "Bible verses integration"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set module verses\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-func HelpInfoMenuMain() {
-    fmt.Printf(`
-Usage: ./afrconsole [options]
-
-Common options:
-    -a, --auto          Start africana in automation mode 'guide by menu'
-
-Setup options:
-    -i, --install       Launch installation menu to install needed dependencies
-    -u, --update        Update africana framework and and all it's tools
-
-Framework options:
-    -l, -L, --logs      Show logs in terminal
-    -v, -V, --version   Show version
-
-Console options:
-    -t, --torsocks      Launch torsocks menu to torify your system
-    -n, --networks      Start internal network attacks
-    -e, --exploits      Generate undetectebal R.A.Ts and (Launch listeners for all systems. Evasions also included)
-    -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors
-    -c, --crackers      Crack(NTLMS, HASHES, PCAPS) and bruteforce(SSH, FTP, SMB, RPC etc.)
-    -p, --phishers      Perform almost all advanced Phishing attacks
-    -x, --websites      Launch Web Penetration engines with free bugbounty automation function
-    -k, --credits       Show who developes and mentains africana-framework and (third party tools developers)
-    -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework
-    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s
-    -q, --quite         Start africana without banner and missing tools checking
-    -h, --help          Show this help message and exit
-
-`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
-}
-
-func HelpInfoMenuZero() {
-    fmt.Printf(`
-    %sCommand             Description%s
-    -------             -----------
-    ?                   Help menu. Alias to (h, help)
-    banner              Display an awesome africana banner
-    clear               Clear the working screen or use with flag ('history' to clear history)
-    exit                Exit the console
-    features            Display the list of not yet released features that can be opted in to
-    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
-    history             Show command history
-    menu                Print the menu of the current phase. Alias to letter(m)
-    quit                Exit the console
-    set                 Sets a context-specific variable to a value
-    sleep               Do nothing for the specified number of seconds
-    tips                Show a list of useful productivity tips
-    version             Show the framework and console library version numbers
-
-%sFunction Commands%s
--------- --------
-
-    %sCommand             Description%s
-    -------             -----------
-    advanced            Displays advanced options for one or more modules
-    back                Move back from the current context
-    info                Displays information about one or more modules
-    list                List the Function stack
-    options             Displays global options or for one or more modules
-    run                 Run a selected Function
-    search              Searches Function names and descriptions
-    show                Displays modules of a given type, or all modules
-    use                 Interact with a module by name or search term/index
-
-%sDeveloper Commands%s
---------- --------
-
-    %sCommand             Description%s
-    -------             -----------
-    bash                 Start Intaractive shell in africana. Alias to ('sh, zsh, cmd, powershell')
-    junks                Display what is in the output directory
-    logs                 Display framework.log paged to the end if possible
-    time                 Time how long it takes to run a particular command
-
-For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
-
-func HelpInfoRun() {
-    fmt.Printf(`
-%sUsage%s: run [Function]
-
-%sRun a Function%s:
---- - --------
-  show modules to list modules or <show all>
-
-%sCommand      Description%s
--------      -----------
-run          Enables you to Interact with a Function by name or search term/index. Alias to "use", "exec", "start", "launch", "exploit", "execute".
-
-%sex. %s%susage%s:
---  -----
-
-  run setups or execute setups
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfOptions() {
-    fmt.Printf(`
-%sUsage%s: options -> to show list of options for a given function or module.
-           Same as show options, when 'option' command is invoked does the same.
-
-%sex. %s%susage%s:
---  -----
-
-  show options
-
-Just like show options command, options shows commands in which a sub Function can run in a given sub menu.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoShow() {
-    fmt.Printf(`
-%sUsage%s: show [all], [modules], [options], [functions]
-
-%sex. %s%susage%s:
---  -----
-
-  show modules
-
-%s[*]%s Valid parameters for the %s"show" %scommand are: all, modules, options
-%s[*]%s Additional module-specific parameters are: missing, advanced, evasion, targets, actions
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
-}
-
-func HelpInfoUse() {
-    fmt.Printf(`
-%sUsage%s: use <name|term>
-
-Just like start and run, use enables you to Interact with a Function by name or search term/index. If a Function
-name is not found, it will be treated as a search term. An index from the previous search results can be selected if desired.
-
-%sex. %s%susage%s:
---  -----
-
-  use setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
-
-  use setups
-  use <name>
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoStart() {
-    fmt.Printf(`
-%sUsage%s: start <name|term>
-
-Just like use and run, start enables you to Interact with a Function by name or search term/index.
-If a Function name is not found, it will be treated as a search term. An index from the previous search
-results can be selected if desired.
-
-%sex. %s%susage%s:
---  -----
-
-  start setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
-
-  start setups
-  start <name>
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoList() {
-    fmt.Printf(`
-%sUsage%s: list <name|term>
-
-Show all modules or sub-Functions in a specific face you are. If you are in modules setups,
-list modules command, will list all sub-modules available in that Function.
-
-%sex. %s%susage%s:
---  -----
-
-  list modules
-
-%s[*]%s Valid parameters for the "list" command are: modules, functions or all.
-%s[*]%s Additional Function-specific parameters are: missing, advanced.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
-}
-
-func HelpInfoSet() {
-    fmt.Printf(`
-%sUsage%s: set [options] [name] [value]
-
-Set the given option to value. If value is omitted, print the current value. If both are omitted,
-print options that are currently set.
-
-If run from a Function context, this will set the value in the Function's datastore: -> Use -g to operate on the global datastore.
-
-If setting a PAYLOAD, this command can take an index from 'show payloads'.
-
-%sOPTIONS%s:
--------
-
-    -c, --clear   Clear the values, explicitly setting to nil(default)
-    -g, --global  Operate on global datastore variables
-    -h, --help    Help banner.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfo() {
-    fmt.Printf(`
-%sUsage%s: info <Function name>
-
-%sex. %s%susage%s:
---  -----
-
-  info setups -> or info [ 1. setups   2. torsocks 3. networks 4. exploits 5. wireless ]
-                         [ 5. crackers 6. phishers 7. websites 8. credits  9. verse.   ] -> Integer input support. keys are. (1 2 3 4 5 6 7 8 9 0 and 10)
-
-%sDescription%s:
------------
-
-  Queries the supplied Function or modules for information. If no Function is given, show info for the currently active Function.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoTips() {
-    fmt.Printf(`
-%sUsage%s: getips <Function name>
-
-%sex. %s%susage%s:
---  -----
-
-  info setups, torsocks, networks, exploits, wireless, phishers, webs, verses.
-
-%sDescription%s:
------------
-  Gives you special information about a Function and how to successfully use it in.
-real life scenario.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoFeatures() {
-    fmt.Printf(`
-%sUsage%s: features
-
-%sex. %s%susage%s:
---  -----
-  features -> or show features
-
-%sDescription%s:
------------
-
-Prints feature plans for africana. Ex. modules to be added, what to be corrected.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoExecute() {
-    fmt.Printf(`
-%sOptions%s:
--------
-    %srun%s : Launch the selected Function. Alias to (start, execute)
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func MainOptions() {
-    options := []string{
-        "  MODULE         none             yes       Select a module or function to interact with.",
-    }
-    generateOptions("main/africana_run.fn", options)
-    info := ModuleHelpInfo{
-        Example:          "    set module verses\n    run\n",
-    }
-    modulesUsage(info)
-}
-
 func HelpInfoSetups() {
     info := ModuleHelpInfo{
         Name:          "setups",
@@ -615,85 +644,22 @@ func HelpInfoSetups() {
     ListSetupsFunction()
 }
 
-func ListSetupsDistros() {
-    fmt.Printf(`
-%sSupported Distros%s:
---------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"kali", "    Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable"},
-        {"ubuntu", "  This module will install africana-framework in Ubuntu-Linux"},
-        {"arch", "    Tools will be installed in any Arch-Linux Distros using Blackarch repo"},
-        {"macos", "   Under development. Install africana on MackingTosh systems"},
-        {"android", " Install africana-framework in Termux using chroot environment"},
-        {"windows", " Under development. But can run if tools well installed using commando vm"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
+func HelpInfoTorsocks() {
     info := ModuleHelpInfo{
-        Example:          "    set distro kali\n    set module install\n    run\n",
+        Name:          "torsocks",
+        Function:      "src/securities/torsocks.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
     }
-    modulesUsage(info)
-}
-
-
-func ListSetupsFunction() {
-    fmt.Printf(`
-%sSetups Functions%s:
------- ---------
-
-  # %sName       Description%s
-  - ----       -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"install", "Installs africana in selected distro"},
-        {" update", "Get new release of africana-framework from github and install it"},
-        {" repair", "Repair africana-framework if broken or with issues"},
-        {"   auto", "Auto detect system and do the necessary"},
-        {" delete", "Completely uninstall africana-framework from system. alias to 'uninstall'"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set module install\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-func SetupsOptions() {
-    fmt.Printf(`
-%sModule options %s(setups/setups_launcher.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  DISTRO         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
-  FUNCTION       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
-  RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
-
-%sex. %s%susage%s:
---  -----
-  set distro kali
-  set function install
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+    modulesHelp(info)
+    ListTorsocksFunctions()
 }
 
 func HelpInfoKali() {
@@ -747,7 +713,6 @@ func HelpInfoUbuntu() {
     }
     modulesHelp(info)
 }
-
 
 func HelpInfoMacos() {
     info := ModuleHelpInfo{
@@ -889,84 +854,6 @@ func HelpInfoClearLogs() {
     modulesHelp(info)
 }
 
-
-func ListTorsocksFunctions() {
-    fmt.Printf(`
-%sTorsocks Functions%s:
--------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"  setups", "Installs dnsmasq, squid, privoxy and tor (also set configs)"},
-        {"  vanish", "Start anonymizing the system through tor network"},
-        {"  status", "Check if using tor (Show if all anononimty services are up and running)"},
-        {"   torip", "Check current tor IP address"},
-        {"  chains", "View traffic logs from squid, privoxy, to tor"},
-        {"  reload", "Completely restart torsocks and connect to a different exit-node"},
-        {"exitnode", "Connect to a different exit-node"},
-        {" restore", "Backup and resets Iptables to default"},
-        {"    stop", "Get back to the surface-web"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set module discover\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-func HelpInfoTorsocks() {
-    info := ModuleHelpInfo{
-        Name:          "torsocks",
-        Function:      "src/securities/torsocks.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
-        TestedDistros: "All Distros",
-        Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
-    }
-    modulesHelp(info)
-    ListTorsocksFunctions()
-}
-
-
-func TorsocksOptions() {
-    fmt.Printf(`
-%sModule options %s(src/securities/torrsocks_setup.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  function       none             yes       The function to execute. ex.      -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)
-  run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Distros
-
-%sex. %s%susage%s:
---  -----
-  set function vanish
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
-
 func HelpInfoTorsocksSetups() {
     info := ModuleHelpInfo{
         Name:          "setups",
@@ -1000,8 +887,6 @@ func HelpInfoTorsocksVanish() {
     }
     modulesHelp(info)
 }
-
-
 
 func HelpInfoTorsocksStatus() {
     info := ModuleHelpInfo{
@@ -1129,83 +1014,116 @@ func HelpInfoTorsocksStop() {
     modulesHelp(info)
 }
 
-
-func ListInternalFunctions() {
-    fmt.Printf(`
-%sNetworks Functions%s:
--------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"discover", "Discover all devices connected to the network. Lets you locate targets."},
-        {"portscan", "Get open ports on the target you have set."},
-        {"vulnscan", "Perform vulnerbility scan on open ports of the target you have set."},
-        {"enumscan", "Recon for S.M.B deep information on the target set."},
-        {"smbexpl0", "Launch known vulnerbility exploits on the target's S.M.B services."},
-        {"psniffer", "Sniff all Packets from connected devices to the router(Perform M.I.T.M)."},
-        {"respond4", "Start Killer Responder that configs all required fields to get you a reverse shell on windows. Supports IPv6."},
-        {"beefkill", "Launch Beef-xss and Bettercap/ Ettercp For effective (M.I.B attacks)."},
-        {"toxssin1", "Get Shell through XSS Injection to packets in the wire.(To come)."},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
+func HelpInfoNetworks() {
     info := ModuleHelpInfo{
-        Example:          "    set module discover\n    run\n",
+        Name:          "Networks",
+        Function:      "src/networks.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This is the Network module that contains all internal networks attacks functions.",
+    }
+    modulesHelp(info)
+    ListInternalFunctions()
+}
+
+func HelpInfoChameleon() {
+    info := ModuleHelpInfo{
+        Name:          "exploits",
+        Function:      "src/exploits/chameleon.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "r0jahsm0ntar1",
+        TestedDistros: "All Distros",
+        Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
+    }
+    modulesHelp(info)
+}
+
+func MainOptions() {
+    options := []string{
+        "  MODULE         none             yes       Select a module or function to interact with.",
+        "  RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).",
+        "  show modules   To see modules you can interact with.",
+    }
+    generateOptions("main/africana_run.fn", options)
+    info := ModuleHelpInfo{
+        Example:          "    set module verses\n    run\n",
     }
     modulesUsage(info)
 }
 
-func HelpInfoNetworks() {
+func SetupsOptions() {
     fmt.Printf(`
-       %sName%s: Networks
-   %sFunction%s: src/networks
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2024
-
-%sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Distros
-
-%sDescription%s:
------------
-  This is the Network module that contains all internal networks attacks functions.
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-    ListInternalFunctions()
-}
-
-func NetworksOptions() {
-    fmt.Printf(`
-%sModule options %s(src/networks/networks_pentest.fn):
+%sModule options %s(setups/setups_launcher.fn):
 
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
-  MODE           single           yes       Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask.
-  IFACE          eth0             yes       Interface to use for penetration testing.
-  RHOST          none             yes       Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on.
-  PASSWD         Jesus            yes       The password to set for beef-xss login page with the default user:beef
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed if you need to use (responder, beefninja and xsshooker to handle reverse calls.
-  GATEWAY        ->               yes       %sDefault%s: %s%s%s. The default roouter ipaddres. Will be needed when running functions like (beefninja).
-  SPOOFER        ettercap         yes       The tool to be used for spoofing target host to our domain. the other (bettercap).
-  PROXIES        none             no        Just incase you want to run your traffic through proxies. -> (discover, portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja, xsshooker).
-  FAKEDNS        *                yes       Dns to be resolved when performing dns spoof. Mainly needed when beefninja function is at hand.
-  FUNCTION       none             yes       The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja).
+  DISTRO         none             yes       Distro to install africana on.    -> supported distros. (arch, ubuntu, macos, android, windows).
+  FUNCTION       none             yes       The function to execute.          -> ex. (Install, update, repair or uninstall).
+  RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
+
+%sex. %s%susage%s:
+--  -----
+  set distro kali
+  set function install
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func TorsocksOptions() {
+    fmt.Printf(`
+%sModule options %s(src/securities/torrsocks_setup.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  function       none             yes       The function to execute. ex.      -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)
+  run            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).
+
+%sSupported Distros%s:
+--------- --------
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  -----
+  set function vanish
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func NetworksOption() {
+    fmt.Printf(`
+%sModule options %s(src/networks/networks_pentest.fn):
+
+  %sName      Current Setting  Required  Description%s
+  ----      ---------------  --------  -----------
+  MODE      single           yes       Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask.
+  IFACE     eth0             yes       Interface to use for penetration testing.
+  RHOST     none             yes       Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on.
+  PASSWD    Jesus            yes       The password to set for beef-xss login page with the default user:beef
+  LHOST     ->               yes       %sDefault%s: %s%s%s. Mainly needed if you need to use (responder, beefninja and xsshooker to handle reverse calls.
+  GATEWAY   ->               yes       %sDefault%s: %s%s%s. The default roouter ipaddres. Will be needed when running functions like (beefninja).
+  SPOOFER   ettercap         yes       The tool to be used for spoofing target host to our domain. the other (bettercap).
+  PROXIES    none             no        Just incase you want to run your traffic through proxies. -> (discover, portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja, xsshooker).
+  FAKEDNS   *                yes       Dns to be resolved when performing dns spoof. Mainly needed when beefninja function is at hand.
+  FUNCTION  none             yes       The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja).
 
 %sSupported Distros%s:
 --------- --------
@@ -1221,6 +1139,173 @@ func NetworksOptions() {
 View the full module info with the %s'info'%s, or %s'info -d'%s command.
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc,       bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc,           bcolors.Bold, bcolors.Endc, bcolors.Yellow, Gateway, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func OptionsResponder() {
+    fmt.Printf(`
+%sModule Options %s(src/networks/responder.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+
+%sSupported Distros%s:
+--------- --------
+   Id  Name
+   --  ----
+   0   All Browsers
+
+%sex. %s%susage%s:
+--  -----
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func OptionsBeefNinja() {
+    fmt.Printf(`
+%sModule Options %s(src/networks/beefninja.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+  SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
+
+%sSupported Distros%s:
+--------- --------
+   Id  Name
+   --  ----
+   0   All Browsers
+
+%sex. %s%susage%s:
+--  -----
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func OptionsXssHoocker() {
+    fmt.Printf(`
+%sModule Options %s(src/networks/xsshooker.fn):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+  RHOST          none             yes       Target to attack. Host's ipadress.
+  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
+  LPORT          9999             yes       Listener port to handle beacons.
+  PROXIES        none             no        Just incase you want to run your traffic through proxies.
+
+%sSupported Distros%s:
+--------- --------
+   Id  Name
+   --  ----
+   0   All Distros
+
+%sex. %s%susage%s:
+--  -----
+  set LHOST 127.0.0.1
+  run
+
+View the full module info with the %s'info'%s, or %s'info -d'%s command.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+}
+
+func NetworksOptions(Mode, IFace, RHost, Passwd, Lhost, Gateway, Spoofer, Proxies, FakeDns, Function string) {
+    rows := [][]string{
+        {"MODE", Mode, "yes", "Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask."},
+        {"IFACE", IFace, "yes", "Interface to use for penetration testing."},
+        {"RHOST", RHost, "yes", "Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on."},
+        {"PASSWD", Passwd, "yes", "The password to set for beef-xss login page with the default user:beef"},
+        {"LHOST", Lhost, "yes", "Mainly needed if you need to use (responder, beefninja and xsshooker to handle reverse calls."},
+        {"GATEWAY", Gateway, "yes", "The default router ipaddress. Will be needed when running functions like (beefninja)."},
+        {"SPOOFER", Spoofer, "yes", "The tool to be used for spoofing target host to our domain. The other (bettercap)."},
+        {"PROXIES", Proxies, "no", "Just in case you want to run your traffic through proxies. -> (discover, portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja, xsshooker)."},
+        {"FAKEDNS", FakeDns, "yes", "DNS to be resolved when performing DNS spoof. Mainly needed when beefninja function is at hand."},
+        {"FUNCTION", Function, "yes", "The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja)."},
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/networks/networks_pentest.fn",
+        DefaultTableConfig,
+        rows,
+    ))
+}
+
+func ExploitsOptions(Icon, Lhost, Lport, Hport, Script, Malware, Function, Proxy, OutPutDir, Listener, Protocol string) {
+    rows := [][]string{
+        {"ICON", Icon, "yes", "Icon to be used while generating backdoors"},
+        {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors and launching Listeners"},
+        {"LPORT", Lport, "yes", "Listener port to handle beacons"},
+        {"HPORT", Hport, "yes", "The port to handle file smaglers in blacjack function"},
+        {"BUILD", Malware, "yes", "Output name of the backdoor to be generated"},
+        {"SCRIPT", Script, "yes", "Your powershell script location to be opfsicated"},
+        {"OUTPUT", OutPutDir, "yes", "Location for generated backdoor"},
+        {"PROXIES", Proxy, "no", "Run traffic through proxies"},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)"},
+        {"LISTENER", Listener, "yes", "Listener for call back connections"},
+        {"FUNCTION", Function, "yes", "Function to perform (ghost, shellz, etc)"},
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/exploits/backdoor_pentest.fn",
+        DefaultTableConfig,
+        rows,
+    ))
+}
+
+func BlackJackOptions(Lhost string) {
+    rows := [][]string{
+        {"LHOST", Lhost, "yes", "Listener host address"},
+        {"LPORT", "9999", "yes", "Listener port to handle beacons"},
+        {"HPORT", "3333", "yes", "Port for file smaglers in blacjack"},
+        {"SCRIPT", "none", "yes", "Powershell script location"},
+        {"PROXIES", "none", "no", "Traffic through proxies"},
+        {"PROTOCOL", "tcp", "yes", "Communication protocol"},
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/exploits/blackjack_listener.fn",
+        DefaultTableConfig,
+        rows,
+    ))
+}
+
+
+func AndroRatOptions(Lhost, Lport, Hport, Malware, OutPutDir, Proxies, Protocol string) {
+    rows := [][]string{
+        {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors."},
+        {"LPORT", Lport, "yes", "Listener port to handle beacons."},
+        {"HPORT", Hport, "yes", "The port to handle file smaglers in blacjack function."},
+        {"BUILD", Malware, "yes", "Output name of the backdoor to be generated."},
+        {"OUTPUT", OutPutDir, "yes", "Output location."},
+        {"PROXIES", Proxies, "no", "Run traffic through proxies."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+    }
+
+    config := TableConfig{
+        NameWidth:    12,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/exploits/androrat_listener.fn",
+        config,
+        rows,
+    ))
 }
 
 func HelpInfoDiscover() {
@@ -1490,33 +1575,6 @@ func HelpInfoResponder() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-func OptionsResponder() {
-    fmt.Printf(`
-%sModule Options %s(src/networks/responder.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Browsers
-
-%sex. %s%susage%s:
---  -----
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
-
 func HelpInfoBeefNinja() {
     fmt.Printf(`
        %sName%s: beefninja
@@ -1553,34 +1611,6 @@ func HelpInfoBeefNinja() {
   This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func OptionsBeefNinja() {
-    fmt.Printf(`
-%sModule Options %s(src/networks/beefninja.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-  SPOOFER        ettercap         yes       Tool to be used to spoof dns and repond to them. ex. (bettercap)
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Browsers
-
-%sex. %s%susage%s:
---  -----
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func HelpInfoXssHoocker() {
@@ -1621,169 +1651,6 @@ func HelpInfoXssHoocker() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-func OptionsXssHoocker() {
-    fmt.Printf(`
-%sModule Options %s(src/networks/xsshooker.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  RHOST          none             yes       Target to attack. Host's ipadress.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Distros
-
-%sex. %s%susage%s:
---  -----
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
-
-func ListExploitsFunctions() {
-    fmt.Printf(`
-%sExploits Functions%s:
--------- ---------
-
-  # %sName           Description%s
-  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"   androrat", "It is another Android Listener. It is cool but only works on android 4 to 9. Suppoorts android < 14 but less functions"},
-        {"  teardroid", "Andoird Listener. Needs alot of online configuration but the best for now"},
-        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
-        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
-        {"     shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners"},
-        {"      ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
-        {"  chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
-        {"dllbackdoor", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims"},
-        {"regbackdoor", "Just like dllbackdoor but the persisten mechanisim is through regestry keys"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set module hoaxshell\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-func ListListenersFunctions() {
-    fmt.Printf(`
-%sListeners Functions%s:
---------- ---------
-
-  # %sName           Description%s
-  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"  blackjack", "It is a tool derived from villain. It supports both tcp, http and https reverse shells. Supports evasions and bypasses almost all avs"},
-        {"  hoaxshell", "A Killer FUD that bypasses most avs"},
-        {"       ncat", "Starts ncat to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
-        {" metasploit", "Launches metasploit to listen for either tcp or http(s) protocol for powershell reverse shell. Best launched with dllbackdoor or regbackdoor modules"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set module dllbackdoor\n    set listener blackjack\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-func ListObfscatorsFunctions() {
-    fmt.Printf(`
-%sObfscators Functions%s:
----------- ---------
-
-  # %sName     Description%s
-  - ----     -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it"},
-        {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set script Full_path_to_your .ps1\n    run\n",
-    }
-    modulesUsage(info)
-}
-
-
-func ListIcons() {
-    fmt.Printf(`
-%sList of Icons%s:
----- -- -----
-
-  # %sName          Description%s
-  - ----          -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-
-    items := []struct {
-        name string
-        desc string
-    }{
-        {"    access","Microsoft access document icon for your output malware"},
-        {"   autorun","Autorun standard icon to disguise your malicious malware"},
-        {"     excel","Microsoft excel document icon for your output malware"},
-        {"       pdf","Standard .pdf icon for your malicious backdoor"},
-        {"   project","Another icon found in microsoft office tools"},
-        {" publisher","Microsoft publisher document icon for your output malware"},
-        {"    redrat","A simple icon for a rat. This will fortunetly look suspicious"},
-        {"     visio","Microsoft access document icon for your output malware"},
-        {"       vlc","An icon that will output your malware as a vlc vidoe player"},
-        {"     word","Microsoft word document icon for your output malware"},
-        {" defender","Microsoft defender icon for your output malware"},
-        {"kaspersky","Kapersky antivirus icon for your output malware"},
-    }
-
-    for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s%s > %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
-    info := ModuleHelpInfo{
-        Example:          "    set icon access\n",
-    }
-    modulesUsage(info)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 func HelpInfoExploits() {
@@ -1811,58 +1678,6 @@ func HelpInfoExploits() {
   This is the Exploits module that contains all Listener, backdoors and obfsicatorsfunctions.
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
     ListExploitsFunctions()
-}
-
-func ExploitsOptions() {
-    fmt.Printf(`
-%sModule Options %s(src/exploits/backdoor_pentest.fn):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  ICON           pdf              yes       Icon to be used while generating backdoors using (DllBackDoor and RegBackDoor). Try 'show icons' to see all supported icons.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, dllbackdoor and regbackdoor)
-  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghost & chameleon).
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
-  LISTENER       blackjack        yes       The default Listener to handle your call back connections. (ncat, hoaxshell, metasploit .etc)
-  FUNCTION       none             yes       The function you want network module to perform. ex. (ghost, shellz, listene, androrat, teardroid, blackjack, hoaxshell, dllbackdoor, regbackdoor).
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Distros
-
-%sex. %s%susage%s:
---  -----
-  show function
-  set function blackjack
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
-
-func HelpInfoChameleon() {
-    info := ModuleHelpInfo{
-        Name:          "exploits",
-        Function:      "src/exploits/chameleon.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
-        TestedDistros: "All Distros",
-        Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
-    }
-    modulesHelp(info)
 }
 
 func HelpInfoBlackJack() {
@@ -2087,34 +1902,7 @@ func HelpInfoTearNdroid() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-func BlackJackOptions() {
-    fmt.Printf(`
-%sModule Options %s(src/exploits/blackjack_listener.fn):
 
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Distros
-
-%sex. %s%susage%s:
---  -----
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
 
 func HelpInfoChameLeon() {
      fmt.Printf(`
@@ -2379,36 +2167,7 @@ func HelpInfoAndroRat() {
 }
 
 
-func AndroRatOptions() {
-    fmt.Printf(`
-%sModule Options %s(src/exploits/androrat_listener.fn):
 
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  BUILD          africana_malware yes       Output name of the backdoor to be generated. Neede when using(androrat, dllbackdoor and regbackdoor)
-  SCRIPT         none             yes       Your powershell script location to be opfsicated. Mostly neede when using (ghos).
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-  PROXIES        none             no        Just incase you want to run your traffic through proxies.
-  PROTOCOL       tcp              yes       The kind of protocol to be use while communicating to your host machine. (tcp, http or https).
-
-%sSupported Distros%s:
---------- --------
-   Id  Name
-   --  ----
-   0   All Distros
-
-%sex. %s%susage%s:
---  -----
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s, or %s'info -d'%s command.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
-}
 
 func ListWirelessFunctions() {
     fmt.Printf(`
@@ -2845,9 +2604,8 @@ func ListPhishersFunctions() {
     }
 
     for i, item := range items {
-        fmt.Printf(`
-  %s%d. %s%-3s %s> %s`, bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
-    }
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        }
     info := ModuleHelpInfo{
         Example:          "    set module gophish\n    run\n",
     }
@@ -3639,6 +3397,272 @@ func HelpInfoVerses() {
   Verses is a module to narate the Bible scriptures one by one. It enables africana developer to acknowledge our LORD GOD JESUS CHRIST for Creating everything including you, me and everything.
 
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoRun() {
+    fmt.Printf(`
+%sUsage%s: run [Function]
+
+%sRun a Function%s:
+--- - --------
+  show modules to list modules or <show all>
+
+%sCommand      Description%s
+-------      -----------
+run          Enables you to Interact with a Function by name or search term/index. Alias to "use", "exec", "start", "launch", "exploit", "execute".
+
+%sex. %s%susage%s:
+--  -----
+
+  run setups or execute setups
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfOptions() {
+    fmt.Printf(`
+%sUsage%s: options -> to show list of options for a given function or module.
+           Same as show options, when 'option' command is invoked does the same.
+
+%sex. %s%susage%s:
+--  -----
+
+  show options
+
+Just like show options command, options shows commands in which a sub Function can run in a given sub menu.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoShow() {
+    fmt.Printf(`
+%sUsage%s: show [all], [modules], [options], [functions]
+
+%sex. %s%susage%s:
+--  -----
+
+  show modules
+
+%s[*]%s Valid parameters for the %s"show" %scommand are: all, modules, options
+%s[*]%s Additional module-specific parameters are: missing, advanced, evasion, targets, actions
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
+}
+
+func HelpInfoUse() {
+    fmt.Printf(`
+%sUsage%s: use <name|term>
+
+Just like start and run, use enables you to Interact with a Function by name or search term/index. If a Function
+name is not found, it will be treated as a search term. An index from the previous search results can be selected if desired.
+
+%sex. %s%susage%s:
+--  -----
+
+  use setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
+
+  use setups
+  use <name>
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoStart() {
+    fmt.Printf(`
+%sUsage%s: start <name|term>
+
+Just like use and run, start enables you to Interact with a Function by name or search term/index.
+If a Function name is not found, it will be treated as a search term. An index from the previous search
+results can be selected if desired.
+
+%sex. %s%susage%s:
+--  -----
+
+  start setups, torsocks, networks, exploits, wireless, phishers, websites, credits, verses
+
+  start setups
+  start <name>
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoList() {
+    fmt.Printf(`
+%sUsage%s: list <name|term>
+
+Show all modules or sub-Functions in a specific face you are. If you are in modules setups,
+list modules command, will list all sub-modules available in that Function.
+
+%sex. %s%susage%s:
+--  -----
+
+  list modules
+
+%s[*]%s Valid parameters for the "list" command are: modules, functions or all.
+%s[*]%s Additional Function-specific parameters are: missing, advanced.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
+}
+
+func HelpInfoSet() {
+    fmt.Printf(`
+%sUsage%s: set [options] [name] [value]
+
+Set the given option to value. If value is omitted, print the current value. If both are omitted,
+print options that are currently set.
+
+If run from a Function context, this will set the value in the Function's datastore: -> Use -g to operate on the global datastore.
+
+If setting a PAYLOAD, this command can take an index from 'show payloads'.
+
+%sOPTIONS%s:
+-------
+
+    -c, --clear   Clear the values, explicitly setting to nil(default)
+    -g, --global  Operate on global datastore variables
+    -h, --help    Help banner.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfo() {
+    fmt.Printf(`
+%sUsage%s: info <Function name>
+
+%sex. %s%susage%s:
+--  -----
+
+  info setups -> or info [ 1. setups   2. torsocks 3. networks 4. exploits 5. wireless ]
+                         [ 5. crackers 6. phishers 7. websites 8. credits  9. verse.   ] -> Integer input support. keys are. (1 2 3 4 5 6 7 8 9 0 and 10)
+
+%sDescription%s:
+-----------
+
+  Queries the supplied Function or modules for information. If no Function is given, show info for the currently active Function.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoTips() {
+    fmt.Printf(`
+%sUsage%s: getips <Function name>
+
+%sex. %s%susage%s:
+--  -----
+
+  info setups, torsocks, networks, exploits, wireless, phishers, webs, verses.
+
+%sDescription%s:
+-----------
+  Gives you special information about a Function and how to successfully use it in.
+real life scenario.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoFeatures() {
+    fmt.Printf(`
+%sUsage%s: features
+
+%sex. %s%susage%s:
+--  -----
+  features -> or show features
+
+%sDescription%s:
+-----------
+
+Prints feature plans for africana. Ex. modules to be added, what to be corrected.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoExecute() {
+    fmt.Printf(`
+%sOptions%s:
+-------
+    %srun%s : Launch the selected Function. Alias to (start, execute)
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+}
+
+func HelpInfoMenuMain() {
+    fmt.Printf(`
+Usage: ./afrconsole [options]
+
+Common options:
+    -a, --auto          Start africana in automation mode 'guide by menu'.
+
+Setup options:
+    -i, --install       Launch installation menu to install needed dependencies.
+    -u, --update        Update africana framework and and all it's tools.
+
+Framework options:
+    -l, -L, --logs      Show logs in terminal.
+    -v, -V, --version   Show version.
+
+Console options:
+    -t, --torsocks      Launch torsocks menu to torify your system.
+    -n, --networks      Start internal network attacks.
+    -e, --exploits      Generate undetectebal R.A.Ts and (Launch listeners for all systems. Evasions also included).
+    -w, --wireless      From wifi, bluetooth, cantools and other wireles attack vectors.
+    -c, --crackers      Crack(NTLMS, HASHES, PCAPS) and bruteforce(SSH, FTP, SMB, RPC etc.).
+    -p, --phishers      Perform almost all advanced Phishing attacks.
+    -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
+    -k, --credits       Show who developes and mentains africana-framework and (third party tools developers).
+    -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework.
+    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1%s.
+    -q, --quite         Start africana without banner and missing tools checking.
+    -h, --help          Show this help message and exit.
+
+`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+}
+
+func HelpInfoMenuZero() {
+    fmt.Printf(`
+    %sCommand             Description%s
+    -------             -----------
+    ?                   Help menu. Alias to (h, help).
+    banner              Display an awesome africana banner.
+    clear               Clear the working screen or use with flag ('history' to clear history).
+    exit                Exit the console.
+    features            Display the list of not yet released features that can be opted in to.
+    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
+    history             Show command history.
+    menu                Print the menu of the current phase. Alias to letter(m).
+    quit                Exit the console.
+    set                 Sets a context-specific variable to a value.
+    sleep               Do nothing for the specified number of seconds.
+    tips                Show a list of useful productivity tips.
+    version             Show the framework and console library version numbers.
+
+%sFunction Commands%s
+-------- --------
+
+    %sCommand             Description%s
+    -------             -----------
+    advanced            Displays advanced options for one or more modules.
+    back                Move back from the current context.
+    info                Displays information about one or more modules.
+    list                List the Function stack.
+    options             Displays global options or for one or more modules.
+    run                 Run a selected Function.
+    search              Searches Function names and descriptions.
+    show                Displays modules of a given type, or all modules.
+    use                 Interact with a module by name or search term/index.
+
+%sDeveloper Commands%s
+--------- --------
+
+    %sCommand             Description%s
+    -------             -----------
+    bash                 Start Intaractive shell in africana. Alias to ('sh, zsh, cmd, powershell').
+    junks                Display what is in the output directory.
+    logs                 Display framework.log paged to the end if possible.
+    time                 Time how long it takes to run a particular command.
+
+For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
+
+`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func UpsentTools() {
