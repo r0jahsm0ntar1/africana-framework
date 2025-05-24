@@ -198,7 +198,7 @@ func executeCommand(cmd string) bool {
         {[]string{"? info", "h info", "help info"}, menus.HelpInfo},
         {[]string{"v", "version"}, banners.Version},
         {[]string{"s", "sleep"}, utils.Sleep},
-        {[]string{"c", "clear", "clear screen", "screen clear"}, utils.ClearScreen},
+        {[]string{"c", "cls", "clear", "cls screen", "clear screen", "screen cls", "screen clear"}, utils.ClearScreen},
 
         {[]string{"histo", "history", "show history", "log", "logs", "show log", "show logs"}, subprocess.ShowHistory},
         {[]string{"c junk", "c junks", "c output", "c outputs", "clear junk", "clear junks", "clear output", "clear outputs"}, utils.ClearJunks},
