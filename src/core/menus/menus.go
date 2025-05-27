@@ -49,7 +49,7 @@ func FormatRow(config TableConfig, name, value, required, desc string) string {
 
 func FormatModuleHeader(modulePath string) string {
     return fmt.Sprintf(
-        "\n%sModule Options %s(%s%s%s):\n", bcolors.Bold, bcolors.Endc, bcolors.Green, modulePath, bcolors.Endc,
+        "\nModule Options (%s%s%s):\n", bcolors.Green, modulePath, bcolors.Endc,
     )
 }
 
@@ -58,25 +58,25 @@ func FormatColumnHeaders(config TableConfig) string {
         FormatRow(config, "----", "---------------", "--------", "-----------")
 }
 
-func FormatFooter() string {
-    return fmt.Sprintf(`
-%sSupported Distros%s:
---------- --------
+func FormatFooter(info ModuleHelpInfo) string {
+    if info.Example != "" {
+        return fmt.Sprintf(`
+Supported distros:
+
    Id  Name
    --  ----
-   0   All Distros
+   0   Automatic Target
 
-%sex. %susage%s:
+%sex. %s%susage%s:
 --  -----
-  show options
-  set LHOST 127.0.0.1
-  run
-
-View the full module info with the %s'info'%s or %s'info -d'%s command.
-`, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+%s
+View the full module info with the %s'info'%s or %s'show modules'%s, to get list of modules.
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+    }
+    return ""
 }
 
-func FormatModuleOptions(modulePath string, config TableConfig, rows [][]string) string {
+func FormatModuleOptions(modulePath string, config TableConfig, rows [][]string, moduleInfo ModuleHelpInfo) string {
     var builder strings.Builder
 
     builder.WriteString(FormatModuleHeader(modulePath))
@@ -91,7 +91,7 @@ func FormatModuleOptions(modulePath string, config TableConfig, rows [][]string)
         }
     }
 
-    builder.WriteString(FormatFooter())
+    builder.WriteString(FormatFooter(moduleInfo))
 
     return builder.String()
 }
@@ -226,7 +226,6 @@ func MenuTwo() {
     generateMenu(items, "", true)
 }
 
-
 func MenuThree() {
     items := []string{
         "Discover targets",
@@ -333,15 +332,15 @@ func ListMainFunctions() {
         desc string
     }{
         {"  setups", "Manage framework installation, updates, dependencies and complete removal."},
-        {"torsocks", "Enforce Tor network routing for all traffic with leak protection."},
-        {"networks", "Conduct MITM, DNS spoofing and network vulnerability assessments."},
-        {"exploits", "Create stealth payloads and establish encrypted C2 connections."},
-        {"wireless", "Perform WPA2 cracking, rogue AP attacks and spectrum analysis."},
-        {"crackers", "Bruteforce services and crack hashes using advanced techniques."},
-        {"phishers", "Deploy convincing phishing sites with automated data capture."},
-        {"websites", "Scan for vulnerabilities and exploit web application flaws."},
-        {" credits", "View acknowledgments for contributors and integrated tools."},
-        {"  verses", "Access scriptural references for ethical hacking guidance."},
+        {"torsocks", "Enforce Tor network routing for all traffic with leak protection. Dnsleak fixed."},
+        {"networks", "Conduct MITM, DNS spoofing and network vulnerability assessments. With advanced MITB."},
+        {"exploits", "Create stealth payloads and establish encrypted C2 connections. Persistence mechanisims."},
+        {"wireless", "Perform WPA2 cracking, rogue AP attacks and spectrum analysis. Can & Bluetooth support."},
+        {"crackers", "Bruteforce services and crack hashes using advanced techniques. Offline & Online modules."},
+        {"phishers", "Deploy convincing phishing sites with automated data capture. OTP Bypass full support."},
+        {"websites", "Scan for vulnerabilities and exploit web application flaws. With bugbounty free recon."},
+        {" credits", "View acknowledgments for contributors and integrated tools. Third party developers."},
+        {"  verses", "Access scriptural references for spiritual growth. With  ethical hacking guidance."},
     }
 
     for i, item := range items {
@@ -764,7 +763,6 @@ func HelpInfoKali() {
     }
     modulesHelp(info)
 }
-
 
 func HelpInfoArch() {
     info := ModuleHelpInfo{
@@ -1776,82 +1774,44 @@ func HelpInfoWireless() {
     ListWirelessFunctions()
 }
 
-
-
-
-
-
-func HelpInfoBlackJack() {
-    fmt.Printf(`
-       %sName%s: blackjack
-   %sFunction%s: src/exploits/blackajck.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s: t3l3machus
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-
-%sDescription%s:
------------
-  It is a tool derived from villain framework. It supports both tcp, http and https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoBlackJack(Lhost string) {
+    info := ModuleHelpInfo{
+        Name:          "blackjack",
+        Function:      "src/exploits/blackajck.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "r0jahsm0ntar1",
+        CreatedBy:     "t3l3machus",
+        TestedDistros: "All Distros",
+        Description:   "It is a tool derived from villain framework. It supports both tcp, http and https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.",
+        Example:          "    set module blackjack\n    run\n",
+    }
+    modulesHelp(info)
+    BlackJackOptions(Lhost)
 }
 
-
-func HelpInfoShellz() {
-    fmt.Printf(`
-       %sName%s: shellz
-   %sFunction%s: src/exploits/shellz.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s: sandres
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoShellz(Lhost, Lport, Protocol string) {
+    info := ModuleHelpInfo{
+        Name:          "shellz",
+        Function:      "src/exploits/shellz.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "r0jahsm0ntar1",
+        CreatedBy:     "t3l3machus",
+        TestedDistros: "All Distros",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+        Example:          "    set module shellz\n    run\n",
+    }
+    modulesHelp(info)
+    ShellzOptions(Lhost, Lport, Protocol)
 }
 
 func HelpInfoHoaxShell() {
@@ -2554,12 +2514,34 @@ func HelpInfoWifiPumpkin() {
 
 
 
+func MainOptions() {
+    rows := [][]string{
+        {"MODULE", "none", "yes", "A module to interact with."},
+    }
 
-func NetworksOptions(Mode, IFace, RHost, Passwd, Lhost, Gateway, Spoofer, Proxies, FakeDns, Function string) {
+    config := TableConfig{
+        NameWidth:    9,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    moduleInfo := ModuleHelpInfo{
+        Example: "  set module setups\n  run\n",
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "main/africana_run.fn",
+        config,
+        rows,
+        moduleInfo,
+    ))
+}
+
+func NetworksOptions(Mode, Iface, Rhost, Passwd, Lhost, Gateway, Spoofer, Proxies, FakeDns, Function string) {
     rows := [][]string{
         {"MODE", Mode, "yes", "Kind of attack to perform (single or all) single will attack single rhost, all for entire subnetmask."},
-        {"IFACE", IFace, "yes", "Interface to use for penetration testing."},
-        {"RHOST", RHost, "yes", "Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on."},
+        {"IFACE", Iface, "yes", "Interface to use for penetration testing."},
+        {"RHOST", Rhost, "yes", "Alias to (RHOSTS, TARGET, TARGETS) The target to perform functions on."},
         {"PASSWD", Passwd, "yes", "The password to set for beef-xss login page with the default user:beef"},
         {"LHOST", Lhost, "yes", "Mainly needed if you need to use (responder, beefninja and xsshooker to handle reverse calls."},
         {"GATEWAY", Gateway, "yes", "The default router ipaddress. Will be needed when running functions like (beefninja)."},
@@ -2569,22 +2551,29 @@ func NetworksOptions(Mode, IFace, RHost, Passwd, Lhost, Gateway, Spoofer, Proxie
         {"FUNCTION", Function, "yes", "The function you want network module to perform. ex. (portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefninja)."},
     }
 
+    option := fmt.Sprintf("  set iface %s\n  run\n", Iface)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
     fmt.Println(FormatModuleOptions(
         "src/networks/networks_pentest.fn",
         DefaultTableConfig,
         rows,
+        moduleInfo,
     ))
 }
 
-func ExploitsOptions(Icon, Lhost, Lport, Hport, Script, Malware, Function, Proxy, OutPutDir, Listener, Protocol string) {
+func ExploitsOptions(Icon, Lhost, Lport, Hport, Script, BuildName, Function, Proxy, BuildDir, Listener, Protocol string) {
     rows := [][]string{
         {"ICON", Icon, "yes", "Icon to be used while generating backdoors."},
         {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors and launching Listeners."},
         {"LPORT", Lport, "yes", "Listener port to handle beacons."},
         {"HPORT", Hport, "yes", "The port to handle file smaglers in blacjack function."},
-        {"BUILD", Malware, "yes", "Output name of the backdoor to be generated."},
+        {"BUILD", BuildName, "yes", "Output name of the backdoor to be generated."},
         {"SCRIPT", Script, "yes", "Your powershell script location to be opfsicated."},
-        {"OUTPUT", OutPutDir, "yes", "Location for generated backdoor."},
+        {"OUTPUT", BuildDir, "yes", "Location for generated backdoor."},
         {"PROXIES", Proxy, "no", "Run traffic through proxies."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
         {"FUNCTION", Function, "yes", "Function to perform (ghost, shellz, etc)."},
@@ -2595,10 +2584,18 @@ func ExploitsOptions(Icon, Lhost, Lport, Hport, Script, Malware, Function, Proxy
         SettingWidth: 21,
         ReqWidth:     9,
     }
+
+    option := fmt.Sprintf("  set icon %s\n  run\n", Icon)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
     fmt.Println(FormatModuleOptions(
         "src/exploits/backdoor_pentest.fn",
         config,
         rows,
+        moduleInfo,
     ))
 }
 
@@ -2612,19 +2609,58 @@ func BlackJackOptions(Lhost string) {
         {"PROTOCOL", "tcp", "yes", "Communication protocol."},
     }
 
+    config := TableConfig{
+        NameWidth:    12,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    option := fmt.Sprintf("  set lhost %s\n  run\n", Lhost)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
     fmt.Println(FormatModuleOptions(
         "src/exploits/blackjack_listener.fn",
-        DefaultTableConfig,
+        config,
         rows,
+        moduleInfo,
     ))
 }
 
-func AndroRatOptions(Lhost, Lport, Hport, Malware, OutPutDir, Proxies, Protocol string) {
+func ShellzOptions(Lhost, Lport, Protocol string) {
+    rows := [][]string{
+        {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors."},
+        {"LPORT", Lport, "yes", "Listener port to handle beacons."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+    }
+    config := TableConfig{
+        NameWidth:    12,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    option := fmt.Sprintf("  set lhost %s\n  run\n", Lhost)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/exploits/shellz_listener.fn",
+        config,
+        rows,
+        moduleInfo,
+    ))
+}
+
+func AndroRatOptions(Lhost, Lport, Hport, BuildName, OutPutDir, Proxies, Protocol string) {
     rows := [][]string{
         {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors."},
         {"LPORT", Lport, "yes", "Listener port to handle beacons."},
         {"HPORT", Hport, "yes", "The port to handle file smaglers in blacjack function."},
-        {"BUILD", Malware, "yes", "Output name of the backdoor to be generated."},
+        {"BUILD", BuildName, "yes", "Output name of the backdoor to be generated."},
         {"OUTPUT", OutPutDir, "yes", "Output location."},
         {"PROXIES", Proxies, "no", "Run traffic through proxies."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
@@ -2636,12 +2672,20 @@ func AndroRatOptions(Lhost, Lport, Hport, Malware, OutPutDir, Proxies, Protocol 
         ReqWidth:     9,
     }
 
+    option := fmt.Sprintf("  set lhost %s\n  run\n", Lhost)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
     fmt.Println(FormatModuleOptions(
         "src/exploits/androrat_listener.fn",
         config,
         rows,
+        moduleInfo,
     ))
 }
+
 func CrackersOptions() {
     options := []string{
         "\n  MODE           none             yes       Attack mode (online/offline)\n",
@@ -2653,20 +2697,6 @@ func CrackersOptions() {
     generateOptions("src/crackers/passwords_pentest.fn", options)
 }
 
-
-
-func MainOptions() {
-    options := []string{
-        "  MODULE         none             yes       Select a module or function to interact with.",
-        "  RUN            none             yes       To execute the function. Alias to -> (start, execute, exec, launch).",
-        "  show modules   To see modules you can interact with.",
-    }
-    generateOptions("main/africana_run.fn", options)
-    info := ModuleHelpInfo{
-        Example:          "    set module verses\n    run\n",
-    }
-    modulesUsage(info)
-}
 
 func SetupsOptions() {
     fmt.Printf(`
