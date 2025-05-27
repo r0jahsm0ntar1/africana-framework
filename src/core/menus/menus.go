@@ -20,6 +20,28 @@ var DefaultTableConfig = TableConfig{
     ReqWidth:     9,
 }
 
+type TableConfig struct {
+    NameWidth     int
+    SettingWidth  int
+    ReqWidth      int
+}
+
+type PrintOptions struct {
+    LPORT     string
+    LHOST     string
+    BUILD     string
+    OUTPUT    string
+    TOOLS_DIR string
+    HPORT     string
+    PROTOCOL  string
+    SCRIPT    string
+    ICON      string
+    LISTENER  string
+    BUILDDIR  string
+    BUILDNAME string
+}
+
+
 type ModuleHelpInfo struct {
     Name          string
     Function      string
@@ -32,15 +54,70 @@ type ModuleHelpInfo struct {
     ProvidedBy    string
     CreatedBy     string
     TestedDistros string
+    CheckSupport  string
     Description   string
     Example       string
     Options       string
 }
 
-type TableConfig struct {
-    NameWidth    int
-    SettingWidth int
-    ReqWidth     int
+func modulesHelp(info ModuleHelpInfo) {
+    fmt.Printf(`
+       %sName%s: %s
+   %sFunction%s: %s
+   %sPlatform%s: %s
+       %sArch%s: %s
+ %sPrivileged%s: %s
+    %sLicense%s: %s
+       %sRank%s: %s
+  %sDisclosed%s: %s
+
+%sProvided by%s: %s
+ %sCreated by%s: %s
+
+%sTested Distros%s:
+   Id  Name
+   --  ----
+-> 0   %s
+
+%sCheck supported%s:
+  %s
+`, bcolors.Bold, bcolors.Endc, info.Name, bcolors.Bold, bcolors.Endc, info.Function, bcolors.Bold, bcolors.Endc, info.Platform, bcolors.Bold, bcolors.Endc, info.Arch, bcolors.Bold, bcolors.Endc, info.Privileged, bcolors.Bold, bcolors.Endc, info.License, bcolors.Bold, bcolors.Endc, info.Rank, bcolors.Bold, bcolors.Endc, info.Disclosed, bcolors.Bold, bcolors.Endc, info.ProvidedBy, bcolors.Bold, bcolors.Endc, info.CreatedBy, bcolors.Bold, bcolors.Endc, info.TestedDistros, bcolors.Bold, bcolors.Endc, info.CheckSupport)
+}
+
+func generateOptions(modulePath string, options []string) {
+    fmt.Printf(`
+%sModule options %s(%s):
+
+  %sName           Current Setting  Required  Description%s
+  ----           ---------------  --------  -----------
+`,bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
+
+    for _, opt := range options {
+        fmt.Printf(opt)
+    }
+}
+
+func modulesUsage(info ModuleHelpInfo) {
+    if info.Options != "" {
+        fmt.Printf("\n%sOptions%s:\n%s\n", bcolors.Bold, bcolors.Endc, info.Options)
+    }
+
+    if info.Description != "" {
+        fmt.Printf(`
+
+%sDescription%s:
+  %s
+`, bcolors.Bold, bcolors.Endc, info.Description)
+    }
+
+    if info.Example != "" {
+        fmt.Printf(`
+%sex. %s%susage%s:
+--  -----
+%s
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example)
+    }
+
 }
 
 func FormatRow(config TableConfig, name, value, required, desc string) string {
@@ -61,12 +138,6 @@ func FormatColumnHeaders(config TableConfig) string {
 func FormatFooter(info ModuleHelpInfo) string {
     if info.Example != "" {
         return fmt.Sprintf(`
-Supported distros:
-
-   Id  Name
-   --  ----
-   0   Automatic Target
-
 %sex. %s%susage%s:
 --  -----
 %s
@@ -96,55 +167,6 @@ func FormatModuleOptions(modulePath string, config TableConfig, rows [][]string,
     return builder.String()
 }
 
-func modulesHelp(info ModuleHelpInfo) {
-    fmt.Printf(`
-       %sName%s: %s
-   %sFunction%s: %s
-   %sPlatform%s: %s
-       %sArch%s: %s
- %sPrivileged%s: %s
-    %sLicense%s: %s
-       %sRank%s: %s
-  %sDisclosed%s: %s
-
-%sProvided by%s: %s
- %sCreated by%s: %s
-
-%sTested Distros%s:
------- -------
-   Id  Name
-   --  ----
--> 0   %s
-
-%sDescription%s:
------------
-  %s
-`, bcolors.Bold, bcolors.Endc, info.Name, bcolors.Bold, bcolors.Endc, info.Function, bcolors.Bold, bcolors.Endc, info.Platform, bcolors.Bold, bcolors.Endc, info.Arch, bcolors.Bold, bcolors.Endc, info.Privileged, bcolors.Bold, bcolors.Endc, info.License, bcolors.Bold, bcolors.Endc, info.Rank, bcolors.Bold, bcolors.Endc, info.Disclosed, bcolors.Bold, bcolors.Endc, info.ProvidedBy, bcolors.Bold, bcolors.Endc, info.CreatedBy, bcolors.Bold, bcolors.Endc, info.TestedDistros, bcolors.Bold, bcolors.Endc, info.Description)
-
-    if info.Options != "" {
-        fmt.Printf("\n%sOptions%s:\n%s\n", bcolors.Bold, bcolors.Endc, info.Options)
-    }
-
-    if info.Example != "" {
-        fmt.Printf(`
-%sex. %s%susage%s:
---  -----
-%s
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example)
-    }
-}
-
-func modulesUsage(info ModuleHelpInfo) {
-    if info.Example != "" {
-        fmt.Printf(`
-
-%sex. %s%susage%s:
---  -----
-%s
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example)
-    }
-}
-
 func generateMenu(menuItems []string, helpText string, backOption bool) {
     fmt.Printf(`
 %s%s%sSelect a number from the table below.%s
@@ -168,16 +190,38 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
     }
 }
 
-func generateOptions(modulePath string, options []string) {
-    fmt.Printf(`
-%sModule options %s(%s):
 
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-`,bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
+func PrintSelected(opts PrintOptions) {
+    printedAny := false
+    
+    printIfSet := func(name, value string) {
+        if value != "" {
+            fmt.Printf("%s => %s\n", name, value)
+            printedAny = true
+        }
+    }
 
-    for _, opt := range options {
-        fmt.Printf(opt)
+    if opts.LPORT != "" || opts.LHOST != "" || opts.BUILD != "" ||
+        opts.OUTPUT != "" || opts.TOOLS_DIR != "" || opts.HPORT != "" ||
+        opts.PROTOCOL != "" || opts.SCRIPT != "" || opts.ICON != "" ||
+        opts.LISTENER != "" || opts.BUILDDIR != "" || opts.BUILDNAME != "" {
+        fmt.Println() 
+    }
+
+    printIfSet("LPORT", opts.LPORT)
+    printIfSet("LHOST", opts.LHOST)
+    printIfSet("BUILD", opts.BUILD)
+    printIfSet("OUTPUT", opts.OUTPUT)
+    printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
+    printIfSet("HPORT", opts.HPORT)
+    printIfSet("PROTOCOL", opts.PROTOCOL)
+    printIfSet("SCRIPT", opts.SCRIPT)
+    printIfSet("ICON", opts.ICON)
+    printIfSet("LISTENER", opts.LISTENER)
+    printIfSet("BUILD_DIR", opts.BUILDDIR)
+    printIfSet("BUILD_NAME", opts.BUILDNAME)
+    if printedAny {
+        fmt.Println()
     }
 }
 
@@ -321,25 +365,22 @@ func MenuEight() {
 
 func ListMainFunctions() {
     fmt.Printf(`
-%sMain Modules%s:
----- -------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule      Description%s
+  - ------      -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
         {"  setups", "Manage framework installation, updates, dependencies and complete removal."},
-        {"torsocks", "Enforce Tor network routing for all traffic with leak protection. Dnsleak fixed."},
-        {"networks", "Conduct MITM, DNS spoofing and network vulnerability assessments. With advanced MITB."},
-        {"exploits", "Create stealth payloads and establish encrypted C2 connections. Persistence mechanisims."},
+        {"torsocks", "Enforce Tor network routing for all traffic with leak protection."},
+        {"networks", "Conduct MITM, DNS spoofing and network vulnerability assessments."},
+        {"exploits", "Create stealth payloads and establish encrypted C2 connections. Free inplants."},
         {"wireless", "Perform WPA2 cracking, rogue AP attacks and spectrum analysis. Can & Bluetooth support."},
-        {"crackers", "Bruteforce services and crack hashes using advanced techniques. Offline & Online modules."},
-        {"phishers", "Deploy convincing phishing sites with automated data capture. OTP Bypass full support."},
+        {"crackers", "Bruteforce services and crack hashes using advanced techniques."},
+        {"phishers", "Deploy convincing phishing sites with automated data capture."},
         {"websites", "Scan for vulnerabilities and exploit web application flaws. With bugbounty free recon."},
-        {" credits", "View acknowledgments for contributors and integrated tools. Third party developers."},
+        {" credits", "View acknowledgments for contributors and integrated tools."},
         {"  verses", "Access scriptural references for spiritual growth. With  ethical hacking guidance."},
     }
 
@@ -347,18 +388,16 @@ func ListMainFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
-        Example: "    set module verses\n    run\n",
+        Description:      "This module constains all sub-modules for africana-framework.",
+        Example:          "    set module setups\n    run\n",
     }
     modulesUsage(info)
 }
 
 func ListSetupsDistros() {
     fmt.Printf(`
-%sSupported Distros%s:
---------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sDistro      Description%s
+  - -----       -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -376,6 +415,7 @@ func ListSetupsDistros() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "This are the Distros by which can fully support africana-framework.",
         Example:          "    set distro kali\n    set module install\n    run\n",
     }
     modulesUsage(info)
@@ -383,11 +423,8 @@ func ListSetupsDistros() {
 
 func ListSetupsFunction() {
     fmt.Printf(`
-%sSetups Functions%s:
------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule      Description%s
+  - ------      -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -404,6 +441,7 @@ func ListSetupsFunction() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that can be interacted in setup module.",
         Example:          "    set module install\n    run\n",
     }
     modulesUsage(info)
@@ -411,11 +449,8 @@ func ListSetupsFunction() {
 
 func ListTorsocksFunctions() {
     fmt.Printf(`
-%sTorsocks Functions%s:
--------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -436,6 +471,7 @@ func ListTorsocksFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that torsocks module performs.",
         Example:          "    set module discover\n    run\n",
     }
     modulesUsage(info)
@@ -443,11 +479,8 @@ func ListTorsocksFunctions() {
 
 func ListInternalFunctions() {
     fmt.Printf(`
-%sNetworks Functions%s:
--------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -468,6 +501,7 @@ func ListInternalFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that networks module performs.",
         Example:          "    set module discover\n    run\n",
     }
     modulesUsage(info)
@@ -475,11 +509,8 @@ func ListInternalFunctions() {
 
 func ListExploitsFunctions() {
     fmt.Printf(`
-%sExploits Functions%s:
--------- ---------
-
-  # %sName         Description%s
-  - ----         -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule       Description%s
+  - ------       -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -500,6 +531,7 @@ func ListExploitsFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that exploits module performs.",
         Example:          "    set module hoaxshell\n    run\n",
     }
     modulesUsage(info)
@@ -507,11 +539,8 @@ func ListExploitsFunctions() {
 
 func ListListenersFunctions() {
     fmt.Printf(`
-%sListeners Functions%s:
---------- ---------
-
-  # %sName           Description%s
-  - ----           -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -527,6 +556,7 @@ func ListListenersFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the listeners you can call to handle reverse connections.",
         Example:          "    set module lithaldll\n    set listener blackjack\n    run\n",
     }
     modulesUsage(info)
@@ -534,11 +564,8 @@ func ListListenersFunctions() {
 
 func ListObfscatorsFunctions() {
     fmt.Printf(`
-%sObfscators Functions%s:
----------- ---------
-
-  # %sName     Description%s
-  - ----     -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -552,19 +579,16 @@ func ListObfscatorsFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that obfscator module performs.",
         Example:          "    set script Full_path_to_your .ps1\n    run\n",
     }
     modulesUsage(info)
 }
 
-
 func ListIcons() {
     fmt.Printf(`
-%sList of Icons%s:
----- -- -----
-
-  # %sName         Description%s
-  - ----         -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sIcon          Description%s
+  - ----          -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -588,18 +612,46 @@ func ListIcons() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the icons that can be used to embede backdoors.",
         Example:          "    set icon access\n",
+    }
+    modulesUsage(info)
+}
+
+func ListWirelessFunctions() {
+    fmt.Printf(`
+  # %sModule       Description%s
+  - ------       -----------`, bcolors.Bold, bcolors.Endc)
+
+    items := []struct {
+        name string
+        desc string
+    }{
+        {"   wifite","Wifite is a tool to audit WEP or WPA encrypted wireless networks."},
+        {"  fluxion","Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now."},
+        {"bettercap","Bettercap is a tool to audit Internal network and wirekless network like, WEP or WPA encrypted wireless networks."},
+        {"airgeddon","Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now."},
+        {"wifipumpk","wifipumpkin, Is a Powerful framework for rogue access point attack. This option run automated mode directly."},
+        {"autopumpk","This option runs wifipumpkin3 in manual mode where africana sets everything for you."},
+        {"  To come",""},
+        {"  To come",""},
+        {"  To come",""},
+    }
+
+    for i, item := range items {
+        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+    }
+    info := ModuleHelpInfo{
+        Description:      "These are the functions that websites module performs.",
+        Example:          "    set module enumscan or -> use enumscan\n    set rhosts https://example.com\n    run\n",
     }
     modulesUsage(info)
 }
 
 func ListWebsitesFunctions() {
     fmt.Printf(`
-%sWebsites Modules%s:
--------- -------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -620,41 +672,39 @@ func ListWebsitesFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that websites module performs.",
         Example:          "    set module enumscan or -> use enumscan\n    set rhosts https://example.com\n    run\n",
     }
     modulesUsage(info)
 }
 
-
 func ListCrackersFunctions() {
     fmt.Printf(`
-%sCrackers Functions%s:
--------- ---------
-
-  # %sName        Description%s
-  - ----        -----------`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule     Description%s
+  - ------     -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
-        {"     ssh","Automated Bruteforcer for SSH using rockyou.txt wordlists."},
-        {"     ftp","Bruteforcer for FTP using rockyou.txt wordlists."},
-        {"     smb","Hydra Bruteforcer for SMB using rockyou.txt wordlists."},
-        {"     rdp","Bruteforcer for RDP using rockyou.txt wordlists."},
-        {"    ldap","Hydra Bruteforcer for LDAP using rockyou.txt wordlists."},
-        {"    smtp","Bruteforcer for SMTP using rockyou.txt wordlists."},
-        {"  telnet","Bruteforcer for TELNET using rockyou.txt wordlists."},
-        {" http(s)","Hydra Bruteforcer for HTTP/ HTTPS using rockyou.txt wordlists. Forms needed."},
-        {"    pcap","Crack captured .pcap files. Full location is needed."},
-        {"    ntlm","Crack ntlm file using default wordlists."},
-        {"    hash","Auto identify hash and start bruteforcing for passwords."},
+        {"    ssh","Automated Bruteforcer for SSH.(mode online)."},
+        {"    ftp","Bruteforcer for FTP.(mode online)."},
+        {"    smb","Hydra Bruteforcer for SMB.(mode online)."},
+        {"    rdp","Bruteforcer for RDP.(mode online)."},
+        {"   ldap","Hydra Bruteforcer for LDAP.(mode online)."},
+        {"   smtp","Bruteforcer for SMTP.(mode online)."},
+        {" telnet","Bruteforcer for TELNET.(mode online)."},
+        {"http(s)","Hydra Bruteforcer for HTTP/ HTTPS. Forms needed.(mode online)."},
+        {"   pcap","Crack captured .pcap files. Full location is needed for .pcap.(mod offline)."},
+        {"   ntlm","Crack ntlm file.Full location is needed for .ntlm.(mod offline)."},
+        {"   hash","Auto identify hash and start bruteforcing.(mod offline)."},
     }
 
     for i, item := range items {
-        fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
+        fmt.Printf("\n %s%2d. %s%-7s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that crackers module performs.",
         Example:          "    set mode online\n    set module ssh\n    set wordlist -> (Give full path)\n    run\n",
     }
     modulesUsage(info)
@@ -662,11 +712,8 @@ func ListCrackersFunctions() {
 
 func ListPhishersFunctions() {
     fmt.Printf(`
-%sPhishers Functions%s:
--------- ---------
-
-  # %sName          Description%s
-  - ----          ----------- `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+  # %sModule        Description%s
+  - ------        -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -687,6 +734,7 @@ func ListPhishersFunctions() {
         fmt.Printf("\n %s%2d. %s%-8s%s > %s", bcolors.BrightBlue, i + 1, bcolors.Yellow, item.name, bcolors.Endc, item.desc)
     }
     info := ModuleHelpInfo{
+        Description:      "These are the functions that phishers module performs.",
         Example:          "    set module gophish\n    run\n",
     }
     modulesUsage(info)
@@ -705,7 +753,7 @@ func HelpInfoMain() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
-        Description:   "This is the main module containing all africana-framework functions.",
+        CheckSupport:  "Yes",
     }
     modulesHelp(info)
     ListMainFunctions()
@@ -723,6 +771,7 @@ func HelpInfoSetups() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This modules enables you to Install, uninstall, update and mentain africana-framework.",
     }
     modulesHelp(info)
@@ -741,6 +790,7 @@ func HelpInfoTorsocks() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
     }
     modulesHelp(info)
@@ -759,6 +809,7 @@ func HelpInfoKali() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.",
     }
     modulesHelp(info)
@@ -776,6 +827,7 @@ func HelpInfoArch() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
     }
     modulesHelp(info)
@@ -793,6 +845,7 @@ func HelpInfoUbuntu() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.",
     }
     modulesHelp(info)
@@ -810,6 +863,7 @@ func HelpInfoMacos() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
     }
     modulesHelp(info)
@@ -828,6 +882,7 @@ func HelpInfoWindows() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
     }
     modulesHelp(info)
@@ -845,6 +900,7 @@ func HelpInfoAndroid() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.",
     }
     modulesHelp(info)
@@ -863,6 +919,7 @@ func HelpInfoUpdate() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function to update and mentain africana-framework.",
     }
     modulesHelp(info)
@@ -880,6 +937,7 @@ func HelpInfoUninstall() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com",
     }
     modulesHelp(info)
@@ -897,6 +955,7 @@ func HelpInfoAuto() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function to auto select distro and install africana with all it's dependencies.",
     }
     modulesHelp(info)
@@ -915,6 +974,7 @@ func HelpInfoRepair() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a function repairs africana incase it is broken.",
     }
     modulesHelp(info)
@@ -933,6 +993,7 @@ func HelpInfoClearLogs() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will clear all your logs that has been recorded from the last time you cleaned the log folder.",
     }
     modulesHelp(info)
@@ -950,6 +1011,7 @@ func HelpInfoTorsocksSetups() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.",
     }
     modulesHelp(info)
@@ -967,6 +1029,7 @@ func HelpInfoTorsocksVanish() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.",
     }
     modulesHelp(info)
@@ -984,6 +1047,7 @@ func HelpInfoTorsocksStatus() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.",
     }
     modulesHelp(info)
@@ -1002,6 +1066,7 @@ func HelpInfoTorsocksTorIp() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly configured, then you will get a congratulation mesage from tor website.",
     }
     modulesHelp(info)
@@ -1020,6 +1085,7 @@ func HelpInfoTorsocksChains() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.",
     }
     modulesHelp(info)
@@ -1038,6 +1104,7 @@ func HelpInfoTorsocksReload() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will stop all tor services and restart again acuring new exitnodes and torchains.",
     }
     modulesHelp(info)
@@ -1055,6 +1122,7 @@ func HelpInfoTorsocksExitnode() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.",
     }
     modulesHelp(info)
@@ -1073,6 +1141,7 @@ func HelpInfoTorsocksRestore() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
     }
     modulesHelp(info)
@@ -1091,6 +1160,7 @@ func HelpInfoTorsocksStop() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
     }
     modulesHelp(info)
@@ -1108,12 +1178,14 @@ func HelpInfoNetworks() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This is the Network module that contains all internal networks attacks functions.",
     }
     modulesHelp(info)
     ListInternalFunctions()
 }
 
+//Exploits
 func HelpInfoChameleon() {
     info := ModuleHelpInfo{
         Name:          "exploits",
@@ -1126,15 +1198,16 @@ func HelpInfoChameleon() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
     }
     modulesHelp(info)
 }
 
-func HelpInfoCrackersModules(Module string) {
+func HelpInfoExploits() {
     info := ModuleHelpInfo{
-        Name:          Module,
-        Function:      "src/crackers",
+        Name:          "exploits",
+        Function:      "src/networks/exploits.fn",
         Platform:      "All",
         Arch:          "x64, x86, amd_64, android",
         Privileged:    "No",
@@ -1143,12 +1216,15 @@ func HelpInfoCrackersModules(Module string) {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
-        Description:   fmt.Sprintf("%s module for credential bruteforcing using large wordlists", Module),
-        Example:       "set function " + Module + "\nrun\n",
+        CheckSupport:  "Yes",
+        Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicators functions.",
+        Example:          "    set module exploits\n    run\n",
     }
     modulesHelp(info)
+    ListExploitsFunctions()
 }
 
+//Crackers
 func HelpInfoCrackers() {
     info := ModuleHelpInfo{
         Name:          "crackers",
@@ -1161,11 +1237,13 @@ func HelpInfoCrackers() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
     }
     modulesHelp(info)
     ListCrackersFunctions()
 }
+
 
 //phishers
 func HelpInfoPhishers() {
@@ -1180,6 +1258,7 @@ func HelpInfoPhishers() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.",
     }
     modulesHelp(info)
@@ -1198,6 +1277,7 @@ func HelpInfoGoPhish() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module gophish\n    run\n",
     }
@@ -1216,6 +1296,7 @@ func HelpInfoGoodGinx() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module goodginx\n    run\n",
     }
@@ -1234,6 +1315,7 @@ func HelpInfoZPhisher() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module zphisher\n    run\n",
     }
@@ -1252,6 +1334,7 @@ func HelpInfoBlackEye() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module blackeye\n    run\n",
     }
@@ -1270,6 +1353,7 @@ func HelpInfoAdvPhisher() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module advphisher\n    run\n",
     }
@@ -1288,6 +1372,7 @@ func HelpInfoDarkPhish() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module darkphish\n    run\n",
     }
@@ -1306,6 +1391,7 @@ func HelpInfoShellPhish() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module shellphish\n    run\n",
     }
@@ -1324,6 +1410,7 @@ func HelpInfoSetoolKit() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module setoolkit\n    run\n",
     }
@@ -1342,6 +1429,7 @@ func HelpInfoThc() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
         Example:          "    set module thc\n    run\n",
     }
@@ -1361,6 +1449,7 @@ func HelpInfoWebsites() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module websites\n    run\n",
     }
@@ -1379,6 +1468,7 @@ func HelpInfoEnumScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module enumscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1397,6 +1487,7 @@ func HelpInfoDnsRecon() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module dnsrecon\n    set rhosts https://example.com\n    run\n",
     }
@@ -1415,6 +1506,7 @@ func HelpInfoPortScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module dnsrecon\n    set rhosts https://example.com\n    run\n",
     }
@@ -1433,6 +1525,7 @@ func HelpInfoTechScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module techscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1451,6 +1544,7 @@ func HelpInfoFuzzScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module fuzzscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1469,6 +1563,7 @@ func HelpInfoLeakScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module leakscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1487,6 +1582,7 @@ func HelpInfoVulnScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module vulnscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1505,6 +1601,7 @@ func HelpInfoAsetScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module asetscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1523,6 +1620,7 @@ func HelpInfoAutoScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module autoscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1542,6 +1640,7 @@ func HelpInfoCredits() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module credits\n    run\n",
     }
@@ -1562,6 +1661,7 @@ func HelpInfoVerses() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module verses\n    run\n",
     }
@@ -1582,6 +1682,7 @@ func HelpInfoDiscover() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will scan for all connected devices in the network given using bettercap then arrange the targets in a table for you to select one to attack further.",
         Example:          "    set module discover\n    run\n",
     }
@@ -1600,6 +1701,7 @@ func HelpInfoInEnumScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
         Example:          "    set module enumscan\n    set rhosts https://example.com\n    run\n",
     }
@@ -1618,6 +1720,7 @@ func HelpInfoInPortScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will scan all open ports of the target to reveal open ports.",
         Example:          "    set module portscan\n    run\n",
     }
@@ -1637,6 +1740,7 @@ func HelpInfoInVulnScan() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will Perform vulnerbility scan on open ports of the target you have set.",
         Example:          "    set module vulnscan\n    run\n",
     }
@@ -1656,6 +1760,7 @@ func HelpInfoSmbExplo() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will Launch known vulnerbility exploits on the target's S.M.B services.",
         Example:          "    set module smbexplo\n    run\n",
     }
@@ -1675,6 +1780,7 @@ func HelpInfoPSniffer() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will Sniff all Packets from connected devices to the router(Perform M.I.T.M).",
         Example:          "    set module psniffer\n    run\n",
     }
@@ -1693,6 +1799,7 @@ func HelpInfoResponder() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version.",
         Example:          "    set module responder\n    run\n",
     }
@@ -1711,6 +1818,7 @@ func HelpInfoBeefNinja() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.",
         Example:          "    set module beefninja\n    run\n",
     }
@@ -1730,30 +1838,12 @@ func HelpInfoXssHoocker() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.",
         Example:          "    set module xsshooker\n    run\n",
     }
     modulesHelp(info)
 }
-
-func HelpInfoExploits() {
-    info := ModuleHelpInfo{
-        Name:          "exploits",
-        Function:      "src/networks/exploits.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
-        TestedDistros: "All Distros",
-        Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicatorsfunctions.",
-        Example:          "    set module exploits\n    run\n",
-    }
-    modulesHelp(info)
-}
-
 
 func HelpInfoWireless() {
     info := ModuleHelpInfo{
@@ -1767,6 +1857,7 @@ func HelpInfoWireless() {
         Disclosed:     "2024",
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "This is the wireless module containing all wireless pentesting functions.",
         Example:          "    set module wireless\n    run\n",
     }
@@ -1787,6 +1878,7 @@ func HelpInfoBlackJack(Lhost string) {
         ProvidedBy:    "r0jahsm0ntar1",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a tool derived from villain framework. It supports both tcp, http and https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.",
         Example:          "    set module blackjack\n    run\n",
     }
@@ -1807,6 +1899,7 @@ func HelpInfoShellz(Lhost, Lport, Protocol string) {
         ProvidedBy:    "r0jahsm0ntar1",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
         Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
         Example:          "    set module shellz\n    run\n",
     }
@@ -1814,41 +1907,28 @@ func HelpInfoShellz(Lhost, Lport, Protocol string) {
     ShellzOptions(Lhost, Lport, Protocol)
 }
 
-func HelpInfoHoaxShell() {
-    fmt.Printf(`
-       %sName%s: hoaxshell
-   %sFunction%s: src/exploits/hoaxshell.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s: t3l3machus
- %sCreated by%s: r0jahsm0ntar1
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-
-%sDescription%s:
------------
-  It is a tool like villein or blackjack that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoHoaxShell(Lhost, Lport, Protocol string) {
+    info := ModuleHelpInfo{
+        Name:          "hoaxshell",
+        Function:      "src/exploits/hoaxshell.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "r0jahsm0ntar1",
+        CreatedBy:     "t3l3machus",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool like villein or blackjack that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+        Example:          "    set module hoaxshell\n    run\n",
+    }
+    modulesHelp(info)
+    HoaxshellOptions(Lhost, Lport, Protocol)
 }
+
+
 
 func HelpInfoLithalDll() {
     fmt.Printf(`
@@ -2227,37 +2307,6 @@ func HelpInfoAndroRat() {
 `, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, Lhost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
-
-
-
-func ListWirelessFunctions() {
-    fmt.Printf(`
-%sNetworks Functions%s:
--------- ---------
-
-  # %sName       Description%s
-  - ----       -----------
-  %s1. %s   wifite %s> Wifite is a tool to audit WEP or WPA encrypted wireless networks.
-  %s2. %s  fluxion %s> Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s3. %sbettercap %s> Bettercap is a tool to audit Internal network and wirekless network like, WEP or WPA encrypted wireless networks.
-  %s4. %sairgeddon %s> Airgeddon Fluxion is a tool to audit WEP or WPA encrypted wireless networks. Only manual option is supported by now.
-  %s5. %swifipumpk %s> wifipumpkin - Is a Powerful framework for rogue access point attack. This option run automated mode directly.
-  %s6. %sKillerpuk %s> This option runs wifipumpkin3 in manual mode where africana sets everything for you.
-  %s7. %s   To add %s> Not yet implimented.
-  %s8. %s   To add %s> Not yet implimented.
-  %s9. %s   To add %s> Not yet implimented.
-
-%sex. %s%susage%s:
---  -----
-
-    set function wifite
-    run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Yellow, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-
-
 func WirelessOptions() {
     fmt.Printf(`
 %sModule Options %s(src/wirelss/wireless_pentest.fn):
@@ -2499,21 +2548,6 @@ func HelpInfoWifiPumpkin() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 func MainOptions() {
     rows := [][]string{
         {"MODULE", "none", "yes", "A module to interact with."},
@@ -2686,17 +2720,59 @@ func AndroRatOptions(Lhost, Lport, Hport, BuildName, OutPutDir, Proxies, Protoco
     ))
 }
 
-func CrackersOptions() {
-    options := []string{
-        "\n  MODE           none             yes       Attack mode (online/offline)\n",
-        "  RHOST          none             yes       Target host\n",
-        "  WORDLIST       rockyou.txt      yes       Path to wordlist\n",
-        "  USERNAME       root             yes       Single username to test\n",
-        "  PASSWORD       password         yes       Single password to test\n\n",
+func HoaxshellOptions(Lhost, Lport, Protocol string) {
+    rows := [][]string{
+        {"LHOST", Lhost, "yes", "Mainly needed when generating backdoors."},
+        {"LPORT", Lport, "yes", "Listener port to handle beacons."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
     }
-    generateOptions("src/crackers/passwords_pentest.fn", options)
+    config := TableConfig{
+        NameWidth:    12,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    option := fmt.Sprintf("  set lhost %s\n  run\n", Lhost)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/exploits/hoaxshell_listener.fn",
+        config,
+        rows,
+        moduleInfo,
+    ))
 }
 
+func CrackersOptions(Mode, Rhost, WordList, UserName, PassWord string) {
+    rows := [][]string{
+        {"MODE", Mode, "yes", "Attack mode (online/offline)."},
+        {"RHOST", Rhost, "yes", "Target host."},
+        {"USERNAME", UserName, "yes", "Single username to test."},
+        {"PASSWORD", PassWord, "yes", "Single password to test."},
+        {"WORDLIST", WordList, "yes", "Path to wordlist."},
+    }
+    config := TableConfig{
+        NameWidth:    12,
+        SettingWidth: 18, 
+        ReqWidth:     9,
+    }
+
+    option := fmt.Sprintf("  set lhost %s\n  run\n", Lhost)
+
+    moduleInfo := ModuleHelpInfo{
+        Example: option,
+    }
+
+    fmt.Println(FormatModuleOptions(
+        "src/crackers/passwords_pentest.fn",
+        config,
+        rows,
+        moduleInfo,
+    ))
+}
 
 func SetupsOptions() {
     fmt.Printf(`

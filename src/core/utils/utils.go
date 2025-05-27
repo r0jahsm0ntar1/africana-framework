@@ -399,7 +399,7 @@ func ClearScreen() {
 }
 
 func SystemShell(Input string) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
+    fmt.Printf("%s[*] %sexec: %s\n", bcolors.BrightBlue, bcolors.Endc, Input)
     subprocess.Popen(Input)
 }
 
@@ -611,13 +611,13 @@ func BrowserLogs() {
 }
 
 func ListJunks() {
-    fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
+    fmt.Printf("%s[*] %sList output\n", bcolors.BrightBlue, bcolors.Endc)
     subprocess.Popen("ls -a /root/.afr3/output")
     return
 }
 
 func ClearJunks() {
-    fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
+    fmt.Printf("%s[*] %sClear output\n", bcolors.BrightBlue, bcolors.Endc)
     subprocess.Popen(`rm -rf /root/.afr3/output/*`)
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return

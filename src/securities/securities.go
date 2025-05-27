@@ -759,7 +759,7 @@ func resetToDefault(overidePass bool, resetAsChildFunc bool) {
             fileNameID := time.Now().Format("01_02_2006-15:04:05")
             cmd := exec.Command("sudo", "iptables-save", ">", "/tmp/iptables_"+fileNameID+".rules")
             cmd.Run()
-            fmt.Printf("%sSaved in %s/tmp%s as %siptables_%s.rules%s\n\n", bcolors.BrightCyan, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, fileNameID, bcolors.Endc)
+            fmt.Printf("%sSaved in %s/tmp%s as %siptables_%s.rules%s\n", bcolors.BrightCyan, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, fileNameID, bcolors.Endc)
         } else {
             fmt.Printf("%s Default rules are set, backup not required :)%s\n", bcolors.BrightYellow, bcolors.Endc)
         }

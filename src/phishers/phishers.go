@@ -365,7 +365,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,
@@ -396,7 +396,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,

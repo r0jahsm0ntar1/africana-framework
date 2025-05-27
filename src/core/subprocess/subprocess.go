@@ -202,7 +202,7 @@ func ShowHistory() {
     defer file.Close()
 
     scanner := bufio.NewScanner(file)
-    fmt.Printf("%s[*] %sexec: history\n\n", bcolors.BrightBlue, bcolors.Endc)
+    fmt.Printf("%s[*] %sexec: history\n", bcolors.BrightBlue, bcolors.Endc)
     lineNumber := 1
     for scanner.Scan() {
         fmt.Printf("%s%d. %s%s\n", bcolors.BrightBlue, lineNumber, bcolors.Endc, scanner.Text())
@@ -216,7 +216,7 @@ func ClearHistory() {
     if err != nil {
         fmt.Printf("%s[!] %sError clearing history:", bcolors.BrightRed, bcolors.Endc, err)
     } else {
-        fmt.Printf("%s[*] %sexec: clear history\n\n%s[*] %sHistory cleared ...\n", bcolors.BrightBlue, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s[*] %sexec: clear history\n%s[*] %sHistory cleared ...\n", bcolors.BrightBlue, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         openLogFile()
     }
 }
