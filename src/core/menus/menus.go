@@ -201,25 +201,22 @@ func PrintSelected(opts PrintOptions) {
         }
     }
 
-    if opts.LPORT != "" || opts.LHOST != "" || opts.BUILD != "" ||
-        opts.OUTPUT != "" || opts.TOOLS_DIR != "" || opts.HPORT != "" ||
-        opts.PROTOCOL != "" || opts.SCRIPT != "" || opts.ICON != "" ||
-        opts.LISTENER != "" || opts.BUILDDIR != "" || opts.BUILDNAME != "" {
-        fmt.Println() 
+    if opts.LPORT != "" || opts.LHOST != "" || opts.BUILD != "" || opts.OUTPUT != "" || opts.TOOLS_DIR != "" || opts.HPORT != "" || opts.PROTOCOL != "" || opts.ICON != "" || opts.LISTENER != "" || opts.BUILDDIR != "" || opts.BUILDNAME != "" || opts.SCRIPT != "" {
+        fmt.Println()
     }
 
+    printIfSet("ICON", opts.ICON)
     printIfSet("LPORT", opts.LPORT)
-    printIfSet("LHOST", opts.LHOST)
-    printIfSet("BUILD", opts.BUILD)
-    printIfSet("OUTPUT", opts.OUTPUT)
-    printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
     printIfSet("HPORT", opts.HPORT)
     printIfSet("PROTOCOL", opts.PROTOCOL)
-    printIfSet("SCRIPT", opts.SCRIPT)
-    printIfSet("ICON", opts.ICON)
     printIfSet("LISTENER", opts.LISTENER)
-    printIfSet("BUILD_DIR", opts.BUILDDIR)
     printIfSet("BUILD_NAME", opts.BUILDNAME)
+    printIfSet("LHOST", opts.LHOST)
+    printIfSet("OUTPUT", opts.OUTPUT)
+    printIfSet("SCRIPT", opts.SCRIPT)
+    printIfSet("BUILD_DIR", opts.BUILDDIR)
+    printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
+
     if printedAny {
         fmt.Println()
     }
