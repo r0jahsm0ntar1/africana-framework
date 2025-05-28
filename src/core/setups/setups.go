@@ -710,7 +710,7 @@ func ArchSetups() {
 func UpdateAfricana() {
     fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
-    subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv africana-linux /usr/local/bin/africana; rm -rf ../africana-framework`)
+    subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv ./afrconsole /usr/local/bin/; rm -rf ../africana-framework`)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return
 }
@@ -729,7 +729,7 @@ func WindowsSetups() {
 func Uninstaller() {
     fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.BrightRed, bcolors.Endc)
     if _, err := os.Stat(ToolsDir); !os.IsNotExist(err) {
-        subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/africana`)
+        subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/afrconsole`)
         fmt.Printf("\n%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
         os.Exit(0)
     } else {

@@ -58,7 +58,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; mv afrconsole /usr/local/bin/africana; afrconsole -h
+make; mv afrconsole /usr/local/bin/; afrconsole -h
 ```
 
 ## Installation in all Arch based distros;
@@ -73,7 +73,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; mv afrconsole /usr/local/bin/africana; afrconsole -h
+make; mv afrconsole /usr/local/bin/; afrconsole -h
 ```
 ## Installation in tmux on Android based distros;
 ```bash
@@ -95,7 +95,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; mv afrconsole /usr/local/bin/africana; afrconsole -h
+make; mv afrconsole /usr/local/bin/; afrconsole -h
 ```
 
 ## The script should be run as a super user do(sudo) for root permissions .

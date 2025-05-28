@@ -173,8 +173,16 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
 
 `, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc)
 
+    maxLength := 0
+    for _, item := range menuItems {
+        if len(item) > maxLength {
+            maxLength = len(item)
+        }
+    }
+
     for i, item := range menuItems {
-        fmt.Printf("%s %d. %s%s\n", bcolors.BrightBlue, i + 1, bcolors.Endc, item)
+        num := fmt.Sprintf("%2d", i + 1)
+        fmt.Printf("%s %s. %s%s\n", bcolors.BrightBlue, num, bcolors.Endc, item)
     }
 
     if backOption {
