@@ -592,9 +592,9 @@ func Editors(filesToReplacements map[string]map[string]string) {
 func BrowseTutarilas() {
     switch runtime.GOOS {
     case "linux", "darwin":
-        command = `xdg-open "https://youtube.com/@RojahsMontari" 2>/dev/null`
+        command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
     case "windows":
-        command = `start "" "https://youtube.com/@RojahsMontari"`
+        command = `start "" "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1"`
     default:
         fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
         return

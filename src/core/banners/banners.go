@@ -22,10 +22,10 @@ func Version() {
 
 func GraphicsIntro() {
     fmt.Printf(`
-       =[ africana framework                              ]
+       =[ Africana Framework                              ]
 + -- --=[ Made simple but lethal                          ]
-+ -- --=[ Created by Dr. r0jahsm0ntar1                    ]
-+ -- --=[ Follow on GitHub, HTB, X, YT: @RojahsMontari    ]
++ -- --=[ Created by Dr. Rojahs Montari                   ]
++ -- --=[ Follow on GitHub, HTB, X, YT: @r0jahsm0ntar1    ]
 `)
     Version()
 }

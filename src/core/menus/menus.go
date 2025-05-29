@@ -126,7 +126,7 @@ func FormatRow(config TableConfig, name, value, required, desc string) string {
 
 func FormatModuleHeader(modulePath string) string {
     return fmt.Sprintf(
-        "\nModule Options (%s%s%s):\n", bcolors.Green, modulePath, bcolors.Endc,
+        "\nModule Options (%s%s%s):\n", bcolors.Yellow, modulePath, bcolors.Endc,
     )
 }
 
@@ -198,10 +198,9 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
     }
 }
 
-
-func PrintSelected(opts PrintOptions) {
+func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool) {
     printedAny := false
-    
+
     printIfSet := func(name, value string) {
         if value != "" {
             fmt.Printf("%s => %s\n", name, value)
@@ -209,7 +208,7 @@ func PrintSelected(opts PrintOptions) {
         }
     }
 
-    if opts.LPORT != "" || opts.LHOST != "" || opts.BUILD != "" || opts.OUTPUT != "" || opts.TOOLS_DIR != "" || opts.HPORT != "" || opts.PROTOCOL != "" || opts.ICON != "" || opts.LISTENER != "" || opts.BUILDDIR != "" || opts.BUILDNAME != "" || opts.SCRIPT != "" {
+    if opts.LPORT != "" || opts.LHOST != "" || opts.OUTPUT != "" || opts.TOOLS_DIR != "" || opts.HPORT != "" || opts.PROTOCOL != "" || opts.ICON != "" || opts.LISTENER != "" || opts.BUILDDIR != "" || opts.BUILDNAME != "" || opts.SCRIPT != "" {
         fmt.Println()
     }
 
@@ -225,7 +224,7 @@ func PrintSelected(opts PrintOptions) {
     printIfSet("BUILD_DIR", opts.BUILDDIR)
     printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
 
-    if printedAny {
+    if printedAny && endWithNewLine {
         fmt.Println()
     }
 }
@@ -3217,7 +3216,7 @@ Console options:
     -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
     -k, --credits       Show who developes and mentains africana-framework and (third party tools developers).
     -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework.
-    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1%s.
+    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     -q, --quite         Start africana without banner and missing tools checking.
     -h, --help          Show this help message and exit.
 
@@ -3233,7 +3232,7 @@ func HelpInfoMenuZero() {
     clear               Clear the working screen or use with flag ('history' to clear history).
     exit                Exit the console.
     features            Display the list of not yet released features that can be opted in to.
-    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@RojahsMontari%s.
+    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     history             Show command history.
     menu                Print the menu of the current phase. Alias to letter(m).
     quit                Exit the console.
@@ -3273,5 +3272,5 @@ For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 }
 
 func UpsentTools() {
-    fmt.Println(bcolors.Yellow + "\n[!] " + bcolors.Endc + "Choice selected not implemented yet!, but coming soon!" + bcolors.Endc)
+    fmt.Println("\n%s[!] %sChoice selected not implemented yet!, but coming soon!", bcolors.Yellow, bcolors.Endc)
 }
