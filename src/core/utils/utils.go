@@ -488,7 +488,7 @@ func GetDefaultIP() (string, error) {
     return "", fmt.Errorf("no active network interface found")
 }
 
-func Ifaces() ([]InterfaceInfo, error) {
+func IFaces() ([]InterfaceInfo, error) {
     interfaces, err := net.Interfaces()
     if err != nil {
         return nil, fmt.Errorf("error getting interfaces: %w", err)

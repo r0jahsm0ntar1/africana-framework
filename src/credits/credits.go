@@ -95,7 +95,7 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolo
     }
 
     fmt.Printf(`
-%s%s%sCrackers for Passwords, Hash & .Pcap%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
+%s%s%sCrackers for PassWords, Hash & .Pcap%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
    crackers := bcolors.Endc + `
 1. Aircrack_ng
 2. John

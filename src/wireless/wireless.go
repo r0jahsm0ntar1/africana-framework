@@ -17,15 +17,15 @@ import(
 
 var (
     Mode = "auto"
-    Lport = "9999"
-    Hport = "3333"
-    Iface = "wlan0"
+    LPort = "9999"
+    HPort = "3333"
+    IFace = "wlan0"
     Ssid = "End times ministries"
 
-    Lhost = LhostIp
-    LhostIp, _ = utils.GetDefaultIP()
+    LHost = LHostIp
+    LHostIp, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
-    Input, Rhost, Proxy, Function, Script string
+    Input, RHost, Proxy, Function, Script string
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
@@ -39,7 +39,7 @@ var defaultValues = map[string]string{
     "iface": "wlan0",
     "ssid": "End times ministries",
 
-    "lhost": LhostIp,
+    "lhost": LHostIp,
     "output": OutPutDir,
 }
 
@@ -108,7 +108,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoWireless},
         {[]string{"m", "menu"}, menus.MenuFive},
-        {[]string{"option", "options", "show option", "show options"}, menus.WirelessOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() { menus.WirelessOptions(IFace, LHost, OutPutDir) }},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWirelessFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run wifite", "use wifite", "exec wifite", "start wifite", "launch wifite", "exploit wifite", "execute wifite"}, func() { WirelessPenFunctions("wifite") }},
@@ -164,10 +164,10 @@ func handleSetCommand(parts []string) {
 
         "mode": &Mode,
         "ssid": &Ssid,
-        "iface": &Iface,
-        "lhost": &Lhost,
-        "lport": &Lport,
-        "hport": &Hport,
+        "iface": &IFace,
+        "lhost": &LHost,
+        "lport": &LPort,
+        "hport": &HPort,
         "proxies": &Proxy,
         "func": &Function,
         "funcs": &Function,
@@ -194,10 +194,10 @@ func handleUnsetCommand(parts []string) {
 
         "mode": &Mode,
         "ssid": &Ssid,
-        "iface": &Iface,
-        "lhost": &Lhost,
-        "lport": &Lport,
-        "hport": &Hport,
+        "iface": &IFace,
+        "lhost": &LHost,
+        "lport": &LPort,
+        "hport": &HPort,
         "proxies": &Proxy,
         "func": &Function,
         "funcs": &Function,
@@ -224,11 +224,11 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    if Iface == "" {
+    if IFace == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    WirelessPenFunctions(Function, Iface)
+    WirelessPenFunctions(Function, IFace)
 }
 
 func autoExecuteFunc(distro string, function string) {
@@ -238,7 +238,7 @@ func autoExecuteFunc(distro string, function string) {
 }
 
 func WirelessPenFunctions(Function string, args ...interface{}) {
-    fmt.Printf("\nRHOST => %s\nFunction => %s\n", Rhost, Function)
+    fmt.Printf("\nRHOST => %s\nFunction => %s\n", RHost, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -247,19 +247,19 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-         "wifite": func() {Wifite(Iface)},
+         "wifite": func() {Wifite(IFace)},
         "fluxion": func() {Fluxion()},
-        "bettercap": func() {Bettercap(Iface)},
+        "bettercap": func() {Bettercap(IFace)},
         "airgeddon": func() {AirGeddon()},
         "wifipumpkin": func() {WifiPumpkin()},
-        "WifiPumpkin3": func() {WifiPumpkin3(Iface, Ssid)},
+        "WifiPumpkin3": func() {WifiPumpkin3(IFace, Ssid)},
 
-        "1": func() {Wifite(Iface)},
+        "1": func() {Wifite(IFace)},
         "2": func() {Fluxion()},
-        "3": func() {Bettercap(Iface)},
+        "3": func() {Bettercap(IFace)},
         "4": func() {AirGeddon()},
         "5": func() {WifiPumpkin()},
-        "6": func() {WifiPumpkin3(Iface, Ssid)},
+        "6": func() {WifiPumpkin3(IFace, Ssid)},
     }
 
     textCommands := []string{"wifite", "fluxion", "bettercap", "airgeddon", "wifipumpkin"}
@@ -305,22 +305,22 @@ func WifiPumpkin() {
     subprocess.Popen(`wifipumpkin3`)
 }
 
-func WifiPumpkin3(Iface string, Ssid string) {
+func WifiPumpkin3(IFace string, Ssid string) {
      if Ssid == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, Iface, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, IFace, bcolors.Endc)
         return
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`wifipumpkin3; clear`)
     }
-    subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, Iface, Ssid)
+    subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, IFace, Ssid)
 }
 
-func Wifite(Iface string) {
-    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, Iface, RokyPath)
+func Wifite(IFace string) {
+    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, IFace, RokyPath)
 }
 
-func Bettercap(Iface string) {
-    subprocess.Popen(`airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file /usr/local/opt/handshakes; wifi.deauth all"`, Iface, Iface, Iface, Iface, Iface)
+func Bettercap(IFace string) {
+    subprocess.Popen(`airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file /usr/local/opt/handshakes; wifi.deauth all"`, IFace, IFace, IFace, IFace, IFace)
 }

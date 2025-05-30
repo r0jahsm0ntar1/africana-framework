@@ -221,7 +221,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoSetups},
         {[]string{"m", "menu"}, menus.MenuOne},
-        {[]string{"option", "options", "show option", "show options"}, menus.SetupsOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.SetupsOptions(Distro)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListSetupsFunction},
         {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
 

