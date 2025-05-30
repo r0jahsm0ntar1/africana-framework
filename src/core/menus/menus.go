@@ -2951,20 +2951,19 @@ func HelpInfoSet() {
 %sUsage%s: set [options] [name] [value]
 
 Set the given option to value. If value is omitted, print the current value. If both are omitted,
-print options that are currently set.
+print options that are currently set. ex.(set LPORT 9001)
 
-If run from a Function context, this will set the value in the Function's datastore: -> Use -g to operate on the global datastore.
+`, bcolors.Bold, bcolors.Endc)
+}
 
-If setting a PAYLOAD, this command can take an index from 'show payloads'.
+func HelpInfoUnSet() {
+    fmt.Printf(`
+%sUsage%s: unset [value]
 
-%sOPTIONS%s:
--------
+Unset the given option. If value is omitted, print the current value. If both are omitted,
+print options that are currently set. Unset is an alias to Delete.(unset option).
 
-    -c, --clear   Clear the values, explicitly setting to nil(default)
-    -g, --global  Operate on global datastore variables
-    -h, --help    Help banner.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfo() {
@@ -3110,3 +3109,4 @@ For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 func UpsentTools() {
     fmt.Println("\n%s[!] %sChoice selected not implemented yet!, but coming soon!", bcolors.Yellow, bcolors.Endc)
 }
+

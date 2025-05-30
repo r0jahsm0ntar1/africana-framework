@@ -9,6 +9,7 @@ import(
     "time"
     "bytes"
     "bufio"
+    "strconv"
     "os/exec"
     "bcolors"
     "strings"
@@ -536,6 +537,21 @@ func GetDefaultGatewayIP() (string, error) {
     return gatewayIP, nil
 }
 
+func ValidateIPAddress(ip string) error {
+    if net.ParseIP(ip) == nil {
+        return fmt.Errorf("invalid IP address format")
+    }
+    return nil
+}
+
+func ValidatePort(port string) error {
+    p, err := strconv.Atoi(port)
+    if err != nil || p < 1 || p > 65535 {
+        return fmt.Errorf("port must be between 1-65535")
+    }
+    return nil
+}
+
 func AskForProxy(Proxy string) (*url.URL, error) {
     proxyStr := strings.TrimSpace(Proxy)
     proxyURL, err := url.Parse(proxyStr)
@@ -878,3 +894,4 @@ func InitiLize() {
         GenerateSelfSignedCert(certPath, keyPath)
     }
 }
+
