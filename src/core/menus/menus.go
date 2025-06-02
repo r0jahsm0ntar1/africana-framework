@@ -118,16 +118,10 @@ func modulesUsage(info ModuleHelpInfo) {
     }
 }
 
-// New dynamic version of FormatRow
 func FormatRow(nameWidth, settingWidth, reqWidth int, name, value, required, desc string) string {
-    return fmt.Sprintf("  %-*s  %-*s  %-*s  %s", 
-        nameWidth, name,
-        settingWidth, value,
-        reqWidth, required,
-        desc)
+    return fmt.Sprintf("  %-*s  %-*s  %-*s  %s", nameWidth, name, settingWidth, value, reqWidth, required, desc)
 }
 
-// Calculate maximum column widths
 func calculateMaxWidths(rows [][]string) (int, int, int) {
     maxName := len("Name")
     maxSetting := len("Current Setting")
@@ -145,7 +139,6 @@ func calculateMaxWidths(rows [][]string) (int, int, int) {
         }
     }
 
-    // Ensure minimum widths for headers
     if maxName < len("Name") {
         maxName = len("Name")
     }
@@ -160,15 +153,11 @@ func calculateMaxWidths(rows [][]string) (int, int, int) {
 }
 
 func FormatModuleHeader(modulePath string) string {
-    return fmt.Sprintf(
-        "\nModule Options (%s%s%s):\n", bcolors.Yellow, modulePath, bcolors.Endc,
-    )
+    return fmt.Sprintf("\nModule Options (%s%s%s%s):\n", bcolors.Italic, bcolors.Red, modulePath, bcolors.Endc)
 }
 
-// Updated to use dynamic widths
 func FormatColumnHeaders(nameWidth, settingWidth, reqWidth int) string {
-    return FormatRow(nameWidth, settingWidth, reqWidth, "Name", "Current Setting", "Required", "Description") + "\n" +
-        FormatRow(nameWidth, settingWidth, reqWidth, "----", "---------------", "--------", "-----------")
+    return FormatRow(nameWidth, settingWidth, reqWidth, "Name", "Current Setting", "Required", "Description") + "\n" + FormatRow(nameWidth, settingWidth, reqWidth, "----", "---------------", "--------", "-----------")
 }
 
 func FormatFooter(info ModuleHelpInfo) string {
@@ -183,11 +172,9 @@ View the full module info with the %s'info'%s or %s'show modules'%s, to get list
     return ""
 }
 
-// Updated FormatModuleOptions with dynamic width calculation
 func FormatModuleOptions(modulePath string, rows [][]string, moduleInfo ModuleHelpInfo) string {
     var builder strings.Builder
 
-    // Calculate maximum widths
     maxName, maxSetting, maxReq := calculateMaxWidths(rows)
 
     builder.WriteString(FormatModuleHeader(modulePath))
@@ -196,7 +183,7 @@ func FormatModuleOptions(modulePath string, rows [][]string, moduleInfo ModuleHe
     builder.WriteString("\n")
 
     for _, row := range rows {
-        if len(row) >= 4 {  // Now handles rows with more than 4 columns (though only first 4 are used)
+        if len(row) >= 4 {
             builder.WriteString(FormatRow(maxName, maxSetting, maxReq, row[0], row[1], row[2], row[3]))
             builder.WriteString("\n")
         }
@@ -207,12 +194,9 @@ func FormatModuleOptions(modulePath string, rows [][]string, moduleInfo ModuleHe
     return builder.String()
 }
 
-// Backward compatible version that maintains your original function signature
 func FormatModuleOptionsWithConfig(modulePath string, config TableConfig, rows [][]string, moduleInfo ModuleHelpInfo) string {
-    // Convert fixed-width config to dynamic by calculating actual needed widths
     maxName, maxSetting, maxReq := calculateMaxWidths(rows)
-    
-    // Use the larger of configured width or needed width
+
     if config.NameWidth > maxName {
         maxName = config.NameWidth
     }

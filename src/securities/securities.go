@@ -20,8 +20,10 @@ import(
 )
 
 var (
-    Input, Proxy, Function string
-    scanner  = bufio.NewScanner(os.Stdin)
+    LHostIp, _ = utils.GetDefaultIP()
+    scanner   = bufio.NewScanner(os.Stdin)
+    Input, RHost, Proxy, Script, Function string
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
 )
 
 type stringMatcher struct {
@@ -156,14 +158,72 @@ func handleSetCommand(parts []string) {
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
+        "output": &OutPutDir,
         "function": &Function,
         "functions": &Function,
     }
+
+    validKeys := make([]string, 0, len(setValues))
+    for k := range setValues {
+        validKeys = append(validKeys, k)
+    }
+
     if ptr, exists := setValues[key]; exists {
         *ptr = value
         fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
-    } else {
-        menus.HelpInfoSet()
+        return
+    }
+
+    var suggestions []string
+    lowerInput := strings.ToLower(key)
+    for _, cmd := range validKeys {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            suggestions = append(suggestions, cmd)
+        }
+    }
+
+    if len(suggestions) > 0 {
+        fmt.Printf("%s[!] %sKey '%s%s%s' is invalid. Did you mean one of these?%s\n\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, key, bcolors.Endc, bcolors.Endc)
+
+        maxWidth := 0
+        for _, s := range suggestions {
+            if len(s) > maxWidth {
+                maxWidth = len(s)
+            }
+        }
+        maxWidth += 3
+
+        cols := 5
+        if len(suggestions) < cols {
+            cols = len(suggestions)
+        }
+
+        for i := 0; i < len(suggestions); i += cols {
+            for j := 0; j < cols && i+j < len(suggestions); j++ {
+                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+            }
+            fmt.Println()
+        }
+
+        return
+    }
+
+    fmt.Printf("%s[!] %sKey '%s%s%s' is invalid. Available keys:%s\n\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, key, bcolors.Endc, bcolors.Endc)
+    maxWidth := 0
+    for _, k := range validKeys {
+        if len(k) > maxWidth {
+            maxWidth = len(k)
+        }
+    }
+    maxWidth += 3
+
+    cols := 5
+    for i := 0; i < len(validKeys); i += cols {
+        for j := 0; j < cols && i+j < len(validKeys); j++ {
+            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+        }
+        fmt.Println()
     }
 }
 
@@ -178,14 +238,82 @@ func handleUnsetCommand(parts []string) {
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
+        "output": &OutPutDir,
         "function": &Function,
         "functions": &Function,
     }
+    defaultValues := map[string]string{
+        "func":      "",
+        "proxies":   "",
+        "funcs":     "",
+        "module":    "",
+        "output":    "",
+        "function":  "",
+        "functions": "",
+    }
+
+    validKeys := make([]string, 0, len(unsetValues))
+    for k := range unsetValues {
+        validKeys = append(validKeys, k)
+    }
+
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = ""
-        fmt.Printf("%s => None\n", strings.ToUpper(key))
-    } else {
-        menus.HelpInfoSet()
+        *ptr = defaultValues[key]
+        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        return
+    }
+
+    var suggestions []string
+    lowerInput := strings.ToLower(key)
+    for _, cmd := range validKeys {
+        lowerCmd := strings.ToLower(cmd)
+        if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
+            suggestions = append(suggestions, cmd)
+        }
+    }
+
+    if len(suggestions) > 0 {
+        fmt.Printf("%s[!] %sKey '%s%s%s' is invalid. Did you mean one of these?%s\n\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, key, bcolors.Endc, bcolors.Endc)
+
+        maxWidth := 0
+        for _, s := range suggestions {
+            if len(s) > maxWidth {
+                maxWidth = len(s)
+            }
+        }
+        maxWidth += 3
+
+        cols := 5
+        if len(suggestions) < cols {
+            cols = len(suggestions)
+        }
+        
+        for i := 0; i < len(suggestions); i += cols {
+            for j := 0; j < cols && i+j < len(suggestions); j++ {
+                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+            }
+            fmt.Println()
+        }
+
+        return
+    }
+
+    fmt.Printf("%s[!] %sKey '%s%s%s' is invalid. Available keys:%s\n\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, key, bcolors.Endc, bcolors.Endc)
+
+    maxWidth := 0
+    for _, k := range validKeys {
+        if len(k) > maxWidth {
+            maxWidth = len(k)
+        }
+    }
+    maxWidth += 3
+
+    cols := 5
+    for i := 0; i < len(validKeys); i += cols {
+        for j := 0; j < cols && i+j < len(validKeys); j++ {
+            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+        }
+        fmt.Println()
     }
 }
 

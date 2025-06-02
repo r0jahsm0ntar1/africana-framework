@@ -17,7 +17,7 @@ func Version() {
      %sFramework%s: %s
        %sConsole%s: %s
 
-`, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
+`, bcolors.Green, bcolors.Endc, version, bcolors.Green, bcolors.Endc, version)
 }
 
 func GraphicsIntro() {
