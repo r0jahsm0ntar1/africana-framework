@@ -423,11 +423,11 @@ func EnumScan(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming initial enumeration scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    fmt.Printf("\n%s[*] %sPerforming full enumeration scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
     for _, cmd := range []string{
         fmt.Sprintf("subfinder -nW -d %s -o %s/subfinder_%s.txt", RHost, ReconDir, RHost),
         fmt.Sprintf("amass enum -passive -d %s -o %s/amass_%s.txt", RHost, ReconDir, RHost),
-        fmt.Sprintf("assetfinder %s -o %s/assetfinder_%s.txt", RHost, ReconDir, RHost),
+        fmt.Sprintf("assetfinder %s > %s/assetfinder_%s.txt", RHost, ReconDir, RHost),
         fmt.Sprintf("findomain --target %s --threads 40 -u %s/findomain_%s.txt", RHost, ReconDir, RHost),
     } {
         subprocess.Popen(cmd)
@@ -683,12 +683,13 @@ func ScanHttpx(RHost, ReconDir string) {
 }
 
 func ScaNaabuAndNuclei(RHost, ReconDir string) {
-
+    naabuOutput := filepath.Join(ReconDir, fmt.Sprintf("naabu_%s.txt", RHost))
+    nucleiOutput := filepath.Join(ReconDir, fmt.Sprintf("nuclei_%s.txt", RHost))
     sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", RHost))
 
     for _, cmd := range []string{
-        fmt.Sprintf("naabu -list %s -o %s/naabu_%s.txt", sortedHttpxOutput, ReconDir, RHost),
-        fmt.Sprintf("nuclei -list %s -o %s/nuclei_%s.txt", sortedHttpxOutput, ReconDir, RHost),
+        fmt.Sprintf("naabu -v -l %s -o %s", sortedHttpxOutput, naabuOutput),
+        fmt.Sprintf("nuclei -v -l %s -o %s", sortedHttpxOutput, nucleiOutput),
     } {
         subprocess.Popen(cmd)
     }

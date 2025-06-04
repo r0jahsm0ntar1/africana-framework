@@ -630,13 +630,16 @@ func BrowserLogs() {
 
 func ListJunks() {
     fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Popen("ls -a /root/.afr3/output")
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
+    subprocess.Popen("tree %s*", OutPutDir)
     return
 }
 
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Popen(`rm -rf /root/.afr3/output/*`)
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
+    subprocess.Popen("tree %s*", OutPutDir)
+    subprocess.Popen("rm -rf %s/*", OutPutDir)
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
