@@ -11,7 +11,7 @@ var (
     Interfaces, _ = utils.IFaces()
     LHost, _      = utils.GetDefaultIP()
     Gateway, _    = utils.GetDefaultGatewayIP()
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
 )
 
 var DefaultTableConfig = TableConfig{
@@ -2372,7 +2372,7 @@ func HelpInfoWifite() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordList location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2413,7 +2413,7 @@ func HelpInfoFluxion() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordList location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2454,7 +2454,7 @@ func HelpInfoBetterCap() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordList location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2496,7 +2496,7 @@ func HelpInfoAirGeddon() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordList location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2538,7 +2538,7 @@ func HelpInfoWifiPumpkin() {
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   SSID           ->               yes       The fake name of your wifi for the clients to see. Default = 'End times ministries'
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordList location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2718,13 +2718,13 @@ func WirelessOptions(IFace, LHost, OutPutDir string) {
     ))
 }
 
-func CrackersOptions(Mode, RHost, WordList, UserName, PassWord string) { 
+func CrackersOptions(Mode, RHost, WordListDir, UserName, PassWord string) { 
     rows := [][]string{
         {"MODE", Mode, "yes", "Attack mode (online/offline)."},
         {"RHOST", RHost, "yes", "Target host."},
         {"USERNAME", UserName, "yes", "Single username to test."},
         {"PASSWORD", PassWord, "yes", "Single password to test."},
-        {"WORDLIST", WordList, "yes", "Path to wordlist."},
+        {"WORDLIST", WordListDir, "yes", "Path to wordlist."},
     }
 
     fmt.Println(FormatModuleOptions(
@@ -2793,20 +2793,20 @@ func ToxssInxOptions(Mode, LPort, Spoofer, RHost, LHost string) {
     ))
 }
 
-func WebsitesOptions(RHost, OutPutDir, Proxies, UserName, PassWord, WordList string) {
+func WebsitesOptions(RHost, OutPutDir, Proxies, UserName, PassWord, WordListDir string) {
     rows := [][]string{
         {"RHOST", RHost, "yes", "Mainly needed when generating backdoors."},
         {"OUTPUT", OutPutDir, "no", "OutPut location."},
         {"PROXIES", Proxies, "no", "Just incase you want to run your traffic through proxies.."},
         {"USERNAME", UserName, "no", "Single user name to attack on a give service."},
         {"PASSWORD", PassWord, "no", "Single password to use while attacking a given name or password."},
-        {"WORDLIST", WordList, "yes", "A list of user names or passwords to be used. -> (Give full path)."},
+        {"WORDLIST", WordListDir, "yes", "A list of user names or passwords to be used. -> (Give full path)."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/websites/bugbounty_pentest.fn",
         rows,
-        ModuleHelpInfo{Example: "  set WORDLIST " + WordList + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set WORDLIST " + WordListDir + "\n  run\n"},
     ))
 }
 

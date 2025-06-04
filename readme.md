@@ -20,9 +20,9 @@ Africana Framework is an open-source, community-driven cybersecurity toolkit des
     |    |    |    |    +--------------------- 5. Wifi Attack Vectors Both Automated & Manual. With Wifite, Airgeddon, Bettercap, Wifipumpkin3.
     |    |    |    + ------------------------- 6. Password, Hash Cracking With AirCrack-ng, John And Hashcat More Will Be Added As The Tool Grows.
     |    |    + ------------------------------ 7. Social Engenearing Attacks With Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher. Others Will Be Added.
-    |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix, Osmedeus etc.
+    |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix etc.
     +----------------------------------------- 9. About the author of Africana and free pentesting tricks, Materials.
-    []---------------------------------------- 10. That one place you really need to be. Very nice essential things just try ten.
+    []----------------------------------------10. That one place you really need to be. Very nice essential things just try ten.
 ```
 
 # Disclaimer: 

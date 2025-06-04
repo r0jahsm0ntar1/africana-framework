@@ -23,7 +23,7 @@ var (
     LHostIp, _ = utils.GetDefaultIP()
     scanner   = bufio.NewScanner(os.Stdin)
     Input, RHost, Proxy, Script, Function string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
 )
 
 type stringMatcher struct {

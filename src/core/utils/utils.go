@@ -4,11 +4,13 @@ import(
     "os"
     "io"
     "net"
+    "log"
     "fmt"
     "sync"
     "time"
     "bytes"
     "bufio"
+    "regexp"
     "strconv"
     "os/exec"
     "bcolors"
@@ -31,7 +33,7 @@ import(
 
 var (
     cmd *exec.Cmd 
-    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordList, RokyPath string
+    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordListDir, RokyPath string
 
 )
 
@@ -858,6 +860,26 @@ func min(nums ...int) int {
     return m
 }
 
+func CheckErr(err error) {
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+
+func FileExists(filename string) bool {
+    _, err := os.Stat(filename)
+    return !os.IsNotExist(err)
+}
+
+func StripANSI(text string) string {
+    ansi := regexp.MustCompile(`\x1B(?:[@-Z\\-_]]|\[[0-?]*[ -/]*[@-~])`)
+    return ansi.ReplaceAllString(text, "")
+}
+
+func StripBrackets(text string) string {
+    return strings.Replace(strings.Replace(text, "[", "", -1), "]", "", -1)
+}
+
 func DirLocations() (string, string, string, string, string, string, string) {
     baseDir := "/root/.afr3"
     if !subprocess.IsRoot() {
@@ -870,13 +892,7 @@ func DirLocations() (string, string, string, string, string, string, string) {
 
     certDir := filepath.Join(baseDir, "certs")
     toolsDir := filepath.Join(baseDir, "africana-base")
-    return certDir,
-        filepath.Join(baseDir, "output"),
-        filepath.Join(certDir, "afr_key.pem"),
-        filepath.Join(certDir, "afr_cert.pem"),
-        toolsDir,
-        "/usr/share/wordlists/rockyou.txt",
-        filepath.Join(toolsDir, "wordlists", "everything.txt")
+    return certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
 }
 
 func InitiLize() {
@@ -884,8 +900,7 @@ func InitiLize() {
 
     for _, dir := range []string{certDir, outDir} {
         if err := os.MkdirAll(dir, 0755); err != nil {
-            fmt.Printf("%s[!] %sError creating %s: %v%s\n", 
-                bcolors.BrightRed, bcolors.Endc, dir, err, bcolors.Endc)
+            fmt.Printf("%s[!] %sError creating %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, dir, err, bcolors.Endc)
             return
         }
     }

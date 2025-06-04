@@ -30,7 +30,7 @@ var(
     scanner = bufio.NewScanner(os.Stdin)
     Gateway, _ = utils.GetDefaultGatewayIP()
     Input, Function, Target string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{

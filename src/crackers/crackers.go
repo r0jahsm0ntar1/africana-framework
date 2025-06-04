@@ -7,24 +7,23 @@ import(
     "bufio"
     "menus"
     "strconv"
-    "credits"
     "banners"
     "strings"
     "bcolors"
     "scriptures"
     "subprocess"
+    "path/filepath"
 )
 
 var(
-    Mode = "none"
-    RHost = "none"
-    Proxy = "none"
-    OutPut = "none"
-    PassWord = "none"
-    UserName = "none"
-    Pcap, Input, Function, Hashes string
+    Mode = "online"
+    UserName = "admin"
+    PassWord = "password"
     scanner = bufio.NewScanner(os.Stdin)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
+    WorkingDir = filepath.Join(OutPutDir, "crackers")
+    RHost, Proxy, Pcap, Input, Function, Hashes string
+    WordList = filepath.Join(WordListDir, "everything.txt")
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
@@ -106,32 +105,32 @@ func executeCommand(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, func() { menus.CrackersOptions(Mode, RHost, WordList, UserName, PassWord) }},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListCrackersFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run ssh", "use ssh", "exec ssh", "start ssh", "launch ssh", "exploit ssh", "execute ssh"}, func() { HydraSsh() }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run ssh", "use ssh", "exec ssh", "start ssh", "launch ssh", "exploit ssh", "execute ssh"}, func() { CrackersPenFunctions(fmt.Sprintf("ssh")) }},
         {[]string{"? 1", "info 1", "help 1", "ssh", "info ssh", "help ssh"}, menus.HelpInfoFeatures},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run ftp", "use ftp", "exec ftp", "start ftp", "launch ftp", "exploit ftp", "execute ftp"}, func() { HydraFtp() }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run ftp", "use ftp", "exec ftp", "start ftp", "launch ftp", "exploit ftp", "execute ftp"}, func() { CrackersPenFunctions(fmt.Sprintf("ftp")) }},
         {[]string{"? 2", "info 2", "help 2", "ftp", "info ftp", "help ftp"}, menus.HelpInfoFeatures},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() { HydraSmb() }},
-        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.HelpInfoFeatures},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run smb", "use smb", "exec smb", "start smb", "launch smb", "exploit smb", "execute smb"}, func() { CrackersPenFunctions(fmt.Sprintf("smb")) }},
+        {[]string{"? 3", "info 3", "help 3", "smb", "info smb", "help smb"}, menus.HelpInfoFeatures},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() { menus.MenuZero() }},
-        {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.HelpInfoFeatures},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run rdp", "use rdp", "exec rdp", "start rdp", "launch rdp", "exploit rdp", "execute rdp"}, func() { CrackersPenFunctions(fmt.Sprintf("rdp")) }},
+        {[]string{"? 4", "info 4", "help 4", "rdp", "info rdp", "help rdp"}, menus.HelpInfoFeatures},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() { menus.MenuZero() }},
-        {[]string{"? 5", "info 5", "help 5", "wireless", "info wireless", "help wireless"}, menus.HelpInfoFeatures},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run ldap", "use ldap", "exec ldap", "start ldap", "launch ldap", "exploit ldap", "execute ldap"}, func() { CrackersPenFunctions(fmt.Sprintf("ldap")) }},
+        {[]string{"? 5", "info 5", "help 5", "ldap", "info ldap", "help ldap"}, menus.HelpInfoFeatures},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() { menus.MenuZero() }},
-        {[]string{"? 6", "info 6", "help 6", "crackers", "info crackers", "help crackers"}, menus.HelpInfoFeatures},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run smtp", "use smtp", "exec smtp", "start smtp", "launch smtp", "exploit smtp", "execute smtp"}, func() { CrackersPenFunctions(fmt.Sprintf("smtp")) }},
+        {[]string{"? 6", "info 6", "help 6", "smtp", "info smtp", "help smtp"}, menus.HelpInfoFeatures},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() { menus.MenuZero() }},
-        {[]string{"? 7", "info 7", "help 7", "phishers", "info phishers", "help phishers"}, menus.HelpInfoFeatures},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run telnet", "use telnet", "exec telnet", "start telnet", "launch telnet", "exploit telnet", "execute telnet"}, func() { CrackersPenFunctions(fmt.Sprintf("telnet")) }},
+        {[]string{"? 7", "info 7", "help 7", "telnet", "info telnet", "help telnet"}, menus.HelpInfoFeatures},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() { menus.MenuZero() }},
-        {[]string{"? 8", "info 8", "help 8", "websites", "info websites", "help websites"}, menus.HelpInfoFeatures},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run https", "use https", "exec https", "start https", "launch https", "exploit https", "execute https"}, func() { CrackersPenFunctions(fmt.Sprintf("https")) }},
+        {[]string{"? 8", "info 8", "help 8", "https", "info https", "help https"}, menus.HelpInfoFeatures},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() { credits.Creditors() }},
-        {[]string{"? 9", "info 9", "help 9", "credits", "info credits", "help credits"}, menus.HelpInfoFeatures},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run pcap", "use pcap", "exec pcap", "start pcap", "launch pcap", "exploit pcap", "execute pcap"}, func() { CrackersPenFunctions(fmt.Sprintf("pcap")) }},
+        {[]string{"? 9", "info 9", "help 9", "pcap", "info pcap", "help pcap"}, menus.HelpInfoFeatures},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
@@ -339,6 +338,8 @@ func autoExecuteFunc(distro string, function string) {
 }
 
 func CrackersPenFunctions(Function string, args ...interface{}) {
+    os.MkdirAll(WorkingDir, os.ModePerm)
+
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {

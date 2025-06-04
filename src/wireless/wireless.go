@@ -26,7 +26,7 @@ var (
     LHostIp, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
     Input, RHost, Proxy, Function, Script string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordList = utils.DirLocations()
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
 )
 
 var defaultValues = map[string]string{
