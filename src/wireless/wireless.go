@@ -30,7 +30,7 @@ var (
 )
 
 var defaultValues = map[string]string{
-    
+
     "proxies": "",
     "mode": "auto",
     "function": "",

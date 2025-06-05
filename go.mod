@@ -1,4 +1,4 @@
-module main.go
+module github.com/r0jahsm0ntar1/africana-framework/v3
 
 replace credits => ./src/credits/
 
