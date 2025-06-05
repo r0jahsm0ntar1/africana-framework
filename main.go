@@ -1,9 +1,9 @@
 package main
 
 import(
-    "console"
+    "afrconsole"
 )
 
 func main() {
-    console.Start()
+    afrconsole.Start()
 }

@@ -20,8 +20,6 @@ replace setups => ./src/core/setups/
 
 replace bcolors => ./src/core/bcolors/
 
-replace console => ./src/core/console/
-
 replace banners => ./src/core/banners/
 
 replace securities => ./src/securities/
@@ -32,13 +30,15 @@ replace scriptures => ./src/scriptures/
 
 replace webattackers => ./src/webattackers/
 
+replace afrconsole => ./src/core/afrconsole/
+
 replace subprocess => ./src/core/subprocess/
 
 require (
+	afrconsole v0.0.0-00010101000000-000000000000 // indirect
 	agreements v0.0.0-00010101000000-000000000000 // indirect
 	banners v0.0.0-00010101000000-000000000000 // indirect
 	bcolors v0.0.0-00010101000000-000000000000 // indirect
-	console v0.0.0-00010101000000-000000000000 // indirect
 	crackers v0.0.0-00010101000000-000000000000 // indirect
 	credits v0.0.0-00010101000000-000000000000 // indirect
 	exploits v0.0.0-00010101000000-000000000000 // indirect

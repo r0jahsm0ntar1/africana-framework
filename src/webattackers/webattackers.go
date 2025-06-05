@@ -419,9 +419,9 @@ func EnumScan(RHost, ReconDir string) {
     fmt.Printf("\n%s[*] %sPerforming full enumeration scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
     for _, cmd := range []string{
         fmt.Sprintf("subfinder -nW -d %s -o %s/subfinder_%s.txt", RHost, ReconDir, RHost),
-        fmt.Sprintf("amass enum -passive -d %s -o %s/amass_%s.txt", RHost, ReconDir, RHost),
+        //fmt.Sprintf("amass enum -passive -d %s -o %s/amass_%s.txt", RHost, ReconDir, RHost),
         fmt.Sprintf("assetfinder %s > %s/assetfinder_%s.txt", RHost, ReconDir, RHost),
-        fmt.Sprintf("findomain --target %s --threads 40 -u %s/findomain_%s.txt", RHost, ReconDir, RHost),
+        fmt.Sprintf("findomain --target %s -u %s/findomain_%s.txt", RHost, ReconDir, RHost),
     } {
         subprocess.Popen(cmd)
     }
@@ -544,15 +544,14 @@ func AutoScan(RHost, ReconDir string) {
 
     EnumScan(RHost, ReconDir)
     CombineSubdomains(RHost, ReconDir)
-    //FindIPs(RHost, ResolversFile, ReconDir)
     ScanHttpx(RHost, ReconDir)
     ScaNaabuAndNuclei(RHost, ReconDir)
 
-    fmt.Printf("\n%s[*] %sWorkflow completed! Results saved at %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightGreen, ReconDir, bcolors.Endc)
+    fmt.Printf("%s[*] %sWorkflow Results saved at %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightGreen, ReconDir, bcolors.Endc)
 }
 
 func ScanCRT(RHost, ReconDir string) {
-    fmt.Printf("\n%s[*] %sScanning crt.sh ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+    fmt.Printf("\n%s[*] %sScanning for subdomains with crt.sh ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
 
     crtOutput := filepath.Join(ReconDir, fmt.Sprintf("crt_%s.txt", RHost))
     crtURL := fmt.Sprintf("https://crt.sh/?q=%%.%s&output=json", RHost)
@@ -572,6 +571,8 @@ func ScanCRT(RHost, ReconDir string) {
         }
     }
 
+    fmt.Print(ioutil.ReadFile(crtOutput))
+
     writeUniqueSubdomainsToFile(crtOutput, uniqueSubdomains)
 }
 
@@ -587,8 +588,6 @@ func writeUniqueSubdomainsToFile(filename string, uniqueSubdomains map[string]st
 }
 
 func CombineSubdomains(RHost, ReconDir string) {
-    fmt.Printf("\n%s[*] %sCombining subdomains ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-
     subfinderOutput := filepath.Join(ReconDir, fmt.Sprintf("subfinder_%s.txt", RHost))
     amassOutput := filepath.Join(ReconDir, fmt.Sprintf("amass_%s.txt", RHost))
     assetfinderOutput := filepath.Join(ReconDir, fmt.Sprintf("assetfinder_%s.txt", RHost))
@@ -627,12 +626,13 @@ func FindIPs(RHost, ResolversFile, ReconDir string) {
 }
 
 func ScanHttpx(RHost, ReconDir string) {
+    fmt.Printf("\n%s[*] %sScanning host using httpx ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+
     subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("subdomains_%s.txt", RHost))
     httpxOutput := filepath.Join(ReconDir, fmt.Sprintf("httpx_%s.txt", RHost))
 
     subprocess.Popen("httpx -l %s -title -tech-detect -status-code -o %s", subdomainsOutput, httpxOutput)
 
-    fmt.Printf("\n%s[*] %sSorting httpx results ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
     sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", RHost))
 
     linesBytes, err := ioutil.ReadFile(httpxOutput)
@@ -676,19 +676,32 @@ func ScanHttpx(RHost, ReconDir string) {
 }
 
 func ScaNaabuAndNuclei(RHost, ReconDir string) {
-    naabuOutput := filepath.Join(ReconDir, fmt.Sprintf("naabu_%s.txt", RHost))
-    nucleiOutput := filepath.Join(ReconDir, fmt.Sprintf("nuclei_%s.txt", RHost))
     sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", RHost))
+    FinalOutPut := filepath.Join(ReconDir, fmt.Sprintf("katana_%s.txt", RHost))
+    
+    commands := []struct {
+        description string
+        command     string
+    }{
+        {
+            description: fmt.Sprintf("\n%s[*] %sPort scanning using naabu ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc),
+            command:     fmt.Sprintf("naabu -nmap-cli 'nmap -v -o %s/nmap_%s.txt -sV -sC' -l %s -o %s/naabu_%s.txt", ReconDir, RHost, sortedHttpxOutput, ReconDir, RHost),
+        },
+        {
+            description: fmt.Sprintf("\n%s[*] %sKatana scanning using naabu ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc),
+            command:     fmt.Sprintf("katana -list %s -o %s/katana_%s.txt", sortedHttpxOutput, ReconDir, RHost),
+        },
+        {
+            description: fmt.Sprintf("\n%s[*] %sVulnerability assessment using nuclei ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc),
+            command:     fmt.Sprintf("nuclei -l %s -o %s/nuclei_%s.txt", FinalOutPut, ReconDir, RHost),
+        },
+    }
 
-    for _, cmd := range []string{
-        fmt.Sprintf("naabu -l %s -o %s", sortedHttpxOutput, naabuOutput),
-        fmt.Sprintf("nuclei -l %s -o %s", sortedHttpxOutput, nucleiOutput),
-    } {
-        subprocess.Popen(cmd)
+    for _, cmd := range commands {
+        fmt.Println(cmd.description)
+        subprocess.Popen(cmd.command)
     }
 }
-
-
 
 
 
