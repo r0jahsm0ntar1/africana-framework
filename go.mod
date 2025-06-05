@@ -1,6 +1,6 @@
 //John 3:16
 
-module github.com/r0jahsm0ntar1/africana-framework/v3
+module main
 
 replace credits => ./src/credits/
 
