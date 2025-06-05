@@ -223,35 +223,35 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoSetups},
         {[]string{"m", "menu"}, menus.MenuOne},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.SetupsOptions(Distro)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.SetupsOptions(Distro, Function)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListSetupsFunction},
         {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run kali", "use kali", "exec kali", "start kali", "launch kali", "exploit kali", "execute kali"}, func() { autoExecuteFunc("kali", "install") }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run kali", "use kali", "exec kali", "start kali", "launch kali", "exploit kali", "execute kali"}, func() { SetupsFunction(Function, "kali") }},
         {[]string{"? 1", "info 1", "help 1", "kali", "info kali", "help kali"}, menus.HelpInfoKali},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run ubuntu", "use ubuntu", "exec ubuntu", "start ubuntu", "launch ubuntu", "exploit ubuntu", "execute ubuntu"}, func() { autoExecuteFunc("ubuntu", "install") }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run ubuntu", "use ubuntu", "exec ubuntu", "start ubuntu", "launch ubuntu", "exploit ubuntu", "execute ubuntu"}, func() { SetupsFunction(Function, "ubuntu") }},
         {[]string{"? 2", "info 2", "help 2", "ubuntu", "info ubuntu", "help ubuntu"}, menus.HelpInfoUbuntu},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run arch", "use arch", "exec arch", "start arch", "launch arch", "exploit arch", "execute arch"}, func() { autoExecuteFunc("arch", "install") }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run arch", "use arch", "exec arch", "start arch", "launch arch", "exploit arch", "execute arch"}, func() { SetupsFunction(Function, "arch") }},
         {[]string{"? 3", "info 3", "help 3", "arch", "info arch", "help arch"}, menus.HelpInfoArch},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run macos", "use macos", "exec macos", "start macos", "launch macos", "exploit macos", "execute macos"}, func() { autoExecuteFunc("macos", "install") }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run macos", "use macos", "exec macos", "start macos", "launch macos", "exploit macos", "execute macos"}, func() { SetupsFunction(Function, "macos") }},
         {[]string{"? 4", "info 4", "help 4", "macos", "info macos", "help macos"}, menus.HelpInfoMacos},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run android", "use android", "exec android", "start android", "launch android", "exploit android", "execute android"}, func() { autoExecuteFunc("android", "install") }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run android", "use android", "exec android", "start android", "launch android", "exploit android", "execute android"}, func() { SetupsFunction(Function, "android") }},
         {[]string{"? 5", "info 5", "help 5", "android", "info android", "help android"}, menus.HelpInfoAndroid},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run windows", "use windows", "exec windows", "start windows", "launch windows", "exploit windows", "execute windows"}, func() { autoExecuteFunc("windows", "install") }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run windows", "use windows", "exec windows", "start windows", "launch windows", "exploit windows", "execute windows"}, func() { SetupsFunction(Function, "windows") }},
         {[]string{"? 6", "info 6", "help 6", "windows", "info windows", "help windows"}, menus.HelpInfoWindows},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run update", "use update", "exec update", "start update", "launch update", "exploit update", "execute update"}, func() { autoExecuteFunc("update", "install") }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run update", "use update", "exec update", "start update", "launch update", "exploit update", "execute update"}, func() { SetupsFunction("update", Distro) }},
         {[]string{"? 7", "info 7", "help 7", "update", "info update", "help update"}, menus.HelpInfoUpdate},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run repair", "use repair", "exec repair", "start repair", "launch repair", "exploit repair", "execute repair"}, func() { autoExecuteFunc("repair", "install") }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run repair", "use repair", "exec repair", "start repair", "launch repair", "exploit repair", "execute repair"}, func() { SetupsFunction("repair", Distro) }},
         {[]string{"? 8", "info 8", "help 8", "repair", "info repair", "help repair"}, menus.HelpInfoRepair},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run uninstall", "use uninstall", "exec uninstall", "start uninstall", "launch uninstall", "exploit uninstall", "execute uninstall"}, func() { autoExecuteFunc("uninstall", "install") }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run uninstall", "use uninstall", "exec uninstall", "start uninstall", "launch uninstall", "exploit uninstall", "execute uninstall"}, func() { SetupsFunction("uninstall", Distro) }},
         {[]string{"? 9", "info 9", "help 9", "uninstall", "info uninstall", "help uninstall"}, menus.HelpInfoUninstall},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
@@ -442,13 +442,7 @@ func executeFunction() {
     SetupsFunction(Function, Distro)
 }
 
-func autoExecuteFunc(distro string, function string) {
-    Distro = distro
-    Function = function
-    executeFunction()
-}
-
-func SetupsFunction(Function string, args ...interface{}) {
+func SetupsFunction(Function, Distro string, args ...interface{}) {
     fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
@@ -458,13 +452,9 @@ func SetupsFunction(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "auto": func() { AutoSetups() },
-        "install": func() { Installer(Distro) },
-        "update": func() { UpdateAfricana() },
-        "repair": func() { UpdateAfricana() },
-        "uninstall": func() { Uninstaller() },
 
         "0": func() { AutoSetups() },
+
         "1": func() { KaliSetups() },
         "2": func() { UbuntuSetups() },
         "3": func() { ArchSetups() },
@@ -474,6 +464,21 @@ func SetupsFunction(Function string, args ...interface{}) {
         "7": func() { UpdateAfricana() },
         "8": func() { UpdateAfricana() },
         "9": func() { Uninstaller() },
+
+        "auto":      func() { AutoSetups() },
+
+        "kali":      func() { KaliSetups() },
+        "ubuntu":    func() { UbuntuSetups() },
+        "arch":      func() { ArchSetups() },
+        "macos":     func() { MacosSetups() },
+        "android":   func() { AndroidSetups() },
+        "windows":   func() { WindowsSetups() },
+
+        "install":   func() { Installer(Distro) },
+        "update":    func() { UpdateAfricana() },
+        "repair":    func() { UpdateAfricana() },
+        "uninstall": func() { Uninstaller() },
+
     }
 
     textCommands := []string{"auto", "install", "update", "repair", "uninstall"}

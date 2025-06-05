@@ -31,10 +31,10 @@ var (
 )
 
 var defaultValues = map[string]string{
-   "proxies": "",
    "rhost": "",
    "rhosts": "",
    "target": "",
+   "proxies": "",
    "function": "",
    "wordlist": WordList,
 }
@@ -107,31 +107,31 @@ func executeCommand(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, func() { menus.WebsitesOptions(RHost, OutPutDir, Proxy, UserName, PassWord, WordList)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWebsitesFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run netmap", "use netmap", "exec netmap", "start netmap", "launch netmap", "exploit netmap", "execute netmap"}, func() { WebPenFunctions(fmt.Sprintf("netmap")) }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run netmap", "use netmap", "exec netmap", "start netmap", "launch netmap", "exploit netmap", "execute netmap"}, func() { WebPenFunctions("netmap") }},
         {[]string{"? 1", "info 1", "help 1", "netmap", "info netmap", "help netmap"}, menus.HelpInfoPortScan},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run enumscan", "use enumscan", "exec enumscan", "start enumscan", "launch enumscan", "exploit enumscan", "execute enumscan"}, func() { WebPenFunctions(fmt.Sprintf("enumscan")) }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run enumscan", "use enumscan", "exec enumscan", "start enumscan", "launch enumscan", "exploit enumscan", "execute enumscan"}, func() { WebPenFunctions("enumscan") }},
         {[]string{"? 2", "info 2", "help 2", "enumscan", "info enumscan", "help enumscan"}, menus.HelpInfoEnumScan},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run dnsrecon", "use dnsrecon", "exec dnsrecon", "start dnsrecon", "launch dnsrecon", "exploit dnsrecon", "execute dnsrecon"}, func() { WebPenFunctions(fmt.Sprintf("dnsrecon")) }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run dnsrecon", "use dnsrecon", "exec dnsrecon", "start dnsrecon", "launch dnsrecon", "exploit dnsrecon", "execute dnsrecon"}, func() { WebPenFunctions("dnsrecon") }},
         {[]string{"? 3", "info 3", "help 3", "dnsrecon", "info dnsrecon", "help dnsrecon"}, menus.HelpInfoDnsRecon},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run techscan", "use techscan", "exec techscan", "start techscan", "launch techscan", "exploit techscan", "execute techscan"}, func() { WebPenFunctions(fmt.Sprintf("techscan")) }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run techscan", "use techscan", "exec techscan", "start techscan", "launch techscan", "exploit techscan", "execute techscan"}, func() { WebPenFunctions("techscan") }},
         {[]string{"? 4", "info 4", "help 4", "techscan", "info techscan", "help techscan"}, menus.HelpInfoTechScan},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run asetscan", "use asetscan", "exec asetscan", "start asetscan", "launch asetscan", "exploit asetscan", "execute asetscan"}, func() { WebPenFunctions(fmt.Sprintf("asetscan")) }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run asetscan", "use asetscan", "exec asetscan", "start asetscan", "launch asetscan", "exploit asetscan", "execute asetscan"}, func() { WebPenFunctions("asetscan") }},
         {[]string{"? 5", "info 5", "help 5", "asetscan", "info asetscan", "help asetscan"}, menus.HelpInfoAsetScan},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run fuzzscan", "use fuzzscan", "exec fuzzscan", "start fuzzscan", "launch fuzzscan", "exploit fuzzscan", "execute fuzzscan"}, func() { WebPenFunctions(fmt.Sprintf("fuzzscan")) }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run fuzzscan", "use fuzzscan", "exec fuzzscan", "start fuzzscan", "launch fuzzscan", "exploit fuzzscan", "execute fuzzscan"}, func() { WebPenFunctions("fuzzscan") }},
         {[]string{"? 6", "info 6", "help 6", "fuzzscan", "info fuzzscan", "help fuzzscan"}, menus.HelpInfoFuzzScan},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run leakscan", "use leakscan", "exec leakscan", "start leakscan", "launch leakscan", "exploit leakscan", "execute leakscan"}, func() { WebPenFunctions(fmt.Sprintf("leakscan")) }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run leakscan", "use leakscan", "exec leakscan", "start leakscan", "launch leakscan", "exploit leakscan", "execute leakscan"}, func() { WebPenFunctions("leakscan") }},
         {[]string{"? 7", "info 7", "help 7", "leakscan", "info leakscan", "help leakscan"}, menus.HelpInfoLeakScan},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run vulnscan", "use vulnscan", "exec vulnscan", "start vulnscan", "launch vulnscan", "exploit vulnscan", "execute vulnscan"}, func() { WebPenFunctions(fmt.Sprintf("vulnscan")) }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run vulnscan", "use vulnscan", "exec vulnscan", "start vulnscan", "launch vulnscan", "exploit vulnscan", "execute vulnscan"}, func() { WebPenFunctions("vulnscan") }},
         {[]string{"? 8", "info 8", "help 8", "vulnscan", "info vulnscan", "help vulnscan"}, menus.HelpInfoVulnScan},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run bounty", "use bounty", "exec bounty", "start bounty", "launch bounty", "exploit bounty", "execute bounty"}, func() { WebPenFunctions(fmt.Sprintf("bounty")) }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run bounty", "use bounty", "exec bounty", "start bounty", "launch bounty", "exploit bounty", "execute bounty"}, func() { WebPenFunctions("bounty") }},
         {[]string{"? 9", "info 9", "help 9", "bounty", "info bounty", "help bounty"}, menus.HelpInfoAutoScan},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
@@ -330,12 +330,6 @@ func executeFunction() {
     WebPenFunctions(Function, RHost)
 }
 
-func autoExecuteFunc(distro string, function string) {
-    //Distro = distro
-    //Function = function
-    executeFunction()
-}
-
 func formatRHost(rawHost string) (cleanedHost, fullURL string) {
     prefixes := []string{"http://", "https://", "www."}
     cleanedHost = rawHost
@@ -358,10 +352,8 @@ func WebPenFunctions(Function string, args ...interface{}) {
     os.MkdirAll(ReconDir, os.ModePerm)
 
     //cleaned, full := formatRHost(RHost)
-    //fmt.Println(cleaned)  "example.com"
-    //fmt.Println(full)    "http://example.com"
 
-    fmt.Printf("\nRHOST => %s\nOUTPUT => %s\nFunction => %s\n", RHost, ReconDir, Function)
+    fmt.Printf("\nRHOST => %s\nFunction => %s\nOUTPUT => %s\n", RHost, Function, ReconDir)
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -370,15 +362,6 @@ func WebPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "netmap":   func() {PortScan(RHost, ReconDir)},
-        "enumscan": func() {EnumScan(RHost, ReconDir)},
-        "dnsrecon": func() {DnsRecon(RHost, ReconDir)},
-        "techscan": func() {TechScan(RHost, ReconDir)},
-        "asetscan": func() {AsetScan(RHost, ReconDir)},
-        "fuzzscan": func() {FuzzScan(RHost, ReconDir)},
-        "leakscan": func() {LeakScan(RHost, ReconDir)},
-        "vulnscan": func() {VulnScan(RHost, ReconDir)},
-        "bounty":   func() {AutoScan(RHost, ReconDir)},
 
         "1": func() {PortScan(RHost, ReconDir)},
         "2": func() {EnumScan(RHost, ReconDir)},
@@ -389,6 +372,16 @@ func WebPenFunctions(Function string, args ...interface{}) {
         "7": func() {LeakScan(RHost, ReconDir)},
         "8": func() {VulnScan(RHost, ReconDir)},
         "9": func() {AutoScan(RHost, ReconDir)},
+
+        "netmap":   func() {PortScan(RHost, ReconDir)},
+        "enumscan": func() {EnumScan(RHost, ReconDir)},
+        "dnsrecon": func() {DnsRecon(RHost, ReconDir)},
+        "techscan": func() {TechScan(RHost, ReconDir)},
+        "asetscan": func() {AsetScan(RHost, ReconDir)},
+        "fuzzscan": func() {FuzzScan(RHost, ReconDir)},
+        "leakscan": func() {LeakScan(RHost, ReconDir)},
+        "vulnscan": func() {VulnScan(RHost, ReconDir)},
+        "bounty":   func() {AutoScan(RHost, ReconDir)},
     }
 
     textCommands := []string{"netmap", "enumscan", "dnsrecon", "techscan", "asetscan", "fuzzscan", "leakscan", "vulnscan", "bounty"}
@@ -551,7 +544,7 @@ func AutoScan(RHost, ReconDir string) {
 
     EnumScan(RHost, ReconDir)
     CombineSubdomains(RHost, ReconDir)
-    FindIPs(RHost, ResolversFile, ReconDir)
+    //FindIPs(RHost, ResolversFile, ReconDir)
     ScanHttpx(RHost, ReconDir)
     ScaNaabuAndNuclei(RHost, ReconDir)
 
@@ -561,7 +554,7 @@ func AutoScan(RHost, ReconDir string) {
 func ScanCRT(RHost, ReconDir string) {
     fmt.Printf("\n%s[*] %sScanning crt.sh ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
 
-    crtOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.crt.txt", RHost))
+    crtOutput := filepath.Join(ReconDir, fmt.Sprintf("crt_%s.txt", RHost))
     crtURL := fmt.Sprintf("https://crt.sh/?q=%%.%s&output=json", RHost)
 
     response, _ := exec.Command("curl", "-s", crtURL).Output()
@@ -600,8 +593,8 @@ func CombineSubdomains(RHost, ReconDir string) {
     amassOutput := filepath.Join(ReconDir, fmt.Sprintf("amass_%s.txt", RHost))
     assetfinderOutput := filepath.Join(ReconDir, fmt.Sprintf("assetfinder_%s.txt", RHost))
     findomainOutput := filepath.Join(ReconDir, fmt.Sprintf("findomain_%s.txt", RHost))
-    crtOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.crt.txt", RHost))
-    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.subdomains.txt", RHost))
+    crtOutput := filepath.Join(ReconDir, fmt.Sprintf("crt_%s.txt", RHost))
+    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("subdomains_%s.txt", RHost))
 
     subdomainFiles := []string{subfinderOutput, amassOutput, assetfinderOutput, findomainOutput, crtOutput}
     uniqueSubdomains := make(map[string]struct{})
@@ -627,14 +620,14 @@ func CombineSubdomains(RHost, ReconDir string) {
 func FindIPs(RHost, ResolversFile, ReconDir string) {
     fmt.Printf("\n%s[*] %sFinding IPs for subdomains ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
 
-    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.subdomains.txt", RHost))
+    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("subdomains_%s.txt", RHost))
     ipsOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.ips.txt", RHost))
 
     subprocess.Popen("massdns -r %s -t A -o S -w %s %s", ResolversFile, ipsOutput, subdomainsOutput)
 }
 
 func ScanHttpx(RHost, ReconDir string) {
-    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("%s.subdomains.txt", RHost))
+    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("subdomains_%s.txt", RHost))
     httpxOutput := filepath.Join(ReconDir, fmt.Sprintf("httpx_%s.txt", RHost))
 
     subprocess.Popen("httpx -l %s -title -tech-detect -status-code -o %s", subdomainsOutput, httpxOutput)
@@ -688,8 +681,8 @@ func ScaNaabuAndNuclei(RHost, ReconDir string) {
     sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", RHost))
 
     for _, cmd := range []string{
-        fmt.Sprintf("naabu -v -l %s -o %s", sortedHttpxOutput, naabuOutput),
-        fmt.Sprintf("nuclei -v -l %s -o %s", sortedHttpxOutput, nucleiOutput),
+        fmt.Sprintf("naabu -l %s -o %s", sortedHttpxOutput, naabuOutput),
+        fmt.Sprintf("nuclei -l %s -o %s", sortedHttpxOutput, nucleiOutput),
     } {
         subprocess.Popen(cmd)
     }
@@ -712,7 +705,7 @@ func ScaNaabuAndNuclei(RHost, ReconDir string) {
 
 
 
-
+//Intense bug bounty hunt
 func Sublist3r(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
     subprocess.Popen(`cd %s/websites/sublist3r/; python3 sublist3r.py -v -d %s`, ToolsDir, RHost)

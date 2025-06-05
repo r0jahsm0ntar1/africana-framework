@@ -66,6 +66,12 @@ type Spinner struct {
     isWindows   bool
 }
 
+func CheckErr(err error) {
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+
 var SpinnerStyles = map[string][]string{
     "classic":    {"|", "/", "-", "\\"},
     "triangle":   {"◢", "◣", "◤", "◥"},
@@ -607,45 +613,19 @@ func Editors(filesToReplacements map[string]map[string]string) {
     }
 }
 
-func BrowseTutarilas() {
-    switch runtime.GOOS {
-    case "linux", "darwin":
-        command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
-    case "windows":
-        command = `start "" "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1"`
-    default:
-        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
-        return
-    }
-    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(command)
+
+func FileExists(filename string) bool {
+    _, err := os.Stat(filename)
+    return !os.IsNotExist(err)
 }
 
-func BrowserLogs() {
-    subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr3/logs/; cat *.log | aha --black > /var/www/html/index.html`)
-    subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null; php -S 0.0.0:80`)
-    subprocess.Popen(`rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/`)
-    return
+func StripANSI(text string) string {
+    ansi := regexp.MustCompile(`\x1B(?:[@-Z\\-_]]|\[[0-?]*[ -/]*[@-~])`)
+    return ansi.ReplaceAllString(text, "")
 }
 
-func ListJunks() {
-    fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
-    subprocess.Popen("tree %s*", OutPutDir)
-    return
-}
-
-func ClearJunks() {
-    fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
-    subprocess.Popen("tree %s*", OutPutDir)
-    subprocess.Popen("rm -rf %s/*", OutPutDir)
-    fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
-    return
-}
-
-func Sleep() {
-    subprocess.Popen("sleep")
+func StripBrackets(text string) string {
+    return strings.Replace(strings.Replace(text, "[", "", -1), "]", "", -1)
 }
 
 func GetAgreementPath() string {
@@ -863,24 +843,45 @@ func min(nums ...int) int {
     return m
 }
 
-func CheckErr(err error) {
-    if err != nil {
-        log.Fatal(err)
+func BrowseTutarilas() {
+    switch runtime.GOOS {
+    case "linux", "darwin":
+        command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
+    case "windows":
+        command = `start "" "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1"`
+    default:
+        fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
+        return
     }
+    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
+    subprocess.Popen(command)
 }
 
-func FileExists(filename string) bool {
-    _, err := os.Stat(filename)
-    return !os.IsNotExist(err)
+func BrowserLogs() {
+    subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr3/logs/; cat *.log | aha --black > /var/www/html/index.html`)
+    subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null; php -S 0.0.0:80`)
+    subprocess.Popen(`rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/`)
+    return
 }
 
-func StripANSI(text string) string {
-    ansi := regexp.MustCompile(`\x1B(?:[@-Z\\-_]]|\[[0-?]*[ -/]*[@-~])`)
-    return ansi.ReplaceAllString(text, "")
+func ListJunks() {
+    fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
+    subprocess.Popen("tree %s*", OutPutDir)
+    return
 }
 
-func StripBrackets(text string) string {
-    return strings.Replace(strings.Replace(text, "[", "", -1), "]", "", -1)
+func ClearJunks() {
+    fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
+    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
+    subprocess.Popen("tree %s*", OutPutDir)
+    subprocess.Popen("rm -rf %s/*", OutPutDir)
+    fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
+    return
+}
+
+func Sleep() {
+    subprocess.Popen("sleep")
 }
 
 func DirLocations() (string, string, string, string, string, string, string) {

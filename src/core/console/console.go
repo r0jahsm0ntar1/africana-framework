@@ -443,9 +443,9 @@ func handleUnsetCommand(parts []string) {
     unsetValues := map[string]*string{
 
         "func": &Function,
-        "funcs": &Function,
         "setups": &Setups,
         "verses": &Verses,
+        "funcs": &Function,
         "credits": &Credits,
         "module": &Function,
         "function": &Function,

@@ -2568,10 +2568,10 @@ func MainOptions() {
     ))
 }
 
-func SetupsOptions(Distro string) {
+func SetupsOptions(Distro, Function string) {
     rows := [][]string{
         {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
-        {"FUNCTION", "none", "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
     }
 
     fmt.Println(FormatModuleOptions(
