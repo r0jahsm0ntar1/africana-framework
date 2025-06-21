@@ -1,4 +1,5 @@
 //John 3:16
+
 package securities
 
 import(
@@ -324,12 +325,6 @@ func executeFunction() {
         return
     }
     AnonimityFunctions(Function)
-}
-
-func autoExecuteFunc(distro string, function string) {
-    //Distro = distro
-    //Function = function
-    executeFunction()
 }
 
 func AnonimityFunctions(Function string, args ...interface{}) {

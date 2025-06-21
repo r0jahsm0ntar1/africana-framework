@@ -1,4 +1,5 @@
 //John 3:16
+
 package wireless
 
 import(
@@ -21,7 +22,7 @@ var (
     LPort = "9999"
     HPort = "3333"
     IFace = "wlan0"
-    Ssid = "End times ministries"
+    Ssid = "The End Times Ministries."
 
     LHost = LHostIp
     LHostIp, _ = utils.GetDefaultIP()
@@ -33,8 +34,8 @@ var (
 var defaultValues = map[string]string{
 
     "proxies": "",
-    "mode": "auto",
     "function": "",
+    "mode": "auto",
     "lport": "9999",
     "hport": "3333",
     "iface": "wlan0",

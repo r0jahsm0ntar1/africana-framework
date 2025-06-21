@@ -1,4 +1,5 @@
 //John 3:16
+
 package phishers
 
 import(
@@ -118,31 +119,31 @@ func executeCommand(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, func() { menus.PhishersOptions(Mode, RHost, Proxy) }},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListPhishersFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run gophish", "use gophish", "exec gophish", "start gophish", "launch gophish", "exploit gophish", "execute gophish"}, func() { GoPhish() }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run gophish", "use gophish", "exec gophish", "start gophish", "launch gophish", "exploit gophish", "execute gophish"}, func() { PhishingPenFunctions("gophish") }},
         {[]string{"? 1", "info 1", "help 1", "gophish", "info gophish", "help gophish"}, menus.HelpInfoGoPhish},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run goodginx", "use goodginx", "exec goodginx", "start goodginx", "launch goodginx", "exploit goodginx", "execute goodginx"}, func() { GoodGinx() }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run goodginx", "use goodginx", "exec goodginx", "start goodginx", "launch goodginx", "exploit goodginx", "execute goodginx"}, func() { PhishingPenFunctions("goodginx") }},
         {[]string{"? 2", "info 2", "help 2", "goodginx", "info goodginx", "help goodginx"}, menus.HelpInfoGoodGinx},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run zphisher", "use zphisher", "exec zphisher", "start zphisher", "launch zphisher", "exploit zphisher", "execute zphisher"}, func() { ZPhisher() }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run zphisher", "use zphisher", "exec zphisher", "start zphisher", "launch zphisher", "exploit zphisher", "execute zphisher"}, func() { PhishingPenFunctions("zphisher") }},
         {[]string{"? 3", "info 3", "help 3", "zphisher", "info zphisher", "help zphisher"}, menus.HelpInfoZPhisher},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run blackeye", "use blackeye", "exec blackeye", "start blackeye", "launch blackeye", "exploit blackeye", "execute blackeye"}, func() { BlackEye() }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run blackeye", "use blackeye", "exec blackeye", "start blackeye", "launch blackeye", "exploit blackeye", "execute blackeye"}, func() { PhishingPenFunctions("blackeye") }},
         {[]string{"? 4", "info 4", "help 4", "blackeye", "info blackeye", "help blackeye"}, menus.HelpInfoBlackEye},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run advphisher", "use advphisher", "exec advphisher", "start advphisher", "launch advphisher", "exploit advphisher", "execute advphisher"}, func() { AdvPhisher() }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run advphisher", "use advphisher", "exec advphisher", "start advphisher", "launch advphisher", "exploit advphisher", "execute advphisher"}, func() { PhishingPenFunctions("advphisher") }},
         {[]string{"? 5", "info 5", "help 5", "advphisher", "info advphisher", "help advphisher"}, menus.HelpInfoAdvPhisher},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run darkphish", "use darkphish", "exec darkphish", "start darkphish", "launch darkphish", "exploit darkphish", "execute darkphish"}, func() { DarkPhish() }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run darkphish", "use darkphish", "exec darkphish", "start darkphish", "launch darkphish", "exploit darkphish", "execute darkphish"}, func() { PhishingPenFunctions("darkphish") }},
         {[]string{"? 6", "info 6", "help 6", "darkphish", "info darkphish", "help darkphish"}, menus.HelpInfoDarkPhish},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run shellphish", "use shellphish", "exec shellphish", "start shellphish", "launch shellphish", "exploit shellphish", "execute shellphish"}, func() { ShellPhish() }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run shellphish", "use shellphish", "exec shellphish", "start shellphish", "launch shellphish", "exploit shellphish", "execute shellphish"}, func() { PhishingPenFunctions("shellphish") }},
         {[]string{"? 7", "info 7", "help 7", "shellphish", "info shellphish", "help shellphish"}, menus.HelpInfoShellPhish},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run setoolkit", "use setoolkit", "exec setoolkit", "start setoolkit", "launch setoolkit", "exploit setoolkit", "execute setoolkit"}, func() { SetoolKit() }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run setoolkit", "use setoolkit", "exec setoolkit", "start setoolkit", "launch setoolkit", "exploit setoolkit", "execute setoolkit"}, func() { PhishingPenFunctions("setoolkit") }},
         {[]string{"? 8", "info 8", "help 8", "setoolkit", "info setoolkit", "help setoolkit"}, menus.HelpInfoSetoolKit},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run thc", "use thc", "exec thc", "start thc", "launch thc", "exploit thc", "execute thc"}, func() { Thc() }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run thc", "use thc", "exec thc", "start thc", "launch thc", "exploit thc", "execute thc"}, func() { PhishingPenFunctions("thc") }},
         {[]string{"? 9", "info 9", "help 9", "thc", "info thc", "help thc"}, menus.HelpInfoThc},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
@@ -277,6 +278,25 @@ func handleUnsetCommand(parts []string) {
         "functions": &Function,
     }
 
+    defaultValues := map[string]string{
+        "name":       "",
+        "iface":      "",
+        "rhost":      "",
+        "lport":      "",
+        "target":     "",
+        "proxies":    "",
+        "lhost":      "",
+        "password":   "",
+        "func":       "",
+        "funcs":      "",
+        "spoofer":    "",
+        "fakedns":    "",
+        "module":     "",
+        "output":     "",
+        "function":   "",
+        "functions":  "",
+    }
+
     validKeys := make([]string, 0, len(unsetValues))
     for k := range unsetValues {
         validKeys = append(validKeys, k)
@@ -348,12 +368,6 @@ func executeFunction() {
         return
     }
     PhishingPenFunctions(Function)
-}
-
-func autoExecuteFunc(distro string, function string) {
-    //Distro = distro
-    //Function = function
-    executeFunction()
 }
 
 func PhishingPenFunctions(Function string, args ...interface{}) {

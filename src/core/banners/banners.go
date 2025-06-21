@@ -1,4 +1,5 @@
 //John 3:16
+
 package banners
 
 import(
@@ -18,7 +19,7 @@ func Version() {
      %sFramework%s: %s
        %sConsole%s: %s
 
-`, bcolors.Green, bcolors.Endc, version, bcolors.Green, bcolors.Endc, version)
+`, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
 }
 
 func GraphicsIntro() {

@@ -1,4 +1,5 @@
 //John 3:16
+
 package bcolors
 
 import (

