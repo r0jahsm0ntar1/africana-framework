@@ -103,11 +103,6 @@ make; mv afrconsole /usr/local/bin/; afrconsole -h
 sudo afrconsole
 ```
 
-## The script should be run as a super user do(sudo) for root permissions .
-```bash
-sudo africana
-```
-
 ## About the Author
 ```
                        .--,
