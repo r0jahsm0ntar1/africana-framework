@@ -117,27 +117,27 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "setups":   func() { menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()} ,
-        "torsocks": func() { menus.MenuTwo(); securities.Torsocks(); menus.MenuZero() },
-        "networks": func() { menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero() },
-        "exploits": func() { menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero() },
-        "wireless": func() { menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero() },
-        "crackers": func() { menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero() },
-        "phishers": func() { menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero() },
-        "websites": func() { menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero() },
-        "credits":  func() { credits.Creditors(); menus.MenuZero() },
-        "verses":   func() { scriptures.ScriptureNarators(); menus.MenuZero() },
+        "setups":   func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()} ,
+        "torsocks": func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
+        "networks": func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
+        "exploits": func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
+        "wireless": func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
+        "crackers": func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
+        "phishers": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
+        "websites": func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
+        "credits":  func() {credits.Creditors(); menus.MenuZero()},
+        "verses":   func() {scriptures.ScriptureNarators(); menus.MenuZero()},
 
-        "1": func() { menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero() },
-        "2": func() { menus.MenuTwo(); securities.Torsocks(); menus.MenuZero() },
-        "3": func() { menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero() },
-        "4": func() { menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero() },
-        "5": func() { menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero() },
-        "6": func() { menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero() },
-        "7": func() { menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero() },
-        "8": func() { menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero() },
-        "9": func() { credits.Creditors(); menus.MenuZero() },
-       "10": func() { scriptures.ScriptureNarators(); menus.MenuZero() },
+        "1": func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
+        "2": func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
+        "3": func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
+        "4": func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
+        "5": func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
+        "6": func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
+        "7": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
+        "8": func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
+        "9": func() {credits.Creditors(); menus.MenuZero()},
+       "10": func() {scriptures.ScriptureNarators(); menus.MenuZero()},
     }
 
     textCommands := []string{
@@ -198,34 +198,34 @@ func executeCommandAuto(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, menus.MainOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListMainFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() { menus.MenuOne(); africanaFrameworAuto("setups"); menus.MenuZero() }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() {africanaFrameworAuto("setups")}},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoSetups},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() { menus.MenuTwo(); africanaFrameworAuto("torsocks"); menus.MenuZero() }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() {africanaFrameworAuto("torsocks")}},
         {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, menus.HelpInfoTorsocks},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() { menus.MenuThree(); africanaFrameworAuto("networks"); menus.MenuZero() }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() {africanaFrameworAuto("networks")}},
         {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.HelpInfoNetworks},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() { menus.MenuFour(); africanaFrameworAuto("exploits"); menus.MenuZero() }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() {africanaFrameworAuto("exploits")}},
         {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.HelpInfoExploits},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() { menus.MenuFive(); africanaFrameworAuto("wireless"); menus.MenuZero() }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() {africanaFrameworAuto("wireless")}},
         {[]string{"? 5", "info 5", "help 5", "wireless", "info wireless", "help wireless"}, menus.HelpInfoWireless},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() { menus.MenuSix(); africanaFrameworAuto("crackers"); menus.MenuZero() }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() {africanaFrameworAuto("crackers")}},
         {[]string{"? 6", "info 6", "help 6", "crackers", "info crackers", "help crackers"}, menus.HelpInfoCrackers},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() { menus.MenuSeven(); africanaFrameworAuto("phishers"); menus.MenuZero() }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() {africanaFrameworAuto("phishers")}},
         {[]string{"? 7", "info 7", "help 7", "phishers", "info phishers", "help phishers"}, menus.HelpInfoPhishers},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() { menus.MenuEight(); africanaFrameworAuto("websites"); menus.MenuZero() }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() {africanaFrameworAuto("websites")}},
         {[]string{"? 8", "info 8", "help 8", "websites", "info websites", "help websites"}, menus.HelpInfoWebsites},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() { africanaFrameworAuto("credits") }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() {africanaFrameworAuto("credits")}},
         {[]string{"? 9", "info 9", "help 9", "credits", "info credits", "help credits"}, menus.HelpInfoCredits},
 
-        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, func() { africanaManual("verses") }},
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, func() {africanaManual("verses")}},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
 
@@ -304,34 +304,34 @@ func executeCommand(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, menus.MainOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListMainFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() { africanaManual("setups") }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() {africanaManual("setups")}},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoSetups},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() { africanaManual("torsocks") }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() {africanaManual("torsocks")}},
         {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, menus.HelpInfoTorsocks},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() { africanaManual("networks") }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() {africanaManual("networks")}},
         {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.HelpInfoNetworks},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() { africanaManual("exploits") }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() {africanaManual("exploits")}},
         {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.HelpInfoExploits},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() { africanaManual("wireless") }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run wireless", "use wireless", "exec wireless", "start wireless", "launch wireless", "exploit wireless", "execute wireless"}, func() {africanaManual("wireless")}},
         {[]string{"? 5", "info 5", "help 5", "wireless", "info wireless", "help wireless"}, menus.HelpInfoWireless},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() { africanaManual("crackers") }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run crackers", "use crackers", "exec crackers", "start crackers", "launch crackers", "exploit crackers", "execute crackers"}, func() {africanaManual("crackers")}},
         {[]string{"? 6", "info 6", "help 6", "crackers", "info crackers", "help crackers"}, menus.HelpInfoCrackers},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() { africanaManual("phishers") }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run phishers", "use phishers", "exec phishers", "start phishers", "launch phishers", "exploit phishers", "execute phishers"}, func() {africanaManual("phishers")}},
         {[]string{"? 7", "info 7", "help 7", "phishers", "info phishers", "help phishers"}, menus.HelpInfoPhishers},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() { africanaManual("websites") }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run websites", "use websites", "exec websites", "start websites", "launch websites", "exploit websites", "execute websites"}, func() {africanaManual("websites")}},
         {[]string{"? 8", "info 8", "help 8", "websites", "info websites", "help websites"}, menus.HelpInfoWebsites},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() { africanaManual("credits") }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run credits", "use credits", "exec credits", "start credits", "launch credits", "exploit credits", "execute credits"}, func() {africanaManual("credits")}},
         {[]string{"? 9", "info 9", "help 9", "credits", "info credits", "help credits"}, menus.HelpInfoCredits},
 
-        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, func() { africanaManual("verses") }},
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, func() {africanaManual("verses")}},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
 
@@ -631,55 +631,55 @@ func createCommandMap() map[string]func() {
         "-u":         setups.UpdateAfricana,
         "--update":   setups.UpdateAfricana,
 
-        "-0":         func() { launchAutoModeWithMenu(nil, nil) },
-        "-a":         func() { launchAutoModeWithMenu(nil, nil) },
-        "--auto":     func() { launchAutoModeWithMenu(nil, nil) },
+        "-0":         func() {launchAutoModeWithMenu(nil, nil)},
+        "-a":         func() {launchAutoModeWithMenu(nil, nil)},
+        "--auto":     func() {launchAutoModeWithMenu(nil, nil)},
 
-        "-1":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
-        "-i":         func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
-        "--install":  func() { launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher) },
+        "-1":         func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
+        "-i":         func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
+        "--install":  func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
 
-        "-2":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
-        "-t":         func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
-        "--torsocks": func() { launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks) },
+        "-2":         func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
+        "-t":         func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
+        "--torsocks": func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
 
-        "-3":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
-        "-n":         func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
-        "--networks": func() { launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest) },
+        "-3":         func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
+        "-n":         func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
+        "--networks": func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
 
-        "-4":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
-        "-e":         func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
-        "--exploits": func() { launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest) },
+        "-4":         func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
+        "-e":         func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
+        "--exploits": func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
 
-        "-5":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
-        "-w":         func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
-        "--wireless": func() { launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest) },
+        "-5":         func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
+        "-w":         func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
+        "--wireless": func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
 
-        "-6":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
-        "-c":         func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
-        "--crackers": func() { launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest) },
+        "-6":         func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
+        "-c":         func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
+        "--crackers": func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
 
-        "-7":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
-        "-p":         func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
-        "--phishers": func() { launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest) },
+        "-7":         func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
+        "-p":         func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
+        "--phishers": func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
 
-        "-8":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
-        "-x":         func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
-        "--websites": func() { launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest) },
+        "-8":         func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
+        "-x":         func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
+        "--websites": func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
 
-        "-9":         func() { credits.Creditors(); africanaAutoMode() },
-        "-k":         func() { credits.Creditors(); africanaAutoMode() },
-        "--credits":  func() { credits.Creditors(); africanaAutoMode() },
+        "-9":         func() {credits.Creditors(); africanaAutoMode()},
+        "-k":         func() {credits.Creditors(); africanaAutoMode()},
+        "--credits":  func() {credits.Creditors(); africanaAutoMode()},
 
-        "-10":        func() { scriptures.ScriptureNarators(); africanaAutoMode() },
-        "-s":         func() { scriptures.ScriptureNarators(); africanaAutoMode() },
-        "--verses":   func() { scriptures.ScriptureNarators(); africanaAutoMode() },
+        "-10":        func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "-s":         func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "--verses":   func() {scriptures.ScriptureNarators(); africanaAutoMode()},
 
-        "-g":         func() { banners.RandomBanners(); utils.BrowseTutarilas() },
-        "--guide":    func() { banners.RandomBanners(); utils.BrowseTutarilas() },
+        "-g":         func() {banners.RandomBanners(); utils.BrowseTutarilas()},
+        "--guide":    func() {banners.RandomBanners(); utils.BrowseTutarilas()},
 
-        "-q":         func() { scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode() },
-        "--quite":    func() { scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode() },
+        "-q":         func() {scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode()},
+        "--quite":    func() {scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode()},
 
         "-00":       menus.HelpInfoMenuMain,
         "-h":        menus.HelpInfoMenuMain,
