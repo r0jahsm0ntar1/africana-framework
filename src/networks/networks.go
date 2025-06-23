@@ -24,8 +24,8 @@ var(
     Mode = "single"
     IFace  = "eth0"
     Passwd = "Jesus"
+    Proxies = "none"
     Spoofer = "ettercap"
-    Proxies = "non"
 
     LHost, _ = utils.GetDefaultIP()
     scanner = bufio.NewScanner(os.Stdin)
@@ -380,12 +380,6 @@ func executeFunction() {
 }
 
 func NetworkPenFunctions(Function string, args ...interface{}) {
-    if RHost != "" {
-        fmt.Printf("\nRHOST => %s", RHost)
-    }
-    if Function != "" {
-        fmt.Printf("\nFUNCTION => %s", Function)
-    }
     if Proxy != "" {
         fmt.Printf("PROXIES => %s\n", Proxy)
         if err := utils.SetProxy(Proxy); err != nil {
@@ -572,6 +566,12 @@ func PacketSniffer(Mode string, RHost string) {
 }
 
 func KillerResponder(IFace string, LHost string) {
+
+    menus.PrintSelected(menus.PrintOptions{
+        IFACE:    IFace,
+        LHOST:    LHost,
+    }, true, true)
+
     filePath := "/root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana"
 
     if _, err := os.Stat(filePath); os.IsNotExist(err) {

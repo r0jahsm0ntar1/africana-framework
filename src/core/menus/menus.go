@@ -29,15 +29,16 @@ type TableConfig struct {
 }
 
 type PrintOptions struct {
+    ICON       string
     LPORT      string
+    IFACE      string
+    HPORT      string
     LHOST      string
     BUILD      string
     OUTPUT     string
     TOOLS_DIR  string
-    HPORT      string
     PROTOCOL   string
     SCRIPT     string
-    ICON       string
     COREICON   string
     LISTENER   string
     BUILDNAME  string
@@ -269,11 +270,12 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
         }
     }
 
-    if opts.ICON != "" || opts.COREICON != "" || opts.LHOST != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLS_DIR != "" || opts.OUTPUT != "" || opts.BUILDNAME != ""  || opts.OBFUSCATOR != "" {
+    if opts.ICON != "" || opts.IFACE != "" || opts.COREICON != "" || opts.LHOST != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLS_DIR != "" || opts.OUTPUT != "" || opts.BUILDNAME != ""  || opts.OBFUSCATOR != "" {
         fmt.Println()
     }
 
     printIfSet("ICON", opts.ICON)
+    printIfSet("IFACE", opts.IFACE)
     printIfSet("LPORT", opts.LPORT)
     printIfSet("HPORT", opts.HPORT)
     printIfSet("LHOST", opts.LHOST)
