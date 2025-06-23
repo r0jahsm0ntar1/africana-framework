@@ -106,31 +106,31 @@ func executeCommand(cmd string) bool {
         {[]string{"option", "options", "show option", "show options"}, menus.TorsocksOptions},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListTorsocksFunctions},
 
-        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() { AnonimityFunctions("setups") }},
+        {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() {AnonimityFunctions("setups")}},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoTorsocksSetups},
 
-        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run vanish", "use vanish", "exec vanish", "start vanish", "launch vanish", "exploit vanish", "execute vanish"}, func() { AnonimityFunctions("vanish") }},
+        {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run vanish", "use vanish", "exec vanish", "start vanish", "launch vanish", "exploit vanish", "execute vanish"}, func() {AnonimityFunctions("vanish")}},
         {[]string{"? 2", "info 2", "help 2", "vanish", "info vanish", "help vanish"}, menus.HelpInfoTorsocksVanish},
 
-        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run status", "use status", "exec status", "start status", "launch status", "exploit status", "execute status"}, func() { AnonimityFunctions("status") }},
+        {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run status", "use status", "exec status", "start status", "launch status", "exploit status", "execute status"}, func() {AnonimityFunctions("status")}},
         {[]string{"? 3", "info 3", "help 3", "status", "info status", "help status"}, menus.HelpInfoTorsocksStatus},
 
-        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run torip", "use torip", "exec torip", "start torip", "launch torip", "exploit torip", "execute torip"}, func() { AnonimityFunctions("torip") }},
+        {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run torip", "use torip", "exec torip", "start torip", "launch torip", "exploit torip", "execute torip"}, func() {AnonimityFunctions("torip")}},
         {[]string{"? 4", "info 4", "help 4", "torip", "info torip", "help torip"}, menus.HelpInfoTorsocksTorIp},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run chains", "use chains", "exec chains", "start chains", "launch chains", "exploit chains", "execute chains"}, func() { AnonimityFunctions("chains") }},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run chains", "use chains", "exec chains", "start chains", "launch chains", "exploit chains", "execute chains"}, func() {AnonimityFunctions("chains")}},
         {[]string{"? 5", "info 5", "help 5", "chains", "info chains", "help chains"}, menus.HelpInfoTorsocksChains},
 
-        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run reload", "use reload", "exec reload", "start reload", "launch reload", "exploit reload", "execute reload"}, func() { AnonimityFunctions("reload") }},
+        {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run reload", "use reload", "exec reload", "start reload", "launch reload", "exploit reload", "execute reload"}, func() {AnonimityFunctions("reload")}},
         {[]string{"? 6", "info 6", "help 6", "reload", "info reload", "help reload"}, menus.HelpInfoTorsocksReload},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run exitnode", "use exitnode", "exec exitnode", "start exitnode", "launch exitnode", "exploit exitnode", "execute exitnode"}, func() { AnonimityFunctions("exitnode") }},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run exitnode", "use exitnode", "exec exitnode", "start exitnode", "launch exitnode", "exploit exitnode", "execute exitnode"}, func() {AnonimityFunctions("exitnode")}},
         {[]string{"? 7", "info 7", "help 7", "exitnode", "info exitnode", "help exitnode"}, menus.HelpInfoTorsocksExitnode},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run restore", "use restore", "exec restore", "start restore", "launch restore", "exploit restore", "execute restore"}, func() { AnonimityFunctions("restore") }},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run restore", "use restore", "exec restore", "start restore", "launch restore", "exploit restore", "execute restore"}, func() {AnonimityFunctions("restore")}},
         {[]string{"? 8", "info 8", "help 8", "restore", "info restore", "help restore"}, menus.HelpInfoTorsocksRestore},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run stop", "use stop", "exec stop", "start stop", "launch stop", "exploit stop", "execute stop"}, func() { AnonimityFunctions("stop") }},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run stop", "use stop", "exec stop", "start stop", "launch stop", "exploit stop", "execute stop"}, func() {AnonimityFunctions("stop")}},
         {[]string{"? 9", "info 9", "help 9", "stop", "info stop", "help stop"}, menus.HelpInfoTorsocksStop}, 
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
