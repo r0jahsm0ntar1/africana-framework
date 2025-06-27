@@ -591,8 +591,8 @@ func ListExploitsFunctions() {
         {"   shellz", "Supports all distro reverse shells generation that supports both tcp, https and https connection. Launches variety of listeners."},
         {"    ghost", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it."},
         {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it."},
-        {"lithaldll", "Generates undetected backdoor with embeded hoaxreverse shell. Has .dll persistent mechanisims."},
         {"regsniper", "Just like lithaldll but the persisten mechanisim is through regestry keys."},
+        {"lithaldll", "Generates undetected backdoor with embeded hoax reverse shell. Has .dll persistent mechanisims targetting OneDrive."},
     }
 
     for i, item := range items {

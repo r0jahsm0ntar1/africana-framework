@@ -42,7 +42,7 @@ var defaultValues = map[string]string{
     "lport": "9999",
     "iface": "eth0",
     "mode": "single",
-    "passwd": "Jesus",
+    "passwd": "Jesus Christ",
     "Spoofer": "ettercap",
 
     "lhost": LHost,
@@ -61,7 +61,7 @@ type stringMatcher struct {
 
 func NetworksPentest() {
     for {
-        fmt.Printf("%s%safr3%s networks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr3%s networks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         scanner.Scan()
         Input = strings.TrimSpace(scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -773,7 +773,7 @@ func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd
     }
 
     switch strings.ToLower(Mode) {
-    case "default":
+    case "single":
         fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {

@@ -22,16 +22,6 @@ func Version() {
 `, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
 }
 
-func GraphicsIntro() {
-    fmt.Printf(`
-       =[ Africana Framework                              ]
-+ -- --=[ Made simple but lethal                          ]
-+ -- --=[ Created by Dr. Rojahs Montari                   ]
-+ -- --=[ Follow on GitHub, HTB, X, YT: @r0jahsm0ntar1    ]
-`)
-    Version()
-}
-
 func GraphicsLarge() {
     rand.Seed(time.Now().UnixNano())
     gbanner := rand.Intn(7) + 1
@@ -220,6 +210,16 @@ func GraphicsTorNet() {
 |  _| . |  _|_ -| . |  _| '_|_ -|
 |_| |___|_| |___|___|___|_,_|___|%s
 `, bcolors.Colors(), bcolors.Endc)
+}
+
+func GraphicsIntro() {
+    fmt.Printf(`
+       =[ Africana Framework                              ]
++ -- --=[ Made simple but lethal                          ]
++ -- --=[ Created by Dr. Rojahs Montari                   ]
++ -- --=[ Follow on GitHub, HTB, X, YT: @r0jahsm0ntar1    ]
+`)
+    Version()
 }
 
 func RandomBanners() {
