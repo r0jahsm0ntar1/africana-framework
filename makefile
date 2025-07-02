@@ -8,7 +8,7 @@ linux:
 	GOOS=linux go build -v -x -o $(EXE) $(LDFLAGS) $(SRC)
 
 macos:
-	GOOS=darwin go build -v -x -o $(EXE) $(LDFLAGS) $(SRC)
+	GOOS=darwin go build -v -x -o $(EXE).mac $(LDFLAGS) $(SRC)
 
 windows:
 	GOOS=windows go build -v -x -o $(EXE).exe $(LDFLAGS) $(SRC)
@@ -16,4 +16,4 @@ windows:
 all: linux macos windows
 
 clean:
-	rm -f $(EXE).exe $(EXE)
+	rm -f $(EXE).exe $(EXE).mac $(EXE)
