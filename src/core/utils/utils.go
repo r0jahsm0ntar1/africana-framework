@@ -432,7 +432,7 @@ func GenerateSelfSignedCert(certPath, keyPath string) {
     template := x509.Certificate{
         SerialNumber: serialNumber,
         Subject: pkix.Name{
-            Organization: []string{"The End Time Ministries"},
+            Organization: []string{"The End Times Ministries."},
         },
         NotBefore:             notBefore,
         NotAfter:              notAfter,

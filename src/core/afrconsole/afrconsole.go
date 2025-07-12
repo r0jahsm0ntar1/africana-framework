@@ -117,7 +117,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "setups":   func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()} ,
+        "setups":   func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
         "torsocks": func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
         "networks": func() {menus.MenuThree(); networks.NetworksPentest(); menus.MenuZero()},
         "exploits": func() {menus.MenuFour(); exploits.ExploitsPentest(); menus.MenuZero()},
