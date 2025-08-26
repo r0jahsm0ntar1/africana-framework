@@ -7,7 +7,6 @@ import(
     "fmt"
     "utils"
     "menus"
-    "bufio"
     "setups"
     "strconv"
     "credits"
@@ -23,13 +22,11 @@ import(
     "agreements"
     "scriptures"
     "securities"
-    "webattackers"
+    "webcrackers"
 )
 
-var(
-    scanner = bufio.NewScanner(os.Stdin)
-    agreementDir = utils.GetAgreementPath()
-    proxyURL, filePath, Input, RHost, Proxy, Xhost, Yhost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Function string
+var (
+    Function string
 )
 
 var defaultValues = map[string]string{
@@ -43,13 +40,13 @@ type stringMatcher struct {
 }
 
 func Start() {
-    if _, err := os.Stat(agreementDir); os.IsNotExist(err) {
+    if _, err := os.Stat(utils.GetAgreementPath()); os.IsNotExist(err) {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-            scanner.Scan()
-            Input := strings.TrimSpace(scanner.Text())
+            fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+            utils.Scanner.Scan()
+            Input := strings.TrimSpace(utils.Scanner.Text())
             switch Input {
             case "y", "yes":
                 utils.Sealing()
@@ -59,7 +56,7 @@ func Start() {
             case "n", "q", "no", "exit", "quit":
                 os.Exit(0)
             default:
-                fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
+                fmt.Printf("%s[!] %sChoices are (y|n|yes|no)\n", bcolors.BrightYellow, bcolors.Endc)
             }
         }
     } else {
@@ -70,9 +67,9 @@ func Start() {
 func africanaAutoMode() {
     menus.MenuZero()
     for {
-        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -89,7 +86,6 @@ func africanaAutoMode() {
             //
         case "set":
             handleSetCommand(buildParts)
-            executeFunctionAuto()
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
@@ -105,15 +101,57 @@ func executeFunctionAuto() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    africanaFrameworAuto("")
+    africanaFrameworAuto(Function)
 }
 
 func africanaFrameworAuto(Function string, args ...interface{}) {
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.ExMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            //OUTPUTLOGS: utils.GeneratorDir,
+            //PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.ExMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            //OUTPUTLOGS: utils.GeneratorDir,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
     }
 
     commands := map[string]func(){
@@ -124,7 +162,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
         "wireless": func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
         "crackers": func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
         "phishers": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
-        "websites": func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
+        "websites": func() {menus.MenuEight(); webcrackers.WebsitesPentest(); menus.MenuZero()},
         "credits":  func() {credits.Creditors(); menus.MenuZero()},
         "verses":   func() {scriptures.ScriptureNarators(); menus.MenuZero()},
 
@@ -135,7 +173,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
         "5": func() {menus.MenuFive(); wireless.WirelessPentest(); menus.MenuZero()},
         "6": func() {menus.MenuSix(); crackers.CrackersPentest(); menus.MenuZero()},
         "7": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
-        "8": func() {menus.MenuEight(); webattackers.WebsitesPentest(); menus.MenuZero()},
+        "8": func() {menus.MenuEight(); webcrackers.WebsitesPentest(); menus.MenuZero()},
         "9": func() {credits.Creditors(); menus.MenuZero()},
        "10": func() {scriptures.ScriptureNarators(); menus.MenuZero()},
     }
@@ -243,9 +281,9 @@ func executeCommandAuto(cmd string) bool {
 
 func africanaManualMode() {
     for {
-        fmt.Printf("%s%s%safr3%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -262,7 +300,6 @@ func africanaManualMode() {
             //
         case "set":
             handleSetCommand(buildParts)
-            executeFunction()
         case "unset", "delete":
             handleUnsetCommand(buildParts)
         case "run", "start", "launch", "exploit", "execute":
@@ -355,21 +392,44 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
-        "func": &Function,
         "funcs": &Function,
-        "setups": &Setups,
-        "verses": &Verses,
-        "credits": &Credits,
+        "func": &Function,
         "module": &Function,
         "function": &Function,
-        "torsocks": &Torsocks,
-        "networks": &Networks,
-        "exploits": &Exploits,
-        "wireless": &Wireless,
-        "crackers": &Crackers,
-        "phishers": &Phishers,
-        "websites": &Websites,
-        "functions": &Function,
+        "functions": &utils.Function,
+
+        "setups": &utils.Setups,
+        "verses": &utils.Verses,
+        "credits": &utils.Credits,
+        "torsocks": &utils.Torsocks,
+        "networks": &utils.Networks,
+        "exploits": &utils.Exploits,
+        "wireless": &utils.Wireless,
+        "crackers": &utils.Crackers,
+        "phishers": &utils.Phishers,
+        "websites": &utils.Websites,
+
+        "rhost": &utils.RHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
+        "lhost": &utils.LHost,
+
+        "script": &utils.Script,
+        "proxy": &utils.Proxies,
+        "proxies": &utils.Proxies,
+        "build": &utils.BuildName,
+
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
+
+        "wordlist": &utils.WordsList,
+        "password": &utils.PassWord,
+        "protocol": &utils.Protocol,
+        "listener": &utils.Listener,
+        "innericon": &utils.InnerIcon,
+        "outericon": &utils.OuterIcon,
+        "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -379,7 +439,7 @@ func handleSetCommand(parts []string) {
 
     if ptr, exists := setValues[key]; exists {
         *ptr = value
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
+        fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, strings.ToUpper(key), bcolors.Endc, value)
         return
     }
 
@@ -444,21 +504,44 @@ func handleUnsetCommand(parts []string) {
     key := parts[1]
     unsetValues := map[string]*string{
 
-        "func": &Function,
-        "setups": &Setups,
-        "verses": &Verses,
         "funcs": &Function,
-        "credits": &Credits,
+        "func": &Function,
         "module": &Function,
         "function": &Function,
-        "torsocks": &Torsocks,
-        "networks": &Networks,
-        "exploits": &Exploits,
-        "wireless": &Wireless,
-        "crackers": &Crackers,
-        "phishers": &Phishers,
-        "websites": &Websites,
-        "functions": &Function,
+        "functions": &utils.Function,
+
+        "setups": &utils.Setups,
+        "verses": &utils.Verses,
+        "credits": &utils.Credits,
+        "torsocks": &utils.Torsocks,
+        "networks": &utils.Networks,
+        "exploits": &utils.Exploits,
+        "wireless": &utils.Wireless,
+        "crackers": &utils.Crackers,
+        "phishers": &utils.Phishers,
+        "websites": &utils.Websites,
+
+        "rhost": &utils.RHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
+        "lhost": &utils.LHost,
+
+        "script": &utils.Script,
+        "proxy": &utils.Proxies,
+        "proxies": &utils.Proxies,
+        "build": &utils.BuildName,
+
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
+
+        "wordlist": &utils.WordsList,
+        "password": &utils.PassWord,
+        "protocol": &utils.Protocol,
+        "listener": &utils.Listener,
+        "innericon": &utils.InnerIcon,
+        "outericon": &utils.OuterIcon,
+        "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -468,7 +551,7 @@ func handleUnsetCommand(parts []string) {
 
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key]
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
 
@@ -531,15 +614,57 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    africanaManual("")
+    africanaManual(Function)
 }
 
 func africanaManual(Function string, args ...interface{}) {
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.ExMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            //OUTPUTLOGS: utils.GeneratorDir,
+            //PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.ExMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            //OUTPUTLOGS: utils.GeneratorDir,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
     }
 
     commands := map[string]func(){
@@ -550,7 +675,7 @@ func africanaManual(Function string, args ...interface{}) {
         "wireless": wireless.WirelessPentest,
         "crackers": crackers.CrackersPentest,
         "phishers": phishers.PhishingPentest,
-        "websites": webattackers.WebsitesPentest,
+        "websites": webcrackers.WebsitesPentest,
         "credits":  credits.Creditors,
         "verses":   scriptures.ScriptureNarators,
 
@@ -561,7 +686,7 @@ func africanaManual(Function string, args ...interface{}) {
         "5":  wireless.WirelessPentest,
         "6":  crackers.CrackersPentest,
         "7":  phishers.PhishingPentest,
-        "8":  webattackers.WebsitesPentest,
+        "8":  webcrackers.WebsitesPentest,
         "9":  credits.Creditors,
         "10": scriptures.ScriptureNarators,
     }
@@ -635,51 +760,51 @@ func createCommandMap() map[string]func() {
         "-a":         func() {launchAutoModeWithMenu(nil, nil)},
         "--auto":     func() {launchAutoModeWithMenu(nil, nil)},
 
-        "-1":         func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
-        "-i":         func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
-        "--install":  func() {launchAutoModeWithMenu(menus.MenuOne, setups.SetupsLauncher)},
+        "-1":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); setups.SetupsLauncher()},
+        "-i":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); setups.SetupsLauncher()},
+        "--install":  func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); setups.SetupsLauncher()},
 
-        "-2":         func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
-        "-t":         func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
-        "--torsocks": func() {launchAutoModeWithMenu(menus.MenuTwo, securities.Torsocks)},
+        "-2":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); securities.Torsocks()},
+        "-t":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); securities.Torsocks()},
+        "--torsocks": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); securities.Torsocks()},
 
-        "-3":         func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
-        "-n":         func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
-        "--networks": func() {launchAutoModeWithMenu(menus.MenuThree, networks.NetworksPentest)},
+        "-3":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); networks.NetworksPentest()},
+        "-n":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); networks.NetworksPentest()},
+        "--networks": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); networks.NetworksPentest()},
 
-        "-4":         func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
-        "-e":         func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
-        "--exploits": func() {launchAutoModeWithMenu(menus.MenuFour, exploits.ExploitsPentest)},
+        "-4":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); exploits.ExploitsPentest()},
+        "-e":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); exploits.ExploitsPentest()},
+        "--exploits": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); exploits.ExploitsPentest()},
 
-        "-5":         func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
-        "-w":         func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
-        "--wireless": func() {launchAutoModeWithMenu(menus.MenuFive, wireless.WirelessPentest)},
+        "-5":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); wireless.WirelessPentest()},
+        "-w":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); wireless.WirelessPentest()},
+        "--wireless": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); wireless.WirelessPentest()},
 
-        "-6":         func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
-        "-c":         func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
-        "--crackers": func() {launchAutoModeWithMenu(menus.MenuSix, crackers.CrackersPentest)},
+        "-6":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); crackers.CrackersPentest()},
+        "-c":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); crackers.CrackersPentest()},
+        "--crackers": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); crackers.CrackersPentest()},
 
-        "-7":         func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
-        "-p":         func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
-        "--phishers": func() {launchAutoModeWithMenu(menus.MenuSeven, phishers.PhishingPentest)},
+        "-7":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); phishers.PhishingPentest()},
+        "-p":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); phishers.PhishingPentest()},
+        "--phishers": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); phishers.PhishingPentest()},
 
-        "-8":         func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
-        "-x":         func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
-        "--websites": func() {launchAutoModeWithMenu(menus.MenuEight, webattackers.WebsitesPentest)},
+        "-8":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); webcrackers.WebsitesPentest(); africanaManualMode()},
+        "-x":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); webcrackers.WebsitesPentest(); africanaManualMode()},
+        "--websites": func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); webcrackers.WebsitesPentest(); africanaManualMode()},
 
-        "-9":         func() {credits.Creditors(); africanaAutoMode()},
-        "-k":         func() {credits.Creditors(); africanaAutoMode()},
-        "--credits":  func() {credits.Creditors(); africanaAutoMode()},
+        "-9":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); credits.Creditors(); africanaManualMode()},
+        "-k":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); credits.Creditors(); africanaManualMode()},
+        "--credits":  func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); credits.Creditors(); africanaManualMode()},
 
-        "-10":        func() {scriptures.ScriptureNarators(); africanaAutoMode()},
-        "-s":         func() {scriptures.ScriptureNarators(); africanaAutoMode()},
-        "--verses":   func() {scriptures.ScriptureNarators(); africanaAutoMode()},
+        "-10":        func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
+        "-s":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
+        "--verses":   func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
 
-        "-g":         func() {banners.RandomBanners(); utils.BrowseTutarilas()},
-        "--guide":    func() {banners.RandomBanners(); utils.BrowseTutarilas()},
+        "-g":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutarilas(); africanaManualMode()},
+        "--guide":    func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutarilas(); africanaManualMode()},
 
-        "-q":         func() {scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode()},
-        "--quite":    func() {scriptures.Verse(); utils.InitiLize(); banners.Version(); africanaManualMode()},
+        "-q":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); africanaManualMode()},
+        "--quite":    func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); africanaManualMode()},
 
         "-00":       menus.HelpInfoMenuMain,
         "-h":        menus.HelpInfoMenuMain,

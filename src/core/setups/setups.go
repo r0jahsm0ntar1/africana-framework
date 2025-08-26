@@ -6,7 +6,6 @@ import(
     "os"
     "fmt"
     "time"
-    "bufio"
     "menus"
     "utils"
     "strconv"
@@ -19,25 +18,22 @@ import(
     "subprocess"
 )
 
+var (
+    Function string
+)
+
 type stringMatcher struct {
     names  []string
     action func()
 }
 
-var (
-    PyEnvName = "africana-venv"
-    Input, Proxy, Function string
-    Distro, _ = utils.GetLinuxDistroID()
-    scanner = bufio.NewScanner(os.Stdin)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
-)
-
 var defaultValues = map[string]string{
-    "module": "",
-    "proxies": "",
-    "function": "",
-    "distro": Distro,
-    "pyenvname": PyEnvName,
+    "module":       "",
+    "function":     "",
+    "distro":       utils.Distro,
+    "proxy":        utils.Proxies,
+    "proxies":      utils.Proxies,
+    "pyenvname":    utils.PyEnvName,
 }
 
 var (
@@ -167,9 +163,9 @@ var (
 
 func SetupsLauncher() {
     for {
-        fmt.Printf("%s%s%safr3%s packages(%s%score/setups_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s packages(%s%score/setups_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -225,7 +221,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoSetups},
         {[]string{"m", "menu"}, menus.MenuOne},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.SetupsOptions(Distro, Function)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.SetupsOptions(utils.Distro, Function)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListSetupsFunction},
         {[]string{"distro", "distros", "list distro", "list distros", "show distro", "show distros"}, menus.ListSetupsDistros},
 
@@ -247,13 +243,13 @@ func executeCommand(cmd string) bool {
         {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run windows", "use windows", "exec windows", "start windows", "launch windows", "exploit windows", "execute windows"}, func() {SetupsFunction(Function, "windows")}},
         {[]string{"? 6", "info 6", "help 6", "windows", "info windows", "help windows"}, menus.HelpInfoWindows},
 
-        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run update", "use update", "exec update", "start update", "launch update", "exploit update", "execute update"}, func() {SetupsFunction("update", Distro)}},
+        {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run update", "use update", "exec update", "start update", "launch update", "exploit update", "execute update"}, func() {SetupsFunction("update", utils.Distro)}},
         {[]string{"? 7", "info 7", "help 7", "update", "info update", "help update"}, menus.HelpInfoUpdate},
 
-        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run repair", "use repair", "exec repair", "start repair", "launch repair", "exploit repair", "execute repair"}, func() {SetupsFunction("repair", Distro)}},
+        {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run repair", "use repair", "exec repair", "start repair", "launch repair", "exploit repair", "execute repair"}, func() {SetupsFunction("repair", utils.Distro)}},
         {[]string{"? 8", "info 8", "help 8", "repair", "info repair", "help repair"}, menus.HelpInfoRepair},
 
-        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run uninstall", "use uninstall", "exec uninstall", "start uninstall", "launch uninstall", "exploit uninstall", "execute uninstall"}, func() {SetupsFunction("uninstall", Distro)}},
+        {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run uninstall", "use uninstall", "exec uninstall", "start uninstall", "launch uninstall", "exploit uninstall", "execute uninstall"}, func() {SetupsFunction("uninstall", utils.Distro)}},
         {[]string{"? 9", "info 9", "help 9", "uninstall", "info uninstall", "help uninstall"}, menus.HelpInfoUninstall},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
@@ -280,13 +276,14 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
-        "distro": &Distro,
-        "proxies": &Proxy,
-        "func":  &Function,
+        "func": &Function,
+        "funcs": &Function,
         "module": &Function,
         "function": &Function,
         "functions": &Function,
-        "pyenvname": &PyEnvName,
+        "distro": &utils.Distro,
+        "proxies": &utils.Proxies,
+        "pyenvname": &utils.PyEnvName,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -296,7 +293,7 @@ func handleSetCommand(parts []string) {
 
     if ptr, exists := setValues[key]; exists {
         *ptr = value
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
+        fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, strings.ToUpper(key), bcolors.Endc, value)
         return
     }
 
@@ -361,14 +358,14 @@ func handleUnsetCommand(parts []string) {
     key := parts[1]
     unsetValues := map[string]*string{
 
-        "distro": &Distro,
-        "proxies": &Proxy,
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
         "function": &Function,
         "functions": &Function,
-        "pyenvname": &PyEnvName,
+        "distro": &utils.Distro,
+        "proxies": &utils.Proxies,
+        "pyenvname": &utils.PyEnvName,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -378,7 +375,7 @@ func handleUnsetCommand(parts []string) {
 
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key]
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
 
@@ -441,16 +438,59 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    SetupsFunction(Function, Distro)
+    SetupsFunction(Function, utils.Distro)
 }
 
 func SetupsFunction(Function, Distro string, args ...interface{}) {
-    fmt.Printf("\nDISTRO => %s\nFUNCTION => %s\n", Distro, Function)
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    os.MkdirAll(utils.SetupsLogs, os.ModePerm)
+
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.SeMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.SetupsLogs,
+            PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.SeMode,
+            //IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.SetupsLogs,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, true)
     }
 
     commands := map[string]func(){
@@ -476,7 +516,7 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
         "android":   func() {AndroidSetups()},
         "windows":   func() {WindowsSetups()},
 
-        "install":   func() {Installer(Distro)},
+        "install":   func() {Installer(utils.Distro)},
         "update":    func() {UpdateAfricana()},
         "repair":    func() {UpdateAfricana()},
         "uninstall": func() {Uninstaller()},
@@ -524,7 +564,7 @@ func Installer(Distro string) {
         {[]string{"9", "uninstall"}, Uninstaller},
     }
 
-    distroLower := strings.ToLower(Distro)
+    distroLower := strings.ToLower(utils.Distro)
     for _, m := range matchers {
         for _, name := range m.names {
             if name == distroLower {
@@ -534,9 +574,8 @@ func Installer(Distro string) {
         }
     }
 
-    fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.Red, bcolors.Endc, Distro, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.Red, bcolors.Endc, utils.Distro, bcolors.Green, bcolors.Endc)
 }
-
 
 func CheckTools() {
     spinner := utils.New(
@@ -579,11 +618,10 @@ func CheckTools() {
     userChoice()
 }
 
-
 func userChoice() {
     fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
-    scanner.Scan()
-    Input := strings.TrimSpace(scanner.Text())
+    utils.Scanner.Scan()
+    Input := strings.TrimSpace(utils.Scanner.Text())
     switch Input {
     case "y", "yes":
        AutoSetups()
@@ -670,10 +708,9 @@ func InstallTools(tools map[string]map[string]string) {
         }
     }
 
-    RokyPath  = "/usr/share/wordlists/rockyou.txt"
     if runtime.GOOS == "linux" {
-        gzFilePath := RokyPath + ".gz"
-        if _, err := os.Stat(RokyPath); os.IsNotExist(err) {
+        gzFilePath := utils.RokyPath + ".gz"
+        if _, err := os.Stat(utils.RokyPath); os.IsNotExist(err) {
             if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
                 return
             }
@@ -710,7 +747,7 @@ var linuxTaskMap = map[string]func(){
 }
 
 func Venv(PyEnvName string) {
-    subprocess.Popen(`cd ~/.afr3/; python3 -m virtualenv %s --system-site-packages; echo -n "\n source ~/.afr3/%s/bin/activate" >> ~/.zshrc; source ~/.zshrc`, PyEnvName, PyEnvName)
+    subprocess.Popen("cd %s; python3 -m virtualenv %s --system-site-packages; echo -n '\n source %s%s/bin/activate' >> ~/.zshrc; source ~/.zshrc", utils.BaseDir, utils.PyEnvName, utils.BaseDir, utils.PyEnvName)
 }
 
 func InstallFoundationTools(commands []string) {
@@ -720,14 +757,7 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    githubCommands := []string{
-        `cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1`,
-        `python3 -m pip install -r /root/.afr3/africana-base/requirements.txt`,
-    }
-
-    for _, cmd := range githubCommands {
-        subprocess.Popen(cmd)
-    }
+    subprocess.Popen("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; python3 -m pip install -r %s/requirements.txt", utils.BaseDir, utils.BaseDir)
 }
 
 func AutoSetups() {
@@ -760,14 +790,14 @@ func AutoSetups() {
 func KaliSetups() {
     fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
-    if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
-            `wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg`,
-            `cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
-            `cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
-            `dpkg --add-architecture i386`,
-            `apt-get update -y`,
-            `apt-get install zsh git curl -y`,
+            "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+            "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+            "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+            "dpkg --add-architecture i386",
+            "apt-get update -y",
+            "apt-get install zsh git curl -y",
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
@@ -784,14 +814,14 @@ func KaliSetups() {
 func UbuntuSetups() {
     fmt.Printf("\n%s[>] %sInstalling africana in ubuntu ...\n", bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
-    if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
-            `wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg`,
-            `cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg`,
-            `cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list`,
-            `dpkg --add-architecture i386`,
-            `add-apt-repository multiverse`,
-            `apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks`,
+            "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+            "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+            "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+            "dpkg --add-architecture i386",
+            "add-apt-repository multiverse",
+            "apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
@@ -806,15 +836,15 @@ func UbuntuSetups() {
 
 func ArchSetups() {
     fmt.Printf("\n%s[>] %sInstalling blackarch tools ...\n", bcolors.Green, bcolors.Endc)
-    if _, err := os.Stat(ToolsDir); os.IsNotExist(err) {
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
         foundationCommands := []string{
-            `curl -O https://blackarch.org/strap.sh`,
-            `chmod +x strap.sh`,
-            `./strap.sh`,
-            `pacman -Syu --noconfirm`,
-            `pacman -S --noconfirm blackarch`,
-            `pacman -S --noconfirm base-devel bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f WordListDir wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386`,
-            `winecfg /v win11`,
+            "curl -O https://blackarch.org/strap.sh",
+            "chmod +x strap.sh",
+            "./strap.sh",
+            "pacman -Syu --noconfirm",
+            "pacman -S --noconfirm blackarch",
+            "pacman -S --noconfirm base-devel bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f WordsListDir wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386",
+            "winecfg /v win11",
         }
         InstallFoundationTools(foundationCommands)
         fmt.Printf("\n%s[>] %sInstalling third party tools ...\n", bcolors.Green, bcolors.Endc)
@@ -827,8 +857,8 @@ func ArchSetups() {
 
 func UpdateAfricana() {
     fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(`cd /root/.afr3/africana-base; git pull .`)
-    subprocess.Popen(`cd /root/.afr3/; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; mv ./afrconsole /usr/local/bin/; rm -rf ../africana-framework`)
+    subprocess.Popen("cd %s; git pull .", utils.ToolsDir)
+    subprocess.Popen("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return
 }
@@ -846,9 +876,9 @@ func WindowsSetups() {
 
 func Uninstaller() {
     fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.BrightRed, bcolors.Endc)
-    if _, err := os.Stat(ToolsDir); !os.IsNotExist(err) {
-        subprocess.Popen(`rm -rf /root/.afr3/; rm -rf /usr/local/bin/afrconsole`)
-        fmt.Printf("\n%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
+    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
+        subprocess.Popen("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
+        fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
         os.Exit(0)
     } else {
         fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.Green, bcolors.Endc)

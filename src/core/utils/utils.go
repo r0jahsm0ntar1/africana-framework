@@ -34,9 +34,76 @@ import(
 )
 
 var (
-    cmd *exec.Cmd 
-    flag, shell, command, agreementDir, agreementPath, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, WordListDir, RokyPath string
+    cmd *exec.Cmd
 
+    Function   = ""
+    Protocol   = "tcp"
+    OuterIcon  = "word"
+    LPort      = "9999"
+    HPort      = "3333"
+    Obfuscator = "ghost"
+    InnerIcon  = "kaspersky"
+    Listener   = "blackjack"
+    BuildName  = "africana_fud"
+    RawBuild   = "africana_raw"
+    PyEnvName  = "africana-venv"
+
+    FakeDns    = "*"
+    NeMode     = "single"
+    IFace      = "eth0"
+    Spoofer    = "ettercap"
+
+    WlanIFace  = "wlan0"
+    UserName   = "admin"
+    PassWord   = "password"
+    Ssid       = "The End Times Ministries."
+
+    WiMode     = "auto"
+    ExMode     = "auto"
+    SeMode     = "auto"
+    PhMode     = "all"
+    CrMode     = "online"
+    WeMode     = "recon"
+    DDosMode   = "gui"
+
+    BeefName   = "beef"
+    BeefPass   = "Jesus"
+    PhFakeDns  = "Jesus is coming soon"
+
+
+    LHost, _ = GetDefaultIP()
+    Distro, _ = GetLinuxDistroID()
+    Gateway, _ = GetDefaultGatewayIP()
+    Scanner = bufio.NewScanner(os.Stdin)
+
+    Date = time.Now().Format("2006-01-02.15.04.05")
+
+    SetupsLogs = filepath.Join(OutPutDir, "setups")
+    SecLogs = filepath.Join(OutPutDir, "securities")
+    NetworkLogs = filepath.Join(OutPutDir, "networks")
+    ExploitsLogs = filepath.Join(OutPutDir, "exploits")
+    PhishersLogs = filepath.Join(OutPutDir, "phishers")
+    CrackersLogs = filepath.Join(OutPutDir, "crackers")
+    WirelessLogs = filepath.Join(OutPutDir, "wireless")
+    WebCrackersLogs = filepath.Join(OutPutDir, "websites")
+    GeneratorDir = filepath.Join(ExploitsLogs, "generator")
+
+
+    IconsDir = filepath.Join(TemplateDir, "icons")
+    WinresDir = filepath.Join(TemplateDir, "rcedits")
+    WinresInit = filepath.Join(TemplateDir, "rcedits", "winres")
+    TemplateDir = filepath.Join(ToolsDir, "exploits", "payload_templates")
+
+    OutPutBuild = filepath.Join(GeneratorDir, BuildName)
+    WListeners = filepath.Join(ToolsDir, "exploits", "windows", "listeners")
+    AListeners = filepath.Join(ToolsDir, "exploits", "androids", "listeners")
+    ObfusCatorsDir = filepath.Join(ToolsDir, "exploits", "windows", "obfuscators")
+
+    WordsList = filepath.Join(WordsListDir, "everything.txt")
+    ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")
+
+    BaseDir, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordsListDir = DirLocations()
+    Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
 )
 
 type InterfaceInfo struct {
@@ -530,7 +597,6 @@ func IFaces() ([]InterfaceInfo, error) {
 }
 
 func GetDefaultGatewayIP() (string, error) {
-    var cmd *exec.Cmd
     if runtime.GOOS == "windows" {
         cmd = exec.Command("cmd", "/C", "route print 0.0.0.0")
     } else {
@@ -562,32 +628,32 @@ func ValidatePort(port string) error {
     return nil
 }
 
-func AskForProxy(Proxy string) (*url.URL, error) {
-    proxyStr := strings.TrimSpace(Proxy)
+func AskForProxy(Proxies string) (*url.URL, error) {
+    proxyStr := strings.TrimSpace(Proxies)
     proxyURL, err := url.Parse(proxyStr)
     if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
-        return nil, fmt.Errorf("invalid PROXY format (eg. http://localhost:80)")
+        return nil, fmt.Errorf("Invalid PROXY format (eg. http://localhost:80)")
     }
 
     validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
     if !validSchemes[proxyURL.Scheme] {
-        return nil, fmt.Errorf("invalid scheme (use http(s), socks4(5))")
+        return nil, fmt.Errorf("Invalid scheme (use http(s), socks4(5))")
     }
     return proxyURL, nil
 }
 
-func SetProxy(Proxy string) error {
-    proxyURL, err := AskForProxy(Proxy)
+func SetProxy(Proxies string) error {
+    proxyURL, err := AskForProxy(Proxies)
     if err != nil {
         fmt.Printf("\n%s[!] %s%s\n", bcolors.BrightRed, bcolors.Endc, err)
         return err
     }
     
     if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
-        return fmt.Errorf("error setting HTTP_PROXY: %w", err)
+        return fmt.Errorf("Error setting HTTP_PROXY: %w", err)
     }
     if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
-        return fmt.Errorf("error setting HTTPS_PROXY: %w", err)
+        return fmt.Errorf("Error setting HTTPS_PROXY: %w", err)
     }
     return nil
 }
@@ -615,6 +681,33 @@ func Editors(filesToReplacements map[string]map[string]string) {
     }
 }
 
+func ReadFileLetterByLetter(filename string, delay time.Duration) {
+    if _, err := os.Stat(filename); os.IsNotExist(err) {
+        return
+    }
+
+    file, err := os.Open(filename)
+    if err != nil {
+        fmt.Printf("%s[!] %sError opening file: ", bcolors.BrightRed, bcolors.Endc, err)
+        return
+    }
+    defer file.Close()
+
+    scanner := bufio.NewScanner(file)
+
+    for scanner.Scan() {
+        line := scanner.Text()
+        for _, letter := range line {
+            fmt.Print(string(letter))
+            time.Sleep(delay)
+        }
+        fmt.Println()
+    }
+
+    if err := scanner.Err(); err != nil {
+        fmt.Printf("%s[!] %sError reading file: ", bcolors.BrightRed, bcolors.Endc, err)
+    }
+}
 
 func FileExists(filename string) bool {
     _, err := os.Stat(filename)
@@ -631,15 +724,15 @@ func StripBrackets(text string) string {
 }
 
 func GetAgreementPath() string {
-    baseDir := "/root/.afr3/agreements/"
+    agreementDir := filepath.Join("/root/.afr" + subprocess.Version, "agreements")
     if !subprocess.IsRoot() {
         homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
             return ""
         }
-        baseDir = filepath.Join(homeDir, ".afr3", "agreements")
+        agreementDir = filepath.Join(homeDir, ".afr" + subprocess.Version, "agreements")
     }
-    return filepath.Join(baseDir, "covenant.txt")
+    return filepath.Join(agreementDir, "covenant.txt")
 }
 
 func Agreements(filePath string) {
@@ -848,71 +941,74 @@ func min(nums ...int) int {
 func BrowseTutarilas() {
     switch runtime.GOOS {
     case "linux", "darwin":
-        command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
+        Command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
     case "windows":
-        command = `start "" "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1"`
+        Command = `start "" "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1"`
     default:
         fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
         return
     }
     fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(command)
+    subprocess.Popen(Command)
 }
 
 func BrowserLogs() {
-    subprocess.Popen(`mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr3/logs/; cat *.log | aha --black > /var/www/html/index.html`)
-    subprocess.Popen(`xdg-open "http://0.0.0.0:80/index.html" 2>/dev/null; php -S 0.0.0:80`)
-    subprocess.Popen(`rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/`)
+    subprocess.Popen("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html", subprocess.Version)
+    subprocess.Popen("xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80")
+    subprocess.Popen("rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/")
     return
 }
 
 func ListJunks() {
     fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
     subprocess.Popen("tree %s*", OutPutDir)
     return
 }
 
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = DirLocations()
     subprocess.Popen("tree %s*", OutPutDir)
     subprocess.Popen("rm -rf %s/*", OutPutDir)
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
 
+func LocateTool(Tool string) {
+    if _, err := exec.LookPath(Tool); err != nil {
+        fmt.Printf("%s[!] %s%s%s %sisn't installed, Try %s'apt install %s.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
+        return
+    }
+}
+
 func Sleep() {
     subprocess.Popen("sleep")
 }
 
-func DirLocations() (string, string, string, string, string, string, string) {
-    baseDir := "/root/.afr3"
+func DirLocations() (string, string, string, string, string, string, string, string) {
+    baseDir := filepath.Join("/root/.afr" + subprocess.Version)
     if !subprocess.IsRoot() {
         if homeDir := subprocess.GetHomeDir(); homeDir != "" {
-            baseDir = filepath.Join(homeDir, ".afr3")
+            baseDir = filepath.Join(homeDir, ".afr" + subprocess.Version)
         } else {
-            return "", "", "", "", "", "", ""
+            return "", "", "", "", "", "", "", ""
         }
     }
 
     certDir := filepath.Join(baseDir, "certs")
     toolsDir := filepath.Join(baseDir, "africana-base")
-    return certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
+    return baseDir, certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
 }
 
 func InitiLize() {
-    certDir, outDir, keyPath, certPath, _, _, _ := DirLocations()
-
-    for _, dir := range []string{certDir, outDir} {
-        if err := os.MkdirAll(dir, 0755); err != nil {
-            fmt.Printf("%s[!] %sError creating %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, dir, err, bcolors.Endc)
+    for _, BaseDirs := range []string{CertDir, OutPutDir} {
+        if err := os.MkdirAll(BaseDirs, 0755); err != nil {
+            fmt.Printf("%s[!] %sError creating %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, BaseDirs, err, bcolors.Endc)
             return
         }
     }
 
-    if _, err := os.Stat(certPath); os.IsNotExist(err) {
-        GenerateSelfSignedCert(certPath, keyPath)
+    if _, err := os.Stat(CertPath); os.IsNotExist(err) {
+        GenerateSelfSignedCert(CertPath, KeyPath)
     }
 }
 

@@ -3,45 +3,17 @@
 package credits
 
 import(
-    "os"
     "fmt"
     "time"
-    "bufio"
+    "utils"
     "bcolors"
+    "path/filepath"
 )
 
-func readFileLetterByLetter(filename string, delay time.Duration) {
-    if _, err := os.Stat(filename); os.IsNotExist(err) {
-        return
-    }
-
-    file, err := os.Open(filename)
-    if err != nil {
-        fmt.Printf("%s[!] %sError opening file: ", bcolors.BrightRed, bcolors.Endc, err)
-        return
-    }
-    defer file.Close()
-
-    scanner := bufio.NewScanner(file)
-
-    for scanner.Scan() {
-        line := scanner.Text()
-        for _, letter := range line {
-            fmt.Print(string(letter))
-            time.Sleep(delay)
-        }
-        fmt.Println()
-    }
-
-    if err := scanner.Err(); err != nil {
-        fmt.Printf("%s[!] %sError reading file: ", bcolors.BrightRed, bcolors.Endc, err)
-    }
-}
-
 func Contributors() {
-    filename := "/root/.afr3/africana-base/hacktricks/roadmap.txt"
+    filename := filepath.Join(utils.ToolsDir, "hacktricks", "roadmap.txt")
     delay := 0 * time.Millisecond
-    readFileLetterByLetter(filename, delay)
+    utils.ReadFileLetterByLetter(filename, delay)
 
     fmt.Printf(`%s%s%s
 Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)

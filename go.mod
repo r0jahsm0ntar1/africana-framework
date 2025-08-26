@@ -2,6 +2,8 @@
 
 module main
 
+go 1.24.4
+
 replace credits => ./src/credits/
 
 replace utils => ./src/core/utils/
@@ -30,7 +32,7 @@ replace agreements => ./src/agreements/
 
 replace scriptures => ./src/scriptures/
 
-replace webattackers => ./src/webattackers/
+replace webcrackers => ./src/webcrackers/
 
 replace afrconsole => ./src/core/afrconsole/
 
@@ -52,6 +54,6 @@ require (
 	setups v0.0.0-00010101000000-000000000000 // indirect
 	subprocess v0.0.0-00010101000000-000000000000 // indirect
 	utils v0.0.0-00010101000000-000000000000 // indirect
-	webattackers v0.0.0-00010101000000-000000000000 // indirect
+	webcrackers v0.0.0-00010101000000-000000000000 // indirect
 	wireless v0.0.0-00010101000000-000000000000 // indirect
 )

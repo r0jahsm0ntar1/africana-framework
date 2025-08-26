@@ -21,11 +21,8 @@ import(
     "scriptures"
 )
 
-var (
-    LHostIp, _ = utils.GetDefaultIP()
-    scanner   = bufio.NewScanner(os.Stdin)
-    Input, RHost, Proxy, Script, Function string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
+var(
+    Function string
 )
 
 type stringMatcher struct {
@@ -45,9 +42,9 @@ var torrString = []string{
 
 func Torsocks() {
     for {
-        fmt.Printf("%s%s%safr3%s torsocks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s torsocks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -156,11 +153,13 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "proxies": &Proxy,
+        "proxies": &utils.Proxies,
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
-        "output": &OutPutDir,
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
         "function": &Function,
         "functions": &Function,
     }
@@ -172,7 +171,7 @@ func handleSetCommand(parts []string) {
 
     if ptr, exists := setValues[key]; exists {
         *ptr = value
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
+        fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, strings.ToUpper(key), bcolors.Endc, value)
         return
     }
 
@@ -236,22 +235,24 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "proxies": &Proxy,
+        "proxies": &utils.Proxies,
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
-        "output": &OutPutDir,
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
         "function": &Function,
         "functions": &Function,
     }
     defaultValues := map[string]string{
-        "func":      "",
-        "proxies":   "",
-        "funcs":     "",
-        "module":    "",
-        "output":    "",
-        "function":  "",
-        "functions": "",
+        "func":         "",
+        "proxies":      "",
+        "funcs":        "",
+        "module":       "",
+        "output":       "",
+        "function":     "",
+        "functions":    "",
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -261,7 +262,7 @@ func handleUnsetCommand(parts []string) {
 
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key]
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
 
@@ -328,32 +329,75 @@ func executeFunction() {
 }
 
 func AnonimityFunctions(Function string, args ...interface{}) {
-    fmt.Printf("\nFunction => %s\n", Function)
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    os.MkdirAll(utils.SecLogs, os.ModePerm)
+
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.SeMode,
+            IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.SecLogs,
+            PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            //MODE: utils.SeMode,
+            IFACE: utils.IFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.SecLogs,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
     }
 
     commands := map[string]func(){
-        "setups": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
-        "start": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
-        "status": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()},
+        "setups":   func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server"); fmt.Println()},
+        "start":    func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
+        "status":   func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service"); fmt.Println()},
         "exitnode": func() {banners.GraphicsTorNet(); fmt.Println(); torCircuit()},
-        "torip": func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
-        "restore": func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
-        "chains": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()},
-        "reload": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
-        "stop": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
+        "torip":    func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
+        "restore":  func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
+        "chains":   func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("tail -vf /var/log/privoxy/logfile"); fmt.Println()},
+        "reload":   func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
+        "stop":     func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
 
-        "1": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server`); fmt.Println()},
+        "1": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server"); fmt.Println()},
         "2": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configDhclient(); ConfigChangeMac(); configDnsmasq(); configSquid(); configPrivoxy(); configFirewall(); torStatus(0)},
-        "3": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`); fmt.Println()},
+        "3": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("systemctl --no-pager -l status changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service"); fmt.Println()},
         "4": func() {banners.GraphicsTorNet(); fmt.Println(); torCircuit()},
         "5": func() {banners.GraphicsTorNet(); fmt.Println(); torStatus(0)},
         "6": func() {banners.GraphicsTorNet(); fmt.Println(); resetToDefault(false, false)},
-        "7": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen(`tail -vf /var/log/privoxy/logfile`); fmt.Println()},
+        "7": func() {banners.GraphicsTorNet(); fmt.Println(); subprocess.Popen("tail -vf /var/log/privoxy/logfile"); fmt.Println()},
         "8": func() {banners.GraphicsTorNet(); fmt.Println(); configTorrc(); configFirewall(); torStatus(0)},
         "9": func() {banners.GraphicsTorNet(); fmt.Println(); termiNate()},
     }
@@ -464,7 +508,7 @@ func configDhclient() {
     }
     filePath := "/etc/dhcp/dhclient.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana`)
+        subprocess.Popen("cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/dhcp/dhclient.conf": {
                 "#prepend domain-name-servers 127.0.0.1;": "prepend domain-name-servers 127.0.0.1, 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4;",
@@ -481,7 +525,7 @@ func configDnsmasq() {
     }
     filePath := "/etc/dnsmasq.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana`)
+        subprocess.Popen("cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/dnsmasq.conf": {
                 "#port=5353": "port=5353",
@@ -498,7 +542,7 @@ func configPrivoxy() {
     }
     filePath := "/etc/privoxy/privoxy.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp -r /etc/privoxy/config /etc/privoxy/privoxy.conf.bak_africana`)
+        subprocess.Popen("cp -r /etc/privoxy/config /etc/privoxy/privoxy.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/privoxy/config": {
                 "#debug     1": "debug   1",
@@ -519,7 +563,7 @@ func configSquid() {
     }
     filePath := "/etc/squid/squid.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana`)
+        subprocess.Popen("cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/squid/squid.conf": {
                 "http_port 3128": "http_port 3129\nnever_direct allow all\nshutdown_lifetime 0 seconds\ncache_peer localhost parent 8118 7 no-digest no-query",
@@ -596,7 +640,7 @@ func resolvConfig(rSwitch int) int {
 
         scanner := bufio.NewScanner(file)
         found := false
-        for scanner.Scan() {
+        for utils.Scanner.Scan() {
             if strings.Contains(scanner.Text(), resolvString) {
                 found = true
                 break
@@ -673,7 +717,7 @@ func termiNate() {
         fmt.Print("                                                    " + bcolors.Green + "Done " + bcolors.BrightYellow + "✔" + bcolors.BrightBlue +")\n" + bcolors.Endc)
     }
     fmt.Print(bcolors.BrightBlue + "(" + bcolors.BrightYellow + "Stoping macchanger, dnsmasq, privoxy, squid..\n" + bcolors.Endc)
-    subprocess.Popen(`systemctl stop changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service`)
+    subprocess.Popen("systemctl stop changemac@eth0.service dnsmasq.service squid.service privoxy.service tor@default.service")
     fmt.Print("                                                    " + bcolors.Green + "Done " + bcolors.BrightYellow + "✔" + bcolors.BrightBlue +")\n" + bcolors.Endc)
 }
 

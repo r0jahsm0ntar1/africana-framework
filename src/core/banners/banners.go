@@ -7,9 +7,7 @@ import(
     "time"
     "bcolors"
     "math/rand"
-)
-var (
-    version = "3.0.3-dev"
+    "subprocess"
 )
 
 type Banners struct{}
@@ -19,7 +17,7 @@ func Version() {
      %sFramework%s: %s
        %sConsole%s: %s
 
-`, bcolors.BrightGreen, bcolors.Endc, version, bcolors.BrightGreen, bcolors.Endc, version)
+`, bcolors.BrightGreen, bcolors.Endc, subprocess.Dversion, bcolors.BrightGreen, bcolors.Endc, subprocess.Dversion)
 }
 
 func GraphicsLarge() {

@@ -7,7 +7,6 @@ import(
     "fmt"
     "menus"
     "utils"
-    "bufio"
     "strings"
     "banners"
     "bcolors"
@@ -16,33 +15,22 @@ import(
     "subprocess"
 )
 
-
 var (
-    Mode = "auto"
-    LPort = "9999"
-    HPort = "3333"
-    IFace = "wlan0"
-    Ssid = "The End Times Ministries."
-
-    LHost = LHostIp
-    LHostIp, _ = utils.GetDefaultIP()
-    scanner = bufio.NewScanner(os.Stdin)
-    Input, RHost, Proxy, Function, Script string
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
+    Function string
 )
 
 var defaultValues = map[string]string{
 
-    "proxies": "",
-    "function": "",
-    "mode": "auto",
-    "lport": "9999",
-    "hport": "3333",
-    "iface": "wlan0",
-    "ssid": "End times ministries",
-
-    "lhost": LHostIp,
-    "output": OutPutDir,
+    "function":     Function,
+    "ssid":         utils.Ssid,
+    "lport":        utils.LPort,
+    "hport":        utils.HPort,
+    "lhost":        utils.LHost,
+    "proxies":      utils.Proxies,
+    "iface":        utils.WlanIFace,
+    "output":       utils.WirelessLogs,
+    "innericon" :   utils.InnerIcon,
+    "obfuscator":   utils.Obfuscator,
 }
 
 type stringMatcher struct {
@@ -52,9 +40,9 @@ type stringMatcher struct {
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%s%safr3%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        scanner.Scan()
-        Input = strings.TrimSpace(scanner.Text())
+        fmt.Printf("%s%s%safr%s%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
@@ -110,7 +98,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoWireless},
         {[]string{"m", "menu"}, menus.MenuFive},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.WirelessOptions(IFace, LHost, OutPutDir)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.WirelessOptions(utils.WlanIFace, utils.LHost, utils.OutPutDir)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWirelessFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run wifite", "use wifite", "exec wifite", "start wifite", "launch wifite", "exploit wifite", "execute wifite"}, func() {WirelessPenFunctions("wifite")}},
@@ -164,19 +152,21 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
-        "mode": &Mode,
-        "ssid": &Ssid,
-        "iface": &IFace,
-        "lhost": &LHost,
-        "lport": &LPort,
-        "hport": &HPort,
-        "proxies": &Proxy,
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
-        "output": &OutPutDir,
+        "ssid": &utils.Ssid,
+        "mode": &utils.WiMode,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
         "function": &Function,
         "functions": &Function,
+        "iface": &utils.WlanIFace,
+        "proxies": &utils.Proxies,
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -186,7 +176,7 @@ func handleSetCommand(parts []string) {
 
     if ptr, exists := setValues[key]; exists {
         *ptr = value
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), value)
+        fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, strings.ToUpper(key), bcolors.Endc, value)
         return
     }
 
@@ -251,19 +241,21 @@ func handleUnsetCommand(parts []string) {
     key := parts[1]
     unsetValues := map[string]*string{
 
-        "mode": &Mode,
-        "ssid": &Ssid,
-        "iface": &IFace,
-        "lhost": &LHost,
-        "lport": &LPort,
-        "hport": &HPort,
-        "proxies": &Proxy,
         "func": &Function,
         "funcs": &Function,
         "module": &Function,
-        "output": &OutPutDir,
+        "ssid": &utils.Ssid,
+        "mode": &utils.WiMode,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
         "function": &Function,
         "functions": &Function,
+        "iface": &utils.WlanIFace,
+        "proxies": &utils.Proxies,
+        "output": &utils.OutPutDir,
+        "outputlog": &utils.OutPutDir,
+        "outputlogs": &utils.OutPutDir,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -273,7 +265,7 @@ func handleUnsetCommand(parts []string) {
 
     if ptr, exists := unsetValues[key]; exists {
         *ptr = defaultValues[key]
-        fmt.Printf("%s => %s\n", strings.ToUpper(key), "Null")
+        fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
 
@@ -301,7 +293,7 @@ func handleUnsetCommand(parts []string) {
         if len(suggestions) < cols {
             cols = len(suggestions)
         }
-        
+
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
@@ -336,37 +328,80 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    if IFace == "" {
+    if utils.WlanIFace == "" {
         fmt.Printf("\n%s[!] %sMissing required parameters IFACE. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    WirelessPenFunctions(Function, IFace)
+    WirelessPenFunctions(Function, utils.WlanIFace)
 }
 
 func WirelessPenFunctions(Function string, args ...interface{}) {
-    fmt.Printf("\nMODE => %s\nIFACE => %s\nFunction => %s\n", Mode, IFace, Function)
-    if Proxy != "" {
-        fmt.Printf("PROXIES => %s\n", Proxy)
-        if err := utils.SetProxy(Proxy); err != nil {
+    os.MkdirAll(utils.WirelessLogs, os.ModePerm)
+
+    if utils.Proxies != "" {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.WiMode,
+            IFACE: utils.WlanIFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.WirelessLogs,
+            PROXIES: utils.Proxies,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, false)
+
+        if err := utils.SetProxy(utils.Proxies); err != nil {
             //
         }
+    } else {
+        menus.PrintSelected(menus.PrintOptions{
+            MODE: utils.WiMode,
+            IFACE: utils.WlanIFace,
+            //LPORT: utils.LPort,
+            //HPORT: utils.HPort,
+            //RHOST: utils.RHost,
+            //LHOST: utils.LHost,
+            //DISTRO: utils.Distro,
+            //SCRIPT: utils.Script,
+            OUTPUTLOGS: utils.WirelessLogs,
+            FUNCTION: Function,
+            //RECONDIR: utils.ReconDir,
+            //LISTENER: utils.Listener,
+            //PROTOCOL: utils.Protocol,
+            //TOOLSDIR: utils.ToolsDir,
+            //INNERICON: utils.InnerIcon,
+            //OUTERICON: utils.OuterIcon,
+            //BUILDNAME: utils.BuildName,
+            //OBFUSCATOR: utils.Obfuscator,
+        }, true, true)
     }
 
     commands := map[string]func(){
 
-        "1": func() {Wifite(IFace)},
+        "1": func() {Wifite(utils.WlanIFace)},
         "2": func() {Fluxion()},
-        "3": func() {Bettercap(IFace)},
+        "3": func() {Bettercap(utils.WlanIFace)},
         "4": func() {AirGeddon()},
         "5": func() {WifiPumpkin()},
-        "6": func() {WifiPumpkin3(IFace, Ssid)},
+        "6": func() {WifiPumpkin3(utils.WlanIFace, utils.Ssid)},
 
-        "wifite": func() {Wifite(IFace)},
-        "fluxion": func() {Fluxion()},
-        "bettercap": func() {Bettercap(IFace)},
-        "airgeddon": func() {AirGeddon()},
-        "wifipumpkin": func() {WifiPumpkin()},
-        "WifiPumpkin3": func() {WifiPumpkin3(IFace, Ssid)},
+        "wifite":       func() {Wifite(utils.WlanIFace)},
+        "fluxion":      func() {Fluxion()},
+        "bettercap":    func() {Bettercap(utils.WlanIFace)},
+        "airgeddon":    func() {AirGeddon()},
+        "wifipumpkin":  func() {WifiPumpkin()},
+        "WifiPumpkin3": func() {WifiPumpkin3(utils.WlanIFace, utils.Ssid)},
 
     }
 
@@ -401,7 +436,7 @@ func AirGeddon() {
 }
 
 func Fluxion() {
-    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, ToolsDir)
+    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, utils.ToolsDir)
 }
 
 func WifiPumpkin() {
@@ -413,22 +448,22 @@ func WifiPumpkin() {
     subprocess.Popen(`wifipumpkin3`)
 }
 
-func WifiPumpkin3(IFace string, Ssid string) {
-     if Ssid == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, IFace, bcolors.Endc)
+func WifiPumpkin3(WlanIFace, Ssid string) {
+     if utils.Ssid == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate MISSING SSID: %s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.Green, Function, utils.WlanIFace, bcolors.Endc)
         return
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
         subprocess.Popen(`wifipumpkin3; clear`)
     }
-    subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxy noproxy; start"`, IFace, Ssid)
+    subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxies noproxy; start"`, utils.WlanIFace, utils.Ssid)
 }
 
-func Wifite(IFace string) {
-    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, IFace, RokyPath)
+func Wifite(WlanIFace string) {
+    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, utils.WlanIFace, utils.RokyPath)
 }
 
-func Bettercap(IFace string) {
-    subprocess.Popen(`airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file /usr/local/opt/handshakes; wifi.deauth all"`, IFace, IFace, IFace, IFace, IFace)
+func Bettercap(WlanIFace string) {
+    subprocess.Popen(`airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file /usr/local/opt/handshakes; wifi.deauth all"`, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace)
 }

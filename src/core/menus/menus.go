@@ -7,13 +7,7 @@ import (
     "utils"
     "bcolors"
     "strings"
-)
-
-var (
-    Interfaces, _ = utils.IFaces()
-    LHost, _      = utils.GetDefaultIP()
-    Gateway, _    = utils.GetDefaultGatewayIP()
-    CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordListDir = utils.DirLocations()
+    "subprocess"
 )
 
 var DefaultTableConfig = TableConfig{
@@ -29,20 +23,26 @@ type TableConfig struct {
 }
 
 type PrintOptions struct {
-    ICON       string
+    MODE       string
     LPORT      string
     IFACE      string
     HPORT      string
+    RHOST      string
     LHOST      string
     BUILD      string
-    OUTPUT     string
-    TOOLS_DIR  string
-    PROTOCOL   string
+    DISTRO     string
     SCRIPT     string
-    COREICON   string
+    PROXIES    string
+    RECONDIR   string
+    FUNCTION   string
+    TOOLSDIR   string
+    PROTOCOL   string
     LISTENER   string
+    INNERICON  string
+    OUTERICON  string
     BUILDNAME  string
     OBFUSCATOR string
+    OUTPUTLOGS string
 }
 
 
@@ -88,19 +88,6 @@ func modulesHelp(info ModuleHelpInfo) {
 `, bcolors.Bold, bcolors.Endc, info.Name, bcolors.Bold, bcolors.Endc, info.Function, bcolors.Bold, bcolors.Endc, info.Platform, bcolors.Bold, bcolors.Endc, info.Arch, bcolors.Bold, bcolors.Endc, info.Privileged, bcolors.Bold, bcolors.Endc, info.License, bcolors.Bold, bcolors.Endc, info.Rank, bcolors.Bold, bcolors.Endc, info.Disclosed, bcolors.Bold, bcolors.Endc, info.ProvidedBy, bcolors.Bold, bcolors.Endc, info.CreatedBy, bcolors.Bold, bcolors.Endc, info.TestedDistros, bcolors.Bold, bcolors.Endc, info.CheckSupport)
 }
 
-func generateOptions(modulePath string, options []string) {
-    fmt.Printf(`
-%sModule options %s(%s):
-
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-`, bcolors.Bold, bcolors.Endc, modulePath, bcolors.Bold, bcolors.Endc)
-
-    for _, opt := range options {
-        fmt.Printf(opt)
-    }
-}
-
 func modulesUsage(info ModuleHelpInfo) {
     if info.Options != "" {
         fmt.Printf("\n%sOptions%s:\n%s\n", bcolors.Bold, bcolors.Endc, info.Options)
@@ -118,8 +105,8 @@ func modulesUsage(info ModuleHelpInfo) {
         fmt.Printf(`
 %sex. %s%susage%s:
 --  -----
-%s
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example)
+%s%s%s
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Cyan, info.Example, bcolors.Endc)
     }
 }
 
@@ -158,7 +145,7 @@ func calculateMaxWidths(rows [][]string) (int, int, int) {
 }
 
 func FormatModuleHeader(modulePath string) string {
-    return fmt.Sprintf("\nModule Options (%s%s%s):\n", bcolors.Italic, modulePath, bcolors.Endc)
+    return fmt.Sprintf("\nModule Options (%s%s%s%s):\n", bcolors.Italic, bcolors.Cyan, modulePath, bcolors.Endc)
 }
 
 func FormatColumnHeaders(nameWidth, settingWidth, reqWidth int) string {
@@ -170,9 +157,9 @@ func FormatFooter(info ModuleHelpInfo) string {
         return fmt.Sprintf(`
 %sex. %s%susage%s:
 --  -----
-%s
+%s%s%s
 View the full module info with the %s'info'%s or %s'show modules'%s, to get list of modules.
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, info.Example, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Cyan, info.Example, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
     }
     return ""
 }
@@ -231,9 +218,9 @@ func FormatModuleOptionsWithConfig(modulePath string, config TableConfig, rows [
 
 func generateMenu(menuItems []string, helpText string, backOption bool) {
     fmt.Printf(`
-%s%s%sSelect a number from the table below.%s
+%s%sSelect a number from the table below.%s
 
-`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 
     maxLength := 0
     for _, item := range menuItems {
@@ -249,14 +236,14 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
 
     if backOption {
         fmt.Printf(`
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s0. %s%s%s%sGo back.%s
+%s h. %s%s%sGet help.%s %se. %s%s%sExit afr%s%s %s0. %s%s%sGo to previous menu.%s
 
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc,  bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
     } else {
         fmt.Printf(`
-%s h. %s%s%s%sGet help.%s %se. %s%s%s%sExit afr3%s %s10. %s%s%s%sGet Bonus Packages.%s
+%s h. %s%s%sGet help.%s %se. %s%s%sExit afr%s%s %s10. %s%s%sGet bonus packages.%s
 
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Bold, bcolors.Underl, bcolors.Endc)
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
     }
 }
 
@@ -265,28 +252,34 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
 
     printIfSet := func(name, value string) {
         if value != "" {
-            fmt.Printf("%s => %s\n", name, value)
+            fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, name, bcolors.Endc, value)
             printedAny = true
         }
     }
 
-    if opts.ICON != "" || opts.IFACE != "" || opts.COREICON != "" || opts.LHOST != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLS_DIR != "" || opts.OUTPUT != "" || opts.BUILDNAME != ""  || opts.OBFUSCATOR != "" {
+    if opts.MODE != "" || opts.IFACE != "" || opts.INNERICON != "" || opts.OUTERICON != "" || opts.RHOST != "" || opts.LHOST != "" || opts.DISTRO != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLSDIR != "" || opts.OUTPUTLOGS != "" || opts.PROXIES !="" || opts.FUNCTION !="" || opts.RECONDIR !="" || opts.BUILDNAME != "" || opts.OBFUSCATOR != "" {
         fmt.Println()
     }
 
-    printIfSet("ICON", opts.ICON)
+    printIfSet("MODE", opts.MODE)
     printIfSet("IFACE", opts.IFACE)
     printIfSet("LPORT", opts.LPORT)
     printIfSet("HPORT", opts.HPORT)
+    printIfSet("RHOST", opts.RHOST)
     printIfSet("LHOST", opts.LHOST)
+    printIfSet("DISTRO", opts.DISTRO)
     printIfSet("SCRIPT", opts.SCRIPT)
-    printIfSet("OUTPUT", opts.OUTPUT)
+    printIfSet("PROXIES", opts.PROXIES)
+    printIfSet("FUNCTION", opts.FUNCTION)
+    printIfSet("RECONDIR", opts.RECONDIR)
     printIfSet("LISTENER", opts.LISTENER)
     printIfSet("PROTOCOL", opts.PROTOCOL)
-    printIfSet("COREICON", opts.COREICON)
-    printIfSet("TOOLS_DIR", opts.TOOLS_DIR)
-    printIfSet("BUILD_NAME", opts.BUILDNAME)
+    printIfSet("TOOLSDIR", opts.TOOLSDIR)
+    printIfSet("INNERICON", opts.INNERICON)
+    printIfSet("OUTERICON", opts.OUTERICON)
+    printIfSet("BUILDNAME", opts.BUILDNAME)
     printIfSet("OBFUSCATOR", opts.OBFUSCATOR)
+    printIfSet("OUTPUTLOGS", opts.OUTPUTLOGS)
 
     if printedAny && endWithNewLine {
         fmt.Println()
@@ -362,8 +355,8 @@ func MenuFour() {
         "shellz",
         "ghost",
         "chameleon",
-        "lithaldll",
         "regsniper",
+        "lithaldll",
     }
     generateMenu(items, "", true)
 }
@@ -1137,7 +1130,7 @@ func HelpInfoTorsocksTorIp() {
         CreatedBy:     "r0jahsm0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
-        Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxy is correctly configured, then you will get a congratulation mesage from tor website.",
+        Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxies is correctly configured, then you will get a congratulation mesage from tor website.",
     }
     modulesHelp(info)
 }
@@ -1995,7 +1988,7 @@ func HelpInfoHoaxShell(LHost, LPort, Protocol string) {
 }
 
 
-func HelpInfoLithalDll(Icon, LHost, LPort, HPort, Protocol, OutPut, Listener string) {
+func HelpInfoLithalDll(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listener string) {
     info := ModuleHelpInfo{
         Name:          "lithaldll",
         Function:      "src/exploits/lithaldll.fn",
@@ -2012,7 +2005,7 @@ func HelpInfoLithalDll(Icon, LHost, LPort, HPort, Protocol, OutPut, Listener str
         Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
     }
     modulesHelp(info)
-    LithalDllOptions(Icon, LHost, LPort, HPort, Protocol, OutPut, Listener)
+    LithalDllOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listener)
 }
 
 
@@ -2042,16 +2035,16 @@ func HelpInfoHavoc() {
   ----           ---------------  --------  -----------
   ICON           pdf              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTearNdroid() {
@@ -2079,16 +2072,16 @@ func HelpInfoTearNdroid() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -2118,17 +2111,17 @@ func HelpInfoChameLeon() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   SCRIPT         none             yes       Full location of the powershell script to be obfsicated.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoGhost() {
@@ -2156,17 +2149,17 @@ func HelpInfoGhost() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
   SCRIPT         none             yes       Powershell script to obfsicate inorder to bypass AVs.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoSeaShell() {
@@ -2194,16 +2187,16 @@ func HelpInfoSeaShell() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoListener() {
@@ -2231,16 +2224,16 @@ func HelpInfoListener() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoRegSniper() {
@@ -2269,16 +2262,16 @@ func HelpInfoRegSniper() {
   ----           ---------------  --------  -----------
   ICON           pdf              yes       The icon to use to disguise your backdoor with.
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoTearDroid() {
@@ -2306,16 +2299,16 @@ func HelpInfoTearDroid() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 func HelpInfoAndroRat() {
@@ -2343,16 +2336,16 @@ func HelpInfoAndroRat() {
   %sName           Current Setting  Required  Description%s
   ----           ---------------  --------  -----------
   LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listener port to handle beacons.
+  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
   HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  OUTPUT         ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
   PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
+  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
 
 %sDescription%s:
 -----------
   It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
 }
 
 
@@ -2382,7 +2375,7 @@ func HelpInfoWifite() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2423,7 +2416,7 @@ func HelpInfoFluxion() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2464,7 +2457,7 @@ func HelpInfoBetterCap() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2506,7 +2499,7 @@ func HelpInfoAirGeddon() {
   ----           ---------------  --------  -----------
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2548,7 +2541,7 @@ func HelpInfoWifiPumpkin() {
   MODE           auto             yes       Attacking mode to use. (auto or manual)
   SSID           ->               yes       The fake name of your wifi for the clients to see. Default = 'End times ministries'
   IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordListDir location for cracking captured handshakes.
+  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
 
 %sDescription%s:
 -----------
@@ -2612,34 +2605,34 @@ func NetworksOptions(Mode, IFace, RHost, Passwd, LHost, Gateway, Spoofer, Proxie
     ))
 }
 
-func ExploitsOptions(Icon, CoreIcon, LHost, LPort, HPort, Script, BuildName, Function, Proxy, BuildDir, Listener, Protocol, Obfuscator string) {
+func ExploitsOptions(OuterIcon, InnerIcon, LHost, LPort, HPort, Script, BuildName, Function, Proxies, ExploitsLogs, Listener, Protocol, Obfuscator string) {
     rows := [][]string{
-        {"ICON", Icon, "yes", "Icon to be used while generating backdoors."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"HPORT", HPort, "yes", "Port for file smaglers in blackjack function."},
-        {"LHOST", LHost, "yes", "Mainly needed when generating backdoors and launching listeners."},
         {"BUILD", BuildName, "yes", "Output name of the backdoor to be generated."},
+        {"LHOST", LHost, "yes", "Mainly needed when generating backdoors and launching listeners."},
         {"SCRIPT", Script, "yes", "Path to PowerShell script to be obfuscated."},
-        {"OUTPUT", BuildDir, "yes", "Output location for generated backdoor."},
-        {"PROXIES", Proxy, "no", "Route traffic through proxies if desired."},
-        {"COREICON", CoreIcon, "yes", "THe hidden backdoor's icon. The one the user will see in the system if curious."},
+        {"PROXIES", Proxies, "no", "Route traffic through proxies if desired."},
         {"PROTOCOL", Protocol, "yes", "Communication protocol (tcp, http, https)."},
         {"FUNCTION", Function, "yes", "Function to perform (ghost, shellz, etc.)."},
         {"LISTENER", Listener, "yes", "Listener for callback connections."},
+        {"INNERICON", InnerIcon, "yes", "THe hidden backdoor's icon. The one the user will see in the system if curious."},
+        {"OUTERICON", OuterIcon, "yes", "OuterIcon to be used while generating backdoors."},
         {"OBFUSCATOR", Obfuscator, "yes", "The tool to obfusicate your backdoor. Use 'show obfuscator' to list them."},
+        {"OUTPUTLOGS", ExploitsLogs, "yes", "Output location for generated backdoor."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/exploits/backdoor_pentest.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LPORT " + LPort + "\n  set MODULE " + Function + "\n  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LPORT " + LPort + "\n  set MODULE " + Function + "\n  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func BlackJackOptions(LHost string) {
     rows := [][]string{
         {"LHOST", LHost, "yes", "Listener host address."},
-        {"LPORT", "9999", "yes", "Listener port to handle beacons."},
+        {"LPORT", "9999", "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"HPORT", "3333", "yes", "Port for file smaglers in blacjack."},
         {"SCRIPT", "none", "yes", "Powershell script location."},
         {"PROXIES", "none", "no", "Traffic through proxies."},
@@ -2649,78 +2642,78 @@ func BlackJackOptions(LHost string) {
     fmt.Println(FormatModuleOptions(
         "src/exploits/blackjack_listener.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func ShellzOptions(LHost, LPort, Protocol string) {
     rows := [][]string{
         {"LHOST", LHost, "yes", "Mainly needed when generating backdoors."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/exploits/shellz_listener.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func AndroRatOptions(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol string) {
     rows := [][]string{
         {"LHOST", LHost, "yes", "Mainly needed when generating backdoors."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"HPORT", HPort, "yes", "The port to handle file smaglers in blacjack function."},
         {"BUILD", BuildName, "yes", "OutPut name of the backdoor to be generated."},
-        {"OUTPUT", OutPutDir, "yes", "OutPut location."},
         {"PROXIES", Proxies, "no", "Run traffic through proxies."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/exploits/androrat_listener.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func HoaxshellOptions(LHost, LPort, Protocol string) {
     rows := [][]string{
         {"LHOST", LHost, "yes", "Mainly needed when generating backdoors."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/exploits/hoaxshell_listener.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
-func LithalDllOptions(Icon, LHost, LPort, HPort, Protocol, OutPut, Listener string) {
+func LithalDllOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
     rows := [][]string{
-        {"ICON", Icon, "yes", "Mainly needed to disguise generated backdoors."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"OUTERICON", OuterIcon, "yes", "Mainly needed to disguise generated backdoors."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
         {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
-        {"OUTPUT", OutPut, "yes", "Mainly needed when generating backdoors."},
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/exploits/lithaldll_listener.fn",
         rows,
-        ModuleHelpInfo{Example: "  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func WirelessOptions(IFace, LHost, OutPutDir string) {
     rows := [][]string{
         {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
-        {"LHOST", LHost, "yes", "Listener port to handle beacons."},
-        {"OUTPUT", OutPutDir, "yes", "OutPut location."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
     }
 
     fmt.Println(FormatModuleOptions(
@@ -2730,13 +2723,13 @@ func WirelessOptions(IFace, LHost, OutPutDir string) {
     ))
 }
 
-func CrackersOptions(Mode, RHost, WordListDir, UserName, PassWord string) { 
+func CrackersOptions(Mode, RHost, WordsListDir, UserName, PassWord string) { 
     rows := [][]string{
         {"MODE", Mode, "yes", "Attack mode (online/offline)."},
         {"RHOST", RHost, "yes", "Target host."},
         {"USERNAME", UserName, "yes", "Single username to test."},
         {"PASSWORD", PassWord, "yes", "Single password to test."},
-        {"WORDLIST", WordListDir, "yes", "Path to wordlist."},
+        {"WORDLIST", WordsListDir, "yes", "Path to wordlist."},
     }
 
     fmt.Println(FormatModuleOptions(
@@ -2761,7 +2754,7 @@ func TorsocksOptions() {
 func ResponderOptions(Mode, LPort, RHost, LHost string) {
     rows := [][]string{
         {"MODE", Mode, "yes", "Mode to launch. All to attack all subnet, Single to attack only one target."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"RHOST", RHost, "no", "Target to attack. Host's ipadress."},
         {"LHOST", LHost, "no", "Mainly needed when generating backdoors and launching Listeners. Default to your eth0 ip."},
     }
@@ -2769,56 +2762,56 @@ func ResponderOptions(Mode, LPort, RHost, LHost string) {
     fmt.Println(FormatModuleOptions(
         "src/networks/responder.fn",
         rows,
-        ModuleHelpInfo{Example: "  set MODULE responder\n  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set MODULE responder\n  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func BeefKillOptions(Mode, LPort, Spoofer, RHost, LHost string) {
     rows := [][]string{
         {"MODE", Mode, "yes", "Mode to launch. All to attack all subnet, Single to attack only one target."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"RHOST", RHost, "no", "Target to attack. Host's ipadress."},
         {"LHOST", LHost, "no", "Mainly needed when generating backdoors and launching Listeners. Default to your eth0 ip."},
-        {"SPOOFER", Spoofer, "yes", "Listener port to handle beacons."},
+        {"SPOOFER", Spoofer, "yes", "Listening port to handle beacons or 'revese shell connections'."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/networks/beefkill.fn",
         rows,
-        ModuleHelpInfo{Example: "  set MODULE beefkill\n  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set MODULE beefkill\n  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
 func ToxssInxOptions(Mode, LPort, Spoofer, RHost, LHost string) {
     rows := [][]string{
         {"MODE", Mode, "yes", "Mode to launch. All to attack all subnet, Single to attack only one target."},
-        {"LPORT", LPort, "yes", "Listener port to handle beacons."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
         {"RHOST", RHost, "no", "Target to attack. Host's ipadress."},
         {"LHOST", LHost, "no", "Mainly needed when generating backdoors and launching Listeners. Default to your eth0 ip."},
-        {"SPOOFER", Spoofer, "yes", "Listener port to handle beacons."},
+        {"SPOOFER", Spoofer, "yes", "Listening port to handle beacons or 'revese shell connections'."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/networks/toxssinx.fn",
         rows,
-        ModuleHelpInfo{Example: "  set MODULE toxssinx\n  set LHOST " + LHost + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set MODULE toxssinx\n  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
-func WebsitesOptions(RHost, ResultDir, Proxies, UserName, PassWord, WordListDir string) {
+func WebsitesOptions(RHost, ResultDir, Proxies, UserName, PassWord, WordsListDir string) {
     rows := [][]string{
         {"RHOST", RHost, "yes", "The host to be attacked eg. website."},
-        {"OUTPUT", ResultDir, "no", "OutPut location."},
         {"PROXIES", Proxies, "no", "Just incase you want to run your traffic through proxies.."},
         {"USERNAME", UserName, "no", "Single user name to attack on a give service."},
         {"PASSWORD", PassWord, "no", "Single password to use while attacking a given name or password."},
-        {"WORDLIST", WordListDir, "yes", "A list of user names or passwords to be used. -> (Give full path)."},
+        {"OUTPUTLOGS", ResultDir, "no", "OutPut location."},
+        {"WORDSLISTS", WordsListDir, "yes", "A list of user names or passwords to be used. -> (Give full path)."},
     }
 
     fmt.Println(FormatModuleOptions(
         "src/websites/bugbounty_pentest.fn",
         rows,
-        ModuleHelpInfo{Example: "  set WORDLIST " + WordListDir + "\n  run\n"},
+        ModuleHelpInfo{Example: "  set WORDLIST " + WordsListDir + "\n  run\n"},
     ))
 }
 

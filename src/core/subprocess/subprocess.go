@@ -20,8 +20,10 @@ var (
     err error
     mu sync.Mutex
     logFile *os.File
-    logDir = "/root/.afr3/logs/"
+    Version    = "3"
+    Dversion   = Version + ".0.4-dev"
     flag, shell, process, initialDir, currentDir string
+    logDir     = filepath.Join("/root/.afr" + Version, "logs")
 )
 
 func init() {
@@ -60,7 +62,7 @@ func creatLogDir() {
         if homeDir == "" {
             return
         }
-        logDir = homeDir + "/.afr3/logs/"
+        logDir = filepath.Join(homeDir, "/.afr" + Version, "logs")
     }
 
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
