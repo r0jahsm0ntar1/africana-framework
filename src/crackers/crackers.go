@@ -40,7 +40,7 @@ func CrackersPentest() {
         fmt.Printf("%s%s%safr3%s crackers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
-        buildParts := strings.Fields(strings.ToLower(utils.Input))
+        buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue
         }
@@ -323,10 +323,6 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    if utils.RHost == "" {
-        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        return
-    }
     CrackersPenFunctions(Function, utils.RHost)
 }
 
@@ -340,7 +336,7 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
             //LPORT: utils.LPort,
             //HPORT: utils.HPort,
             RHOST: utils.RHost,
-            LHOST: utils.LHost,
+            //LHOST: utils.LHost,
             //DISTRO: utils.Distro,
             //SCRIPT: utils.Script,
             OUTPUTLOGS: utils.CrackersLogs,
@@ -366,7 +362,7 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
             //LPORT: utils.LPort,
             //HPORT: utils.HPort,
             RHOST: utils.RHost,
-            LHOST: utils.LHost,
+            //LHOST: utils.LHost,
             //DISTRO: utils.Distro,
             //SCRIPT: utils.Script,
             OUTPUTLOGS: utils.CrackersLogs,
@@ -383,16 +379,32 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "ssh": HydraSsh,
-        "ftp": HydraFtp,
-        "smb": HydraSmb,
+      "ssh":    func() {HydraSsh(utils.RHost)},
+      "ftp":    func() {HydraFtp(utils.RHost)},
+      "smb":    func() {HydraSmb(utils.RHost)},
+      "rdp":    func() {HydraRdp(utils.RHost)},
+      "ldap":   func() {HydraLdap(utils.RHost)},
+      "telnet": func() {HydraTelnet(utils.RHost)},
+      "http":   func() {HydraHttp(utils.RHost)},
+      "https":  func() {HydraHttp(utils.RHost)},
+      "pcap":   func() {AirCrackng(utils.Pcap)},
+      "ntlm":   func() {HydraNtlm(utils.RHost)},
+      "hash":   func() {HashBuster(utils.Hashes)},
 
-        "1": HydraSsh,
-        "2": HydraFtp,
-        "3": HydraSmb,
+        "1": func() {HydraSsh(utils.RHost)},
+        "2": func() {HydraFtp(utils.RHost)},
+        "3": func() {HydraSmb(utils.RHost)},
+        "4": func() {HydraRdp(utils.RHost)},
+        "5": func() {HydraLdap(utils.RHost)},
+        "6": func() {HydraTelnet(utils.RHost)},
+        "7": func() {HydraHttp(utils.RHost)},
+        "8": func() {HydraHttp(utils.RHost)},
+        "9": func() {AirCrackng(utils.Pcap)},
+       "10": func() {HydraNtlm(utils.RHost)},
+       "11": func() {HashBuster(utils.Hashes)},
     }
 
-    textCommands := []string{"ssh", "ftp", "smb"}
+    textCommands := []string{"ssh", "ftp", "smb", "rdp", "ldap", "smtp", "telnet", "http", "https", "pcap", "ntlm", "hash"}
 
     if action, exists := commands[Function]; exists {
         action()
@@ -400,7 +412,7 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     }
 
     if num, err := strconv.Atoi(Function); err == nil {
-        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-11.\n", bcolors.Yellow, bcolors.Endc, num)
         menus.ListCrackersFunctions()
         return
     }
@@ -418,158 +430,115 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     menus.ListCrackersFunctions()
 }
 
-func AirCrackng() {
-    subprocess.Popen(`aircrack-ng %s -w %s`, utils.Pcap, utils.WordsList)
+func AirCrackng(Pcap string) {
+    subprocess.Popen("aircrack-ng %s -w %s", utils.Pcap, utils.WordsList)
     fmt.Println()
 }
 
-func JohnCrackng() {
-    subprocess.Popen(`john %s --wordlist=%s`, utils.Pcap, utils.WordsList)
+func JohnCrackng(Pcap string) {
+    subprocess.Popen("john %s --wordlist=%s", utils.Pcap, utils.WordsList)
     fmt.Println()
 }
 
-func CyberBrute() {
-    subprocess.Popen(`cd %s/crackers/cyberbrute; bash cyberbrute.sh %s`, utils.ToolsDir, utils.RHost)
+func CyberBrute(RHost string) {
+    subprocess.Popen("cd %s/cyberbrute; bash cyberbrute.sh %s", utils.CrackersTools, utils.RHost)
     fmt.Println()
 }
 
-func HashBuster() {
-    subprocess.Popen(`cd %scrackers/hash-buster; python3 cracker.py -t 10 %s`, utils.ToolsDir, utils.Hashes)
+func HashBuster(Hashes string) {
+    subprocess.Popen("cd %s/hash-buster; python3 cracker.py -t 10 %s", utils.CrackersTools, utils.Hashes)
     fmt.Println()
 }
 
-func HydraSsh() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SSHcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraSsh_outfile.txt -u ssh://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SSHcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraSsh_outfile.txt -u ssh://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraSsh(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sSSHcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraSsh_outfile.txt -u ssh://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraFtp() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "FTPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraFtp_outfile.txt -u ftp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "FTPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraFtp_outfile.txt -u ftp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraFtp(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sFTPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraFtp_outfile.txt -u ftp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraSmb() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SMBcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraSmb_outfile.txt -u smb://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SMBCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraSmb_outfile.txt -u smb://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraSmb(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sSMBcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSmb_outfile.txt -u smb://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraRdp() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "RDPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "RDPCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraRdp(RHost string) {
+    fmt.Printf("\n%s[*] %sRDPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
+}
+
+func HydraLdap(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sLDAPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraLdap_outfile.txt -u ldap://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraLdap() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "LDAPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraLdap_outfile.txt -u ldap://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "LDAPCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraLdap_outfile.txt -u ldap://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraSmtp(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sSMTPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSmtp_outfile.txt -u smtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraSmtp() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SMTPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraSmtp_outfile.txt -u smtp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SMTPCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraSmtp_outfile.txt -u smtp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraSnmtp(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sSNMTPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSnmtp_outfile.txt -u snmtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraSnmtp() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SNMTPCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraSnmtp_outfile.txt -u snmtp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "SNMTPCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraSnmtp_outfile.txt -u snmtp://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraTelnet(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sTELNETCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraTelnet_outfile.txt -u telnet://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraTelnet() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "TELNETCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraTelnet_outfile.txt -u telnet://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "TELNETCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraTelnet_outfile.txt -u telnet://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
+func HydraHttp(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
+    fmt.Printf("\n%s[*] %sFTPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraHttps_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
 }
 
-func HydraHttps() {
-    switch strings.ToLower(utils.Input) {
-    case "1":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "FTPcracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -l %s -P %s -f -o %s/HydraHttps_outfile.txt -u https://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    case "2":
-        fmt.Printf(bcolors.Endc + "\n[" + bcolors.Cyan + "HTTPSCracker has began" + bcolors.Endc + "] [" + bcolors.Green + "Target" + bcolors.Endc + ": " + bcolors.Yellow + "%s" + bcolors.Endc + "]\n" + bcolors.Endc, utils.RHost)
-        subprocess.Popen(`hydra -t 4 -L %s -P %s -f -o %s/HydraHttps_outfile.txt -u http://%s`, utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
-        fmt.Println()
-        return
-    }
-}
 
+func HydraNtlm(RHost string) {
+    fmt.Printf("\n%s[*] %sNTLMcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
+    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraNtlm_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    return
+}

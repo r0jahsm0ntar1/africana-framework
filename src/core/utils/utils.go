@@ -88,16 +88,21 @@ var (
     WebCrackersLogs = filepath.Join(OutPutDir, "websites")
     GeneratorDir = filepath.Join(ExploitsLogs, "generator")
 
+    WirelessTools = filepath.Join(ToolsDir, "wireless")
+    ExploitsTools = filepath.Join(ToolsDir, "exploits")
+    PhishersTools = filepath.Join(ToolsDir, "phishers")
+    CrackersTools = filepath.Join(ToolsDir, "crackers")
+    WeBountyTools = filepath.Join(ToolsDir, "websites")
 
     IconsDir = filepath.Join(TemplateDir, "icons")
     WinresDir = filepath.Join(TemplateDir, "rcedits")
     WinresInit = filepath.Join(TemplateDir, "rcedits", "winres")
-    TemplateDir = filepath.Join(ToolsDir, "exploits", "payload_templates")
+    TemplateDir = filepath.Join(ExploitsTools, "payload_templates")
 
     OutPutBuild = filepath.Join(GeneratorDir, BuildName)
-    WListeners = filepath.Join(ToolsDir, "exploits", "windows", "listeners")
-    AListeners = filepath.Join(ToolsDir, "exploits", "androids", "listeners")
-    ObfusCatorsDir = filepath.Join(ToolsDir, "exploits", "windows", "obfuscators")
+    WListeners = filepath.Join(ExploitsTools, "windows", "listeners")
+    AListeners = filepath.Join(ExploitsTools, "androids", "listeners")
+    ObfusCatorsDir = filepath.Join(ExploitsTools, "windows", "obfuscators")
 
     WordsList = filepath.Join(WordsListDir, "everything.txt")
     ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")

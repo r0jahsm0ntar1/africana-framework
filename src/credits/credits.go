@@ -17,9 +17,9 @@ func Contributors() {
 
     fmt.Printf(`%s%s%s
 Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)
-    fmt.Printf(bcolors.Endc + `
+    fmt.Printf(`%s
 1. torsocks
-` + bcolors.Endc)
+`, bcolors.Endc)
 
     fmt.Printf(`
 %s%s%sInternal network attack vectors%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)

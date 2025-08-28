@@ -430,14 +430,14 @@ func AnonimityFunctions(Function string, args ...interface{}) {
 
 func configTorrc() {
     if strings.Contains(flaG(), "torsocks") {
-        fmt.Print(bcolors.Cyan + "\n              Torsocks: " + bcolors.Endc + "is already running ...\n" + bcolors.Endc)
+        fmt.Printf("\n%s[*] %sTorsocks: %sis already running ...\n", bcolors.Green, bcolors.Cyan, bcolors.Endc)
         //os.Exit(1)
     }
 
     rSwitch := cypheR(0, 0)
 
     if _, err := exec.LookPath("tor"); err != nil {
-        fmt.Printf("\n%sTor isn't installed, install it with 'sudo apt install tor'%s\n", bcolors.BrightRed, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sTor isn't installed. Try %s'sudo apt install tor'%s\n", bcolors.Red, bcolors.Endc, bcolors.Green, bcolors.Endc)
         //os.Exit(1)
     }
 
@@ -452,10 +452,11 @@ func configTorrc() {
         for _, element := range torrString {
             file.WriteString(element + "\n")
         }
-        fmt.Printf("%sDone ...%s\n", bcolors.BrightCyan, bcolors.Endc)
+        fmt.Printf("\n%s[*] %sDone: %sConfiguring TORRC file ...\n", bcolors.Green, bcolors.Cyan, bcolors.Endc)
+
     } else {
-        fmt.Println(bcolors.BrightBlue + "\n(" + bcolors.BrightYellow + "Configuring Torrc ..." + bcolors.Endc)
-        time.Sleep(400 * time.Millisecond)
+        fmt.Printf("\n%s[*] %sConfiguring: %sTorrc ...\n", bcolors.Green, bcolors.Cyan, bcolors.Endc)
+
         cmd := exec.Command("cp", "/etc/tor/torrc", "/etc/tor/torrc.bak_torsocks")
         cmd.Run()
         file, err := os.Create("/etc/tor/torrc")
@@ -467,7 +468,7 @@ func configTorrc() {
         for _, element := range torrString {
             file.WriteString(element + "\n")
         }
-        fmt.Print("                                                    " + bcolors.Green + "Done " + bcolors.BrightYellow + "✔" + bcolors.BrightBlue +")\n" + bcolors.Endc)
+        fmt.Printf("\n%s[*] %sDone: %sConfiguring TORRC file ...\n", bcolors.Green, bcolors.Cyan, bcolors.Endc)
     }
     resolvConfig(rSwitch)
 }

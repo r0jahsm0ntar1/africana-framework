@@ -98,7 +98,7 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoWireless},
         {[]string{"m", "menu"}, menus.MenuFive},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.WirelessOptions(utils.WlanIFace, utils.LHost, utils.OutPutDir)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.WirelessOptions(utils.WlanIFace, utils.LHost, utils.WirelessLogs)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListWirelessFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run wifite", "use wifite", "exec wifite", "start wifite", "launch wifite", "exploit wifite", "execute wifite"}, func() {WirelessPenFunctions("wifite")}},
@@ -432,20 +432,20 @@ func WirelessPenFunctions(Function string, args ...interface{}) {
 }
 
 func AirGeddon() {
-    subprocess.Popen(`airgeddon`)
+    subprocess.Popen("airgeddon")
 }
 
 func Fluxion() {
-    subprocess.Popen(`cd %s/wireless/fluxion/; bash fluxion.sh`, utils.ToolsDir)
+    subprocess.Popen("cd %s/fluxion/; bash ./fluxion.sh", utils.WirelessTools)
 }
 
 func WifiPumpkin() {
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`wifipumpkin3`)
+        subprocess.Popen("wifipumpkin3")
         utils.ClearScreen()
     }
-    subprocess.Popen(`wifipumpkin3`)
+    subprocess.Popen("wifipumpkin3")
 }
 
 func WifiPumpkin3(WlanIFace, Ssid string) {
@@ -455,15 +455,15 @@ func WifiPumpkin3(WlanIFace, Ssid string) {
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen(`wifipumpkin3; clear`)
+        subprocess.Popen("wifipumpkin3; clear")
     }
     subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxies noproxy; start"`, utils.WlanIFace, utils.Ssid)
 }
 
 func Wifite(WlanIFace string) {
-    subprocess.Popen(`wifite -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120`, utils.WlanIFace, utils.RokyPath)
+    subprocess.Popen("cd %s/wifite/; python3 ./wifite.py -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120", utils.WirelessTools, utils.WlanIFace, utils.RokyPath)
 }
 
 func Bettercap(WlanIFace string) {
-    subprocess.Popen(`airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval "set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file /usr/local/opt/handshakes; wifi.deauth all"`, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace)
+    subprocess.Popen("airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file %s/handshakes; wifi.deauth all'", utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WirelessLogs)
 }
