@@ -108,7 +108,7 @@ var (
     ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")
 
     BaseDir, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordsListDir = DirLocations()
-    Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
+    baseDir, Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
 )
 
 type InterfaceInfo struct {
@@ -978,11 +978,12 @@ func ClearJunks() {
     return
 }
 
-func LocateTool(Tool string) {
-    if _, err := exec.LookPath(Tool); err != nil {
-        fmt.Printf("%s[!] %s%s%s %sisn't installed, Try %s'apt install %s.'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
-        return
+func LocateTool(tool string) error {
+    if _, err := exec.LookPath(tool); err != nil {
+        fmt.Printf("%s[!] %s%s%s %sisn't installed. Try %s'apt install %s'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, tool, bcolors.Endc, bcolors.Green, tool, bcolors.Endc)
+        return err
     }
+    return nil
 }
 
 func Sleep() {
@@ -990,7 +991,12 @@ func Sleep() {
 }
 
 func DirLocations() (string, string, string, string, string, string, string, string) {
-    baseDir := filepath.Join("/root/.afr" + subprocess.Version)
+    if runtime.GOOS == "windows" {
+        baseDir = filepath.Join(os.Getenv("ProgramData"), ".afr" + subprocess.Version)
+    } else {
+        baseDir = filepath.Join("/root", ".afr" + subprocess.Version)
+    }
+
     if !subprocess.IsRoot() {
         if homeDir := subprocess.GetHomeDir(); homeDir != "" {
             baseDir = filepath.Join(homeDir, ".afr" + subprocess.Version)
@@ -998,9 +1004,9 @@ func DirLocations() (string, string, string, string, string, string, string, str
             return "", "", "", "", "", "", "", ""
         }
     }
-
     certDir := filepath.Join(baseDir, "certs")
     toolsDir := filepath.Join(baseDir, "africana-base")
+
     return baseDir, certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
 }
 
