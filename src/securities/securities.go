@@ -410,7 +410,7 @@ func AnonimityFunctions(Function string, args ...interface{}) {
     }
 
     if num, err := strconv.Atoi(Function); err == nil {
-        fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are from 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+        fmt.Printf("%s[!] %sNumber %s%d%s is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, bcolors.Red, num, bcolors.Endc)
         menus.ListTorsocksFunctions()
         return
     }

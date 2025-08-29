@@ -3040,11 +3040,11 @@ Console options:
     -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
     -k, --credits       Show who developes and mentains africana-framework and (third party tools developers).
     -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework.
-    -g, --guide         Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
+    -g, --guide         Watch tutarials on %sYouTube%s: %s%s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     -q, --quite         Start africana without banner and missing tools checking.
     -h, --help          Show this help message and exit.
 
-`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Red, bcolors.Endc)
 }
 
 func HelpInfoMenuZero() {
@@ -3056,7 +3056,7 @@ func HelpInfoMenuZero() {
     clear               Clear the working screen or use with flag ('history' to clear history).
     exit                Exit the console.
     features            Display the list of not yet released features that can be opted in to.
-    guide               Watch tutarials on %sYouTube %s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
+    guide               Watch tutarials on %sYouTube%s: %s%s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     history             Show command history.
     menu                Print the menu of the current phase. Alias to letter(m).
     quit                Exit the console.
@@ -3092,7 +3092,7 @@ func HelpInfoMenuZero() {
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Red, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func UpsentTools() {

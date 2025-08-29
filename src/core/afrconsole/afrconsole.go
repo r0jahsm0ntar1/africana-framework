@@ -186,7 +186,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
         action()
     } else {
         if num, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+            fmt.Printf("%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
             menus.ListMainFunctions()
             return
         }
@@ -630,7 +630,7 @@ func africanaManual(Function string, args ...interface{}) {
             //SCRIPT: utils.Script,
             //OUTPUTLOGS: utils.GeneratorDir,
             //PROXIES: utils.Proxies,
-            FUNCTION: Function,
+            //FUNCTION: Function,
             //RECONDIR: utils.ReconDir,
             //LISTENER: utils.Listener,
             //PROTOCOL: utils.Protocol,
@@ -655,7 +655,7 @@ func africanaManual(Function string, args ...interface{}) {
             //DISTRO: utils.Distro,
             //SCRIPT: utils.Script,
             //OUTPUTLOGS: utils.GeneratorDir,
-            FUNCTION: Function,
+            //FUNCTION: Function,
             //RECONDIR: utils.ReconDir,
             //LISTENER: utils.Listener,
             //PROTOCOL: utils.Protocol,
@@ -699,7 +699,7 @@ func africanaManual(Function string, args ...interface{}) {
         action()
     } else {
         if num, err := strconv.Atoi(Function); err == nil {
-            fmt.Printf("\n%s[!] %sNumber %d is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, num)
+            fmt.Printf("%s[!] %sNumber %s'%d'%s is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, bcolors.Red, num, bcolors.Endc)
             menus.ListMainFunctions()
             return
         }

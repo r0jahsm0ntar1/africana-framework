@@ -26,7 +26,7 @@ default: build
 
 # Build for current system
 build:
-	@echo "Building $(APP_NAME) for current system..."
+	@echo "[+] Building $(APP_NAME) for current system ..."
 	@mkdir -p $(BUILD_DIR)
 	@for platform in $(PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
@@ -41,6 +41,10 @@ build:
 distro:
 	@OS_NAME=$(filter-out $@,$(MAKECMDGOALS)); \
 	if [ -z "$$OS_NAME" ]; then \
+		echo " ,__,       ";\
+		echo " (oo)____   ";\
+		echo " (__)    )\ ";\
+		echo "    ||--||  ";\
 		echo "Usage: make distro <os>"; \
 		echo "Supported OS: linux, windows, darwin, all"; \
 		exit 1; \
@@ -63,17 +67,23 @@ distro:
 
 # Clean output
 clean:
-	@echo "Cleaning build directory..."
+	@echo "[+] Cleaning build directory ..."
 	@go clean -r -x -cache
 	@rm -rf $(BUILD_DIR)
 
 # Native run helper
 run:
 	@BIN=$(BUILD_DIR)/$(APP_NAME)-$(shell uname -s | tr A-Z a-z)-$(shell uname -m); \
-	echo "Running $$BIN..."; \
+	echo "[+] Running $$BIN..."; \
 	chmod +x $$BIN && $$BIN
 
 # Prevent Make from trying to treat distro targets like files
 .PHONY: default build distro clean run linux windows darwin all
 %:
 	@:
+
+#make                # Builds for your current OS (auto-detected)
+#make distro linux   # Builds for Linux
+#make distro darwin  # Builds for macOS
+#make distro windows # Builds for Windows
+#make distro all     # Builds for all OS/arch combinations
