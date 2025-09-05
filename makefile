@@ -1,3 +1,43 @@
+# Colors - Basic
+Endc   := \033[0m
+Bold   := \033[1m
+Dim    := \033[2m
+Italic := \033[3m
+Underl := \033[4m
+Blink  := \033[5m
+Blink2 := \033[6m
+Invert := \033[7m
+Hidden := \033[8m
+Strike := \033[9m
+
+# Colors - Standard
+Black   := \033[30m
+Red     := \033[31m
+Green   := \033[32m
+Yellow  := \033[33m
+Blue    := \033[34m
+Magenta := \033[35m
+Cyan    := \033[36m
+White   := \033[37m
+
+# Colors - Bright
+Grey          := \033[90m
+BrightRed     := \033[91m
+BrightGreen   := \033[92m
+BrightYellow  := \033[93m
+BrightBlue    := \033[94m
+BrightMagenta := \033[95m
+BrightCyan    := \033[96m
+BrightWhite   := \033[97m
+
+# Define banner as a shell function
+define PRINT_BANNER
+	echo "${BrightYellow} ,__,       ${Endc}"; \
+	echo "${BrightYellow} (oo)____   ${Endc}"; \
+	echo "${BrightYellow} (__)    )\ ${Endc}"; \
+	echo "${BrightYellow}    ||--||  ${Endc}";
+endef
+
 # Project name
 APP_NAME := afrconsole
 
@@ -26,64 +66,109 @@ default: build
 
 # Build for current system
 build:
-	@echo "[+] Building $(APP_NAME) for current system ..."
+	@echo "${BrightGreen}${Bold}[*] ${Endc}Detecting system ...${Endc}"
+	@echo "${BrightBlue}${Bold}[+] ${Endc}Building ${Green}${APP_NAME}${Endc} for current system ...${Endc}"
 	@mkdir -p $(BUILD_DIR)
 	@for platform in $(PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
 		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
-		echo " > $$OUT"; \
-		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT . || exit 1; \
+		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
+		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
+		if [ $$? -eq 0 ]; then \
+			echo "${BrightGreen}${Bold}[*] ${Endc}Build almost complete ...${Endc}"; \
+		else \
+			echo "${BrightRed}${Blink}[!] Build failed${Endc}"; \
+			exit 1; \
+		fi; \
 	done
+	@echo "${BackGreen}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Build for specified OS (e.g., make distro windows)
 distro:
 	@OS_NAME=$(filter-out $@,$(MAKECMDGOALS)); \
 	if [ -z "$$OS_NAME" ]; then \
-		echo " ,__,       ";\
-		echo " (oo)____   ";\
-		echo " (__)    )\ ";\
-		echo "    ||--||  ";\
-		echo "Usage: make distro <os>"; \
-		echo "Supported OS: linux, windows, darwin, all"; \
+		$(PRINT_BANNER) \
+		echo "${BrightRed}${Bold}Usage:${Endc} make distro <os>"; \
+		echo "${BrightBlue}${Underl}Supported OS:${Endc} linux, windows, darwin, all"; \
 		exit 1; \
 	fi; \
 	if [ "$$OS_NAME" = "all" ]; then \
 		PLATFORMS="$(ALL_TARGETS)"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightGreen}${Underl}all platforms${BrightBlue} ...${Endc}"; \
 	else \
 		PLATFORMS="$(call expand_targets,$$OS_NAME)"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightCyan}${Underl}$$OS_NAME${BrightBlue} ...${Endc}"; \
 	fi; \
-	echo "Building for: $$OS_NAME"; \
 	mkdir -p $(BUILD_DIR); \
 	for platform in $$PLATFORMS; do \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
 		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
-		echo " > $$OUT"; \
-		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT . || exit 1; \
+		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
+		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
+		if [ $$? -eq 0 ]; then \
+			echo "${BrightGreen}${Bold}[*] ${Endc}Build almost complete ...${Endc}"; \
+		else \
+			echo "${BrightRed}${Blink}[!] Build failed${Endc}"; \
+			exit 1; \
+		fi; \
 	done
+	@echo "${BackGreen}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Clean output
 clean:
-	@echo "[+] Cleaning build directory ..."
+	@echo "${BrightYellow}${Bold}[!] ${Endc}Cleaning build directory ...${Endc}"
 	@go clean -r -x -cache
 	@rm -rf $(BUILD_DIR)
+	@echo "${BrightBlue}${Bold}[+] ${Endc}Clean completed!${Endc}"
 
 # Native run helper
 run:
-	@BIN=$(BUILD_DIR)/$(APP_NAME)-$(shell uname -s | tr A-Z a-z)-$(shell uname -m); \
-	echo "[+] Running $$BIN..."; \
-	chmod +x $$BIN && $$BIN
+	@GOOS=$(shell uname -s | tr A-Z a-z); \
+	GOARCH=$(shell uname -m); \
+	# Map x86_64 to amd64 if needed \
+	if [ "$$GOARCH" = "x86_64" ]; then GOARCH="amd64"; fi; \
+	EXT=; \
+	if [ "$$GOOS" = "windows" ]; then EXT=".exe"; fi; \
+	BIN=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
+	if [ ! -f "$$BIN" ]; then \
+		echo "${BrightRed}${Blink}[!] ${Endc}Binary not found: ${BrightCyan}$$BIN${Endc}"; \
+		echo "${BrightBlue}Run ${BrightCyan}make build${BrightBlue} first${Endc}"; \
+		exit 1; \
+	fi; \
+	echo "${BrightBlue}${Bold}[+] ${Endc}Running ${Green}$$BIN ${Endc}...${Endc}"; \
+	chmod +x $$BIN; \
+	./$$BIN -q; \
+	EXIT_CODE=$$?; \
+	if [ $$EXIT_CODE -eq 0 ]; then \
+		echo "${Green}${Bold}[*] ${Endc}Execution completed successfully! ...${Endc}"; \
+	else \
+		echo "${BackBrightRed}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
+	fi
+
+# Help target
+help:
+	@echo "${BrightCyan}${Bold}${Underl}Available commands:${Endc}"
+	@echo "  ${BrightGreen}make${Endc}           - Build for current system"
+	@echo "  ${BrightGreen}make build${Endc}     - Build for current system"
+	@echo "  ${BrightGreen}make distro <os>${Endc} - Build for specific OS"
+	@echo "  ${BrightGreen}make clean${Endc}     - Clean build artifacts"
+	@echo "  ${BrightGreen}make run${Endc}       - Run the built binary"
+	@echo "  ${BrightGreen}make help${Endc}      - Show this help"
+	@echo ""
+	@echo "${BrightYellow}${Bold} Examples:${Endc}"
+	@echo "  ${BrightWhite}make distro linux${Endc}   - ${Dim}Build for Linux${Endc}"
+	@echo "  ${BrightWhite}make distro windows${Endc} - ${Dim}Build for Windows${Endc}"
+	@echo "  ${BrightWhite}make distro darwin${Endc}  - ${Dim}Build for macOS${Endc}"
+	@echo "  ${BrightWhite}make distro all${Endc}     - ${Dim}Build for all platforms${Endc}"
+	@echo ""
+	@echo "${BrightBlue}Current OS: ${BrightCyan}$(shell uname -s)${Endc}"
+	@echo "${BrightBlue}Current Arch: ${BrightCyan}$(shell uname -m)${Endc}"
 
 # Prevent Make from trying to treat distro targets like files
-.PHONY: default build distro clean run linux windows darwin all
+.PHONY: default build distro clean run help banner linux windows darwin all
 %:
 	@:
-
-#make                # Builds for your current OS (auto-detected)
-#make distro linux   # Builds for Linux
-#make distro darwin  # Builds for macOS
-#make distro windows # Builds for Windows
-#make distro all     # Builds for all OS/arch combinations

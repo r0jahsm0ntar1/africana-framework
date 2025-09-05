@@ -1042,7 +1042,7 @@ For thine is the kingdom, and the power, and the glory, for ever. Amen.
 `, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
 }
 
-func ScriptureNarators() {
+func ScriptureNarrators() {
     CommandMents(); TheLordsPrayer()
     fmt.Printf(`
 Life Tip.: %s%sDefeat the devil by fasting and praying ...%s

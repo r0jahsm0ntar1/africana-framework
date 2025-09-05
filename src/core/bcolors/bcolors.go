@@ -85,9 +85,7 @@ func init() {
 
 func Colors(args ...string) string {
     colors := []string{
-        BrightRed, BrightGreen, BrightYellow, BrightBlue,
-        BrightMagenta, BrightCyan, BrightWhite, Yellow,
-        Magenta, Cyan, Green, Blue, Red,
+        BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite, Yellow, Magenta, Cyan, Green, Blue, Red,
         XTERM_FG[9],
         XTERM_FG[10],
         XTERM_FG[11],

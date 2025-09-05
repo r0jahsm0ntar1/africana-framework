@@ -43,7 +43,7 @@ func init() {
     }
 }
 
-func IsRoot() bool {
+func CheckRoot()bool {
     return os.Geteuid() == 0
 }
 
@@ -57,7 +57,7 @@ func GetHomeDir() string {
 }
 
 func creatLogDir() {
-    if !IsRoot() {
+    if !CheckRoot(){
         homeDir := GetHomeDir()
         if homeDir == "" {
             return
@@ -123,13 +123,13 @@ func executeFullCommand(command string) {
     }()
 
     if err := cmd.Start(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s%s_", bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s_", bcolors.BrightRed, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s_", bcolors.BrightRed, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 
@@ -147,7 +147,7 @@ func openLogFile() {
 
     logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s_", bcolors.BrightRed, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 }

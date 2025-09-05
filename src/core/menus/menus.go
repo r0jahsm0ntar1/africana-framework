@@ -231,7 +231,7 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
 
     for i, item := range menuItems {
         num := fmt.Sprintf("%2d", i + 1)
-        fmt.Printf("%s %s. %s%s\n", bcolors.BrightBlue, num, bcolors.Endc, item)
+        fmt.Printf("%s %s. %s%s.\n", bcolors.BrightBlue, num, bcolors.Endc, item)
     }
 
     if backOption {
@@ -250,36 +250,49 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
 func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool) {
     printedAny := false
 
-    printIfSet := func(name, value string) {
-        if value != "" {
-            fmt.Printf("%s%s%s -> %s\n", bcolors.Cyan, name, bcolors.Endc, value)
-            printedAny = true
+    fields := []struct {
+        name  string
+        value string
+    }{
+        {"MODE", opts.MODE},
+        {"IFACE", opts.IFACE},
+        {"INNERICON", opts.INNERICON},
+        {"OUTERICON", opts.OUTERICON},
+        {"RHOST", opts.RHOST},
+        {"LHOST", opts.LHOST},
+        {"DISTRO", opts.DISTRO},
+        {"LPORT", opts.LPORT},
+        {"HPORT", opts.HPORT},
+        {"SCRIPT", opts.SCRIPT},
+        {"PROTOCOL", opts.PROTOCOL},
+        {"LISTENER", opts.LISTENER},
+        {"TOOLSDIR", opts.TOOLSDIR},
+        {"OUTPUTLOGS", opts.OUTPUTLOGS},
+        {"PROXIES", opts.PROXIES},
+        {"FUNCTION", opts.FUNCTION},
+        {"RECONDIR", opts.RECONDIR},
+        {"BUILDNAME", opts.BUILDNAME},
+        {"OBFUSCATOR", opts.OBFUSCATOR},
+    }
+
+    hasAnyValue := false
+    for _, field := range fields {
+        if field.value != "" {
+            hasAnyValue = true
+            break
         }
     }
 
-    if opts.MODE != "" || opts.IFACE != "" || opts.INNERICON != "" || opts.OUTERICON != "" || opts.RHOST != "" || opts.LHOST != "" || opts.DISTRO != "" || opts.LPORT != "" || opts.HPORT != "" || opts.SCRIPT != "" || opts.PROTOCOL != "" || opts.LISTENER != "" || opts.TOOLSDIR != "" || opts.OUTPUTLOGS != "" || opts.PROXIES !="" || opts.FUNCTION !="" || opts.RECONDIR !="" || opts.BUILDNAME != "" || opts.OBFUSCATOR != "" {
+    if startWithNewLine && hasAnyValue {
         fmt.Println()
     }
 
-    printIfSet("MODE", opts.MODE)
-    printIfSet("IFACE", opts.IFACE)
-    printIfSet("LPORT", opts.LPORT)
-    printIfSet("HPORT", opts.HPORT)
-    printIfSet("RHOST", opts.RHOST)
-    printIfSet("LHOST", opts.LHOST)
-    printIfSet("DISTRO", opts.DISTRO)
-    printIfSet("SCRIPT", opts.SCRIPT)
-    printIfSet("PROXIES", opts.PROXIES)
-    printIfSet("FUNCTION", opts.FUNCTION)
-    printIfSet("RECONDIR", opts.RECONDIR)
-    printIfSet("LISTENER", opts.LISTENER)
-    printIfSet("PROTOCOL", opts.PROTOCOL)
-    printIfSet("TOOLSDIR", opts.TOOLSDIR)
-    printIfSet("INNERICON", opts.INNERICON)
-    printIfSet("OUTERICON", opts.OUTERICON)
-    printIfSet("BUILDNAME", opts.BUILDNAME)
-    printIfSet("OBFUSCATOR", opts.OBFUSCATOR)
-    printIfSet("OUTPUTLOGS", opts.OUTPUTLOGS)
+    for _, field := range fields {
+        if field.value != "" {
+            fmt.Printf("%s%s%s -> %s\n", bcolors.BrightBlue, field.name, bcolors.Endc, field.value)
+            printedAny = true
+        }
+    }
 
     if printedAny && endWithNewLine {
         fmt.Println()
@@ -303,30 +316,30 @@ func MenuZero() {
 
 func MenuOne() {
     items := []string{
-        "Kali",
-        "Ubuntu",
-        "Arch",
-        "Macos",
-        "Android",
-        "Windows",
-        "Update",
-        "Repair",
-        "UnInstall",
+        "Set africana in KALI-LINUX",
+        "Install in UBUNTU-LINUX",
+        "Set in ARCH-LINUX and BLACK-ARCH",
+        "Install in MACOS systems",
+        "Set in ANDROID Termux",
+        "Install in WINDOWS systems",
+        "UPDATE africana to latest version",
+        "Repair africana framework if brocken",
+        "Completely UnInstall africana framework",
     }
     generateMenu(items, "", true)
 }
 
 func MenuTwo() {
     items := []string{
-        "Install all necesary anonymity tools and configure them",
-        "Start anonimity through tor",
-        "Check if all anonimity softwares are up and running",
+        "Install necesary torsocks tools",
+        "Start anonimity through tor network",
+        "Check if all anonimity softwares are running",
         "Check for external tor IP and status",
         "Display all outgoing traffick through proxies",
-        "Restart all tor services and reconnect afresh",
+        "Restart all tor services and reconnect",
         "Change your current exit node",
-        "Bring back all default Iptables and other configs files",
-        "Disconect from tor network and Kill all anonimty services",
+        "Bring back all default configs files",
+        "Disconect from tor network",
     }
     generateMenu(items, "", true)
 }
@@ -334,44 +347,41 @@ func MenuTwo() {
 func MenuThree() {
     items := []string{
         "Discover targets",
-        "Discover open ports",
-        "Start Vuln scan",
+        "Scan for open ports",
+        "Start Vuln scan on target",
         "Active directory recon",
         "Exploit active directory",
-        "Sniff packets",
+        "Sniff passing packets",
         "Launch killer Responder",
-        "Launch M.I.B",
-        "Start XSS Injection ",
+        "Launch M.I.B on devices",
+        "Start XSS Injection",
     }
     generateMenu(items, "", true)
 }
 
 func MenuFour() {
     items := []string{
-        "androrat",
-        "teardroid",
-        "blackjack",
-        "hoaxshell",
-        "shellz",
-        "ghost",
-        "chameleon",
-        "regsniper",
-        "lithaldll",
+        "Start androrat for androids",
+        "Launch teardroid for androids",
+        "Start blackjack to attack windows",
+        "Launch hoaxshell for windows systems",
+        "Generate reverse shells with shellz",
+        "Start ghost for .ps1 obfscations",
+        "Launch chameleon to obfscate .ps1",
+        "Start regsniper endgame generator",
+        "Launch lithaldll the killer DLL",
     }
     generateMenu(items, "", true)
 }
 
 func MenuFive() {
     items := []string{
-        "wifite",
-        "fluxion",
-        "bettercap",
-        "airgeddon",
-        "wifipumpkin",
-        "wifipumpkin3",
-        "Coming soon",
-        "Coming soon",
-        "Coming soon",
+        "Start wifite automated",
+        "Launch fluxion manual",
+        "Start bettercap wifi-killer",
+        "Launch airgeddon manual",
+        "Start wifipumpkin automated",
+        "Begin wifipumpkin in manual mode",
     }
     generateMenu(items, "", true)
 }
@@ -3040,11 +3050,11 @@ Console options:
     -x, --websites      Launch Web Penetration engines with free bugbounty automation function.
     -k, --credits       Show who developes and mentains africana-framework and (third party tools developers).
     -s, --verses        Scirptures. Launch chosen Bible verses as used in the framework.
-    -g, --guide         Watch tutarials on %sYouTube%s: %s%s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
+    -g, --guide         Watch tutarials on %sYouTube%s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     -q, --quite         Start africana without banner and missing tools checking.
     -h, --help          Show this help message and exit.
 
-`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Red, bcolors.Endc)
+`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
 }
 
 func HelpInfoMenuZero() {
@@ -3056,7 +3066,7 @@ func HelpInfoMenuZero() {
     clear               Clear the working screen or use with flag ('history' to clear history).
     exit                Exit the console.
     features            Display the list of not yet released features that can be opted in to.
-    guide               Watch tutarials on %sYouTube%s: %s%s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
+    guide               Watch tutarials on %sYouTube%s: %s%shttps://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1%s.
     history             Show command history.
     menu                Print the menu of the current phase. Alias to letter(m).
     quit                Exit the console.
@@ -3092,7 +3102,7 @@ func HelpInfoMenuZero() {
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Red, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func UpsentTools() {

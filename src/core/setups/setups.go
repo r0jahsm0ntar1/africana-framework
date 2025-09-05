@@ -215,7 +215,7 @@ func executeCommand(cmd string) bool {
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
         {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
         {[]string{"banner"}, banners.RandomBanners},
-        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutorials},
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
@@ -252,7 +252,7 @@ func executeCommand(cmd string) bool {
         {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run uninstall", "use uninstall", "exec uninstall", "start uninstall", "launch uninstall", "exploit uninstall", "execute uninstall"}, func() {SetupsFunction("uninstall", utils.Distro)}},
         {[]string{"? 9", "info 9", "help 9", "uninstall", "info uninstall", "help uninstall"}, menus.HelpInfoUninstall},
 
-        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarrators},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
 
@@ -490,7 +490,7 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
             //OUTERICON: utils.OuterIcon,
             //BUILDNAME: utils.BuildName,
             //OBFUSCATOR: utils.Obfuscator,
-        }, true, true)
+        }, true, false)
     }
 
     commands := map[string]func(){

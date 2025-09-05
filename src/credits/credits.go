@@ -11,9 +11,9 @@ import(
 )
 
 func Contributors() {
-    filename := filepath.Join(utils.ToolsDir, "hacktricks", "roadmap.txt")
-    delay := 0 * time.Millisecond
-    utils.ReadFileLetterByLetter(filename, delay)
+    Filename := filepath.Join(utils.ToolsDir, "hacktricks", "roadmap.txt")
+    Delay := 0 * time.Millisecond
+    utils.ReadFileLetterByLetter(bcolors.BrightGreen, Filename, Delay)
 
     fmt.Printf(`%s%s%s
 Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underl, bcolors.BrightBlue, bcolors.Endc)

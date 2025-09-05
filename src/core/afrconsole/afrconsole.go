@@ -30,7 +30,7 @@ var (
 )
 
 var defaultValues = map[string]string{
-    "module": "",
+    "module":  "",
     "proxies": "",
 }
 
@@ -164,7 +164,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
         "phishers": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
         "websites": func() {menus.MenuEight(); webcrackers.WebsitesPentest(); menus.MenuZero()},
         "credits":  func() {credits.Creditors(); menus.MenuZero()},
-        "verses":   func() {scriptures.ScriptureNarators(); menus.MenuZero()},
+        "verses":   func() {scriptures.ScriptureNarrators(); menus.MenuZero()},
 
         "1": func() {menus.MenuOne(); setups.SetupsLauncher(); menus.MenuZero()},
         "2": func() {menus.MenuTwo(); securities.Torsocks(); menus.MenuZero()},
@@ -175,7 +175,7 @@ func africanaFrameworAuto(Function string, args ...interface{}) {
         "7": func() {menus.MenuSeven(); phishers.PhishingPentest(); menus.MenuZero()},
         "8": func() {menus.MenuEight(); webcrackers.WebsitesPentest(); menus.MenuZero()},
         "9": func() {credits.Creditors(); menus.MenuZero()},
-       "10": func() {scriptures.ScriptureNarators(); menus.MenuZero()},
+       "10": func() {scriptures.ScriptureNarrators(); menus.MenuZero()},
     }
 
     textCommands := []string{
@@ -227,7 +227,7 @@ func executeCommandAuto(cmd string) bool {
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
         {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
         {[]string{"banner"}, banners.RandomBanners},
-        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutorials},
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
@@ -332,7 +332,7 @@ func executeCommand(cmd string) bool {
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
         {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
         {[]string{"banner"}, banners.RandomBanners},
-        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutorials},
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
@@ -677,7 +677,7 @@ func africanaManual(Function string, args ...interface{}) {
         "phishers": phishers.PhishingPentest,
         "websites": webcrackers.WebsitesPentest,
         "credits":  credits.Creditors,
-        "verses":   scriptures.ScriptureNarators,
+        "verses":   scriptures.ScriptureNarrators,
 
         "1":  setups.SetupsLauncher,
         "2":  securities.Torsocks,
@@ -688,7 +688,7 @@ func africanaManual(Function string, args ...interface{}) {
         "7":  phishers.PhishingPentest,
         "8":  webcrackers.WebsitesPentest,
         "9":  credits.Creditors,
-        "10": scriptures.ScriptureNarators,
+        "10": scriptures.ScriptureNarrators,
     }
 
     textCommands := []string{
@@ -720,7 +720,7 @@ func africanaManual(Function string, args ...interface{}) {
 
 func Genesis() {
     if len(os.Args) < 2 {
-        launchDefaultMode()
+        scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsTinny(); banners.GraphicsIntro(); africanaManualMode()
         return
     }
 
@@ -731,10 +731,6 @@ func Genesis() {
     } else {
         menus.HelpInfoMenuMain()
     }
-}
-
-func launchDefaultMode() {
-    scriptures.Verse(); utils.InitiLize(); setups.CheckTools(); banners.GraphicsTinny(); banners.GraphicsIntro(); africanaManualMode()
 }
 
 func launchAutoModeWithMenu(menuFunc func(), actionFunc func()) {
@@ -796,12 +792,12 @@ func createCommandMap() map[string]func() {
         "-k":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); credits.Creditors(); africanaManualMode()},
         "--credits":  func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); credits.Creditors(); africanaManualMode()},
 
-        "-10":        func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
-        "-s":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
-        "--verses":   func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarators(); africanaManualMode()},
+        "-10":        func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarrators(); africanaManualMode()},
+        "-s":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarrators(); africanaManualMode()},
+        "--verses":   func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); scriptures.ScriptureNarrators(); africanaManualMode()},
 
-        "-g":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutarilas(); africanaManualMode()},
-        "--guide":    func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutarilas(); africanaManualMode()},
+        "-g":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutorials(); africanaManualMode()},
+        "--guide":    func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); utils.BrowseTutorials(); africanaManualMode()},
 
         "-q":         func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); africanaManualMode()},
         "--quite":    func() {scriptures.Verse(); banners.Version(); utils.InitiLize(); africanaManualMode()},

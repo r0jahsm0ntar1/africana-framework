@@ -49,7 +49,7 @@ var (
     PyEnvName  = "africana-venv"
 
     FakeDns    = "*"
-    NeMode     = "single"
+    NeMode     = "all"
     IFace      = "eth0"
     Spoofer    = "ettercap"
 
@@ -93,6 +93,7 @@ var (
     PhishersTools = filepath.Join(ToolsDir, "phishers")
     CrackersTools = filepath.Join(ToolsDir, "crackers")
     WeBountyTools = filepath.Join(ToolsDir, "websites")
+    NetworkTools  = filepath.Join(ToolsDir, "networks")
 
     IconsDir = filepath.Join(TemplateDir, "icons")
     WinresDir = filepath.Join(TemplateDir, "rcedits")
@@ -481,9 +482,10 @@ func ClearScreen() {
     }
 }
 
-func SystemShell(Input string) {
+func SystemShell(Command string, args ...interface{}) {
     fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
-    subprocess.Popen(Input)
+    subprocess.Popen(Command)
+    return
 }
 
 func GenerateSelfSignedCert(certPath, keyPath string) {
@@ -686,7 +688,7 @@ func Editors(filesToReplacements map[string]map[string]string) {
     }
 }
 
-func ReadFileLetterByLetter(filename string, delay time.Duration) {
+func ReadFileLetterByLetter(color, filename string, delay time.Duration) {
     if _, err := os.Stat(filename); os.IsNotExist(err) {
         return
     }
@@ -703,7 +705,7 @@ func ReadFileLetterByLetter(filename string, delay time.Duration) {
     for scanner.Scan() {
         line := scanner.Text()
         for _, letter := range line {
-            fmt.Print(string(letter))
+            fmt.Print(color + string(letter) + bcolors.Endc)
             time.Sleep(delay)
         }
         fmt.Println()
@@ -730,7 +732,7 @@ func StripBrackets(text string) string {
 
 func GetAgreementPath() string {
     agreementDir := filepath.Join("/root/.afr" + subprocess.Version, "agreements")
-    if !subprocess.IsRoot() {
+    if !subprocess.CheckRoot(){
         homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
             return ""
@@ -943,7 +945,7 @@ func min(nums ...int) int {
     return m
 }
 
-func BrowseTutarilas() {
+func BrowseTutorials() {
     switch runtime.GOOS {
     case "linux", "darwin":
         Command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
@@ -978,12 +980,16 @@ func ClearJunks() {
     return
 }
 
-func LocateTool(tool string) error {
-    if _, err := exec.LookPath(tool); err != nil {
-        fmt.Printf("%s[!] %s%s%s %sisn't installed. Try %s'apt install %s'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, tool, bcolors.Endc, bcolors.Green, tool, bcolors.Endc)
+func LocateTool(Tool string, args ...interface{}) error {
+    if _, err := exec.LookPath(Tool); err != nil {
+        fmt.Printf("%s[!] %s%s%s %sisn't installed. Try %s'apt install %s'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
         return err
     }
     return nil
+}
+
+func Info(colors, art, message string) {
+    fmt.Printf("\n%s%s%s[%s] %s%s ...", bcolors.Endc, bcolors.Bold, colors, art, bcolors.Endc, message)
 }
 
 func Sleep() {
@@ -997,7 +1003,7 @@ func DirLocations() (string, string, string, string, string, string, string, str
         baseDir = filepath.Join("/root", ".afr" + subprocess.Version)
     }
 
-    if !subprocess.IsRoot() {
+    if !subprocess.CheckRoot(){
         if homeDir := subprocess.GetHomeDir(); homeDir != "" {
             baseDir = filepath.Join(homeDir, ".afr" + subprocess.Version)
         } else {

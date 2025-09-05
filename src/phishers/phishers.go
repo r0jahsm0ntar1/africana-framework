@@ -93,7 +93,7 @@ func executeCommand(cmd string) bool {
         {[]string{"info list", "help list", "use list", "list"}, menus.HelpInfoList},
         {[]string{"h option", "? option", "h options", "? options", "info option", "help option", "info options", "help options"}, menus.HelpInfOptions},
         {[]string{"banner"}, banners.RandomBanners},
-        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutarilas},
+        {[]string{"g", "t", "guide", "tutarial"}, utils.BrowseTutorials},
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
@@ -129,7 +129,7 @@ func executeCommand(cmd string) bool {
         {[]string{"9", "run 9", "use 9", "exec 9", "start 9", "launch 9", "exploit 9", "execute 9", "run thc", "use thc", "exec thc", "start thc", "launch thc", "exploit thc", "execute thc"}, func() {PhishingPenFunctions("thc")}},
         {[]string{"? 9", "info 9", "help 9", "thc", "info thc", "help thc"}, menus.HelpInfoThc},
 
-        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarators},
+        {[]string{"10", "run 10", "use 10", "exec 10", "start 10", "launch 10", "exploit 10", "execute 10", "run verses", "use verses", "exec verses", "start verses", "launch verses", "exploit verses", "execute verses"}, scriptures.ScriptureNarrators},
         {[]string{"? 10", "verses", "info 10", "help 10", "info verses", "help verses"}, menus.HelpInfoVerses},
     }
 
@@ -410,16 +410,16 @@ func PhishingPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "gophish":         func() {GoPhish()},
-        "goodginx":        func() {GoodGinx()},
-        "zphisher":        func() {ZPhisher()},
-        "blackeye":        func() {BlackEye()},
-        "advphish":        func() {AdvPhisher()},
-        "darkPhish":       func() {DarkPhish()},
-        "shellphish":      func() {ShellPhish()},
-        "setoolkit":       func() {SetoolKit()},
+        "gophish": func() {GoPhish()},
+        "goodginx": func() {GoodGinx()},
+        "zphisher": func() {ZPhisher()},
+        "blackeye": func() {BlackEye()},
+        "advphish": func() {AdvPhisher()},
+        "darkPhish": func() {DarkPhish()},
+        "shellphish": func() {ShellPhish()},
+        "setoolkit": func() {SetoolKit()},
+        "thc": func() {Thc()},
         "thehackerchoice": func() {Thc()},
-        "thc":             func() {Thc()},
 
         "1": func() {GoPhish()},
         "2": func() {GoodGinx()},
@@ -499,12 +499,8 @@ func CyberPhish() {
 }
 
 func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
-    utils.Scanner.Scan()
-    Input := utils.Scanner.Text()
-    switch strings.ToLower(Input) {
-    case "0":
-        return
-    case "1":
+    switch strings.ToLower(Target) {
+    case "one":
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
@@ -535,7 +531,9 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
         subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
-    case "2":
+        return
+
+    case "all":
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
@@ -551,6 +549,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
             }
         utils.Editors(filesToReplacements)
         }
+
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
             subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
@@ -562,13 +561,17 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
             }
         utils.Editors(filesToReplacements)
         }
+
         fmt.Println()
         subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, IFace)
         subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
         fmt.Println()
         subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
+        return
+
     default:
-        utils.SystemShell(Input)
+        fmt.Printf("\n%s[!] %sInvalid parameter TARGET. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        return
     }
     fmt.Println()
 }
