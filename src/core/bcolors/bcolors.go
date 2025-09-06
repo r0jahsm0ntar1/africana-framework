@@ -13,12 +13,12 @@ var (
     Bold   = "\033[1m"
     Dim    = "\033[2m"
     Italic = "\033[3m"
-    Underl = "\033[4m"
     Blink  = "\033[5m"
     Blink2 = "\033[6m"
     Invert = "\033[7m"
     Hidden = "\033[8m"
     Strike = "\033[9m"
+    Underline = "\033[4m"
 
     Black   = "\033[30m"
     Red     = "\033[31m"
@@ -71,7 +71,7 @@ func init() {
 
     if runtime.GOOS == "windows" {
         Black, Red, Green, Yellow, Blue, Magenta, Cyan, White = "", "", "", "", "", "", "", ""
-        Endc, Bold, Dim, Italic, Underl, Blink, Blink2, Invert, Hidden, Strike = "", "", "", "", "", "", "", "", "", ""
+        Endc, Bold, Dim, Italic, Underline, Blink, Blink2, Invert, Hidden, Strike = "", "", "", "", "", "", "", "", "", ""
         BackBlack, BackRed, BackGreen, BackYellow, BackBlue, BackMagenta, BackCyan, BackWhite = "", "", "", "", "", "", "", ""
         Grey, BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite = "", "", "", "", "", "", "", ""
         BackGrey, BackBrightRed, BackBrightGreen, BackBrightYellow, BackBrightBlue, BackBrightMagenta, BackBrightCyan, BackBrightWhite = "", "", "", "", "", "", "", ""

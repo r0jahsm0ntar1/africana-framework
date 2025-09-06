@@ -44,7 +44,7 @@ func Start() {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+            fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
             utils.Scanner.Scan()
             Input := strings.TrimSpace(utils.Scanner.Text())
             switch Input {
@@ -67,7 +67,7 @@ func Start() {
 func africanaAutoMode() {
     menus.MenuZero()
     for {
-        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -281,7 +281,7 @@ func executeCommandAuto(cmd string) bool {
 
 func africanaManualMode() {
     for {
-        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))

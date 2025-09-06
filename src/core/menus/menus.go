@@ -220,7 +220,7 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
     fmt.Printf(`
 %s%sSelect a number from the table below.%s
 
-`, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underline, bcolors.Endc)
 
     maxLength := 0
     for _, item := range menuItems {
@@ -238,12 +238,12 @@ func generateMenu(menuItems []string, helpText string, backOption bool) {
         fmt.Printf(`
 %s h. %s%s%sGet help.%s %se. %s%s%sExit afr%s%s %s0. %s%s%sGo to previous menu.%s
 
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underline, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underline, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underline, bcolors.Endc)
     } else {
         fmt.Printf(`
 %s h. %s%s%sGet help.%s %se. %s%s%sExit afr%s%s %s10. %s%s%sGet bonus packages.%s
 
-`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underl, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.BrightBlue, bcolors.Endc, bcolors.Underline, bcolors.Italic, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underline, subprocess.Version, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Italic, bcolors.Underline, bcolors.Endc)
     }
 }
 
@@ -3054,7 +3054,7 @@ Console options:
     -q, --quite         Start africana without banner and missing tools checking.
     -h, --help          Show this help message and exit.
 
-`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc)
+`, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underline, bcolors.Endc)
 }
 
 func HelpInfoMenuZero() {
@@ -3102,7 +3102,7 @@ func HelpInfoMenuZero() {
 
 For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 
-`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underl, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
+`, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Italic, bcolors.Underline, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
 }
 
 func UpsentTools() {

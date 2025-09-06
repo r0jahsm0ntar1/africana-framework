@@ -1026,7 +1026,7 @@ func CommandMents() {
 %s 8. %sYou shall not steal.
 %s 9. %sYou shall not bear false witness.
 %s10. %sYou shall not covet.
-`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underline, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
 }
 
 func TheLordsPrayer() {
@@ -1039,7 +1039,7 @@ Give us this day our daily bread.
 And forgive us our debts, as we forgive our debtors.
 And lead us not into temptation, but deliver us from evil.
 For thine is the kingdom, and the power, and the glory, for ever. Amen.
-`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underline, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc)
 }
 
 func ScriptureNarrators() {
@@ -1051,7 +1051,7 @@ Life Tip.: %s%sDefeat the devil by fasting and praying ...%s
 Bible verse desktop (vrsoft.org). Copyright Public Domain. Language English.
 Scripture taken from the King James Version.%s
 
-`, bcolors.Italic, bcolors.Underl, bcolors.Bold, bcolors.Endc)
+`, bcolors.Italic, bcolors.Underline, bcolors.Bold, bcolors.Endc)
     rand.Seed(time.Now().UnixNano())
     for _, verse := range verses {
         PrintVerse(bcolors.Yellow + verse + bcolors.Endc)

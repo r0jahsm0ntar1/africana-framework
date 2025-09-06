@@ -81,7 +81,7 @@ type stringMatcher struct {
 
 func Torsocks() {
     for {
-        fmt.Printf("%s%s%safr%s%s torsocks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s torsocks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -391,23 +391,23 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "setups":   func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "setups":   func() { banners.GraphicsTorNet(); subprocess.Run("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
         "vanish":   func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "status":   func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
         "torip":    func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
         "exitnode": func() { banners.GraphicsTorNet(); TorCircuit() },
         "restore":  func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
-        "chains":   func() { banners.GraphicsTorNet(); subprocess.Popen("tail -vf /var/log/privoxy/logfile") },
+        "chains":   func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
         "reload":   func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
         "stop":     func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
 
-        "1": func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "1": func() { banners.GraphicsTorNet(); subprocess.Run("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
         "2": func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "3": func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
         "4": func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
         "5": func() { banners.GraphicsTorNet(); TorCircuit() },
         "6": func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
-        "7": func() { banners.GraphicsTorNet(); subprocess.Popen("tail -vf /var/log/privoxy/logfile") },
+        "7": func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
         "8": func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
         "9": func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
     }
@@ -479,7 +479,7 @@ func ConfigDhclient() {
 
     filePath := "/etc/dhcp/dhclient.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana")
+        subprocess.Run("cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/dhcp/dhclient.conf": {
                 "#prepend domain-name-servers 127.0.0.1;": "prepend domain-name-servers 127.0.0.1, 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4;",
@@ -497,7 +497,7 @@ func ConfigDnsmasq() {
 
     filePath := "/etc/dnsmasq.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana")
+        subprocess.Run("cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/dnsmasq.conf": {
                 "#port=5353": "port=5353",
@@ -515,7 +515,7 @@ func ConfigPrivoxy() {
 
     filePath := "/etc/privoxy/config.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("cp -r /etc/privoxy/config /etc/privoxy/config.bak_africana")
+        subprocess.Run("cp -r /etc/privoxy/config /etc/privoxy/config.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/privoxy/config": {
                 "#debug     1": "debug   1",
@@ -536,7 +536,7 @@ func ConfigSquid() {
     }
     filePath := "/etc/squid/squid.conf.bak_africana"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana")
+        subprocess.Run("cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana")
         filesToReplacements := map[string]map[string]string{
             "/etc/squid/squid.conf": {
                 "http_port 3128": "http_port 3129\nnever_direct allow all\nshutdown_lifetime 0 seconds\ncache_peer localhost parent 8118 7 no-digest no-query",
@@ -743,39 +743,24 @@ func getIPGeolocation(ip string) {
     "region": "%s%s%s",
     "city": "%s%s%s",
     "coordinates": {
-      "latitude": %.6f,
-      "longitude": %.6f
+      "latitude": %s%.6f%s,
+      "longitude": %s%.6f%s
     },
     "isp": "%s%s%s"
   },
   "service_provider": "%s%s%s",
   "timestamp": {
-    "unix": %d,
+    "unix": %s%d%s,
     "iso8601": "%s%s%s",
     "human_readable": "%s%s%s",
     "timezone": "%s%s%s"
   },
   "query_info": {
-    "success": true,
+    "success": %strue%s,
     "response_time": "%s%s%s"
   }
 }
-%s`,
-        bcolors.Endc,
-        bcolors.Cyan, info.IP, bcolors.Endc,
-        bcolors.Cyan, info.Continent, bcolors.Endc,
-        bcolors.Cyan, info.Country, bcolors.Endc,
-        bcolors.Cyan, info.Region, bcolors.Endc,
-        bcolors.Cyan, info.City, bcolors.Endc,
-        info.Latitude, info.Longitude,
-        bcolors.Cyan, info.ISP, bcolors.Endc,
-        bcolors.Cyan, info.ISP, bcolors.Endc,
-        now.Unix(),
-        bcolors.Cyan, now.Format(time.RFC3339), bcolors.Endc,
-        bcolors.Cyan, now.Format("Monday, January 2, 2006 at 3:04:05 PM"), bcolors.Endc,
-        bcolors.Cyan, now.Format("MST"), bcolors.Endc,
-        bcolors.Cyan, responseTime.String(), bcolors.Endc,
-        bcolors.Endc)
+%s`, bcolors.Endc, bcolors.Cyan, info.IP, bcolors.Endc, bcolors.Cyan, info.Continent, bcolors.Endc, bcolors.Cyan, info.Country, bcolors.Endc, bcolors.Cyan, info.Region, bcolors.Endc, bcolors.Cyan, info.City, bcolors.Endc, bcolors.Cyan, info.Latitude, bcolors.Endc, bcolors.Cyan, info.Longitude, bcolors.Endc, bcolors.Cyan, info.ISP, bcolors.Endc, bcolors.Cyan, info.ISP, bcolors.Endc, bcolors.Cyan, now.Unix(), bcolors.Endc, bcolors.Cyan, now.Format(time.RFC3339), bcolors.Endc, bcolors.Cyan, now.Format("Monday, January 2, 2006 at 3:04:05 PM"), bcolors.Endc, bcolors.Cyan, now.Format("MST"), bcolors.Endc, bcolors.Cyan, bcolors.Endc, bcolors.Cyan, responseTime.String(), bcolors.Endc, bcolors.Endc)
 }
 
 func getString(data map[string]interface{}, keys ...string) string {
@@ -1407,33 +1392,6 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
     return nil
 }
 
-func TestDNSLeak() (string, error) {
-    result := DNSLeakTestResult{
-        Timestamp: time.Now().Format(time.RFC3339),
-        Status:    "completed",
-        TestType:  "comprehensive",
-    }
-
-    torResult, err := checkTorUsage()
-    if err != nil {
-        result.Status = "partial"
-        result.TorCheck.IsUsingTor = false
-    } else {
-        result.TorCheck = torResult
-    }
-
-    dnsServers, leakDetected := performDNSLeakTests()
-    result.DNSServers = dnsServers
-    result.LeakDetected = leakDetected
-
-    jsonData, err := json.MarshalIndent(result, "", "  ")
-    if err != nil {
-        return "", fmt.Errorf("failed to marshal JSON: %v", err)
-    }
-
-    return string(jsonData), nil
-}
-
 func checkTorUsage() (TorResult, error) {
     result := TorResult{}
 
@@ -1644,6 +1602,80 @@ func getSystemDNSServers() ([]string, error) {
     return servers, nil
 }
 
+func TestDNSLeak() (string, error) {
+    result := DNSLeakTestResult{
+        Timestamp: time.Now().Format(time.RFC3339),
+        Status:    "completed",
+        TestType:  "comprehensive",
+    }
+
+    torResult, err := checkTorUsage()
+    if err != nil {
+        result.Status = "partial"
+        result.TorCheck.IsUsingTor = false
+    } else {
+        result.TorCheck = torResult
+    }
+
+    dnsServers, leakDetected := performDNSLeakTests()
+    result.DNSServers = dnsServers
+    result.LeakDetected = leakDetected
+
+    coloredJSON := formatDNSLeakResultColored(result)
+    return coloredJSON, nil
+}
+
+func formatDNSLeakResultColored(result DNSLeakTestResult) string {
+    dnsServersStr := "null"
+    if result.DNSServers != nil && len(result.DNSServers) > 0 {
+        dnsServersStr = formatDNSServersColored(result.DNSServers)
+    }
+
+    return fmt.Sprintf(`%s
+{
+  "timestamp": "%s%s%s",
+  "status": "%s%s%s",
+  "test_type": "%s%s%s",
+  "dns_servers": %s,
+  "leak_detected": %s%t%s,
+  "tor_check": {
+    "is_using_tor": %s%t%s,
+    "exit_ip": "%s%s%s"%s
+  }
+}
+%s`, bcolors.Endc, bcolors.Cyan, result.Timestamp, bcolors.Endc, bcolors.Cyan, result.Status, bcolors.Endc, bcolors.Cyan, result.TestType, bcolors.Endc, dnsServersStr, bcolors.Cyan, result.LeakDetected, bcolors.Endc, bcolors.Cyan, result.TorCheck.IsUsingTor, bcolors.Endc, bcolors.Cyan, result.TorCheck.ExitIP, bcolors.Endc, formatTorCheckCountry(result.TorCheck), bcolors.Endc)
+}
+
+func formatTorCheckCountry(torCheck TorResult) string {
+    if torCheck.ExitCountry != "" {
+        return fmt.Sprintf(`,
+    "exit_country": "%s%s%s"`, bcolors.Cyan, torCheck.ExitCountry, bcolors.Endc)
+    }
+    return ""
+}
+
+func formatDNSServersColored(servers []DNSServer) string {
+    var builder strings.Builder
+    builder.WriteString("[\n")
+
+    for i, server := range servers {
+        builder.WriteString(fmt.Sprintf(`    {
+      "ip": "%s%s%s",
+      "isp": "%s%s%s",
+      "country": "%s%s%s",
+      "asn": "%s%s%s",
+      "via_tor": %s%t%s
+    }`, bcolors.Cyan, server.IP, bcolors.Endc, bcolors.Cyan, server.ISP, bcolors.Endc, bcolors.Cyan, server.Country, bcolors.Endc, bcolors.Cyan, server.ASN, bcolors.Endc, bcolors.Cyan, server.ViaTor, bcolors.Endc))
+
+        if i < len(servers)-1 {
+            builder.WriteString(",\n")
+        }
+    }
+
+    builder.WriteString("\n  ]")
+    return builder.String()
+}
+
 func CheckLeakTest() (*DNSLeakTestResult, error) {
     fmt.Printf("\n%s%s[!] %sTesting DNS leaks ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
@@ -1652,18 +1684,24 @@ func CheckLeakTest() (*DNSLeakTestResult, error) {
         return nil, fmt.Errorf("%s%s[!] %sDNS leak test failed: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
     }
 
+    fmt.Println(result)
+
+    cleanJSON := stripColors(result)
     var leakResult DNSLeakTestResult
-    if err := json.Unmarshal([]byte(result), &leakResult); err != nil {
+    if err := json.Unmarshal([]byte(cleanJSON), &leakResult); err != nil {
         return nil, fmt.Errorf("%s%s[!] %sFailed to parse DNS leak results: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
     }
-
-    fmt.Println(result)
 
     if leakResult.LeakDetected {
         fmt.Printf("\n%s%s[>] %sDNS LEAK DETECTED! Found %d non-Tor DNS servers\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, len(leakResult.DNSServers))
         return &leakResult, fmt.Errorf("%s%s[!] %sDNS leak detected", bcolors.Bold, bcolors.Red, bcolors.Endc)
     } else {
-        fmt.Printf("%s%s[>] %sNo DNS leaks detected ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%s[*] %sCongratualion. No DNS leaks detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
         return &leakResult, nil
     }
+}
+
+func stripColors(text string) string {
+    re := regexp.MustCompile(`\x1b\[[0-9;]*m`)
+    return re.ReplaceAllString(text, "")
 }

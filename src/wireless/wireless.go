@@ -40,7 +40,7 @@ type stringMatcher struct {
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%s%safr%s%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -438,7 +438,7 @@ func AirGeddon() {
             return
         }
     }
-    subprocess.Popen("airgeddon")
+    subprocess.Run("airgeddon")
 }
 
 func Fluxion() {
@@ -448,7 +448,7 @@ func Fluxion() {
             return
         }
     }
-    subprocess.Popen("cd %s/fluxion/; bash ./fluxion.sh", utils.WirelessTools)
+    subprocess.Run("cd %s/fluxion/; bash ./fluxion.sh", utils.WirelessTools)
     return
 }
 
@@ -461,10 +461,10 @@ func WifiPumpkin() {
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("wifipumpkin3")
+        subprocess.Run("wifipumpkin3")
         utils.ClearScreen()
     }
-    subprocess.Popen("wifipumpkin3")
+    subprocess.Run("wifipumpkin3")
     return
 }
 
@@ -481,14 +481,14 @@ func WifiPumpkin3(WlanIFace, Ssid string) {
     }
     filePath := "/root/.config/wifipumpkin3/"
     if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Popen("wifipumpkin3; clear")
+        subprocess.Run("wifipumpkin3; clear")
     }
-    subprocess.Popen(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxies noproxy; start"`, utils.WlanIFace, utils.Ssid)
+    subprocess.Run(`wifipumpkin3 --xpulp "set interface %s; set ssid '%s'; set proxies noproxy; start"`, utils.WlanIFace, utils.Ssid)
     return
 }
 
 func Wifite(WlanIFace string) {
-    subprocess.Popen("cd %s/wifite/; python3 ./wifite.py -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120", utils.WirelessTools, utils.WlanIFace, utils.RokyPath)
+    subprocess.Run("cd %s/wifite/; python3 ./wifite.py -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120", utils.WirelessTools, utils.WlanIFace, utils.RokyPath)
     return
 }
 
@@ -499,6 +499,6 @@ func Bettercap(WlanIFace string) {
             return
         }
     }
-    subprocess.Popen("airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file %s/handshakes; wifi.deauth all'", utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WirelessLogs)
+    subprocess.Run("airmon-ng check kill; service NetworkManager restart; ip link set %s down; iw dev %s set type monitor; ip link set %s up; iw %s set txpower fixed 3737373737373; service NetworkManager start; sleep 3; bettercap --iface %s -eval 'set $ {bold}(Jesus.is.❤. Type.exit.when.done) » {reset}; wifi.recon on; wifi.show; set wifi.show.sort clients desc; set ticker.commands clear; wifi.show; wifi.assoc all; wifi.assoc all wifi.handshakes.file %s/handshakes; wifi.deauth all'", utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WlanIFace, utils.WirelessLogs)
     return
 }

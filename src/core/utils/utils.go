@@ -484,7 +484,7 @@ func ClearScreen() {
 
 func SystemShell(Command string, args ...interface{}) {
     fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
-    subprocess.Popen(Command)
+    subprocess.Run(Command)
     return
 }
 
@@ -956,26 +956,26 @@ func BrowseTutorials() {
         return
     }
     fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen(Command)
+    subprocess.Run(Command)
 }
 
 func BrowserLogs() {
-    subprocess.Popen("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html", subprocess.Version)
-    subprocess.Popen("xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80")
-    subprocess.Popen("rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/")
+    subprocess.Run("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html", subprocess.Version)
+    subprocess.Run("xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80")
+    subprocess.Run("rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/")
     return
 }
 
 func ListJunks() {
     fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Popen("tree %s*", OutPutDir)
+    subprocess.Run("tree %s*", OutPutDir)
     return
 }
 
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Popen("tree %s*", OutPutDir)
-    subprocess.Popen("rm -rf %s/*", OutPutDir)
+    subprocess.Run("tree %s*", OutPutDir)
+    subprocess.Run("rm -rf %s/*", OutPutDir)
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
@@ -993,7 +993,7 @@ func Info(colors, art, message string) {
 }
 
 func Sleep() {
-    subprocess.Popen("sleep")
+    subprocess.Run("sleep")
 }
 
 func DirLocations() (string, string, string, string, string, string, string, string) {

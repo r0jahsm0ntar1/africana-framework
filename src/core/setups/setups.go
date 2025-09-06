@@ -163,7 +163,7 @@ var (
 
 func SetupsLauncher() {
     for {
-        fmt.Printf("%s%s%safr%s%s packages(%s%score/setups_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr%s%s packages(%s%score/setups_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -681,7 +681,7 @@ func InstallTools(tools map[string]map[string]string) {
         fmt.Printf("\n%sInstalling system tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["system"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
-            subprocess.Popen("sudo apt install -y %s", pkg)
+            subprocess.Run("sudo apt install -y %s", pkg)
             time.Sleep(180 * time.Millisecond)
         }
     }
@@ -691,9 +691,9 @@ func InstallTools(tools map[string]map[string]string) {
         for tool, pkg := range tools["security"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
             if strings.HasPrefix(pkg, "github.com") {
-                subprocess.Popen("go install %s", pkg)
+                subprocess.Run("go install %s", pkg)
             } else {
-                subprocess.Popen("sudo apt install -y %s", pkg)
+                subprocess.Run("sudo apt install -y %s", pkg)
             }
             time.Sleep(180 * time.Millisecond)
         }
@@ -703,7 +703,7 @@ func InstallTools(tools map[string]map[string]string) {
         fmt.Printf("\n%sInstalling project discovery tools%s.", bcolors.Bold, bcolors.Endc)
         for tool, pkg := range tools["discovery"] {
             fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
-            subprocess.Popen("go install %s", pkg)
+            subprocess.Run("go install %s", pkg)
             time.Sleep(180 * time.Millisecond)
         }
     }
@@ -715,7 +715,7 @@ func InstallTools(tools map[string]map[string]string) {
                 return
             }
             command := fmt.Sprintf("gunzip -d -9 %s", gzFilePath)
-            subprocess.Popen(command)
+            subprocess.Run(command)
         }
     }
 }
@@ -747,17 +747,18 @@ var linuxTaskMap = map[string]func(){
 }
 
 func Venv(PyEnvName string) {
-    subprocess.Popen("cd %s; python3 -m virtualenv %s --system-site-packages; echo -n '\n source %s%s/bin/activate' >> ~/.zshrc; source ~/.zshrc", utils.BaseDir, utils.PyEnvName, utils.BaseDir, utils.PyEnvName)
+    subprocess.Run("cd %s; python3 -m virtualenv %s --system-site-packages; echo -n '\n source %s%s/bin/activate' >> ~/.zshrc; source ~/.zshrc", utils.BaseDir, utils.PyEnvName, utils.BaseDir, utils.PyEnvName)
 }
 
 func InstallFoundationTools(commands []string) {
     for _, cmd := range commands {
-        subprocess.Popen(cmd)
+        subprocess.Run(cmd)
     }
 }
 
 func InstallGithubTools() {
-    subprocess.Popen("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; python3 -m pip install -r %s/requirements.txt", utils.BaseDir, utils.BaseDir)
+    Venv(utils.PyEnvName)
+    subprocess.Run(`cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; xterm -fullscreen -T 'Glory be To Lord God Jesus Christ' -e "source ~/.zshrc; python3 -m pip install install -r %s/requirements.txt"`, utils.BaseDir, utils.BaseDir)
 }
 
 func AutoSetups() {
@@ -801,7 +802,7 @@ func KaliSetups() {
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
-        subprocess.Popen("winecfg /v win11")
+        subprocess.Run("winecfg /v win11")
         fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
         fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
@@ -825,7 +826,7 @@ func UbuntuSetups() {
         }
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
-        subprocess.Popen("winecfg /v win11")
+        subprocess.Run("winecfg /v win11")
         fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
         InstallGithubTools()
         fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
@@ -857,8 +858,8 @@ func ArchSetups() {
 
 func UpdateAfricana() {
     fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Popen("cd %s; git pull .", utils.ToolsDir)
-    subprocess.Popen("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../../africana-framework", utils.BaseDir)
+    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
     fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
     return
 }
@@ -877,7 +878,7 @@ func WindowsSetups() {
 func Uninstaller() {
     fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.BrightRed, bcolors.Endc)
     if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
-        subprocess.Popen("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
+        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
         fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
         os.Exit(0)
     } else {

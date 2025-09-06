@@ -37,7 +37,7 @@ type stringMatcher struct {
 
 func CrackersPentest() {
     for {
-        fmt.Printf("%s%s%safr3%s crackers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underl, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s%safr3%s crackers(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         utils.Scanner.Scan()
         Input := strings.TrimSpace(utils.Scanner.Text())
         buildParts := strings.Fields(strings.ToLower(Input))
@@ -431,22 +431,22 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
 }
 
 func AirCrackng(Pcap string) {
-    subprocess.Popen("aircrack-ng %s -w %s", utils.Pcap, utils.WordsList)
+    subprocess.Run("aircrack-ng %s -w %s", utils.Pcap, utils.WordsList)
     fmt.Println()
 }
 
 func JohnCrackng(Pcap string) {
-    subprocess.Popen("john %s --wordlist=%s", utils.Pcap, utils.WordsList)
+    subprocess.Run("john %s --wordlist=%s", utils.Pcap, utils.WordsList)
     fmt.Println()
 }
 
 func CyberBrute(RHost string) {
-    subprocess.Popen("cd %s/cyberbrute; bash cyberbrute.sh %s", utils.CrackersTools, utils.RHost)
+    subprocess.Run("cd %s/cyberbrute; bash cyberbrute.sh %s", utils.CrackersTools, utils.RHost)
     fmt.Println()
 }
 
 func HashBuster(Hashes string) {
-    subprocess.Popen("cd %s/hash-buster; python3 cracker.py -t 10 %s", utils.CrackersTools, utils.Hashes)
+    subprocess.Run("cd %s/hash-buster; python3 cracker.py -t 10 %s", utils.CrackersTools, utils.Hashes)
     fmt.Println()
 }
 
@@ -456,7 +456,7 @@ func HydraSsh(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sSSHcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraSsh_outfile.txt -u ssh://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -l %s -P %s -f -o %s/HydraSsh_outfile.txt -u ssh://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -466,7 +466,7 @@ func HydraFtp(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sFTPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraFtp_outfile.txt -u ftp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -l %s -P %s -f -o %s/HydraFtp_outfile.txt -u ftp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -476,13 +476,13 @@ func HydraSmb(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sSMBcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSmb_outfile.txt -u smb://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraSmb_outfile.txt -u smb://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
 func HydraRdp(RHost string) {
     fmt.Printf("\n%s[*] %sRDPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -492,7 +492,7 @@ func HydraLdap(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sLDAPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraLdap_outfile.txt -u ldap://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraLdap_outfile.txt -u ldap://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -502,7 +502,7 @@ func HydraSmtp(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sSMTPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSmtp_outfile.txt -u smtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraSmtp_outfile.txt -u smtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -512,7 +512,7 @@ func HydraSnmtp(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sSNMTPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraSnmtp_outfile.txt -u snmtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraSnmtp_outfile.txt -u snmtp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -522,7 +522,7 @@ func HydraTelnet(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sTELNETCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -L %s -P %s -f -o %s/HydraTelnet_outfile.txt -u telnet://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraTelnet_outfile.txt -u telnet://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
@@ -532,13 +532,13 @@ func HydraHttp(RHost string) {
         return
     }
     fmt.Printf("\n%s[*] %sFTPcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraHttps_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -l %s -P %s -f -o %s/HydraHttps_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }
 
 
 func HydraNtlm(RHost string) {
     fmt.Printf("\n%s[*] %sNTLMcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Popen("hydra -t 4 -l %s -P %s -f -o %s/HydraNtlm_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
+    subprocess.Run("hydra -t 4 -l %s -P %s -f -o %s/HydraNtlm_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
 }

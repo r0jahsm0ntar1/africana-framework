@@ -72,7 +72,7 @@ func creatLogDir() {
     }
 }
 
-func Popen(command string, args ...interface{}) {
+func Run(command string, args ...interface{}) {
     creatLogDir(); openLogFile()
     if len(args) > 0 {
         process = fmt.Sprintf(command, args...)
