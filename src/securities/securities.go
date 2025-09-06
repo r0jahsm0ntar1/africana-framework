@@ -26,8 +26,8 @@ var Function string
 
 var GeoAPIs = []string{
     "http://ip-api.com/json/%s",
-    "https://ipapi.co/%s/json/",
-    "https://freeipapi.com/api/json/%s",
+    "https://ipinfo.io/%s/json",
+    "https://freegeoip.app/json/%s",
 }
 
 var IpServices = []string{
@@ -37,6 +37,41 @@ var IpServices = []string{
     "https://icanhazip.com",
     "https://ifconfig.me/ip",
     "https://checkip.amazonaws.com",
+}
+
+type IPGeoInfo struct {
+    IP        string  `json:"ip"`
+    ISP       string  `json:"isp"`
+    Country   string  `json:"country"`
+    Region    string  `json:"region"`
+    City      string  `json:"city"`
+    Latitude  float64 `json:"latitude"`
+    Longitude float64 `json:"longitude"`
+    ASN       string  `json:"asn"`
+    Continent string  `json:"continent"`
+}
+
+type DNSLeakTestResult struct {
+    Timestamp  string     `json:"timestamp"`
+    Status     string     `json:"status"`
+    TestType   string     `json:"test_type"`
+    DNSServers []DNSServer `json:"dns_servers"`
+    LeakDetected bool     `json:"leak_detected"`
+    TorCheck   TorResult  `json:"tor_check"`
+}
+
+type DNSServer struct {
+    IP       string `json:"ip"`
+    ISP      string `json:"isp,omitempty"`
+    Country  string `json:"country,omitempty"`
+    ASN      string `json:"asn,omitempty"`
+    ViaTor   bool   `json:"via_tor"`
+}
+
+type TorResult struct {
+    IsUsingTor bool   `json:"is_using_tor"`
+    ExitIP     string `json:"exit_ip,omitempty"`
+    ExitCountry string `json:"exit_country,omitempty"`
 }
 
 type stringMatcher struct {
@@ -356,8 +391,8 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "setups":   func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server") },
-        "vanish":   func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); TorStatus(0) },
+        "setups":   func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "vanish":   func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "status":   func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
         "torip":    func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
         "exitnode": func() { banners.GraphicsTorNet(); TorCircuit() },
@@ -366,8 +401,8 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
         "reload":   func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
         "stop":     func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
 
-        "1": func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server") },
-        "2": func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); TorStatus(0) },
+        "1": func() { banners.GraphicsTorNet(); subprocess.Popen("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "2": func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "3": func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
         "4": func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
         "5": func() { banners.GraphicsTorNet(); TorCircuit() },
@@ -575,7 +610,7 @@ SocksPort 9050
 DNSPort 5353
 `
     filePath := "/etc/tor/torrc"
-    fmt.Printf("\n%s%s[*] %sConfiguring torrc.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[*] %sConfiguring torrc.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
     if _, err := os.Stat(filePath); err == nil {
         if err := exec.Command("cp", filePath, filePath+".bak_torsocks").Run(); err != nil {
@@ -689,42 +724,17 @@ func getPublicIP() string {
 }
 
 func getIPGeolocation(ip string) {
-    for _, apiTemplate := range GeoAPIs {
-        apiUrl := fmt.Sprintf(apiTemplate, ip)
-        startTime := time.Now()
+    info, err := getIPInfo(ip)
+    if err != nil {
+        fmt.Printf("%sError: Could not retrieve geolocation data%s\n", bcolors.Red, bcolors.Endc)
+        return
+    }
 
-        resp, err := http.Get(apiUrl)
-        if err != nil {
-            continue
-        }
-        defer resp.Body.Close()
+    now := time.Now()
+    startTime := time.Now()
+    responseTime := time.Since(startTime).Round(time.Millisecond)
 
-        if resp.StatusCode != http.StatusOK {
-            continue
-        }
-
-        body, err := io.ReadAll(resp.Body)
-        if err != nil {
-            continue
-        }
-
-        var geoData map[string]interface{}
-        if err := json.Unmarshal(body, &geoData); err != nil {
-            continue
-        }
-
-        responseTime := time.Since(startTime).Round(time.Millisecond)
-        now := time.Now()
-
-        country := getString(geoData, "country", "country_name", "countryName")
-        region := getString(geoData, "region", "regionName", "state_prov")
-        city := getString(geoData, "city")
-        isp := getString(geoData, "isp", "org", "asn", "asn_org")
-        lat := getFloat(geoData, "lat", "latitude")
-        lon := getFloat(geoData, "lon", "longitude", "lng")
-        continent := getString(geoData, "continent", "continent_name", "continentName")
-
-        fmt.Printf(`
+    fmt.Printf(`
 {
   "ip_address": "%s",
   "geolocation": {
@@ -750,10 +760,11 @@ func getIPGeolocation(ip string) {
     "response_time": "%s"
   }
 }
-`, ip, continent, country, region, city, lat, lon, isp, strings.TrimPrefix(apiUrl, "http://"), now.Unix(), now.Format(time.RFC3339), now.Format("Monday, January 2, 2006 at 3:04:05 PM"), now.Format("MST"), responseTime)
-        return
-    }
-    fmt.Printf("%sError: Could not retrieve geolocation data%s\n", bcolors.Red, bcolors.Endc)
+`, info.IP, info.Continent, info.Country, info.Region, info.City, 
+   info.Latitude, info.Longitude, info.ISP, info.ISP,
+   now.Unix(), now.Format(time.RFC3339), 
+   now.Format("Monday, January 2, 2006 at 3:04:05 PM"), 
+   now.Format("MST"), responseTime)
 }
 
 func getString(data map[string]interface{}, keys ...string) string {
@@ -764,14 +775,23 @@ func getString(data map[string]interface{}, keys ...string) string {
             }
         }
     }
-    return "N/A"
+    return "Unknown"
 }
 
 func getFloat(data map[string]interface{}, keys ...string) float64 {
     for _, key := range keys {
         if value, exists := data[key]; exists {
-            if f, ok := value.(float64); ok {
-                return f
+            switch v := value.(type) {
+            case float64:
+                return v
+            case float32:
+                return float64(v)
+            case int:
+                return float64(v)
+            case string:
+                if f, err := strconv.ParseFloat(v, 64); err == nil {
+                    return f
+                }
             }
         }
     }
@@ -1046,7 +1066,7 @@ func CheckServiceStatus() {
 }
 
 func TorStatus(retryCount int) {
-    fmt.Printf("\n%s%s[!] %sChecking Tor network status.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sChecking Tor network status ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     result, err := CheckTorStatus()
     if err != nil {
@@ -1064,7 +1084,7 @@ func TorStatus(retryCount int) {
 }
 
 func displayTorResult(result map[string]string) {
-    fmt.Printf("%s%s[*] %s%sYour IP address: %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Yellow, bcolors.Cyan, result["ip"], bcolors.Endc)
+    fmt.Printf("%s%s[>] %s%sYour IP address: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Yellow, bcolors.Cyan, result["ip"], bcolors.Endc)
 
     if strings.Contains(result["title"], "Congratulations") {
         fmt.Printf("%s%s[*] %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, result["title"])
@@ -1138,101 +1158,147 @@ func ConfigFirewall() error {
 
     FirewallOff, FirewallOn := CheckDefaultRules()
     if FirewallOn != "" {
-        return fmt.Errorf("%s\nCan't execute %siptables-save%s. See the reason below.\n%s%s%s",
-            bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, FirewallOn, bcolors.Endc)
+        return fmt.Errorf("%s\nCan't execute %siptables-save%s. See the reason below.\n%s%s%s", bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, FirewallOn, bcolors.Endc)
     }
 
     if strings.TrimSpace(FirewallOff) == "0" {
-        fmt.Printf("%s%s[*] %sDefault rules are configured, skipping.", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%s[*] %sDefault rules are configured, skipping backup.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     } else {
         fmt.Printf("%s%s[+] %sSaving default firewall rules ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
-        cmd := exec.Command("bash", "-c", "iptables-save > /etc/iptables_rules_torsocks.bak")
+        cmd := exec.Command("bash", "-c", "sudo iptables-save > /etc/iptables_rules_torsocks.bak")
         if err := cmd.Run(); err != nil {
-            return fmt.Errorf("%s%s[!] %sFailed to save iptables rules: %s%v", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err)
+            return fmt.Errorf("%s%s[!] %sFailed to save iptables rules: %v%s", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
         }
 
         fmt.Printf("%s%s[+] %sDone saving firewall rules.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     }
 
-    InnOutRules := `
-#!/bin/bash
-# Set variables
-tor_uid=$(id -u debian-tor)
-trans_port="9040"
-dns_port="5353"
-virtual_address="10.192.0.0/10"
-
-# Define non_tor as an array (corrected)
-non_tor=("127.0.0.0/8" "10.0.0.0/8" "172.16.0.0/12" "192.168.0.0/16")
-
-# Flush current iptables rules
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
-iptables -P INPUT ACCEPT
-iptables -P FORWARD ACCEPT
-iptables -P OUTPUT ACCEPT
-
-## *nat OUTPUT (For local redirection)
-# nat .onion addresses
-iptables -t nat -A OUTPUT -d $virtual_address -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports $trans_port
-
-# nat dns requests to Tor
-iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports $dns_port
-
-# Don't nat the Tor process, the loopback, or the local network
-iptables -t nat -A OUTPUT -m owner --uid-owner $tor_uid -j RETURN
-iptables -t nat -A OUTPUT -o lo -j RETURN
-
-# Allow lan access for hosts in $non_tor (FIXED - process each network individually)
-for lan in "${non_tor[@]}"; do
-    iptables -t nat -A OUTPUT -d "$lan" -j RETURN
-done
-
-# Redirects all other pre-routing and output to Tor's TransPort
-iptables -t nat -A OUTPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports $trans_port
-
-## *filter INPUT
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-
-# Drop everything else
-iptables -A INPUT -j DROP
-
-## *filter FORWARD
-iptables -A FORWARD -j DROP
-
-## *filter OUTPUT
-# Fix for potential kernel transproxy packet leaks
-iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
-iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP
-iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
-
-# Allow Tor process output
-iptables -A OUTPUT -m owner --uid-owner $tor_uid -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j ACCEPT
-
-# Allow loopback output
-iptables -A OUTPUT -d 127.0.0.1/32 -o lo -j ACCEPT
-
-# Tor transproxy magic
-iptables -A OUTPUT -d 127.0.0.1/32 -p tcp -m tcp --dport $trans_port --tcp-flags FIN,SYN,RST,ACK SYN -j ACCEPT
-
-# Allow DNS queries (CRITICAL FIX - add your DNS server IP)
-iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
-
-# Drop everything else
-iptables -A OUTPUT -j DROP
-
-## Set default policies to DROP
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT DROP
-`
     fmt.Printf("\n%s%s[*] %sSetting up firewall rules ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Popen(InnOutRules)
+
+    if err := SetTorIptablesRules(); err != nil {
+        return fmt.Errorf("%s%s[!] %sFailed to set up firewall rules: %v%s", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
+    }
+    
     fmt.Printf("%s%s[+] %sDone setting up firewall rules ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    return nil
+}
+
+func SetTorIptablesRules() error {
+    cmd := exec.Command("id", "-u", "debian-tor")
+    uidBytes, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("failed to get tor UID: %v", err)
+    }
+    torUID := strings.TrimSpace(string(uidBytes))
+    
+    transPort := "9040"
+    dnsPort := "5353"
+    virtAddr := "10.192.0.0/10"
+
+    commands := []string{
+        "iptables -P INPUT ACCEPT",
+        "iptables -P FORWARD ACCEPT",
+        "iptables -P OUTPUT ACCEPT",
+        "iptables -F",
+        "iptables -X",
+        "iptables -Z",
+        "iptables -t nat -F",
+        "iptables -t nat -X",
+        "iptables -t mangle -F",
+        "iptables -t mangle -X",
+        "iptables -t raw -F",
+        "iptables -t raw -X",
+
+        // *nat OUTPUT (For local redirection)
+        // nat .onion addresses
+        "iptables -t nat -A OUTPUT -d " + virtAddr + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
+        // nat dns requests to Tor
+        "iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports " + dnsPort + " -m comment --comment \"neutron_triggered\"",
+        // Don't nat the Tor process, the loopback, or the local network
+        "iptables -t nat -A OUTPUT -m owner --uid-owner " + torUID + " -j RETURN",
+        "iptables -t nat -A OUTPUT -o lo -j RETURN",
+
+        // Allow lan access for hosts in non_tor networks (expanded from loop)
+        "iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 172.16.0.0/12 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN",
+
+        // Allow IANA reserved blocks (expanded from loop)
+        "iptables -t nat -A OUTPUT -d 0.0.0.0/8 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 100.64.0.0/10 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 169.254.0.0/16 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 192.0.0.0/24 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 192.0.2.0/24 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 192.88.99.0/24 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 198.18.0.0/15 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 198.51.100.0/24 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 203.0.113.0/24 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 224.0.0.0/4 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 240.0.0.0/4 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 255.255.255.255/32 -j RETURN",
+
+        // Redirect all other pre-routing and output to Tor's TransPort
+        "iptables -t nat -A OUTPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
+
+        // *filter INPUT
+        "iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT",
+        "iptables -A INPUT -i lo -j ACCEPT",
+        "iptables -A INPUT -j DROP",
+
+        // *filter FORWARD
+        "iptables -A FORWARD -j DROP",
+
+        // Fix for possible kernel packet-leak
+        "iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP",
+        "iptables -A OUTPUT -m state --state INVALID -j DROP",
+
+        // *filter OUTPUT
+        "iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT",
+        // Allow Tor process output
+        "iptables -A OUTPUT -m owner --uid-owner " + torUID + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j ACCEPT",
+        // Allow loopback output
+        "iptables -A OUTPUT -d 127.0.0.1/32 -o lo -j ACCEPT",
+        // Tor transproxy magic
+        "iptables -A OUTPUT -d 127.0.0.1/32 -p tcp -m tcp --dport " + transPort + " --tcp-flags FIN,SYN,RST,ACK SYN -j ACCEPT",
+        // Drop everything else
+        "iptables -A OUTPUT -j DROP",
+
+        // Set default policies to DROP
+        "iptables -P INPUT DROP",
+        "iptables -P FORWARD DROP",
+        "iptables -P OUTPUT DROP",
+    }
+    
+    fmt.Printf("%s%s[*] %sSetting up Tor iptables rules...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+    
+    var lastError error
+    successCount := 0
+    
+    for i, cmdStr := range commands {
+        cmd := exec.Command("bash", "-c", "sudo "+cmdStr)
+        output, err := cmd.CombinedOutput()
+        if err != nil {
+            fmt.Printf("%s%s[!] %sFailed command %d: %s - Error: %v%s\n", 
+                bcolors.Bold, bcolors.Red, bcolors.Endc, i+1, cmdStr, err, bcolors.Endc)
+            if string(output) != "" {
+                fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
+            }
+            lastError = err
+        } else {
+            successCount++
+        }
+        time.Sleep(50 * time.Millisecond)
+    }
+    
+    fmt.Printf("%s%s[*] %sCompleted: %d/%d commands executed successfully%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, successCount, len(commands), bcolors.Endc)
+
+    if lastError != nil {
+        return fmt.Errorf("%s%s[!] %sSome iptables commands failed during Tor setup%s", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Endc)
+    }
+
+    fmt.Printf("%s%s[+] %sTor iptables rules configured successfully!%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
     return nil
 }
 
@@ -1328,4 +1394,265 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
     }
 
     return nil
+}
+
+func TestDNSLeak() (string, error) {
+    result := DNSLeakTestResult{
+        Timestamp: time.Now().Format(time.RFC3339),
+        Status:    "completed",
+        TestType:  "comprehensive",
+    }
+
+    torResult, err := checkTorUsage()
+    if err != nil {
+        result.Status = "partial"
+        result.TorCheck.IsUsingTor = false
+    } else {
+        result.TorCheck = torResult
+    }
+
+    dnsServers, leakDetected := performDNSLeakTests()
+    result.DNSServers = dnsServers
+    result.LeakDetected = leakDetected
+
+    jsonData, err := json.MarshalIndent(result, "", "  ")
+    if err != nil {
+        return "", fmt.Errorf("failed to marshal JSON: %v", err)
+    }
+
+    return string(jsonData), nil
+}
+
+func checkTorUsage() (TorResult, error) {
+    result := TorResult{}
+
+    cmd := exec.Command("timeout", "10", "torify", "curl", "-s", "https://check.torproject.org/api/ip")
+    output, err := cmd.Output()
+    if err != nil {
+        return result, fmt.Errorf("tor check failed: %v", err)
+    }
+
+    var torResponse struct {
+        IP      string `json:"IP"`
+        IsTor   bool   `json:"IsTor"`
+        Country string `json:"Country"`
+    }
+
+    if err := json.Unmarshal(output, &torResponse); err != nil {
+        return result, fmt.Errorf("failed to parse tor response: %v", err)
+    }
+
+    result.IsUsingTor = torResponse.IsTor
+    result.ExitIP = torResponse.IP
+    result.ExitCountry = torResponse.Country
+
+    return result, nil
+}
+
+func performDNSLeakTests() ([]DNSServer, bool) {
+    var servers []DNSServer
+    leakDetected := false
+
+    testDomains := []string{
+        "google.com",
+        "facebook.com",
+        "amazon.com",
+        "microsoft.com",
+    }
+
+    dnsProviders := []struct {
+        name string
+        ip   string
+    }{
+        {"Google DNS", "8.8.8.8"},
+        {"Cloudflare", "1.1.1.1"},
+        {"OpenDNS", "208.67.222.222"},
+        {"Quad9", "9.9.9.9"},
+    }
+
+    uniqueServers := make(map[string]DNSServer)
+
+    for _, domain := range testDomains {
+        for _, provider := range dnsProviders {
+            server, err := testDNSResolution(domain, provider.ip)
+            if err == nil && server.IP != "" {
+                if !isTorExitNode(server.IP) {
+                    server.ViaTor = false
+                    leakDetected = true
+                } else {
+                    server.ViaTor = true
+                }
+                uniqueServers[server.IP] = server
+            }
+            time.Sleep(100 * time.Millisecond)
+        }
+    }
+
+    for _, server := range uniqueServers {
+        servers = append(servers, server)
+    }
+
+    return servers, leakDetected
+}
+
+func testDNSResolution(domain, dnsServer string) (DNSServer, error) {
+    server := DNSServer{IP: dnsServer}
+
+    cmd := exec.Command("dig", "+short", domain, "@"+dnsServer)
+    output, err := cmd.Output()
+    if err != nil {
+        return server, err
+    }
+
+    if strings.TrimSpace(string(output)) == "" {
+        return server, fmt.Errorf("no DNS response from %s", dnsServer)
+    }
+
+    ipInfo, err := getIPInfo(dnsServer)
+    if err == nil {
+        server.ISP = ipInfo.ISP
+        server.Country = ipInfo.Country
+        server.ASN = ipInfo.ASN
+    } else {
+        server.ISP = "Unknown"
+        server.Country = "Unknown"
+        server.ASN = "Unknown"
+    }
+
+    return server, nil
+}
+
+func getIPInfo(ip string) (IPGeoInfo, error) {
+    info := IPGeoInfo{IP: ip}
+
+    for _, apiTemplate := range GeoAPIs {
+        apiUrl := fmt.Sprintf(apiTemplate, ip)
+        
+        resp, err := http.Get(apiUrl)
+        if err != nil {
+            continue
+        }
+        defer resp.Body.Close()
+
+        if resp.StatusCode != http.StatusOK {
+            continue
+        }
+
+        body, err := io.ReadAll(resp.Body)
+        if err != nil {
+            continue
+        }
+
+        var geoData map[string]interface{}
+        if err := json.Unmarshal(body, &geoData); err != nil {
+            continue
+        }
+
+        info.Country = getString(geoData, "country", "country_name", "countryName")
+        info.Region = getString(geoData, "region", "regionName", "state_prov")
+        info.City = getString(geoData, "city")
+        info.ISP = getString(geoData, "isp", "org", "asn", "asn_org")
+        info.Latitude = getFloat(geoData, "lat", "latitude")
+        info.Longitude = getFloat(geoData, "lon", "longitude", "lng")
+        info.Continent = getString(geoData, "continent", "continent_name", "continentName")
+
+        if strings.Contains(info.ISP, "AS") {
+            parts := strings.Split(info.ISP, " ")
+            if len(parts) > 0 {
+                info.ASN = parts[0]
+            }
+        }
+        
+        return info, nil
+    }
+    
+    return info, fmt.Errorf("could not retrieve geolocation data")
+}
+
+func isTorExitNode(ip string) bool {
+    conn, err := net.DialTimeout("tcp", net.JoinHostPort(ip, "53"), 2*time.Second)
+    if err != nil {
+        return true
+    }
+    conn.Close()
+    return false
+}
+
+func testSystemDNS() ([]DNSServer, bool) {
+    var servers []DNSServer
+    leakDetected := false
+
+    dnsServers, err := getSystemDNSServers()
+    if err != nil {
+        return servers, true
+    }
+
+    for _, dnsIP := range dnsServers {
+        server := DNSServer{
+            IP:     dnsIP,
+            ViaTor: isTorExitNode(dnsIP),
+        }
+
+        if !server.ViaTor {
+            leakDetected = true
+            ipInfo, err := getIPInfo(dnsIP)
+            if err == nil {
+                server.ISP = ipInfo.ISP
+                server.Country = ipInfo.Country
+                server.ASN = ipInfo.ASN
+            } else {
+                server.ISP = "Unknown"
+                server.Country = "Unknown"
+                server.ASN = "Unknown"
+            }
+        }
+
+        servers = append(servers, server)
+    }
+
+    return servers, leakDetected
+}
+
+func getSystemDNSServers() ([]string, error) {
+    content, err := os.ReadFile("/etc/resolv.conf")
+    if err != nil {
+        return nil, err
+    }
+
+    var servers []string
+    lines := strings.Split(string(content), "\n")
+    for _, line := range lines {
+        if strings.HasPrefix(line, "nameserver") {
+            parts := strings.Fields(line)
+            if len(parts) >= 2 {
+                servers = append(servers, parts[1])
+            }
+        }
+    }
+
+    return servers, nil
+}
+
+func CheckLeakTest() (*DNSLeakTestResult, error) {
+    fmt.Printf("\n%s%s[!] %sTesting DNS leaks ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+
+    result, err := TestDNSLeak()
+    if err != nil {
+        return nil, fmt.Errorf("%s%s[!] %sDNS leak test failed: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+    }
+
+    var leakResult DNSLeakTestResult
+    if err := json.Unmarshal([]byte(result), &leakResult); err != nil {
+        return nil, fmt.Errorf("%s%s[!] %sFailed to parse DNS leak results: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+    }
+
+    fmt.Println(result)
+
+    if leakResult.LeakDetected {
+        fmt.Printf("\n%s%s[>] %sDNS LEAK DETECTED! Found %d non-Tor DNS servers\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, len(leakResult.DNSServers))
+        return &leakResult, fmt.Errorf("%s%s[!] %sDNS leak detected", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    } else {
+        fmt.Printf("%s%s[>] %sNo DNS leaks detected ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        return &leakResult, nil
+    }
 }
