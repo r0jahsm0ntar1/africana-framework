@@ -734,37 +734,48 @@ func getIPGeolocation(ip string) {
     startTime := time.Now()
     responseTime := time.Since(startTime).Round(time.Millisecond)
 
-    fmt.Printf(`
+    fmt.Printf(`%s
 {
-  "ip_address": "%s",
+  "ip_address": "%s%s%s",
   "geolocation": {
-    "continent": "%s",
-    "country": "%s",
-    "region": "%s",
-    "city": "%s",
+    "continent": "%s%s%s",
+    "country": "%s%s%s",
+    "region": "%s%s%s",
+    "city": "%s%s%s",
     "coordinates": {
       "latitude": %.6f,
       "longitude": %.6f
     },
-    "isp": "%s"
+    "isp": "%s%s%s"
   },
-  "service_provider": "%s",
+  "service_provider": "%s%s%s",
   "timestamp": {
     "unix": %d,
-    "iso8601": "%s",
-    "human_readable": "%s",
-    "timezone": "%s"
+    "iso8601": "%s%s%s",
+    "human_readable": "%s%s%s",
+    "timezone": "%s%s%s"
   },
   "query_info": {
     "success": true,
-    "response_time": "%s"
+    "response_time": "%s%s%s"
   }
 }
-`, info.IP, info.Continent, info.Country, info.Region, info.City, 
-   info.Latitude, info.Longitude, info.ISP, info.ISP,
-   now.Unix(), now.Format(time.RFC3339), 
-   now.Format("Monday, January 2, 2006 at 3:04:05 PM"), 
-   now.Format("MST"), responseTime)
+%s`,
+        bcolors.Endc,
+        bcolors.Cyan, info.IP, bcolors.Endc,
+        bcolors.Cyan, info.Continent, bcolors.Endc,
+        bcolors.Cyan, info.Country, bcolors.Endc,
+        bcolors.Cyan, info.Region, bcolors.Endc,
+        bcolors.Cyan, info.City, bcolors.Endc,
+        info.Latitude, info.Longitude,
+        bcolors.Cyan, info.ISP, bcolors.Endc,
+        bcolors.Cyan, info.ISP, bcolors.Endc,
+        now.Unix(),
+        bcolors.Cyan, now.Format(time.RFC3339), bcolors.Endc,
+        bcolors.Cyan, now.Format("Monday, January 2, 2006 at 3:04:05 PM"), bcolors.Endc,
+        bcolors.Cyan, now.Format("MST"), bcolors.Endc,
+        bcolors.Cyan, responseTime.String(), bcolors.Endc,
+        bcolors.Endc)
 }
 
 func getString(data map[string]interface{}, keys ...string) string {
