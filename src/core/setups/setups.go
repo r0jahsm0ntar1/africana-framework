@@ -61,7 +61,7 @@ var (
         "gawk":                         "gawk",
         "gcc":                          "gcc",
         "gdb":                          "gdb",
-        "github-desktop":               "github-desktop",
+        //"github-desktop":               "github-desktop",
         "golang-go":                    "golang-go",
         "gstreamer1.0-libav":           "gstreamer1.0-libav",
         "gunzip":                       "gunzip",
@@ -97,7 +97,7 @@ var (
         "openssl":                      "openssl",
         "php-cgi":                      "php-cgi",
         "pkg-config":                   "pkg-config",
-        "playit":                       "playit",
+        //"playit":                       "playit",
         "powershell":                   "powershell",
         "privoxy":                      "privoxy",
         "python3":                      "python3",
@@ -188,7 +188,7 @@ func getPackageName(tool, pkg string) string {
             "gawk":                         "gawk",
             "gcc":                          "gcc",
             "gdb":                          "gdb",
-            "github-desktop":               "github-desktop",
+            //"github-desktop":               "github-desktop",
             "golang-go":                    "go",
             "gstreamer1.0-libav":           "gst-libav",
             "gunzip":                       "gzip",
@@ -224,7 +224,7 @@ func getPackageName(tool, pkg string) string {
             "openssl":                      "openssl",
             "php-cgi":                      "php",
             "pkg-config":                   "pkgconf",
-            "playit":                       "playit",
+            //"playit":                       "playit",
             "powershell":                   "powershell",
             "privoxy":                      "privoxy",
             "python3":                      "python",
@@ -840,12 +840,12 @@ func SetupGoEnvironment(PyEnvName string) {
 
     for _, dir := range goDirs {
         if err := os.MkdirAll(dir, 0755); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create directory %s: %v%s\n", bcolors.Yellow, bcolors.Endc, dir, err, bcolors.Endc)
+            fmt.Printf("%s%s[!] %sFailed to create directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, dir, err, bcolors.Endc)
         }
     }
 
     if err := os.MkdirAll(pythonVenv, 0755); err != nil {
-        fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Yellow, bcolors.Endc, pythonVenv, err, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, pythonVenv, err, bcolors.Endc)
     }
 
     shellProfiles := []string{
@@ -941,14 +941,14 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
         if err := CreatePythonVenv(); err != nil {
             fmt.Printf("%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
         }
-        
+
         InstallFoundationTools(foundationCommands)
         InstallTools(missingTools)
 
         if !utils.IsArchLinux() {
             subprocess.Run("winecfg /v win11")
         }
-        fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
         InstallGithubTools()
 
         fmt.Printf("\n%s%s[*] %sAfricana successfully installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
@@ -997,10 +997,12 @@ func ArchSetups() {
 }
 
 func UpdateAfricana() {
-    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     subprocess.Run("cd %s; git pull .", utils.ToolsDir)
+    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Bue, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
-    fmt.Printf("\n%s%s[*] %sAfricana successfully updated.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
 func Uninstaller() {
