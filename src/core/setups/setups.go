@@ -722,9 +722,7 @@ func printMissingTools(missingTools map[string]map[string]string) {
 
     for _, cat := range categories {
         if len(missingTools[cat.key]) > 0 {
-            fmt.Printf("\n%s%s%s[!] %s%sMissing %s tools.%s\n", 
-                bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Bold, cat.name, bcolors.Endc)
-            
+            fmt.Printf("\n%s%s[!] %s%sMissing %s tools.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Bold, cat.name, bcolors.Endc)
             for tool := range missingTools[cat.key] {
                 fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
                 time.Sleep(90 * time.Millisecond)
@@ -735,17 +733,17 @@ func printMissingTools(missingTools map[string]map[string]string) {
 
 func userChoice() {
     fmt.Printf("\n%s%s[?] %sInstall missing tools? (y/n): ", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    
+
     utils.Scanner.Scan()
     input := strings.ToLower(strings.TrimSpace(utils.Scanner.Text()))
-    
+
     switch input {
     case "y", "yes":
         AutoSetups()
     case "n", "q", "no", "exit", "quit":
-        fmt.Printf("%s%s%s[!] %sInstallation skipped. Some tools are missing.\n",  bcolors.Bold, bcolors.BrightRed, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sInstallation skipped. Some tools are missing ...\n",  bcolors.Bold, bcolors.BrightRed, bcolors.Endc)
     default:
-        fmt.Printf("%s%s%s[!] %sChoices are (y|n|yes|no)", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sChoices are (y|n|yes|no)", bcolors.Bold, bcolors.Red, bcolors.Endc)
         userChoice()
     }
 }
@@ -817,7 +815,6 @@ func InstallTools(tools map[string]map[string]string) {
                         subprocess.Run("sudo apt install -y %s", actualPkg)
                     }
                 }
-                
                 time.Sleep(180 * time.Millisecond)
             }
         }
