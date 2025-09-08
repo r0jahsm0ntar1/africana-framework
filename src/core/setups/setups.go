@@ -999,7 +999,7 @@ func ArchSetups() {
 func UpdateAfricana() {
     fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     subprocess.Run("cd %s; git pull .", utils.ToolsDir)
-    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Bue, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
     fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
