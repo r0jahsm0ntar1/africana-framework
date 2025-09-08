@@ -1062,7 +1062,7 @@ func Verse() {
     rand.Seed(time.Now().UnixNano())
     verseIndex := rand.Intn(1000) + 1
     if message, exists := verses[verseIndex]; exists {
-        fmt.Printf("%s[+] %s%s%s%s%s\n", bcolors.BrightGreen, bcolors.Endc, message, bcolors.Blink, `.🕊️`, bcolors.Endc)
+        fmt.Printf("%s%s[+] %s%s%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, message, bcolors.Blink, `.🕊️`, bcolors.Endc)
     }
 }
 

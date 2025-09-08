@@ -16,6 +16,7 @@ import(
     "runtime"
     "scriptures"
     "subprocess"
+    "path/filepath"
 )
 
 var (
@@ -34,6 +35,15 @@ var defaultValues = map[string]string{
     "proxy":        utils.Proxies,
     "proxies":      utils.Proxies,
     "pyenvname":    utils.PyEnvName,
+}
+
+var linuxTaskMap = map[string]func(){
+    "kali":    KaliSetups,
+    "debian":  KaliSetups,
+    "ubuntu":  UbuntuSetups,
+    "fedora":  func() { fmt.Printf("%s[+] %sFedora distro detected.\n", bcolors.BrightGreen, bcolors.Endc) },
+    "arch":    ArchSetups,
+    "alpine":  func() { fmt.Printf("%s[+] %sAlpine distro detected.\n", bcolors.BrightGreen, bcolors.Endc) },
 }
 
 var (
@@ -160,6 +170,115 @@ var (
         "waybackurls":                  "github.com/tomnomnom/waybackurls@latest",
     }
 )
+
+func getPackageName(tool, pkg string) string {
+    if utils.IsArchLinux() {
+        archPackages := map[string]string{
+
+            "aha":                          "aha",
+            "aircrack-ng":                  "aircrack-ng",
+            "build-essential":              "base-devel",
+            "checkinstall":                 "checkinstall",
+            "cowpatty":                     "cowpatty",
+            "dhcpd":                        "dhcp",
+            "dnsmasq":                      "dnsmasq",
+            "docker.io":                    "docker",
+            "dsniff":                       "dsniff",
+            "ftp":                          "inetutils",
+            "gawk":                         "gawk",
+            "gcc":                          "gcc",
+            "gdb":                          "gdb",
+            "github-desktop":               "github-desktop",
+            "golang-go":                    "go",
+            "gstreamer1.0-libav":           "gst-libav",
+            "gunzip":                       "gzip",
+            "hostapd":                      "hostapd",
+            "hydra":                        "hydra",
+            "iptables":                     "iptables",
+            "jq":                           "jq",
+            "lcov":                         "lcov",
+            "libbz2-dev":                   "bzip2",
+            "libc6-dev":                    "glibc",
+            "libffi-dev":                   "libffi",
+            "libgdbm-compat-dev":           "gdbm",
+            "libgdbm-dev":                  "gdbm",
+            "libgeoip-dev":                 "geoip",
+            "libgeoip1t64":                 "geoip",
+            "liblzma-dev":                  "xz",
+            "libncurses-dev":               "ncurses",
+            "libpcap-dev":                  "libpcap",
+            "libreadline-dev":              "readline",
+            "libsqlite3-dev":               "sqlite",
+            "libssl-dev":                   "openssl",
+            "lighttpd":                     "lighttpd",
+            "macchanger":                   "macchanger",
+            "mdk3":                         "mdk3",
+            "mdk4":                         "mdk4",
+            "mousepad":                     "mousepad",
+            "ncat":                         "nmap",
+            "net-tools":                    "net-tools",
+            "nmap":                         "nmap",
+            "npm":                          "npm",
+            "openssh-client":               "openssh",
+            "openssh-server":               "openssh",
+            "openssl":                      "openssl",
+            "php-cgi":                      "php",
+            "pkg-config":                   "pkgconf",
+            "playit":                       "playit",
+            "powershell":                   "powershell",
+            "privoxy":                      "privoxy",
+            "python3":                      "python",
+            "python3-dev":                  "python",
+            "python3-geoip":                "python-geoip",
+            "python3-pip":                  "python-pip",
+            "python3-pycurl":               "python-pycurl",
+            "python3-requests":             "python-requests",
+            "python3-scapy":                "python-scapy",
+            "python3-venv":                 "python",
+            "python3-whois":                "python-whois",
+            "python-dev-is-python3":        "python",
+            "rfkill":                       "util-linux",
+            "rlwrap":                       "rlwrap",
+            "squid":                        "squid",
+            "tk-dev":                       "tk",
+            "tmux":                         "tmux",
+            "tor":                          "tor",
+            "uuid-dev":                     "util-linux",
+            "wine32":                       "wine",
+            "xterm":                        "xterm",
+            "zlib1g-dev":                   "zlib",
+            "zsh":                          "zsh",
+
+            "airgeddon":                    "airgeddon",
+            "commix":                       "commix",
+            "dnsenum":                      "dnsenum",
+            "dnsrecon":                     "dnsrecon",
+            "findomain":                    "findomain",
+            "feroxbuster":                  "feroxbuster",
+            "gobuster":                     "gobuster",
+            "gophish":                      "gophish",
+            "massdns":                      "massdns",
+            "metasploit-framework":         "metasploit",
+            "netexec":                      "netexec",
+            "nikto":                        "nikto",
+            "smbmap":                       "smbmap",
+            "sqlmap":                       "sqlmap",
+            "sslscan":                      "sslscan",
+            "uniscan":                      "uniscan",
+            "wapiti":                       "wapiti",
+            "whatweb":                      "whatweb",
+            "wifipumpkin3":                 "wifipumpkin3",
+            "wifite":                       "wifite",
+            "xsser":                        "xsser",
+        }
+        
+        if archPkg, exists := archPackages[pkg]; exists {
+            return archPkg
+        }
+        return tool
+    }
+    return pkg
+}
 
 func SetupsLauncher() {
     for {
@@ -578,176 +697,327 @@ func Installer(Distro string) {
 }
 
 func CheckTools() {
-    spinner := utils.New(
-        utils.WithStyle("classic"),
-        utils.WithEffect("bounce"),
-    )
+    spinner := utils.New(utils.WithStyle("classic"), utils.WithEffect("bounce"))
     spinner.Start()
     missingTools := UpsentTools()
     spinner.Stop()
 
-    totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"])
-    if totalMissing == 0 {
+    if len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) == 0 {
         fmt.Printf("%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
         return
     }
 
-    if len(missingTools["system"]) > 0 {
-        fmt.Printf("%s[!] %s%sMissing system tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-        for tool := range missingTools["system"] {
-            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
-            time.Sleep(90 * time.Millisecond)
-        }
-    }
-
-    if len(missingTools["security"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing security tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-        for tool := range missingTools["security"] {
-            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
-            time.Sleep(90 * time.Millisecond)
-        }
-    }
-
-    if len(missingTools["discovery"]) > 0 {
-        fmt.Printf("\n%s[!] %s%sMissing project discovery tools.%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-        for tool := range missingTools["discovery"] {
-            fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
-            time.Sleep(90 * time.Millisecond)
-        }
-    }
+    printMissingTools(missingTools)
     userChoice()
 }
 
+func printMissingTools(missingTools map[string]map[string]string) {
+    categories := []struct{
+        key, name string
+    }{
+        {"system", "system"},
+        {"security", "security"}, 
+        {"discovery", "project discovery"},
+    }
+
+    for _, cat := range categories {
+        if len(missingTools[cat.key]) > 0 {
+            fmt.Printf("\n%s%s[!] %s%sMissing %s tools.%s\n", 
+                bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Bold, cat.name, bcolors.Endc)
+            
+            for tool := range missingTools[cat.key] {
+                fmt.Printf("  %s- %s%s...\n", bcolors.Bold, bcolors.Endc, tool)
+                time.Sleep(90 * time.Millisecond)
+            }
+        }
+    }
+}
+
 func userChoice() {
-    fmt.Printf("\n%s[?] %sLaunch setups to install missing tools? (y/n): ", bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[?] %sInstall missing tools? (y/n): ", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    
     utils.Scanner.Scan()
-    Input := strings.TrimSpace(utils.Scanner.Text())
-    switch Input {
+    input := strings.ToLower(strings.TrimSpace(utils.Scanner.Text()))
+    
+    switch input {
     case "y", "yes":
-       AutoSetups()
-       return
+        AutoSetups()
     case "n", "q", "no", "exit", "quit":
-        fmt.Printf("%s[!] %sInstallation skipped. Some tools are missing ...\n", bcolors.BrightRed, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sInstallation skipped. Some tools are missing.\n",  bcolors.Bold, bcolors.BrightRed, bcolors.Endc)
     default:
-        fmt.Printf("%s[!] %sChoices are (y|n|yes|no)", bcolors.BrightYellow, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sChoices are (y|n|yes|no)", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
         userChoice()
-        return
     }
 }
 
 func isInstalled(tool string) bool {
-    _, err := exec.LookPath(tool)
-    if err != nil {
-        cmd := exec.Command("dpkg", "-s", tool)
-        if cmd.Run() == nil {
-            return true
-        }
-        return false
+    if _, err := exec.LookPath(tool); err == nil {
+        return true
     }
-    return true
+    if utils.IsArchLinux() {
+        cmd := exec.Command("pacman", "-Q", tool)
+        return cmd.Run() == nil
+    }
+    cmd := exec.Command("dpkg", "-s", tool)
+    return cmd.Run() == nil
 }
 
 func UpsentTools() map[string]map[string]string {
-    missing := make(map[string]map[string]string)
-    missing["system"] = make(map[string]string)
-    missing["security"] = make(map[string]string)
-    missing["discovery"] = make(map[string]string)
-
-    for tool, pkg := range systemTools {
-        if !isInstalled(tool) {
-            time.Sleep(45 * time.Millisecond)
-            missing["system"][tool] = pkg
-        }
+    missing := map[string]map[string]string{
+        "system":    {},
+        "security":  {},
+        "discovery": {},
     }
 
-    for tool, pkg := range securityTools {
-        if !isInstalled(tool) {
-            time.Sleep(45 * time.Millisecond)
-            missing["security"][tool] = pkg
-        }
+    toolSets := []struct{
+        category string
+        tools    map[string]string
+    }{
+        {"system", systemTools},
+        {"security", securityTools},
+        {"discovery", projectDiscoveryTools},
     }
 
-    for tool, pkg := range projectDiscoveryTools {
-        if !isInstalled(tool) {
-            time.Sleep(45 * time.Millisecond)
-            missing["discovery"][tool] = pkg
+    for _, set := range toolSets {
+        for tool, pkg := range set.tools {
+            if !isInstalled(tool) {
+                time.Sleep(45 * time.Millisecond)
+                missing[set.category][tool] = pkg
+            }
         }
     }
+    
     return missing
 }
 
 func InstallTools(tools map[string]map[string]string) {
-    if len(tools["system"]) > 0 {
-        fmt.Printf("\n%sInstalling system tools%s.", bcolors.Bold, bcolors.Endc)
-        for tool, pkg := range tools["system"] {
-            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
-            subprocess.Run("sudo apt install -y %s", pkg)
-            time.Sleep(180 * time.Millisecond)
+    categories := []struct{
+        key, name string
+    }{
+        {"system", "system"},
+        {"security", "security"},
+        {"discovery", "project discovery"},
+    }
+
+    for _, cat := range categories {
+        if len(tools[cat.key]) > 0 {
+            fmt.Printf("\n%sInstalling %s tools%s.", bcolors.Bold, cat.name, bcolors.Endc)
+            for tool, pkg := range tools[cat.key] {
+                fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
+                actualPkg := getPackageName(tool, pkg)
+
+                if cat.key == "security" && strings.HasPrefix(pkg, "github.com") {
+                    subprocess.Run("go install %s", pkg)
+                } else if cat.key == "discovery" {
+                    subprocess.Run("go install %s", pkg)
+                } else {
+                    if utils.IsArchLinux() {
+                        subprocess.Run("sudo pacman -S --noconfirm %s", actualPkg)
+                    } else {
+                        subprocess.Run("sudo apt install -y %s", actualPkg)
+                    }
+                }
+                
+                time.Sleep(180 * time.Millisecond)
+            }
+        }
+    }
+}
+
+func SetupGoEnvironment(PyEnvName string) {
+    homeDir := os.Getenv("HOME")
+    goPath := filepath.Join(homeDir, ".go")
+    os.Setenv("GOPATH", goPath)
+    os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(goPath, "bin"))
+
+    pythonVenv := filepath.Join(utils.BaseDir, utils.PyEnvName)
+    os.Setenv("VIRTUAL_ENV", pythonVenv)
+    os.Setenv("PATH", filepath.Join(pythonVenv, "bin") + ":" + os.Getenv("PATH"))
+
+    goDirs := []string{
+        goPath,
+        filepath.Join(goPath, "bin"),
+        filepath.Join(goPath, "pkg"),
+        filepath.Join(goPath, "src"),
+    }
+
+    for _, dir := range goDirs {
+        if err := os.MkdirAll(dir, 0755); err != nil {
+            fmt.Printf("%s[!] %sFailed to create directory %s: %v%s\n", bcolors.Yellow, bcolors.Endc, dir, err, bcolors.Endc)
         }
     }
 
-    if len(tools["security"]) > 0 {
-        fmt.Printf("\n%sInstalling security tools%s.", bcolors.Bold, bcolors.Endc)
-        for tool, pkg := range tools["security"] {
-            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
-            if strings.HasPrefix(pkg, "github.com") {
-                subprocess.Run("go install %s", pkg)
+    if err := os.MkdirAll(pythonVenv, 0755); err != nil {
+        fmt.Printf("%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Yellow, bcolors.Endc, pythonVenv, err, bcolors.Endc)
+    }
+
+    shellProfiles := []string{
+        filepath.Join(homeDir, ".bashrc"),
+        filepath.Join(homeDir, ".zshrc"),
+    }
+
+    envSetup := fmt.Sprintf(`
+# Go environment
+export GOPATH=%s
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+# Python AFR environment
+export AFR_VENV=%s
+export PATH=$AFR_VENV/bin:$PATH
+source $AFR_VENV/bin/activate 2>/dev/null
+`, goPath, pythonVenv)
+
+    for _, profile := range shellProfiles {
+        if err := appendToShellProfile(profile, envSetup); err != nil {
+            fmt.Printf("%s[!] %sFailed to update %s: %v%s\n", 
+                bcolors.Yellow, bcolors.Endc, profile, err, bcolors.Endc)
+        }
+    }
+}
+
+func appendToShellProfile(profilePath, content string) error {
+    if _, err := os.Stat(profilePath); os.IsNotExist(err) {
+        if err := os.WriteFile(profilePath, []byte(content), 0644); err != nil {
+            return err
+        }
+        return nil
+    }
+
+    f, err := os.OpenFile(profilePath, os.O_APPEND|os.O_WRONLY, 0644)
+    if err != nil {
+        return err
+    }
+    defer f.Close()
+
+    _, err = f.WriteString(content)
+    return err
+}
+
+func CreatePythonVenv() error {
+    homeDir := os.Getenv("HOME")
+    venvPath := filepath.Join(homeDir, ".afr", "afr-venv")
+
+    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); err == nil {
+        fmt.Printf("%s[+] %sPython virtual environment already exists%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
+        return nil
+    }
+
+    fmt.Printf("%s[+] %sCreating Python virtual environment...%s\n", bcolors.BrightGreen, bcolors.Endc, bcolors.Endc)
+
+    cmd := exec.Command("python3", "-m", "venv", venvPath)
+    if output, err := cmd.CombinedOutput(); err != nil {
+        return fmt.Errorf("failed to create Python venv: %v\nOutput: %s", err, string(output))
+    }
+
+    fmt.Printf("%s[+] %sPython virtual environment created at %s%s\n", bcolors.Green, bcolors.Endc, venvPath, bcolors.Endc)
+    return nil
+}
+
+func AutoSetups() {
+    switch runtime.GOOS {
+    case "linux":
+        if utils.DetectAndroid() {
+            fmt.Printf("%s[+] %sAndroid Detected.\n", bcolors.BrightGreen, bcolors.Endc)
+            AndroidSetups()
+        } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
+            if task, ok := linuxTaskMap[distroID]; ok {
+                task()
             } else {
-                subprocess.Run("sudo apt install -y %s", pkg)
+                fmt.Printf("%s[!] %sUnsupported Linux distro: %s\n", bcolors.BrightRed, bcolors.Endc, distroID)
             }
-            time.Sleep(180 * time.Millisecond)
+        } else {
+            fmt.Printf("%s[!] %sLinux distro detection failed.\n", bcolors.BrightRed, bcolors.Endc)
         }
-    }
-
-    if len(tools["discovery"]) > 0 {
-        fmt.Printf("\n%sInstalling project discovery tools%s.", bcolors.Bold, bcolors.Endc)
-        for tool, pkg := range tools["discovery"] {
-            fmt.Printf("\n%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
-            subprocess.Run("go install %s", pkg)
-            time.Sleep(180 * time.Millisecond)
-        }
-    }
-
-    if runtime.GOOS == "linux" {
-        gzFilePath := utils.RokyPath + ".gz"
-        if _, err := os.Stat(utils.RokyPath); os.IsNotExist(err) {
-            if _, err := os.Stat(gzFilePath); os.IsNotExist(err) {
-                return
-            }
-            command := fmt.Sprintf("gunzip -d -9 %s", gzFilePath)
-            subprocess.Run(command)
-        }
+    case "windows":
+        fmt.Printf("%s[+] %sWindows detected.\n", bcolors.BrightGreen, bcolors.Endc)
+        WindowsSetups()
+    case "darwin":
+        fmt.Printf("%s[+] %smacOS detected.\n", bcolors.BrightGreen, bcolors.Endc)
+        MacosSetups()
+    default:
+        fmt.Printf("%s[!] %sUnsupported OS: %s\n", bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
     }
 }
 
-var linuxTaskMap = map[string]func(){
-    "kali": func() {
-        fmt.Printf("%s[+] %sKali distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        KaliSetups()
-    },
-    "debian": func() {
-        fmt.Printf("%s[+] %sDebian distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        KaliSetups()
-    },
-    "ubuntu": func() {
-        fmt.Printf("%s[+] %sUbuntu distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        UbuntuSetups()
-    },
-    "fedora": func() {
-        fmt.Printf("%s[+] %sFedora distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-    },
-    "arch": func() {
-        fmt.Printf("%s[+] %sArch distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-        ArchSetups()
-    },
-    "alpine": func() {
-        fmt.Printf("%s[+] %sAlpine distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-    },
-    // Add more distros as needed
+func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
+        SetupGoEnvironment(utils.PyEnvName)
+
+        if err := CreatePythonVenv(); err != nil {
+            fmt.Printf("%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+        }
+        
+        InstallFoundationTools(foundationCommands)
+        InstallTools(missingTools)
+
+        if !utils.IsArchLinux() {
+            subprocess.Run("winecfg /v win11")
+        }
+        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
+        InstallGithubTools()
+
+        fmt.Printf("\n%s[*] %sAfricana successfully installed.\n", bcolors.Green, bcolors.Endc)
+    } else {
+        UpdateAfricana()
+    }
 }
 
-func Venv(PyEnvName string) {
-    subprocess.Run("cd %s; python3 -m virtualenv %s --system-site-packages; echo -n '\n source %s%s/bin/activate' >> ~/.zshrc; source ~/.zshrc", utils.BaseDir, utils.PyEnvName, utils.BaseDir, utils.PyEnvName)
+func KaliSetups() {
+    fmt.Printf("\n%s[>] %sInstalling africana in kali.\n", bcolors.Green, bcolors.Endc)
+    missingTools := UpsentTools()
+    
+    commands := []string{
+        "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+        "dpkg --add-architecture i386",
+        "apt-get update -y",
+        "apt-get install zsh git curl -y",
+    }
+    baseLinuxSetup(missingTools, commands)
+}
+
+func UbuntuSetups() {
+    fmt.Printf("\n%s[>] %sInstalling africana in ubuntu.\n", bcolors.Green, bcolors.Endc)
+    missingTools := UpsentTools()
+    commands := []string{
+        "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+        "dpkg --add-architecture i386",
+        "add-apt-repository multiverse",
+        "apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
+    }
+    baseLinuxSetup(missingTools, commands)
+}
+
+func ArchSetups() {
+    fmt.Printf("\n%s[>] %sSetting up Arch Linux.\n", bcolors.Green, bcolors.Endc)
+    missingTools := UpsentTools()
+    commands := []string{
+        "sudo pacman -Syu --noconfirm",
+        "sudo pacman -S --noconfirm base-devel git curl zsh go",
+    }
+    baseLinuxSetup(missingTools, commands)
+}
+
+func UpdateAfricana() {
+    fmt.Printf("\n%s[!] %sAfricana already installed. Updating.\n", bcolors.Green, bcolors.Endc)
+    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
+    fmt.Printf("\n%s[*] %sAfricana successfully updated.\n", bcolors.Green, bcolors.Endc)
+}
+
+func Uninstaller() {
+    fmt.Printf("%s\n[!] %sUninstalling africana.\n", bcolors.BrightRed, bcolors.Endc)
+    
+    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
+        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
+        fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Green, bcolors.Endc)
+        os.Exit(0)
+    } else {
+        fmt.Printf("%s[!] %sAfricana is not installed.\n", bcolors.Green, bcolors.Endc)
+    }
 }
 
 func InstallFoundationTools(commands []string) {
@@ -757,131 +1027,17 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    Venv(utils.PyEnvName)
     subprocess.Run(`cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; xterm -fullscreen -T 'Glory be To Lord God Jesus Christ' -e "source ~/.zshrc; python3 -m pip install install -r %s/requirements.txt"`, utils.BaseDir, utils.BaseDir)
 }
 
-func AutoSetups() {
-    osName := runtime.GOOS
-
-    switch osName {
-    case "linux":
-        if utils.DetectAndroid() {
-            fmt.Printf("%s[+] %sAndroid Detected ...", bcolors.BrightGreen, bcolors.Endc)
-            AndroidSetups()
-        } else {
-            distroID, err := utils.GetLinuxDistroID()
-            if err != nil {
-                fmt.Printf("%s[!] %sLinux OS detected but distro detection failed: %v\n", bcolors.BrightRed, bcolors.Endc, err)
-            } else if task, ok := linuxTaskMap[distroID]; ok {
-                task()
-            } else {
-                fmt.Printf("%s[!] %sUnknown or unsupported Linux distro: %s", bcolors.BrightRed, bcolors.Endc, distroID)
-            }
-        }
-    case "windows":
-        fmt.Printf("%s[+] %sWindows distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-    case "darwin":
-        fmt.Printf("%s[+] %smacOS distro detected ...", bcolors.BrightGreen, bcolors.Endc)
-    default:
-        fmt.Printf("%s[!] %sUnsupported or unknown OS: %s", bcolors.BrightRed, bcolors.Endc, osName)
-    }
-}
-
-func KaliSetups() {
-    fmt.Printf("\n%s[>] %sInstalling africana in kali ...\n", bcolors.Green, bcolors.Endc)
-    missingTools := UpsentTools()
-    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        foundationCommands := []string{
-            "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-            "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-            "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
-            "dpkg --add-architecture i386",
-            "apt-get update -y",
-            "apt-get install zsh git curl -y",
-        }
-        InstallFoundationTools(foundationCommands)
-        InstallTools(missingTools)
-        subprocess.Run("winecfg /v win11")
-        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
-        InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
-    } else {
-        UpdateAfricana()
-        return
-    }
-}
-
-func UbuntuSetups() {
-    fmt.Printf("\n%s[>] %sInstalling africana in ubuntu ...\n", bcolors.Green, bcolors.Endc)
-    missingTools := UpsentTools()
-    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        foundationCommands := []string{
-            "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-            "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-            "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
-            "dpkg --add-architecture i386",
-            "add-apt-repository multiverse",
-            "apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
-        }
-        InstallFoundationTools(foundationCommands)
-        InstallTools(missingTools)
-        subprocess.Run("winecfg /v win11")
-        fmt.Printf("\n%s[*] %sInstalling third party tools\n", bcolors.Green, bcolors.Endc)
-        InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana succesfully installed ...\n", bcolors.Green, bcolors.Endc)
-    } else {
-        UpdateAfricana()
-    }
-}
-
-func ArchSetups() {
-    fmt.Printf("\n%s[>] %sInstalling blackarch tools ...\n", bcolors.Green, bcolors.Endc)
-    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        foundationCommands := []string{
-            "curl -O https://blackarch.org/strap.sh",
-            "chmod +x strap.sh",
-            "./strap.sh",
-            "pacman -Syu --noconfirm",
-            "pacman -S --noconfirm blackarch",
-            "pacman -S --noconfirm base-devel bc jq npm tor aha ftp ncat gcc gawk tmux mdk4 mdk3 nmap playit rlwrap squid privoxy iptables dnsmasq openssh-client libpcap-dev openssh-server powershell golang-go docker.io python3 python3-pip build-essential libssl-dev libffi-dev python3-dev python3-venv python3-pycurl python3-geoip python3-whois python3-requests python3-scapy libgeoip1t64 libgeoip-dev gophish wifipumpkin3 wifite airgeddon nuclei nikto nmap smbmap dnsrecon metasploit-framework gobuster feroxbuster uniscan sqlmap commix dnsenum sslscan whatweb wafw00f WordsListDir wapiti xsser util-linux netexec libssl-dev aircrack-ng cowpatty dhcpd hostapd lighttpd net-tools macchanger dsniff openssl php-cgi xterm rfkill unzip hydra wine32:i386",
-            "winecfg /v win11",
-        }
-        InstallFoundationTools(foundationCommands)
-        fmt.Printf("\n%s[>] %sInstalling third party tools ...\n", bcolors.Green, bcolors.Endc)
-        InstallGithubTools()
-        fmt.Printf("\n%s[*] %sAfricana fully installed ...\n", bcolors.Green, bcolors.Endc)
-    } else {
-        UpdateAfricana()
-    }
-}
-
-func UpdateAfricana() {
-    fmt.Printf("\n%s[!] %sAfricana already installed. Updating it ...\n", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
-    fmt.Printf("\n%s[*] %sAfricana succesfully updated ...\n", bcolors.Green, bcolors.Endc)
-    return
-}
-
 func AndroidSetups() {
-    // Placeholder for Windows setup logic
+    fmt.Printf("%s[+] %sAndroid setup placeholder.\n", bcolors.BrightGreen, bcolors.Endc)
 }
 
 func MacosSetups() {
+    fmt.Printf("%s[+] %smacOS setup placeholder.\n", bcolors.BrightGreen, bcolors.Endc)
 }
 
 func WindowsSetups() {
-    // Placeholder for Windows setup logic
-}
-
-func Uninstaller() {
-    fmt.Printf("%s\n[!] %sUninstalling africana ...\n", bcolors.BrightRed, bcolors.Endc)
-    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
-        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
-        fmt.Printf("%s[*] %sAfricana uninstalled. Goodbye! ...", bcolors.Green, bcolors.Endc)
-        os.Exit(0)
-    } else {
-        fmt.Printf("%s[!] %sAfricana is not installed ...\n", bcolors.Green, bcolors.Endc)
-    }
+    fmt.Printf("%s[+] %sWindows setup placeholder.\n", bcolors.BrightGreen, bcolors.Endc)
 }

@@ -77,13 +77,13 @@ build:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${BrightGreen}${Bold}[*] ${Endc}Build almost complete ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Build almost complete ...${Endc}"; \
 		else \
-			echo "${BrightRed}${Blink}[!] Build failed${Endc}"; \
+			echo "${Red}${Bold}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
-	@echo "${BackGreen}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
+	@echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Build for specified OS (e.g., make distro windows)
 distro:
@@ -110,13 +110,13 @@ distro:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${BrightGreen}${Bold}[*] ${Endc}Build almost complete ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Build almost complete ...${Endc}"; \
 		else \
-			echo "${BrightRed}${Blink}[!] Build failed${Endc}"; \
+			echo "${BrightRed}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
-	@echo "${BackGreen}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
+	@echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Clean output
 clean:

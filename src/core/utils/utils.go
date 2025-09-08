@@ -42,11 +42,11 @@ var (
     LPort      = "9999"
     HPort      = "3333"
     Obfuscator = "ghost"
+    PyEnvName  = "afr_venv"
     InnerIcon  = "kaspersky"
     Listener   = "blackjack"
     BuildName  = "africana_fud"
     RawBuild   = "africana_raw"
-    PyEnvName  = "africana-venv"
 
     FakeDns    = "*"
     NeMode     = "all"
@@ -874,6 +874,10 @@ func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
 }
 
 func GetLinuxDistroID() (string, error) {
+    if _, err := os.Stat("/etc/arch-release"); err == nil {
+        return "arch", nil
+    }
+
     file, err := os.Open("/etc/os-release")
     if err != nil {
         return "", err
@@ -884,11 +888,38 @@ func GetLinuxDistroID() (string, error) {
     for scanner.Scan() {
         line := scanner.Text()
         if strings.HasPrefix(line, "ID=") {
-            return strings.Trim(strings.TrimPrefix(line, "ID="), `"`), nil
+            distroID := strings.Trim(strings.TrimPrefix(line, "ID="), `"`)
+            if distroID == "manjaro" || distroID == "endeavouros" || distroID == "garuda" {
+                return "arch", nil
+            }
+            return distroID, nil
         }
     }
 
     return "", fmt.Errorf("could not determine Linux distro")
+}
+
+func IsArchLinux() bool {
+    distroID, err := GetLinuxDistroID()
+    if err != nil {
+        if _, err := exec.LookPath("pacman"); err == nil {
+            if _, err := os.Stat("/etc/debian_version"); os.IsNotExist(err) {
+                return true
+            }
+        }
+        return false
+    }
+
+    archDistros := map[string]bool{
+        "arch":        true,
+        "manjaro":     true,
+        "endeavouros": true,
+        "garuda":      true,
+        "artix":       true,
+        "arcolinux":   true,
+    }
+    
+    return archDistros[distroID]
 }
 
 func DetectAndroid() bool {
