@@ -801,10 +801,10 @@ func InstallTools(tools map[string]map[string]string) {
         if len(tools[cat.key]) > 0 {
             fmt.Printf("\n%sInstalling %s tools%s.", bcolors.Bold, cat.name, bcolors.Endc)
             for tool, pkg := range tools[cat.key] {
-                fmt.Printf("\n%s%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.BrightGreen, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, tool)
+                fmt.Printf("\n%s%s[+]  %s%s- %sInstalling %s%-20s ...", bcolors.Bold, bcolors.Green, bcolors.Bold, bcolors.Endc, bcolors.Blue, bcolors.Endc, tool)
                 actualPkg := getPackageName(tool, pkg)
 
-                if cat.key == "security" && strings.HasPrefix(pkg, "github.com") {
+                if cat.key == "security" && strings.HasPrefix(pkg, "@latest") {
                     subprocess.Run("go install %s", pkg)
                 } else if cat.key == "discovery" {
                     subprocess.Run("go install %s", pkg)
