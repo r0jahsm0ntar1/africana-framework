@@ -38,7 +38,7 @@ var (
 
     Function   = ""
     Protocol   = "tcp"
-    OuterIcon  = "word"
+    OuterIcon  = "pdf"
     LPort      = "9999"
     HPort      = "3333"
     Obfuscator = "ghost"
@@ -108,8 +108,8 @@ var (
     WordsList = filepath.Join(WordsListDir, "everything.txt")
     ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")
 
-    BaseDir, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordsListDir = DirLocations()
-    baseDir, Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
+    BaseDir, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordsListDir = subprocess.DirLocations()
+    Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
 )
 
 type InterfaceInfo struct {
@@ -1025,26 +1025,6 @@ func Info(colors, art, message string) {
 
 func Sleep() {
     subprocess.Run("sleep")
-}
-
-func DirLocations() (string, string, string, string, string, string, string, string) {
-    if runtime.GOOS == "windows" {
-        baseDir = filepath.Join(os.Getenv("ProgramData"), ".afr" + subprocess.Version)
-    } else {
-        baseDir = filepath.Join("/root", ".afr" + subprocess.Version)
-    }
-
-    if !subprocess.CheckRoot(){
-        if homeDir := subprocess.GetHomeDir(); homeDir != "" {
-            baseDir = filepath.Join(homeDir, ".afr" + subprocess.Version)
-        } else {
-            return "", "", "", "", "", "", "", ""
-        }
-    }
-    certDir := filepath.Join(baseDir, "certs")
-    toolsDir := filepath.Join(baseDir, "africana-base")
-
-    return baseDir, certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
 }
 
 func InitiLize() {

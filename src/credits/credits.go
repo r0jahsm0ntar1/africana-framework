@@ -129,13 +129,13 @@ Torsocks & anonimity%s`, bcolors.Bold, bcolors.Underline, bcolors.BrightBlue, bc
 %s%s%sCode of conduct%s`, bcolors.Bold, bcolors.Underline, bcolors.BrightBlue, bcolors.Endc)
     caution := bcolors.Endc + `
 [ Africana-framework is written purely for Good & not evil]
-[ The author of africana-framework is Rojahs Montari from.]
-[ cyberafrics a cybersecurity organisation in Africa Kenya]
+[ The author of africana-framework is Christ Maniach from.]
+[ lighTech a cybersecurity organisation in Africa Kenya...]
 [ What is there 4 U 2 gain the whole world & loose your...]
 [ soul? Be smart your Creator has good plans for you......]
 [ The devil has no power over you Christian soldier.......]
 [ Email....: rojahsmontari@gmail.com......................]
-[ YouTube..: https://youtube.com/@RojahsMontari...........]
+[ YouTube..: https://youtube.com/@r0jahsm0ntar1...........]
 ` + bcolors.Endc
     for _, c := range caution {
         fmt.Print(string(c))

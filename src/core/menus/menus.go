@@ -266,13 +266,13 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
         {"SCRIPT", opts.SCRIPT},
         {"PROTOCOL", opts.PROTOCOL},
         {"LISTENER", opts.LISTENER},
-        {"TOOLSDIR", opts.TOOLSDIR},
-        {"OUTPUTLOGS", opts.OUTPUTLOGS},
-        {"PROXIES", opts.PROXIES},
         {"FUNCTION", opts.FUNCTION},
-        {"RECONDIR", opts.RECONDIR},
         {"BUILDNAME", opts.BUILDNAME},
+        {"PROXIES", opts.PROXIES},
         {"OBFUSCATOR", opts.OBFUSCATOR},
+        {"OUTPUTLOGS", opts.OUTPUTLOGS},
+        {"TOOLSDIR", opts.TOOLSDIR},
+        {"RECONDIR", opts.RECONDIR},
     }
 
     hasAnyValue := false
@@ -824,7 +824,7 @@ func HelpInfoMain() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -842,7 +842,7 @@ func HelpInfoSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This modules enables you to Install, uninstall, update and mentain africana-framework.",
@@ -861,7 +861,7 @@ func HelpInfoTorsocks() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
@@ -880,7 +880,7 @@ func HelpInfoKali() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.",
@@ -898,7 +898,7 @@ func HelpInfoArch() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
@@ -916,7 +916,7 @@ func HelpInfoUbuntu() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.",
@@ -934,7 +934,7 @@ func HelpInfoMacos() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
@@ -953,7 +953,7 @@ func HelpInfoWindows() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
@@ -971,7 +971,7 @@ func HelpInfoAndroid() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.",
@@ -990,7 +990,7 @@ func HelpInfoUpdate() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to update and mentain africana-framework.",
@@ -1008,7 +1008,7 @@ func HelpInfoUninstall() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com",
@@ -1026,7 +1026,7 @@ func HelpInfoAuto() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to auto select distro and install africana with all it's dependencies.",
@@ -1045,7 +1045,7 @@ func HelpInfoRepair() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a function repairs africana incase it is broken.",
@@ -1064,7 +1064,7 @@ func HelpInfoClearLogs() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will clear all your logs that has been recorded from the last time you cleaned the log folder.",
@@ -1082,7 +1082,7 @@ func HelpInfoTorsocksSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.",
@@ -1100,7 +1100,7 @@ func HelpInfoTorsocksVanish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.",
@@ -1118,7 +1118,7 @@ func HelpInfoTorsocksStatus() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.",
@@ -1137,7 +1137,7 @@ func HelpInfoTorsocksTorIp() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxies is correctly configured, then you will get a congratulation mesage from tor website.",
@@ -1156,7 +1156,7 @@ func HelpInfoTorsocksChains() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.",
@@ -1175,7 +1175,7 @@ func HelpInfoTorsocksReload() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will stop all tor services and restart again acuring new exitnodes and torchains.",
@@ -1193,7 +1193,7 @@ func HelpInfoTorsocksExitnode() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.",
@@ -1212,7 +1212,7 @@ func HelpInfoTorsocksRestore() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
@@ -1231,7 +1231,7 @@ func HelpInfoTorsocksStop() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
@@ -1249,7 +1249,7 @@ func HelpInfoNetworks() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This is the Network module that contains all internal networks attacks functions.",
@@ -1269,7 +1269,7 @@ func HelpInfoChameleon() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
@@ -1287,7 +1287,7 @@ func HelpInfoExploits() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicators functions.",
@@ -1308,7 +1308,7 @@ func HelpInfoCrackers() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
@@ -1329,7 +1329,7 @@ func HelpInfoPhishers() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.",
@@ -1348,7 +1348,7 @@ func HelpInfoGoPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1367,7 +1367,7 @@ func HelpInfoGoodGinx() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1386,7 +1386,7 @@ func HelpInfoZPhisher() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1405,7 +1405,7 @@ func HelpInfoBlackEye() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1424,7 +1424,7 @@ func HelpInfoAdvPhisher() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1443,7 +1443,7 @@ func HelpInfoDarkPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1462,7 +1462,7 @@ func HelpInfoShellPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1481,7 +1481,7 @@ func HelpInfoSetoolKit() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1500,7 +1500,7 @@ func HelpInfoThc() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1520,7 +1520,7 @@ func HelpInfoWebsites() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1539,7 +1539,7 @@ func HelpInfoEnumScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1558,7 +1558,7 @@ func HelpInfoDnsRecon() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1577,7 +1577,7 @@ func HelpInfoPortScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1596,7 +1596,7 @@ func HelpInfoTechScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1615,7 +1615,7 @@ func HelpInfoFuzzScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1634,7 +1634,7 @@ func HelpInfoLeakScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1653,7 +1653,7 @@ func HelpInfoVulnScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1672,7 +1672,7 @@ func HelpInfoAsetScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1691,7 +1691,7 @@ func HelpInfoAutoScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1711,7 +1711,7 @@ func HelpInfoCredits() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1732,7 +1732,7 @@ func HelpInfoVerses() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1753,7 +1753,7 @@ func HelpInfoDiscover() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan for all connected devices in the network given using bettercap then arrange the targets in a table for you to select one to attack further.",
@@ -1772,7 +1772,7 @@ func HelpInfoInEnumScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1791,7 +1791,7 @@ func HelpInfoInPortScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan all open ports of the target to reveal open ports.",
@@ -1811,7 +1811,7 @@ func HelpInfoInVulnScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Perform vulnerbility scan on open ports of the target you have set.",
@@ -1831,7 +1831,7 @@ func HelpInfoSmbExplo() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch known vulnerbility exploits on the target's S.M.B services.",
@@ -1850,7 +1850,7 @@ func HelpInfoPSniffer() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Sniff all Packets from connected devices to the router(Perform M.I.T.M).",
@@ -1869,7 +1869,7 @@ func HelpInfoResponder(Mode, LPort, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version.",
@@ -1888,7 +1888,7 @@ func HelpInfoBeefKill(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.",
@@ -1909,7 +1909,7 @@ func HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.",
@@ -1928,7 +1928,7 @@ func HelpInfoWireless() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "r0jahsm0ntar1",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -1946,7 +1946,7 @@ func HelpInfoBlackJack(LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "r0jahsm0ntar1",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1966,7 +1966,7 @@ func HelpInfoShellz(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "r0jahsm0ntar1",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1987,7 +1987,7 @@ func HelpInfoHoaxShell(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "r0jahsm0ntar1",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2008,7 +2008,7 @@ func HelpInfoLithalDll(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listene
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "r0jahsm0ntar1",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "Israel Isreal",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2031,7 +2031,7 @@ func HelpInfoHavoc() {
   %sDisclosed%s: 2025
 
 %sProvided by%s: t3l3machus
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2069,7 +2069,7 @@ func HelpInfoTearNdroid() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2108,7 +2108,7 @@ func HelpInfoChameLeon() {
   %sDisclosed%s: 2025
 
 %sProvided by%s: t3l3machus
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2146,7 +2146,7 @@ func HelpInfoGhost() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2184,7 +2184,7 @@ func HelpInfoSeaShell() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2221,7 +2221,7 @@ func HelpInfoListener() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2258,7 +2258,7 @@ func HelpInfoRegSniper() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2296,7 +2296,7 @@ func HelpInfoTearDroid() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2333,7 +2333,7 @@ func HelpInfoAndroRat() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2371,7 +2371,7 @@ func HelpInfoWifite() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2412,7 +2412,7 @@ func HelpInfoFluxion() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2453,7 +2453,7 @@ func HelpInfoBetterCap() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2495,7 +2495,7 @@ func HelpInfoAirGeddon() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------
@@ -2536,7 +2536,7 @@ func HelpInfoWifiPumpkin() {
   %sDisclosed%s: 2025
 
 %sProvided by%s:
- %sCreated by%s: r0jahsm0ntar1
+ %sCreated by%s: ChristManiach
 
 %sSupported Distros%s:
 --------- --------

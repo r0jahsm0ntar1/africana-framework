@@ -18,12 +18,13 @@ import (
 
 var (
     err error
+    Version = "3"
     mu sync.Mutex
     logFile *os.File
-    Version    = "3"
-    Dversion   = Version + ".0.4-dev"
-    flag, shell, process, initialDir, currentDir string
-    logDir     = filepath.Join("/root/.afr" + Version, "logs")
+    Dversion = Version + ".0.4-dev"
+    logDir = filepath.Join(BaseDir, "logs")
+    BaseDir, _, _, _, _, _, _, _ = DirLocations()
+    flag, shell, process, baseDir, initialDir, currentDir string
 )
 
 func init() {
@@ -50,7 +51,7 @@ func CheckRoot()bool {
 func GetHomeDir() string {
     usr, err := user.Current()
     if err != nil {
-        fmt.Printf("Error getting current user:", err)
+        fmt.Printf("%s%s[!] %sError getting current user:", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return ""
     }
     return usr.HomeDir
@@ -66,7 +67,7 @@ func creatLogDir() {
     }
 
     if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError creating log directory ... %s%s_", bcolors.BrightRed, bcolors.Endc, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s%s[!] %sError creating log directory ... %s%s_", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
         return
     }
@@ -123,13 +124,13 @@ func executeFullCommand(command string) {
     }()
 
     if err := cmd.Start(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError starting command ... %s_", bcolors.BrightRed, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s%s[!] %sError starting command ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
         return
     }
 
     if err := cmd.Wait(); err != nil {
-        msg, _ := fmt.Printf("%s[!] %sProcess is incomplete ... %s_", bcolors.BrightRed, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s%s[!] %sProcess is incomplete ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 
@@ -147,7 +148,7 @@ func openLogFile() {
 
     logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        msg, _ := fmt.Printf("%s[!] %sError opening log file ... %s_", bcolors.BrightRed, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s%s[!] %sError opening log file ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 }
@@ -187,9 +188,9 @@ func changeDirectory(newDir string) {
 
     if stat, err := os.Stat(newDir); err == nil && stat.IsDir() {
         currentDir = newDir
-        fmt.Printf("%s[*] %sChanged directory to: %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, currentDir, bcolors.Endc)
+        fmt.Printf("%s%s[*] %sChanged directory to: %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Blue, currentDir, bcolors.Endc)
     } else {
-        fmt.Printf("%s[!] %sInvalid directory: %s%s%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightBlue, newDir, bcolors.Endc)
+        fmt.Printf("%s%s[!] %sInvalid directory: %s%s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Blue, newDir, bcolors.Endc)
     }
 }
 
@@ -206,7 +207,7 @@ func ShowHistory() {
     defer file.Close()
 
     scanner := bufio.NewScanner(file)
-    fmt.Printf("%s[*] %sexec: history\n\n", bcolors.BrightBlue, bcolors.Endc)
+    fmt.Printf("%s%s[*] %sexec: history\n\n", bcolors.Bold, bcolors.BrightBlue, bcolors.Endc)
     lineNumber := 1
     for scanner.Scan() {
         fmt.Printf("%s%d. %s%s\n", bcolors.BrightBlue, lineNumber, bcolors.Endc, scanner.Text())
@@ -218,9 +219,30 @@ func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Printf("%s[!] %sError clearing history:", bcolors.BrightRed, bcolors.Endc, err)
+        fmt.Printf("%s%s[!] %sError clearing history:", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err)
     } else {
-        fmt.Printf("%s[*] %sexec: clear history\n%s[*] %sHistory cleared ...\n", bcolors.BrightBlue, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("%s%s[+] %sexec: clear history\n%s%s[*] %sHistory cleared ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.BrightGreen, bcolors.Endc)
         openLogFile()
     }
+}
+
+func DirLocations() (string, string, string, string, string, string, string, string) {
+    if runtime.GOOS == "windows" {
+        baseDir = filepath.Join(os.Getenv("ProgramData"), ".afr" + Version)
+    } else {
+        baseDir = filepath.Join("/root", ".afr" + Version)
+    }
+
+    if !CheckRoot(){
+        if homeDir := GetHomeDir(); homeDir != "" {
+            baseDir = filepath.Join(homeDir, ".afr" + Version)
+        } else {
+            return "", "", "", "", "", "", "", ""
+        }
+    }
+
+    certDir := filepath.Join(baseDir, "certs")
+    toolsDir := filepath.Join(baseDir, "africana-base")
+
+    return baseDir, certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
 }

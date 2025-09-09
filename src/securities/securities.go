@@ -2,24 +2,24 @@
 package securities
 
 import (
-    "encoding/json"
-    "fmt"
     "io"
-    "net"
-    "net/http"
     "os"
-    "os/exec"
+    "fmt"
+    "net"
+    "time"
+    "menus"
+    "utils"
     "regexp"
+    "setups"
     "strconv"
     "strings"
-    "time"
-
     "banners"
     "bcolors"
-    "menus"
+    "os/exec"
+    "net/http"
     "scriptures"
     "subprocess"
-    "utils"
+    "encoding/json"
 )
 
 var Function string
@@ -391,20 +391,20 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-        "setups":   func() { banners.GraphicsTorNet(); subprocess.Run("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "setups":   func() { banners.GraphicsTorNet(); setups.CheckMissing() },
         "vanish":   func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "status":   func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
-        "torip":    func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
+        "torip":    func() { banners.GraphicsTorNet(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "exitnode": func() { banners.GraphicsTorNet(); TorCircuit() },
         "restore":  func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
         "chains":   func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
         "reload":   func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
         "stop":     func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
 
-        "1": func() { banners.GraphicsTorNet(); subprocess.Run("apt-get update; apt-get install -y curl tor squid privoxy dnsmasq iptables isc-dhcp-client isc-dhcp-server dnsutils") },
+        "1": func() { banners.GraphicsTorNet(); setups.CheckMissing() },
         "2": func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "3": func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
-        "4": func() { banners.GraphicsTorNet(); CheckIP(); TorStatus(0) },
+        "4": func() { banners.GraphicsTorNet(); CheckIP(); CheckLeakTest(); TorStatus(0) },
         "5": func() { banners.GraphicsTorNet(); TorCircuit() },
         "6": func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
         "7": func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
@@ -687,8 +687,8 @@ func CheckIptables() string {
 }
 
 func CheckIP() {
-    fmt.Printf("\n%s%s[*] %sCheck public IP address.", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    fmt.Printf("\n%s%s[+] %sCheck Your system geolocation.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("%s%s[*] %sGetting your public IP address ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sGetting your system geolocation ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     ip := getPublicIP()
     if ip == "" {
         fmt.Printf("%s%s[!] %sError: Could not retrieve public IP address.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
@@ -1086,7 +1086,7 @@ func displayTorResult(result map[string]string) {
         fmt.Printf("%s%s[*] %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, result["title"])
         fmt.Printf("%s%s[+] %sYour connection is secured through Tor ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     } else {
-        fmt.Printf("%s%s[!] %s%s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, result["title"])
+        fmt.Printf("%s%s[!] %s%s..\n", bcolors.Bold, bcolors.Red, bcolors.Endc, result["title"])
         fmt.Printf("%s%s[>] %sWarning: You are NOT using the Tor network!\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
         fmt.Printf("%s%s[+] %sFor enhanced privacy, consider using Tor network ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     }
@@ -1206,22 +1206,18 @@ func SetTorIptablesRules() error {
         "iptables -t raw -F",
         "iptables -t raw -X",
 
-        // *nat OUTPUT (For local redirection)
-        // nat .onion addresses
         "iptables -t nat -A OUTPUT -d " + virtAddr + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
-        // nat dns requests to Tor
+
         "iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports " + dnsPort + " -m comment --comment \"neutron_triggered\"",
-        // Don't nat the Tor process, the loopback, or the local network
+
         "iptables -t nat -A OUTPUT -m owner --uid-owner " + torUID + " -j RETURN",
         "iptables -t nat -A OUTPUT -o lo -j RETURN",
 
-        // Allow lan access for hosts in non_tor networks (expanded from loop)
         "iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN",
         "iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN",
         "iptables -t nat -A OUTPUT -d 172.16.0.0/12 -j RETURN",
         "iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN",
 
-        // Allow IANA reserved blocks (expanded from loop)
         "iptables -t nat -A OUTPUT -d 0.0.0.0/8 -j RETURN",
         "iptables -t nat -A OUTPUT -d 100.64.0.0/10 -j RETURN",
         "iptables -t nat -A OUTPUT -d 169.254.0.0/16 -j RETURN",
@@ -1235,33 +1231,27 @@ func SetTorIptablesRules() error {
         "iptables -t nat -A OUTPUT -d 240.0.0.0/4 -j RETURN",
         "iptables -t nat -A OUTPUT -d 255.255.255.255/32 -j RETURN",
 
-        // Redirect all other pre-routing and output to Tor's TransPort
         "iptables -t nat -A OUTPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
 
-        // *filter INPUT
         "iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT",
         "iptables -A INPUT -i lo -j ACCEPT",
         "iptables -A INPUT -j DROP",
 
-        // *filter FORWARD
         "iptables -A FORWARD -j DROP",
 
-        // Fix for possible kernel packet-leak
         "iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP",
         "iptables -A OUTPUT -m state --state INVALID -j DROP",
 
-        // *filter OUTPUT
         "iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT",
-        // Allow Tor process output
+
         "iptables -A OUTPUT -m owner --uid-owner " + torUID + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j ACCEPT",
-        // Allow loopback output
+
         "iptables -A OUTPUT -d 127.0.0.1/32 -o lo -j ACCEPT",
-        // Tor transproxy magic
+
         "iptables -A OUTPUT -d 127.0.0.1/32 -p tcp -m tcp --dport " + transPort + " --tcp-flags FIN,SYN,RST,ACK SYN -j ACCEPT",
-        // Drop everything else
+
         "iptables -A OUTPUT -j DROP",
 
-        // Set default policies to DROP
         "iptables -P INPUT DROP",
         "iptables -P FORWARD DROP",
         "iptables -P OUTPUT DROP",
@@ -1677,7 +1667,8 @@ func formatDNSServersColored(servers []DNSServer) string {
 }
 
 func CheckLeakTest() (*DNSLeakTestResult, error) {
-    fmt.Printf("\n%s%s[!] %sTesting DNS leaks ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sTesting DNS leaks ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[+] %sPleas be patient. Geting results ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
     result, err := TestDNSLeak()
     if err != nil {
@@ -1693,7 +1684,7 @@ func CheckLeakTest() (*DNSLeakTestResult, error) {
     }
 
     if leakResult.LeakDetected {
-        fmt.Printf("\n%s%s[>] %sDNS LEAK DETECTED! Found %d non-Tor DNS servers\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, len(leakResult.DNSServers))
+        fmt.Printf("%s%s[!] %s%s%sDNS LEAK DETECTED! %sFound %d non-Tor DNS servers!", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Yellow, bcolors.Blink, bcolors.Endc, len(leakResult.DNSServers))
         return &leakResult, fmt.Errorf("%s%s[!] %sDNS leak detected", bcolors.Bold, bcolors.Red, bcolors.Endc)
     } else {
         fmt.Printf("%s%s[*] %sCongratualion. No DNS leaks detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)

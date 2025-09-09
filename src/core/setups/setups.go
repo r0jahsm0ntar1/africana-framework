@@ -584,7 +584,7 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
             //OUTERICON: utils.OuterIcon,
             //BUILDNAME: utils.BuildName,
             //OBFUSCATOR: utils.Obfuscator,
-        }, true, false)
+        }, true, true)
 
         if err := utils.SetProxy(utils.Proxies); err != nil {
             //
@@ -609,7 +609,7 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
             //OUTERICON: utils.OuterIcon,
             //BUILDNAME: utils.BuildName,
             //OBFUSCATOR: utils.Obfuscator,
-        }, true, false)
+        }, true, true)
     }
 
     commands := map[string]func(){
@@ -694,6 +694,21 @@ func Installer(Distro string) {
     }
 
     fmt.Printf("%s%s[!] Error: %sInvalid DISTRO %s. Use %s'help' %sfor commands.\n", bcolors.Red, bcolors.Endc, utils.Distro, bcolors.Green, bcolors.Endc)
+}
+
+func CheckMissing() {
+    spinner := utils.New(utils.WithStyle("triangle"), utils.WithEffect("bounce"), utils.WithClearOnStop(false), utils.WithText("%s%s[*] %sChecking missing tools ...", bcolors.Bold, bcolors.Green, bcolors.Endc))
+    spinner.Start()
+    missingTools := UpsentTools()
+    spinner.Stop()
+
+    if len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) == 0 {
+        fmt.Printf("%s%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
+        return
+    }
+
+    printMissingTools(missingTools)
+    userChoice()
 }
 
 func CheckTools() {

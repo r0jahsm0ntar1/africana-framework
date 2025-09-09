@@ -202,15 +202,14 @@ func GraphicsTinny() {
 }
 
 func GraphicsTorNet() {
-    fmt.Printf(`%s
- _____     _ _ _           _ ___
+    fmt.Printf(`%s _____     _ _ _           _ ___
 |  |  |___| |_| |_ ___ ___|_|  _|_ _
 |    -| .'| | |  _| . |  _| |  _| | |
 |__|__|__,|_|_|_| |___|_| |_|_| |_  |
                                 |___|%s
 =[ Transparent proxy through Tor.
 =[ @r0jahsm0ntar1
-`, bcolors.Colors(), bcolors.Endc)
+`, bcolors.Colors(), bcolors.Endc); fmt.Println()
 }
 
 func GraphicsIntro() {
