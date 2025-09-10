@@ -248,7 +248,7 @@ func getPackageName(tool, pkg string) string {
             "xterm":                        "xterm",
             "zlib1g-dev":                   "zlib",
             "zsh":                          "zsh",
-
+                        /*Security tools*/
             "airgeddon":                    "airgeddon",
             "commix":                       "commix",
             "dnsenum":                      "dnsenum",
