@@ -23,25 +23,37 @@ type TableConfig struct {
 }
 
 type PrintOptions struct {
-    MODE       string
+    FUNCTION   string
+    LHOST      string
     LPORT      string
-    IFACE      string
     HPORT      string
     RHOST      string
-    LHOST      string
-    BUILD      string
-    DISTRO     string
+    PROXY      string
     SCRIPT     string
-    PROXIES    string
-    RECONDIR   string
-    FUNCTION   string
-    TOOLSDIR   string
+    BUILD      string
+    WORDLIST   string
+    PASSWORD   string
     PROTOCOL   string
     LISTENER   string
     INNERICON  string
     OUTERICON  string
-    BUILDNAME  string
     OBFUSCATOR string
+    PASSWD     string
+    GATEWAY    string
+    FAKEDNS    string
+    SPOOFER    string
+    NAME       string
+    MODE       string
+    DISTRO     string
+    PYENVNAME  string
+    DDOSMODE   string
+    SSID       string
+    TOOLSDIR   string
+    OUTPUT     string
+    RECONDIR   string
+    IFACE      string
+    BUILDNAME  string
+    PROXIES    string
     OUTPUTLOGS string
 }
 

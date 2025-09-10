@@ -244,5 +244,5 @@ func DirLocations() (string, string, string, string, string, string, string, str
     certDir := filepath.Join(baseDir, "certs")
     toolsDir := filepath.Join(baseDir, "africana-base")
 
-    return baseDir, certDir, filepath.Join(baseDir, "output"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(certDir, "afr_cert.pem"), toolsDir, "/usr/share/wordlists/rockyou.txt", filepath.Join(toolsDir, "wordlists")
+    return baseDir, toolsDir, certDir, filepath.Join(certDir, "afr_cert.pem"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(baseDir, "output"), filepath.Join(toolsDir, "wordlists"), "/usr/share/wordlists/rockyou.txt"
 }

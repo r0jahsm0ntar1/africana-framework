@@ -78,6 +78,7 @@ var (
 
     Date = time.Now().Format("2006-01-02.15.04.05")
 
+    ReconDir = filepath.Join(OutPutDir, "recondir")
     SetupsLogs = filepath.Join(OutPutDir, "setups")
     SecLogs = filepath.Join(OutPutDir, "securities")
     NetworkLogs = filepath.Join(OutPutDir, "networks")
@@ -108,8 +109,8 @@ var (
     WordsList = filepath.Join(WordsListDir, "everything.txt")
     ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")
 
-    BaseDir, CertDir, OutPutDir, KeyPath, CertPath, ToolsDir, RokyPath, WordsListDir = subprocess.DirLocations()
-    Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Setups, Torsocks, Networks, Exploits, Wireless, Crackers, Phishers, Websites, Credits, Verses, Script, Hashes, Pcap string
+    BaseDir, ToolsDir, CertDir, CertPath, KeyPath, OutPutDir, WordsListDir, RokyPath = subprocess.DirLocations()
+    Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Script, Hashes, Pcap string
 )
 
 type InterfaceInfo struct {
@@ -1028,7 +1029,7 @@ func Sleep() {
 }
 
 func InitiLize() {
-    for _, BaseDirs := range []string{CertDir, OutPutDir} {
+    for _, BaseDirs := range []string{ CertDir, OutPutDir, SetupsLogs, SecLogs, NetworkLogs, ExploitsLogs, PhishersLogs, CrackersLogs, WirelessLogs, WebCrackersLogs } {
         if err := os.MkdirAll(BaseDirs, 0755); err != nil {
             fmt.Printf("%s[!] %sError creating %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, BaseDirs, err, bcolors.Endc)
             return
@@ -1039,4 +1040,3 @@ func InitiLize() {
         GenerateSelfSignedCert(CertPath, KeyPath)
     }
 }
-

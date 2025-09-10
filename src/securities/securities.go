@@ -74,9 +74,27 @@ type TorResult struct {
     ExitCountry string `json:"exit_country,omitempty"`
 }
 
+
 type stringMatcher struct {
     names  []string
     action func()
+}
+
+var defaultValues = map[string]string{
+
+    "function":     Function,
+    "script":       utils.Script,
+    "proxies":      utils.Proxies,
+    "outericon":    utils.OuterIcon,
+    "lport":        utils.LPort,
+    "hport":        utils.HPort,
+    "protocol":     utils.Protocol,
+    "listener":     utils.Listener,
+    "build":        utils.BuildName,
+    "lhost":        utils.LHost,
+    "output":       utils.ExploitsLogs,
+    "innericon" :   utils.InnerIcon,
+    "obfuscator":   utils.Obfuscator,
 }
 
 func Torsocks() {
@@ -191,15 +209,47 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-        "proxies":     &utils.Proxies,
-        "func":        &Function,
-        "funcs":       &Function,
-        "module":      &Function,
-        "output":      &utils.OutPutDir,
-        "outputlog":   &utils.OutPutDir,
-        "outputlogs":  &utils.OutPutDir,
-        "function":    &Function,
-        "functions":   &Function,
+      "func": &Function,
+      "funcs": &Function,
+      "module": &Function,
+      "ssid": &utils.Ssid,
+      "mode": &utils.NeMode,
+      "function": &Function,
+      "lhost": &utils.LHost,
+      "lport": &utils.LPort,
+      "hport": &utils.HPort,
+      "rhost": &utils.RHost,
+      "rhosts": &utils.RHost,
+      "functions": &Function,
+      "target": &utils.RHost,
+      "distro": &utils.Distro,
+      "targets": &utils.RHost,
+      "proxy": &utils.Proxies,
+      "script": &utils.Script,
+       "name": &utils.BeefName,
+      "build": &utils.BuildName,
+      "proxies": &utils.Proxies,
+      "passwd": &utils.BeefPass,
+      "gateway": &utils.Gateway,
+      "fakedns": &utils.FakeDns,
+      "spoofer": &utils.Spoofer,
+      "toolsdir": &utils.ToolsDir,
+      "ddosmode": &utils.DDosMode,
+      "recondir": &utils.ReconDir,
+      "password": &utils.PassWord,
+      "protocol": &utils.Protocol,
+      "listener": &utils.Listener,
+      "wordlist": &utils.WordsList,
+      "listeners": &utils.Listener,
+      "pyenvname": &utils.PyEnvName,
+      "innericon": &utils.InnerIcon,
+      "outericon": &utils.OuterIcon,
+      "buildname": &utils.BuildName,
+      "obfuscator": &utils.Obfuscator,
+
+      "output": &utils.SecLogs,
+      "outputlog": &utils.SecLogs,
+      "outputlogs": &utils.SecLogs,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -273,24 +323,47 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-        "proxies":    &utils.Proxies,
-        "func":       &Function,
-        "funcs":      &Function,
-        "module":     &Function,
-        "output":     &utils.OutPutDir,
-        "outputlog":  &utils.OutPutDir,
-        "outputlogs": &utils.OutPutDir,
-        "function":   &Function,
-        "functions":  &Function,
-    }
-    defaultValues := map[string]string{
-        "func":       "",
-        "proxies":    "",
-        "funcs":      "",
-        "module":     "",
-        "output":     "",
-        "function":   "",
-        "functions":  "",
+      "func": &Function,
+      "funcs": &Function,
+      "module": &Function,
+      "ssid": &utils.Ssid,
+      "mode": &utils.NeMode,
+      "function": &Function,
+      "lhost": &utils.LHost,
+      "lport": &utils.LPort,
+      "hport": &utils.HPort,
+      "rhost": &utils.RHost,
+      "rhosts": &utils.RHost,
+      "functions": &Function,
+      "target": &utils.RHost,
+      "distro": &utils.Distro,
+      "targets": &utils.RHost,
+      "proxy": &utils.Proxies,
+      "script": &utils.Script,
+       "name": &utils.BeefName,
+      "build": &utils.BuildName,
+      "proxies": &utils.Proxies,
+      "passwd": &utils.BeefPass,
+      "gateway": &utils.Gateway,
+      "fakedns": &utils.FakeDns,
+      "spoofer": &utils.Spoofer,
+      "toolsdir": &utils.ToolsDir,
+      "ddosmode": &utils.DDosMode,
+      "recondir": &utils.ReconDir,
+      "password": &utils.PassWord,
+      "protocol": &utils.Protocol,
+      "listener": &utils.Listener,
+      "wordlist": &utils.WordsList,
+      "listeners": &utils.Listener,
+      "pyenvname": &utils.PyEnvName,
+      "innericon": &utils.InnerIcon,
+      "outericon": &utils.OuterIcon,
+      "buildname": &utils.BuildName,
+      "obfuscator": &utils.Obfuscator,
+
+      "output": &utils.SecLogs,
+      "outputlog": &utils.SecLogs,
+      "outputlogs": &utils.SecLogs,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -367,8 +440,6 @@ func executeFunction() {
 }
 
 func AnonimityFunctions(functionName string, args ...interface{}) {
-    os.MkdirAll(utils.SecLogs, os.ModePerm)
-
     if utils.Proxies != "" {
         menus.PrintSelected(menus.PrintOptions{
             IFACE:       utils.IFace,
