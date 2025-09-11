@@ -114,8 +114,8 @@ func executeCommand(cmd string) bool {
         {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run blackeye", "use blackeye", "exec blackeye", "start blackeye", "launch blackeye", "exploit blackeye", "execute blackeye"}, func() {PhishingPenFunctions("blackeye")}},
         {[]string{"? 4", "info 4", "help 4", "blackeye", "info blackeye", "help blackeye"}, menus.HelpInfoBlackEye},
 
-        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run advphisher", "use advphisher", "exec advphisher", "start advphisher", "launch advphisher", "exploit advphisher", "execute advphisher"}, func() {PhishingPenFunctions("advphisher")}},
-        {[]string{"? 5", "info 5", "help 5", "advphisher", "info advphisher", "help advphisher"}, menus.HelpInfoAdvPhisher},
+        {[]string{"5", "run 5", "use 5", "exec 5", "start 5", "launch 5", "exploit 5", "execute 5", "run advphish", "use advphish", "exec advphish", "start advphish", "launch advphish", "exploit advphish", "execute advphish"}, func() {PhishingPenFunctions("advphish")}},
+        {[]string{"? 5", "info 5", "help 5", "advphish", "info advphish", "help advphish"}, menus.HelpInfoAdvPhisher},
 
         {[]string{"6", "run 6", "use 6", "exec 6", "start 6", "launch 6", "exploit 6", "execute 6", "run darkphish", "use darkphish", "exec darkphish", "start darkphish", "launch darkphish", "exploit darkphish", "execute darkphish"}, func() {PhishingPenFunctions("darkphish")}},
         {[]string{"? 6", "info 6", "help 6", "darkphish", "info darkphish", "help darkphish"}, menus.HelpInfoDarkPhish},
@@ -374,7 +374,7 @@ func handleUnsetCommand(parts []string) {
     }
 }
 
-func executeFunction() {
+func executeFunction() { 
     if Function == ""{
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
@@ -438,7 +438,7 @@ func PhishingPenFunctions(Function string, args ...interface{}) {
         "zphisher": func() {ZPhisher()},
         "blackeye": func() {BlackEye()},
         "advphish": func() {AdvPhisher()},
-        "darkPhish": func() {DarkPhish()},
+        "darkphish": func() {DarkPhish()},
         "shellphish": func() {ShellPhish()},
         "setoolkit": func() {SetoolKit()},
         "thc": func() {Thc()},
@@ -472,7 +472,7 @@ func PhishingPenFunctions(Function string, args ...interface{}) {
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
         if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            fmt.Printf("%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, Function, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
             return
         }
     }

@@ -77,13 +77,12 @@ build:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${Yellow}${Bold}[>] ${Endc}Build almost complete ...${Endc}"; \
+			echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${Red}${Bold}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
-	@echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Build for specified OS (e.g., make distro windows)
 distro:
@@ -110,13 +109,12 @@ distro:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${Yellow}${Bold}[>] ${Endc}Build almost complete ...${Endc}"; \
+			echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${BrightRed}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
-	@echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"
 
 # Clean output
 clean:
@@ -144,7 +142,7 @@ run:
 	./$$BIN -q; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
-		echo "\n${Green}${Bold}[*] ${Endc}Execution completed successfully! ...${Endc}"; \
+		echo "${Blue}${Bold}[*] ${Endc}Execution completed successfully ...${Endc}"; \
 	else \
 		echo "${BackBrightRed}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
 	fi

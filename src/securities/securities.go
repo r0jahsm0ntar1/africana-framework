@@ -500,7 +500,7 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
         if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-            fmt.Printf("\n%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, functionName, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            fmt.Printf("%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, functionName, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
             return
         }
     }
