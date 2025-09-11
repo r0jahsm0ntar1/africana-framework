@@ -68,7 +68,7 @@ var (
 
     BeefName   = "beef"
     BeefPass   = "Jesus"
-    PhFakeDns  = "Jesus is coming soon"
+    PhFakeDns  = "Jesus Christ is coming soon!"
 
 
     LHost, _ = GetDefaultIP()
@@ -77,6 +77,13 @@ var (
     Scanner = bufio.NewScanner(os.Stdin)
 
     Date = time.Now().Format("2006-01-02.15.04.05")
+
+    WirelessTools = filepath.Join(ToolsDir, "wireless")
+    ExploitsTools = filepath.Join(ToolsDir, "exploits")
+    PhishersTools = filepath.Join(ToolsDir, "phishers")
+    CrackersTools = filepath.Join(ToolsDir, "crackers")
+    WeBountyTools = filepath.Join(ToolsDir, "websites")
+    NetworkTools  = filepath.Join(ToolsDir, "networks")
 
     ReconDir = filepath.Join(OutPutDir, "recondir")
     SetupsLogs = filepath.Join(OutPutDir, "setups")
@@ -87,17 +94,10 @@ var (
     CrackersLogs = filepath.Join(OutPutDir, "crackers")
     WirelessLogs = filepath.Join(OutPutDir, "wireless")
     WebCrackersLogs = filepath.Join(OutPutDir, "websites")
-    GeneratorDir = filepath.Join(ExploitsLogs, "generator")
-
-    WirelessTools = filepath.Join(ToolsDir, "wireless")
-    ExploitsTools = filepath.Join(ToolsDir, "exploits")
-    PhishersTools = filepath.Join(ToolsDir, "phishers")
-    CrackersTools = filepath.Join(ToolsDir, "crackers")
-    WeBountyTools = filepath.Join(ToolsDir, "websites")
-    NetworkTools  = filepath.Join(ToolsDir, "networks")
 
     IconsDir = filepath.Join(TemplateDir, "icons")
     WinresDir = filepath.Join(TemplateDir, "rcedits")
+    GeneratorDir = filepath.Join(ExploitsLogs, "generator")
     WinresInit = filepath.Join(TemplateDir, "rcedits", "winres")
     TemplateDir = filepath.Join(ExploitsTools, "payload_templates")
 
@@ -162,6 +162,19 @@ var SpinnerStyles = map[string][]string{
     "vertical":   {"▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▂"},
     "clock":      {"🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛"},
     "bouncing":   {"[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]"},
+}
+
+func ClearScreen() {
+    if runtime.GOOS == "windows" {
+        cmd = exec.Command("cmd", "/c", "cls")
+    } else {
+        cmd = exec.Command("clear")
+    }
+
+    cmd.Stdout = os.Stdout
+    if err := cmd.Run(); err != nil {
+        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.BrightRed, bcolors.Endc, err)
+    }
 }
 
 func toUpper(r rune) rune {
@@ -373,7 +386,7 @@ func (s *Spinner) spin() {
             if s.clearOnStop {
                 s.clearLine()
             } else {
-                fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
+                fmt.Fprint(s.writer, "\r" + s.currentText + "  \r" + s.currentText)
             }
             return
         case <-ticker.C:
@@ -436,7 +449,7 @@ func (s *Spinner) Stop() {
     if s.clearOnStop {
         s.clearLine()
     } else {
-        fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
+        fmt.Fprint(s.writer, "\r" + s.currentText + "  \r" + s.currentText)
     }
     
     //s.showCursor()
@@ -447,7 +460,7 @@ func (s *Spinner) Stop() {
 func (s *Spinner) clearLine() {
     if s.isWindows {
         width := 80
-        fmt.Fprint(s.writer, "\r"+strings.Repeat(" ", width)+"\r")
+        fmt.Fprint(s.writer, "\r" + strings.Repeat(" ", width) + "\r")
     } else {
         fmt.Fprint(s.writer, "\033[2K\r")
     }
@@ -468,25 +481,6 @@ func (s *Spinner) UpdateText(format string, a ...interface{}) {
     s.baseFormat = format
     s.baseArgs = a
     s.currentText = fmt.Sprintf(format, a...)
-}
-
-func ClearScreen() {
-    if runtime.GOOS == "windows" {
-        cmd = exec.Command("cmd", "/c", "cls")
-    } else {
-        cmd = exec.Command("clear")
-    }
-
-    cmd.Stdout = os.Stdout
-    if err := cmd.Run(); err != nil {
-        fmt.Printf("%s[!] %sError clearing screen: %s\n", bcolors.BrightRed, bcolors.Endc, err)
-    }
-}
-
-func SystemShell(Command string, args ...interface{}) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
-    subprocess.Run(Command)
-    return
 }
 
 func GenerateSelfSignedCert(certPath, keyPath string) {
@@ -602,6 +596,13 @@ func IFaces() ([]InterfaceInfo, error) {
     }
 
     return result, nil
+}
+
+
+func SystemShell(Command string, args ...interface{}) {
+    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
+    subprocess.Run(Command)
+    return
 }
 
 func GetDefaultGatewayIP() (string, error) {
@@ -992,9 +993,7 @@ func BrowseTutorials() {
 }
 
 func BrowserLogs() {
-    subprocess.Run("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html", subprocess.Version)
-    subprocess.Run("xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80")
-    subprocess.Run("rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/")
+    subprocess.Run("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html; xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80; rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/", subprocess.Version)
     return
 }
 
@@ -1006,8 +1005,7 @@ func ListJunks() {
 
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Run("tree %s*", OutPutDir)
-    subprocess.Run("rm -rf %s/*", OutPutDir)
+    subprocess.Run("tree %s*; rm -rf %s/*", OutPutDir, OutPutDir)
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
@@ -1026,6 +1024,20 @@ func Info(colors, art, message string) {
 
 func Sleep() {
     subprocess.Run("sleep")
+}
+
+func GSleep(args []string) {
+    if len(args) < 2 {
+        return
+    }
+
+    seconds, err := strconv.Atoi(args[1])
+    if err != nil || seconds <= 0 {
+        return
+    }
+    
+    duration := time.Duration(seconds) * time.Second
+    time.Sleep(duration)
 }
 
 func InitiLize() {

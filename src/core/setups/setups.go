@@ -976,13 +976,33 @@ func CreatePythonVenv() error {
 
     fmt.Printf("%s%s[+] %sCreating Python virtual environment...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
-    cmd := exec.Command("python3", "-m", "venv", venvPath)
-    if output, err := cmd.CombinedOutput(); err != nil {
-        return fmt.Errorf("failed to create Python venv: %v\nOutput: %s", err, string(output))
-    }
+    subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
 
     fmt.Printf("%s%s[+] %sPython virtual environment created at %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, venvPath, bcolors.Endc)
     return nil
+}
+
+func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
+        SetupGoEnvironment(utils.PyEnvName)
+
+        if err := CreatePythonVenv(); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+        }
+
+        InstallFoundationTools(foundationCommands)
+        InstallTools(missingTools)
+
+        if !utils.IsArchLinux() {
+            subprocess.Run("winecfg /v win11")
+        }
+        fmt.Printf("\n\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        InstallGithubTools()
+
+        fmt.Printf("\n%s%s[*] %sAfricana successfully installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    } else {
+        UpdateAfricana()
+    }
 }
 
 func AutoSetups() {
@@ -1008,29 +1028,6 @@ func AutoSetups() {
         MacosSetups()
     default:
         fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
-    }
-}
-
-func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
-    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        SetupGoEnvironment(utils.PyEnvName)
-
-        if err := CreatePythonVenv(); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
-        }
-
-        InstallFoundationTools(foundationCommands)
-        InstallTools(missingTools)
-
-        if !utils.IsArchLinux() {
-            subprocess.Run("winecfg /v win11")
-        }
-        fmt.Printf("\n\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        InstallGithubTools()
-
-        fmt.Printf("\n%s%s[*] %sAfricana successfully installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    } else {
-        UpdateAfricana()
     }
 }
 
@@ -1100,7 +1097,13 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    subprocess.Run(`cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1; xterm -fullscreen -T 'Glory be To Lord God Jesus Christ' -e "source ~/.zshrc; python3 -m pip install install -r %s/requirements.txt"`, utils.BaseDir, utils.BaseDir)
+    venvPath := filepath.Join(utils.BaseDir, utils.PyEnvName)
+    venvPython := filepath.Join(venvPath, "bin", "python")
+    //venvPip := filepath.Join(venvPath, "bin", "pip")
+
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
+    subprocess.Run("%s -m pip install -r %s/requirements.txt", venvPython, utils.ToolsDir)
 }
 
 func AndroidSetups() {
