@@ -42,6 +42,7 @@ func init() {
         initialDir = dir
         currentDir = dir
     }
+
 }
 
 func CheckRoot()bool {
@@ -245,4 +246,13 @@ func DirLocations() (string, string, string, string, string, string, string, str
     toolsDir := filepath.Join(baseDir, "africana-base")
 
     return baseDir, toolsDir, certDir, filepath.Join(certDir, "afr_cert.pem"), filepath.Join(certDir, "afr_key.pem"), filepath.Join(baseDir, "output"), filepath.Join(toolsDir, "wordlists"), "/usr/share/wordlists/rockyou.txt"
+}
+
+func ValidateToolsDir() error {
+    _, toolsDir, _, _, _, _, _, _ := DirLocations()
+
+    if _, err := os.Stat(toolsDir); os.IsNotExist(err) {
+        return fmt.Errorf("'%s%s%s' doesn't exist!", bcolors.Bold, toolsDir, bcolors.Endc)
+    }
+    return nil
 }

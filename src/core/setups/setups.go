@@ -761,7 +761,7 @@ func Installer(Distro string) {
 }
 
 func CheckMissing() {
-    spinner := utils.New(utils.WithStyle("triangle"), utils.WithEffect("bounce"), utils.WithClearOnStop(false), utils.WithText("%s%s[*] %sChecking missing tools ...", bcolors.Bold, bcolors.Green, bcolors.Endc))
+    spinner := utils.New(utils.WithStyle("circle"), utils.WithEffect("bounce"), utils.WithClearOnStop(true), utils.WithText("[+] Setup is Checking all missing tools ..."))
     spinner.Start()
     missingTools := UpsentTools()
     spinner.Stop()
@@ -812,7 +812,6 @@ func printMissingTools(missingTools map[string]map[string]string) {
 
 func userChoice() {
     fmt.Printf("\n%s%s[?] %sInstall missing tools? (y/n): ", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
     utils.Scanner.Scan()
     input := strings.ToLower(strings.TrimSpace(utils.Scanner.Text()))
 

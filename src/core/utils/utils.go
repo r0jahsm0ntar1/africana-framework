@@ -1051,4 +1051,8 @@ func InitiLize() {
     if _, err := os.Stat(CertPath); os.IsNotExist(err) {
         GenerateSelfSignedCert(CertPath, KeyPath)
     }
+    if err := subprocess.ValidateToolsDir(); err != nil {
+        fmt.Printf("%s%s[!] %sError: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("%s%s[>] %sPlease launch the installation process to avoid errors ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    }
 }
