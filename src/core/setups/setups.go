@@ -122,7 +122,6 @@ var (
         "xterm":                        "xterm",
         "zlib1g-dev":                   "zlib1g-dev",
         "zsh":                          "zsh",
-        "go-winres":                    "github.com/tc-hib/go-winres@latest",
     }
 
     securityTools = map[string]string{
@@ -138,7 +137,6 @@ var (
         "metasploit-framework":         "metasploit-framework",
         "netexec":                      "netexec",
         "nikto":                        "nikto",
-        "nuclei":                       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
         "smbmap":                       "smbmap",
         "sqlmap":                       "sqlmap",
         "sslscan":                      "sslscan",
@@ -160,7 +158,7 @@ var (
         "gf":                           "github.com/tomnomnom/gf@latest",
         "hakrawler":                    "github.com/hakluke/hakrawler@latest",
         "httpx":                        "github.com/projectdiscovery/httpx/cmd/httpx@latest",
-        "interactsh-client":                   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
+        "interactsh-client":            "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
         "katana":                       "github.com/projectdiscovery/katana/cmd/katana@latest",
         "mapcidr":                      "github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest",
         "naabu":                        "github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
@@ -169,6 +167,8 @@ var (
         "tlsx":                         "github.com/projectdiscovery/tlsx/cmd/tlsx@latest",
         "uncover":                      "github.com/projectdiscovery/uncover/cmd/uncover@latest",
         "waybackurls":                  "github.com/tomnomnom/waybackurls@latest",
+        "nuclei":                       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
+        "go-winres":                    "github.com/tc-hib/go-winres@latest",
     }
 )
 
