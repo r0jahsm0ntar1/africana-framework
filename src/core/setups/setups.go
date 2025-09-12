@@ -160,7 +160,7 @@ var (
         "gf":                           "github.com/tomnomnom/gf@latest",
         "hakrawler":                    "github.com/hakluke/hakrawler@latest",
         "httpx":                        "github.com/projectdiscovery/httpx/cmd/httpx@latest",
-        "interactsh":                   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
+        "interactsh-client":                   "github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
         "katana":                       "github.com/projectdiscovery/katana/cmd/katana@latest",
         "mapcidr":                      "github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest",
         "naabu":                        "github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
@@ -900,20 +900,18 @@ func InstallTools(tools map[string]map[string]string) {
 }
 
 func SetupGoEnvironment(PyEnvName string) {
-    homeDir := os.Getenv("HOME")
-    goPath := filepath.Join(homeDir, ".go")
-    os.Setenv("GOPATH", goPath)
-    os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(goPath, "bin"))
 
-    pythonVenv := filepath.Join(utils.BaseDir, utils.PyEnvName)
-    os.Setenv("VIRTUAL_ENV", pythonVenv)
-    os.Setenv("PATH", filepath.Join(pythonVenv, "bin") + ":" + os.Getenv("PATH"))
+    os.Setenv("GOPATH", utils.GoPath)
+    os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(utils.GoPath, "bin"))
+
+    os.Setenv("VIRTUAL_ENV", utils.PythonVenv)
+    os.Setenv("PATH", filepath.Join(utils.PythonVenv, "bin") + ":" + os.Getenv("PATH"))
 
     goDirs := []string{
-        goPath,
-        filepath.Join(goPath, "bin"),
-        filepath.Join(goPath, "pkg"),
-        filepath.Join(goPath, "src"),
+        utils.GoPath,
+        filepath.Join(utils.GoPath, "bin"),
+        filepath.Join(utils.GoPath, "pkg"),
+        filepath.Join(utils.GoPath, "src"),
     }
 
     for _, dir := range goDirs {
@@ -922,13 +920,13 @@ func SetupGoEnvironment(PyEnvName string) {
         }
     }
 
-    if err := os.MkdirAll(pythonVenv, 0755); err != nil {
-        fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, pythonVenv, err, bcolors.Endc)
+    if err := os.MkdirAll(utils.PythonVenv, 0755); err != nil {
+        fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.PythonVenv, err, bcolors.Endc)
     }
 
     shellProfiles := []string{
-        filepath.Join(homeDir, ".bashrc"),
-        filepath.Join(homeDir, ".zshrc"),
+        filepath.Join(utils.HomeDir, ".bashrc"),
+        filepath.Join(utils.HomeDir, ".zshrc"),
     }
 
     envSetup := fmt.Sprintf(`
@@ -937,10 +935,10 @@ export GOPATH=%s
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Python AFR environment
-export AFR_VENV=%s
-export PATH=$AFR_VENV/bin:$PATH
-source $AFR_VENV/bin/activate 2>/dev/null
-`, goPath, pythonVenv)
+#export AFR_VENV=%s
+#export PATH=$AFR_VENV/bin:$PATH
+#source $AFR_VENV/bin/activate 2>/dev/null
+`, utils.GoPath, utils.PythonVenv)
 
     for _, profile := range shellProfiles {
         if err := appendToShellProfile(profile, envSetup); err != nil {
@@ -1098,13 +1096,9 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    venvPath := filepath.Join(utils.BaseDir, utils.PyEnvName)
-    venvPython := filepath.Join(venvPath, "bin", "python")
-    //venvPip := filepath.Join(venvPath, "bin", "pip")
-
     subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
     //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
-    subprocess.Run("%s -m pip install -r %s/requirements.txt", venvPython, utils.ToolsDir)
+    subprocess.Run("%s -m pip install -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
 }
 
 func AndroidSetups() {

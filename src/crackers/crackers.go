@@ -500,7 +500,7 @@ func CyberBrute(RHost string) {
 }
 
 func HashBuster(Hashes string) {
-    subprocess.Run("cd %s/hash-buster; python3 cracker.py -t 10 %s", utils.CrackersTools, utils.Hashes)
+    subprocess.Run("cd %s/hash-buster; %s cracker.py -t 10 %s", utils.CrackersTools, utils.VenvPython, utils.Hashes)
     fmt.Println()
 }
 

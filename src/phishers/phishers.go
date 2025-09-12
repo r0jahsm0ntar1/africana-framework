@@ -494,7 +494,7 @@ func Thc() {
 }
 
 func SetoolKit() {
-    subprocess.Run(`cd %s/set/; python3 ./setoolkit`, utils.PhishersTools)
+    subprocess.Run(`cd %s/set/; %s ./setoolkit`, utils.PhishersTools, utils.VenvPython)
 }
 
 func ZPhisher() {
@@ -510,7 +510,7 @@ func ShellPhish() {
 }
 
 func DarkPhish() {
-    subprocess.Run(`cd %s/darkphish/; python3 ./dark-phish.py`, utils.PhishersTools)
+    subprocess.Run(`cd %s/darkphish/; %s ./dark-phish.py`, utils.PhishersTools, utils.VenvPython)
 }
 
 func AdvPhisher() {
@@ -518,7 +518,7 @@ func AdvPhisher() {
 }
 
 func CyberPhish() {
-    subprocess.Run(`cd %s/cyberphish/; python3 ./cyberphish.py`, utils.PhishersTools)
+    subprocess.Run(`cd %s/cyberphish/; %s ./cyberphish.py`, utils.PhishersTools, utils.VenvPython)
 }
 
 func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {

@@ -536,7 +536,7 @@ func WifiPumpkin3(WlanIFace, Ssid string) {
 }
 
 func Wifite(WlanIFace string) {
-    subprocess.Run("cd %s/wifite/; python3 ./wifite.py -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120", utils.WirelessTools, utils.WlanIFace, utils.RokyPath)
+    subprocess.Run("cd %s/wifite/; %s ./wifite.py -i %s --ignore-locks --keep-ivs -p 1339 -mac --random-mac -v -inf --bully --pmkid --dic %s --require-fakeauth --nodeauth --pmkid-timeout 120", utils.WirelessTools, utils.VenvPython, utils.WlanIFace, utils.RokyPath)
     return
 }
 

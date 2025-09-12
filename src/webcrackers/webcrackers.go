@@ -785,39 +785,39 @@ func DDosAttack(RHost, DDosMode string) {
     switch strings.ToLower(utils.DDosMode) {
     case "1", "light":
         fmt.Printf("\n%s[*] %sLaunched Socking_waves(instant-knockout!) ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -r '100' --threads '100' --nuke '10000' -a '%s'", utils.WeBountyTools, utils.RHost)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -r '100' --threads '100' --nuke '10000' -a '%s'", utils.WeBountyTools, utils.VenvPython, utils.RHost)
         return
     case "2", "simple":
         fmt.Printf("\n%s[*] %sLaunched xcom-1(only DDoS) ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -r '100' --threads '100' --spray '1000' --smurf '1000' --tachyon '1000' --monlist '1000' --fraggle '1000' --sniper '1000' -a '%s'", utils.WeBountyTools, utils.RHost)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -r '100' --threads '100' --spray '1000' --smurf '1000' --tachyon '1000' --monlist '1000' --fraggle '1000' --sniper '1000' -a '%s'", utils.WeBountyTools, utils.VenvPython, utils.RHost)
         return
     case "3", "hard":
         fmt.Printf("\n%s[*] %sLaunched Palantir 3.14 ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -r '100' --threads '100' --loic '1000' --loris '1000' -a '%s'", utils.WeBountyTools, utils.RHost)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -r '100' --threads '100' --loic '1000' --loris '1000' -a '%s'", utils.WeBountyTools, utils.VenvPython, utils.RHost)
         return
     case "4", "harder":
         fmt.Printf("\n%s[*] %sLaunched xcom-2(only DoS) ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -r '100' --threads '100' --loic '1000' --loris '1000' --ufosyn '1000' --xmas '1000' --nuke '1000' --ufoack '1000' --uforst '1000' --droper '1000' --overlap '1000' --pinger '1000' --ufoudp '1000' -a '%s'", utils.WeBountyTools, utils.RHost)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -r '100' --threads '100' --loic '1000' --loris '1000' --ufosyn '1000' --xmas '1000' --nuke '1000' --ufoack '1000' --uforst '1000' --droper '1000' --overlap '1000' --pinger '1000' --ufoudp '1000' -a '%s'", utils.WeBountyTools, utils.VenvPython, utils.RHost)
         return
     case "5", "update":
         fmt.Printf("\n%s[*] %sDownloading list of bots from C.S ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet --download-zombies", utils.WeBountyTools)
+        subprocess.Run("cd %s/ufonet/; %s ufonet --download-zombies", utils.WeBountyTools, utils.VenvPython)
         return
     case "6", "test":
         fmt.Printf("\n%s[*] %sTesting If all bots are alive & ready to launch ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -t botnet/zombies.txt", utils.WeBountyTools)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -t botnet/zombies.txt", utils.WeBountyTools, utils.VenvPython)
         return
     case "7", "grider":
         fmt.Printf("\n%s[*] %sStarted Grider ufonet --grider ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet --grider", utils.WeBountyTools)
+        subprocess.Run("cd %s/ufonet/; %s ufonet --grider", utils.WeBountyTools, utils.VenvPython)
         return
     case "8", "gui":
         fmt.Printf("\n%s[*] %sLaunched ufonet UI on http://localhost:9999 ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet --gui", utils.WeBountyTools)
+        subprocess.Run("cd %s/ufonet/; %s ufonet --gui", utils.WeBountyTools, utils.VenvPython)
         return
     case "9", "intense":
         fmt.Printf("\n%s[*] %sLaunched Armageddon! with All! ...", bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s/ufonet/; python3 ufonet -r '100' --threads '100' --loic '1000' --loris '1000' --ufosyn '1000' --spray '1000' --smurf '1000' --xmas '1000' --nuke '1000' --tachyon '1000' --monlist '1000' --fraggle '1000' --sniper '1000' --ufoack '1000' --uforst '1000' --droper '1000' --overlap '1000' --pinger '1000' --ufoudp '1000' -a '%s'", utils.WeBountyTools, utils.RHost)
+        subprocess.Run("cd %s/ufonet/; %s ufonet -r '100' --threads '100' --loic '1000' --loris '1000' --ufosyn '1000' --spray '1000' --smurf '1000' --xmas '1000' --nuke '1000' --tachyon '1000' --monlist '1000' --fraggle '1000' --sniper '1000' --ufoack '1000' --uforst '1000' --droper '1000' --overlap '1000' --pinger '1000' --ufoudp '1000' -a '%s'", utils.WeBountyTools, utils.VenvPython, utils.RHost)
         return
     default:
         fmt.Printf("\n%s[!] %sError: Invalid DDOSMODE. %s'%s' %sTry %s'show ddosmode' %stype", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, bcolors.Endc, bcolors.Green, utils.DDosMode, bcolors.Endc)
@@ -838,27 +838,27 @@ func FindIPs(RHost, ResolversFile, ReconDir string) {
 
 func Sublist3r(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/sublist3r/; python3 sublist3r.py -v -d %s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/sublist3r/; %s sublist3r.py -v -d %s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Ashock1(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/ashok/; python3 ashok.py --headers %s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/ashok/; %s ashok.py --headers %s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func OneForAll(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/oneforall/; python3 oneforall.py --alive True --brute True --port medium --dns True --req True --takeover True --show True run --target %s ", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/oneforall/; %s oneforall.py --alive True --brute True --port medium --dns True --req True --takeover True --show True run --target %s ", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func SeekOlver(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/seekolver/; python3 seekolver.py -v -r -k -cn -p 80 443 -te %s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/seekolver/; %s seekolver.py -v -r -k -cn -p 80 443 -te %s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func ParamSpider(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming urls mine ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/paramspider/; python3 paramspider.py -s -d %s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/paramspider/; %s paramspider.py -s -d %s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func SslScan(RHost string) {
@@ -928,48 +928,48 @@ func XsserMan() {
 
 func NetTacker1(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming recon scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -m port_scan -t 100 -i %s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -m port_scan -t 100 -i %s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker2(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming domain scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m subdomain_scan", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m subdomain_scan", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker3(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming admin finder scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m scan", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m scan", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker4(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming info gathering ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m information_gathering -s", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m information_gathering -s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
     fmt.Println()
 }
 
 func NetTacker5(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming vuln scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m server_version_vuln", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m server_version_vuln", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker6(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming CVE scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m cve", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m cve", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker7(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming critical scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s -m high_severity", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m high_severity", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker8(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming intrusive scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py -i %s --profile all/results.txt", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s --profile all/results.txt", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func NetTacker9() {
     fmt.Printf("\n%s[*] %sLaunched WebUI key: africana ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/nettacker/; python3 nettacker.py --start-api --api-access-key africana", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/nettacker/; %s nettacker.py --start-api --api-access-key africana", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r1() {
@@ -979,42 +979,42 @@ func Jok3r1() {
 
 func Jok3r2() {
     fmt.Printf("\n%s[*] %sUpdating tools in the toolbox ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py toolbox --update-all --auto", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py toolbox --update-all --auto", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r3() {
     fmt.Printf("\n%s[*] %sShowing tools in the toolbox ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py toolbox --show-all", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py toolbox --show-all", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r4() {
     fmt.Printf("\n%s[*] %sShowing supported products ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py info --services", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py info --services", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r5(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming avery fast-scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py attack -t %s --profile fast-scan --fast", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py attack -t %s --profile fast-scan --fast", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r6(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming security checks on " + bcolors.BrightRed + "\nTarget: " + bcolors.Yellow + "%s \n" + bcolors.Endc, utils.RHost)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py attack -t %s --profile red-team --fast", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r7(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming critical scan ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py attack -t %s --profile red-team --fast", utils.WeBountyTools, utils.RHost)
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py attack -t %s --profile red-team --fast", utils.WeBountyTools, utils.VenvPython, utils.RHost)
 }
 
 func Jok3r8() {
     fmt.Printf("\n%s[*] %sShowing results & scans ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; xhost +; python3 jok3r.py db creds vulns mission hosts products services report quit; xhost -")
+    subprocess.Run("cd %s/jok3r/; xhost +; %s jok3r.py db creds vulns mission hosts products services report quit; xhost -", utils.WeBountyTools, utils.VenvPython)
 }
 
 func Jok3r9() {
     fmt.Printf("\n%s[*] %sCleaning results & scans ...", bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s/jok3r/; python3 jok3r.py db 'mission -d default'")
+    subprocess.Run("cd %s/jok3r/; %s jok3r.py db 'mission -d default'", utils.WeBountyTools, utils.VenvPython)
 }
 
 func Osmedeus1() {

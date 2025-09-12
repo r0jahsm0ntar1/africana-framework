@@ -545,7 +545,7 @@ func Enum4linux(RHost string) {
         return
     }
     fmt.Printf("\n%s[>] %srunning smb recon on target: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Run(`cd %s/enum4linux-ng; python3 enum4linux-ng.py -A -v %s`, utils.NetworkTools, utils.RHost)
+    subprocess.Run(`cd %s/enum4linux-ng; %s enum4linux-ng.py -A -v %s`, utils.NetworkTools, utils.VenvPython, utils.RHost)
     return
 }
 
@@ -581,7 +581,7 @@ func RpcEnumScan(RHost string) {
 
 func ToxssInx(RHost string) {
     fmt.Printf("\n%s[>] %sperforming M.I.B attacks: %s...\n", bcolors.Green, bcolors.Endc, utils.RHost)
-    subprocess.Run(`cd %s/toxssin/; python3 toxssin.py -u https://%s -c %s -k %s -p 443 -v`, utils.NetworkTools, utils.LHost, utils.CertPath, utils.KeyPath)
+    subprocess.Run(`cd %s/toxssin/; %s toxssin.py -u https://%s -c %s -k %s -p 443 -v`, utils.NetworkTools, utils.VenvPython, utils.LHost, utils.CertPath, utils.KeyPath)
     return
 }
 
@@ -631,12 +631,12 @@ func KillerResponder(IFace, LHost string) {
 
         utils.Editors(filesToReplacements)
 
-        subprocess.Run(`cd %s/responder/; python3 Responder.py -I %s -Pdv`, utils.NetworkTools, utils.IFace)
+        subprocess.Run(`cd %s/responder/; %s Responder.py -I %s -Pdv`, utils.NetworkTools, utils.VenvPython, utils.IFace)
         subprocess.Run(`rm -rf %s/responder/Responder.conf; mv %s/responder/Responder.conf.bak_africana %s/responder/Responder.conf`, utils.NetworkTools, utils.NetworkTools, utils.NetworkTools)
         return
 
     } else {
-        subprocess.Run("cd %s/responder/; python3 Responder.py -I %s -Pdv", utils.NetworkTools, utils.IFace)
+        subprocess.Run("cd %s/responder/; %s Responder.py -I %s -Pdv", utils.NetworkTools, utils.VenvPython, utils.IFace)
         subprocess.Run("rm -rf %s/responder/Responder.conf; mv %s/responder/Responder.conf.bak_africana %s/responder/Responder.conf", utils.NetworkTools, utils.NetworkTools, utils.NetworkTools)
         return
     }

@@ -77,7 +77,7 @@ build:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${Red}${Bold}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
@@ -109,7 +109,7 @@ distro:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
-			echo "${Green}${Bold}[*] ${Endc}Building completed succesfull ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${BrightRed}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
 			exit 1; \
