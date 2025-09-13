@@ -83,8 +83,8 @@ var (
 
     VenvPath = filepath.Join(BaseDir, PyEnvName)
     PythonVenv = filepath.Join(BaseDir, PyEnvName)
-    VenvPython = filepath.Join(VenvPath, "bin", "python")
     VenvPip = filepath.Join(VenvPath, "bin", "pip")
+    VenvPython = filepath.Join(VenvPath, "bin", "python")
 
     WirelessTools = filepath.Join(ToolsDir, "wireless")
     ExploitsTools = filepath.Join(ToolsDir, "exploits")

@@ -225,7 +225,7 @@ func handleSetCommand(parts []string) {
                 maxWidth = len(s)
             }
         }
-        maxWidth += 3
+        maxWidth += 1
 
         cols := 5
         if len(suggestions) < cols {
@@ -234,11 +234,11 @@ func handleSetCommand(parts []string) {
 
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
-                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+                fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
             fmt.Println()
         }
-
+        fmt.Println()
         return
     }
 
@@ -249,12 +249,12 @@ func handleSetCommand(parts []string) {
             maxWidth = len(k)
         }
     }
-    maxWidth += 3
+    maxWidth += 1
 
     cols := 5
     for i := 0; i < len(validKeys); i += cols {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
-            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+            fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
         fmt.Println()
     }
@@ -271,6 +271,7 @@ func handleUnsetCommand(parts []string) {
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
+      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -284,7 +285,8 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-       "name": &utils.BeefName,
+      "name": &utils.BeefName,
+      "interface": &utils.IFace,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -339,7 +341,7 @@ func handleUnsetCommand(parts []string) {
                 maxWidth = len(s)
             }
         }
-        maxWidth += 3
+        maxWidth += 1
 
         cols := 5
         if len(suggestions) < cols {
@@ -348,11 +350,11 @@ func handleUnsetCommand(parts []string) {
         
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
-                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+                fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
             fmt.Println()
         }
-
+        fmt.Println()
         return
     }
 
@@ -364,12 +366,12 @@ func handleUnsetCommand(parts []string) {
             maxWidth = len(k)
         }
     }
-    maxWidth += 3
+    maxWidth += 1
 
     cols := 5
     for i := 0; i < len(validKeys); i += cols {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
-            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+            fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
         fmt.Println()
     }
@@ -824,8 +826,6 @@ func DDosAttack(RHost, DDosMode string) {
     }
 }
 
-
-
 //Intense bug bounty hunt
 func FindIPs(RHost, ResolversFile, ReconDir string) {
     fmt.Printf("\n%s[*] %sFinding IPs for subdomains ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
@@ -1032,8 +1032,8 @@ func Osmedeus3(RHost string) {
     subprocess.Run("osmedeus --nv scan -f vuln-and-dirb -t %s", utils.RHost)
 }
 
-func Osmedeus4(Targe string) {
-    fmt.Printf("\n%s[*] %sPerforming bulk scan on " + bcolors.BrightYellow + "Targets " + bcolors.Endc + "= " + bcolors.Green + bcolors.Italic + "%s \n" + bcolors.Endc, utils.RHost)
+func Osmedeus4(RHost string) {
+    fmt.Printf("\n%s[*] %sPerforming bulk scan on %s ", bcolors.Green, bcolors.Endc, utils.RHost)
     subprocess.Run("osmedeus scan -f vuln-and-dirb -t %s", utils.RHost)
 }
 

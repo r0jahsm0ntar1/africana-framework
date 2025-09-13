@@ -392,33 +392,49 @@ func handleSetCommand(parts []string) {
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
 
-        "funcs": &Function,
-        "func": &Function,
-        "module": &Function,
-        "function": &Function,
-        "functions": &utils.Function,
+      "func": &Function,
+      "funcs": &Function,
+      "module": &Function,
+      "ssid": &utils.Ssid,
+      "iface": &utils.IFace,
+      "mode": &utils.NeMode,
+      "function": &Function,
+      "lhost": &utils.LHost,
+      "lport": &utils.LPort,
+      "hport": &utils.HPort,
+      "rhost": &utils.RHost,
+      "rhosts": &utils.RHost,
+      "functions": &Function,
+      "target": &utils.RHost,
+      "distro": &utils.Distro,
+      "targets": &utils.RHost,
+      "proxy": &utils.Proxies,
+      "script": &utils.Script,
+      "name": &utils.BeefName,
+      "interface": &utils.IFace,
+      "build": &utils.BuildName,
+      "proxies": &utils.Proxies,
+      "passwd": &utils.BeefPass,
+      "gateway": &utils.Gateway,
+      "fakedns": &utils.FakeDns,
+      "spoofer": &utils.Spoofer,
+      "toolsdir": &utils.ToolsDir,
+      "ddosmode": &utils.DDosMode,
+      "recondir": &utils.ReconDir,
+      "password": &utils.PassWord,
+      "protocol": &utils.Protocol,
+      "listener": &utils.Listener,
+      "wordlist": &utils.WordsList,
+      "listeners": &utils.Listener,
+      "pyenvname": &utils.PyEnvName,
+      "innericon": &utils.InnerIcon,
+      "outericon": &utils.OuterIcon,
+      "buildname": &utils.BuildName,
+      "obfuscator": &utils.Obfuscator,
 
-        "rhost": &utils.RHost,
-        "lport": &utils.LPort,
-        "hport": &utils.HPort,
-        "lhost": &utils.LHost,
-
-        "script": &utils.Script,
-        "proxy": &utils.Proxies,
-        "proxies": &utils.Proxies,
-        "build": &utils.BuildName,
-
-        "output": &utils.OutPutDir,
-        "outputlog": &utils.OutPutDir,
-        "outputlogs": &utils.OutPutDir,
-
-        "wordlist": &utils.WordsList,
-        "password": &utils.PassWord,
-        "protocol": &utils.Protocol,
-        "listener": &utils.Listener,
-        "innericon": &utils.InnerIcon,
-        "outericon": &utils.OuterIcon,
-        "obfuscator": &utils.Obfuscator,
+      "output": &utils.OutPutDir,
+      "outputlog": &utils.OutPutDir,
+      "outputlogs": &utils.OutPutDir,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -450,7 +466,7 @@ func handleSetCommand(parts []string) {
                 maxWidth = len(s)
             }
         }
-        maxWidth += 3
+        maxWidth += 1
 
         cols := 5
         if len(suggestions) < cols {
@@ -459,11 +475,11 @@ func handleSetCommand(parts []string) {
 
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
-                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+                fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
             fmt.Println()
         }
-
+        fmt.Println()
         return
     }
 
@@ -474,12 +490,12 @@ func handleSetCommand(parts []string) {
             maxWidth = len(k)
         }
     }
-    maxWidth += 3
+    maxWidth += 1
 
     cols := 5
     for i := 0; i < len(validKeys); i += cols {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
-            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+            fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
         fmt.Println()
     }
@@ -497,6 +513,7 @@ func handleUnsetCommand(parts []string) {
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
+      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -510,7 +527,8 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-       "name": &utils.BeefName,
+      "name": &utils.BeefName,
+      "interface": &utils.IFace,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -565,7 +583,7 @@ func handleUnsetCommand(parts []string) {
                 maxWidth = len(s)
             }
         }
-        maxWidth += 3
+        maxWidth += 1
 
         cols := 5
         if len(suggestions) < cols {
@@ -574,11 +592,11 @@ func handleUnsetCommand(parts []string) {
         
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
-                fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
+                fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
             fmt.Println()
         }
-
+        fmt.Println()
         return
     }
 
@@ -590,12 +608,12 @@ func handleUnsetCommand(parts []string) {
             maxWidth = len(k)
         }
     }
-    maxWidth += 3
+    maxWidth += 1
 
     cols := 5
     for i := 0; i < len(validKeys); i += cols {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
-            fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
+            fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
         fmt.Println()
     }
