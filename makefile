@@ -173,7 +173,7 @@ run:
 	fi; \
 	echo "${BrightBlue}${Bold}[+] ${Endc}Running ${Green}$$BIN ${Endc}...${Endc}"; \
 	chmod +x $$BIN; \
-	./$$BIN -a; \
+	./$$BIN; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
 		echo "${Blue}${Bold}[*] ${Endc}Execution completed successfully ...${Endc}"; \
