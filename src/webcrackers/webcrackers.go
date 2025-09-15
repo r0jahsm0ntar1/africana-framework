@@ -24,17 +24,6 @@ var (
     Function, ReconDir string
 )
 
-var defaultValues = map[string]string{
-   "rhost":     utils.RHost,
-   "rhosts":    utils.RHost,
-   "target":    utils.RHost,
-   "function":  utils.RHost,
-   "proxy":     utils.Proxies,
-   "proxies":   utils.Proxies,
-   "wordlist":  utils.WordsList,
-   "output":    utils.WebCrackersLogs,
-}
-
 type stringMatcher struct {
     names  []string
     action func()
@@ -153,6 +142,7 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -190,7 +180,6 @@ func handleSetCommand(parts []string) {
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
       "output": &utils.WebCrackersLogs,
       "outputlog": &utils.WebCrackersLogs,
       "outputlogs": &utils.WebCrackersLogs,
@@ -267,11 +256,11 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
-      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -285,8 +274,7 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-      "name": &utils.BeefName,
-      "interface": &utils.IFace,
+       "name": &utils.BeefName,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -306,7 +294,6 @@ func handleUnsetCommand(parts []string) {
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
       "output": &utils.WebCrackersLogs,
       "outputlog": &utils.WebCrackersLogs,
       "outputlogs": &utils.WebCrackersLogs,
@@ -318,7 +305,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

@@ -19,21 +19,6 @@ var (
     Function string
 )
 
-var defaultValues = map[string]string{
-
-    "function": "",
-    "rhost":    utils.RHost,
-    "target":   utils.RHost,
-    "lhost":    utils.LHost,
-    "iface":    utils.IFace,
-    "lport":    utils.LPort,
-    "spoofer":  utils.Spoofer,
-    "name":     utils.BeefName,
-    "password": utils.BeefPass,
-    "fakedns":  utils.PhFakeDns,
-    "output":   utils.OutPutDir,
-}
-
 type stringMatcher struct {
     names  []string
     action func()
@@ -152,6 +137,7 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -188,9 +174,8 @@ func handleSetCommand(parts []string) {
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
       "output": &utils.PhishersLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlog": &utils.PhishersLogs,
       "outputlogs": &utils.PhishersLogs,
     }
@@ -266,11 +251,11 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
-      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -284,8 +269,7 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-      "name": &utils.BeefName,
-      "interface": &utils.IFace,
+       "name": &utils.BeefName,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -304,9 +288,8 @@ func handleUnsetCommand(parts []string) {
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
       "output": &utils.PhishersLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlog": &utils.PhishersLogs,
       "outputlogs": &utils.PhishersLogs,
     }
@@ -317,7 +300,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

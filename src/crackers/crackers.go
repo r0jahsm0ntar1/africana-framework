@@ -19,17 +19,6 @@ var(
     Function string
 )
 
-var defaultValues = map[string]string{
-
-    "rhost":    "",
-    "rhosts":   "",
-    "proxies":  "",
-    "function": "",
-    "output":   utils.OutPutDir,
-    "password": utils.PassWord,
-    "wordlist": utils.WordsList,
-}
-
 type stringMatcher struct {
     names  []string
     action func()
@@ -153,7 +142,6 @@ func handleSetCommand(parts []string) {
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
-      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -167,8 +155,7 @@ func handleSetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-      "name": &utils.BeefName,
-      "interface": &utils.IFace,
+       "name": &utils.BeefName,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -187,12 +174,10 @@ func handleSetCommand(parts []string) {
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
       "output": &utils.CrackersLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlog": &utils.CrackersLogs,
       "outputlogs": &utils.CrackersLogs,
-
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -303,9 +288,8 @@ func handleUnsetCommand(parts []string) {
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
       "output": &utils.CrackersLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlog": &utils.CrackersLogs,
       "outputlogs": &utils.CrackersLogs,
     }
@@ -316,7 +300,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

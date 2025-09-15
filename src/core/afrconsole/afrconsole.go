@@ -29,11 +29,6 @@ var (
     Function string
 )
 
-var defaultValues = map[string]string{
-    "module":  "",
-    "proxies": "",
-}
-
 type stringMatcher struct {
     names  []string
     action func()
@@ -418,6 +413,7 @@ func handleSetCommand(parts []string) {
       "gateway": &utils.Gateway,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
+      "output": &utils.OutPutDir,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
@@ -426,15 +422,13 @@ func handleSetCommand(parts []string) {
       "listener": &utils.Listener,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
+      "outputlog": &utils.OutPutDir,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.OutPutDir,
-      "outputlog": &utils.OutPutDir,
       "outputlogs": &utils.OutPutDir,
+      "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -535,6 +529,7 @@ func handleUnsetCommand(parts []string) {
       "gateway": &utils.Gateway,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
+      "output": &utils.OutPutDir,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
@@ -543,15 +538,13 @@ func handleUnsetCommand(parts []string) {
       "listener": &utils.Listener,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
+      "outputlog": &utils.OutPutDir,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.OutPutDir,
-      "outputlog": &utils.OutPutDir,
       "outputlogs": &utils.OutPutDir,
+      "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -560,7 +553,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

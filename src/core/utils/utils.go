@@ -19,6 +19,7 @@ import(
     "strings"
     "runtime"
     "net/url"
+    "net/http"
     "math/big"
     "io/ioutil"
     "subprocess"
@@ -70,6 +71,9 @@ var (
     BeefPass   = "Jesus"
     PhFakeDns  = "Jesus Christ is coming soon!"
 
+    CHAR            = "├──"
+    CHAR1           = "└──"
+    SPACE_PREFIX    = "   "
 
     LHost, _ = GetDefaultIP()
     Distro, _ = GetLinuxDistroID()
@@ -120,6 +124,51 @@ var (
     BaseDir, ToolsDir, CertDir, CertPath, KeyPath, OutPutDir, WordsListDir, RokyPath = subprocess.DirLocations()
     Flag, Shell, Input, Command, AgreementDir, AgreementPath, Proxies, ProxyURL, RHost, Script, Hashes, Pcap string
 )
+
+var DefaultValues = map[string]string{
+    "build":       BuildName,
+    "buildname":   BuildName,
+    "ddosmode":    DDosMode,
+    "distro":      Distro,
+    "fakedns":     FakeDns,
+    "func":        Function,
+    "function":    Function,
+    "functions":   Function,
+    "funcs":       Function,
+    "gateway":     Gateway,
+    "hport":       HPort,
+    "iface":       IFace,
+    "innericon":   InnerIcon,
+    "interface":   IFace,
+    "lhost":       LHost,
+    "listener":    Listener,
+    "listeners":   Listener,
+    "lport":       LPort,
+    "mode":        NeMode,
+    "module":      Function,
+    "name":        BeefName,
+    "obfuscator":  Obfuscator,
+    "outericon":   OuterIcon,
+    "output":      OutPutDir,
+    "outputlog":   OutPutDir,
+    "outputlogs":  OutPutDir,
+    "passwd":      BeefPass,
+    "password":    PassWord,
+    "proxy":       Proxies,
+    "proxies":     Proxies,
+    "protocol":    Protocol,
+    "pyenvname":   PyEnvName,
+    "recondir":    ReconDir,
+    "rhost":       RHost,
+    "rhosts":      RHost,
+    "script":      Script,
+    "spoofer":     Spoofer,
+    "ssid":        Ssid,
+    "target":      RHost,
+    "targets":     RHost,
+    "toolsdir":    ToolsDir,
+    "wordlist":    WordsList,
+}
 
 type InterfaceInfo struct {
     Name        string
@@ -645,34 +694,81 @@ func ValidatePort(port string) error {
     return nil
 }
 
-func AskForProxy(Proxies string) (*url.URL, error) {
-    proxyStr := strings.TrimSpace(Proxies)
-    proxyURL, err := url.Parse(proxyStr)
-    if err != nil || proxyURL.Scheme == "" || proxyURL.Host == "" {
-        return nil, fmt.Errorf("Invalid PROXY format (eg. http://localhost:80)")
+func AskForProxy(proxyStr string) (*url.URL, error) {
+    proxyStr = strings.TrimSpace(proxyStr)
+    if proxyStr == "" {
+        return nil, fmt.Errorf("proxy string is empty")
     }
 
-    validSchemes := map[string]bool{"http": true, "https": true, "socks5": true, "socks4": true}
-    if !validSchemes[proxyURL.Scheme] {
-        return nil, fmt.Errorf("Invalid scheme (use http(s), socks4(5))")
+    proxyURL, err := url.Parse(proxyStr)
+    if err != nil {
+        return nil, fmt.Errorf("failed to parse proxy URL: %w", err)
     }
+    if proxyURL.Scheme == "" || proxyURL.Host == "" {
+        return nil, fmt.Errorf("%s%s[!] %sInvalid proxy format (eg. http://localhost:8080, socks5://127.0.0.1:9050)", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    }
+
+    //validSchemes := map[string]bool{"http": true, "https": true}
+    //if !validSchemes[proxyURL.Scheme] {
+    //    if strings.HasPrefix(proxyURL.Scheme, "socks") {
+    //        return nil, fmt.Errorf("[!] SOCKS proxy support requires external modules (golang.org/x/net/proxy). Please use an HTTP proxy")
+    //    }
+    //    return nil, fmt.Errorf("[!] Invalid proxy scheme %q (use http or https)", proxyURL.Scheme)
+    //}
+
     return proxyURL, nil
 }
 
-func SetProxy(Proxies string) error {
-    proxyURL, err := AskForProxy(Proxies)
+func SetProxy(proxyStr string) error {
+    proxyURL, err := AskForProxy(proxyStr)
     if err != nil {
-        fmt.Printf("\n%s[!] %s%s\n", bcolors.BrightRed, bcolors.Endc, err)
-        return err
+        return fmt.Errorf("proxy validation failed: %w", err)
     }
-    
-    if err := os.Setenv("HTTP_PROXY", proxyURL.String()); err != nil {
-        return fmt.Errorf("Error setting HTTP_PROXY: %w", err)
+    envVars := map[string]string{
+        "HTTP_PROXY":  proxyURL.String(),
+        "HTTPS_PROXY": proxyURL.String(),
+        "ALL_PROXY":   proxyURL.String(),
+        "http_proxy":  proxyURL.String(),
+        "https_proxy": proxyURL.String(),
+        "all_proxy":   proxyURL.String(),
     }
-    if err := os.Setenv("HTTPS_PROXY", proxyURL.String()); err != nil {
-        return fmt.Errorf("Error setting HTTPS_PROXY: %w", err)
+    for key, value := range envVars {
+        if err := os.Setenv(key, value); err != nil {
+            return fmt.Errorf("failed to set %s: %w", key, err)
+        }
+    }
+
+    validHTTPSchemes := map[string]bool{"http": true, "https": true}
+    if validHTTPSchemes[proxyURL.Scheme] {
+        http.DefaultTransport.(*http.Transport).Proxy = http.ProxyURL(proxyURL)
+        fmt.Printf("%s%s[>] %sGo HTTP transport also configured for: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, proxyURL.String())
+    } else {
+        fmt.Printf("%s%s[>] %sProxy set in environment for external tools: %s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, proxyURL.String())
+        fmt.Printf("%s%s[!] %sNote: Native Go HTTP calls will not use the %s proxy (requires golang.org/x/net/proxy).\n", bcolors.Bold, bcolors.Red, bcolors.Endc, proxyURL.Scheme)
     }
     return nil
+}
+
+func GetProxiedHTTPClient(proxyStr string) (*http.Client, error) {
+    proxyURL, err := AskForProxy(proxyStr)
+    if err != nil {
+        return nil, err
+    }
+
+    customTransport := &http.Transport{
+        Proxy: http.ProxyURL(proxyURL),
+        DialContext: (&net.Dialer{
+            Timeout:   30 * time.Second,
+            KeepAlive: 30 * time.Second,
+        }).DialContext,
+        TLSHandshakeTimeout: 10 * time.Second,
+        IdleConnTimeout:     30 * time.Second,
+    }
+
+    return &http.Client{
+        Transport: customTransport,
+        Timeout:   60 * time.Second,
+    }, nil
 }
 
 func replaceStringsInFile(fileName string, replacements map[string]string) error {

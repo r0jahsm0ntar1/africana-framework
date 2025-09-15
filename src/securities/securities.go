@@ -80,23 +80,6 @@ type stringMatcher struct {
     action func()
 }
 
-var defaultValues = map[string]string{
-
-    "function":     Function,
-    "script":       utils.Script,
-    "proxies":      utils.Proxies,
-    "outericon":    utils.OuterIcon,
-    "lport":        utils.LPort,
-    "hport":        utils.HPort,
-    "protocol":     utils.Protocol,
-    "listener":     utils.Listener,
-    "build":        utils.BuildName,
-    "lhost":        utils.LHost,
-    "output":       utils.ExploitsLogs,
-    "innericon" :   utils.InnerIcon,
-    "obfuscator":   utils.Obfuscator,
-}
-
 func Torsocks() {
     for {
         fmt.Printf("%s%s%safr%s%s torsocks(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
@@ -209,6 +192,7 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -226,6 +210,7 @@ func handleSetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
+      "output": &utils.SecLogs,
        "name": &utils.BeefName,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
@@ -233,12 +218,14 @@ func handleSetCommand(parts []string) {
       "gateway": &utils.Gateway,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
+      "outputlog": &utils.SecLogs,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "outputlogs": &utils.SecLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "pyenvname": &utils.PyEnvName,
@@ -246,10 +233,6 @@ func handleSetCommand(parts []string) {
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.SecLogs,
-      "outputlog": &utils.SecLogs,
-      "outputlogs": &utils.SecLogs,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -323,11 +306,11 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
-      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -341,20 +324,22 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-      "name": &utils.BeefName,
-      "interface": &utils.IFace,
+      "output": &utils.SecLogs,
+       "name": &utils.BeefName,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
       "gateway": &utils.Gateway,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
+      "outputlog": &utils.SecLogs,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "outputlogs": &utils.SecLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "pyenvname": &utils.PyEnvName,
@@ -362,10 +347,6 @@ func handleUnsetCommand(parts []string) {
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.SecLogs,
-      "outputlog": &utils.SecLogs,
-      "outputlogs": &utils.SecLogs,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -374,7 +355,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

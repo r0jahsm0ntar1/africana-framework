@@ -21,26 +21,6 @@ var(
     Function string
 )
 
-var defaultValues = map[string]string{
-
-    "proxies": "",
-    "fakedns": "*",
-    "function": "",
-    "lport": "9999",
-    "iface": "eth0",
-    "mode": "one",
-    "passwd": "Jesus Christ",
-    "spoofer": "ettercap",
-
-    "lhost": utils.LHost,
-    "rhost": utils.RHost,
-    "rhosts": utils.RHost,
-    "target": utils.RHost,
-    "targets": utils.RHost,
-    "gateway": utils.Gateway,
-    "output": utils.OutPutDir,
-}
-
 type stringMatcher struct {
     names  []string
     action func()
@@ -159,6 +139,7 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -191,13 +172,12 @@ func handleSetCommand(parts []string) {
       "listener": &utils.Listener,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
+      "output": &utils.NetworkLogs,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.NetworkLogs,
       "outputlog": &utils.NetworkLogs,
       "outputlogs": &utils.NetworkLogs,
     }
@@ -273,6 +253,7 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -307,13 +288,12 @@ func handleUnsetCommand(parts []string) {
       "listener": &utils.Listener,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
+      "output": &utils.NetworkLogs,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
       "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.NetworkLogs,
       "outputlog": &utils.NetworkLogs,
       "outputlogs": &utils.NetworkLogs,
     }
@@ -324,7 +304,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }

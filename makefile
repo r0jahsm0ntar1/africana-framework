@@ -32,10 +32,20 @@ BrightWhite   := \033[97m
 
 # Define banner as a shell function
 define PRINT_BANNER
-	echo "${BrightYellow} ,__,       ${Endc}"; \
-	echo "${BrightYellow} (oo)____   ${Endc}"; \
-	echo "${BrightYellow} (__)    )\ ${Endc}"; \
-	echo "${BrightYellow}    ||--||  ${Endc}";
+	echo "${BrightYellow} ,__,             ${Endc}"; \
+	echo "${BrightYellow} (oo)____         ${Endc}"; \
+	echo "${BrightYellow} (__)    )\       ${Endc}"; \
+	echo "${BrightYellow}    ||--||        ${Endc}"; \
+	echo "${BrightYellow}    John 3:16     ${Endc}";
+endef
+
+define PRINT_BANNER0
+	echo "${BrightYellow}           .--,   ${Endc}"; \
+	echo "${BrightYellow}       ,.-( (o)\  ${Endc}"; \
+	echo "${BrightYellow}      /   .)/\ ') ${Endc}"; \
+	echo "${BrightYellow}    .',./'/   )/  ${Endc}"; \
+	echo "${BrightYellow}()=///=))))==()   ${Endc}"; \
+	echo "${BrightYellow}  / John 3:16     ${Endc}";
 endef
 
 # Project name
@@ -77,6 +87,7 @@ build:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
+			$(PRINT_BANNER) \
 			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${Red}${Bold}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
@@ -88,7 +99,7 @@ build:
 distro:
 	@OS_NAME=$(filter-out $@,$(MAKECMDGOALS)); \
 	if [ -z "$$OS_NAME" ]; then \
-		$(PRINT_BANNER) \
+		$(PRINT_BANNER0) \
 		echo "${BrightRed}${Bold}Usage:${Endc} make distro <os>"; \
 		echo "${BrightBlue}${Underl}Supported OS:${Endc} linux, windows, darwin, all"; \
 		exit 1; \
@@ -109,6 +120,7 @@ distro:
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
+			$(PRINT_BANNER) \
 			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
 		else \
 			echo "${BrightRed}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \

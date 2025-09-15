@@ -28,15 +28,6 @@ type stringMatcher struct {
     action func()
 }
 
-var defaultValues = map[string]string{
-    "module":       "",
-    "function":     "",
-    "distro":       utils.Distro,
-    "proxy":        utils.Proxies,
-    "proxies":      utils.Proxies,
-    "pyenvname":    utils.PyEnvName,
-}
-
 var linuxTaskMap = map[string]func(){
     "kali":    KaliSetups,
     "debian":  KaliSetups,
@@ -396,6 +387,7 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
@@ -428,16 +420,15 @@ func handleSetCommand(parts []string) {
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "output": &utils.SetupsLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.SetupsLogs,
       "outputlog": &utils.SetupsLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlogs": &utils.SetupsLogs,
     }
 
@@ -512,10 +503,12 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
+
       "func": &Function,
       "funcs": &Function,
       "module": &Function,
       "ssid": &utils.Ssid,
+      "iface": &utils.IFace,
       "mode": &utils.NeMode,
       "function": &Function,
       "lhost": &utils.LHost,
@@ -529,7 +522,8 @@ func handleUnsetCommand(parts []string) {
       "targets": &utils.RHost,
       "proxy": &utils.Proxies,
       "script": &utils.Script,
-       "name": &utils.BeefName,
+      "name": &utils.BeefName,
+      "interface": &utils.IFace,
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
@@ -542,16 +536,15 @@ func handleUnsetCommand(parts []string) {
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "output": &utils.SetupsLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "pyenvname": &utils.PyEnvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
-
-      "output": &utils.SetupsLogs,
       "outputlog": &utils.SetupsLogs,
+      "obfuscator": &utils.Obfuscator,
       "outputlogs": &utils.SetupsLogs,
     }
 
@@ -561,7 +554,7 @@ func handleUnsetCommand(parts []string) {
     }
 
     if ptr, exists := unsetValues[key]; exists {
-        *ptr = defaultValues[key]
+        *ptr = utils.DefaultValues[key]
         fmt.Printf("%s -> %s\n", strings.ToUpper(key), "Null")
         return
     }
