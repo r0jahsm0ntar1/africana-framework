@@ -12,17 +12,16 @@ Africana Framework is an open-source, community-driven cybersecurity toolkit des
 ```
     A    F    R    I    C    A    N    A    Framework.
     *    *    *    *    *    *    *    *    *
-    |    |    |    |    |    |    |    |    |  Africana Topographical Map ...
-    |    |    |    |    |    |    |    |    +- 1. Install, Uninstall or Update Africana Framework.
-    |    |    |    |    |    |    |    +------ 2. System Security Configuration With Tor, Privoxy, Squid, Macchanger, Dnsleak. etc.
-    |    |    |    |    |    |    +----------- 3. Local Network Pentesting With Bettercap, Nmap, Metasploit, Responder, Smbmap. etc.
-    |    |    |    |    |    +---------------- 4. C2 & Revershell Generation Engines Like: Villain, Hoaxshell, Noisemaker, Codebreaker etc.
-    |    |    |    |    +--------------------- 5. Wifi Attack Vectors Both Automated & Manual. With Wifite, Airgeddon, Bettercap, Wifipumpkin3.
-    |    |    |    + ------------------------- 6. Password, Hash Cracking With AirCrack-ng, John And Hashcat More Will Be Added As The Tool Grows.
-    |    |    + ------------------------------ 7. Social Engenearing Attacks With Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher. Others Will Be Added.
-    |    +------------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix etc.
-    +----------------------------------------- 9. About the author of Africana and free pentesting tricks, Materials.
-    []----------------------------------------10. That one place you really need to be. Very nice essential things just try ten.
+    |    |    |    |    |    |    |    |    |- 1. Install, Uninstall or Update Africana Framework.
+    |    |    |    |    |    |    |    |    +- 2. System Security Configuration With Tor, Privoxy, Squid, Macchanger, Dnsleak. etc.
+    |    |    |    |    |    |    |    +------ 3. Local Network Pentesting With Bettercap, Nmap, Metasploit, Responder, Smbmap. etc.
+    |    |    |    |    |    |    +----------- 4. C2 & Revershell Generation Engines Like: Villain, Hoaxshell, Noisemaker, Codebreaker etc.
+    |    |    |    |    |    +---------------- 5. Wifi Attack Vectors Both Automated & Manual. With Wifite, Airgeddon, Bettercap, Wifipumpkin3.
+    |    |    |    |    +--------------------- 6. Password, Hash Cracking With AirCrack-ng, John And Hashcat More Will Be Added As The Tool Grows.
+    |    |    |    + ------------------------- 7. Social Engenearing Attacks With Setoolkit, Goodginx, AdvancedPhishing, Gophish, Anonphisher. Others Will Be Added.
+    |    |    + ------------------------------ 8. Website Attack Vectors With Dnsrecon, Wafw00f, Whatweb, Httpx, Paramspider, Nuclei, BBot, SSlscan, Sqlmap, Xsserscan, Dalfox, Dirsearch, Commix etc.
+    |    +------------------------------------ 9. About the author of Africana and free pentesting tricks, Materials.
+    +----------------------------------------- 10. That one place you really need to be. Very nice essential things just try ten.
 ```
 
 # Disclaimer: 
@@ -49,7 +48,7 @@ Before you begin, ensure you have met the following requirements:
 
 ```bash
 sudo apt update -y
-sudo apt install git golang -y
+sudo apt install git make golang -y
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
@@ -58,13 +57,13 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; cd ./build; clear; ls; ./* -a
+make; make run
 ```
 
 ## Installation in all Arch based distros;
 ```bash
 sudo pacman -Syu
-sudo pacman -Sy git golang
+sudo pacman -Sy git make golang
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
@@ -73,20 +72,16 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; cd ./build; clear; ls; ./* -a
+make; make run
 ```
 ## Installation in tmux on Android based distros;
 ```bash
-pkg update
-pkg upgrade
-termux-setup-storage
-pkg install wget
-wget -O install-nethunter-termux https://offs.ec/2MceZWr
-chmod +x install-nethunter-termux
-./install-nethunter-termux
-nethunter
-sudo apt update && sudo apt full-upgrade -y
-sudo apt install golang -y
+pkg update -y
+pkg upgrade -y
+pkg install git curl screenfetch golang -y
+echo "screenfetch" >> ~/.zshrc
+echo "screenfetch" >> ~/.bashrc
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
@@ -95,7 +90,9 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; cd ./build; clear; ls; ./* -a
+make; make run
+echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc
+echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.bashrc
 ```
 
 ## The script should be run as a super user do(sudo) for root permissions .
@@ -105,24 +102,22 @@ sudo afrconsole
 
 ## About the Author
 ```
-                       .--,
-                   ,.-( (o)\
-                  /   .)/\ ')
-                .',./'/   )/
-            ()=///=))))==()
-              /
-                __                 _____ _____     _     _ 
-             __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
-            |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-Addicted to |_____|___|___|___|___|_____|__|__|_| |_|___|_|
-+---------------------------------------------------------------------+
-|             With great power comes great responsibility.            |
-+---------------------------------------------------------------------+
-|   I am Rojahs Montari. A devoted Christian Studied Education In     |
-|    Kenyatta University Kenya. Got Persionate In Cybersecurity       |
-|    I Then Furthered My Skills By Research, Practice & Expirience.   |
-|     Self employed, Cybersecurity Consoltant, Software Engineer.     |
-+---------------------------------------------------------------------+
+           .--,
+       ,.-( (o)\
+      /   .)/\ ')
+    .',./'/   )/
+()=///=))))==()
+  / Iam an addict to.
+        __                 _____ _____     _     _ 
+     __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
+    |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+    |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+
+I am Rojahs Montari aka Christ Maniac. A devoted Christian who
+Studied Education In Kenyatta University Kenya. I Got Persionate
+In Cybersecurity & Then Furthered My Skills By Research, Practice
+& Expirience.I am Self employed, Cybersecurity Consoltant &
+Software Engineer.
 ```
 
 ## 💰 You can help me by Donating
