@@ -1578,7 +1578,7 @@ func getIPInfo(ip string) (IPGeoInfo, error) {
         
         return info, nil
     }
-    
+
     return info, fmt.Errorf("could not retrieve geolocation data")
 }
 

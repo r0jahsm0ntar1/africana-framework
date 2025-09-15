@@ -991,6 +991,18 @@ func appendToShellProfile(profilePath, content string) error {
     return err
 }
 
+func InstallFoundationTools(commands []string) {
+    for _, cmd := range commands {
+        subprocess.Run(cmd)
+    }
+}
+
+func InstallGithubTools() {
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
+    subprocess.Run("%s -m pip install -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
+}
+
 func CreatePythonVenv() error {
     venvPath := filepath.Join(utils.BaseDir, utils.PyEnvName)
 
@@ -1115,18 +1127,6 @@ func Uninstaller() {
     }
 }
 
-func InstallFoundationTools(commands []string) {
-    for _, cmd := range commands {
-        subprocess.Run(cmd)
-    }
-}
-
-func InstallGithubTools() {
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
-    //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
-    subprocess.Run("%s -m pip install -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
-}
-
 func AndroidSetups() {
     fmt.Printf("\n%s%s[+] %sAndroid setup initiated.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
@@ -1139,14 +1139,18 @@ func AndroidSetups() {
 
     foundationCommands := []string{
         "pkg update -y",
+        "pkg install -y root-repo x11-repo unstable-repo",
+        "pkg update -y",
+        "pkg install -y wget curl git python golang",
+        "pkg update -y",
         "pkg upgrade -y",
         "termux-setup-storage",
-        "pkg install -y wget curl git",
-        "pkg install -y python",
-        "pkg install -y golang",
-        "pkg install -y root-repo",
-        "pkg install -y unstable-repo",
-        "pkg install -y x11-repo",
+        "wget -O install-nethunter-termux https://offs.ec/2MceZWr",
+        "chmod +x install-nethunter-termux",
+        "./install-nethunter-termux",
+        "nethunter",
+        "sudo apt update && sudo apt full-upgrade -y",
+        "sudo apt install golang -y",
     }
 
     baseLinuxSetup(missingTools, foundationCommands)
