@@ -34,15 +34,15 @@ BrightWhite   := \033[97m
 define PRINT_BANNER
 	echo "${BrightYellow} ,__,             ${Endc}"; \
 	echo "${BrightYellow} (oo)____         ${Endc}"; \
-	echo "${BrightYellow} (__)    )\       ${Endc}"; \
+	echo "${BrightYellow} (__)    )\\       ${Endc}"; \
 	echo "${BrightYellow}    ||--||        ${Endc}"; \
 	echo "${BrightYellow}    John 3:16     ${Endc}";
 endef
 
 define PRINT_BANNER0
 	echo "${BrightYellow}           .--,   ${Endc}"; \
-	echo "${BrightYellow}       ,.-( (o)\  ${Endc}"; \
-	echo "${BrightYellow}      /   .)/\ ') ${Endc}"; \
+	echo "${BrightYellow}       ,.-( (o)\\  ${Endc}"; \
+	echo "${BrightYellow}      /   .)/\\ ') ${Endc}"; \
 	echo "${BrightYellow}    .',./'/   )/  ${Endc}"; \
 	echo "${BrightYellow}()=///=))))==()   ${Endc}"; \
 	echo "${BrightYellow}  / John 3:16     ${Endc}";
@@ -51,11 +51,20 @@ endef
 # Project name
 APP_NAME := afrconsole
 
-# Architecture options
-ARCHS := amd64
-
 # Output directory
 BUILD_DIR := build
+
+# Detect current architecture
+UNAME_M := $(shell uname -m)
+ifeq ($(UNAME_M),x86_64)
+    ARCHS := amd64
+else ifeq ($(UNAME_M),aarch64)
+    ARCHS := arm64
+else ifeq ($(UNAME_M),armv7l)
+    ARCHS := arm
+else
+    ARCHS := $(UNAME_M)
+endif
 
 # Map OS keyword to GOOS
 define expand_targets
@@ -68,8 +77,18 @@ ALL_TARGETS := \
     $(call expand_targets,windows) \
     $(call expand_targets,darwin)
 
-# Default platform based on system
-PLATFORMS := $(call expand_targets,$(shell uname -s | tr A-Z a-z))
+# Detect current OS
+UNAME_S := $(shell uname -s | tr A-Z a-z)
+ifeq ($(UNAME_S),linux)
+    # Check if we're in Termux (Android)
+    ifneq ($(wildcard /data/data/com.termux/files/usr/bin/termux-info),)
+        PLATFORMS := $(call expand_targets,android)
+    else
+        PLATFORMS := $(call expand_targets,linux)
+    endif
+else
+    PLATFORMS := $(call expand_targets,$(UNAME_S))
+endif
 
 # Default make (build for current OS)
 default: build
@@ -85,12 +104,12 @@ build:
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
-		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
+		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
 			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building completed successfully ...${Endc}"; \
 		else \
-			echo "${Red}${Bold}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
+			echo "${Red}${Bold}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
@@ -101,7 +120,7 @@ distro:
 	if [ -z "$$OS_NAME" ]; then \
 		$(PRINT_BANNER0) \
 		echo "${BrightRed}${Bold}Usage:${Endc} make distro <os>"; \
-		echo "${BrightBlue}${Underl}Supported OS:${Endc} linux, windows, darwin, all"; \
+		echo "${BrightBlue}${Underl}Supported OS:${Endc} linux, windows, darwin, android, all"; \
 		exit 1; \
 	fi; \
 	if [ "$$OS_NAME" = "all" ]; then \
@@ -118,12 +137,12 @@ distro:
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
 		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
-		GOOS=$$GOOS GOARCH=$$GOARCH go build -v -x -o $$OUT .; \
+		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
 			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building completed succesfull ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building completed successfully ...${Endc}"; \
 		else \
-			echo "${BrightRed}[!] ${Endc}${Cyan}${Blink}Build failed. Pleas retry again ...${Endc}"; \
+			echo "${BrightRed}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
 			exit 1; \
 		fi; \
 	done
@@ -131,21 +150,24 @@ distro:
 # Clean output
 clean:
 	@echo "${BrightYellow}${Bold}[!] ${Endc}Cleaning build directory ...${Endc}"
-	@go clean -r -x -cache
+	@go clean -cache
 	@rm -rf $(BUILD_DIR)
 	@echo "${BrightBlue}${Bold}[+] ${Endc}Clean completed!${Endc}"
 
 # Native run helper
 run:
 	@GOOS=$(shell uname -s | tr A-Z a-z); \
+	if [ -f /data/data/com.termux/files/usr/bin/termux-info ]; then GOOS="android"; fi; \
 	GOARCH=$(shell uname -m); \
-	# Map x86_64 to amd64 if needed \
+	# Map architecture names \
 	if [ "$$GOARCH" = "x86_64" ]; then GOARCH="amd64"; fi; \
+	if [ "$$GOARCH" = "aarch64" ]; then GOARCH="arm64"; fi; \
+	if [ "$$GOARCH" = "armv7l" ]; then GOARCH="arm"; fi; \
 	EXT=; \
 	if [ "$$GOOS" = "windows" ]; then EXT=".exe"; fi; \
 	BIN=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
 	if [ ! -f "$$BIN" ]; then \
-		echo "${BrightRed}${Blink}[!] ${Endc}Binary not found: ${BrightCyan}$$BIN${Endc}"; \
+		echo "${BrightRed}[!] ${Endc}Binary not found: ${BrightCyan}$$BIN${Endc}"; \
 		echo "${BrightBlue}Run ${BrightCyan}make build${BrightBlue} first${Endc}"; \
 		exit 1; \
 	fi; \
@@ -156,7 +178,7 @@ run:
 	if [ $$EXIT_CODE -eq 0 ]; then \
 		echo "${Blue}${Bold}[*] ${Endc}Execution completed successfully ...${Endc}"; \
 	else \
-		echo "${BackBrightRed}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
+		echo "${Red}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
 	fi
 
 # Help target
@@ -173,12 +195,13 @@ help:
 	@echo "  ${BrightWhite}make distro linux${Endc}   - ${Dim}Build for Linux${Endc}"
 	@echo "  ${BrightWhite}make distro windows${Endc} - ${Dim}Build for Windows${Endc}"
 	@echo "  ${BrightWhite}make distro darwin${Endc}  - ${Dim}Build for macOS${Endc}"
+	@echo "  ${BrightWhite}make distro android${Endc} - ${Dim}Build for Android${Endc}"
 	@echo "  ${BrightWhite}make distro all${Endc}     - ${Dim}Build for all platforms${Endc}"
 	@echo ""
 	@echo "${BrightBlue}Current OS: ${BrightCyan}$(shell uname -s)${Endc}"
-	@echo "${BrightBlue}Current Arch: ${BrightCyan}$(shell uname -m)${Endc}"
+	@echo "${BrightBlue}Current Arch: ${BrightCyan}$(shell uname -m) → $(ARCHS)${Endc}"
 
 # Prevent Make from trying to treat distro targets like files
-.PHONY: default build distro clean run help banner linux windows darwin all
+.PHONY: default build distro clean run help
 %:
 	@:
