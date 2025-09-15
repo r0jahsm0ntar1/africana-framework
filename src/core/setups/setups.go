@@ -164,6 +164,37 @@ var (
 )
 
 func getPackageName(tool, pkg string) string {
+    if utils.DetectAndroid() {
+        androidPackages := map[string]string{
+            "golang-go":                    "golang",
+            "python3":                      "python",
+            "python3-pip":                  "python-pip",
+            "python3-dev":                  "python",
+            "python3-venv":                 "python",
+            "git":                          "git",
+            "curl":                         "curl",
+            "wget":                         "wget",
+            "nmap":                         "nmap",
+            "aircrack-ng":                  "aircrack-ng",
+            "hydra":                        "hydra",
+            "sqlmap":                       "sqlmap",
+            "nikto":                        "nikto",
+            "gobuster":                     "gobuster",
+            "net-tools":                    "net-tools",
+            "dnsutils":                     "dnsutils",
+            "build-essential":              "clang",
+            "gcc":                          "clang",
+            "make":                         "make",
+            "libpcap-dev":                  "libpcap",
+            "libssl-dev":                   "openssl",
+            "zlib1g-dev":                   "zlib",
+        }
+        if androidPkg, exists := androidPackages[pkg]; exists {
+            return androidPkg
+        }
+        return tool
+    }
+
     if utils.IsArchLinux() {
         archPackages := map[string]string{
 
@@ -1028,7 +1059,7 @@ func AutoSetups() {
 func KaliSetups() {
     fmt.Printf("\n%s%s[>] %sInstalling africana in kali.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
-    
+
     commands := []string{
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
@@ -1097,7 +1128,31 @@ func InstallGithubTools() {
 }
 
 func AndroidSetups() {
-    fmt.Printf("\n%s%s[+] %sAndroid setup placeholder.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sAndroid setup initiated.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+
+    if !utils.DetectAndroid() {
+        fmt.Printf("%s%s[!] %sThis setup is intended for Android devices only.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+        return
+    }
+
+    missingTools := UpsentTools()
+
+    foundationCommands := []string{
+        "pkg update -y",
+        "pkg upgrade -y",
+        "termux-setup-storage",
+        "pkg install -y wget curl git",
+        "pkg install -y python",
+        "pkg install -y golang",
+        "pkg install -y root-repo",
+        "pkg install -y unstable-repo",
+        "pkg install -y x11-repo",
+    }
+
+    baseLinuxSetup(missingTools, foundationCommands)
+
+    fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 }
 
 func MacosSetups() {
