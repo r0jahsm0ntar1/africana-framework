@@ -1042,35 +1042,6 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
     }
 }
 
-func AutoSetups() {
-    switch runtime.GOOS {
-    case "android":
-        fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        AndroidSetups()
-    case "linux":
-        if utils.DetectAndroid() {
-            fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-            AndroidSetups()
-        } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
-            if task, ok := linuxTaskMap[distroID]; ok {
-                task()
-            } else {
-                fmt.Printf("%s%s[!] %sUnsupported Linux distro: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, distroID)
-            }
-        } else {
-            fmt.Printf("%s%s[!] %sLinux distro detection failed.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
-        }
-    case "windows":
-        fmt.Printf("%s%s[+] %sWindows detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        WindowsSetups()
-    case "darwin":
-        fmt.Printf("%s%s[+] %smacOS detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        MacosSetups()
-    default:
-        fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
-    }
-}
-
 func KaliSetups() {
     fmt.Printf("\n%s%s[>] %sInstalling africana in kali.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
@@ -1110,36 +1081,14 @@ func ArchSetups() {
     baseLinuxSetup(missingTools, commands)
 }
 
-func UpdateAfricana() {
-    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
-    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
-    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-}
-
-func Uninstaller() {
-    fmt.Printf("\n%s%s[!] %sUninstalling africana.", bcolors.Bold, bcolors.Red, bcolors.Endc)
-    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
-        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
-        fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        os.Exit(0)
-    } else {
-        fmt.Printf("\n%s%s[!] %sAfricana is not installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    }
-}
-
 func AndroidSetups() {
-    fmt.Printf("\n%s%s[+] %sAndroid setup initiated.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
+    fmt.Printf("\n%s%s[>] %sInstalling africana in android.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     if !utils.DetectAndroid() {
         fmt.Printf("%s%s[!] %sThis setup is intended for Android devices only.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
         return
     }
 
     missingTools := UpsentTools()
-
     foundationCommands := []string{
         "pkg update -y",
         "pkg install root-repo x11-repo unstable-repo -y",
@@ -1177,4 +1126,53 @@ func MacosSetups() {
 
 func WindowsSetups() {
     fmt.Printf("\n%s%s[+] %sWindows setup placeholder.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+}
+
+func UpdateAfricana() {
+    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
+    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
+    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+}
+
+func Uninstaller() {
+    fmt.Printf("\n%s%s[!] %sUninstalling africana.", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
+        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
+        fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        os.Exit(0)
+    } else {
+        fmt.Printf("\n%s%s[!] %sAfricana is not installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    }
+}
+
+func AutoSetups() {
+    switch runtime.GOOS {
+    case "android":
+        fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        AndroidSetups()
+    case "linux":
+        if utils.DetectAndroid() {
+            fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+            AndroidSetups()
+        } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
+            if task, ok := linuxTaskMap[distroID]; ok {
+                task()
+            } else {
+                fmt.Printf("%s%s[!] %sUnsupported Linux distro: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, distroID)
+            }
+        } else {
+            fmt.Printf("%s%s[!] %sLinux distro detection failed.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+        }
+    case "windows":
+        fmt.Printf("%s%s[+] %sWindows detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        WindowsSetups()
+    case "darwin":
+        fmt.Printf("%s%s[+] %smacOS detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        MacosSetups()
+    default:
+        fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
+    }
 }
