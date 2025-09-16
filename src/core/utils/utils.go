@@ -1032,6 +1032,41 @@ func DetectAndroid() bool {
     if _, err := os.Stat("/system/build.prop"); err == nil {
         return true
     }
+
+    if os.Getenv("ANDROID_ROOT") != "" || os.Getenv("ANDROID_DATA") != "" {
+        return true
+    }
+
+    if _, err := os.Stat("/data/data/com.termux/files/home"); err == nil {
+        return true
+    }
+
+    if runtime.GOOS == "linux" {
+        if _, err := os.Stat("/proc/version"); err == nil {
+            if data, err := os.ReadFile("/proc/version"); err == nil {
+                if strings.Contains(strings.ToLower(string(data)), "android") {
+                    return true
+                }
+            }
+        }
+    }
+    
+    return false
+}
+
+func DetectTermux() bool {
+    if os.Getenv("TERMUX_VERSION") != "" {
+        return true
+    }
+
+    if _, err := os.Stat("/data/data/com.termux/files/usr"); err == nil {
+        return true
+    }
+
+    if strings.Contains(os.Getenv("PREFIX"), "com.termux") {
+        return true
+    }
+    
     return false
 }
 

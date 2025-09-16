@@ -282,9 +282,9 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
         {"BUILDNAME", opts.BUILDNAME},
         {"PROXIES", opts.PROXIES},
         {"OBFUSCATOR", opts.OBFUSCATOR},
-        {"OUTPUTLOGS", opts.OUTPUTLOGS},
         {"TOOLSDIR", opts.TOOLSDIR},
         {"RECONDIR", opts.RECONDIR},
+        {"OUTPUTLOGS", opts.OUTPUTLOGS},
     }
 
     hasAnyValue := false
