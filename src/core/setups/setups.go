@@ -1044,11 +1044,13 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
 
 func AutoSetups() {
     switch runtime.GOOS {
+    case "android":
+        fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        AndroidSetups()
     case "linux":
-        if utils.DetectAndroid() || utils.DetectTermux() {
-            fmt.Printf("%s%s[+] %sAndroid/Termux Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        if utils.DetectAndroid() {
+            fmt.Printf("%s%s[+] %sAndroid Detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
             AndroidSetups()
-            return
         } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
             if task, ok := linuxTaskMap[distroID]; ok {
                 task()
