@@ -1138,7 +1138,6 @@ func AndroidSetups() {
     missingTools := UpsentTools()
 
     foundationCommands := []string{
-
         "pkg update -y",
         "pkg install root-repo x11-repo unstable-repo -y",
         "pkg update -y",
@@ -1154,7 +1153,7 @@ func AndroidSetups() {
         "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >> ~/.zshrc",
         "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc",
 
-        "chsh -s zsh"
+        "chsh -s zsh",
         "termux-setup-storage",
         "wget -O install-nethunter-termux https://offs.ec/2MceZWr",
         "chmod +x install-nethunter-termux",

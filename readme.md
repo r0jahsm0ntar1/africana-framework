@@ -76,6 +76,11 @@ make; make run
 ```
 ## Installation in tmux on Android based distros;
 ```bash
+pkg update -y
+pkg install root-repo x11-repo unstable-repo -y
+pkg install wget curl git make golang -y
+```
+```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 ```
 ```bash
@@ -93,10 +98,10 @@ make; make run
     .',./'/   )/
 ()=///=))))==()
   / Iam an addict to.
-        __                 _____ _____     _     _ 
-     __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_ 
-    |  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
-    |_____|___|___|___|___|_____|__|__|_| |_|___|_|
+    __                 _____ _____     _     _
+ __|  |___ ___ _ _ ___|     |  |  |___|_|___| |_
+|  |  | -_|_ -| | |_ -|   --|     |  _| |_ -|  _|
+|_____|___|___|___|___|_____|__|__|_| |_|___|_|
 
 I am Rojahs Montari aka Christ Maniac. A devoted Christian who
 Studied Education In Kenyatta University Kenya. I Got Persionate
