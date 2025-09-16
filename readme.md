@@ -76,14 +76,6 @@ make; make run
 ```
 ## Installation in tmux on Android based distros;
 ```bash
-pkg update -y
-pkg upgrade -y
-pkg install git curl screenfetch golang -y
-echo "screenfetch" >> ~/.zshrc
-echo "screenfetch" >> ~/.bashrc
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh
-```
-```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 ```
 ```bash
@@ -91,13 +83,6 @@ cd africana-framework
 ```
 ```bash
 make; make run
-echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc
-echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.bashrc
-```
-
-## The script should be run as a super user do(sudo) for root permissions .
-```bash
-sudo afrconsole
 ```
 
 ## About the Author

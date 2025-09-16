@@ -1138,19 +1138,23 @@ func AndroidSetups() {
     missingTools := UpsentTools()
 
     foundationCommands := []string{
+
         "pkg update -y",
         "pkg install root-repo x11-repo unstable-repo -y",
         "pkg update -y",
         "pkg upgrade -y",
-        "pkg install wget curl git python golang screenfetch -y",
+        "pkg install wget curl git python golang screenfetch zsh* -y",
 
         "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
-        "git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
+        "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
 
-        "echo 'screenfetch' >>~/.zshrc",
-        "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc",
-        "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >>~/.zshrc",
+        "echo 'screenfetch' >> ~/.zshrc",
+        "echo 'screenfetch' >> ~/.bashrc",
 
+        "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >> ~/.zshrc",
+        "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc",
+
+        "chsh -s zsh"
         "termux-setup-storage",
         "wget -O install-nethunter-termux https://offs.ec/2MceZWr",
         "chmod +x install-nethunter-termux",
