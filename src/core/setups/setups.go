@@ -1139,17 +1139,24 @@ func AndroidSetups() {
 
     foundationCommands := []string{
         "pkg update -y",
-        "pkg install -y root-repo x11-repo unstable-repo",
+        "pkg install root-repo x11-repo unstable-repo -y",
         "pkg update -y",
         "pkg upgrade -y",
-        "pkg install -y wget curl git python golang",
+        "pkg install wget curl git python golang screenfetch -y",
+
+        "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
+        "git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
+
+        "echo 'screenfetch' >>~/.zshrc",
+        "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc",
+        "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >>~/.zshrc",
+
         "termux-setup-storage",
         "wget -O install-nethunter-termux https://offs.ec/2MceZWr",
         "chmod +x install-nethunter-termux",
         "./install-nethunter-termux",
         "nethunter",
-        "sudo apt update && sudo apt full-upgrade -y",
-        "sudo apt install golang -y",
+        "sudo apt update; sudo apt full-upgrade -y",
     }
 
     baseLinuxSetup(missingTools, foundationCommands)
