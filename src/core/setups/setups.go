@@ -1082,7 +1082,7 @@ func ArchSetups() {
 }
 
 func AndroidSetups() {
-    fmt.Printf("\n%s%s[>] %sInstalling africana in android.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[>] %sInstalling africana in android.", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     if !utils.DetectAndroid() {
         fmt.Printf("%s%s[!] %sThis setup is intended for Android devices only.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
         return
