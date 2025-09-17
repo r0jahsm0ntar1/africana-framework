@@ -1169,7 +1169,6 @@ func installNetHunter() {
 
         "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
         "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
-
         "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
 
         "echo 'screenfetch' >> ~/.zshrc",
@@ -1675,7 +1674,10 @@ func installToolsInNetHunter() {
         "touch ~/.hushlogin",
         "nethunter -r apt update -y",
         "nethunter -r apt full-upgrade -y",
-        "nethunter -r apt install golang python3 python3-venv python3-pip -y",
+        "nethunter -r apt install curl gnupg golang python3 python3-venv python3-pip apt-transport-https -y",
+        "nethunter -r curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
+        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
+        "nethunter -r apt update -y",
     }
 
     missingTools := UpsentTools()
