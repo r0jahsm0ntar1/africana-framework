@@ -903,6 +903,9 @@ func InstallTools(tools map[string]map[string]string) {
 
     isAndroid := utils.DetectAndroid()
     isNetHunter := utils.IsNetHunterEnvironment()
+    isWindows := runtime.GOOS == "windows"
+    isMacOS := runtime.GOOS == "darwin"
+    isArchLinux := utils.IsArchLinux()
 
     for _, cat := range categories {
         if len(tools[cat.key]) > 0 {
@@ -914,23 +917,37 @@ func InstallTools(tools map[string]map[string]string) {
                 if cat.key == "security" && strings.HasPrefix(pkg, "@latest") {
                     if isAndroid && !isNetHunter {
                         subprocess.Run("pkg install golang -y && go install %s", pkg)
+                    } else if isWindows {
+                        subprocess.Run("choco install golang -y && go install %s", pkg)
+                    } else if isMacOS {
+                        subprocess.Run("brew install go && go install %s", pkg)
                     } else {
                         subprocess.Run("go install %s", pkg)
                     }
                 } else if cat.key == "discovery" {
                     if isAndroid && !isNetHunter {
                         subprocess.Run("pkg install golang -y && go install %s", pkg)
+                    } else if isWindows {
+                        subprocess.Run("choco install golang -y && go install %s", pkg)
+                    } else if isMacOS {
+                        subprocess.Run("brew install go && go install %s", pkg)
                     } else {
                         subprocess.Run("go install %s", pkg)
                     }
                 } else {
-                    if utils.IsArchLinux() {
+
+                    switch {
+                    case isArchLinux:
                         subprocess.Run("pacman -S --noconfirm %s", actualPkg)
-                    } else if isNetHunter {
+                    case isNetHunter:
                         subprocess.Run("nethunter -r apt install -y %s", actualPkg)
-                    } else if isAndroid {
+                    case isAndroid:
                         subprocess.Run("pkg install %s -y", actualPkg)
-                    } else {
+                    case isWindows:
+                        subprocess.Run("choco install %s -y", actualPkg)
+                    case isMacOS:
+                        subprocess.Run("brew install %s", actualPkg)
+                    default:
                         subprocess.Run("apt install -y %s", actualPkg)
                     }
                 }
@@ -1153,7 +1170,7 @@ func installNetHunter() {
         "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
         "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
 
-        "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc"
+        "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
 
         "echo 'screenfetch' >> ~/.zshrc",
         "echo 'screenfetch' >> ~/.bashrc",
@@ -1615,7 +1632,7 @@ extract_rootfs
 create_launcher
 cleanup
 
-printf "\n${blue}[*] Configuring NetHunter for Termux ...\n"
+printf "\n${green}[*] Configuring NetHunter for Termux ...\n"
 fix_profile_bash
 fix_resolv_conf
 fix_sudo
@@ -1669,11 +1686,76 @@ func installToolsInNetHunter() {
 }
 
 func MacosSetups() {
-    fmt.Printf("\n%s%s[+] %smacOS setup placeholder.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[*] %sSetting up macOS environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    if err := subprocess.Run("brew --version"); err != nil {
+        fmt.Printf("%s%s[!] %sInstalling Homebrew...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        
+        installCmd := `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+        if err := subprocess.Run(installCmd); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to install Homebrew: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+            return
+        }
+
+        subprocess.Run(`echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc`)
+        subprocess.Run(`eval "$(/opt/homebrew/bin/brew shellenv)"`)
+    }
+
+    foundationTools := []string{
+        "git",
+        "python",
+        "go",
+        "wget",
+        "curl",
+        "gnu-sed",
+        "gnu-tar",
+    }
+
+    fmt.Printf("%s%s[*] %sInstalling foundation tools...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    for _, tool := range foundationTools {
+        fmt.Printf("%s%s[+] %sInstalling %s...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, tool)
+        if err := subprocess.Run("brew install %s", tool); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to install %s: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, tool, err)
+        }
+        time.Sleep(1 * time.Second)
+    }
 }
 
 func WindowsSetups() {
-    fmt.Printf("\n%s%s[+] %sWindows setup placeholder.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[*] %sSetting up Windows environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    if err := subprocess.Run("choco --version"); err != nil {
+        fmt.Printf("%s%s[!] %sInstalling Chocolatey...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        
+        installCmd := `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
+        if err := subprocess.Run(installCmd); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to install Chocolatey: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+            return
+        }
+
+        subprocess.Run("refreshenv")
+        time.Sleep(2 * time.Second)
+    }
+
+    foundationTools := []string{
+        "git",
+        "python3",
+        "golang",
+        "wget",
+        "curl",
+        "7zip",
+        "vscode",
+        "sysinternals",
+    }
+
+    fmt.Printf("%s%s[*] %sInstalling foundation tools...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    for _, tool := range foundationTools {
+        fmt.Printf("%s%s[+] %sInstalling %s...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, tool)
+        if err := subprocess.Run("choco install %s -y --force", tool); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to install %s: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, tool, err)
+        }
+        time.Sleep(1 * time.Second)
+    }
 }
 
 func AutoSetups() {
