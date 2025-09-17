@@ -1642,15 +1642,15 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
     os.WriteFile(installerFile, []byte(installerScript), 0755)
 
     if err := subprocess.Run(installerFile); err != nil {
-        fmt.Printf("%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf(\n"%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return
     }
 
-    fmt.Printf("%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("%s%s[!] %sInstalling tools in NetHunter ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
         "touch ~/.hushlogin",
