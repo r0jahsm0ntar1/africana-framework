@@ -931,7 +931,7 @@ func InstallTools(tools map[string]map[string]string) {
                 case isArchLinux:
                     subprocess.Run("pacman -S --noconfirm %s", packageList)
                 case isNetHunter:
-                    subprocess.Run("nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", packageList)
+                    subprocess.Run("nethunter -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", packageList)
                 case isAndroid:
                     subprocess.Run("pkg install -y %s", packageList)
                 case isWindows:
@@ -939,7 +939,7 @@ func InstallTools(tools map[string]map[string]string) {
                 case isMacOS:
                     subprocess.Run("brew install %s", packageList)
                 default:
-                    subprocess.Run("apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
+                    subprocess.Run("apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
                 }
             }
 
@@ -1033,9 +1033,9 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    subprocess.Run("cd %s; git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
     //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
-    subprocess.Run("%s -m pip install -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
+    subprocess.Run("%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
 }
 
 func CreatePythonVenv() error {
@@ -1118,12 +1118,12 @@ func KaliSetups() {
     missingTools := UpsentTools()
 
     commands := []string{
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
     baseLinuxSetup(missingTools, commands)
 }
@@ -1132,13 +1132,13 @@ func UbuntuSetups() {
     fmt.Printf("\n%s%s[*] %sInstalling africana in ubuntu.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
     commands := []string{
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
         "add-apt-repository multiverse",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
     }
     baseLinuxSetup(missingTools, commands)
 }
@@ -1194,8 +1194,8 @@ func installNetHunter() {
         "pkg upgrade -y",
         "pkg install wget curl git golang screenfetch zsh* termux-api openssh python3 python3-pip python3-venv -y",
 
-        "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
-        "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
+        "git clone --depth 1 --single-branch --branch main --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
+        "git clone --depth 1 --single-branch --branch main --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
         "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
 
         "echo 'screenfetch' >> ~/.zshrc",
@@ -1351,20 +1351,20 @@ function check_dependencies() {
     printf "${blue}\n[*] Checking package dependencies...${reset}\n"
     ## Workaround for termux-app issue #1283 (https://github.com/termux/termux-app/issues/1283)
     ##apt update -y &> /dev/null
-    apt-get update -y &> /dev/null || apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" dist-upgrade -y &> /dev/null
+    apt-get update -y &> /dev/null || apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' dist-upgrade -y &> /dev/null
 
     for i in proot tar axel; do
         if [ -e "$PREFIX"/bin/$i ]; then
             echo "  $i is OK"
         else
             printf "Installing ${i}...\n"
-            apt install -y $i || {
+            apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y $i || {
                 printf "${red}ERROR: Failed to install packages.\n Exiting.\n${reset}"
             exit
             }
         fi
     done
-    apt upgrade -y
+    apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' upgrade -y
 }
 
 function get_url() {
@@ -1514,7 +1514,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install -y tightvncserver kali-desktop-xfce
+        nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update && nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y tightvncserver kali-desktop-xfce
     fi
 }
 function create_kex_launcher() {
@@ -1701,18 +1701,18 @@ func installToolsInNetHunter() {
 
     commands := []string{
         "touch ~/.hushlogin",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
         "dpkg --add-architecture i386",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang python powershell -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang python powershell -y",
     }
 
     missingTools := UpsentTools()
@@ -1829,7 +1829,7 @@ func UpdateAfricana() {
     subprocess.Run("cd %s; git pull .", utils.ToolsDir)
     fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
+    subprocess.Run("cd %s; git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
     fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
