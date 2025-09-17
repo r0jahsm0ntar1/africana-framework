@@ -931,7 +931,7 @@ func InstallTools(tools map[string]map[string]string) {
                 case isArchLinux:
                     subprocess.Run("pacman -S --noconfirm %s", packageList)
                 case isNetHunter:
-                    subprocess.Run("nethunter -r apt install -y %s", packageList)
+                    subprocess.Run("nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", packageList)
                 case isAndroid:
                     subprocess.Run("pkg install -y %s", packageList)
                 case isWindows:
@@ -939,7 +939,7 @@ func InstallTools(tools map[string]map[string]string) {
                 case isMacOS:
                     subprocess.Run("brew install %s", packageList)
                 default:
-                    subprocess.Run("apt install -y %s", packageList)
+                    subprocess.Run("apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
                 }
             }
 
@@ -1096,12 +1096,12 @@ func KaliSetups() {
     missingTools := UpsentTools()
 
     commands := []string{
-        "apt-get install zsh git curl -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
-        "apt-get update -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
     baseLinuxSetup(missingTools, commands)
 }
@@ -1110,13 +1110,13 @@ func UbuntuSetups() {
     fmt.Printf("\n%s%s[*] %sInstalling africana in ubuntu.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
     commands := []string{
-        "apt-get install zsh git curl -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
         "add-apt-repository multiverse",
-        "apt-get update -y; apt-get install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
     }
     baseLinuxSetup(missingTools, commands)
 }
@@ -1677,18 +1677,18 @@ func installToolsInNetHunter() {
 
     commands := []string{
         "touch ~/.hushlogin",
-        "nethunter -r apt update -y",
-        "nethunter -r apt full-upgrade -y",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
         "nethunter -r dpkg --add-architecture i386",
-        "nethunter -r apt install curl wget apt-transport-https -y",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
         "nethunter -r wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "nethunter -r cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "nethunter -r cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "nethunter -r curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
-        "nethunter -r apt update -y",
-        "nethunter -r apt full-upgrade -y",
-        "nethunter -r gnupg golang powershell python3 python3-venv python3-pip",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
+        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang powershell python3 python3-venv python3-pip -y",
     }
 
     missingTools := UpsentTools()
