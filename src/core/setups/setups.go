@@ -1096,12 +1096,12 @@ func KaliSetups() {
     missingTools := UpsentTools()
 
     commands := []string{
+        "apt-get install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
         "apt-get update -y",
-        "apt-get install zsh git curl -y",
     }
     baseLinuxSetup(missingTools, commands)
 }
@@ -1110,12 +1110,13 @@ func UbuntuSetups() {
     fmt.Printf("\n%s%s[*] %sInstalling africana in ubuntu.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
     commands := []string{
+        "apt-get install zsh git curl -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "dpkg --add-architecture i386",
         "add-apt-repository multiverse",
-        "apt-get update -y; apt-get install zsh* git curl ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
+        "apt-get update -y; apt-get install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks",
     }
     baseLinuxSetup(missingTools, commands)
 }
