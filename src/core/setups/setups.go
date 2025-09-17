@@ -1291,14 +1291,11 @@ function set_strings() {
         echo "[2] NetHunter ARM64 (minimal)"
         echo "[3] NetHunter ARM64 (nano)"
         read -p "Enter the image you want to install: " wimg
-        if (( $wimg == "1" ));
-        then
+        if [[ "$wimg" == "1" ]]; then
             wimg="full"
-        elif (( $wimg == "2" ));
-        then
+        elif [[ "$wimg" == "2" ]]; then
             wimg="minimal"
-        elif (( $wimg == "3" ));
-        then
+        elif [[ "$wimg" == "3" ]]; then
             wimg="nano"
         else
             wimg="full"
@@ -1321,11 +1318,10 @@ function set_strings() {
     fi
     ####
 
-
     CHROOT=kali-${SYS_ARCH}
-    IMAGE_NAME=kali-nethunter-rootfs-${wimg}-${SYS_ARCH}.tar.xz
-    SHA_NAME=${IMAGE_NAME}.sha512sum
-}    
+    IMAGE_NAME=kali-nethunter-2025.2-rootfs-${wimg}-${SYS_ARCH}.tar.xz
+    SHA_NAME=SHA256SUMS
+}
 
 function prepare_fs() {
     unset KEEP_CHROOT
@@ -1336,7 +1332,7 @@ function prepare_fs() {
             KEEP_CHROOT=1
         fi
     fi
-} 
+}
 
 function cleanup() {
     if [ -f "${IMAGE_NAME}" ]; then
@@ -1404,10 +1400,18 @@ function verify_sha() {
     if [ -z $KEEP_IMAGE ]; then
         printf "\n${blue}[*] Verifying integrity of rootfs...${reset}\n\n"
         if [ -f "${SHA_NAME}" ]; then
-            sha512sum -c "$SHA_NAME" || {
-                printf "${red} Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
+            # Extract the specific hash for our file from the SHA256SUMS file
+            expected_hash=$(grep "${IMAGE_NAME}" "${SHA_NAME}" | cut -d' ' -f1)
+            computed_hash=$(sha256sum "${IMAGE_NAME}" | cut -d' ' -f1)
+            
+            if [ "$expected_hash" = "$computed_hash" ]; then
+                echo "✓ Checksum verified successfully!"
+            else
+                printf "${red}✗ Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
+                echo "Expected: $expected_hash"
+                echo "Got:      $computed_hash"
                 exit 1
-            }
+            fi
         else
             echo "[!] SHA file not found. Skipping verification..."
         fi
@@ -1681,7 +1685,6 @@ printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI root session${r
 printf "${blue}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
 printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
 printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
-
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
@@ -1709,7 +1712,7 @@ func installToolsInNetHunter() {
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
         "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang powershell python3 python3-venv python3-pip -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang python powershell -y",
     }
 
     missingTools := UpsentTools()
