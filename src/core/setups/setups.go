@@ -1642,7 +1642,7 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
     os.WriteFile(installerFile, []byte(installerScript), 0755)
 
     if err := subprocess.Run(installerFile); err != nil {
-        fmt.Printf(\n"%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("\n%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return
     }
 
