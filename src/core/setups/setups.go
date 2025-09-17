@@ -910,46 +910,50 @@ func InstallTools(tools map[string]map[string]string) {
     for _, cat := range categories {
         if len(tools[cat.key]) > 0 {
             fmt.Printf("\n%sInstalling %s tools%s\n", bcolors.Bold, cat.name, bcolors.Endc)
+
+            var goTools []string
+            var systemPackages []string
+
             for tool, pkg := range tools[cat.key] {
-                fmt.Printf("%s%s[+] %sInstalling %s%-20s %s...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, tool, bcolors.Endc)
-                actualPkg := getPackageName(tool, pkg)
-
-                if cat.key == "security" && strings.HasPrefix(pkg, "@latest") {
-                    if isAndroid && !isNetHunter {
-                        subprocess.Run("pkg install golang -y && go install %s", pkg)
-                    } else if isWindows {
-                        subprocess.Run("choco install golang -y && go install %s", pkg)
-                    } else if isMacOS {
-                        subprocess.Run("brew install go && go install %s", pkg)
-                    } else {
-                        subprocess.Run("go install %s", pkg)
-                    }
-                } else if cat.key == "discovery" {
-                    if isAndroid && !isNetHunter {
-                        subprocess.Run("pkg install golang -y && go install %s", pkg)
-                    } else if isWindows {
-                        subprocess.Run("choco install golang -y && go install %s", pkg)
-                    } else if isMacOS {
-                        subprocess.Run("brew install go && go install %s", pkg)
-                    } else {
-                        subprocess.Run("go install %s", pkg)
-                    }
+                if strings.Contains(pkg, "@latest") {
+                    goTools = append(goTools, pkg)
                 } else {
+                    systemPackages = append(systemPackages, getPackageName(tool, pkg))
+                }
+                fmt.Printf("%s%s[+] %sQueuing %s%-20s %s...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, tool, bcolors.Endc)
+            }
 
-                    switch {
-                    case isArchLinux:
-                        subprocess.Run("pacman -S --noconfirm %s", actualPkg)
-                    case isNetHunter:
-                        subprocess.Run("nethunter -r apt install -y %s", actualPkg)
-                    case isAndroid:
-                        subprocess.Run("pkg install %s -y", actualPkg)
-                    case isWindows:
-                        subprocess.Run("choco install %s -y", actualPkg)
-                    case isMacOS:
-                        subprocess.Run("brew install %s", actualPkg)
-                    default:
-                        subprocess.Run("apt install -y %s", actualPkg)
-                    }
+            if len(systemPackages) > 0 {
+                fmt.Printf("%s%s[*] %sBatch installing %d system packages...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
+                packageList := strings.Join(systemPackages, " ")
+
+                switch {
+                case isArchLinux:
+                    subprocess.Run("pacman -S --noconfirm %s", packageList)
+                case isNetHunter:
+                    subprocess.Run("nethunter -r apt install -y %s", packageList)
+                case isAndroid:
+                    subprocess.Run("pkg install -y %s", packageList)
+                case isWindows:
+                    subprocess.Run("choco install -y %s", packageList)
+                case isMacOS:
+                    subprocess.Run("brew install %s", packageList)
+                default:
+                    subprocess.Run("apt install -y %s", packageList)
+                }
+            }
+
+            for _, pkg := range goTools {
+                fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
+                
+                if isAndroid && !isNetHunter {
+                    subprocess.Run("pkg install golang -y && go install %s", pkg)
+                } else if isWindows {
+                    subprocess.Run("choco install golang -y && go install %s", pkg)
+                } else if isMacOS {
+                    subprocess.Run("brew install go && go install %s", pkg)
+                } else {
+                    subprocess.Run("go install %s", pkg)
                 }
                 time.Sleep(180 * time.Millisecond)
             }
@@ -1674,10 +1678,16 @@ func installToolsInNetHunter() {
         "touch ~/.hushlogin",
         "nethunter -r apt update -y",
         "nethunter -r apt full-upgrade -y",
-        "nethunter -r apt install curl gnupg golang python3 python3-venv python3-pip apt-transport-https -y",
+        "nethunter -r dpkg --add-architecture i386",
+        "nethunter -r apt install curl wget apt-transport-https -y",
+        "nethunter -r wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+        "nethunter -r cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+        "nethunter -r cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
         "nethunter -r curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
         "nethunter -r apt update -y",
+        "nethunter -r apt full-upgrade -y",
+        "nethunter -r gnupg golang powershell python3 python3-venv python3-pip",
     }
 
     missingTools := UpsentTools()
