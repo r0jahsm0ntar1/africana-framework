@@ -1050,7 +1050,7 @@ func CreatePythonVenv() error {
 
     subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
 
-    fmt.Printf("\n%s%s[+] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Green, bcolors.Endc, venvPath, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, venvPath, bcolors.Endc)
     return nil
 }
 
@@ -1065,7 +1065,7 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
         }
 
         if isNetHunter {
-            fmt.Printf("\n%s%s[!] %sSetting up NetHunter foundation tools...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            fmt.Printf("\n%s%s[!] %sSetting up NetHunter foundation tools ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
             for _, cmd := range foundationCommands {
                 nethunterCmd := "nethunter -r " + cmd
                 fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, nethunterCmd)
@@ -1636,7 +1636,7 @@ extract_rootfs
 create_launcher
 cleanup
 
-printf "\n${green}[*] Configuring NetHunter for Termux ...\n"
+printf "\n${yellow}[*] Configuring NetHunter for Termux ...\n"
 fix_profile_bash
 fix_resolv_conf
 fix_sudo
@@ -1645,50 +1645,49 @@ create_kex_launcher
 fix_uid
 
 print_banner
-printf "${green}[=] Kali NetHunter for Termux installed successfully${reset}\n\n"
-printf "${green}[+] To start Kali NetHunter, type:${reset}\n"
-printf "${green}[+] nethunter             # To start NetHunter CLI${reset}\n"
-printf "${green}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
-printf "${green}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
-printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
-#printf "${green}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
-printf "${green}[+] nethunter -r          # To run NetHunter as root${reset}\n"
-#printf "${green}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
-#printf "${green}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
-#printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
-#printf "${green}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
-#printf "${green}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
-printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
+printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"
+printf "${yellow}[+] To start Kali NetHunter, type:${reset}\n"
+printf "${blue}[+] nethunter             # To start NetHunter CLI${reset}\n"
+printf "${blue}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
+printf "${blue}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
+printf "${blue}[+] nethunter -r          # To run NetHunter as root${reset}\n"
+printf "${blue}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
+printf "${blue}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
+printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
+printf "${blue}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
+printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
+printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
 
     if err := subprocess.Run(installerFile); err != nil {
-        fmt.Printf("\n%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return
     }
-
-    fmt.Printf("\n%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter environment ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
         "touch ~/.hushlogin",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "nethunter -r dpkg --add-architecture i386",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
-        "nethunter -r wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "nethunter -r cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-        "nethunter -r cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
-        "nethunter -r curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
+        "dpkg --add-architecture i386",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
+        "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
+        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
+        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+        "curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "nethunter -r apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang powershell python3 python3-venv python3-pip -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
+        "apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang powershell python3 python3-venv python3-pip -y",
     }
 
     missingTools := UpsentTools()
