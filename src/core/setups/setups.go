@@ -925,13 +925,13 @@ func InstallTools(tools map[string]map[string]string) {
                     }
                 } else {
                     if utils.IsArchLinux() {
-                        subprocess.Run("sudo pacman -S --noconfirm %s", actualPkg)
+                        subprocess.Run("pacman -S --noconfirm %s", actualPkg)
                     } else if isNetHunter {
-                        subprocess.Run("nethunter -r apt update && nethunter -r apt install -y %s", actualPkg)
+                        subprocess.Run("nethunter -r apt install -y %s", actualPkg)
                     } else if isAndroid {
                         subprocess.Run("pkg install %s -y", actualPkg)
                     } else {
-                        subprocess.Run("sudo apt install -y %s", actualPkg)
+                        subprocess.Run("apt install -y %s", actualPkg)
                     }
                 }
                 time.Sleep(180 * time.Millisecond)
@@ -1035,18 +1035,32 @@ func CreatePythonVenv() error {
 
 func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
+        isNetHunter := utils.IsNetHunterEnvironment()
+
         SetupGoEnvironment(utils.PyEnvName)
 
         if err := CreatePythonVenv(); err != nil {
             fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
         }
 
-        InstallFoundationTools(foundationCommands)
+        if isNetHunter {
+            fmt.Printf("%s%s[!] %sSetting up NetHunter foundation tools...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            for _, cmd := range foundationCommands {
+                nethunterCmd := "nethunter -r " + cmd
+                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, nethunterCmd)
+                subprocess.Run(nethunterCmd)
+                time.Sleep(100 * time.Millisecond)
+            }
+        } else {
+            InstallFoundationTools(foundationCommands)
+        }
+
         InstallTools(missingTools)
 
-        if !utils.IsArchLinux() {
+        if !utils.IsArchLinux() && !isNetHunter {
             subprocess.Run("winecfg /v win11")
         }
+        
         fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
         InstallGithubTools()
 
@@ -1157,7 +1171,7 @@ func installNetHunter() {
         time.Sleep(100 * time.Millisecond)
     }
 
-    fmt.Printf("%s%s[+] %sDownloading NetHunter installer...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sDownloading NetHunter installer...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
     installerScript := `
 #!/data/data/com.termux/files/usr/bin/bash -e
@@ -1632,42 +1646,21 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
         return
     }
 
-    fmt.Printf("%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("%s%s[+] %sInstalling tools in NetHunter environment...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[!] %sInstalling tools in NetHunter ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
-    androidCommands := []string{
-        "nethunter -r sudo apt update; sudo apt full-upgrade -y",
-    }
-
-    for _, cmd := range androidCommands {
-        fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
-        subprocess.Run(cmd)
-        time.Sleep(100 * time.Millisecond)
+    commands := []string{
+        "touch ~/.hushlogin",
+        "nethunter -r apt update -y",
+        "nethunter -r apt full-upgrade -y",
+        "nethunter -r apt install golang python3 python3-venv python3-pip -y",
     }
 
     missingTools := UpsentTools()
-
-    for category, tools := range missingTools {
-        if len(tools) > 0 {
-            fmt.Printf("\n%s%s[+] %sInstalling %s tools...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, category)
-
-            for tool, pkg := range tools {
-                fmt.Printf("%s%s[*] %sInstalling %s...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, tool)
-
-                if category == "security" && strings.HasPrefix(pkg, "@latest") {
-                    subprocess.Run("nethunter -r go install %s", pkg)
-                } else if category == "discovery" {
-                    subprocess.Run("nethunter -r go install %s", pkg)
-                } else {
-                    subprocess.Run("nethunter -r apt install -y %s", pkg)
-                }
-                time.Sleep(200 * time.Millisecond)
-            }
-        }
-    }
+    baseLinuxSetup(missingTools, commands)
 
     fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
