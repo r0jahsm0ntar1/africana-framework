@@ -1024,7 +1024,7 @@ func IsArchLinux() bool {
         "artix":       true,
         "arcolinux":   true,
     }
-    
+
     return archDistros[distroID]
 }
 
@@ -1067,6 +1067,22 @@ func DetectTermux() bool {
         return true
     }
     
+    return false
+}
+
+func IsNetHunterEnvironment() bool {
+    if _, err := exec.LookPath("nethunter"); err == nil {
+        return true
+    }
+
+    if _, err := exec.LookPath("nh"); err == nil {
+        return true
+    }
+
+    if _, err := os.Stat("/data/local/nhsystem"); err == nil {
+        return true
+    }
+
     return false
 }
 

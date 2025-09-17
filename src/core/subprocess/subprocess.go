@@ -27,6 +27,10 @@ var (
     flag, shell, process, baseDir, initialDir, currentDir string
 )
 
+type RunOptions struct {
+    ReturnError bool
+}
+
 func init() {
     switch runtime.GOOS {
     case "windows":
@@ -74,8 +78,18 @@ func creatLogDir() {
     }
 }
 
-func Run(command string, args ...interface{}) {
-    creatLogDir(); openLogFile()
+func Run(command string, args ...interface{}) error {
+    return runInternal(command, false, args...)
+}
+
+func RunWithError(command string, args ...interface{}) error {
+    return runInternal(command, true, args...)
+}
+
+func runInternal(command string, returnError bool, args ...interface{}) error {
+    creatLogDir()
+    openLogFile()
+
     if len(args) > 0 {
         process = fmt.Sprintf(command, args...)
     } else {
@@ -86,28 +100,42 @@ func Run(command string, args ...interface{}) {
         logCommand(process)
     }
 
+    var executionErr error
+
     if strings.Contains(process, "&&") || strings.Contains(process, ";") {
-        executeFullCommand(process)
-        return
-    }
-
-    parts := strings.Split(process, "&&")
-
-    for i, part := range parts {
-        part = strings.TrimSpace(part)
-        if strings.HasPrefix(part, "cd ") {
-            cdCommand := strings.TrimSpace(strings.TrimPrefix(part, "cd "))
-            changeDirectory(cdCommand)
-            if i == len(parts)-1 {
-                return
+        executionErr = executeFullCommandWithError(process)
+    } else {
+        parts := strings.Split(process, "&&")
+        for i, part := range parts {
+            part = strings.TrimSpace(part)
+            if strings.HasPrefix(part, "cd ") {
+                cdCommand := strings.TrimSpace(strings.TrimPrefix(part, "cd "))
+                changeDirectory(cdCommand)
+                if i == len(parts)-1 {
+                    executionErr = nil
+                    break
+                }
+            } else {
+                executionErr = executeFullCommandWithError(part)
+                if executionErr != nil {
+                    break
+                }
             }
-        } else {
-            executeFullCommand(part)
         }
     }
+
+    if executionErr != nil {
+        if returnError {
+            return executionErr
+        } else {
+            fmt.Printf("%s%s[!] %sFailed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, executionErr)
+        }
+    }
+    
+    return nil
 }
 
-func executeFullCommand(command string) {
+func executeFullCommandWithError(command string) error {
     cmd := exec.Command(shell, flag, command)
     cmd.Stdin = os.Stdin
     cmd.Stdout = os.Stdout
@@ -125,18 +153,16 @@ func executeFullCommand(command string) {
     }()
 
     if err := cmd.Start(); err != nil {
-        msg, _ := fmt.Printf("%s%s[!] %sError starting command ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        fmt.Fprintln(os.Stderr, msg)
-        return
+        return fmt.Errorf("error starting command: %w", err)
     }
 
     if err := cmd.Wait(); err != nil {
-        msg, _ := fmt.Printf("%s%s[!] %sProcess is incomplete ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        fmt.Fprintln(os.Stderr, msg)
+        return fmt.Errorf("process incomplete: %w", err)
     }
 
     signal.Stop(sigs)
     close(sigs)
+    return nil
 }
 
 func openLogFile() {
