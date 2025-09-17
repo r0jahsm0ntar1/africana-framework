@@ -1103,7 +1103,7 @@ func AndroidSetups() {
     }
 
     if utils.IsNetHunterEnvironment() {
-        fmt.Printf("\n%s%s[+] %sNetHunter is already installed. Installing tools...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s%s[+] %sNetHunter is already installed ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
         installToolsInNetHunter()
         return
     }
@@ -1128,7 +1128,7 @@ func AndroidSetups() {
 }
 
 func installNetHunter() {
-    fmt.Printf("%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     commands := []string{
         "pkg update -y",
         "pkg install root-repo x11-repo unstable-repo -y",
