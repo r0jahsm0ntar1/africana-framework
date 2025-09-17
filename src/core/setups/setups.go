@@ -911,7 +911,7 @@ func InstallTools(tools map[string]map[string]string) {
         if len(tools[cat.key]) > 0 {
             fmt.Printf("\n%sInstalling %s tools%s\n", bcolors.Bold, cat.name, bcolors.Endc)
             for tool, pkg := range tools[cat.key] {
-                fmt.Printf("%s%s[+] %sInstalling %s%-20s ...%s", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Blue, tool, bcolors.Endc)
+                fmt.Printf("%s%s[+] %sInstalling %s%-20s %s...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, tool, bcolors.Endc)
                 actualPkg := getPackageName(tool, pkg)
 
                 if cat.key == "security" && strings.HasPrefix(pkg, "@latest") {
@@ -1042,7 +1042,7 @@ func CreatePythonVenv() error {
         return nil
     }
 
-    fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
     subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
 
@@ -1061,7 +1061,7 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
         }
 
         if isNetHunter {
-            fmt.Printf("%s%s[!] %sSetting up NetHunter foundation tools...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            fmt.Printf("\n%s%s[!] %sSetting up NetHunter foundation tools...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
             for _, cmd := range foundationCommands {
                 nethunterCmd := "nethunter -r " + cmd
                 fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, nethunterCmd)
@@ -1669,7 +1669,7 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
         "touch ~/.hushlogin",
