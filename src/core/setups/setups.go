@@ -1153,6 +1153,8 @@ func installNetHunter() {
         "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
         "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
 
+        "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc"
+
         "echo 'screenfetch' >> ~/.zshrc",
         "echo 'screenfetch' >> ~/.bashrc",
 
@@ -1674,26 +1676,6 @@ func WindowsSetups() {
     fmt.Printf("\n%s%s[+] %sWindows setup placeholder.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
-func UpdateAfricana() {
-    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
-    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
-    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-}
-
-func Uninstaller() {
-    fmt.Printf("\n%s%s[!] %sUninstalling africana.", bcolors.Bold, bcolors.Red, bcolors.Endc)
-    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
-        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
-        fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        os.Exit(0)
-    } else {
-        fmt.Printf("\n%s%s[!] %sAfricana is not installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    }
-}
-
 func AutoSetups() {
     switch runtime.GOOS {
     case "android":
@@ -1720,5 +1702,25 @@ func AutoSetups() {
         MacosSetups()
     default:
         fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
+    }
+}
+
+func UpdateAfricana() {
+    fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
+    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    subprocess.Run("cd %s; git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
+    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+}
+
+func Uninstaller() {
+    fmt.Printf("\n%s%s[!] %sUninstalling africana.", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
+        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
+        fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        os.Exit(0)
+    } else {
+        fmt.Printf("\n%s%s[!] %sAfricana is not installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     }
 }
