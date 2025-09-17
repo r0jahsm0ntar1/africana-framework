@@ -944,8 +944,8 @@ func InstallTools(tools map[string]map[string]string) {
             }
 
             for _, pkg := range goTools {
-                fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
-                
+                fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
+
                 if isAndroid && !isNetHunter {
                     subprocess.Run("pkg install golang -y && go install %s", pkg)
                 } else if isWindows {
@@ -1039,6 +1039,7 @@ func InstallGithubTools() {
 }
 
 func CreatePythonVenv() error {
+    isNetHunter := utils.IsNetHunterEnvironment()
     venvPath := filepath.Join(utils.BaseDir, utils.PyEnvName)
 
     if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); err == nil {
@@ -1046,9 +1047,21 @@ func CreatePythonVenv() error {
         return nil
     }
 
-    fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    if err := os.MkdirAll(filepath.Dir(venvPath), 0755); err != nil {
+        return fmt.Errorf("failed to create directory %s: %v", filepath.Dir(venvPath), err)
+    }
 
-    subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
+    fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    
+    if isNetHunter {
+        subprocess.Run("nethunter -r python3 -m venv %s --upgrade-deps", venvPath)
+    } else {
+        subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
+    }
+
+    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); os.IsNotExist(err) {
+        return fmt.Errorf("failed to create Python virtual environment at %s", venvPath)
+    }
 
     fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, venvPath, bcolors.Endc)
     return nil
@@ -1056,12 +1069,14 @@ func CreatePythonVenv() error {
 
 func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
+
         isNetHunter := utils.IsNetHunterEnvironment()
 
-        SetupGoEnvironment(utils.PyEnvName)
-
-        if err := CreatePythonVenv(); err != nil {
-            fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+        if !isNetHunter {
+            SetupGoEnvironment(utils.PyEnvName)
+            if err := CreatePythonVenv(); err != nil {
+                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+            }
         }
 
         if isNetHunter {
@@ -1078,10 +1093,17 @@ func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommand
 
         InstallTools(missingTools)
 
+        if isNetHunter {
+            SetupGoEnvironment(utils.PyEnvName)
+            if err := CreatePythonVenv(); err != nil {
+                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+            }
+        }
+
         if !utils.IsArchLinux() && !isNetHunter {
             subprocess.Run("winecfg /v win11")
         }
-        
+
         fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
         InstallGithubTools()
 
@@ -1158,19 +1180,19 @@ func AndroidSetups() {
     case "n", "q", "no", "exit", "quit":
         return
     default:
-        fmt.Printf("%s%s[!] %sNetHunter installation skipped. Some tools may not work.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        fmt.Printf("\n%s%s[!] %sNetHunter installation skipped. Some tools may not work.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     }
 
 }
 
 func installNetHunter() {
-    fmt.Printf("\n%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     commands := []string{
         "pkg update -y",
         "pkg install root-repo x11-repo unstable-repo -y",
         "pkg update -y",
         "pkg upgrade -y",
-        "pkg install wget curl git python golang screenfetch zsh* termux-api openssh -y",
+        "pkg install wget curl git golang screenfetch zsh* termux-api openssh python3 python3-pip python3-venv -y",
 
         "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.zsh",
         "git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
@@ -1672,7 +1694,7 @@ printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter environment ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
         "touch ~/.hushlogin",
@@ -1702,7 +1724,7 @@ func MacosSetups() {
 
     if err := subprocess.Run("brew --version"); err != nil {
         fmt.Printf("%s%s[!] %sInstalling Homebrew...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        
+
         installCmd := `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
         if err := subprocess.Run(installCmd); err != nil {
             fmt.Printf("%s%s[!] %sFailed to install Homebrew: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
