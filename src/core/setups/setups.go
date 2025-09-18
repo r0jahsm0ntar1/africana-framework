@@ -961,12 +961,9 @@ func InstallTools(tools map[string]map[string]string) {
     }
 }
 
-func SetupGoEnvironment(PyEnvName string) {
+func SetupGoPyEnv(PyEnvName string) error {
     os.Setenv("GOPATH", utils.GoPath)
     os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(utils.GoPath, "bin"))
-
-    os.Setenv("VIRTUAL_ENV", utils.PythonVenv)
-    os.Setenv("PATH", filepath.Join(utils.PythonVenv, "bin") + ":" + os.Getenv("PATH"))
 
     goDirs := []string{
         utils.GoPath,
@@ -978,11 +975,30 @@ func SetupGoEnvironment(PyEnvName string) {
     for _, dir := range goDirs {
         if err := os.MkdirAll(dir, 0755); err != nil {
             fmt.Printf("%s%s[!] %sFailed to create directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, dir, err, bcolors.Endc)
+            return err
         }
     }
 
-    if err := os.MkdirAll(utils.PythonVenv, 0755); err != nil {
-        fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.PythonVenv, err, bcolors.Endc)
+    venvPath := filepath.Join(utils.BaseDir, PyEnvName)
+    os.Setenv("VIRTUAL_ENV", venvPath)
+    os.Setenv("PATH", filepath.Join(venvPath, "bin") + ":" + os.Getenv("PATH"))
+
+    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); err == nil {
+        fmt.Printf("\n%s%s[!] %sPython virtual environment already exists\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    } else {
+        if err := os.MkdirAll(venvPath, 0755); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, venvPath, err, bcolors.Endc)
+            return err
+        }
+
+        fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
+
+        if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); os.IsNotExist(err) {
+            return fmt.Errorf("failed to create Python virtual environment at %s", venvPath)
+        }
+
+        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, venvPath, bcolors.Endc)
     }
 
     shellProfiles := []string{
@@ -995,17 +1011,18 @@ func SetupGoEnvironment(PyEnvName string) {
 export GOPATH=%s
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-# Python AFR environment
-#export AFR_VENV=%s
-#export PATH=$AFR_VENV/bin:$PATH
-#source $AFR_VENV/bin/activate 2>/dev/null
-`, utils.GoPath, utils.PythonVenv)
+# Python virtual environment
+export VIRTUAL_ENV=%s
+export PATH=$VIRTUAL_ENV/bin:$PATH
+`, utils.GoPath, venvPath)
 
     for _, profile := range shellProfiles {
         if err := appendToShellProfile(profile, envSetup); err != nil {
             fmt.Printf("%s%s[!] %sFailed to update %s: %v%s\n", bcolors.Yellow, bcolors.Endc, profile, err, bcolors.Endc)
         }
     }
+
+    return nil
 }
 
 func appendToShellProfile(profilePath, content string) error {
@@ -1038,74 +1055,37 @@ func InstallGithubTools() {
     subprocess.Run("%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
 }
 
-func CreatePythonVenv() error {
-    isNetHunter := utils.IsNetHunterEnvironment()
-    venvPath := filepath.Join(utils.BaseDir, utils.PyEnvName)
-
-    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); err == nil {
-        fmt.Printf("\n%s%s[!] %sPython virtual environment already exists\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        return nil
-    }
-
-    if err := os.MkdirAll(filepath.Dir(venvPath), 0755); err != nil {
-        return fmt.Errorf("failed to create directory %s: %v", filepath.Dir(venvPath), err)
-    }
-
-    fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    
-    if isNetHunter {
-        subprocess.Run("nethunter -r python3 -m venv %s --upgrade-deps", venvPath)
+func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[string]string) {
+    var tools map[string]map[string]string
+    if len(missingTools) > 0 {
+        tools = missingTools[0]
     } else {
-        subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
+        tools = make(map[string]map[string]string)
     }
-
-    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); os.IsNotExist(err) {
-        return fmt.Errorf("failed to create Python virtual environment at %s", venvPath)
-    }
-
-    fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, venvPath, bcolors.Endc)
-    return nil
-}
-
-func baseLinuxSetup(missingTools map[string]map[string]string, foundationCommands []string) {
+    
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-
         isNetHunter := utils.IsNetHunterEnvironment()
 
         if !isNetHunter {
-            SetupGoEnvironment(utils.PyEnvName)
-            if err := CreatePythonVenv(); err != nil {
+            if err := SetupGoPyEnv(utils.PyEnvName); err != nil {
                 fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
             }
         }
 
-        if isNetHunter {
-            fmt.Printf("\n%s%s[!] %sSetting up NetHunter foundation tools ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-            for _, cmd := range foundationCommands {
-                nethunterCmd := "nethunter -r " + cmd
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, nethunterCmd)
-                subprocess.Run(nethunterCmd)
-                time.Sleep(100 * time.Millisecond)
-            }
-        } else {
-            InstallFoundationTools(foundationCommands)
-        }
+        InstallFoundationTools(foundationCommands)
 
-        InstallTools(missingTools)
-
-        if isNetHunter {
-            SetupGoEnvironment(utils.PyEnvName)
-            if err := CreatePythonVenv(); err != nil {
-                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
-            }
+        if len(tools) > 0 {
+            InstallTools(tools)
         }
 
         if !utils.IsArchLinux() && !isNetHunter {
             subprocess.Run("winecfg /v win11")
         }
 
-        fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        InstallGithubTools()
+        if !isNetHunter {
+            fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+            InstallGithubTools()
+        }
 
         fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
     } else {
@@ -1125,7 +1105,7 @@ func KaliSetups() {
         "dpkg --add-architecture i386",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
-    baseLinuxSetup(missingTools, commands)
+    baseLinuxSetup(commands, missingTools)
 }
 
 func UbuntuSetups() {
@@ -1140,7 +1120,7 @@ func UbuntuSetups() {
         "add-apt-repository multiverse",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
     }
-    baseLinuxSetup(missingTools, commands)
+    baseLinuxSetup(commands, missingTools)
 }
 
 func ArchSetups() {
@@ -1150,7 +1130,7 @@ func ArchSetups() {
         "sudo pacman -Syu --noconfirm",
         "sudo pacman -S --noconfirm base-devel git curl zsh go",
     }
-    baseLinuxSetup(missingTools, commands)
+    baseLinuxSetup(commands, missingTools)
 }
 
 func AndroidSetups() {
@@ -1192,7 +1172,7 @@ func installNetHunter() {
         "pkg install root-repo x11-repo unstable-repo -y",
         "pkg update -y",
         "pkg upgrade -y",
-        "pkg install wget curl git golang screenfetch zsh* termux-api openssh python3 python3-pip python3-venv -y",
+        "pkg install wget curl git golang screenfetch zsh* termux-api openssh python -y",
 
         "git clone --depth 1 --single-branch --branch main --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
         "git clone --depth 1 --single-branch --branch main --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
@@ -1671,20 +1651,20 @@ create_kex_launcher
 fix_uid
 
 print_banner
-printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"
+printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n"
 printf "${yellow}[+] To start Kali NetHunter, type:${reset}\n"
-printf "${blue}[+] nethunter             # To start NetHunter CLI${reset}\n"
-printf "${blue}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
-printf "${blue}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
-printf "${blue}[+] nethunter -r          # To run NetHunter as root${reset}\n"
-printf "${blue}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
-printf "${blue}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
-printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
-printf "${blue}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
+printf "${blue}[+] nethunter                  # To start NetHunter CLI${reset}\n"
+printf "${blue}[+] nethunter kex passwd       # To set the KeX password${reset}\n"
+printf "${blue}[+] nethunter kex &            # To start NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex <command>    # Run command in NetHunter env${reset}\n"
+printf "${blue}[+] nethunter -r               # To run NetHunter as root${reset}\n"
+printf "${blue}[+] nethunter -r kex passwd    # To set the KeX password for root${reset}\n"
+printf "${blue}[+] nethunter kex &            # To start NetHunter GUI as root${reset}\n"
+printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI root session${reset}\n"
+printf "${blue}[+] nethunter -r kex kill      # To stop all NetHunter GUI sessions${reset}\n"
 printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
-printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
+printf "${blue}[+] nh                         # Shortcut for nethunter${reset}\n"
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
@@ -1693,30 +1673,30 @@ printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
         fmt.Printf("%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return
     }
-    fmt.Printf("%s%s[+] %sNetHunter installed successfully!\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("%s%s[+] %sNetHunter installed successfully!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 }
 
 func installToolsInNetHunter() {
     fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
-        "touch ~/.hushlogin",
+        "touch '~/.hushlogin'",
+        "dpkg --add-architecture i386",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "dpkg --add-architecture i386",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget apt-transport-https -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
         "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
         "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
-        "curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -",
-        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
+        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
+        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg golang python powershell -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg make golang -y",
+        "git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; afrconsole -i; rm -rf ../africana-framework",
     }
 
-    missingTools := UpsentTools()
-    baseLinuxSetup(missingTools, commands)
+    baseLinuxSetup(commands)
 
     fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
