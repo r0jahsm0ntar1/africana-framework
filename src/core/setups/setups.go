@@ -454,7 +454,7 @@ func handleSetCommand(parts []string) {
       "output": &utils.SetupsLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
-      "pyenvname": &utils.PyEnvName,
+      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
@@ -570,7 +570,7 @@ func handleUnsetCommand(parts []string) {
       "output": &utils.SetupsLogs,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
-      "pyenvname": &utils.PyEnvName,
+      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
@@ -961,7 +961,7 @@ func InstallTools(tools map[string]map[string]string) {
     }
 }
 
-func SetupGoPyEnv(PyEnvName string) error {
+func SetupGoPyEnv(VenvName string) error {
     os.Setenv("GOPATH", utils.GoPath)
     os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(utils.GoPath, "bin"))
 
@@ -979,25 +979,25 @@ func SetupGoPyEnv(PyEnvName string) error {
         }
     }
 
-    os.Setenv("VIRTUAL_ENV", utils.PyvenvPath)
-    os.Setenv("PATH", filepath.Join(utils.PyvenvPath, "bin") + ":" + os.Getenv("PATH"))
+    os.Setenv("VIRTUAL_ENV", utils.VenvPath)
+    os.Setenv("PATH", filepath.Join(utils.VenvPath, "bin") + ":" + os.Getenv("PATH"))
 
-    if _, err := os.Stat(filepath.Join(utils.PyvenvPath, "bin", "python")); err == nil {
+    if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); err == nil {
         fmt.Printf("\n%s%s[!] %sPython virtual environment already exists\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     } else {
-        if err := os.MkdirAll(utils.PyvenvPath, 0755); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.PyvenvPath, err, bcolors.Endc)
+        if err := os.MkdirAll(utils.VenvPath, 0755); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.VenvPath, err, bcolors.Endc)
             return err
         }
 
         fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        subprocess.Run("python3 -m venv %s --upgrade-deps", utils.PyvenvPath)
+        subprocess.Run("%s -m pip install --upgrade pip; python3 -m venv %s --upgrade-deps", utils.VenvPath, utils.VenvPath)
 
-        if _, err := os.Stat(filepath.Join(utils.PyvenvPath, "bin", "python")); os.IsNotExist(err) {
-            return fmt.Errorf("failed to create Python virtual environment at %s", utils.PyvenvPath)
+        if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); os.IsNotExist(err) {
+            return fmt.Errorf("failed to create Python virtual environment at %s", utils.VenvPath)
         }
 
-        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, utils.PyvenvPath, bcolors.Endc)
+        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, utils.VenvPath, bcolors.Endc)
     }
 
     shellProfiles := []string{
@@ -1013,7 +1013,7 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # Python virtual environment
 export VIRTUAL_ENV=%s
 export PATH=$VIRTUAL_ENV/bin:$PATH
-`, utils.GoPath, utils.PyvenvPath)
+`, utils.GoPath, utils.VenvPath)
 
     for _, profile := range shellProfiles {
         if err := appendToShellProfile(profile, envSetup); err != nil {
@@ -1049,7 +1049,7 @@ func InstallFoundationTools(commands []string) {
 }
 
 func InstallGithubTools() {
-    subprocess.Run("cd %s; git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
     //subprocess.Run("%s install -r %s/africana-base/requirements.txt", venvPip, utils.BaseDir)
     subprocess.Run("%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
 }
@@ -1066,7 +1066,7 @@ func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[
         isNetHunter := utils.IsNetHunterEnvironment()
 
         if !isNetHunter {
-            if err := SetupGoPyEnv(utils.PyEnvName); err != nil {
+            if err := SetupGoPyEnv(utils.VenvName); err != nil {
                 fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
             }
         }
@@ -1173,8 +1173,8 @@ func installNetHunter() {
         "pkg upgrade -y",
         "pkg install wget curl git golang screenfetch zsh* termux-api openssh python -y",
 
-        "git clone --depth 1 --single-branch --branch main --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
-        "git clone --depth 1 --single-branch --branch main --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
+        "git clone --depth 1 --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
+        "git clone --depth 1 --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
         "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
 
         "echo 'screenfetch' >> ~/.zshrc",
@@ -1692,7 +1692,7 @@ func installToolsInNetHunter() {
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg make golang -y",
-        "git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; afrconsole -i; rm -rf ../africana-framework",
+        "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* -i",
     }
 
     baseLinuxSetup(commands)
@@ -1808,7 +1808,7 @@ func UpdateAfricana() {
     subprocess.Run("cd %s; git pull .", utils.ToolsDir)
     fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git clone --depth 1 --single-branch --branch main --progress https://github.com/r0jahsm0ntar1/africana-framework --depth 1; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
+    subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
     fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 

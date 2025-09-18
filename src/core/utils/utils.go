@@ -43,7 +43,7 @@ var (
     LPort      = "9999"
     HPort      = "3333"
     Obfuscator = "ghost"
-    PyEnvName  = "afr_venv"
+    VenvName   = "afr_venv"
     InnerIcon  = "kaspersky"
     Listener   = "blackjack"
     BuildName  = "africana_fud"
@@ -85,9 +85,9 @@ var (
     HomeDir = os.Getenv("HOME")
     GoPath = filepath.Join(HomeDir, ".go")
 
-    PyvenvPath = filepath.Join(BaseDir, PyEnvName)
-    VenvPip = filepath.Join(PyvenvPath, "bin", "pip")
-    VenvPython = filepath.Join(PyvenvPath, "bin", "python")
+    VenvPath = filepath.Join(BaseDir, VenvName)
+    VenvPip = filepath.Join(VenvPath, "bin", "pip")
+    VenvPython = filepath.Join(VenvPath, "bin", "python")
 
     WirelessTools = filepath.Join(ToolsDir, "wireless")
     ExploitsTools = filepath.Join(ToolsDir, "exploits")
@@ -156,7 +156,7 @@ var DefaultValues = map[string]string{
     "proxy":       Proxies,
     "proxies":     Proxies,
     "protocol":    Protocol,
-    "pyenvname":   PyEnvName,
+    "venvname":   VenvName,
     "recondir":    ReconDir,
     "rhost":       RHost,
     "rhosts":      RHost,
