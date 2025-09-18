@@ -1266,11 +1266,14 @@ function set_strings() {
         echo "[2] NetHunter ARM64 (minimal)"
         echo "[3] NetHunter ARM64 (nano)"
         read -p "Enter the image you want to install: " wimg
-        if [[ "$wimg" == "1" ]]; then
+        if (( $wimg == "1" ));
+        then
             wimg="full"
-        elif [[ "$wimg" == "2" ]]; then
+        elif (( $wimg == "2" ));
+        then
             wimg="minimal"
-        elif [[ "$wimg" == "3" ]]; then
+        elif (( $wimg == "3" ));
+        then
             wimg="nano"
         else
             wimg="full"
@@ -1293,10 +1296,11 @@ function set_strings() {
     fi
     ####
 
+
     CHROOT=kali-${SYS_ARCH}
-    IMAGE_NAME=kali-nethunter-2025.2-rootfs-${wimg}-${SYS_ARCH}.tar.xz
-    SHA_NAME=SHA256SUMS
-}
+    IMAGE_NAME=kali-nethunter-rootfs-${wimg}-${SYS_ARCH}.tar.xz
+    SHA_NAME=${IMAGE_NAME}.sha512sum
+}    
 
 function prepare_fs() {
     unset KEEP_CHROOT
@@ -1307,7 +1311,7 @@ function prepare_fs() {
             KEEP_CHROOT=1
         fi
     fi
-}
+} 
 
 function cleanup() {
     if [ -f "${IMAGE_NAME}" ]; then
@@ -1326,21 +1330,22 @@ function check_dependencies() {
     printf "${blue}\n[*] Checking package dependencies...${reset}\n"
     ## Workaround for termux-app issue #1283 (https://github.com/termux/termux-app/issues/1283)
     ##apt update -y &> /dev/null
-    apt-get update -y &> /dev/null || apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' dist-upgrade -y &> /dev/null
+    apt-get update -y &> /dev/null || apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" dist-upgrade -y &> /dev/null
 
     for i in proot tar axel; do
         if [ -e "$PREFIX"/bin/$i ]; then
             echo "  $i is OK"
         else
             printf "Installing ${i}...\n"
-            apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y $i || {
+            apt install -y $i || {
                 printf "${red}ERROR: Failed to install packages.\n Exiting.\n${reset}"
             exit
             }
         fi
     done
-    apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' upgrade -y
+    apt upgrade -y
 }
+
 
 function get_url() {
     ROOTFS_URL="${BASE_URL}/${IMAGE_NAME}"
@@ -1375,21 +1380,13 @@ function verify_sha() {
     if [ -z $KEEP_IMAGE ]; then
         printf "\n${blue}[*] Verifying integrity of rootfs...${reset}\n\n"
         if [ -f "${SHA_NAME}" ]; then
-            # Extract the specific hash for our file from the SHA256SUMS file
-            expected_hash=$(grep "${IMAGE_NAME}" "${SHA_NAME}" | cut -d' ' -f1)
-            computed_hash=$(sha256sum "${IMAGE_NAME}" | cut -d' ' -f1)
-            
-            if [ "$expected_hash" = "$computed_hash" ]; then
-                echo "✓ Checksum verified successfully!"
-            else
-                printf "${red}✗ Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
-                echo "Expected: $expected_hash"
-                echo "Got:      $computed_hash"
+            sha512sum -c "$SHA_NAME" || {
+                printf "${red} Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
                 exit 1
-            fi
+            }
         else
-            echo "[!] SHA file not found. Skipping verification..."
-        fi
+            echo "[!] SHA file not found. Skipping verification..."    
+        fi    
     fi
 }
 
@@ -1407,7 +1404,7 @@ function get_sha() {
         else
             echo "[!] SHA_URL does not exist. Skipping download."
         fi
-    fi
+    fi        
 }
 
 function extract_rootfs() {
@@ -1418,6 +1415,7 @@ function extract_rootfs() {
         printf "${yellow}[!] Using existing rootfs directory${reset}\n"
     fi
 }
+
 
 function create_launcher() {
     NH_LAUNCHER=${PREFIX}/bin/nethunter
@@ -1489,7 +1487,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update && nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y tightvncserver kali-desktop-xfce
+        nh sudo apt update && nh sudo apt install -y tightvncserver kali-desktop-xfce
     fi
 }
 function create_kex_launcher() {
@@ -1600,6 +1598,7 @@ function fix_uid() {
 }
 
 function print_banner() {
+    clear
     printf "${blue}##################################################\n"
     printf "${blue}##                                              ##\n"
     printf "${blue}##  88      a8P         db        88        88  ##\n"
@@ -1613,6 +1612,7 @@ function print_banner() {
     printf "${blue}##                                              ##\n"
     printf "${blue}####  ############# NetHunter ####################${reset}\n\n"
 }
+
 
 ##################################
 ##              Main            ##
@@ -1637,7 +1637,7 @@ extract_rootfs
 create_launcher
 cleanup
 
-printf "\n${yellow}[*] Configuring NetHunter for Termux ...\n"
+printf "\n${blue}[*] Configuring NetHunter for Termux ...\n"
 fix_profile_bash
 fix_resolv_conf
 fix_sudo
@@ -1646,20 +1646,20 @@ create_kex_launcher
 fix_uid
 
 print_banner
-printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n"
-printf "${yellow}[+] To start Kali NetHunter, type:${reset}\n"
-printf "${blue}[+] nethunter                  # To start NetHunter CLI${reset}\n"
-printf "${blue}[+] nethunter kex passwd       # To set the KeX password${reset}\n"
-printf "${blue}[+] nethunter kex &            # To start NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex <command>    # Run command in NetHunter env${reset}\n"
-printf "${blue}[+] nethunter -r               # To run NetHunter as root${reset}\n"
-printf "${blue}[+] nethunter -r kex passwd    # To set the KeX password for root${reset}\n"
-printf "${blue}[+] nethunter kex &            # To start NetHunter GUI as root${reset}\n"
-printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI root session${reset}\n"
-printf "${blue}[+] nethunter -r kex kill      # To stop all NetHunter GUI sessions${reset}\n"
-printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
-printf "${blue}[+] nh                         # Shortcut for nethunter${reset}\n"
+printf "${green}[=] Kali NetHunter for Termux installed successfully${reset}\n"
+printf "${green}[+] To start Kali NetHunter, type:${reset}\n"
+printf "${green}[+] nethunter             # To start NetHunter CLI${reset}\n"
+printf "${green}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
+printf "${green}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
+printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
+#printf "${green}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
+printf "${green}[+] nethunter -r          # To run NetHunter as root${reset}\n"
+#printf "${green}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
+#printf "${green}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
+#printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
+#printf "${green}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
+#printf "${green}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
+printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n"
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
