@@ -1326,20 +1326,20 @@ function check_dependencies() {
     printf "${blue}\n[*] Checking package dependencies...${reset}\n"
     ## Workaround for termux-app issue #1283 (https://github.com/termux/termux-app/issues/1283)
     ##apt update -y &> /dev/null
-    apt-get update -y &> /dev/null || apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" dist-upgrade -y &> /dev/null
+    apt-get update -y &> /dev/null || apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' dist-upgrade -y &> /dev/null
 
     for i in proot tar axel; do
         if [ -e "$PREFIX"/bin/$i ]; then
             echo "  $i is OK"
         else
             printf "Installing ${i}...\n"
-            apt install -y $i || {
+            apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y $i || {
                 printf "${red}ERROR: Failed to install packages.\n Exiting.\n${reset}"
             exit
             }
         fi
     done
-    apt upgrade -y
+    apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' upgrade -y
 }
 
 function get_url() {
@@ -1360,46 +1360,24 @@ function get_rootfs() {
     fi
     printf "${blue}[*] Downloading rootfs...${reset}\n\n"
     get_url
-    echo "Downloading: ${ROOTFS_URL}"
     wget --continue "${ROOTFS_URL}"
 }
 
 function check_sha_url() {
-    echo "[+] Checking if SHA_URL exists: ${SHA_URL}"
-    if curl --silent --show-error --fail --retry 2 --retry-delay 3 --head "${SHA_URL}" >/dev/null 2>&1; then
-        echo "[+] SHA_URL exists and is reachable"
-        return 0
-    else
+    if ! curl --silent --show-error --fail --retry 5 --retry-delay 60 --head --user-agent NetHunter-rootless "${SHA_URL}"; then
         echo "[!] SHA_URL (${SHA_URL}) does not exist or is unreachable"
         return 1
     fi
+    return 0
 }
 
 function verify_sha() {
     if [ -z $KEEP_IMAGE ]; then
         printf "\n${blue}[*] Verifying integrity of rootfs...${reset}\n\n"
         if [ -f "${SHA_NAME}" ]; then
-            # Try to find the hash for our file - be flexible with matching
-            expected_hash=$(grep -E ".*${IMAGE_NAME}" "${SHA_NAME}" | head -n1 | awk '{print $1}')
-            
-            # If not found with full name, try partial match
-            if [ -z "$expected_hash" ]; then
-                echo "[!] Could not find exact match for ${IMAGE_NAME}, trying partial match..."
-                expected_hash=$(grep -E ".*nethunter.*${wimg}.*${SYS_ARCH}.*\.tar\.xz" "${SHA_NAME}" | head -n1 | awk '{print $1}')
-            fi
-            
-            if [ -z "$expected_hash" ]; then
-                echo "[!] Could not find hash for ${IMAGE_NAME} in ${SHA_NAME}"
-                echo "[!] Available files in ${SHA_NAME}:"
-                grep "\.tar\.xz" "${SHA_NAME}" || cat "${SHA_NAME}"
-                echo "[!] Skipping verification due to hash not found"
-                return 0
-            fi
-            
-            computed_hash=$(sha256sum "${IMAGE_NAME}" | awk '{print $1}')
-            
-            echo "Expected hash: $expected_hash"
-            echo "Computed hash: $computed_hash"
+            # Extract the specific hash for our file from the SHA256SUMS file
+            expected_hash=$(grep "${IMAGE_NAME}" "${SHA_NAME}" | cut -d' ' -f1)
+            computed_hash=$(sha256sum "${IMAGE_NAME}" | cut -d' ' -f1)
             
             if [ "$expected_hash" = "$computed_hash" ]; then
                 echo "✓ Checksum verified successfully!"
@@ -1419,26 +1397,15 @@ function get_sha() {
     if [ -z $KEEP_IMAGE ]; then
         printf "\n${blue}[*] Getting SHA ... ${reset}\n\n"
         get_url
-        
-        echo "ROOTFS_URL: $ROOTFS_URL"
-        echo "SHA_URL: $SHA_URL"
-        echo "IMAGE_NAME: $IMAGE_NAME"
-        
         if [ -f "${SHA_NAME}" ]; then
             rm -f "${SHA_NAME}"
-        fi
-        
-        # Try to download SHA file
+        fi        
         if check_sha_url; then
             echo "[+] SHA_URL exists. Proceeding with download..."
-            if wget --continue "${SHA_URL}"; then
-                echo "[+] SHA file downloaded successfully"
-                verify_sha
-            else
-                echo "[!] Failed to download SHA file"
-            fi
+            wget --continue "${SHA_URL}"
+            verify_sha
         else
-            echo "[!] SHA_URL does not exist. Skipping SHA verification..."
+            echo "[!] SHA_URL does not exist. Skipping download."
         fi
     fi
 }
@@ -1522,11 +1489,9 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        echo "[+] Installing desktop environment for minimal/nano images..."
-        nh sudo apt update && nh sudo apt install -y tightvncserver kali-desktop-xfce
+        nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update && nh sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y tightvncserver kali-desktop-xfce
     fi
 }
-
 function create_kex_launcher() {
     KEX_LAUNCHER=${CHROOT}/usr/bin/kex
     cat > $KEX_LAUNCHER <<- EOF
@@ -1681,20 +1646,20 @@ create_kex_launcher
 fix_uid
 
 print_banner
-printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"
+printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n"
 printf "${yellow}[+] To start Kali NetHunter, type:${reset}\n"
-printf "${blue}[+] nethunter             # To start NetHunter CLI${reset}\n"
-printf "${blue}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
-printf "${blue}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
-printf "${blue}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
-printf "${blue}[+] nethunter -r          # To run NetHunter as root${reset}\n"
-printf "${blue}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
-printf "${blue}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
-printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
-printf "${blue}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
+printf "${blue}[+] nethunter                  # To start NetHunter CLI${reset}\n"
+printf "${blue}[+] nethunter kex passwd       # To set the KeX password${reset}\n"
+printf "${blue}[+] nethunter kex &            # To start NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex <command>    # Run command in NetHunter env${reset}\n"
+printf "${blue}[+] nethunter -r               # To run NetHunter as root${reset}\n"
+printf "${blue}[+] nethunter -r kex passwd    # To set the KeX password for root${reset}\n"
+printf "${blue}[+] nethunter kex &            # To start NetHunter GUI as root${reset}\n"
+printf "${blue}[+] nethunter kex stop         # To stop NetHunter GUI root session${reset}\n"
+printf "${blue}[+] nethunter -r kex kill      # To stop all NetHunter GUI sessions${reset}\n"
 printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
-printf "${blue}[+] nh                    # Shortcut for nethunter${reset}\n\n"
+printf "${blue}[+] nh                         # Shortcut for nethunter${reset}\n"
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
