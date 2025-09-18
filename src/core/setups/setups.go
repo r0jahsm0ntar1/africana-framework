@@ -1264,7 +1264,7 @@ function set_strings() {
     then
         echo "[1] NetHunter ARM64 (full)"
         echo "[2] NetHunter ARM64 (minimal)"
-        echo "[3] NetHunter ARM64 (nano)"
+        echo "[3] NetHunter ARM64 (nano)\n"
         read -p "Enter the image you want to install: " wimg
         if (( $wimg == "1" ));
         then
@@ -1282,7 +1282,7 @@ function set_strings() {
     then
         echo "[1] NetHunter ARMhf (full)"
         echo "[2] NetHunter ARMhf (minimal)"
-        echo "[3] NetHunter ARMhf (nano)"
+        echo "[3] NetHunter ARMhf (nano)\n"
         read -p "Enter the image you want to install: " wimg
         if [[ "$wimg" == "1" ]]; then
             wimg="full"
@@ -1300,7 +1300,7 @@ function set_strings() {
     CHROOT=kali-${SYS_ARCH}
     IMAGE_NAME=kali-nethunter-rootfs-${wimg}-${SYS_ARCH}.tar.xz
     SHA_NAME=${IMAGE_NAME}.sha512sum
-}    
+}
 
 function prepare_fs() {
     unset KEEP_CHROOT
@@ -1404,14 +1404,14 @@ function get_sha() {
         else
             echo "[!] SHA_URL does not exist. Skipping download."
         fi
-    fi        
+    fi
 }
 
 function extract_rootfs() {
     if [ -z $KEEP_CHROOT ]; then
-        printf "\n${blue}[*] Extracting rootfs... ${reset}\n\n"
+        printf "\n${blue}[*] Extracting rootfs... ${reset}\n"
         proot --link2symlink tar -xf "$IMAGE_NAME" 2> /dev/null || :
-    else        
+    else
         printf "${yellow}[!] Using existing rootfs directory${reset}\n"
     fi
 }
@@ -1598,7 +1598,7 @@ function fix_uid() {
 }
 
 function print_banner() {
-    clear
+    #clear
     printf "${blue}##################################################\n"
     printf "${blue}##                                              ##\n"
     printf "${blue}##  88      a8P         db        88        88  ##\n"
@@ -1665,14 +1665,14 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n"
     os.WriteFile(installerFile, []byte(installerScript), 0755)
 
     if err := subprocess.Run(installerFile); err != nil {
-        fmt.Printf("%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("\n%s%s[!] %sNetHunter installation failed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return
     }
-    fmt.Printf("%s%s[+] %sNetHunter installed successfully!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    fmt.Printf("\n%s%s[+] %sNetHunter installed successfully!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     commands := []string{
         "touch '~/.hushlogin'",
