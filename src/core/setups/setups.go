@@ -979,26 +979,25 @@ func SetupGoPyEnv(PyEnvName string) error {
         }
     }
 
-    venvPath := filepath.Join(utils.BaseDir, PyEnvName)
-    os.Setenv("VIRTUAL_ENV", venvPath)
-    os.Setenv("PATH", filepath.Join(venvPath, "bin") + ":" + os.Getenv("PATH"))
+    os.Setenv("VIRTUAL_ENV", utils.PyvenvPath)
+    os.Setenv("PATH", filepath.Join(utils.PyvenvPath, "bin") + ":" + os.Getenv("PATH"))
 
-    if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); err == nil {
+    if _, err := os.Stat(filepath.Join(utils.PyvenvPath, "bin", "python")); err == nil {
         fmt.Printf("\n%s%s[!] %sPython virtual environment already exists\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     } else {
-        if err := os.MkdirAll(venvPath, 0755); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, venvPath, err, bcolors.Endc)
+        if err := os.MkdirAll(utils.PyvenvPath, 0755); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.PyvenvPath, err, bcolors.Endc)
             return err
         }
 
         fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        subprocess.Run("python3 -m venv %s --upgrade-deps", venvPath)
+        subprocess.Run("python3 -m venv %s --upgrade-deps", utils.PyvenvPath)
 
-        if _, err := os.Stat(filepath.Join(venvPath, "bin", "python")); os.IsNotExist(err) {
-            return fmt.Errorf("failed to create Python virtual environment at %s", venvPath)
+        if _, err := os.Stat(filepath.Join(utils.PyvenvPath, "bin", "python")); os.IsNotExist(err) {
+            return fmt.Errorf("failed to create Python virtual environment at %s", utils.PyvenvPath)
         }
 
-        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, venvPath, bcolors.Endc)
+        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, utils.PyvenvPath, bcolors.Endc)
     }
 
     shellProfiles := []string{
@@ -1014,7 +1013,7 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 # Python virtual environment
 export VIRTUAL_ENV=%s
 export PATH=$VIRTUAL_ENV/bin:$PATH
-`, utils.GoPath, venvPath)
+`, utils.GoPath, utils.PyvenvPath)
 
     for _, profile := range shellProfiles {
         if err := appendToShellProfile(profile, envSetup); err != nil {

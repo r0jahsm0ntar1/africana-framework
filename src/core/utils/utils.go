@@ -85,10 +85,9 @@ var (
     HomeDir = os.Getenv("HOME")
     GoPath = filepath.Join(HomeDir, ".go")
 
-    VenvPath = filepath.Join(BaseDir, PyEnvName)
-    PythonVenv = filepath.Join(BaseDir, PyEnvName)
-    VenvPip = filepath.Join(VenvPath, "bin", "pip")
-    VenvPython = filepath.Join(VenvPath, "bin", "python")
+    PyvenvPath = filepath.Join(BaseDir, PyEnvName)
+    VenvPip = filepath.Join(PyvenvPath, "bin", "pip")
+    VenvPython = filepath.Join(PyvenvPath, "bin", "python")
 
     WirelessTools = filepath.Join(ToolsDir, "wireless")
     ExploitsTools = filepath.Join(ToolsDir, "exploits")
