@@ -902,10 +902,9 @@ func InstallTools(tools map[string]map[string]string) {
     }
 
     isAndroid := utils.DetectAndroid()
-    isNetHunter := utils.IsNetHunterEnvironment()
-    isWindows := runtime.GOOS == "windows"
-    isMacOS := runtime.GOOS == "darwin"
     isArchLinux := utils.IsArchLinux()
+    isMacOS := runtime.GOOS == "darwin"
+    isWindows := runtime.GOOS == "windows"
 
     for _, cat := range categories {
         if len(tools[cat.key]) > 0 {
@@ -930,8 +929,6 @@ func InstallTools(tools map[string]map[string]string) {
                 switch {
                 case isArchLinux:
                     subprocess.Run("pacman -S --noconfirm %s", packageList)
-                case isNetHunter:
-                    subprocess.Run("nethunter -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", packageList)
                 case isAndroid:
                     subprocess.Run("pkg install -y %s", packageList)
                 case isWindows:
@@ -946,7 +943,7 @@ func InstallTools(tools map[string]map[string]string) {
             for _, pkg := range goTools {
                 fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
 
-                if isAndroid && !isNetHunter {
+                if isAndroid {
                     subprocess.Run("pkg install golang -y && go install %s", pkg)
                 } else if isWindows {
                     subprocess.Run("choco install golang -y && go install %s", pkg)
@@ -1063,12 +1060,8 @@ func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[
     }
     
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        isNetHunter := utils.IsNetHunterEnvironment()
-
-        if !isNetHunter {
-            if err := SetupGoPyEnv(utils.VenvName); err != nil {
-                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
-            }
+        if err := SetupGoPyEnv(utils.VenvName); err != nil {
+            fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
         }
 
         InstallFoundationTools(foundationCommands)
@@ -1077,14 +1070,12 @@ func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[
             InstallTools(tools)
         }
 
-        if !utils.IsArchLinux() && !isNetHunter {
+        if !utils.IsArchLinux() {
             subprocess.Run("winecfg /v win11")
         }
 
-        if !isNetHunter {
-            fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-            InstallGithubTools()
-        }
+        fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        InstallGithubTools()
 
         fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
     } else {
@@ -1097,10 +1088,13 @@ func KaliSetups() {
     missingTools := UpsentTools()
 
     commands := []string{
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+        "wget https://playit-cloud.github.io/ppa/key.gpg -O /usr/share/keyrings/playit.gpg",
+        "wget https://playit-cloud.github.io/ppa/playit-cloud.list -O /etc/apt/sources.list.d/playit-cloud.list",
+        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
+        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
         "dpkg --add-architecture i386",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
@@ -1111,10 +1105,13 @@ func UbuntuSetups() {
     fmt.Printf("\n%s%s[*] %sInstalling africana in ubuntu.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     missingTools := UpsentTools()
     commands := []string{
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh git curl -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
+        "wget https://playit-cloud.github.io/ppa/key.gpg -O /usr/share/keyrings/playit.gpg",
+        "wget https://playit-cloud.github.io/ppa/playit-cloud.list -O /etc/apt/sources.list.d/playit-cloud.list",
+        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
+        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
         "dpkg --add-architecture i386",
         "add-apt-repository multiverse",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
@@ -1680,22 +1677,18 @@ func installToolsInNetHunter() {
 
     commands := []string{
         "touch '~/.hushlogin'",
-        "dpkg --add-architecture i386",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
-        "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "cd /etc/apt/trusted.gpg.d/; wget -qO - https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor > playit.gpg",
-        "cd /etc/apt/sources.list.d/; wget -qO - https://playit-cloud.github.io/ppa/playit-cloud.list -o playit-cloud.list",
-        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
-        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install gnupg make golang -y",
-        "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* -i",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
+        "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; ./* -i",
     }
 
-    baseLinuxSetup(commands)
+    for _, cmd := range commands {
+        fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+        if err := subprocess.Run("nethunter -r %s", cmd); err != nil {
+            fmt.Printf("%s%s[!] %sFailed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        }
+        time.Sleep(90 * time.Millisecond)
+    }
 
     fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
