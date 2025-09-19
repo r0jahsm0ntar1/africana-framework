@@ -32,20 +32,20 @@ BrightWhite   := \033[97m
 
 # Define banner as a shell function
 define PRINT_BANNER
-	echo "${BrightYellow} ,__,             ${Endc}"; \
-	echo "${BrightYellow} (oo)____         ${Endc}"; \
+	echo "${BrightYellow} ,__,              ${Endc}"; \
+	echo "${BrightYellow} (oo)____          ${Endc}"; \
 	echo "${BrightYellow} (__)    )\\       ${Endc}"; \
-	echo "${BrightYellow}    ||--||        ${Endc}"; \
-	echo "${BrightYellow}    John 3:16     ${Endc}";
+	echo "${BrightYellow}    ||--||         ${Endc}"; \
+	echo "${BrightYellow}John 3:16          ${Endc}";
 endef
 
 define PRINT_BANNER0
-	echo "${BrightYellow}           .--,   ${Endc}"; \
+	echo "${BrightYellow}           .--,    ${Endc}"; \
 	echo "${BrightYellow}       ,.-( (o)\\  ${Endc}"; \
 	echo "${BrightYellow}      /   .)/\\ ') ${Endc}"; \
-	echo "${BrightYellow}    .',./'/   )/  ${Endc}"; \
-	echo "${BrightYellow}()=///=))))==()   ${Endc}"; \
-	echo "${BrightYellow}  / John 3:16     ${Endc}";
+	echo "${BrightYellow}    .',./'/   )/   ${Endc}"; \
+	echo "${BrightYellow}()=///=))))==()    ${Endc}"; \
+	echo "${BrightYellow}  / John 3:16      ${Endc}\n";
 endef
 
 # Project name
@@ -103,7 +103,7 @@ build:
 		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
-		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
+		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT ...${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
 			$(PRINT_BANNER) \
@@ -183,13 +183,14 @@ run:
 
 # Help target
 help:
+	@$(PRINT_BANNER0)
 	@echo "${BrightCyan}${Bold}${Underl}Available commands:${Endc}"
-	@echo "  ${BrightGreen}make${Endc}           - Build for current system"
-	@echo "  ${BrightGreen}make build${Endc}     - Build for current system"
+	@echo "  ${BrightGreen}make${Endc}             - Build for current system"
+	@echo "  ${BrightGreen}make build${Endc}       - Build for current system"
 	@echo "  ${BrightGreen}make distro <os>${Endc} - Build for specific OS"
-	@echo "  ${BrightGreen}make clean${Endc}     - Clean build artifacts"
-	@echo "  ${BrightGreen}make run${Endc}       - Run the built binary"
-	@echo "  ${BrightGreen}make help${Endc}      - Show this help"
+	@echo "  ${BrightGreen}make clean${Endc}       - Clean build artifacts"
+	@echo "  ${BrightGreen}make run${Endc}         - Run the built binary"
+	@echo "  ${BrightGreen}make help${Endc}        - Show this help"
 	@echo ""
 	@echo "${BrightYellow}${Bold} Examples:${Endc}"
 	@echo "  ${BrightWhite}make distro linux${Endc}   - ${Dim}Build for Linux${Endc}"

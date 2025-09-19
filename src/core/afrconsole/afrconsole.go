@@ -43,12 +43,12 @@ func Start() {
             utils.Scanner.Scan()
             Input := strings.TrimSpace(utils.Scanner.Text())
             switch Input {
-            case "y", "yes":
+            case "a", "k", "y", "ok", "yes", "agree":
                 utils.Sealing()
                 utils.ClearScreen()
                 Genesis()
                 return
-            case "n", "q", "no", "exit", "quit":
+            case "e", "n", "q", "no", "exit", "quit":
                 os.Exit(0)
             default:
                 fmt.Printf("%s[!] %sChoices are (y|n|yes|no)\n", bcolors.BrightYellow, bcolors.Endc)
@@ -414,6 +414,7 @@ func handleSetCommand(parts []string) {
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "output": &utils.OutPutDir,
+      "venvname": &utils.VenvName,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
@@ -423,7 +424,6 @@ func handleSetCommand(parts []string) {
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "outputlog": &utils.OutPutDir,
-      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
@@ -530,6 +530,7 @@ func handleUnsetCommand(parts []string) {
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "output": &utils.OutPutDir,
+      "venvname": &utils.VenvName,
       "toolsdir": &utils.ToolsDir,
       "ddosmode": &utils.DDosMode,
       "recondir": &utils.ReconDir,
@@ -539,7 +540,6 @@ func handleUnsetCommand(parts []string) {
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
       "outputlog": &utils.OutPutDir,
-      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,

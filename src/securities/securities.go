@@ -433,7 +433,7 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
         }, true, false)
 
         if err := utils.SetProxy(utils.Proxies); err != nil {
-            fmt.Printf("%sError setting proxy: %v%s\n", bcolors.Red, err, bcolors.Endc)
+            //
         }
     } else {
         menus.PrintSelected(menus.PrintOptions{
@@ -1229,7 +1229,7 @@ func ConfigFirewall() error {
     if err := SetTorIptablesRules(); err != nil {
         return fmt.Errorf("%s%s[!] %sFailed to set up firewall rules: %v%s", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
     }
-    
+
     fmt.Printf("%s%s[+] %sDone setting up firewall rules ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     return nil
 }
@@ -1238,7 +1238,7 @@ func SetTorIptablesRules() error {
     cmd := exec.Command("id", "-u", "debian-tor")
     uidBytes, err := cmd.Output()
     if err != nil {
-        return fmt.Errorf("failed to get tor UID: %v", err)
+        return fmt.Errorf("[!] Failed to get tor UID: %v", err)
     }
     torUID := strings.TrimSpace(string(uidBytes))
 
@@ -1312,16 +1312,15 @@ func SetTorIptablesRules() error {
     }
     
     fmt.Printf("%s%s[*] %sSetting up Tor iptables rules...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
-    
+
     var lastError error
     successCount := 0
-    
+
     for i, cmdStr := range commands {
-        cmd := exec.Command("bash", "-c", "sudo "+cmdStr)
+        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
         output, err := cmd.CombinedOutput()
         if err != nil {
-            fmt.Printf("%s%s[!] %sFailed command %d: %s - Error: %v%s\n", 
-                bcolors.Bold, bcolors.Red, bcolors.Endc, i+1, cmdStr, err, bcolors.Endc)
+            fmt.Printf("%s%s[!] %sFailed command %d: %s - Error: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, i + 1, cmdStr, err, bcolors.Endc)
             if string(output) != "" {
                 fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
             }
@@ -1345,8 +1344,7 @@ func SetTorIptablesRules() error {
 func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
     if !overridePass {
         var resetConsent string
-        fmt.Printf("%s\nThis will overwrite all of your existing rules %sY(do it)%s/%sN(exit)%s: ", 
-            bcolors.Colors(), bcolors.Green, bcolors.Endc, bcolors.BrightRed, bcolors.Endc)
+        fmt.Printf("%s\nThis will overwrite all of your existing rules %sY(do it)%s/%sN(exit)%s: ", bcolors.Colors(), bcolors.Green, bcolors.Endc, bcolors.BrightRed, bcolors.Endc)
         fmt.Scanln(&resetConsent)
 
         if strings.ToLower(resetConsent) == "n" {
@@ -1361,8 +1359,7 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
 
         FirewallOff, FirewallOn := CheckDefaultRules()
         if FirewallOn != "" {
-            return fmt.Errorf("%sError while checking existing rules; %sexiting..\n%sError message: %s%s%s", 
-                bcolors.BrightRed, bcolors.BrightYellow, bcolors.Yellow, bcolors.Colors(), FirewallOn, bcolors.Endc)
+            return fmt.Errorf("%sError while checking existing rules; %sexiting..\n%sError message: %s%s%s", bcolors.BrightRed, bcolors.BrightYellow, bcolors.Yellow, bcolors.Colors(), FirewallOn, bcolors.Endc)
         }
 
         if strings.TrimSpace(FirewallOff) != "0" {
@@ -1372,8 +1369,7 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
             if err := cmd.Run(); err != nil {
                 return fmt.Errorf("%sFailed to save iptables rules: %v%s", bcolors.BrightRed, err, bcolors.Endc)
             }
-            fmt.Printf("%sSaved in %s/tmp%s as %siptables_%s.rules%s\n", 
-                bcolors.BrightCyan, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, fileNameID, bcolors.Endc)
+            fmt.Printf("%sSaved in %s/tmp%s as %siptables_%s.rules%s\n", bcolors.BrightCyan, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, fileNameID, bcolors.Endc)
         } else {
             fmt.Printf("%s Default rules are set, backup not required :)%s\n", bcolors.BrightYellow, bcolors.Endc)
         }
@@ -1396,13 +1392,12 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
     }
 
     fmt.Printf("%s%s[*] %sFlushing iptables rules...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
-    
+
     var lastError error
     for _, cmdStr := range commands {
-        cmd := exec.Command("bash", "-c", "sudo "+cmdStr)
+        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
         if output, err := cmd.CombinedOutput(); err != nil {
-            fmt.Printf("%s%s[!] %sCommand failed: %s - Error: %v%s\n", 
-                bcolors.Bold, bcolors.Red, bcolors.Endc, cmdStr, err, bcolors.Endc)
+            fmt.Printf("%s%s[!] %sCommand failed: %s - Error: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, cmdStr, err, bcolors.Endc)
             if string(output) != "" {
                 fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
             }
@@ -1426,11 +1421,11 @@ func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
     }
 
     if lastError != nil {
-        return fmt.Errorf("%sSome iptables commands failed during reset%s", bcolors.BrightRed, bcolors.Endc)
+        return fmt.Errorf("%s%s[!] %sSome iptables commands failed during reset ...", bcolors.Bold, bcolors.BrightRed, bcolors.Endc)
     }
 
     if !resetAsChildFunc {
-        fmt.Printf("%s Successfully reset Iptables to default :)%s\n", bcolors.BrightBlue, bcolors.Endc)
+        fmt.Printf("%s%s[*] %sSuccessfully reset Iptables to default ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
     }
 
     return nil
@@ -1452,7 +1447,7 @@ func checkTorUsage() (TorResult, error) {
     }
 
     if err := json.Unmarshal(output, &torResponse); err != nil {
-        return result, fmt.Errorf("failed to parse tor response: %v", err)
+        return result, fmt.Errorf("[!] Failed to parse tor response: %v", err)
     }
 
     result.IsUsingTor = torResponse.IsTor

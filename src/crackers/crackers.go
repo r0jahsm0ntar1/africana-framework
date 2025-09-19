@@ -168,9 +168,9 @@ func handleSetCommand(parts []string) {
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "venvname": &utils.VenvName,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
-      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
@@ -282,9 +282,9 @@ func handleUnsetCommand(parts []string) {
       "password": &utils.PassWord,
       "protocol": &utils.Protocol,
       "listener": &utils.Listener,
+      "venvname": &utils.VenvName,
       "wordlist": &utils.WordsList,
       "listeners": &utils.Listener,
-      "venvname": &utils.VenvName,
       "innericon": &utils.InnerIcon,
       "outericon": &utils.OuterIcon,
       "buildname": &utils.BuildName,
@@ -329,7 +329,7 @@ func handleUnsetCommand(parts []string) {
         if len(suggestions) < cols {
             cols = len(suggestions)
         }
-        
+
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
@@ -419,17 +419,17 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
     }
 
     commands := map[string]func(){
-      "ssh":    func() {HydraSsh(utils.RHost)},
-      "ftp":    func() {HydraFtp(utils.RHost)},
-      "smb":    func() {HydraSmb(utils.RHost)},
-      "rdp":    func() {HydraRdp(utils.RHost)},
-      "ldap":   func() {HydraLdap(utils.RHost)},
-      "telnet": func() {HydraTelnet(utils.RHost)},
-      "http":   func() {HydraHttp(utils.RHost)},
-      "https":  func() {HydraHttp(utils.RHost)},
-      "pcap":   func() {AirCrackng(utils.Pcap)},
-      "ntlm":   func() {HydraNtlm(utils.RHost)},
-      "hash":   func() {HashBuster(utils.Hashes)},
+        "ssh":    func() {HydraSsh(utils.RHost)},
+        "ftp":    func() {HydraFtp(utils.RHost)},
+        "smb":    func() {HydraSmb(utils.RHost)},
+        "rdp":    func() {HydraRdp(utils.RHost)},
+        "ldap":   func() {HydraLdap(utils.RHost)},
+        "telnet": func() {HydraTelnet(utils.RHost)},
+        "http":   func() {HydraHttp(utils.RHost)},
+        "https":  func() {HydraHttp(utils.RHost)},
+        "pcap":   func() {AirCrackng(utils.Pcap)},
+        "ntlm":   func() {HydraNtlm(utils.RHost)},
+        "hash":   func() {HashBuster(utils.Hashes)},
 
         "1": func() {HydraSsh(utils.RHost)},
         "2": func() {HydraFtp(utils.RHost)},
@@ -521,6 +521,10 @@ func HydraSmb(RHost string) {
 }
 
 func HydraRdp(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        return
+    }
     fmt.Printf("\n%s[*] %sRDPCracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
     subprocess.Run("hydra -t 4 -L %s -P %s -f -o %s/HydraRdp_outfile.txt -u rdp://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return
@@ -576,8 +580,11 @@ func HydraHttp(RHost string) {
     return
 }
 
-
 func HydraNtlm(RHost string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sMissing required parameters RHOST. Use %s'show options' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        return
+    }
     fmt.Printf("\n%s[*] %sNTLMcracker running againist: %s\n", bcolors.Green, bcolors.Endc, utils.RHost)
     subprocess.Run("hydra -t 4 -l %s -P %s -f -o %s/HydraNtlm_outfile.txt -u https://%s", utils.WordsList, utils.PassWord, utils.CrackersLogs, utils.RHost)
     return

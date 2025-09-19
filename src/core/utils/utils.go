@@ -654,7 +654,6 @@ func IFaces() ([]InterfaceInfo, error) {
     return result, nil
 }
 
-
 func SystemShell(Command string, args ...interface{}) {
     fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
     subprocess.Run(Command)
@@ -740,7 +739,7 @@ func SetProxy(proxyStr string) error {
     validHTTPSchemes := map[string]bool{"http": true, "https": true}
     if validHTTPSchemes[proxyURL.Scheme] {
         http.DefaultTransport.(*http.Transport).Proxy = http.ProxyURL(proxyURL)
-        fmt.Printf("%s%s[>] %sGo HTTP transport also configured for: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, proxyURL.String())
+        //fmt.Printf("%s%s[>] %sGo HTTP transport also configured for: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, proxyURL.String())
     } else {
         fmt.Printf("%s%s[>] %sProxy set in environment for external tools: %s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, proxyURL.String())
         fmt.Printf("%s%s[!] %sNote: Native Go HTTP calls will not use the %s proxy (requires golang.org/x/net/proxy).\n", bcolors.Bold, bcolors.Red, bcolors.Endc, proxyURL.Scheme)

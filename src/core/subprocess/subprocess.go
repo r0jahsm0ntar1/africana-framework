@@ -56,7 +56,7 @@ func CheckRoot()bool {
 func GetHomeDir() string {
     usr, err := user.Current()
     if err != nil {
-        fmt.Printf("%s%s[!] %sError getting current user:", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        fmt.Printf("%s%s[!] %sError: getting current user ", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         return ""
     }
     return usr.HomeDir
@@ -175,7 +175,7 @@ func openLogFile() {
 
     logFile, err = os.OpenFile(filepath.Join(logDir, "command_history.log"), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
     if err != nil {
-        msg, _ := fmt.Printf("%s%s[!] %sError opening log file ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        msg, _ := fmt.Printf("%s%s[!] %sError: opening log file ... %s_", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
         fmt.Fprintln(os.Stderr, msg)
     }
 }
@@ -246,7 +246,7 @@ func ClearHistory() {
     logFilePath := filepath.Join(logDir, "command_history.log")
     err := os.Remove(logFilePath)
     if err != nil {
-        fmt.Printf("%s%s[!] %sError clearing history:", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err)
+        fmt.Printf("%s%s[!] %sError: clearing history:", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err)
     } else {
         fmt.Printf("%s%s[+] %sexec: clear history\n%s%s[*] %sHistory cleared ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.BrightGreen, bcolors.Endc)
         openLogFile()

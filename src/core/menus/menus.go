@@ -177,10 +177,9 @@ View the full module info with the %s'info'%s or %s'show modules'%s, to get list
 }
 
 func FormatModuleOptions(modulePath string, rows [][]string, moduleInfo ModuleHelpInfo) string {
-    var builder strings.Builder
-
     maxName, maxSetting, maxReq := calculateMaxWidths(rows)
 
+    var builder strings.Builder
     builder.WriteString(FormatModuleHeader(modulePath))
     builder.WriteString("\n")
     builder.WriteString(FormatColumnHeaders(maxName, maxSetting, maxReq))
@@ -192,9 +191,7 @@ func FormatModuleOptions(modulePath string, rows [][]string, moduleInfo ModuleHe
             builder.WriteString("\n")
         }
     }
-
     builder.WriteString(FormatFooter(moduleInfo))
-
     return builder.String()
 }
 
@@ -270,18 +267,18 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
         {"IFACE", opts.IFACE},
         {"INNERICON", opts.INNERICON},
         {"OUTERICON", opts.OUTERICON},
-        {"RHOST", opts.RHOST},
-        {"LHOST", opts.LHOST},
         {"DISTRO", opts.DISTRO},
         {"LPORT", opts.LPORT},
         {"HPORT", opts.HPORT},
-        {"SCRIPT", opts.SCRIPT},
+        {"FUNCTION", opts.FUNCTION},
         {"PROTOCOL", opts.PROTOCOL},
         {"LISTENER", opts.LISTENER},
-        {"FUNCTION", opts.FUNCTION},
+        {"RHOST", opts.RHOST},
+        {"LHOST", opts.LHOST},
         {"BUILDNAME", opts.BUILDNAME},
-        {"PROXIES", opts.PROXIES},
         {"OBFUSCATOR", opts.OBFUSCATOR},
+        {"PROXIES", opts.PROXIES},
+        {"SCRIPT", opts.SCRIPT},
         {"TOOLSDIR", opts.TOOLSDIR},
         {"RECONDIR", opts.RECONDIR},
         {"OUTPUTLOGS", opts.OUTPUTLOGS},
@@ -836,7 +833,7 @@ func HelpInfoMain() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -854,7 +851,7 @@ func HelpInfoSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This modules enables you to Install, uninstall, update and mentain africana-framework.",
@@ -873,7 +870,7 @@ func HelpInfoTorsocks() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
@@ -892,7 +889,7 @@ func HelpInfoKali() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.",
@@ -910,7 +907,7 @@ func HelpInfoArch() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
@@ -928,7 +925,7 @@ func HelpInfoUbuntu() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.",
@@ -946,7 +943,7 @@ func HelpInfoMacos() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
@@ -965,7 +962,7 @@ func HelpInfoWindows() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
@@ -983,7 +980,7 @@ func HelpInfoAndroid() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.",
@@ -1002,7 +999,7 @@ func HelpInfoUpdate() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to update and mentain africana-framework.",
@@ -1020,7 +1017,7 @@ func HelpInfoUninstall() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com",
@@ -1038,7 +1035,7 @@ func HelpInfoAuto() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to auto select distro and install africana with all it's dependencies.",
@@ -1057,7 +1054,7 @@ func HelpInfoRepair() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a function repairs africana incase it is broken.",
@@ -1076,7 +1073,7 @@ func HelpInfoClearLogs() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will clear all your logs that has been recorded from the last time you cleaned the log folder.",
@@ -1094,7 +1091,7 @@ func HelpInfoTorsocksSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.",
@@ -1112,7 +1109,7 @@ func HelpInfoTorsocksVanish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.",
@@ -1130,7 +1127,7 @@ func HelpInfoTorsocksStatus() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.",
@@ -1149,7 +1146,7 @@ func HelpInfoTorsocksTorIp() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxies is correctly configured, then you will get a congratulation mesage from tor website.",
@@ -1168,7 +1165,7 @@ func HelpInfoTorsocksChains() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.",
@@ -1187,7 +1184,7 @@ func HelpInfoTorsocksReload() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will stop all tor services and restart again acuring new exitnodes and torchains.",
@@ -1205,7 +1202,7 @@ func HelpInfoTorsocksExitnode() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.",
@@ -1224,7 +1221,7 @@ func HelpInfoTorsocksRestore() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
@@ -1243,7 +1240,7 @@ func HelpInfoTorsocksStop() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
@@ -1261,7 +1258,7 @@ func HelpInfoNetworks() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This is the Network module that contains all internal networks attacks functions.",
@@ -1271,24 +1268,6 @@ func HelpInfoNetworks() {
 }
 
 //Exploits
-func HelpInfoChameleon() {
-    info := ModuleHelpInfo{
-        Name:          "exploits",
-        Function:      "src/exploits/chameleon.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "This module will help you in obfuscating any powershell script in order to bypass any AV durring execution.",
-    }
-    modulesHelp(info)
-}
-
 func HelpInfoExploits() {
     info := ModuleHelpInfo{
         Name:          "exploits",
@@ -1299,7 +1278,7 @@ func HelpInfoExploits() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicators functions.",
@@ -1320,7 +1299,7 @@ func HelpInfoCrackers() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
@@ -1341,7 +1320,7 @@ func HelpInfoPhishers() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.",
@@ -1360,7 +1339,7 @@ func HelpInfoGoPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1379,7 +1358,7 @@ func HelpInfoGoodGinx() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1398,7 +1377,7 @@ func HelpInfoZPhisher() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1417,7 +1396,7 @@ func HelpInfoBlackEye() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1436,7 +1415,7 @@ func HelpInfoAdvPhisher() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1455,7 +1434,7 @@ func HelpInfoDarkPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1474,7 +1453,7 @@ func HelpInfoShellPhish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1493,7 +1472,7 @@ func HelpInfoSetoolKit() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1512,7 +1491,7 @@ func HelpInfoThc() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
@@ -1532,7 +1511,7 @@ func HelpInfoWebsites() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1551,7 +1530,7 @@ func HelpInfoEnumScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1570,7 +1549,7 @@ func HelpInfoDnsRecon() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1589,7 +1568,7 @@ func HelpInfoPortScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1608,7 +1587,7 @@ func HelpInfoTechScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1627,7 +1606,7 @@ func HelpInfoFuzzScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1646,7 +1625,7 @@ func HelpInfoLeakScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1665,7 +1644,7 @@ func HelpInfoVulnScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1684,7 +1663,7 @@ func HelpInfoAsetScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1703,7 +1682,7 @@ func HelpInfoAutoScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1723,7 +1702,7 @@ func HelpInfoCredits() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1744,7 +1723,7 @@ func HelpInfoVerses() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1765,7 +1744,7 @@ func HelpInfoDiscover() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan for all connected devices in the network given using bettercap then arrange the targets in a table for you to select one to attack further.",
@@ -1784,7 +1763,7 @@ func HelpInfoInEnumScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1803,7 +1782,7 @@ func HelpInfoInPortScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan all open ports of the target to reveal open ports.",
@@ -1823,7 +1802,7 @@ func HelpInfoInVulnScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Perform vulnerbility scan on open ports of the target you have set.",
@@ -1843,7 +1822,7 @@ func HelpInfoSmbExplo() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch known vulnerbility exploits on the target's S.M.B services.",
@@ -1862,7 +1841,7 @@ func HelpInfoPSniffer() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Sniff all Packets from connected devices to the router(Perform M.I.T.M).",
@@ -1881,7 +1860,7 @@ func HelpInfoResponder(Mode, LPort, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version.",
@@ -1900,7 +1879,7 @@ func HelpInfoBeefKill(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.",
@@ -1921,7 +1900,7 @@ func HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.",
@@ -1940,7 +1919,7 @@ func HelpInfoWireless() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "ChristManiach",
+        CreatedBy:     "Christ Maniach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -1948,7 +1927,7 @@ func HelpInfoWireless() {
     ListWirelessFunctions()
 }
 
-func HelpInfoBlackJack(LHost string) {
+func HelpInfoBlackJack(LHost, LPort, HPort, Proxies, Protocol string) {
     info := ModuleHelpInfo{
         Name:          "blackjack",
         Function:      "src/exploits/blackajck.fn",
@@ -1958,14 +1937,14 @@ func HelpInfoBlackJack(LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "ChristManiach",
+        ProvidedBy:    "Christ Maniach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a tool derived from villain framework. It supports both tcp, http and https reverse shells. It has inbuild evasions and bypasses almost all avs. It is the best for now.",
     }
     modulesHelp(info)
-    BlackJackOptions(LHost)
+    BlackJackOptions(LHost, LPort, HPort, Proxies, Protocol)
 }
 
 func HelpInfoShellz(LHost, LPort, Protocol string) {
@@ -1978,7 +1957,7 @@ func HelpInfoShellz(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "ChristManiach",
+        ProvidedBy:    "Christ Maniach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1999,7 +1978,7 @@ func HelpInfoHoaxShell(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "ChristManiach",
+        ProvidedBy:    "Christ Maniach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2020,8 +1999,8 @@ func HelpInfoLithalDll(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listene
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "ChristManiach",
-        CreatedBy:     "Israel Isreal",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
@@ -2030,563 +2009,274 @@ func HelpInfoLithalDll(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listene
     LithalDllOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listener)
 }
 
-
-func HelpInfoHavoc() {
-    fmt.Printf(`
-       %sName%s: havoc
-   %sFunction%s: src/exploits/havoc.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s: t3l3machus
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  ICON           pdf              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoHavoc(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    info := ModuleHelpInfo{
+        Name:          "havoc",
+        Function:      "src/exploits/havoc.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    HavocOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener)
 }
 
-func HelpInfoTearNdroid() {
-    fmt.Printf(`
-       %sName%s: tearndroid
-   %sFunction%s: src/exploits/teandroid.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Androids
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoTearDroid(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol string) {
+    info := ModuleHelpInfo{
+        Name:          "tearndroid",
+        Function:      "src/exploits/tearndroid.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    TearDroidOptions(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol)
 }
 
-
-
-func HelpInfoChameLeon() {
-     fmt.Printf(`
-       %sName%s: chameleon
-   %sFunction%s: src/exploits/chameleon.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s: t3l3machus
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  SCRIPT         none             yes       Full location of the powershell script to be obfsicated.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoChameleon(LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    info := ModuleHelpInfo{
+        Name:          "chameleon",
+        Function:      "src/exploits/chameleon.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    ChameLeonOptions(LHost, LPort, HPort, Protocol, OutPutDir, Listener)
 }
 
-func HelpInfoGhost() {
-    fmt.Printf(`
-       %sName%s: ghost
-   %sFunction%s: src/exploits/ghost.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  SCRIPT         none             yes       Powershell script to obfsicate inorder to bypass AVs.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoSeaShell() {
-    fmt.Printf(`
-       %sName%s: seashell
-   %sFunction%s: src/exploits/seashell.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All IOS
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoListener() {
-    fmt.Printf(`
-       %sName%s: listener
-   %sFunction%s: src/exploits/listener.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoRegSniper() {
-    fmt.Printf(`
-       %sName%s: regsniper
-   %sFunction%s: src/exploits/lithaldll.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  ICON           pdf              yes       The icon to use to disguise your backdoor with.
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoTearDroid() {
-    fmt.Printf(`
-       %sName%s: tearndroid
-   %sFunction%s: src/exploits/tearndroid.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Androids
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
-}
-
-func HelpInfoAndroRat() {
-    fmt.Printf(`
-       %sName%s: androrat
-   %sFunction%s: src/exploits/androrat.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Windows
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  LHOST          ->               yes       %sDefault%s: %s%s%s. Mainly needed when generating backdoors and launching Listeners.
-  LPORT          9999             yes       Listening port to handle beacons or 'revese shell connections'.
-  HPORT          3333             yes       The port to handle file smaglers in blacjack function.
-  PROTOCOL       tcp              yes       Communication protocol to be used between blackjack and client. Supported are, (tcp, http and https).
-  OUTPUTLOGS     ->               yes       %sDefault%s: %s%s%s. Location you want your generated backdoor to be placed.
-
-%sDescription%s:
------------
-  It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.LHost, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Yellow, utils.OutPutDir, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoGhost(LHost, LPort, HPort, Protocol, OutPut, Listener string) {
+    info := ModuleHelpInfo{
+        Name:          "ghost",
+        Function:      "src/exploits/ghost.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    GhostOptions(LHost, LPort, HPort, Protocol, OutPut, Listener)
 }
 
 
-func HelpInfoWifite() {
-    fmt.Printf(`
-       %sName%s: wifite
-   %sFunction%s: src/exploits/wifite.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Wi-fi
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  MODE           auto             yes       Attacking mode to use. (auto or manual)
-  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
-
-%sDescription%s:
------------
-  Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-%sex. %s%susage%s:
---  -----
-
-  set function wifite
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoSeaShell(LHost, LPort, HPort, Protocol, OutPut string) {
+    info := ModuleHelpInfo{
+        Name:          "seashell",
+        Function:      "src/exploits/seashell.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    SeashellOptions(LHost, LPort, HPort, Protocol, OutPut)
 }
 
-func HelpInfoFluxion() {
-    fmt.Printf(`
-       %sName%s: fluxion
-   %sFunction%s: src/exploits/fluxion.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
 
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Wi-fi
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  MODE           auto             yes       Attacking mode to use. (auto or manual)
-  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
-
-%sDescription%s:
------------
-  Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-%sex. %s%susage%s:
---  -----
-
-  set function fluxion
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoListener(LHost, LPort, HPort, Protocol, OutPut, Listener string) {
+    info := ModuleHelpInfo{
+        Name:          "listener",
+        Function:      "src/exploits/listener.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    ListenerOptions(LHost, LPort, HPort, Protocol, OutPut, Listener)
 }
 
-func HelpInfoBetterCap() {
-    fmt.Printf(`
-       %sName%s: bettercap
-   %sFunction%s: src/exploits/bettercap.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Wi-fi
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  MODE           auto             yes       Attacking mode to use. (auto or manual)
-  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
-
-%sDescription%s:
------------
-  Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-%sex. %s%susage%s:
---  -----
-
-  set function bettercap
-  set mode auto
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoRegSniper(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    info := ModuleHelpInfo{
+        Name:          "regsniper",
+        Function:      "src/exploits/regsniper.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    RegsniperOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener)
 }
 
-func HelpInfoAirGeddon() {
-    fmt.Printf(`
-       %sName%s: airgeddon
-   %sFunction%s: src/exploits/airgeddon.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Wi-fi
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  MODE           auto             yes       Attacking mode to use. (auto or manual)
-  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
-
-%sDescription%s:
------------
-  Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-%sex. %s%susage%s:
---  -----
-
-  set function airgeddon
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoAndroRat(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol string) {
+    info := ModuleHelpInfo{
+        Name:          "androrat",
+        Function:      "src/exploits/androrat.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a tool that supports both tcp, http and https reverse shells. It has in build evasions and bypasses almost all avs. It is the best for now.",
+    }
+    modulesHelp(info)
+    AndroRatOptions(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol)
 }
 
-func HelpInfoWifiPumpkin() {
-    fmt.Printf(`
-       %sName%s: wifipumpkin
-   %sFunction%s: src/exploits/wifipumpkin.fn
-   %sPlatform%s: All
-       %sArch%s: x64, x86, amd_64, android
- %sPrivileged%s: No
-    %sLicense%s: Africana Framework License(BSD)
-       %sRank%s: Normal
-  %sDisclosed%s: 2025
-
-%sProvided by%s:
- %sCreated by%s: ChristManiach
-
-%sSupported Distros%s:
---------- --------
-      Id  Name
-      --  ----
-   -> 0   All Wi-fi
-
-%sBasic options%s:
------ --------
-  %sName           Current Setting  Required  Description%s
-  ----           ---------------  --------  -----------
-  MODE           auto             yes       Attacking mode to use. (auto or manual)
-  SSID           ->               yes       The fake name of your wifi for the clients to see. Default = 'End times ministries'
-  IFACE          wlan0            yes       Mainly needed for monitoring and deuthing ect.
-  WORDLISTS      rockyou.txt      yes       WordsListDir location for cracking captured handshakes.
-
-%sDescription%s:
------------
-  Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.
-
-%sex. %s%susage%s:
---  -----
-
-  set function wifipumpkin
-  set mode auto
-  set ssid ----
-  run
-
-`, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc)
+func HelpInfoWifite(IFace, LHost, OutPutDir string) {
+    info := ModuleHelpInfo{
+        Name:          "wifite",
+        Function:      "src/wireless/wifite.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Wifite is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.",
+    }
+    modulesHelp(info)
+    WifiteOptions(IFace, LHost, OutPutDir)
 }
 
+func HelpInfoFluxion(IFace, LHost, OutPutDir string) {
+    info := ModuleHelpInfo{
+        Name:          "fluxion",
+        Function:      "src/wireless/fluxion.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Fluxion is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.",
+    }
+    modulesHelp(info)
+    FluxionOptions(IFace, LHost, OutPutDir)
+}
+
+func HelpInfoBetterCap(IFace, LHost, OutPutDir string) {
+    info := ModuleHelpInfo{
+        Name:          "bettercap",
+        Function:      "src/wireless/bettercap.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Bettercap is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.",
+    }
+    modulesHelp(info)
+    BettercapOptions(IFace, LHost, OutPutDir)
+}
+
+func HelpInfoAirGeddon(IFace, LHost, OutPutDir string) {
+    info := ModuleHelpInfo{
+        Name:          "airgeddon",
+        Function:      "src/wireless/airgeddon.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Airgeddon is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.",
+    }
+    modulesHelp(info)
+    AirgeddonOptions(IFace, LHost, OutPutDir)
+}
+
+func HelpInfoWifiPumpkin(IFace, LHost, OutPutDir string) {
+    info := ModuleHelpInfo{
+        Name:          "wifipumpkin",
+        Function:      "src/wireless/wifipumpkin.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        ProvidedBy:    "Christ Maniach",
+        CreatedBy:     "r0jahs m0ntar1",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "wifipumpkin is a tool to audit WEP or WPA encrypted wireless networks. It uses aircrack-ng, pyrit, reaver, tshark tools to perform the audit. This tool is customizable to be automated with only a few arguments and can be trusted to run without supervision.",
+    }
+    modulesHelp(info)
+    WifipumpkinOptions(IFace, LHost, OutPutDir)
+}
 
 func MainOptions() {
     rows := [][]string{
         {"MODULE", "none", "yes", "A module to interact with."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "main/africana_run.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODULE setups\n  run\n"},
@@ -2599,7 +2289,7 @@ func SetupsOptions(Distro, Function string) {
         {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "setups/setups_launcher.fn",
         rows,
         ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION install\n  run\n"},
@@ -2620,7 +2310,7 @@ func NetworksOptions(Mode, IFace, RHost, Passwd, LHost, Gateway, Spoofer, Proxie
         {"FUNCTION", Function, "yes", "Function to perform: portscan, vulnscan, enumscan, smbexpl, psniffer, responder, beefkill."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/networks/networks_pentest.fn",
         rows,
         ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
@@ -2644,24 +2334,23 @@ func ExploitsOptions(OuterIcon, InnerIcon, LHost, LPort, HPort, Script, BuildNam
         {"OUTPUTLOGS", ExploitsLogs, "yes", "Output location for generated backdoor."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/backdoor_pentest.fn",
         rows,
         ModuleHelpInfo{Example: "  set LPORT " + LPort + "\n  set MODULE " + Function + "\n  set LHOST " + utils.LHost + "\n  run\n"},
     ))
 }
 
-func BlackJackOptions(LHost string) {
+func BlackJackOptions(LHost, LPort, HPort, Proxies, Protocol string) {
     rows := [][]string{
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Port for file smaglers in blackjack function."},
         {"LHOST", LHost, "yes", "Listener host address."},
-        {"LPORT", "9999", "yes", "Listening port to handle beacons or 'revese shell connections'."},
-        {"HPORT", "3333", "yes", "Port for file smaglers in blacjack."},
-        {"SCRIPT", "none", "yes", "Powershell script location."},
-        {"PROXIES", "none", "no", "Traffic through proxies."},
-        {"PROTOCOL", "tcp", "yes", "Communication protocol."},
+        {"PROXIES", Proxies, "no", "Route traffic through proxies if desired."},
+        {"PROTOCOL", Protocol, "yes", "Communication protocol (tcp, http, https)."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/blackjack_listener.fn",
         rows,
         ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2675,7 +2364,7 @@ func ShellzOptions(LHost, LPort, Protocol string) {
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/shellz_listener.fn",
         rows,
         ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2693,7 +2382,25 @@ func AndroRatOptions(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protoco
         {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/androrat_listener.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func TearDroidOptions(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protocol string) {
+    rows := [][]string{
+        {"LHOST", LHost, "yes", "Mainly needed when generating backdoors."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "The port to handle file smaglers in blacjack function."},
+        {"BUILD", BuildName, "yes", "OutPut name of the backdoor to be generated."},
+        {"PROXIES", Proxies, "no", "Run traffic through proxies."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/androrat_listener.fn",
         rows,
         ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2707,7 +2414,7 @@ func HoaxshellOptions(LHost, LPort, Protocol string) {
         {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/hoaxshell_listener.fn",
         rows,
         ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2724,8 +2431,108 @@ func LithalDllOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Liste
         {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/exploits/lithaldll_listener.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func RegsniperOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    rows := [][]string{
+        {"OUTERICON", OuterIcon, "yes", "Mainly needed to disguise generated backdoors."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/regsniper_listener.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func HavocOptions(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    rows := [][]string{
+        {"OUTERICON", OuterIcon, "yes", "Mainly needed to disguise generated backdoors."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/lithaldll_listener.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func ChameLeonOptions(LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    rows := [][]string{
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/chameleon_obfscations.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func SeashellOptions(LHost, LPort, HPort, Protocol, OutPutDir string) {
+    rows := [][]string{
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/seashell_listener.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func ListenerOptions(LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    rows := [][]string{
+        {"LISTENER", Listener, "yes", "Mainly needed to disguise generated backdoors."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/listeners_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
+    ))
+}
+
+func GhostOptions(LHost, LPort, HPort, Protocol, OutPutDir, Listener string) {
+    rows := [][]string{
+        {"LISTENER", Listener, "yes", "Mainly needed to listen for reverse connection. C2."},
+        {"LPORT", LPort, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"HPORT", HPort, "yes", "Https Listener port to handle file smaggling."},
+        {"LHOST", LHost, "yes", "Your local machine IP. Mainly needed when generating backdoors and handling reverse connections."},
+        {"PROTOCOL", Protocol, "yes", "Protocol for host communication (tcp, http, https)."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location. Mainly needed when generating backdoors."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/exploits/ghost_obfscations.fn",
         rows,
         ModuleHelpInfo{Example: "  set LHOST " + utils.LHost + "\n  run\n"},
     ))
@@ -2738,8 +2545,78 @@ func WirelessOptions(IFace, LHost, OutPutDir string) {
         {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/wirelss/wireless_pentest.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
+    ))
+}
+
+func WifiteOptions(IFace, LHost, OutPutDir string) {
+    rows := [][]string{
+        {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/wirelss/wireless_wifite.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
+    ))
+}
+
+func FluxionOptions(IFace, LHost, OutPutDir string) {
+    rows := [][]string{
+        {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/wirelss/wireless_fluxion.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
+    ))
+}
+
+func BettercapOptions(IFace, LHost, OutPutDir string) {
+    rows := [][]string{
+        {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/wirelss/wireless_bettercap.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
+    ))
+}
+
+func AirgeddonOptions(IFace, LHost, OutPutDir string) {
+    rows := [][]string{
+        {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/wirelss/wireless_airgeddon.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
+    ))
+}
+
+func WifipumpkinOptions(IFace, LHost, OutPutDir string) {
+    rows := [][]string{
+        {"IFACE", IFace, "yes", "Mainly needed when generating backdoors."},
+        {"LHOST", LHost, "yes", "Listening port to handle beacons or 'revese shell connections'."},
+        {"OUTPUTLOGS", OutPutDir, "yes", "OutPut location."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "src/wirelss/wireless_wifipumpkin.fn",
         rows,
         ModuleHelpInfo{Example: "  set IFACE " + IFace + "\n  run\n"},
     ))
@@ -2754,7 +2631,7 @@ func CrackersOptions(Mode, RHost, WordsListDir, UserName, PassWord string) {
         {"WORDLIST", WordsListDir, "yes", "Path to wordlist."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/crackers/passwords_pentest.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODE " + Mode + "\n  run\n"},
@@ -2766,7 +2643,7 @@ func TorsocksOptions() {
         {"FUNCTION", "none", "yes", "The function to execute. ex. -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)"},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/securities/torrsocks_setup.fn",
         rows,
         ModuleHelpInfo{Example: "  set VANISH vanish\n  run\n"},
@@ -2781,7 +2658,7 @@ func ResponderOptions(Mode, LPort, RHost, LHost string) {
         {"LHOST", LHost, "no", "Mainly needed when generating backdoors and launching Listeners. Default to your eth0 ip."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/networks/responder.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODULE responder\n  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2797,7 +2674,7 @@ func BeefKillOptions(Mode, LPort, Spoofer, RHost, LHost string) {
         {"SPOOFER", Spoofer, "yes", "Listening port to handle beacons or 'revese shell connections'."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/networks/beefkill.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODULE beefkill\n  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2813,7 +2690,7 @@ func ToxssInxOptions(Mode, LPort, Spoofer, RHost, LHost string) {
         {"SPOOFER", Spoofer, "yes", "Listening port to handle beacons or 'revese shell connections'."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/networks/toxssinx.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODULE toxssinx\n  set LHOST " + utils.LHost + "\n  run\n"},
@@ -2830,7 +2707,7 @@ func WebsitesOptions(RHost, ResultDir, Proxies, UserName, PassWord, WordsListDir
         {"WORDSLISTS", WordsListDir, "yes", "A list of user names or passwords to be used. -> (Give full path)."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/websites/bugbounty_pentest.fn",
         rows,
         ModuleHelpInfo{Example: "  set WORDLIST " + WordsListDir + "\n  run\n"},
@@ -2844,7 +2721,7 @@ func PhishersOptions(Mode, RHost, Proxies string) {
         {"PROXIES", Proxies, "no", "Just incase you want to run your traffic through proxies.."},
     }
 
-    fmt.Println(FormatModuleOptions(
+    fmt.Printf(FormatModuleOptions(
         "src/phishers/phishers_pentest.fn",
         rows,
         ModuleHelpInfo{Example: "  set MODULE setoolkit\n  run\n"},
@@ -3118,6 +2995,6 @@ For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 }
 
 func UpsentTools() {
-    fmt.Println("\n%s[!] %sChoice selected not implemented yet!, but coming soon!", bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s[!] %sChoice selected not implemented yet!, but coming soon!", bcolors.Yellow, bcolors.Endc)
 }
 

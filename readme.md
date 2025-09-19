@@ -77,8 +77,8 @@ make; make run
 ## Installation in tmux on Android based distros;
 ```bash
 pkg update -y
-pkg install root-repo x11-repo unstable-repo -y
-pkg install wget curl git make golang -y
+pkg install root-repo x11-repo unstable-repo wget curl git make golang zsh* -y
+pkg upgrade -y
 ```
 ```bash
 sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
