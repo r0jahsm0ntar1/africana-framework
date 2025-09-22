@@ -29,9 +29,9 @@ type stringMatcher struct {
 }
 
 var linuxTaskMap = map[string]func(){
-    "kali":    KaliSetups,
-    "debian":  KaliSetups,
-    "ubuntu":  UbuntuSetups,
+    "kali":    LinuxSetups,
+    "debian":  LinuxSetups,
+    "ubuntu":  LinuxSetups,
     "fedora":  func() { fmt.Printf("%s%s[+] %sFedora distro detected.\n", bcolors.BrightGreen, bcolors.Endc) },
     "arch":    ArchSetups,
     "alpine":  func() { fmt.Printf("%s%s[+] %sAlpine distro detected.\n", bcolors.BrightGreen, bcolors.Endc) },
@@ -706,8 +706,8 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
 
         "0": func() {AutoSetups()},
 
-        "1": func() {KaliSetups()},
-        "2": func() {UbuntuSetups()},
+        "1": func() {LinuxSetups()},
+        "2": func() {LinuxSetups()},
         "3": func() {ArchSetups()},
         "4": func() {MacosSetups()},
         "5": func() {AndroidSetups()},
@@ -718,8 +718,8 @@ func SetupsFunction(Function, Distro string, args ...interface{}) {
 
         "auto":      func() {AutoSetups()},
 
-        "kali":      func() {KaliSetups()},
-        "ubuntu":    func() {UbuntuSetups()},
+        "kali":      func() {LinuxSetups()},
+        "ubuntu":    func() {LinuxSetups()},
         "arch":      func() {ArchSetups()},
         "macos":     func() {MacosSetups()},
         "android":   func() {AndroidSetups()},
@@ -763,9 +763,9 @@ func Installer(Distro string) {
 
         {[]string{"0", "auto"}, AutoSetups},
         {[]string{"1", "arch"}, ArchSetups},
-        {[]string{"2", "kali"}, KaliSetups},
+        {[]string{"2", "kali"}, LinuxSetups},
         {[]string{"3", "macos"}, MacosSetups},
-        {[]string{"4", "ubuntu"}, UbuntuSetups},
+        {[]string{"4", "ubuntu"}, LinuxSetups},
         {[]string{"5", "android"}, AndroidSetups},
         {[]string{"6", "windows"}, WindowsSetups},
         {[]string{"7", "update"}, UpdateAfricana},
@@ -902,6 +902,7 @@ func InstallTools(tools map[string]map[string]string) {
     }
 
     isAndroid := utils.DetectAndroid()
+    isNethunter := utils.IsNethunter()
     isArchLinux := utils.IsArchLinux()
     isMacOS := runtime.GOOS == "darwin"
     isWindows := runtime.GOOS == "windows"
@@ -929,6 +930,8 @@ func InstallTools(tools map[string]map[string]string) {
                 switch {
                 case isArchLinux:
                     subprocess.Run("pacman -S --noconfirm %s", packageList)
+                case isNethunter:
+                    subprocess.Run("nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew'; nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
                 case isAndroid:
                     subprocess.Run("pkg install -y %s", packageList)
                 case isWindows:
@@ -943,7 +946,9 @@ func InstallTools(tools map[string]map[string]string) {
             for _, pkg := range goTools {
                 fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
 
-                if isAndroid {
+                if isNethunter {
+                    subprocess.Run("nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y golang-go; go install %s", pkg)
+                } else if isAndroid {
                     subprocess.Run("pkg install golang -y && go install %s", pkg)
                 } else if isWindows {
                     subprocess.Run("choco install golang -y && go install %s", pkg)
@@ -959,6 +964,8 @@ func InstallTools(tools map[string]map[string]string) {
 }
 
 func SetupGoPyEnv(VenvName string) error {
+    isNethunter := utils.IsNethunter()
+
     os.Setenv("GOPATH", utils.GoPath)
     os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(utils.GoPath, "bin"))
 
@@ -988,10 +995,15 @@ func SetupGoPyEnv(VenvName string) error {
         }
 
         fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        subprocess.Run("%s -m pip install --upgrade pip; python3 -m venv %s --upgrade-deps", utils.VenvPath, utils.VenvPath)
+
+        if isNethunter {
+            subprocess.Run("nh -r python3 -m pip install --upgrade pip; nh -r python3 -m venv %s --upgrade-deps", utils.VenvPath)
+        } else {
+            subprocess.Run("python3 -m pip install --upgrade pip; python3 -m venv %s --upgrade-deps", utils.VenvPath)
+        }
 
         if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); os.IsNotExist(err) {
-            return fmt.Errorf("failed to create Python virtual environment at %s", utils.VenvPath)
+            return fmt.Errorf("[!] Failed to create Python virtual environment at %s", utils.VenvPath)
         }
 
         fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, utils.VenvPath, bcolors.Endc)
@@ -1008,12 +1020,12 @@ export GOPATH=%s
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Python virtual environment
-export VIRTUAL_ENV=%s
-export PATH=$VIRTUAL_ENV/bin:$PATH
+#export VIRTUAL_ENV=%s
+#export PATH=$VIRTUAL_ENV/bin:$PATH
 `, utils.GoPath, utils.VenvPath)
 
     for _, profile := range shellProfiles {
-        if err := appendToShellProfile(profile, envSetup); err != nil {
+        if err := utils.AppendToShellProfile(profile, envSetup); err != nil {
             fmt.Printf("%s%s[!] %sFailed to update %s: %v%s\n", bcolors.Yellow, bcolors.Endc, profile, err, bcolors.Endc)
         }
     }
@@ -1021,31 +1033,7 @@ export PATH=$VIRTUAL_ENV/bin:$PATH
     return nil
 }
 
-func appendToShellProfile(profilePath, content string) error {
-    if _, err := os.Stat(profilePath); os.IsNotExist(err) {
-        if err := os.WriteFile(profilePath, []byte(content), 0644); err != nil {
-            return err
-        }
-        return nil
-    }
-
-    f, err := os.OpenFile(profilePath, os.O_APPEND|os.O_WRONLY, 0644)
-    if err != nil {
-        return err
-    }
-    defer f.Close()
-
-    _, err = f.WriteString(content)
-    return err
-}
-
-func InstallFoundationTools(commands []string) {
-    for _, cmd := range commands {
-        subprocess.Run(cmd)
-    }
-}
-
-func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[string]string) {
+func baseSetup(foundationCommands []string, missingTools ...map[string]map[string]string) {
     var tools map[string]map[string]string
     if len(missingTools) > 0 {
         tools = missingTools[0]
@@ -1053,16 +1041,41 @@ func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[
         tools = make(map[string]map[string]string)
     }
 
-    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        isAndroid := utils.DetectAndroid()
+    isAndroid := utils.DetectAndroid()
+    isNethunter := utils.IsNethunter()
+    isMacOS := runtime.GOOS == "darwin"
+    isWindows := runtime.GOOS == "windows"
 
-        if isAndroid {
-            fmt.Printf("\n%s%s[!] %sSetting up Android environment...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
+        if isAndroid || isNethunter {
+            fmt.Printf("\n%s%s[!] %sSetting up %s environment...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, 
+                map[bool]string{true: "Nethunter", false: "Android"}[isNethunter])
 
             for _, cmd := range foundationCommands {
-                androidCmd := convertToAndroidCmd(cmd)
+                var androidCmd string
+                if isNethunter {
+                    androidCmd = convertToNethunterCmd(cmd)
+                } else {
+                    androidCmd = convertToAndroidCmd(cmd)
+                }
                 fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, androidCmd)
                 subprocess.Run(androidCmd)
+                time.Sleep(100 * time.Millisecond)
+            }
+        } else if isMacOS {
+            fmt.Printf("%s%s[*] %sSetting up macOS environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+            for _, cmd := range foundationCommands {
+                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+                subprocess.Run(cmd)
+                time.Sleep(100 * time.Millisecond)
+            }
+        } else if isWindows {
+            fmt.Printf("%s%s[*] %sSetting up Windows environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+            for _, cmd := range foundationCommands {
+                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+                subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
         } else {
@@ -1081,13 +1094,29 @@ func baseLinuxSetup(foundationCommands []string, missingTools ...map[string]map[
             InstallTools(tools)
         }
 
-        if !utils.IsArchLinux() && !isAndroid {
+        if !utils.IsArchLinux() && !isAndroid && !isNethunter && !isWindows {
             subprocess.Run("winecfg /v win11")
         }
 
         fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
-        subprocess.Run("%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt", utils.VenvPython, utils.ToolsDir)
+        gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
+        if isNethunter {
+            subprocess.Run("nh -r " + gitCloneCmd, utils.BaseDir)
+        } else if isWindows {
+            subprocess.Run("cd %s && git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+        } else {
+            subprocess.Run(gitCloneCmd, utils.BaseDir)
+        }
+
+        pipInstallCmd := "%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt"
+        if isNethunter {
+            subprocess.Run("nh -r " + pipInstallCmd, utils.VenvPython, utils.ToolsDir)
+        } else if isWindows {
+            subprocess.Run("python -m pip install --retries 10 --timeout 360 -r %s\\requirements.txt", utils.ToolsDir)
+        } else {
+            subprocess.Run(pipInstallCmd, utils.VenvPython, utils.ToolsDir)
+        }
+
         fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
@@ -1113,28 +1142,121 @@ func convertToAndroidCmd(cmd string) string {
     return cmd
 }
 
-func KaliSetups() {
-    fmt.Printf("\n%s%s[*] %sInstalling africana in kali.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    missingTools := UpsentTools()
+func convertToNethunterCmd(cmd string) string {
+    cmd = strings.Replace(cmd, "sudo", "", -1)
 
-    commands := []string{
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
-        "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "wget https://playit-cloud.github.io/ppa/key.gpg -O /usr/share/keyrings/playit.gpg",
-        "wget https://playit-cloud.github.io/ppa/playit-cloud.list -O /etc/apt/sources.list.d/playit-cloud.list",
-        "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
-        "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
-        "dpkg --add-architecture i386",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+    if strings.Contains(cmd, "apt install") {
+        return strings.Replace(cmd, "apt install", "nh -r apt install -y", -1)
     }
-    baseLinuxSetup(commands, missingTools)
+    if strings.Contains(cmd, "apt-get install") {
+        return strings.Replace(cmd, "apt-get install", "nh -r apt install -y", -1)
+    }
+    if strings.Contains(cmd, "yum install") {
+        return strings.Replace(cmd, "yum install", "nh -r apt install -y", -1)
+    }
+    if strings.Contains(cmd, "dnf install") {
+        return strings.Replace(cmd, "dnf install", "nh -r apt install -y", -1)
+    }
+    if strings.Contains(cmd, "pkg install") {
+        return strings.Replace(cmd, "pkg install", "nh -r apt install -y", -1)
+    }
+
+    if strings.Contains(cmd, "pip install") || strings.Contains(cmd, "python") || 
+       strings.Contains(cmd, "git clone") || strings.Contains(cmd, "wget") || 
+       strings.Contains(cmd, "curl") {
+        return "nh -r " + cmd
+    }
+
+    return cmd
 }
 
-func UbuntuSetups() {
-    fmt.Printf("\n%s%s[*] %sInstalling africana in ubuntu.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    missingTools := UpsentTools()
-    commands := []string{
+func setupChocolatey() error {
+    if err := subprocess.Run("choco --version"); err != nil {
+        fmt.Printf("%s%s[!] %sInstalling Chocolatey...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        
+        installCmd := `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
+        if err := subprocess.Run(installCmd); err != nil {
+            return fmt.Errorf("failed to install Chocolatey: %v", err)
+        }
+
+        subprocess.Run("refreshenv")
+        time.Sleep(2 * time.Second)
+    }
+    return nil
+}
+
+func setupBrew() error {
+    if err := subprocess.Run("brew --version"); err != nil {
+        fmt.Printf("%s%s[!] %sInstalling Homebrew...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+
+        installCmd := `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+        if err := subprocess.Run(installCmd); err != nil {
+            return fmt.Errorf("failed to install Homebrew: %v", err)
+        }
+
+        subprocess.Run(`echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc`)
+        subprocess.Run(`eval "$(/opt/homebrew/bin/brew shellenv)"`)
+    }
+    return nil
+}
+
+func getFoundationCommands() []string {
+    isArchLinux := utils.IsArchLinux()
+    isAndroid := utils.DetectAndroid()
+    isNethunter := utils.IsNethunter()
+    isMacOS := runtime.GOOS == "darwin"
+    isWindows := runtime.GOOS == "windows"
+
+    if isAndroid {
+        return []string{
+            "pkg update -y",
+            "pkg install root-repo x11-repo unstable-repo -y",
+            "pkg install wget curl git golang screenfetch zsh* termux-api openssh python -y",
+            "git clone --depth 1 --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
+            "git clone --depth 1 --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
+            "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
+            "echo 'screenfetch' >> ~/.zshrc",
+            "echo 'screenfetch' >> ~/.bashrc",
+            "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >> ~/.zshrc",
+            "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc",
+            "chsh -s zsh",
+            "termux-setup-storage",
+        }
+    } else if isNethunter {
+        return []string{
+            "touch '~/.hushlogin'",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
+            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole",
+        }
+    } else if isMacOS {
+        return []string{
+            "brew install git",
+            "brew install python",
+            "brew install go",
+            "brew install wget",
+            "brew install curl",
+            "brew install gnu-sed",
+            "brew install gnu-tar",
+        }
+    } else if isWindows {
+        return []string{
+            "choco install git -y --force",
+            "choco install python3 -y --force",
+            "choco install golang -y --force",
+            "choco install wget -y --force",
+            "choco install curl -y --force",
+            "choco install 7zip -y --force",
+            "choco install vscode -y --force",
+            "choco install sysinternals -y --force",
+        }
+    } else if isArchLinux {
+        return []string{
+            "sudo pacman -Syu --noconfirm",
+            "sudo pacman -S --noconfirm base-devel git curl zsh go python python-pip wget",
+        }
+    }
+    return []string{
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
         "wget https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
@@ -1143,20 +1265,53 @@ func UbuntuSetups() {
         "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -",
         "echo 'deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | tee /etc/apt/sources.list.d/microsoft.list",
         "dpkg --add-architecture i386",
-        "add-apt-repository multiverse",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y; apt-get -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install zsh* ubuntu-restricted-extras gnome-shell-extension-manager gnome-shell-extensions gnome-tweaks -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
-    baseLinuxSetup(commands, missingTools)
+}
+
+func AutoSetups() {
+    switch runtime.GOOS {
+    case "android":
+        fmt.Printf("\n%s%s[!] %sAndroid distro detected.", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        AndroidSetups()
+    case "linux":
+        if utils.DetectAndroid() {
+            fmt.Printf("\n%s%s[!] %sAndroid distro detected.", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            AndroidSetups()
+        } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
+            if task, ok := linuxTaskMap[distroID]; ok {
+                task()
+            } else {
+                fmt.Printf("%s%s[!] %sUnsupported Linux distro: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, distroID)
+            }
+        } else {
+            fmt.Printf("%s%s[!] %sLinux distro detection failed.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+        }
+    case "windows":
+        fmt.Printf("%s%s[+] %sWindows detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        WindowsSetups()
+    case "darwin":
+        fmt.Printf("%s%s[+] %smacOS detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        MacosSetups()
+    default:
+        fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
+    }
+}
+
+func LinuxSetups() {
+    fmt.Printf("%s%s[*] %sSetting up Linux environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
 }
 
 func ArchSetups() {
-    fmt.Printf("\n%s%s[*] %sSetting up Arch Linux.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sSetting up Arch Linux environment...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
-    commands := []string{
-        "sudo pacman -Syu --noconfirm",
-        "sudo pacman -S --noconfirm base-devel git curl zsh go",
-    }
-    baseLinuxSetup(commands, missingTools)
+    baseSetup(foundationCommands, missingTools)
 }
 
 func AndroidSetups() {
@@ -1166,7 +1321,7 @@ func AndroidSetups() {
         return
     }
 
-    if utils.IsNetHunterEnvironment() {
+    if utils.IsNethunter() {
         fmt.Printf("\n%s%s[+] %sNetHunter is already installed ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
         installToolsInNetHunter()
         return
@@ -1191,34 +1346,50 @@ func AndroidSetups() {
 
 }
 
+func MacosSetups() {
+    fmt.Printf("%s%s[*] %sSetting up macOS environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    if err := setupBrew(); err != nil {
+        fmt.Printf("%s%s[!] %s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        return
+    }
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+}
+
+func WindowsSetups() {
+    fmt.Printf("%s%s[*] %sSetting up Windows environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    if err := setupChocolatey(); err != nil {
+        fmt.Printf("%s%s[!] %s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        return
+    }
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+}
+
+func installToolsInNetHunter() {
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+
+    fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    return
+}
+
 func installNetHunter() {
     fmt.Printf("%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    commands := []string{
-        "pkg update -y",
-        "pkg install root-repo x11-repo unstable-repo -y",
-        "pkg install wget curl git golang screenfetch zsh* termux-api openssh python -y",
 
-        "git clone --depth 1 --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh",
-        "git clone --depth 1 --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions",
-        "wget https://gist.githubusercontent.com/noahbliss/4fec4f5fa2d2a2bc857cccc5d00b19b6/raw/db5ceb8b3f54b42f0474105b4a7a138ce97c0b7a/kali-zshrc -O ~/.zshrc",
-
-        "echo 'screenfetch' >> ~/.zshrc",
-        "echo 'screenfetch' >> ~/.bashrc",
-
-        "echo 'source ~/.zsh/powerlevel10k.zsh-theme' >> ~/.zshrc",
-        "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc",
-
-        "chsh -s zsh",
-        "termux-setup-storage",
-    }
-
-    for _, cmd := range commands {
-        fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
-        if err := subprocess.Run(cmd); err != nil {
-            fmt.Printf("%s%s[!] %sFailed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        }
-        time.Sleep(100 * time.Millisecond)
-    }
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
 
     fmt.Printf("\n%s%s[+] %sDownloading NetHunter installer ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
@@ -1695,130 +1866,6 @@ printf "${green}[+] nh                         # Shortcut for nethunter${reset}\
         return
     }
     fmt.Printf("%s%s[+] %sNetHunter installed successfully!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-}
-
-func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-
-    commands := []string{
-        "touch '~/.hushlogin'",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-        "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; ./* -i",
-    }
-
-    for _, cmd := range commands {
-        fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
-        if err := subprocess.Run("nethunter -r %s", cmd); err != nil {
-            fmt.Printf("%s%s[!] %sFailed: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        }
-        time.Sleep(90 * time.Millisecond)
-    }
-
-    fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-}
-
-func MacosSetups() {
-    fmt.Printf("%s%s[*] %sSetting up macOS environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-    if err := subprocess.Run("brew --version"); err != nil {
-        fmt.Printf("%s%s[!] %sInstalling Homebrew...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-
-        installCmd := `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-        if err := subprocess.Run(installCmd); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to install Homebrew: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-            return
-        }
-
-        subprocess.Run(`echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc`)
-        subprocess.Run(`eval "$(/opt/homebrew/bin/brew shellenv)"`)
-    }
-
-    foundationTools := []string{
-        "git",
-        "python",
-        "go",
-        "wget",
-        "curl",
-        "gnu-sed",
-        "gnu-tar",
-    }
-
-    fmt.Printf("%s%s[*] %sInstalling foundation tools...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    for _, tool := range foundationTools {
-        fmt.Printf("%s%s[+] %sInstalling %s...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, tool)
-        if err := subprocess.Run("brew install %s", tool); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to install %s: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, tool, err)
-        }
-        time.Sleep(1 * time.Second)
-    }
-}
-
-func WindowsSetups() {
-    fmt.Printf("%s%s[*] %sSetting up Windows environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-    if err := subprocess.Run("choco --version"); err != nil {
-        fmt.Printf("%s%s[!] %sInstalling Chocolatey...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        
-        installCmd := `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
-        if err := subprocess.Run(installCmd); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to install Chocolatey: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-            return
-        }
-
-        subprocess.Run("refreshenv")
-        time.Sleep(2 * time.Second)
-    }
-
-    foundationTools := []string{
-        "git",
-        "python3",
-        "golang",
-        "wget",
-        "curl",
-        "7zip",
-        "vscode",
-        "sysinternals",
-    }
-
-    fmt.Printf("%s%s[*] %sInstalling foundation tools...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    for _, tool := range foundationTools {
-        fmt.Printf("%s%s[+] %sInstalling %s...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, tool)
-        if err := subprocess.Run("choco install %s -y --force", tool); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to install %s: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, tool, err)
-        }
-        time.Sleep(1 * time.Second)
-    }
-}
-
-func AutoSetups() {
-    switch runtime.GOOS {
-    case "android":
-        fmt.Printf("\n%s%s[!] %sAndroid distro detected.", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        AndroidSetups()
-    case "linux":
-        if utils.DetectAndroid() {
-            fmt.Printf("\n%s%s[!] %sAndroid distro detected.", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-            AndroidSetups()
-        } else if distroID, err := utils.GetLinuxDistroID(); err == nil {
-            if task, ok := linuxTaskMap[distroID]; ok {
-                task()
-            } else {
-                fmt.Printf("%s%s[!] %sUnsupported Linux distro: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, distroID)
-            }
-        } else {
-            fmt.Printf("%s%s[!] %sLinux distro detection failed.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
-        }
-    case "windows":
-        fmt.Printf("%s%s[+] %sWindows detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        WindowsSetups()
-    case "darwin":
-        fmt.Printf("%s%s[+] %smacOS detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        MacosSetups()
-    default:
-        fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
-    }
 }
 
 func UpdateAfricana() {

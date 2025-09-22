@@ -1068,7 +1068,7 @@ func DetectTermux() bool {
     return false
 }
 
-func IsNetHunterEnvironment() bool {
+func IsNethunter() bool {
     if _, err := exec.LookPath("nethunter"); err == nil {
         return true
     }
@@ -1131,6 +1131,24 @@ func min(nums ...int) int {
     return m
 }
 
+func AppendToShellProfile(profilePath, content string) error {
+    if _, err := os.Stat(profilePath); os.IsNotExist(err) {
+        if err := os.WriteFile(profilePath, []byte(content), 0644); err != nil {
+            return err
+        }
+        return nil
+    }
+
+    f, err := os.OpenFile(profilePath, os.O_APPEND|os.O_WRONLY, 0644)
+    if err != nil {
+        return err
+    }
+    defer f.Close()
+
+    _, err = f.WriteString(content)
+    return err
+}
+
 func BrowseTutorials() {
     switch runtime.GOOS {
     case "linux", "darwin":
@@ -1188,7 +1206,7 @@ func GSleep(args []string) {
     if err != nil || seconds <= 0 {
         return
     }
-    
+
     duration := time.Duration(seconds) * time.Second
     time.Sleep(duration)
 }
