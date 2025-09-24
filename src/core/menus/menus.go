@@ -171,6 +171,7 @@ func FormatFooter(info ModuleHelpInfo) string {
 --  -----
 %s%s%s
 View the full module info with the %s'info'%s or %s'show modules'%s, to get list of modules.
+
 `, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, bcolors.Endc, bcolors.Cyan, info.Example, bcolors.Endc, bcolors.Green, bcolors.Endc, bcolors.Green, bcolors.Endc)
     }
     return ""
@@ -483,11 +484,12 @@ func ListSetupsDistros() {
         name string
         desc string
     }{
+
+        {" android", "Install africana-framework in Termux using chroot environment."},
         {"    kali", "Necessary tools will be installed in in Kali-Linux (Debian distros). Use this it is stable."},
         {"  ubuntu", "This module will install africana-framework in Ubuntu-Linux."},
         {"    arch", "Tools will be installed in any Arch-Linux Distros using Blackarch repo."},
         {"   macos", "Under development. Install africana on MackingTosh systems."},
-        {" android", "Install africana-framework in Termux using chroot environment."},
         {" windows", "Under development. But can run if tools well installed using commando vm."},
     }
 
@@ -527,7 +529,7 @@ func ListSetupsFunction() {
     modulesUsage(info)
 }
 
-func ListTorsocksFunctions() {
+func ListTorsocksFunctions(Function string) {
     fmt.Printf(`
   # %sModule        Description%s
   - ------        -----------`, bcolors.Bold, bcolors.Endc)
@@ -552,7 +554,7 @@ func ListTorsocksFunctions() {
     }
     info := ModuleHelpInfo{
         Description:      "These are the functions that torsocks module performs.",
-        Example:          "    set MODULE discover\n    run\n",
+        Example:          "    set " + "function" + Function + "\n    run\n",
     }
     modulesUsage(info)
 }
@@ -651,10 +653,10 @@ func ListObfscatorsFunctions() {
         name string
         desc string
     }{
+        {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it."},
         {"    ghost", "This tool introduces is a methodology where you can target and obfuscate the individual components of a script with randomized variations."},
         {"    psobf", "It is a giant powershell evasion tool that beats almost all AVS. Try it out you will love it."},
         {"   vulkan", "Vulkan is able to obfuscate powershell scripts in order to make them undetectable against antivirus."},
-        {"chameleon", "It is a python framework evasion tool that beats almost all AVS. Try it out you will love it."},
     }
 
     for i, item := range items {
@@ -822,7 +824,7 @@ func ListPhishersFunctions() {
     modulesUsage(info)
 }
 
-//Help Info functions
+//Help Main functions
 func HelpInfoMain() {
     info := ModuleHelpInfo{
         Name:          "main",
@@ -833,7 +835,7 @@ func HelpInfoMain() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -841,6 +843,7 @@ func HelpInfoMain() {
     ListMainFunctions()
 }
 
+//Setup functions
 func HelpInfoSetups() {
     info := ModuleHelpInfo{
         Name:          "setups",
@@ -851,7 +854,7 @@ func HelpInfoSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This modules enables you to Install, uninstall, update and mentain africana-framework.",
@@ -860,26 +863,7 @@ func HelpInfoSetups() {
     ListSetupsFunction()
 }
 
-func HelpInfoTorsocks() {
-    info := ModuleHelpInfo{
-        Name:          "torsocks",
-        Function:      "src/securities/torsocks.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
-    }
-    modulesHelp(info)
-    ListTorsocksFunctions()
-}
-
-func HelpInfoKali() {
+func HelpInfoKali(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "kali",
         Function:      "src/core/setups_kali.fn",
@@ -889,33 +873,16 @@ func HelpInfoKali() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework in kali-linux a stable debian based distro that has a wide comunity support to avoid package breaks and missing dependencies use kali for africana.",
     }
     modulesHelp(info)
+    KaliOptions(Distro, Function)
 }
 
-func HelpInfoArch() {
-    info := ModuleHelpInfo{
-        Name:          "arch",
-        Function:      "src/core/setups_arch.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoUbuntu() {
+func HelpInfoUbuntu(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "ubuntu",
         Function:      "src/core/setups_ubuntu.fn",
@@ -925,15 +892,35 @@ func HelpInfoUbuntu() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework ubuntu which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Ubuntu docker then install africana.",
     }
     modulesHelp(info)
+    UbuntuOptions(Distro, Function)
 }
 
-func HelpInfoMacos() {
+func HelpInfoArch(Distro, Function string) {
+    info := ModuleHelpInfo{
+        Name:          "arch",
+        Function:      "src/core/setups_arch.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a module to install africana-framework in arch based distros. Arch is well established and all tools could be installed with blackman an intergration of black-arch in any arch-linux distro. No errors reported. africana can run well in arch-linux distros.",
+    }
+    modulesHelp(info)
+    ArchOptions(Distro, Function)
+}
+
+func HelpInfoMacos(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "macos",
         Function:      "src/core/setups_macos.fn",
@@ -943,16 +930,16 @@ func HelpInfoMacos() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Macos which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
     }
     modulesHelp(info)
+    MacosOptions(Distro, Function)
 }
 
-
-func HelpInfoWindows() {
+func HelpInfoWindows(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "windows",
         Function:      "src/core/setups_windows.fn",
@@ -962,15 +949,16 @@ func HelpInfoWindows() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a module to install africana-framework Windows which is a good distor but has alot of problems while installing kali-linux packages. To avoid issues like dependencies problems, Pleas use docker image or install kali-linux in Macos docker then install africana.",
     }
     modulesHelp(info)
+    WindowsOptions(Distro, Function)
 }
 
-func HelpInfoAndroid() {
+func HelpInfoAndroid(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "android",
         Function:      "src/core/setups_android.fn",
@@ -980,16 +968,16 @@ func HelpInfoAndroid() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to install africana-framework in android devices. Kali-linux will be installed in termux then kali-linux in chroot environment that will set all dependencies for africana-framework.",
     }
     modulesHelp(info)
+    AndroidOptions(Distro, Function)
 }
 
-
-func HelpInfoUpdate() {
+func HelpInfoUpdate(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "update",
         Function:      "src/core/setups_update.fn",
@@ -999,15 +987,16 @@ func HelpInfoUpdate() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to update and mentain africana-framework.",
     }
     modulesHelp(info)
+    UpdateOptions(Distro, Function)
 }
 
-func HelpInfoUninstall() {
+func HelpInfoUninstall(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "uninstall",
         Function:      "src/core/setups_uninstall.fn",
@@ -1017,15 +1006,16 @@ func HelpInfoUninstall() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to Uninstall africana completelty from your system with all it's dependencies. Incase of a bug, email me at rojahsmontari@gmail.com",
     }
     modulesHelp(info)
+    UninstallOptions(Distro, Function)
 }
 
-func HelpInfoAuto() {
+func HelpInfoAuto(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "auto",
         Function:      "src/core/setups_auto.fn",
@@ -1035,16 +1025,16 @@ func HelpInfoAuto() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a Function to auto select distro and install africana with all it's dependencies.",
     }
     modulesHelp(info)
+    AutoOptions(Distro, Function)
 }
 
-
-func HelpInfoRepair() {
+func HelpInfoRepair(Distro, Function string) {
     info := ModuleHelpInfo{
         Name:          "repair",
         Function:      "src/core/setups_repair.fn",
@@ -1054,34 +1044,36 @@ func HelpInfoRepair() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "It is a function repairs africana incase it is broken.",
     }
     modulesHelp(info)
+    RepairOptions(Distro, Function)
 }
 
-
-func HelpInfoClearLogs() {
+//TorSocks
+func HelpInfoTorsocks(Function string) {
     info := ModuleHelpInfo{
-        Name:          "clearlogs",
-        Function:      "src/core/setups_clearlogs.fn",
+        Name:          "torsocks",
+        Function:      "src/securities/torsocks.fn",
         Platform:      "All",
         Arch:          "x64, x86, amd_64, android",
         Privileged:    "No",
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
-        Description:   "This module will clear all your logs that has been recorded from the last time you cleaned the log folder.",
+        Description:   "Torsocks is a tool that strictly configures Iptables, Tor, Dsnsmasq, Privoxy and Squid to work together in order to completely anonimize your system through Tor network.",
     }
     modulesHelp(info)
+    ListTorsocksFunctions(Function)
 }
 
-func HelpInfoTorsocksSetups() {
+func HelpInfoTorsocksSetups(Function string) {
     info := ModuleHelpInfo{
         Name:          "setups",
         Function:      "src/securities/setups.fn",
@@ -1091,15 +1083,16 @@ func HelpInfoTorsocksSetups() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will install dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy -> squid -> then tor network. It is done with great care and integrity for super securities.",
     }
     modulesHelp(info)
+    TorsocksSetupsOptions(Function)
 }
 
-func HelpInfoTorsocksVanish() {
+func HelpInfoTorsocksVanish(Function string) {
     info := ModuleHelpInfo{
         Name:          "vanish",
         Function:      "src/securities/vanish.fn",
@@ -1109,15 +1102,16 @@ func HelpInfoTorsocksVanish() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will start services like changemacc to change maccadress in a random way then start dnsmasq, squid, privoxy and tor. It will (also set configs) so that all your local traffick will go through privoxy > squid > then tor network.",
     }
     modulesHelp(info)
+    TorsocksVanishOptions(Function)
 }
 
-func HelpInfoTorsocksStatus() {
+func HelpInfoTorsocksStatus(Function string) {
     info := ModuleHelpInfo{
         Name:          "status",
         Function:      "src/securities/status.fn",
@@ -1127,16 +1121,17 @@ func HelpInfoTorsocksStatus() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will query the system to see if macchanger, dnsmasq, squid, privoxy and tor are working correctly and if all traffic that goes through privoxy > squid > then tor network. It is done with great care and integrity for super securities.",
     }
     modulesHelp(info)
+    TorsocksStatusOptions(Function)
 }
 
 
-func HelpInfoTorsocksTorIp() {
+func HelpInfoTorsocksTorIp(Function string) {
     info := ModuleHelpInfo{
         Name:          "torip",
         Function:      "src/securities/torip.fn",
@@ -1146,16 +1141,17 @@ func HelpInfoTorsocksTorIp() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will check for your external IP. It querries tor website for your gateway IP. If your system's proxies is correctly configured, then you will get a congratulation mesage from tor website.",
     }
     modulesHelp(info)
+    TorsocksTorIpOptions(Function)
 }
 
 
-func HelpInfoTorsocksChains() {
+func HelpInfoTorsocksChains(Function string) {
     info := ModuleHelpInfo{
         Name:          "chains",
         Function:      "src/securities/chains.fn",
@@ -1165,16 +1161,17 @@ func HelpInfoTorsocksChains() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will querry  /var/log/privoxy/log to follow all logs living your system through squid, privoxy to tor.",
     }
     modulesHelp(info)
+    TorsocksChainsOptions(Function)
 }
 
 
-func HelpInfoTorsocksReload() {
+func HelpInfoTorsocksReload(Function string) {
     info := ModuleHelpInfo{
         Name:          "reload",
         Function:      "src/securities/reload.fn",
@@ -1184,15 +1181,16 @@ func HelpInfoTorsocksReload() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will stop all tor services and restart again acuring new exitnodes and torchains.",
     }
     modulesHelp(info)
+    TorsocksReloadOptions(Function)
 }
 
-func HelpInfoTorsocksExitnode() {
+func HelpInfoTorsocksExitnode(Function string) {
     info := ModuleHelpInfo{
         Name:          "exitnode",
         Function:      "src/securities/exitnode.fn",
@@ -1202,16 +1200,17 @@ func HelpInfoTorsocksExitnode() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will shufle the exit nodes to new ones. If you see your nrtwork is slow, This module can help to find a fast one.",
     }
     modulesHelp(info)
+    TorsocksExitnodeOptions(Function)
 }
 
 
-func HelpInfoTorsocksRestore() {
+func HelpInfoTorsocksRestore(Function string) {
     info := ModuleHelpInfo{
         Name:          "restore",
         Function:      "src/securities/restore.fn",
@@ -1221,16 +1220,17 @@ func HelpInfoTorsocksRestore() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
     }
     modulesHelp(info)
+    TorsocksRestoreOptions(Function)
 }
 
 
-func HelpInfoTorsocksStop() {
+func HelpInfoTorsocksStop(Function string) {
     info := ModuleHelpInfo{
         Name:          "stop",
         Function:      "src/securities/stop.fn",
@@ -1240,15 +1240,17 @@ func HelpInfoTorsocksStop() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will restore your Iptables to default. If the Function was killed instantly and IPTABLES were not set as intended, This module will help you fix the lack off internet connection.",
     }
     modulesHelp(info)
+    TorsocksStopOptions(Function)
 }
 
-func HelpInfoNetworks() {
+//networks
+func HelpInfoNetworks(Function string) {
     info := ModuleHelpInfo{
         Name:          "Networks",
         Function:      "src/networks.fn",
@@ -1258,7 +1260,7 @@ func HelpInfoNetworks() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This is the Network module that contains all internal networks attacks functions.",
@@ -1267,473 +1269,6 @@ func HelpInfoNetworks() {
     ListInternalFunctions()
 }
 
-//Exploits
-func HelpInfoExploits() {
-    info := ModuleHelpInfo{
-        Name:          "exploits",
-        Function:      "src/networks/exploits.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicators functions.",
-        Example:          "    set MODULE exploits\n    run\n",
-    }
-    modulesHelp(info)
-    ListExploitsFunctions()
-}
-
-//Crackers
-func HelpInfoCrackers() {
-    info := ModuleHelpInfo{
-        Name:          "crackers",
-        Function:      "src/crackers.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
-    }
-    modulesHelp(info)
-    ListCrackersFunctions()
-}
-
-
-//phishers
-func HelpInfoPhishers() {
-    info := ModuleHelpInfo{
-        Name:          "phishers",
-        Function:      "src/phishers/phishers.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.",
-    }
-    modulesHelp(info)
-    ListPhishersFunctions()
-}
-
-func HelpInfoGoPhish() {
-    info := ModuleHelpInfo{
-        Name:          "gophish",
-        Function:      "src/phishers/gophish.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE gophish\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoGoodGinx() { 
-    info := ModuleHelpInfo{
-        Name:          "goodginx",
-        Function:      "src/phishers/goodginx.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE goodginx\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoZPhisher() {
-    info := ModuleHelpInfo{
-        Name:          "zphisher",
-        Function:      "src/phishers/zphisher.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE zphisher\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoBlackEye() {
-    info := ModuleHelpInfo{
-        Name:          "blackeye",
-        Function:      "src/phishers/blackeye.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE blackeye\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoAdvPhisher() {
-    info := ModuleHelpInfo{
-        Name:          "advphisher",
-        Function:      "src/phishers/advphisher.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE advphisher\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoDarkPhish() { 
-    info := ModuleHelpInfo{
-        Name:          "darkphish",
-        Function:      "src/phishers/darkphish.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE darkphish\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoShellPhish() {
-    info := ModuleHelpInfo{
-        Name:          "shellphish",
-        Function:      "src/phishers/shellphish.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE shellphish\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoSetoolKit() {
-    info := ModuleHelpInfo{
-        Name:          "setoolkit",
-        Function:      "src/phishers/setoolkit.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE setoolkit\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoThc() {
-    info := ModuleHelpInfo{
-        Name:          "thc",
-        Function:      "src/phishers/thc.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
-        Example:          "    set MODULE thc\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-//websites
-func HelpInfoWebsites() {
-    info := ModuleHelpInfo{
-        Name:          "websites",
-        Function:      "src/websites/bug_bounty.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-    }
-    modulesHelp(info)
-    ListWebsitesFunctions()
-}
-
-func HelpInfoEnumScan() {
-    info := ModuleHelpInfo{
-        Name:          "enumscan",
-        Function:      "src/websites/enumscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE enumscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoDnsRecon() {
-    info := ModuleHelpInfo{
-        Name:          "dnsrecon",
-        Function:      "src/websites/dnsrecon.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE dnsrecon\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoPortScan() {
-    info := ModuleHelpInfo{
-        Name:          "portscan",
-        Function:      "src/websites/portscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE dnsrecon\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoTechScan() {
-    info := ModuleHelpInfo{
-        Name:          "techscan",
-        Function:      "src/websites/techscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE techscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoFuzzScan() {
-    info := ModuleHelpInfo{
-        Name:          "fuzzscan",
-        Function:      "src/websites/fuzzscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE fuzzscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoLeakScan() {
-    info := ModuleHelpInfo{
-        Name:          "leakscan",
-        Function:      "src/websites/leakscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE leakscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoVulnScan() {
-    info := ModuleHelpInfo{
-        Name:          "vulnscan",
-        Function:      "src/websites/vulnscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE vulnscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoAsetScan() {
-    info := ModuleHelpInfo{
-        Name:          "asetscan",
-        Function:      "src/websites/asetscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE asetscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-func HelpInfoAutoScan() {
-    info := ModuleHelpInfo{
-        Name:          "autoscan",
-        Function:      "src/websites/autoscan.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE autoscan\n    set rhosts https://example.com\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-//credits
-func HelpInfoCredits() {
-    info := ModuleHelpInfo{
-        Name:          "credits",
-        Function:      "src/websites/credits.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE credits\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-
-//verses
-func HelpInfoVerses() {
-    info := ModuleHelpInfo{
-        Name:          "verses",
-        Function:      "src/websites/verses.fn",
-        Platform:      "All",
-        Arch:          "x64, x86, amd_64, android",
-        Privileged:    "No",
-        License:       "Africana Framework License(BSD)",
-        Rank:          "Normal",
-        Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
-        TestedDistros: "All Distros",
-        CheckSupport:  "Yes",
-        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
-        Example:          "    set MODULE verses\n    run\n",
-    }
-    modulesHelp(info)
-}
-
-
-//networks
 func HelpInfoDiscover() {
     info := ModuleHelpInfo{
         Name:          "discover",
@@ -1744,7 +1279,7 @@ func HelpInfoDiscover() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan for all connected devices in the network given using bettercap then arrange the targets in a table for you to select one to attack further.",
@@ -1763,7 +1298,7 @@ func HelpInfoInEnumScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
@@ -1782,7 +1317,7 @@ func HelpInfoInPortScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will scan all open ports of the target to reveal open ports.",
@@ -1802,7 +1337,7 @@ func HelpInfoInVulnScan() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Perform vulnerbility scan on open ports of the target you have set.",
@@ -1822,7 +1357,7 @@ func HelpInfoSmbExplo() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch known vulnerbility exploits on the target's S.M.B services.",
@@ -1841,7 +1376,7 @@ func HelpInfoPSniffer() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Sniff all Packets from connected devices to the router(Perform M.I.T.M).",
@@ -1860,7 +1395,7 @@ func HelpInfoResponder(Mode, LPort, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch reponder asking for your LHOST, Configuring Wpadscript and weponizing it self. Attack supports alot of windows recent version.",
@@ -1879,7 +1414,7 @@ func HelpInfoBeefKill(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will Launch a Combination of both beef-xss and bettercap in a unique way to inject hook.js in either one or all targets. All settings are done for you.",
@@ -1900,7 +1435,7 @@ func HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
         Description:   "This module will try to Get you a revers Shell through XSS Injection. Still Working on this Option.",
@@ -1909,6 +1444,472 @@ func HelpInfoToxssInx(Mode, LPort, Spoofer, RHost, LHost string) {
     ToxssInxOptions(Mode, LPort, Spoofer, RHost, LHost)
 }
 
+//Exploits
+func HelpInfoExploits() {
+    info := ModuleHelpInfo{
+        Name:          "exploits",
+        Function:      "src/networks/exploits.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "This is the Exploits module that contains all Listener, backdoors and obfsicators functions.",
+        Example:          "    set MODULE exploits\n    run\n",
+    }
+    modulesHelp(info)
+    ListExploitsFunctions()
+}
+
+//Crackers
+func HelpInfoCrackers() {
+    info := ModuleHelpInfo{
+        Name:          "crackers",
+        Function:      "src/crackers.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Crackers is a module enriched with creative attacking faces to help redtemers in successfully cracking or brutforce passwords from services online or local encripted files.",
+    }
+    modulesHelp(info)
+    ListCrackersFunctions()
+}
+
+
+//phishers
+func HelpInfoPhishers() {
+    info := ModuleHelpInfo{
+        Name:          "phishers",
+        Function:      "src/phishers/phishers.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Phishers is a module enriched with creative attacking faces to help redtemers in successfully Perform phishing attacks with ease.",
+    }
+    modulesHelp(info)
+    ListPhishersFunctions()
+}
+
+func HelpInfoGoPhish() {
+    info := ModuleHelpInfo{
+        Name:          "gophish",
+        Function:      "src/phishers/gophish.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE gophish\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoGoodGinx() { 
+    info := ModuleHelpInfo{
+        Name:          "goodginx",
+        Function:      "src/phishers/goodginx.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE goodginx\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoZPhisher() {
+    info := ModuleHelpInfo{
+        Name:          "zphisher",
+        Function:      "src/phishers/zphisher.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE zphisher\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoBlackEye() {
+    info := ModuleHelpInfo{
+        Name:          "blackeye",
+        Function:      "src/phishers/blackeye.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE blackeye\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoAdvPhisher() {
+    info := ModuleHelpInfo{
+        Name:          "advphisher",
+        Function:      "src/phishers/advphisher.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE advphisher\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoDarkPhish() { 
+    info := ModuleHelpInfo{
+        Name:          "darkphish",
+        Function:      "src/phishers/darkphish.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE darkphish\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoShellPhish() {
+    info := ModuleHelpInfo{
+        Name:          "shellphish",
+        Function:      "src/phishers/shellphish.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE shellphish\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoSetoolKit() {
+    info := ModuleHelpInfo{
+        Name:          "setoolkit",
+        Function:      "src/phishers/setoolkit.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE setoolkit\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoThc() {
+    info := ModuleHelpInfo{
+        Name:          "thc",
+        Function:      "src/phishers/thc.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "It is a Function that enables the redteamers to perform phising attacks on various bases.",
+        Example:          "    set MODULE thc\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+//websites
+func HelpInfoWebsites() {
+    info := ModuleHelpInfo{
+        Name:          "websites",
+        Function:      "src/websites/bug_bounty.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+    }
+    modulesHelp(info)
+    ListWebsitesFunctions()
+}
+
+func HelpInfoEnumScan() {
+    info := ModuleHelpInfo{
+        Name:          "enumscan",
+        Function:      "src/websites/enumscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE enumscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoDnsRecon() {
+    info := ModuleHelpInfo{
+        Name:          "dnsrecon",
+        Function:      "src/websites/dnsrecon.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE dnsrecon\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoPortScan() {
+    info := ModuleHelpInfo{
+        Name:          "portscan",
+        Function:      "src/websites/portscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE dnsrecon\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoTechScan() {
+    info := ModuleHelpInfo{
+        Name:          "techscan",
+        Function:      "src/websites/techscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE techscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoFuzzScan() {
+    info := ModuleHelpInfo{
+        Name:          "fuzzscan",
+        Function:      "src/websites/fuzzscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE fuzzscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoLeakScan() {
+    info := ModuleHelpInfo{
+        Name:          "leakscan",
+        Function:      "src/websites/leakscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE leakscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoVulnScan() {
+    info := ModuleHelpInfo{
+        Name:          "vulnscan",
+        Function:      "src/websites/vulnscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE vulnscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoAsetScan() {
+    info := ModuleHelpInfo{
+        Name:          "asetscan",
+        Function:      "src/websites/asetscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE asetscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+func HelpInfoAutoScan() {
+    info := ModuleHelpInfo{
+        Name:          "autoscan",
+        Function:      "src/websites/autoscan.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE autoscan\n    set rhosts https://example.com\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+//credits
+func HelpInfoCredits() {
+    info := ModuleHelpInfo{
+        Name:          "credits",
+        Function:      "src/websites/credits.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE credits\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+
+//verses
+func HelpInfoVerses() {
+    info := ModuleHelpInfo{
+        Name:          "verses",
+        Function:      "src/websites/verses.fn",
+        Platform:      "All",
+        Arch:          "x64, x86, amd_64, android",
+        Privileged:    "No",
+        License:       "Africana Framework License(BSD)",
+        Rank:          "Normal",
+        Disclosed:     "2024",
+        CreatedBy:     "ChristManiach",
+        TestedDistros: "All Distros",
+        CheckSupport:  "Yes",
+        Description:   "Websites is a module enriched with creative attacking faces to help redtemers in successfully Perform insane web attacks with ease. It consists off recons, vulners, ddos among others.",
+        Example:          "    set MODULE verses\n    run\n",
+    }
+    modulesHelp(info)
+}
+
+//Wireless Pentest
 func HelpInfoWireless() {
     info := ModuleHelpInfo{
         Name:          "wireless",
@@ -1919,7 +1920,7 @@ func HelpInfoWireless() {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        CreatedBy:     "Christ Maniach",
+        CreatedBy:     "ChristManiach",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
     }
@@ -1937,7 +1938,7 @@ func HelpInfoBlackJack(LHost, LPort, HPort, Proxies, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1957,7 +1958,7 @@ func HelpInfoShellz(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1978,7 +1979,7 @@ func HelpInfoHoaxShell(LHost, LPort, Protocol string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "t3l3machus",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -1999,7 +2000,7 @@ func HelpInfoLithalDll(OuterIcon, LHost, LPort, HPort, Protocol, OutPut, Listene
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2019,7 +2020,7 @@ func HelpInfoHavoc(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, Listener
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2039,7 +2040,7 @@ func HelpInfoTearDroid(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Proto
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2059,7 +2060,7 @@ func HelpInfoChameleon(LHost, LPort, HPort, Protocol, OutPutDir, Listener string
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2079,7 +2080,7 @@ func HelpInfoGhost(LHost, LPort, HPort, Protocol, OutPut, Listener string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2100,7 +2101,7 @@ func HelpInfoSeaShell(LHost, LPort, HPort, Protocol, OutPut string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2121,7 +2122,7 @@ func HelpInfoListener(LHost, LPort, HPort, Protocol, OutPut, Listener string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2141,7 +2142,7 @@ func HelpInfoRegSniper(OuterIcon, LHost, LPort, HPort, Protocol, OutPutDir, List
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2161,7 +2162,7 @@ func HelpInfoAndroRat(LHost, LPort, HPort, BuildName, OutPutDir, Proxies, Protoc
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2181,7 +2182,7 @@ func HelpInfoWifite(IFace, LHost, OutPutDir string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2201,7 +2202,7 @@ func HelpInfoFluxion(IFace, LHost, OutPutDir string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2221,7 +2222,7 @@ func HelpInfoBetterCap(IFace, LHost, OutPutDir string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2241,7 +2242,7 @@ func HelpInfoAirGeddon(IFace, LHost, OutPutDir string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2261,7 +2262,7 @@ func HelpInfoWifiPumpkin(IFace, LHost, OutPutDir string) {
         License:       "Africana Framework License(BSD)",
         Rank:          "Normal",
         Disclosed:     "2024",
-        ProvidedBy:    "Christ Maniach",
+        ProvidedBy:    "ChristManiach",
         CreatedBy:     "r0jahs m0ntar1",
         TestedDistros: "All Distros",
         CheckSupport:  "Yes",
@@ -2271,9 +2272,16 @@ func HelpInfoWifiPumpkin(IFace, LHost, OutPutDir string) {
     WifipumpkinOptions(IFace, LHost, OutPutDir)
 }
 
-func MainOptions() {
+func MainOptions(Distro, Function, LHost, LPort, HPort, RHost, Proxy, Script, Build, Wordlist, Password, Protocol, Listener, InnerIcon, OuterIcon, Obfuscator, Passwd, GateWay, FakeDns, Spoofer, Name, Mode, PyEnvName, DdosMode, Ssid, ToolsDir, Output, ReconDir, IFace, BuildName, Proxies, OutputLogs string) {
     rows := [][]string{
-        {"MODULE", "none", "yes", "A module to interact with."},
+        {"LPORT", LPort, "no", "Local port for receiving connections."},
+        {"HPORT", HPort, "no", "HPORT for https reverse connections."},
+        {"LHOST", LHost, "no", "Local IP address for receiving connections (listener)."},
+        {"RHOST", RHost, "yes", "Remote target host IP address."},
+        {"IFACE", IFace, "no", "Network interface name (e.g., eth0, wlan0)."},
+        {"OUTPUT", Output, "no", "Output file or directory path."},
+        {"PROXIES", Proxies, "no", "Proxy servers to use. eg. http://127.0.0.1:8118"},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall). ty 'show modules'"},
     }
 
     fmt.Printf(FormatModuleOptions(
@@ -2292,18 +2300,256 @@ func SetupsOptions(Distro, Function string) {
     fmt.Printf(FormatModuleOptions(
         "setups/setups_launcher.fn",
         rows,
-        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION install\n  run\n"},
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
     ))
 }
 
-func NetworksOptions(Mode, IFace, RHost, Passwd, LHost, Gateway, Spoofer, Proxies, FakeDns, Function string) {
+func KaliOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func UbuntuOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func ArchOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func AndroidOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func MacosOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func WindowsOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func AutoOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func UpdateOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func RepairOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func UninstallOptions(Distro, Function string) {
+    rows := [][]string{
+        {"DISTRO", Distro, "yes", "Distro to install africana on. Supported distros: (arch, ubuntu, macos, android, windows)."},
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/setups_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set DISTRO " + Distro + "\n  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksSetupsOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksVanishOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksStatusOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksTorIpOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksChainsOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksReloadOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksExitnodeOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksRestoreOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func TorsocksStopOptions(Function string) {
+    rows := [][]string{
+        {"FUNCTION", Function, "yes", "The function to execute e.g. (install, update, repair, uninstall)."},
+    }
+
+    fmt.Printf(FormatModuleOptions(
+        "setups/torsocks_launcher.fn",
+        rows,
+        ModuleHelpInfo{Example: "  set FUNCTION " + Function + " \n  run\n"},
+    ))
+}
+
+func NetworksOptions(Mode, IFace, RHost, Passwd, LHost, GateWay, Spoofer, Proxies, FakeDns, Function string) {
     rows := [][]string{
         {"MODE", Mode, "yes", "Kind of attack to perform (single or all). 'single' will attack one rhost; 'all' will attack entire subnet."},
         {"IFACE", IFace, "yes", "Interface to use for penetration testing."},
         {"RHOST", RHost, "yes", "Alias to (RHOSTS, TARGET, TARGETS). The target to perform functions on."},
         {"LHOST", LHost, "yes", "Needed when using responder, beefkill, or toxssinx to handle reverse connections."},
         {"PASSWD", Passwd, "yes", "Password for beef-xss login page. Default user: beef."},
-        {"GATEWAY", Gateway, "yes", "Default router IP address. Needed when running functions like beefkill."},
+        {"GATEWAY", GateWay, "yes", "Default router IP address. Needed when running functions like beefkill."},
         {"SPOOFER", Spoofer, "yes", "Tool for spoofing target host to our domain. (e.g., bettercap)."},
         {"PROXIES", Proxies, "no", "Use proxies for traffic (discover, portscan, vulnscan, etc.)."},
         {"FAKEDNS", FakeDns, "yes", "DNS to resolve during spoofing (e.g., for beefkill)."},
@@ -2638,9 +2884,9 @@ func CrackersOptions(Mode, RHost, WordsListDir, UserName, PassWord string) {
     ))
 }
 
-func TorsocksOptions() {
+func TorsocksOptions(Function string) {
     rows := [][]string{
-        {"FUNCTION", "none", "yes", "The function to execute. ex. -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)"},
+        {"FUNCTION", Function, "yes", "The function to execute. ex. -> (setups, vanish, exitnode, status, ipaddress, restore, reload, chains, stop)"},
     }
 
     fmt.Printf(FormatModuleOptions(
@@ -2997,4 +3243,3 @@ For more info on a specific command, use %s<command> -h %sor %shelp <command>%s.
 func UpsentTools() {
     fmt.Printf("\n%s[!] %sChoice selected not implemented yet!, but coming soon!", bcolors.Yellow, bcolors.Endc)
 }
-

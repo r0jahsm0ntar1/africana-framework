@@ -77,7 +77,7 @@ var (
 
     LHost, _ = GetDefaultIP()
     Distro, _ = GetLinuxDistroID()
-    Gateway, _ = GetDefaultGatewayIP()
+    GateWay, _ = GetDefaultGatewayIP()
     Scanner = bufio.NewScanner(os.Stdin)
 
     Date = time.Now().Format("2006-01-02.15.04.05")
@@ -134,7 +134,7 @@ var DefaultValues = map[string]string{
     "function":    Function,
     "functions":   Function,
     "funcs":       Function,
-    "gateway":     Gateway,
+    "gateway":     GateWay,
     "hport":       HPort,
     "iface":       IFace,
     "innericon":   InnerIcon,
@@ -156,7 +156,7 @@ var DefaultValues = map[string]string{
     "proxy":       Proxies,
     "proxies":     Proxies,
     "protocol":    Protocol,
-    "venvname":   VenvName,
+    "venvname":    VenvName,
     "recondir":    ReconDir,
     "rhost":       RHost,
     "rhosts":      RHost,

@@ -86,7 +86,7 @@ func africanaAutoMode() {
         case "run", "start", "launch", "exploit", "execute":
             executeFunctionAuto()
         default:
-            utils.SystemShell(Input)
+            utils.SystemShell(strings.ToLower(Input))
         }
     }
 }
@@ -228,17 +228,17 @@ func executeCommandAuto(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoMain},
         {[]string{"m", "menu"}, menus.MenuZero},
-        {[]string{"option", "options", "show option", "show options"}, menus.MainOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() { menus.MainOptions(utils.Distro, utils.Function, utils.LHost, utils.LPort, utils.HPort, utils.RHost, utils.Proxies, utils.Script, utils.BuildName, utils.WordsList, utils.PassWord, utils.Protocol, utils.Listener, utils.InnerIcon, utils.OuterIcon, utils.Obfuscator, utils.BeefPass, utils.GateWay, utils.FakeDns, utils.Spoofer, utils.UserName, utils.WiMode, utils.VenvName, utils.DDosMode, utils.Ssid, utils.ToolsDir, utils.OutPutDir, utils.ReconDir, utils.IFace, utils.BuildName, utils.Proxies, utils.OutPutDir)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListMainFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() {africanaFrameworAuto("setups")}},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoSetups},
 
         {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() {africanaFrameworAuto("torsocks")}},
-        {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, menus.HelpInfoTorsocks},
+        {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, func() {menus.HelpInfoTorsocks(Function)}},
 
         {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() {africanaFrameworAuto("networks")}},
-        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.HelpInfoNetworks},
+        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, func() {menus.HelpInfoNetworks(Function)}},
 
         {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() {africanaFrameworAuto("exploits")}},
         {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.HelpInfoExploits},
@@ -300,7 +300,7 @@ func africanaManualMode() {
         case "run", "start", "launch", "exploit", "execute":
             executeFunction()
         default:
-            utils.SystemShell(Input)
+            utils.SystemShell(strings.ToLower(Input))
         }
     }
 }
@@ -333,17 +333,17 @@ func executeCommand(cmd string) bool {
 
         {[]string{"info"}, menus.HelpInfoMain},
         {[]string{"m", "menu"}, menus.MenuZero},
-        {[]string{"option", "options", "show option", "show options"}, menus.MainOptions},
+        {[]string{"option", "options", "show option", "show options"}, func() { menus.MainOptions(utils.Distro, utils.Function, utils.LHost, utils.LPort, utils.HPort, utils.RHost, utils.Proxies, utils.Script, utils.BuildName, utils.WordsList, utils.PassWord, utils.Protocol, utils.Listener, utils.InnerIcon, utils.OuterIcon, utils.Obfuscator, utils.BeefPass, utils.GateWay, utils.FakeDns, utils.Spoofer, utils.UserName, utils.WiMode, utils.VenvName, utils.DDosMode, utils.Ssid, utils.ToolsDir, utils.OutPutDir, utils.ReconDir, utils.IFace, utils.BuildName, utils.Proxies, utils.OutPutDir)}},
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListMainFunctions},
 
         {[]string{"1", "run 1", "use 1", "exec 1", "start 1", "launch 1", "exploit 1", "execute 1", "run setups", "use setups", "exec setups", "start setups", "launch setups", "exploit setups", "execute setups"}, func() {africanaManual("setups")}},
         {[]string{"? 1", "info 1", "help 1", "setups", "info setups", "help setups"}, menus.HelpInfoSetups},
 
         {[]string{"2", "run 2", "use 2", "exec 2", "start 2", "launch 2", "exploit 2", "execute 2", "run torsocks", "use torsocks", "exec torsocks", "start torsocks", "launch torsocks", "exploit torsocks", "execute torsocks"}, func() {africanaManual("torsocks")}},
-        {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, menus.HelpInfoTorsocks},
+        {[]string{"? 2", "info 2", "help 2", "torsocks", "info torsocks", "help torsocks"}, func() {menus.HelpInfoTorsocks(Function)}},
 
         {[]string{"3", "run 3", "use 3", "exec 3", "start 3", "launch 3", "exploit 3", "execute 3", "run networks", "use networks", "exec networks", "start networks", "launch networks", "exploit networks", "execute networks"}, func() {africanaManual("networks")}},
-        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, menus.HelpInfoNetworks},
+        {[]string{"? 3", "info 3", "help 3", "networks", "info networks", "help networks"}, func() {menus.HelpInfoNetworks(Function)}},
 
         {[]string{"4", "run 4", "use 4", "exec 4", "start 4", "launch 4", "exploit 4", "execute 4", "run exploits", "use exploits", "exec exploits", "start exploits", "launch exploits", "exploit exploits", "execute exploits"}, func() {africanaManual("exploits")}},
         {[]string{"? 4", "info 4", "help 4", "exploits", "info exploits", "help exploits"}, menus.HelpInfoExploits},
@@ -410,7 +410,7 @@ func handleSetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "output": &utils.OutPutDir,
@@ -526,7 +526,7 @@ func handleUnsetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "output": &utils.OutPutDir,

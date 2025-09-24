@@ -55,7 +55,7 @@ func WebsitesPentest() {
         case "run", "start", "launch", "exploit", "execute":
             executeFunction()
         default:
-            utils.SystemShell(Input)
+            utils.SystemShell(strings.ToLower(Input))
         }
     }
 }
@@ -164,7 +164,7 @@ func handleSetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,
@@ -278,7 +278,7 @@ func handleUnsetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,

