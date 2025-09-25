@@ -1466,7 +1466,7 @@ function ask() {
 }
 
 function get_arch() {
-    printf "${blue}[*] Checking device architecture ..."
+    printf "${green}[*] ${blue}Checking device architecture ..."
     case $(getprop ro.product.cpu.abi) in
         arm64-v8a)
             SYS_ARCH=arm64
@@ -1550,7 +1550,7 @@ function cleanup() {
 }
 
 function check_dependencies() {
-    printf "\n${blue}[*] Checking package dependencies ...${reset}\n"
+    printf "\n${green}[*] ${blue}Checking package dependencies ...${reset}\n"
     ## Workaround for termux-app issue #1283 (https://github.com/termux/termux-app/issues/1283)
     ##apt update -y &> /dev/null
     apt-get update -y &> /dev/null || apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" dist-upgrade -y &> /dev/null
@@ -1585,7 +1585,7 @@ function get_rootfs() {
             return
         fi
     fi
-    printf "${blue}[*] Downloading rootfs ...${reset}\n"
+    printf "${green}[*] ${blue}Downloading rootfs ...${reset}\n"
     get_url
     wget --continue "${ROOTFS_URL}"
 }
@@ -1600,7 +1600,7 @@ function check_sha_url() {
 
 function verify_sha() {
     if [ -z $KEEP_IMAGE ]; then
-        printf "\n${blue}[*] Verifying integrity of rootfs ...${reset}\n"
+        printf "\n${green}[*] ${blue}Verifying integrity of rootfs ...${reset}\n"
         if [ -f "${SHA_NAME}" ]; then
             sha512sum -c "$SHA_NAME" || {
                 printf "${red} Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
@@ -1614,7 +1614,7 @@ function verify_sha() {
 
 function get_sha() {
     if [ -z $KEEP_IMAGE ]; then
-        printf "\n${blue}[*] Getting SHA ... ${reset}\n"
+        printf "\n${green}[*] ${blue}Getting SHA ... ${reset}\n"
         get_url
         if [ -f "${SHA_NAME}" ]; then
             rm -f "${SHA_NAME}"
@@ -1631,7 +1631,7 @@ function get_sha() {
 
 function extract_rootfs() {
     if [ -z $KEEP_CHROOT ]; then
-        printf "\n${blue}[*] Extracting rootfs... ${reset}\n"
+        printf "\n${green}[*] ${blue}Extracting rootfs ...${reset}\n"
         proot --link2symlink tar -xf "$IMAGE_NAME" 2> /dev/null || :
     else
         printf "${yellow}[!] Using existing rootfs directory${reset}\n"
@@ -1726,7 +1726,7 @@ function start-kex() {
         SCREEN=":2"
     else
         SCREEN=":1"
-    fi 
+    fi
     export MOZ_FAKE_NO_SANDBOX=1; export HOME=\${HOME}; export USER=\${USR}; LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libgcc_s.so.1 nohup vncserver \$SCREEN >/dev/null 2>&1 </dev/null
     starting_kex=1
     return 0
@@ -1858,7 +1858,7 @@ extract_rootfs
 create_launcher
 cleanup
 
-printf "\n${blue}[*] Configuring NetHunter for Termux ...\n"
+printf "\n${green}[*] ${blue}Configuring NetHunter for Termux ...{reset}\n"
 fix_profile_bash
 fix_resolv_conf
 fix_sudo
