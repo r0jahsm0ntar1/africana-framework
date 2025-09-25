@@ -927,7 +927,7 @@ func InstallTools(tools map[string]map[string]string) {
                 fmt.Printf("%s%s[*] %sInstalling %d system packages individually ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
 
                 for _, pkg := range systemPackages {
-                    fmt.Printf("\n%s%s[>] %sInstalling : %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Blue, bcolors.Yellow, pkg, bcolors.Endc)
+                    fmt.Printf("\n%s%s[>] %sInstalling %s:%s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
 
                     var err error
                     switch {
@@ -955,7 +955,7 @@ func InstallTools(tools map[string]map[string]string) {
             }
 
             for _, pkg := range goTools {
-                fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
+                fmt.Printf("\n%s%s[>] %sInstalling Go tool %s:%s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
 
                 var err error
                 if isNethunter {
@@ -1061,7 +1061,7 @@ func installThirdPartyTools() {
     isWindows := runtime.GOOS == "windows"
 
     fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    
+
     gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
     if isNethunter {
         subprocess.Run("nh -r " + gitCloneCmd, utils.BaseDir)
@@ -1466,7 +1466,7 @@ function ask() {
 }
 
 function get_arch() {
-    printf "${green}[*] ${blue}Checking device architecture ..."
+    printf "\n${green}[*] ${reset}Checking device architecture ..."
     case $(getprop ro.product.cpu.abi) in
         arm64-v8a)
             SYS_ARCH=arm64
@@ -1585,7 +1585,7 @@ function get_rootfs() {
             return
         fi
     fi
-    printf "${green}[*] ${blue}Downloading rootfs ...${reset}\n"
+    printf "\n${green}[*] ${blue}Downloading rootfs ...${reset}\n"
     get_url
     wget --continue "${ROOTFS_URL}"
 }
@@ -1637,7 +1637,6 @@ function extract_rootfs() {
         printf "${yellow}[!] Using existing rootfs directory${reset}\n"
     fi
 }
-
 
 function create_launcher() {
     NH_LAUNCHER=${PREFIX}/bin/nethunter
@@ -1858,7 +1857,7 @@ extract_rootfs
 create_launcher
 cleanup
 
-printf "\n${green}[*] ${blue}Configuring NetHunter for Termux ...{reset}\n"
+printf "\n${green}[*] ${blue}Configuring NetHunter for Termux ...${reset}\n"
 fix_profile_bash
 fix_resolv_conf
 fix_sudo
