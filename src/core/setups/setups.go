@@ -944,7 +944,7 @@ func InstallTools(tools map[string]map[string]string) {
                     default:
                         err = subprocess.Run("sudo apt-get install -y %s", pkg)
                     }
-                    
+
                     if err != nil {
                         fmt.Printf("%s%s[!] %sFailed to install %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, pkg, err, bcolors.Endc)
                     } else {
@@ -974,7 +974,7 @@ func InstallTools(tools map[string]map[string]string) {
                     subprocess.Run("sudo apt-get install -y golang-go")
                     err = subprocess.Run("go install %s", pkg)
                 }
-                
+
                 if err != nil {
                     fmt.Printf("%s%s[!] %sFailed to install Go tool %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, pkg, err, bcolors.Endc)
                 } else {
@@ -1102,7 +1102,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
             for _, cmd := range foundationCommands {
                 androidCmd := convertToNethunterCmd(cmd)
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, androidCmd)
+                fmt.Printf("\n%s%s[*] %sRunning: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Yellow, bcolors.Endc, cmd, bcolors.Endc)
                 subprocess.Run(androidCmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1111,7 +1111,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
             for _, cmd := range foundationCommands {
                 androidCmd := convertToAndroidCmd(cmd)
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, androidCmd)
+                fmt.Printf("\n%s%s[*] %sRunning: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Yellow, bcolors.Endc, androidCmd, bcolors.Endc)
                 subprocess.Run(androidCmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1119,7 +1119,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up macOS environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+                fmt.Printf("\n%s%s[*] %sRunning: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Yellow, bcolors.Endc, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1127,7 +1127,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up Windows environment...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+                fmt.Printf("\n%s%s[*] %sRunning: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Yellow, bcolors.Endc, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1137,7 +1137,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             }
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, cmd)
+                fmt.Printf("\n%s%s[*] %sRunning: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Yellow, bcolors.Endc, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
