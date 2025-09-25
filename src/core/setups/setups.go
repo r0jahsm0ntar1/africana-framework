@@ -924,40 +924,63 @@ func InstallTools(tools map[string]map[string]string) {
             }
 
             if len(systemPackages) > 0 {
-                fmt.Printf("%s%s[*] %sBatch installing %d system packages...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
-                packageList := strings.Join(systemPackages, " ")
+                fmt.Printf("%s%s[*] %sInstalling %d system packages individually...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
 
-                switch {
-                case isArchLinux:
-                    subprocess.Run("pacman -S --noconfirm %s", packageList)
-                case isNethunter:
-                    subprocess.Run("nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew'; nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
-                case isAndroid:
-                    subprocess.Run("pkg install -y %s", packageList)
-                case isWindows:
-                    subprocess.Run("choco install -y %s", packageList)
-                case isMacOS:
-                    subprocess.Run("brew install %s", packageList)
-                default:
-                    subprocess.Run("apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' -y %s", packageList)
+                for _, pkg := range systemPackages {
+                    fmt.Printf("\n%s%s[>] %sInstalling : %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Blue, bcolors.Yellow, pkg, bcolors.Endc)
+
+                    var err error
+                    switch {
+                    case isArchLinux:
+                        err = subprocess.Run("sudo pacman -S --noconfirm %s", pkg)
+                    case isNethunter:
+                        err = subprocess.Run("nh -r apt-get install -y %s", pkg)
+                    case isAndroid:
+                        err = subprocess.Run("pkg install -y %s", pkg)
+                    case isWindows:
+                        err = subprocess.Run("choco install -y --force %s", pkg)
+                    case isMacOS:
+                        err = subprocess.Run("brew install %s", pkg)
+                    default:
+                        err = subprocess.Run("sudo apt-get install -y %s", pkg)
+                    }
+                    
+                    if err != nil {
+                        fmt.Printf("%s%s[!] %sFailed to install %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, pkg, err, bcolors.Endc)
+                    } else {
+                        fmt.Printf("%s%s[✓] %sSuccessfully installed %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
+                    }
+                    time.Sleep(90 * time.Millisecond)
                 }
             }
 
             for _, pkg := range goTools {
                 fmt.Printf("%s%s[+] %sInstalling Go tool: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, pkg, bcolors.Endc)
 
+                var err error
                 if isNethunter {
-                    subprocess.Run("nh -r apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y golang-go; go install %s", pkg)
+                    subprocess.Run("nh -r apt-get install -y golang-go")
+                    err = subprocess.Run("nh -r go install %s", pkg)
                 } else if isAndroid {
-                    subprocess.Run("pkg install golang -y && go install %s", pkg)
+                    subprocess.Run("pkg install golang -y")
+                    err = subprocess.Run("go install %s", pkg)
                 } else if isWindows {
-                    subprocess.Run("choco install golang -y && go install %s", pkg)
+                    subprocess.Run("choco install golang -y")
+                    err = subprocess.Run("go install %s", pkg)
                 } else if isMacOS {
-                    subprocess.Run("brew install go && go install %s", pkg)
+                    subprocess.Run("brew install go")
+                    err = subprocess.Run("go install %s", pkg)
                 } else {
-                    subprocess.Run("go install %s", pkg)
+                    subprocess.Run("sudo apt-get install -y golang-go")
+                    err = subprocess.Run("go install %s", pkg)
                 }
-                time.Sleep(180 * time.Millisecond)
+                
+                if err != nil {
+                    fmt.Printf("%s%s[!] %sFailed to install Go tool %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, pkg, err, bcolors.Endc)
+                } else {
+                    fmt.Printf("%s%s[✓] %sSuccessfully installed Go tool %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
+                }
+                time.Sleep(90 * time.Millisecond)
             }
         }
     }
