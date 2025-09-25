@@ -1074,17 +1074,20 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
     isWindows := runtime.GOOS == "windows"
 
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
-        if isAndroid || isNethunter {
-            fmt.Printf("\n%s%s[!] %sSetting up %s environment...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, 
-                map[bool]string{true: "Nethunter", false: "Android"}[isNethunter])
+        if isNethunter {
+            fmt.Printf("\n%s%s[!] %sSetting up NetHunter environment...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                var androidCmd string
-                if isNethunter {
-                    androidCmd = convertToNethunterCmd(cmd)
-                } else {
-                    androidCmd = convertToAndroidCmd(cmd)
-                }
+                androidCmd := convertToNethunterCmd(cmd)
+                fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, androidCmd)
+                subprocess.Run(androidCmd)
+                time.Sleep(100 * time.Millisecond)
+            }
+        } else if isAndroid {
+            fmt.Printf("\n%s%s[!] %sSetting up Android environment...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+
+            for _, cmd := range foundationCommands {
+                androidCmd := convertToAndroidCmd(cmd)
                 fmt.Printf("%s%s[*] %sRunning: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, androidCmd)
                 subprocess.Run(androidCmd)
                 time.Sleep(100 * time.Millisecond)
