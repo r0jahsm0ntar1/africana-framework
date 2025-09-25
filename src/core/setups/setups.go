@@ -927,7 +927,7 @@ func InstallTools(tools map[string]map[string]string) {
                 fmt.Printf("%s%s[*] %sInstalling %d system packages individually ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
 
                 for _, pkg := range systemPackages {
-                    fmt.Printf("\n%s%s[>] %sInstalling %s:%s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
+                    fmt.Printf("\n%s%s[>] %sInstalling%s: %s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
 
                     var err error
                     switch {
@@ -955,7 +955,7 @@ func InstallTools(tools map[string]map[string]string) {
             }
 
             for _, pkg := range goTools {
-                fmt.Printf("\n%s%s[>] %sInstalling Go tool %s:%s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
+                fmt.Printf("\n%s%s[>] %sInstalling Go tool%s: %s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
 
                 var err error
                 if isNethunter {
@@ -1248,13 +1248,10 @@ func getFoundationCommands() []string {
 
     if isNethunter {
         return []string{
-            "touch ~/.hushlogin",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git curl wget make golang python3 python3-venv python3-pip -y",
-            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework",
-            "cd africana-framework && make",
-            "cd africana-framework/build && mv ./* /usr/local/bin/afrconsole",
-            "afrconsole -i",
+        "touch /root/.hushlogin",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
+        "sh -c 'git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework && cd africana-framework && make && cd build && mv ./* /usr/local/bin/ && afrconsole -i'",
         }
     } else if isAndroid {
         return []string{
@@ -1718,7 +1715,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install tightvncserver kali-desktop-xfce -y
+        nh sudo apt update && nh sudo apt install upgrade -y #tightvncserver kali-desktop-xfce -y
     fi
 }
 
