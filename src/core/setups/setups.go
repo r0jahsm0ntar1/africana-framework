@@ -1310,7 +1310,8 @@ func ArchSetups() {
     fmt.Printf("\n%s%s[*] %sSetting up Arch Linux environment...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
     foundationCommands := getFoundationCommands()
-    baseSetup(foundationCommands)
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
 }
 
 func AndroidSetups() {
@@ -1387,8 +1388,7 @@ func installNetHunter() {
     fmt.Printf("%s%s[+] %sInstalling NetHunter...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
     foundationCommands := getFoundationCommands()
-    missingTools := UpsentTools()
-    baseSetup(foundationCommands, missingTools)
+    baseSetup(foundationCommands)
 
     fmt.Printf("\n%s%s[+] %sDownloading NetHunter installer ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
