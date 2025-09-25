@@ -1251,9 +1251,9 @@ func getFoundationCommands() []string {
         "touch /root/.hushlogin",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-        "cat > /tmp/install_africana.sh << 'EOF'\n#!/bin/bash\ngit clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework\ncd africana-framework\nmake\ncd build\nmv ./* /usr/local/bin/\nafrconsole -i\nEOF",
-        "chmod +x /tmp/install_africana.sh",
-        "/tmp/install_africana.sh",
+        //"cat > /tmp/install_africana.sh << 'EOF'\n#!/bin/bash\ngit clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework\ncd africana-framework\nmake\ncd build\nmv ./* /usr/local/bin/\nafrconsole -i\nEOF",
+        //"chmod +x /tmp/install_africana.sh",
+        //"/tmp/install_africana.sh",
         }
     } else if isAndroid {
         return []string{
@@ -1717,7 +1717,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install upgrade -y #tightvncserver kali-desktop-xfce -y
+        nh sudo apt update && nh sudo apt install make golang -y #tightvncserver kali-desktop-xfce -y
     fi
 }
 
@@ -1828,6 +1828,26 @@ function fix_uid() {
     nh -r groupmod -g "$GRPID" kali 2>/dev/null
 }
 
+function install_africana() {
+    printf "\n${blue}[*] Installing Africana Framework ...${reset}\n"
+
+    # Create .hushlogin
+    touch /root/.hushlogin
+
+    # Install dependencies
+    apt-get update -y
+    apt-get install -y git make golang
+    
+    # Install Africana Framework
+    cd /root
+    git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework
+    cd africana-framework
+    make
+    cd build
+    mv ./* /usr/local/bin/
+    printf "${green}[+] Africana Framework installed successfully${reset}\n"
+}
+
 function print_banner() {
     #clear
     printf "${blue}##################################################\n"
@@ -1874,9 +1894,12 @@ fix_sudo
 check_kex
 create_kex_launcher
 fix_uid
+# Then call it before the final messages:
+install_africana
 
 print_banner
-printf "${green}[=] Kali NetHunter for Termux installed successfully${reset}\n\n"
+printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"
+
 printf "${green}[+] To start Kali NetHunter, type:${reset}\n"
 printf "${green}[+] nethunter             # To start NetHunter CLI${reset}\n"
 printf "${green}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
