@@ -1033,6 +1033,33 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
     return nil
 }
 
+func installThirdPartyTools() {
+    isNethunter := utils.IsNethunter()
+    isWindows := runtime.GOOS == "windows"
+
+    fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    
+    gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
+    if isNethunter {
+        subprocess.Run("nh -r " + gitCloneCmd, utils.BaseDir)
+    } else if isWindows {
+        subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    } else {
+        subprocess.Run(gitCloneCmd, utils.BaseDir)
+    }
+
+    pipInstallCmd := "%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt"
+    if isNethunter {
+        subprocess.Run("nh -r " + pipInstallCmd, utils.VenvPython, utils.ToolsDir)
+    } else if isWindows {
+        subprocess.Run("python -m pip install --retries 10 --timeout 360 -r %s\\requirements.txt", utils.ToolsDir)
+    } else {
+        subprocess.Run(pipInstallCmd, utils.VenvPython, utils.ToolsDir)
+    }
+
+    fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
+}
+
 func baseSetup(foundationCommands []string, missingTools ...map[string]map[string]string) {
     var tools map[string]map[string]string
     if len(missingTools) > 0 {
@@ -1098,26 +1125,6 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             subprocess.Run("winecfg /v win11")
         }
 
-        fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
-        if isNethunter {
-            subprocess.Run("nh -r " + gitCloneCmd, utils.BaseDir)
-        } else if isWindows {
-            subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
-        } else {
-            subprocess.Run(gitCloneCmd, utils.BaseDir)
-        }
-
-        pipInstallCmd := "%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt"
-        if isNethunter {
-            subprocess.Run("nh -r " + pipInstallCmd, utils.VenvPython, utils.ToolsDir)
-        } else if isWindows {
-            subprocess.Run("python -m pip install --retries 10 --timeout 360 -r %s\\requirements.txt", utils.ToolsDir)
-        } else {
-            subprocess.Run(pipInstallCmd, utils.VenvPython, utils.ToolsDir)
-        }
-
-        fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
     } else {
         UpdateAfricana()
     }
@@ -1304,6 +1311,7 @@ func LinuxSetups() {
     foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
     baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
 }
 
 func ArchSetups() {
@@ -1312,6 +1320,7 @@ func ArchSetups() {
     foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
     baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
 }
 
 func AndroidSetups() {
@@ -1357,6 +1366,7 @@ func MacosSetups() {
     foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
     baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
 }
 
 func WindowsSetups() {
@@ -1370,18 +1380,7 @@ func WindowsSetups() {
     foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
     baseSetup(foundationCommands, missingTools)
-}
-
-func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-
-    foundationCommands := getFoundationCommands()
-    missingTools := UpsentTools()
-    baseSetup(foundationCommands, missingTools)
-
-    fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-    return
+    installThirdPartyTools()
 }
 
 func installNetHunter() {
@@ -1865,6 +1864,19 @@ printf "${green}[+] nh                         # Shortcut for nethunter${reset}\
         return
     }
     fmt.Printf("%s%s[+] %sNetHunter installed successfully!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+}
+
+func installToolsInNetHunter() {
+    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
+
+    fmt.Printf("\n%s%s[+] %sAndroid setup completed successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s%s[!] %sNote: Some tools may require root access or additional setup.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    return
 }
 
 func UpdateAfricana() {
