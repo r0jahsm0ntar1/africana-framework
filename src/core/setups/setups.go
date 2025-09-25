@@ -1214,7 +1214,14 @@ func getFoundationCommands() []string {
     isMacOS := runtime.GOOS == "darwin"
     isWindows := runtime.GOOS == "windows"
 
-    if isAndroid {
+    if isNethunter {
+        return []string{
+            "touch '~/.hushlogin'",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
+            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole",
+        }
+    } else if isAndroid {
         return []string{
             "pkg update -y",
             "pkg install root-repo x11-repo unstable-repo -y",
@@ -1228,13 +1235,6 @@ func getFoundationCommands() []string {
             "echo 'source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc",
             "chsh -s zsh",
             "termux-setup-storage",
-        }
-    } else if isNethunter {
-        return []string{
-            "touch '~/.hushlogin'",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole",
         }
     } else if isMacOS {
         return []string{
@@ -1794,7 +1794,7 @@ function fix_uid() {
 }
 
 function print_banner() {
-    clear
+    #clear
     printf "${blue}##################################################\n"
     printf "${blue}##                                              ##\n"
     printf "${blue}##  88      a8P         db        88        88  ##\n"
