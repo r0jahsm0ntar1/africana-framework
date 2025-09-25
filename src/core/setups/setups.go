@@ -1251,7 +1251,9 @@ func getFoundationCommands() []string {
         "touch /root/.hushlogin",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-        "sh -c 'git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework && cd africana-framework && make && cd build && mv ./* /usr/local/bin/ && afrconsole -i'",
+        "cat > /tmp/install_africana.sh << 'EOF'\n#!/bin/bash\ngit clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework\ncd africana-framework\nmake\ncd build\nmv ./* /usr/local/bin/\nafrconsole -i\nEOF",
+        "chmod +x /tmp/install_africana.sh",
+        "/tmp/install_africana.sh",
         }
     } else if isAndroid {
         return []string{
