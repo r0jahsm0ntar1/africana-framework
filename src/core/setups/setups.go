@@ -1102,7 +1102,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
             for _, cmd := range foundationCommands {
                 nethunterCmd := convertToNethunterCmd(cmd)
-                fmt.Printf("\n%s%s[*] %s%sRunning %s:%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, nethunterCmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, nethunterCmd, bcolors.Endc)
                 subprocess.Run(nethunterCmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1111,7 +1111,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
             for _, cmd := range foundationCommands {
                 androidCmd := convertToAndroidCmd(cmd)
-                fmt.Printf("\n%s%s[*] %s%sRunning %s:%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
                 subprocess.Run(androidCmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1119,7 +1119,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up macOS environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%sRunning %s:%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1127,7 +1127,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up Windows environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%sRunning %s:%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
@@ -1137,7 +1137,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             }
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%sRunning %s:%s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(100 * time.Millisecond)
             }
