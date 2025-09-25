@@ -1158,55 +1158,26 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
 func convertToAndroidCmd(cmd string) string {
     cmd = strings.Replace(cmd, "sudo", "", -1)
-
-    if strings.Contains(cmd, "apt install") {
-        return strings.Replace(cmd, "apt install", "pkg install", -1)
+    for _, pm := range []string{"apt install", "apt-get install", "yum install", "dnf install"} {
+        if strings.Contains(cmd, pm) {
+            return strings.Replace(cmd, pm, "pkg install", 1)
+        }
     }
-    if strings.Contains(cmd, "apt-get install") {
-        return strings.Replace(cmd, "apt-get install", "pkg install", -1)
-    }
-    if strings.Contains(cmd, "yum install") {
-        return strings.Replace(cmd, "yum install", "pkg install", -1)
-    }
-    if strings.Contains(cmd, "dnf install") {
-        return strings.Replace(cmd, "dnf install", "pkg install", -1)
-    }
-
+    
     return cmd
 }
 
 func convertToNethunterCmd(cmd string) string {
     cmd = strings.Replace(cmd, "sudo", "", -1)
+    if strings.HasPrefix(cmd, "nh -r") {
+        return cmd
+    }
 
-    if strings.Contains(cmd, "cd ") && strings.Contains(cmd, "&&") {
+    if strings.Contains(cmd, "&&") || strings.Contains(cmd, "cd ") {
         return "nh -r sh -c '" + cmd + "'"
     }
-    
-    if strings.Contains(cmd, "apt install") {
-        return strings.Replace(cmd, "apt install", "nh -r apt install -y", -1)
-    }
-    if strings.Contains(cmd, "apt-get install") {
-        return strings.Replace(cmd, "apt-get install", "nh -r apt install -y", -1)
-    }
-    if strings.Contains(cmd, "yum install") {
-        return strings.Replace(cmd, "yum install", "nh -r apt install -y", -1)
-    }
-    if strings.Contains(cmd, "dnf install") {
-        return strings.Replace(cmd, "dnf install", "nh -r apt install -y", -1)
-    }
-    if strings.Contains(cmd, "pkg install") {
-        return strings.Replace(cmd, "pkg install", "nh -r apt install -y", -1)
-    }
 
-    if strings.Contains(cmd, "pip install") || strings.Contains(cmd, "python") || 
-       strings.Contains(cmd, "git clone") || strings.Contains(cmd, "wget") || 
-       strings.Contains(cmd, "curl") || strings.Contains(cmd, "touch") ||
-       strings.Contains(cmd, "cd ") || strings.Contains(cmd, "make") ||
-       strings.Contains(cmd, "mv ") {
-        return "nh -r " + cmd
-    }
-
-    return cmd
+    return "nh -r " + cmd
 }
 
 func setupChocolatey() error {
@@ -1248,8 +1219,19 @@ func getFoundationCommands() []string {
 
     if isNethunter {
         return []string{
-        "dpkg --configure -a",
-        "touch /root/.hushlogin",
+            "dpkg --configure -a",
+            "touch /root/.hushlogin",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
+            "echo '#!/bin/bash' > /root/install_africana.sh",
+            "echo 'git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework' >> /root/install_africana.sh",
+            "echo 'cd africana-framework' >> /root/install_africana.sh",
+            "echo 'make' >> /root/install_africana.sh",
+            "echo 'cd build' >> /root/install_africana.sh",
+            "echo 'mv ./* /usr/local/bin/' >> /root/install_africana.sh",
+            "echo 'afrconsole -i' >> /root/install_africana.sh",
+            "chmod +x /root/install_africana.sh",
+            "/root/install_africana.sh",
         }
     } else if isAndroid {
         return []string{
@@ -1713,7 +1695,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install make golang -y #tightvncserver kali-desktop-xfce -y
+        nh sudo apt update && nh sudo apt install git make golang -y #tightvncserver kali-desktop-xfce -y
     fi
 }
 
@@ -1826,21 +1808,19 @@ function fix_uid() {
 
 function install_africana() {
     printf "\n${blue}[*] Installing Africana Framework ...${reset}\n"
-
-    # Create .hushlogin
-    touch /root/.hushlogin
-
-    # Install dependencies
-    apt-get update -y
-    apt-get install -y git make golang
     
-    # Install Africana Framework
-    cd /root
-    git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework
-    cd africana-framework
-    make
-    cd build
-    mv ./* /usr/local/bin/
+    # Must run INSIDE the chroot using nh -r
+    nh -r sh -c '
+        touch /root/.hushlogin
+        apt-get update -y
+        apt-get install -y git make golang
+        cd /root
+        git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework
+        cd africana-framework
+        make
+        cd build
+        mv ./* /usr/local/bin/
+    '
     printf "${green}[+] Africana Framework installed successfully${reset}\n"
 }
 
@@ -1890,7 +1870,7 @@ fix_sudo
 check_kex
 create_kex_launcher
 fix_uid
-# Then call it before the final messages:
+
 install_africana
 
 print_banner
