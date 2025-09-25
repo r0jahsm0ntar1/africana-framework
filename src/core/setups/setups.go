@@ -1098,38 +1098,38 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
         if isNethunter {
-            fmt.Printf("\n%s%s[!] %sSetting up NetHunter environment ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            fmt.Printf("\n%s%s[!] %sSetting up NetHunter environment ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
                 nethunterCmd := convertToNethunterCmd(cmd)
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, nethunterCmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s :%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, nethunterCmd, bcolors.Endc)
                 subprocess.Run(nethunterCmd)
-                time.Sleep(100 * time.Millisecond)
+                time.Sleep(90 * time.Millisecond)
             }
         } else if isAndroid {
-            fmt.Printf("\n%s%s[!] %sSetting up Android environment ...\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+            fmt.Printf("\n%s%s[!] %sSetting up Android environment ...", bcolors.Bold, bcolors.Red, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
                 androidCmd := convertToAndroidCmd(cmd)
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s :%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
                 subprocess.Run(androidCmd)
-                time.Sleep(100 * time.Millisecond)
+                time.Sleep(90 * time.Millisecond)
             }
         } else if isMacOS {
             fmt.Printf("%s%s[*] %sSetting up macOS environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s :%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
-                time.Sleep(100 * time.Millisecond)
+                time.Sleep(90 * time.Millisecond)
             }
         } else if isWindows {
             fmt.Printf("%s%s[*] %sSetting up Windows environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s :%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
-                time.Sleep(100 * time.Millisecond)
+                time.Sleep(90 * time.Millisecond)
             }
         } else {
             if err := SetupGoPyEnv(utils.VenvName); err != nil {
@@ -1137,9 +1137,9 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             }
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%s%sRunning%s :%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
-                time.Sleep(100 * time.Millisecond)
+                time.Sleep(90 * time.Millisecond)
             }
         }
 
@@ -1178,6 +1178,10 @@ func convertToAndroidCmd(cmd string) string {
 func convertToNethunterCmd(cmd string) string {
     cmd = strings.Replace(cmd, "sudo", "", -1)
 
+    if strings.Contains(cmd, "cd ") && strings.Contains(cmd, "&&") {
+        return "nh -r sh -c '" + cmd + "'"
+    }
+    
     if strings.Contains(cmd, "apt install") {
         return strings.Replace(cmd, "apt install", "nh -r apt install -y", -1)
     }
@@ -1196,7 +1200,9 @@ func convertToNethunterCmd(cmd string) string {
 
     if strings.Contains(cmd, "pip install") || strings.Contains(cmd, "python") || 
        strings.Contains(cmd, "git clone") || strings.Contains(cmd, "wget") || 
-       strings.Contains(cmd, "curl") {
+       strings.Contains(cmd, "curl") || strings.Contains(cmd, "touch") ||
+       strings.Contains(cmd, "cd ") || strings.Contains(cmd, "make") ||
+       strings.Contains(cmd, "mv ") {
         return "nh -r " + cmd
     }
 
@@ -1224,7 +1230,7 @@ func setupBrew() error {
 
         installCmd := `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
         if err := subprocess.Run(installCmd); err != nil {
-            return fmt.Errorf("failed to install Homebrew: %v", err)
+            return fmt.Errorf("[!] failed to install Homebrew: %v", err)
         }
 
         subprocess.Run(`echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc`)
@@ -1242,10 +1248,13 @@ func getFoundationCommands() []string {
 
     if isNethunter {
         return []string{
-            "touch '~/.hushlogin'",
+            "touch ~/.hushlogin",
             "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole",
+            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git curl wget make golang python3 python3-venv python3-pip -y",
+            "git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework",
+            "cd africana-framework && make",
+            "cd africana-framework/build && mv ./* /usr/local/bin/afrconsole",
+            "afrconsole -i",
         }
     } else if isAndroid {
         return []string{
@@ -1482,7 +1491,7 @@ function get_arch() {
 
 function set_strings() {
     echo \
-    && echo "" 
+    && echo ""
     ####
     if [[ ${SYS_ARCH} == "arm64" ]];
     then
@@ -1525,7 +1534,7 @@ function set_strings() {
     CHROOT=kali-${SYS_ARCH}
     IMAGE_NAME=kali-nethunter-rootfs-${wimg}-${SYS_ARCH}.tar.xz
     SHA_NAME=${IMAGE_NAME}.sha512sum
-}    
+}
 
 function prepare_fs() {
     unset KEEP_CHROOT
@@ -1709,7 +1718,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install git curl wget make golang python3 python3-venv python3-pip tightvncserver kali-desktop-xfce -y
+        nh sudo apt update && nh sudo apt install tightvncserver kali-desktop-xfce -y
     fi
 }
 
@@ -1868,7 +1877,7 @@ create_kex_launcher
 fix_uid
 
 print_banner
-printf "${green}[=] Kali NetHunter for Termux installed successfully${reset}\n"
+printf "${green}[=] Kali NetHunter for Termux installed successfully${reset}\n\n"
 printf "${green}[+] To start Kali NetHunter, type:${reset}\n"
 printf "${green}[+] nethunter             # To start NetHunter CLI${reset}\n"
 printf "${green}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
@@ -1881,7 +1890,7 @@ printf "${green}[+] nethunter -r          # To run NetHunter as root${reset}\n"
 #printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
 #printf "${green}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
 #printf "${green}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
-printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n"
+printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
     os.WriteFile(installerFile, []byte(installerScript), 0755)
@@ -1894,7 +1903,7 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n"
 }
 
 func installToolsInNetHunter() {
-    fmt.Printf("\n%s%s[!] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+    fmt.Printf("\n%s%s[>] %sInstalling tools in NetHunter ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     foundationCommands := getFoundationCommands()
     missingTools := UpsentTools()
