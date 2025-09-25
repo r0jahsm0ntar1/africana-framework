@@ -1415,7 +1415,7 @@ func installNetHunter() {
     foundationCommands := getFoundationCommands()
     baseSetup(foundationCommands)
 
-    fmt.Printf("\n%s%s[+] %sDownloading NetHunter installer ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[>] %sDownloading NetHunter installer ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
 
     installerScript := `
 #!/data/data/com.termux/files/usr/bin/bash -e
