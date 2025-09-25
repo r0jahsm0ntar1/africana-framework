@@ -1489,7 +1489,7 @@ function set_strings() {
         echo "[1] NetHunter ARM64 (full)"
         echo "[2] NetHunter ARM64 (minimal)"
         echo "[3] NetHunter ARM64 (nano)"
-        read -p "\nEnter the image you want to install: " wimg
+        read -p "Enter the image you want to install: " wimg
         if (( $wimg == "1" ));
         then
             wimg="full"
@@ -1507,7 +1507,7 @@ function set_strings() {
         echo "[1] NetHunter ARMhf (full)"
         echo "[2] NetHunter ARMhf (minimal)"
         echo "[3] NetHunter ARMhf (nano)"
-        read -p "\nEnter the image you want to install: " wimg
+        read -p "Enter the image you want to install: " wimg
         if [[ "$wimg" == "1" ]]; then
             wimg="full"
         elif [[ "$wimg" == "2" ]]; then
