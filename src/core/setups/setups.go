@@ -1017,7 +1017,7 @@ func SetupGoPyEnv(VenvName string) error {
             return err
         }
 
-        fmt.Printf("\n%s%s[+] %sCreating Python virtual environment...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        fmt.Printf("\n%s%s[+] %sCreating Python virtual environment ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
         if isNethunter {
             subprocess.Run("nh -r python3 -m pip install --upgrade pip; nh -r python3 -m venv %s --upgrade-deps", utils.VenvPath)
@@ -1426,7 +1426,7 @@ USERNAME=kali
 
 function unsupported_arch() {
     printf "${red}"
-    echo "[*] Unsupported Architecture\n\n"
+    echo "[*] Unsupported Architecture\n"
     printf "${reset}"
     exit
 }
@@ -1520,7 +1520,6 @@ function set_strings() {
     fi
     ####
 
-
     CHROOT=kali-${SYS_ARCH}
     IMAGE_NAME=kali-nethunter-rootfs-${wimg}-${SYS_ARCH}.tar.xz
     SHA_NAME=${IMAGE_NAME}.sha512sum
@@ -1548,10 +1547,10 @@ function cleanup() {
         fi
         fi
     fi
-} 
+}
 
 function check_dependencies() {
-    printf "${blue}\n[*] Checking package dependencies...${reset}\n"
+    printf "\n${blue}[*] Checking package dependencies ...${reset}\n"
     ## Workaround for termux-app issue #1283 (https://github.com/termux/termux-app/issues/1283)
     ##apt update -y &> /dev/null
     apt-get update -y &> /dev/null || apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" dist-upgrade -y &> /dev/null
@@ -1570,7 +1569,6 @@ function check_dependencies() {
     apt upgrade -y
 }
 
-
 function get_url() {
     ROOTFS_URL="${BASE_URL}/${IMAGE_NAME}"
     SHA_URL="${BASE_URL}/${SHA_NAME}"
@@ -1587,7 +1585,7 @@ function get_rootfs() {
             return
         fi
     fi
-    printf "${blue}[*] Downloading rootfs...${reset}\n\n"
+    printf "${blue}[*] Downloading rootfs ...${reset}\n"
     get_url
     wget --continue "${ROOTFS_URL}"
 }
@@ -1602,40 +1600,40 @@ function check_sha_url() {
 
 function verify_sha() {
     if [ -z $KEEP_IMAGE ]; then
-        printf "\n${blue}[*] Verifying integrity of rootfs...${reset}\n\n"
+        printf "\n${blue}[*] Verifying integrity of rootfs ...${reset}\n"
         if [ -f "${SHA_NAME}" ]; then
             sha512sum -c "$SHA_NAME" || {
                 printf "${red} Rootfs corrupted. Please run this installer again or download the file manually\n${reset}"
                 exit 1
             }
         else
-            echo "[!] SHA file not found. Skipping verification..."    
-        fi    
+            echo "[!] SHA file not found. Skipping verification ..."
+        fi
     fi
 }
 
 function get_sha() {
     if [ -z $KEEP_IMAGE ]; then
-        printf "\n${blue}[*] Getting SHA ... ${reset}\n\n"
+        printf "\n${blue}[*] Getting SHA ... ${reset}\n"
         get_url
         if [ -f "${SHA_NAME}" ]; then
             rm -f "${SHA_NAME}"
         fi        
         if check_sha_url; then
-            echo "[+] SHA_URL exists. Proceeding with download..."
+            echo "[+] SHA_URL exists. Proceeding with download ..."
             wget --continue "${SHA_URL}"
             verify_sha
         else
-            echo "[!] SHA_URL does not exist. Skipping download."
+            echo "[!] SHA_URL does not exist. Skipping download ..."
         fi
-    fi        
+    fi
 }
 
 function extract_rootfs() {
     if [ -z $KEEP_CHROOT ]; then
-        printf "\n${blue}[*] Extracting rootfs... ${reset}\n\n"
+        printf "\n${blue}[*] Extracting rootfs... ${reset}\n"
         proot --link2symlink tar -xf "$IMAGE_NAME" 2> /dev/null || :
-    else        
+    else
         printf "${yellow}[!] Using existing rootfs directory${reset}\n"
     fi
 }
@@ -1706,14 +1704,14 @@ EOF
     if [ ! -f "${NH_SHORTCUT}" ]; then
         ln -s "${NH_LAUNCHER}" "${NH_SHORTCUT}" >/dev/null
     fi
-   
 }
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update && nh sudo apt install -y tightvncserver kali-desktop-xfce
+        nh sudo apt update && nh sudo apt install git curl wget make golang python3 python3-venv python3-pip tightvncserver kali-desktop-xfce -y
     fi
 }
+
 function create_kex_launcher() {
     KEX_LAUNCHER=${CHROOT}/usr/bin/kex
     cat > $KEX_LAUNCHER <<- EOF
@@ -1749,10 +1747,10 @@ function status-kex() {
     sessions=\$(vncserver -list | sed s/"TigerVNC"/"NetHunter KeX"/)
     if [[ \$sessions == *"590"* ]]; then
         printf "\n\${sessions}\n"
-        printf "\nYou can use the KeX client to connect to any of these displays.\n\n"
+        printf "\nYou can use the KeX client to connect to any of these displays.\n"
     else
         if [ ! -z \$starting_kex ]; then
-            printf '\nError starting the KeX server.\nPlease try "nethunter kex kill" or restart your termux session and try again.\n\n'
+            printf '\nError starting the KeX server.\nPlease try "nethunter kex kill" or restart your termux session and try again.\n'
         fi
     fi
     return 0
@@ -1834,9 +1832,8 @@ function print_banner() {
     printf "${blue}##  88     '88.   d8'        '8b  88        88  ##\n"
     printf "${blue}##  88       Y8b d8'          '8b 888888888 88  ##\n"
     printf "${blue}##                                              ##\n"
-    printf "${blue}####  ############# NetHunter ####################${reset}\n\n"
+    printf "${blue}####  ############# NetHunter ####################${reset}\n"
 }
-
 
 ##################################
 ##              Main            ##
