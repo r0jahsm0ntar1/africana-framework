@@ -1222,16 +1222,7 @@ func getFoundationCommands() []string {
             "dpkg --configure -a",
             "touch /root/.hushlogin",
             "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-            "apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
-            "echo '#!/bin/bash' > /root/install_africana.sh",
-            "echo 'git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework' >> /root/install_africana.sh",
-            "echo 'cd africana-framework' >> /root/install_africana.sh",
-            "echo 'make' >> /root/install_africana.sh",
-            "echo 'cd build' >> /root/install_africana.sh",
-            "echo 'mv ./* /usr/local/bin/' >> /root/install_africana.sh",
-            "echo 'afrconsole -i' >> /root/install_africana.sh",
-            "chmod +x /root/install_africana.sh",
-            "/root/install_africana.sh",
+            //"apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install git make golang -y",
         }
     } else if isAndroid {
         return []string{
@@ -1357,7 +1348,7 @@ func AndroidSetups() {
     switch Input {
     case "y", "yes":
         installNetHunter()
-        installToolsInNetHunter()
+        //installToolsInNetHunter()
         return
     case "n", "q", "no", "exit", "quit":
         return
@@ -1808,7 +1799,7 @@ function fix_uid() {
 
 function install_africana() {
     printf "\n${blue}[*] Installing Africana Framework ...${reset}\n"
-    
+
     # Must run INSIDE the chroot using nh -r
     nh -r sh -c '
         touch /root/.hushlogin
@@ -1820,8 +1811,114 @@ function install_africana() {
         make
         cd build
         mv ./* /usr/local/bin/
+        afrconsole -i
     '
     printf "${green}[+] Africana Framework installed successfully${reset}\n"
+}
+
+function create_africana_launcher() {
+    AFR_LAUNCHER=${PREFIX}/bin/africana
+    AFR_SHORTCUT=${PREFIX}/bin/afr
+
+    cat > "$AFR_LAUNCHER" <<- 'EOF'
+#!/data/data/com.termux/files/usr/bin/bash -e
+
+VERSION="1.0"
+AFR_CONSOLE="afrconsole"
+
+function show_help() {
+    echo "Africana Framework Launcher v$VERSION"
+    echo "Usage: africana [OPTIONS] [COMMAND]"
+    echo ""
+    echo "Options:"
+    echo "  -i, --install    Run afrconsole install"
+    echo "  -u, --update     Update africana framework"
+    echo "  -v, --version    Show version information"
+    echo "  -h, --help       Show this help message"
+    echo "  -r, --root       Run as root in nethunter"
+    echo ""
+    echo "Examples:"
+    echo "  africana                     # Start africana console"
+    echo "  africana -i                  # Run installation"
+    echo "  africana --update            # Update framework"
+    echo "  africana -r                  # Run as root"
+    echo "  afr                          # Shortcut for africana"
+}
+
+function update_africana() {
+    echo "[*] Updating Africana Framework..."
+    nethunter -r sh -c '
+        if [ -d "/root/africana-framework" ]; then
+            cd /root/africana-framework
+            git pull
+            make clean
+            make
+            cd build
+            mv ./* /usr/local/bin/
+            echo "[+] Africana Framework updated successfully"
+        else
+            echo "[!] Africana Framework not found. Installing..."
+            cd /root
+            git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework
+            cd africana-framework
+            make
+            cd build
+            mv ./* /usr/local/bin/
+            echo "[+] Africana Framework installed successfully"
+        fi
+    '
+}
+
+function main() {
+    # Handle command line arguments
+    case "$1" in
+        -i|--install)
+            nethunter -r sh -c "afrconsole -i"
+            ;;
+        -u|--update)
+            update_africana
+            ;;
+        -v|--version)
+            echo "Africana Framework Launcher v$VERSION"
+            ;;
+        -h|--help)
+            show_help
+            ;;
+        -r|--root)
+            if [ "$#" -gt 1 ]; then
+                shift
+                nethunter -r sh -c "afrconsole $@"
+            else
+                nethunter -r sh -c "afrconsole"
+            fi
+            ;;
+        "")
+            # No arguments, start normally
+            nethunter -r sh -c "afrconsole"
+            ;;
+        *)
+            # Pass all arguments to afrconsole
+            nethunter -r sh -c "afrconsole $@"
+            ;;
+    esac
+}
+
+# Start main function
+main "$@"
+EOF
+
+    chmod 700 "$AFR_LAUNCHER"
+
+    # Create shortcut
+    if [ -L "${AFR_SHORTCUT}" ]; then
+        rm -f "${AFR_SHORTCUT}"
+    fi
+    if [ ! -f "${AFR_SHORTCUT}" ]; then
+        ln -s "${AFR_LAUNCHER}" "${AFR_SHORTCUT}" >/dev/null
+    fi
+
+    create_africana_launcher
+    printf "${green}[+] Africana launcher created successfully${reset}\n"
 }
 
 function print_banner() {
