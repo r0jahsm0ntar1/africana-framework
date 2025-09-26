@@ -1547,7 +1547,7 @@ post_config_actions() {
 ################################################################################
 pre_complete_actions() {
 	if ! ${GUI_INSTALLED:-false} && [ "${SELECTED_INSTALLATION}" != "full" ] && ask -y -- -t "Should I set up the GUI now?"; then
-		set_up_gui && install_africana && set_up_browser && GUI_INSTALLED=true
+		set_up_gui && set_up_browser && GUI_INSTALLED=true
 	fi
 }
 
@@ -1668,7 +1668,7 @@ function install_africana() {
         msg -s "Done, all the dependencies are installed."
         msg -t "Now lemme clone and build the Africana Framework."
         msg "This will take a while."
-        
+
         if distro_exec sh -c '
             cd /root
             if [ -d "africana-framework" ]; then
@@ -1683,7 +1683,7 @@ function install_africana() {
         '; then
             msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
             msg -t "Now lemme create the launcher script for Africana."
-            
+
             if {
                 local africana_launcher="$(
                     cat 2>>"${LOG_FILE}" <<-EOF
@@ -3851,6 +3851,7 @@ if ${ACTION_CONFIGURE}; then
 	post_config_actions # External function
 	set_user_shell
 	set_zone_info
+	install_africana
 fi
 
 # Clean up files
