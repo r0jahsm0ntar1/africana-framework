@@ -1931,20 +1931,36 @@ printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 
 func UpdateAfricana() {
     fmt.Printf("\n%s%s[!] %sAfricana already installed. Updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git pull .", utils.ToolsDir)
-    fmt.Printf("\n%s%s[+] %sSuccesfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    subprocess.Run(fmt.Sprintf("cd %s && git pull", utils.ToolsDir))
+    fmt.Printf("\n%s%s[+] %sSuccessfully updated Base-tools.\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
     fmt.Printf("\n%s%s[*] %sUpdating africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework; cd ./africana-framework; make; cd ./build; mv ./* /usr/local/bin/afrconsole; rm -rf ../africana-framework", utils.BaseDir)
-    fmt.Printf("\n%s%s[*] %sSuccesfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+
+    commands := []string{
+        fmt.Sprintf("cd %s", utils.BaseDir),
+        "rm -rf africana-framework",
+        "git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework",
+        "cd africana-framework && make",
+        "cd build && mv ./* /usr/local/bin/afrconsole",
+        "cd ../.. && rm -rf africana-framework",
+    }
+
+    subprocess.Run(strings.Join(commands, " && "))
+    fmt.Printf("\n%s%s[*] %sSuccessfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
 func Uninstaller() {
-    fmt.Printf("\n%s%s[!] %sUninstalling africana.", bcolors.Bold, bcolors.Red, bcolors.Endc)
-    if _, err := os.Stat(utils.BaseDir); !os.IsNotExist(err) {
-        subprocess.Run("rm -rf %s; rm -rf /usr/local/bin/afrconsole", utils.BaseDir)
-        fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        os.Exit(0)
-    } else {
+    fmt.Printf("\n%s%s[!] %sUninstalling africana...\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+ 
+    if _, err := os.Stat(utils.BaseDir); os.IsNotExist(err) {
         fmt.Printf("\n%s%s[!] %sAfricana is not installed.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        return
     }
+
+    subprocess.Run(fmt.Sprintf("rm -rf %s", utils.BaseDir))
+    subprocess.Run("rm -f /usr/local/bin/afrconsole")
+
+    fmt.Printf("\n%s%s[*] %sAfricana uninstalled. Goodbye!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    os.Exit(0)
 }
