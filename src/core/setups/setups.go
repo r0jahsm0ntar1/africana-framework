@@ -1095,6 +1095,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
     isNethunter := utils.IsNethunter()
     isMacOS := runtime.GOOS == "darwin"
     isWindows := runtime.GOOS == "windows"
+    isRegularLinux := !isAndroid && !isNethunter && !isMacOS && !isWindows
 
     if _, err := os.Stat(utils.ToolsDir); os.IsNotExist(err) {
         if isNethunter {
@@ -1132,10 +1133,6 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
                 time.Sleep(90 * time.Millisecond)
             }
         } else {
-            if err := SetupGoPyEnv(utils.VenvName); err != nil {
-                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
-            }
-
             for _, cmd := range foundationCommands {
                 fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
@@ -1145,6 +1142,12 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
         if len(tools) > 0 {
             InstallTools(tools)
+        }
+
+        if isRegularLinux {
+            if err := SetupGoPyEnv(utils.VenvName); err != nil {
+                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+            }
         }
 
         if !utils.IsArchLinux() && !isAndroid && !isNethunter && !isWindows {
@@ -1339,7 +1342,7 @@ func AndroidSetups() {
         return
     }
 
-    fmt.Printf("\n%s%s[!] %sNetHunter not detected. Please install NetHunter first.", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    fmt.Printf("\n%s%s[!] %sNetHunter not detected. Please install NetHunter first ...", bcolors.Bold, bcolors.Red, bcolors.Endc)
     fmt.Printf("\n%s%s[?] %sWould you like to install NetHunter? (y/N): ", bcolors.Bold, bcolors.Cyan, bcolors.Endc)
 
     utils.Scanner.Scan()
@@ -1710,6 +1713,36 @@ function start-kex() {
     return 0
 }
 
+function create_africana_launcher() {
+    AFR_LAUNCHER=${PREFIX}/bin/africana
+    AFR_SHORTCUT=${PREFIX}/bin/afr
+
+    cat > "$AFR_LAUNCHER" <<- 'EOF'
+#!/data/data/com.termux/files/usr/bin/bash -e
+
+# Simple pass-through launcher for africana framework
+if [ $# -eq 0 ]; then
+    # No arguments - start normally
+    nethunter -r sh -c "afrconsole"
+else
+    # Pass all arguments to afrconsole
+    nethunter -r sh -c "afrconsole $*"
+fi
+EOF
+
+    chmod 700 "$AFR_LAUNCHER"
+
+    # Create shortcut
+    if [ -L "${AFR_SHORTCUT}" ]; then
+        rm -f "${AFR_SHORTCUT}"
+    fi
+    if [ ! -f "${AFR_SHORTCUT}" ]; then
+        ln -s "${AFR_LAUNCHER}" "${AFR_SHORTCUT}" >/dev/null
+    fi
+   
+    printf "${green}[+] Africana launcher created successfully${reset}\n"
+}
+
 function stop-kex() {
     vncserver -kill :1 | sed s/"Xtigervnc"/"NetHunter KeX"/
     vncserver -kill :2 | sed s/"Xtigervnc"/"NetHunter KeX"/
@@ -1813,37 +1846,8 @@ function install_africana() {
         mv ./* /usr/local/bin/afrconsole
         afrconsole -i
     '
+    create_africana_launcher
     printf "${green}[+] Africana Framework installed successfully${reset}\n"
-}
-
-function create_africana_launcher() {
-    AFR_LAUNCHER=${PREFIX}/bin/africana
-    AFR_SHORTCUT=${PREFIX}/bin/afr
-
-    cat > "$AFR_LAUNCHER" <<- 'EOF'
-#!/data/data/com.termux/files/usr/bin/bash -e
-
-# Simple pass-through launcher for africana framework
-if [ $# -eq 0 ]; then
-    # No arguments - start normally
-    nethunter -r sh -c "afrconsole"
-else
-    # Pass all arguments to afrconsole
-    nethunter -r sh -c "afrconsole $*"
-fi
-EOF
-
-    chmod 700 "$AFR_LAUNCHER"
-
-    # Create shortcut
-    if [ -L "${AFR_SHORTCUT}" ]; then
-        rm -f "${AFR_SHORTCUT}"
-    fi
-    if [ ! -f "${AFR_SHORTCUT}" ]; then
-        ln -s "${AFR_LAUNCHER}" "${AFR_SHORTCUT}" >/dev/null
-    fi
-   
-    printf "${green}[+] Africana launcher created successfully${reset}\n"
 }
 
 function print_banner() {
@@ -1895,7 +1899,6 @@ create_kex_launcher
 fix_uid
 
 install_africana
-create_africana_launcher
 
 print_banner
 printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"

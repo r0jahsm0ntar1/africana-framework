@@ -66,6 +66,19 @@ else
     ARCHS := $(UNAME_M)
 endif
 
+# Detect current OS
+UNAME_S := $(shell uname -s | tr A-Z a-z)
+ifeq ($(UNAME_S),linux)
+    # Check if we're in Termux (Android)
+    ifneq ($(wildcard /data/data/com.termux/files/usr/bin/termux-info),)
+        CURRENT_OS := android
+    else
+        CURRENT_OS := linux
+    endif
+else
+    CURRENT_OS := $(UNAME_S)
+endif
+
 # Map OS keyword to GOOS
 define expand_targets
 $(foreach arch,$(ARCHS),$(1)/$(arch))
@@ -77,17 +90,11 @@ ALL_TARGETS := \
     $(call expand_targets,windows) \
     $(call expand_targets,darwin)
 
-# Detect current OS
-UNAME_S := $(shell uname -s | tr A-Z a-z)
-ifeq ($(UNAME_S),linux)
-    # Check if we're in Termux (Android)
-    ifneq ($(wildcard /data/data/com.termux/files/usr/bin/termux-info),)
-        PLATFORMS := $(call expand_targets,android)
-    else
-        PLATFORMS := $(call expand_targets,linux)
-    endif
+# Current platform targets
+ifeq ($(CURRENT_OS),android)
+    PLATFORMS := $(call expand_targets,android)
 else
-    PLATFORMS := $(call expand_targets,$(UNAME_S))
+    PLATFORMS := $(call expand_targets,$(CURRENT_OS))
 endif
 
 # Default make (build for current OS)
@@ -96,7 +103,7 @@ default: build
 # Build for current system
 build:
 	@echo "${BrightGreen}${Bold}[*] ${Endc}Detecting system ...${Endc}"
-	@echo "${BrightBlue}${Bold}[+] ${Endc}Building ${Green}${APP_NAME}${Endc} for current system ...${Endc}"
+	@echo "${BrightBlue}${Bold}[+] ${Endc}Building ${Green}${APP_NAME}${Endc} for ${BrightCyan}${CURRENT_OS}${Endc} (${BrightYellow}${ARCHS}${Endc}) ...${Endc}"
 	@mkdir -p $(BUILD_DIR)
 	@for platform in $(PLATFORMS); do \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
@@ -107,7 +114,7 @@ build:
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
 			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building completed successfully ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building for ${BrightCyan}${CURRENT_OS}${Endc} (${BrightYellow}${ARCHS}${Endc}) completed successfully ...${Endc}"; \
 		else \
 			echo "${Red}${Bold}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
 			exit 1; \
@@ -140,7 +147,7 @@ distro:
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		if [ $$? -eq 0 ]; then \
 			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building completed successfully ...${Endc}"; \
+			echo "${Blue}${Bold}[+] ${Endc}Building for ${BrightCyan}$$OS_NAME${Endc} completed successfully ...${Endc}"; \
 		else \
 			echo "${BrightRed}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
 			exit 1; \
@@ -156,13 +163,8 @@ clean:
 
 # Native run helper
 run:
-	@GOOS=$(shell uname -s | tr A-Z a-z); \
-	if [ -f /data/data/com.termux/files/usr/bin/termux-info ]; then GOOS="android"; fi; \
-	GOARCH=$(shell uname -m); \
-	# Map architecture names \
-	if [ "$$GOARCH" = "x86_64" ]; then GOARCH="amd64"; fi; \
-	if [ "$$GOARCH" = "aarch64" ]; then GOARCH="arm64"; fi; \
-	if [ "$$GOARCH" = "armv7l" ]; then GOARCH="arm"; fi; \
+	@GOOS=$(CURRENT_OS); \
+	GOARCH=$(ARCHS); \
 	EXT=; \
 	if [ "$$GOOS" = "windows" ]; then EXT=".exe"; fi; \
 	BIN=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
@@ -171,12 +173,12 @@ run:
 		echo "${BrightBlue}Run ${BrightCyan}make build${BrightBlue} first${Endc}"; \
 		exit 1; \
 	fi; \
-	echo "${BrightBlue}${Bold}[+] ${Endc}Running ${Green}$$BIN ${Endc}...${Endc}"; \
+	echo "${BrightBlue}${Bold}[+] ${Endc}Running ${Green}$$BIN ${Endc}on ${BrightCyan}$$GOOS${Endc} (${BrightYellow}$$GOARCH${Endc}) ...${Endc}"; \
 	chmod +x $$BIN; \
 	./$$BIN -a; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
-		echo "${Blue}${Bold}[*] ${Endc}Execution completed successfully ...${Endc}"; \
+		echo "${Blue}${Bold}[*] ${Endc}Execution on ${BrightCyan}$$GOOS${Endc} completed successfully ...${Endc}"; \
 	else \
 		echo "${Red}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
 	fi
@@ -199,7 +201,7 @@ help:
 	@echo "  ${BrightWhite}make distro android${Endc} - ${Dim}Build for Android${Endc}"
 	@echo "  ${BrightWhite}make distro all${Endc}     - ${Dim}Build for all platforms${Endc}"
 	@echo ""
-	@echo "${BrightBlue}Current OS: ${BrightCyan}$(shell uname -s)${Endc}"
+	@echo "${BrightBlue}Current OS: ${BrightCyan}$(CURRENT_OS)${Endc}"
 	@echo "${BrightBlue}Current Arch: ${BrightCyan}$(shell uname -m) → $(ARCHS)${Endc}"
 
 # Prevent Make from trying to treat distro targets like files
