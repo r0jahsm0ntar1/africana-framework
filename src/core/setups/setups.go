@@ -88,7 +88,7 @@ var (
         "openssl":                      "openssl",
         "php-cgi":                      "php-cgi",
         "pkg-config":                   "pkg-config",
-        //"playit":                       "playit",
+        "playit":                       "playit",
         "powershell":                   "powershell",
         "privoxy":                      "privoxy",
         "python3":                      "python3",
@@ -121,7 +121,6 @@ var (
         "dnsenum":                      "dnsenum",
         "dnsrecon":                     "dnsrecon",
         "findomain":                    "findomain",
-        "feroxbuster":                  "feroxbuster",
         "gobuster":                     "gobuster",
         "gophish":                      "gophish",
         "massdns":                      "massdns",
@@ -247,7 +246,7 @@ func getPackageName(tool, pkg string) string {
             "openssl":                      "openssl",
             "php-cgi":                      "php",
             "pkg-config":                   "pkgconf",
-            //"playit":                       "playit",
+            "playit":                       "playit",
             "powershell":                   "powershell",
             "privoxy":                      "privoxy",
             "python3":                      "python",
@@ -278,7 +277,6 @@ func getPackageName(tool, pkg string) string {
             "dnsenum":                      "dnsenum",
             "dnsrecon":                     "dnsrecon",
             "findomain":                    "findomain",
-            "feroxbuster":                  "feroxbuster",
             "gobuster":                     "gobuster",
             "gophish":                      "gophish",
             "massdns":                      "massdns",
@@ -1873,12 +1871,13 @@ function print_banner() {
 ##              Main            ##
 
 # Add some colours
+
+reset='\033[0m'
 red='\033[1;31m'
+blue='\033[1;34m'
 green='\033[1;32m'
 yellow='\033[1;33m'
-blue='\033[1;34m'
 light_cyan='\033[1;96m'
-reset='\033[0m'
 
 cd "$HOME"
 print_banner
@@ -1907,17 +1906,17 @@ print_banner
 printf "${green}[*] Kali NetHunter for Termux installed successfully${reset}\n\n"
 
 printf "${green}[+] To start Kali NetHunter, type:${reset}\n"
-printf "${green}[+] nethunter             # To start NetHunter CLI${reset}\n"
-printf "${green}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
-printf "${green}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
-printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
-#printf "${green}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
-printf "${green}[+] nethunter -r          # To run NetHunter as root${reset}\n"
-#printf "${green}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
-#printf "${green}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
-#printf "${green}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
-#printf "${green}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
-#printf "${green}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
+printf "${blue}[+] nethunter             # To start NetHunter CLI${reset}\n"
+printf "${blue}[+] nethunter kex passwd  # To set the KeX password${reset}\n"
+printf "${blue}[+] nethunter kex &       # To start NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI${reset}\n"
+printf "${blue}[+] nethunter kex <command> # Run command in NetHunter env${reset}\n"
+printf "${blue}[+] nethunter -r          # To run NetHunter as root${reset}\n"
+printf "${blue}[+] nethunter -r kex passwd  # To set the KeX password for root${reset}\n"
+printf "${blue}[+] nethunter kex &       # To start NetHunter GUI as root${reset}\n"
+printf "${blue}[+] nethunter kex stop    # To stop NetHunter GUI root session${reset}\n"
+printf "${blue}[+] nethunter -r kex kill # To stop all NetHunter GUI sessions${reset}\n"
+printf "${blue}[+] nethunter -r kex <command> # Run command in NetHunter env as root${reset}\n"
 printf "${green}[+] nh                    # Shortcut for nethunter${reset}\n\n"
 `
     installerFile := filepath.Join(utils.SetupsLogs, "nethunter-installer.sh")
