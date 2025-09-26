@@ -1408,7 +1408,7 @@ func installNetHunter() {
 #                                                                              #
 #     Installs Kali NetHunter in Termux.                                       #
 #                                                                              #
-#     Copyright (C) 2023-2025  Jore <https://github.com/jorexdeveloper>        #
+#     Copyright (C) 2023-2025  Rojahs <https://github.com/r0jahsm0ntar1>       #
 #                                                                              #
 #     This program is free software: you can redistribute it and/or modify     #
 #     it under the terms of the GNU General Public License as published by     #
@@ -1547,7 +1547,7 @@ post_config_actions() {
 ################################################################################
 pre_complete_actions() {
 	if ! ${GUI_INSTALLED:-false} && [ "${SELECTED_INSTALLATION}" != "full" ] && ask -y -- -t "Should I set up the GUI now?"; then
-		set_up_gui && set_up_browser && GUI_INSTALLED=true
+		set_up_gui && install_africana && set_up_browser && GUI_INSTALLED=true
 	fi
 }
 
@@ -1660,35 +1660,75 @@ set_up_browser() {
 	fi
 }
 
-DISTRO_NAME="Kali NetHunter"
-PROGRAM_NAME="$(basename "${0}")"
-DISTRO_REPOSITORY="termux-nethunter"
-VERSION_NAME="2025.3"
-KERNEL_RELEASE="$(uname -r)"
-
-SHASUM_CMD=sha256sum
-TRUSTED_SHASUMS="$(
-	cat <<-EOF
-		8dd42a9c8eb6cb7efcb169a6824b2cdc61ff0f999e87b30effa11832c528916e  kali-nethunter-rootfs-minimal-arm64.tar.xz
-		709f131a7b8ca25073553b8ac8065cf9f9d113e764d1f5f4c03c54cb47fc4475  kali-nethunter-rootfs-minimal-armhf.tar.xz
-		771f511202c28074a1756859ac8211bed9d85a1cf4eddba19416b12e05492d24  kali-nethunter-rootfs-nano-arm64.tar.xz
-		ae1c75b78dd1c70f37fd748561a5272015a1ae054335d78de9f0a6ed49dc1bdb  kali-nethunter-rootfs-nano-armhf.tar.xz
-		b7c60dd5a1db33b399afcecc40be39415f5593f7302b6573aece1265dae44d73  kali-nethunter-rootfs-full-arm64.tar.xz
-		11ee09de068493a6f7a2c8f6b1e0d5a18cb3cc511f25aca7db99e1ede82c0e15  kali-nethunter-rootfs-full-armhf.tar.xz
-	EOF
-)"
-
-ARCHIVE_STRIP_DIRS=1 # directories stripped by tar when extracting rootfs archive
-BASE_URL="https://kali.download/nethunter-images/kali-${VERSION_NAME}/rootfs"
-TERMUX_FILES_DIR="/data/data/com.termux/files"
-
-DISTRO_SHORTCUT="${TERMUX_FILES_DIR}/usr/bin/nh"
-DISTRO_LAUNCHER="${TERMUX_FILES_DIR}/usr/bin/nethunter"
-
-DEFAULT_ROOTFS_DIR="${TERMUX_FILES_DIR}/kali"
-DEFAULT_LOGIN="kali"
-
-# WARNING!!! DO NOT CHANGE BELOW!!!
+function install_africana() {
+    msg -t "Now lemme install the Africana Framework in ${DISTRO_NAME}."
+    msg "This won't take long."
+    
+    if distro_exec apt update && distro_exec apt install -y git make golang; then
+        msg -s "Done, all the dependencies are installed."
+        msg -t "Now lemme clone and build the Africana Framework."
+        msg "This will take a while."
+        
+        if distro_exec sh -c '
+            cd /root
+            if [ -d "africana-framework" ]; then
+                rm -rf africana-framework
+            fi
+            git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
+            cd africana-framework
+            make
+            cd build
+            cp afrconsole /usr/local/bin/
+            chmod +x /usr/local/bin/afrconsole
+        '; then
+            msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
+            msg -t "Now lemme create the launcher script for Africana."
+            
+            if {
+                local africana_launcher="$(
+                    cat 2>>"${LOG_FILE}" <<-EOF
+						#!/data/data/com.termux/files/usr/bin/bash
+						unset LD_PRELOAD
+						exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && afrconsole \"\\\$@\"" "\$@"
+					EOF
+                )"
+                mkdir -p "$(dirname "${PREFIX}/bin/africana")"
+                echo "${africana_launcher}" >"${PREFIX}/bin/africana"
+                chmod 700 "${PREFIX}/bin/africana"
+                termux-fix-shebang "${PREFIX}/bin/africana"
+                
+                # Create shortcut
+                if [ -L "${PREFIX}/bin/afr" ]; then
+                    rm -f "${PREFIX}/bin/afr"
+                fi
+                ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
+                
+                if [ "${DEFAULT_LOGIN}" != "root" ]; then
+                    # Also make it available inside the chroot for the default user
+                    distro_exec sh -c "
+                        if [ ! -L '/home/${DEFAULT_LOGIN}/afr' ]; then
+                            ln -sf /usr/local/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
+                        fi
+                    "
+                fi
+            } 2>>"${LOG_FILE}"; then
+                msg -s "Done, Africana launcher created successfully!"
+                
+                # Show usage information
+                msg -N "To use Africana Framework, run:"
+                msg -- "${Y}africana${C} or ${Y}afr${C}"
+                msg -N "For help: ${Y}africana --help${C}"
+                
+            else
+                msg -e "I failed to create the Africana launcher."
+            fi
+        else
+            msg -qm0 "I have failed to build the Africana Framework in ${DISTRO_NAME}."
+        fi
+    else
+        msg -qm0 "I have failed to install the dependencies for Africana Framework."
+    fi
+}
 
 # Define the template function
 define_termux_distro() {
@@ -1702,7 +1742,7 @@ cat << 'EOF'
 #                                                                              #
 # Backend for installing a Linux Distro in Termux.                             #
 #                                                                              #
-# Copyright (C) 2023-2025 Jore <https://github.com/jorexdeveloper>             #
+# Copyright (C) 2023-2025 Rojahs <https://github.com/r0jahsm0ntar1>            #
 #                                                                              #
 # This program is free software: you can redistribute it and/or modify         #
 # it under the terms of the GNU General Public License as published by         #
@@ -3586,8 +3626,8 @@ ask() {
 ################################################################################
 
 # Project information
-GITHUB="https://github.com/jorexdeveloper"
-AUTHOR="Jore"
+GITHUB="https://github.com/r0jahsm0ntar1"
+AUTHOR="r0jahsm0ntar1"
 
 # Default env path
 DEFAULT_PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/system/bin:/system/xbin"
@@ -3769,7 +3809,7 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 	else
 		action=configure
 	fi
-	clear
+	#clear
 	distro_banner # External function
 	print_intro
 	check_arch
@@ -3778,7 +3818,7 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 		if ${ENABLE_COLOR} && [ -z "${C}" ]; then
 			set_colors
 			if [ -n "${C}" ]; then
-				clear
+				#clear
 				distro_banner
 				print_intro
 			fi
@@ -3827,6 +3867,36 @@ fi
 
 EOF
 }
+
+DISTRO_NAME="Kali NetHunter"
+PROGRAM_NAME="$(basename "${0}")"
+DISTRO_REPOSITORY="termux-nethunter"
+VERSION_NAME="2025.3"
+KERNEL_RELEASE="$(uname -r)"
+
+SHASUM_CMD=sha256sum
+TRUSTED_SHASUMS="$(
+	cat <<-EOF
+		8dd42a9c8eb6cb7efcb169a6824b2cdc61ff0f999e87b30effa11832c528916e  kali-nethunter-rootfs-minimal-arm64.tar.xz
+		709f131a7b8ca25073553b8ac8065cf9f9d113e764d1f5f4c03c54cb47fc4475  kali-nethunter-rootfs-minimal-armhf.tar.xz
+		771f511202c28074a1756859ac8211bed9d85a1cf4eddba19416b12e05492d24  kali-nethunter-rootfs-nano-arm64.tar.xz
+		ae1c75b78dd1c70f37fd748561a5272015a1ae054335d78de9f0a6ed49dc1bdb  kali-nethunter-rootfs-nano-armhf.tar.xz
+		b7c60dd5a1db33b399afcecc40be39415f5593f7302b6573aece1265dae44d73  kali-nethunter-rootfs-full-arm64.tar.xz
+		11ee09de068493a6f7a2c8f6b1e0d5a18cb3cc511f25aca7db99e1ede82c0e15  kali-nethunter-rootfs-full-armhf.tar.xz
+	EOF
+)"
+
+ARCHIVE_STRIP_DIRS=1 # directories stripped by tar when extracting rootfs archive
+BASE_URL="https://kali.download/nethunter-images/kali-${VERSION_NAME}/rootfs"
+TERMUX_FILES_DIR="/data/data/com.termux/files"
+
+DISTRO_SHORTCUT="${TERMUX_FILES_DIR}/usr/bin/nh"
+DISTRO_LAUNCHER="${TERMUX_FILES_DIR}/usr/bin/nethunter"
+
+DEFAULT_ROOTFS_DIR="${TERMUX_FILES_DIR}/kali"
+DEFAULT_LOGIN="kali"
+
+# WARNING!!! DO NOT CHANGE BELOW!!!
 
 # Check in script's directory for template
 distro_template="$(realpath "$(dirname "${0}")")/termux-distro.sh"
