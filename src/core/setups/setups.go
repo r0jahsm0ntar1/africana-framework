@@ -1261,12 +1261,14 @@ func getFoundationCommands() []string {
     return []string{
         "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
         "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
-        "sudo mkdir -p /usr/share/keyrings /etc/apt/sources.list.d",
-        "sudo wget -q https://archive.kali.org/archive-keyring.gpg -O /usr/share/keyrings/kali-archive-keyring.gpg",
-        "sudo wget -q https://playit-cloud.github.io/ppa/key.gpg -O /usr/share/keyrings/playit.gpg",
-        "sudo wget -q https://playit-cloud.github.io/ppa/playit-cloud.list -O /etc/apt/sources.list.d/playit-cloud.list",
+        "sudo mkdir -p /usr/share/keyrings /etc/apt/sources.list.d /etc/apt/trusted.gpg.d",
+        "sudo curl -fsSL https://archive.kali.org/archive-keyring.gpg -o /usr/share/keyrings/kali-archive-keyring.gpg",
+        "curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null",
+        "echo 'deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./' | sudo tee /etc/apt/sources.list.d/playit-cloud.list",
         "curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg",
         "echo 'deb [arch=amd64,armhf,arm64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
+        "echo 'Package: powershell\nPin: origin packages.microsoft.com\nPin-Priority: 1001' | sudo tee /etc/apt/preferences.d/powershell-pin",
+        "sudo dpkg --add-architecture i386",
         "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
 }
