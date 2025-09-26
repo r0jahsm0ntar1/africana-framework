@@ -1713,36 +1713,6 @@ function start-kex() {
     return 0
 }
 
-function create_africana_launcher() {
-    AFR_LAUNCHER=${PREFIX}/bin/africana
-    AFR_SHORTCUT=${PREFIX}/bin/afr
-
-    cat > "$AFR_LAUNCHER" <<- 'EOF'
-#!/data/data/com.termux/files/usr/bin/bash -e
-
-# Simple pass-through launcher for africana framework
-if [ $# -eq 0 ]; then
-    # No arguments - start normally
-    nethunter -r sh -c "afrconsole"
-else
-    # Pass all arguments to afrconsole
-    nethunter -r sh -c "afrconsole $*"
-fi
-EOF
-
-    chmod 700 "$AFR_LAUNCHER"
-
-    # Create shortcut
-    if [ -L "${AFR_SHORTCUT}" ]; then
-        rm -f "${AFR_SHORTCUT}"
-    fi
-    if [ ! -f "${AFR_SHORTCUT}" ]; then
-        ln -s "${AFR_LAUNCHER}" "${AFR_SHORTCUT}" >/dev/null
-    fi
-   
-    printf "${green}[+] Africana launcher created successfully${reset}\n"
-}
-
 function stop-kex() {
     vncserver -kill :1 | sed s/"Xtigervnc"/"NetHunter KeX"/
     vncserver -kill :2 | sed s/"Xtigervnc"/"NetHunter KeX"/
@@ -1828,6 +1798,36 @@ function fix_uid() {
     GRPID=$(id -g)
     nh -r usermod -u "$USRID" kali 2>/dev/null
     nh -r groupmod -g "$GRPID" kali 2>/dev/null
+}
+
+function create_africana_launcher() {
+    AFR_LAUNCHER=${PREFIX}/bin/africana
+    AFR_SHORTCUT=${PREFIX}/bin/afr
+
+    cat > "$AFR_LAUNCHER" << EOF
+#!/data/data/com.termux/files/usr/bin/bash -e
+
+# Simple pass-through launcher for africana framework
+if [ \$# -eq 0 ]; then
+    # No arguments - start normally
+    nethunter -r sh -c "afrconsole"
+else
+    # Pass all arguments to afrconsole
+    nethunter -r sh -c "afrconsole \$*"
+fi
+EOF
+
+    chmod 700 "$AFR_LAUNCHER"
+
+    # Create shortcut
+    if [ -L "${AFR_SHORTCUT}" ]; then
+        rm -f "${AFR_SHORTCUT}"
+    fi
+    if [ ! -f "${AFR_SHORTCUT}" ]; then
+        ln -s "${AFR_LAUNCHER}" "${AFR_SHORTCUT}" >/dev/null 2>&1
+    fi
+
+    printf "${green}[+] Africana launcher created successfully${reset}\n"
 }
 
 function install_africana() {
