@@ -1327,8 +1327,20 @@ func AndroidSetups() {
 
     if utils.IsNethunter() {
         fmt.Printf("\n%s%s[+] %sNetHunter is already installed ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        //installNetHunter()
-        return
+        fmt.Printf("\n%s%s[?] %sWould you like to update NetHunter? (y/N): ", bcolors.Bold, bcolors.Cyan, bcolors.Endc)
+        utils.Scanner.Scan()
+        Input := strings.TrimSpace(utils.Scanner.Text())
+
+        switch Input {
+        case "y", "yes":
+            installNetHunter()
+            return
+        case "n", "q", "no", "exit", "quit":
+            fmt.Printf("\n%s%s[!] %sNetHunter update skipped ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            return
+        default:
+            fmt.Printf("\n%s%s[!] %sNetHunter update skipped ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        }
     }
 
     fmt.Printf("\n%s%s[!] %sNetHunter not detected. Please install NetHunter first ...", bcolors.Bold, bcolors.Red, bcolors.Endc)
@@ -1342,6 +1354,10 @@ func AndroidSetups() {
         installNetHunter()
         return
     case "n", "q", "no", "exit", "quit":
+        fmt.Printf("\n%s%s[>] %sInstalling android foundation tools ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        foundationCommands := getFoundationCommands()
+        baseSetup(foundationCommands)
+        fmt.Printf("\n%s%s[!] %sNetHunter installation skipped. Some tools may not work.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
         return
     default:
         fmt.Printf("\n%s%s[!] %sNetHunter installation skipped. Some tools may not work.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
@@ -1675,7 +1691,7 @@ EOF
 
 function check_kex() {
     if [ "$wimg" = "nano" ] || [ "$wimg" = "minimal" ]; then
-        nh sudo apt update #&& nh sudo apt install tightvncserver kali-desktop-xfce -y
+        nh sudo apt update && nh sudo apt install tightvncserver kali-desktop-xfce -y
     fi
 }
 
@@ -1822,7 +1838,6 @@ function install_africana() {
     # Must run INSIDE the chroot using nh -r
     nh -r sh -c '
         touch /root/.hushlogin
-        apt-get update -y
         apt-get install -y git make golang
         cd /root
         git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-framework
