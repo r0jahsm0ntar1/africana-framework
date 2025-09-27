@@ -1469,6 +1469,25 @@ distro_banner() {
 	msg -a "${spaces}${B}                                             ."
 }
 
+kali_banner() {
+	local spaces=''
+	for ((i = $((($(stty size | cut -d ' ' -f2) - 49) / 2)); i > 0; i--)); do
+		spaces+=' '
+	done
+	msg -a "${spaces}${B}##################################################"
+	msg -a "${spaces}${B}##                                              ##"
+	msg -a "${spaces}${B}##  88      a8P         db        88        88  ##"
+	msg -a "${spaces}${B}##  88    .88'         d88b       88        88  ##"
+	msg -a "${spaces}${B}##  88   88'          d8''8b      88        88  ##"
+	msg -a "${spaces}${B}##  88 d88           d8'  '8b     88        88  ##"
+	msg -a "${spaces}${B}##  8888'88.        d8YaaaaY8b    88        88  ##"
+	msg -a "${spaces}${B}##  88P   Y8b      d8''''''''8b   88        88  ##"
+	msg -a "${spaces}${B}##  88     '88.   d8'        '8b  88        88  ##"
+	msg -a "${spaces}${B}##  88       Y8b d8'          '8b 888888888 88  ##"
+	msg -a "${spaces}${B}##                                              ##"
+	msg -a "${spaces}${B}####  ############# NetHunter ####################"
+}
+
 ################################################################################
 # Called after checking architecture and required pkgs                         #
 # New Variables: SYS_ARCH LIB_GCC_PATH                                         #
@@ -3738,8 +3757,8 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 	else
 		action=configure
 	fi
-	clear
-	distro_banner # External function
+	#clear
+	kali_banner # External function
 	print_intro
 	check_arch
 	${package_check:-:} && package_check &&
