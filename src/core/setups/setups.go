@@ -3829,10 +3829,12 @@ install_africana() {
         rm -rf ../../africana-framework
     '; then
         msg -s "Africana Framework installation completed!"
-        # Create simple launcher that passes any flags
-        msg -t "Creating Africana launcher..."
+
+        # Create simple launcher that passes ALL flags directly to africana
+        msg -t "Now let me create the launcher script for Africana."
         if {
-            cat > "${PREFIX}/bin/africana" <<-EOF
+            local africana_launcher="$(
+                cat 2>>"${LOG_FILE}" <<-EOF
 #!/data/data/com.termux/files/usr/bin/bash
 
 ################################################################################
@@ -3845,24 +3847,39 @@ install_africana() {
 #                                                                              #
 ################################################################################
 
-exec "${DISTRO_LAUNCHER}" -r /usr/bin/afrconsole "\$@"
-EOF
+# Disable termux-exec
+unset LD_PRELOAD
 
+# Execute africana inside NetHunter - pass ALL arguments directly
+exec "${DISTRO_LAUNCHER}" /usr/bin/afrconsole "\$@"
+EOF
+            )"
+
+            mkdir -p "$(dirname "${PREFIX}/bin/africana")"
+            echo "${africana_launcher}" >"${PREFIX}/bin/africana"
             chmod 700 "${PREFIX}/bin/africana"
             termux-fix-shebang "${PREFIX}/bin/africana"
 
             # Create shortcut
-            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr" 2>/dev/null || true
+            if [ -L "${PREFIX}/bin/afr" ]; then
+                rm -f "${PREFIX}/bin/afr"
+            fi
+            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
 
         } 2>>"${LOG_FILE}"; then
-            msg -s "Africana launcher created!"
-            msg -N "Usage: ${Y}africana${C} or ${Y}afr${C} [any flags]"
+            msg -s "Done, Africana launcher created successfully!"
+            msg -N "To use Africana Framework, run:"
+            msg -- "${Y}africana${C} or ${Y}afr${C}"
+            msg -N "All arguments are passed directly to afrconsole."
             msg -N "Examples:"
-            msg -- "${Y}africana${C}"
-            msg -- "${Y}afr -i${C}"
-            msg -- "${Y}africana --help${C}"
+            msg -- "${Y}africana${C}          (launch interactive)"
+            msg -- "${Y}afr -h${C}            (show africana help)"
+            msg -- "${Y}africana -i${C}       (install dependencies)"
+            msg -- "${Y}afr -a${C}            (automation mode)"
+            msg -- "${Y}africana --version${C} (show version)"
+
         else
-            msg -e "Failed to create launcher."
+            msg -e "I failed to create the Africana launcher."
         fi
 
     else
