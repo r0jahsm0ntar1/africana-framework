@@ -3799,114 +3799,81 @@ EOF
 
 install_africana() {
     msg -t "Now let me install the Africana Framework in ${DISTRO_NAME}."
-    msg "This won't take long."
     
-    if distro_exec apt update && distro_exec apt install -y git make golang; then
-        msg -s "Done, all the dependencies are installed."
-        msg -t "Now let me clone and build the Africana Framework."
-        msg "This will take a while."
-
-        if distro_exec sh -c '
-            cd /root
-            if [ -d "africana-framework" ]; then
-                rm -rf africana-framework
-            fi
-            git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
-            cd africana-framework
-            make
-            cd build
-            # Install to /usr/bin instead of /usr/local/bin for better compatibility
-            cp -rv ./* /usr/bin/
-            chmod +x /usr/bin/afrconsole
-            # Clean up - remove the cloned directory after installation
-            cd /root
+    if distro_exec sh -c '
+        # Install dependencies
+        apt update && apt install -y git make golang
+        
+        # Clone and build Africana
+        cd /root
+        if [ -d "africana-framework" ]; then
             rm -rf africana-framework
-        '; then
-            msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
-            msg -t "Now let me create the launcher script for Africana."
-
-            if {
-                local africana_launcher="$(
-                    cat 2>>"${LOG_FILE}" <<-EOF
-#!/data/data/com.termux/files/usr/bin/bash
-# Launch Africana Framework directly in NetHunter environment
-unset LD_PRELOAD
-exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && exec /usr/bin/afrconsole \"\\\$@\"" sh "\$@"
-EOF
-                )"
-                mkdir -p "$(dirname "${PREFIX}/bin/africana")"
-                echo "${africana_launcher}" >"${PREFIX}/bin/africana"
-                chmod 700 "${PREFIX}/bin/africana"
-                termux-fix-shebang "${PREFIX}/bin/africana"
-                
-                # Create shortcut
-                if [ -L "${PREFIX}/bin/afr" ]; then
-                    rm -f "${PREFIX}/bin/afr"
-                fi
-                ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
-                
-                # Create a direct launcher inside the chroot as well
-                distro_exec sh -c "
-                    # Create direct launcher script inside chroot
-                    cat > /usr/local/bin/africana << 'EOF2'
-#!/bin/bash
-cd /root
-exec /usr/bin/afrconsole \"\\\$@\"
-EOF2
-                    chmod +x /usr/local/bin/africana
-                    
-                    # Create symlink
-                    if [ -L '/usr/local/bin/afr' ]; then
-                        rm -f '/usr/local/bin/afr'
-                    fi
-                    ln -sf /usr/local/bin/africana /usr/local/bin/afr
-                    
-                    # Also make it available for default user if not root
-                    if [ '${DEFAULT_LOGIN}' != 'root' ]; then
-                        if [ ! -L '/home/${DEFAULT_LOGIN}/afr' ]; then
-                            ln -sf /usr/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
-                        fi
-                    fi
-                "
-            } 2>>"${LOG_FILE}"; then
-                msg -s "Done, Africana launcher created successfully!"
-
-                # Show usage information
-                msg -N "To use Africana Framework, run directly from Termux:"
-                msg -- "${Y}africana${C} or ${Y}afr${C}"
-                msg -N "For help: ${Y}africana --help${C}"
-                msg -N "Or from inside NetHunter: ${Y}afrconsole --help${C}"
-
-                # Launch Africana with -i flag to install dependencies
-                msg -t "Now launching Africana with -i flag to install other dependencies..."
-                if distro_exec sh -c '
-                    # Try multiple possible locations
-                    if [ -f "/usr/bin/afrconsole" ]; then
-                        cd /root
-                        /usr/bin/afrconsole -i
-                    elif [ -f "/usr/local/bin/afrconsole" ]; then
-                        cd /root
-                        /usr/local/bin/afrconsole -i
-                    else
-                        echo "Error: Could not find afrconsole binary"
-                        find / -name "afrconsole" 2>/dev/null | head -5
-                        exit 1
-                    fi
-                '; then
-                    msg -s "Africana dependency installation completed!"
-                else
-                    msg -e "Africana dependency installation failed."
-                    msg -t "Try running manually: ${Y}africana -i${C}"
-                fi
-
-            else
-                msg -e "I failed to create the Africana launcher."
-            fi
-        else
-            msg -qm0 "I have failed to build the Africana Framework in ${DISTRO_NAME}."
         fi
+        git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
+        cd africana-framework
+        make
+        cd build
+        cp -rv ./* /usr/bin/
+        chmod +x /usr/bin/afrconsole
+        cd /root
+        rm -rf africana-framework
+        
+        # Run Africana installation
+        cd /root
+        /usr/bin/afrconsole -i
+    '; then
+        msg -s "Africana Framework installation completed!"
+        
+        # Create launcher that matches nethunter launcher exactly
+        msg -t "Now let me create the launcher script for Africana."
+        if {
+            local africana_launcher="$(
+                cat 2>>"${LOG_FILE}" <<-EOF
+#!/data/data/com.termux/files/usr/bin/bash
+
+################################################################################
+#                                                                              #
+# Africana Framework Launcher                                                  #
+#                                                                              #
+# Launches Africana Framework inside NetHunter environment                     #
+#                                                                              #
+# Copyright (C) 2023-2025  Rojahs <https://github.com/r0jahsm0ntar1>            #
+#                                                                              #
+################################################################################
+
+# Disable termux-exec
+unset LD_PRELOAD
+
+# Execute africana inside NetHunter
+exec "${DISTRO_LAUNCHER}" -r /usr/bin/afrconsole "\$@"
+EOF
+            )"
+            
+            mkdir -p "$(dirname "${PREFIX}/bin/africana")"
+            echo "${africana_launcher}" >"${PREFIX}/bin/africana"
+            chmod 700 "${PREFIX}/bin/africana"
+            termux-fix-shebang "${PREFIX}/bin/africana"
+            
+            # Create shortcut exactly like 'nh' for 'nethunter'
+            if [ -L "${PREFIX}/bin/afr" ]; then
+                rm -f "${PREFIX}/bin/afr"
+            fi
+            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
+            
+        } 2>>"${LOG_FILE}"; then
+            msg -s "Done, Africana launcher created successfully!"
+            
+            # Show usage information matching main code style
+            msg -N "To use Africana Framework, run:"
+            msg -- "${Y}africana${C} or ${Y}afr${C}"
+            msg -N "For help: ${Y}africana --help${C}"
+            
+        else
+            msg -e "I failed to create the Africana launcher."
+        fi
+        
     else
-        msg -qm0 "I have failed to install the dependencies for Africana Framework."
+        msg -e "Africana installation encountered some issues."
     fi
 }
 
