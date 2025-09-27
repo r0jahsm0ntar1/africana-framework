@@ -109,7 +109,7 @@ var (
         "tmux":                         "tmux",
         "tor":                          "tor",
         "uuid-dev":                     "uuid-dev",
-        "wine32":                       "wine32:i386",
+        //"wine32":                       "wine32:i386",
         "xterm":                        "xterm",
         "zlib1g-dev":                   "zlib1g-dev",
         "zsh":                          "zsh",
@@ -267,7 +267,7 @@ func getPackageName(tool, pkg string) string {
             "tmux":                         "tmux",
             "tor":                          "tor",
             "uuid-dev":                     "util-linux",
-            "wine32":                       "wine",
+            //"wine32":                       "wine",
             "xterm":                        "xterm",
             "zlib1g-dev":                   "zlib",
             "zsh":                          "zsh",
@@ -1158,9 +1158,9 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             }
         }
 
-        if !utils.IsArchLinux() && !isAndroid && !isWindows {
-            subprocess.Run("winecfg /v win11")
-        }
+        //if !utils.IsArchLinux() && !isAndroid && !isWindows {
+        //    subprocess.Run("winecfg /v win11")
+        //}
 
     } else {
         UpdateAfricana()
@@ -1266,7 +1266,7 @@ func getFoundationCommands() []string {
         "curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg",
         "echo 'deb [arch=amd64,armhf,arm64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
         "echo 'Package: powershell\nPin: origin packages.microsoft.com\nPin-Priority: 1001' | sudo tee /etc/apt/preferences.d/powershell-pin",
-        "sudo dpkg --add-architecture i386",
+        //"sudo dpkg --add-architecture i386",
         "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
 }
