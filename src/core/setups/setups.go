@@ -1660,7 +1660,7 @@ set_up_browser() {
 	fi
 }
 
-function install_africana() {
+install_africana() {
     msg -t "Now lemme install the Africana Framework in ${DISTRO_NAME}."
     msg "This won't take long."
     
@@ -1678,7 +1678,7 @@ function install_africana() {
             cd africana-framework
             make
             cd build
-            cp afrconsole /usr/local/bin/
+            cp -rv ./* /usr/local/bin/afrconsole
             chmod +x /usr/local/bin/afrconsole
         '; then
             msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
@@ -1713,12 +1713,20 @@ function install_africana() {
                 fi
             } 2>>"${LOG_FILE}"; then
                 msg -s "Done, Africana launcher created successfully!"
-                
+
                 # Show usage information
                 msg -N "To use Africana Framework, run:"
                 msg -- "${Y}africana${C} or ${Y}afr${C}"
                 msg -N "For help: ${Y}africana --help${C}"
-                
+
+                # Launch Africana with -i flag to install dependencies
+                msg -t "Now launching Africana with -i flag to install other dependencies..."
+                if distro_exec sh -c "cd /root && afrconsole -i"; then
+                    msg -s "Africana dependency installation completed!"
+                else
+                    msg -e "Africana dependency installation encountered some issues."
+                fi
+
             else
                 msg -e "I failed to create the Africana launcher."
             fi
