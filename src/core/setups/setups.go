@@ -3815,8 +3815,12 @@ install_africana() {
             cd africana-framework
             make
             cd build
-            cp -rv ./* /usr/local/bin/afrconsole
-            chmod +x /usr/local/bin/afrconsole
+            # Install to /usr/bin instead of /usr/local/bin for better compatibility
+            cp -rv ./* /usr/bin/
+            chmod +x /usr/bin/afrconsole
+            # Clean up - remove the cloned directory after installation
+            cd /root
+            rm -rf africana-framework
         '; then
             msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
             msg -t "Now let me create the launcher script for Africana."
@@ -3824,10 +3828,11 @@ install_africana() {
             if {
                 local africana_launcher="$(
                     cat 2>>"${LOG_FILE}" <<-EOF
-						#!/data/data/com.termux/files/usr/bin/bash
-						unset LD_PRELOAD
-						exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && afrconsole \"\\\$@\"" "\$@"
-					EOF
+#!/data/data/com.termux/files/usr/bin/bash
+# Launch Africana Framework directly in NetHunter environment
+unset LD_PRELOAD
+exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && exec /usr/bin/afrconsole \"\\\$@\"" sh "\$@"
+EOF
                 )"
                 mkdir -p "$(dirname "${PREFIX}/bin/africana")"
                 echo "${africana_launcher}" >"${PREFIX}/bin/africana"
@@ -3840,28 +3845,58 @@ install_africana() {
                 fi
                 ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
                 
-                if [ "${DEFAULT_LOGIN}" != "root" ]; then
-                    # Also make it available inside the chroot for the default user
-                    distro_exec sh -c "
+                # Create a direct launcher inside the chroot as well
+                distro_exec sh -c "
+                    # Create direct launcher script inside chroot
+                    cat > /usr/local/bin/africana << 'EOF2'
+#!/bin/bash
+cd /root
+exec /usr/bin/afrconsole \"\\\$@\"
+EOF2
+                    chmod +x /usr/local/bin/africana
+                    
+                    # Create symlink
+                    if [ -L '/usr/local/bin/afr' ]; then
+                        rm -f '/usr/local/bin/afr'
+                    fi
+                    ln -sf /usr/local/bin/africana /usr/local/bin/afr
+                    
+                    # Also make it available for default user if not root
+                    if [ '${DEFAULT_LOGIN}' != 'root' ]; then
                         if [ ! -L '/home/${DEFAULT_LOGIN}/afr' ]; then
-                            ln -sf /usr/local/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
+                            ln -sf /usr/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
                         fi
-                    "
-                fi
+                    fi
+                "
             } 2>>"${LOG_FILE}"; then
                 msg -s "Done, Africana launcher created successfully!"
 
                 # Show usage information
-                msg -N "To use Africana Framework, run:"
+                msg -N "To use Africana Framework, run directly from Termux:"
                 msg -- "${Y}africana${C} or ${Y}afr${C}"
                 msg -N "For help: ${Y}africana --help${C}"
+                msg -N "Or from inside NetHunter: ${Y}afrconsole --help${C}"
 
                 # Launch Africana with -i flag to install dependencies
                 msg -t "Now launching Africana with -i flag to install other dependencies..."
-                if distro_exec sh -c "afrconsole -i"; then
+                if distro_exec sh -c '
+                    # Try multiple possible locations
+                    if [ -f "/usr/bin/afrconsole" ]; then
+                        cd /root
+                        /usr/bin/afrconsole -i
+                    elif [ -f "/usr/local/bin/afrconsole" ]; then
+                        cd /root
+                        /usr/local/bin/afrconsole -i
+                    else
+                        echo "Error: Could not find afrconsole binary"
+                        find / -name "afrconsole" 2>/dev/null | head -5
+                        exit 1
+                    fi
+                '; then
                     msg -s "Africana dependency installation completed!"
                 else
-                    msg -e "Africana dependency installation encountered some issues."
+                    msg -e "Africana dependency installation failed."
+                    msg -t "Try running manually: ${Y}africana -i${C}"
                 fi
 
             else
