@@ -1027,6 +1027,14 @@ func IsArchLinux() bool {
 }
 
 func DetectAndroid() bool {
+    if IsNethunter() {
+        return false
+    }
+
+    if DetectTermux() && !IsNethunter() {
+        return true
+    }
+
     if _, err := os.Stat("/system/build.prop"); err == nil {
         return true
     }
@@ -1078,6 +1086,22 @@ func IsNethunter() bool {
     }
 
     if _, err := os.Stat("/data/local/nhsystem"); err == nil {
+        return true
+    }
+
+    if _, err := os.Stat("/etc/nethunter-release"); err == nil {
+        return true
+    }
+    
+    if _, err := os.Stat("/etc/kali-release"); err == nil {
+        return true
+    }
+    
+    if _, err := os.Stat("/etc/debian_chroot"); err == nil {
+        return true
+    }
+
+    if os.Getenv("DEBIAN_CHROOT") != "" {
         return true
     }
 
