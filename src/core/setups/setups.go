@@ -1660,88 +1660,9 @@ set_up_browser() {
 	fi
 }
 
-install_africana() {
-    msg -t "Now lemme install the Africana Framework in ${DISTRO_NAME}."
-    msg "This won't take long."
-    
-    if distro_exec apt update && distro_exec apt install -y git make golang; then
-        msg -s "Done, all the dependencies are installed."
-        msg -t "Now lemme clone and build the Africana Framework."
-        msg "This will take a while."
-
-        if distro_exec sh -c '
-            cd /root
-            if [ -d "africana-framework" ]; then
-                rm -rf africana-framework
-            fi
-            git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
-            cd africana-framework
-            make
-            cd build
-            cp -rv ./* /usr/local/bin/afrconsole
-            chmod +x /usr/local/bin/afrconsole
-        '; then
-            msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
-            msg -t "Now lemme create the launcher script for Africana."
-
-            if {
-                local africana_launcher="$(
-                    cat 2>>"${LOG_FILE}" <<-EOF
-						#!/data/data/com.termux/files/usr/bin/bash
-						unset LD_PRELOAD
-						exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && afrconsole \"\\\$@\"" "\$@"
-					EOF
-                )"
-                mkdir -p "$(dirname "${PREFIX}/bin/africana")"
-                echo "${africana_launcher}" >"${PREFIX}/bin/africana"
-                chmod 700 "${PREFIX}/bin/africana"
-                termux-fix-shebang "${PREFIX}/bin/africana"
-                
-                # Create shortcut
-                if [ -L "${PREFIX}/bin/afr" ]; then
-                    rm -f "${PREFIX}/bin/afr"
-                fi
-                ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
-                
-                if [ "${DEFAULT_LOGIN}" != "root" ]; then
-                    # Also make it available inside the chroot for the default user
-                    distro_exec sh -c "
-                        if [ ! -L '/home/${DEFAULT_LOGIN}/afr' ]; then
-                            ln -sf /usr/local/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
-                        fi
-                    "
-                fi
-            } 2>>"${LOG_FILE}"; then
-                msg -s "Done, Africana launcher created successfully!"
-
-                # Show usage information
-                msg -N "To use Africana Framework, run:"
-                msg -- "${Y}africana${C} or ${Y}afr${C}"
-                msg -N "For help: ${Y}africana --help${C}"
-
-                # Launch Africana with -i flag to install dependencies
-                msg -t "Now launching Africana with -i flag to install other dependencies..."
-                if distro_exec sh -c "cd /root && afrconsole -i"; then
-                    msg -s "Africana dependency installation completed!"
-                else
-                    msg -e "Africana dependency installation encountered some issues."
-                fi
-
-            else
-                msg -e "I failed to create the Africana launcher."
-            fi
-        else
-            msg -qm0 "I have failed to build the Africana Framework in ${DISTRO_NAME}."
-        fi
-    else
-        msg -qm0 "I have failed to install the dependencies for Africana Framework."
-    fi
-}
-
 # Define the template function
 define_termux_distro() {
 cat << 'EOF'
-
 #!/data/data/com.termux/files/usr/bin/bash
 
 ################################################################################
@@ -3635,7 +3556,7 @@ ask() {
 
 # Project information
 GITHUB="https://github.com/r0jahsm0ntar1"
-AUTHOR="r0jahsm0ntar1"
+AUTHOR="Rojahs"
 
 # Default env path
 DEFAULT_PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/system/bin:/system/xbin"
@@ -3817,7 +3738,7 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 	else
 		action=configure
 	fi
-	#clear
+	clear
 	distro_banner # External function
 	print_intro
 	check_arch
@@ -3826,7 +3747,7 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 		if ${ENABLE_COLOR} && [ -z "${C}" ]; then
 			set_colors
 			if [ -n "${C}" ]; then
-				#clear
+				clear
 				distro_banner
 				print_intro
 			fi
@@ -3859,7 +3780,6 @@ if ${ACTION_CONFIGURE}; then
 	post_config_actions # External function
 	set_user_shell
 	set_zone_info
-	install_africana
 fi
 
 # Clean up files
@@ -3871,10 +3791,88 @@ fi
 if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 	pre_complete_actions # External function
 	show_complete_msg
+	install_africana
 	post_complete_actions # External function
 fi
-
 EOF
+}
+
+install_africana() {
+    msg -t "Now lemme install the Africana Framework in ${DISTRO_NAME}."
+    msg "This won't take long."
+    
+    if distro_exec apt update && distro_exec apt install -y git make golang; then
+        msg -s "Done, all the dependencies are installed."
+        msg -t "Now lemme clone and build the Africana Framework."
+        msg "This will take a while."
+
+        if distro_exec sh -c '
+            cd /root
+            if [ -d "africana-framework" ]; then
+                rm -rf africana-framework
+            fi
+            git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
+            cd africana-framework
+            make
+            cd build
+            cp -rv ./* /usr/local/bin/afrconsole
+            chmod +x /usr/local/bin/afrconsole
+        '; then
+            msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
+            msg -t "Now lemme create the launcher script for Africana."
+
+            if {
+                local africana_launcher="$(
+                    cat 2>>"${LOG_FILE}" <<-EOF
+						#!/data/data/com.termux/files/usr/bin/bash
+						unset LD_PRELOAD
+						exec "${DISTRO_LAUNCHER}" -r sh -c "cd /root && afrconsole \"\\\$@\"" "\$@"
+					EOF
+                )"
+                mkdir -p "$(dirname "${PREFIX}/bin/africana")"
+                echo "${africana_launcher}" >"${PREFIX}/bin/africana"
+                chmod 700 "${PREFIX}/bin/africana"
+                termux-fix-shebang "${PREFIX}/bin/africana"
+                
+                # Create shortcut
+                if [ -L "${PREFIX}/bin/afr" ]; then
+                    rm -f "${PREFIX}/bin/afr"
+                fi
+                ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
+                
+                if [ "${DEFAULT_LOGIN}" != "root" ]; then
+                    # Also make it available inside the chroot for the default user
+                    distro_exec sh -c "
+                        if [ ! -L '/home/${DEFAULT_LOGIN}/afr' ]; then
+                            ln -sf /usr/local/bin/afrconsole '/home/${DEFAULT_LOGIN}/afr'
+                        fi
+                    "
+                fi
+            } 2>>"${LOG_FILE}"; then
+                msg -s "Done, Africana launcher created successfully!"
+
+                # Show usage information
+                msg -N "To use Africana Framework, run:"
+                msg -- "${Y}africana${C} or ${Y}afr${C}"
+                msg -N "For help: ${Y}africana --help${C}"
+
+                # Launch Africana with -i flag to install dependencies
+                msg -t "Now launching Africana with -i flag to install other dependencies..."
+                if distro_exec sh -c "cd /root && afrconsole -i"; then
+                    msg -s "Africana dependency installation completed!"
+                else
+                    msg -e "Africana dependency installation encountered some issues."
+                fi
+
+            else
+                msg -e "I failed to create the Africana launcher."
+            fi
+        else
+            msg -qm0 "I have failed to build the Africana Framework in ${DISTRO_NAME}."
+        fi
+    else
+        msg -qm0 "I have failed to install the dependencies for Africana Framework."
+    fi
 }
 
 DISTRO_NAME="Kali NetHunter"
