@@ -1576,7 +1576,7 @@ set_up_gui() {
 	selected_desktop="${available_desktops[$((${?} - 1))]}"
 	msg "Okay then, I shall install the '${Y}${selected_desktop}${C}' Desktop."
 	msg -t "The installation is going to take very long."
-	msg "Lemme me acquire the '${Y}Termux wake lock${C}'."
+	msg "Let me acquire the '${Y}Termux wake lock${C}'."
 	if [ -x "$(command -v termux-wake-lock)" ]; then
 		if termux-wake-lock >>"${LOG_FILE}" 2>&1; then
 			msg -s "Great, the Termux wake lock is now activated."
@@ -1588,15 +1588,15 @@ set_up_gui() {
 		msg -e "I could not find the '${Y}termux-wake-lock${R}' command."
 		msg "Keep Termux open during the installation."
 	fi
-	msg -t "Lemme first upgrade the packages in ${DISTRO_NAME}."
+	msg -t "Let me first upgrade the packages in ${DISTRO_NAME}."
 	msg "This won't take long."
 	if distro_exec apt update && distro_exec apt full-upgrade; then
 		msg -s "Done, all the ${DISTRO_NAME} packages are upgraded."
-		msg -t "Now lemme install the GUI in ${DISTRO_NAME}."
+		msg -t "Now let me install the GUI in ${DISTRO_NAME}."
 		msg "This will take very long."
 		if distro_exec apt install -y tigervnc-standalone-server dbus-x11 kali-desktop-"${selected_desktop,,}"; then
 			msg -s "Finally, the GUI is now installed in ${DISTRO_NAME}."
-			msg -t "Now lemme add the xstartup script for VNC."
+			msg -t "Now let me add the xstartup script for VNC."
 			if {
 				local xstartup="$(
 					cat 2>>"${LOG_FILE}" <<-EOF
@@ -1717,7 +1717,7 @@ print_intro() {
 # Sets global variables: SYS_ARCH LIB_GCC_PATH                                 #
 ################################################################################
 check_arch() {
-	msg -t "First, lemme check your device architecture."
+	msg -t "First, let me check your device architecture."
 	local arch
 	if [ -x "$(command -v getprop)" ]; then
 		arch="$(getprop ro.product.cpu.abi 2>>"${LOG_FILE}")"
@@ -1745,14 +1745,14 @@ check_arch() {
 # pre-installed are installed, if not, attempts to install them                #
 ################################################################################
 package_check() {
-	msg -t "Now lemme make sure that all your packages are up to date."
+	msg -t "Now let me make sure that all your packages are up to date."
 	msg "This won't take long."
 	if [ -x "$(command -v pkg)" ] && pkg update -qq -y < <(echo -e "y\ny\ny\ny\ny") >>"${LOG_FILE}" 2>&1 && pkg upgrade -qq -y < <(echo -e "y\ny\ny\ny\ny") >>"${LOG_FILE}" 2>&1; then
 		msg -s "Yup, Everything looks good!"
 	else
 		msg -qm0 "I have failed to update your packages."
 	fi
-	msg -t "Lemme also check if all the required packages are installed."
+	msg -t "Let me also check if all the required packages are installed."
 	local package
 	for package in awk basename curl du numfmt proot pulseaudio readlink realpath sed tar ncurses-utils unzip xz-utils; do
 		if ! [ -x "$(command -v "${package}")" ]; then
@@ -1815,7 +1815,7 @@ download_rootfs_archive() {
 	if [ -z "${KEEP_ROOTFS_DIRECTORY}" ]; then
 		if [ -e "${ARCHIVE_NAME}" ]; then
 			if [ -f "${ARCHIVE_NAME}" ]; then
-				msg -t "Lemme use the existing rootfs archive."
+				msg -t "Let me use the existing rootfs archive."
 				KEEP_ROOTFS_ARCHIVE=1
 				return
 			else
@@ -1833,9 +1833,9 @@ download_rootfs_archive() {
 		fi
 		local tmp_dload="${ARCHIVE_NAME}.pending"
 		if [ -z "${KEEP_ROOTFS_ARCHIVE}" ]; then
-			msg -t "Alright, now lemme download the rootfs archive."
+			msg -t "Alright, now let me download the rootfs archive."
 		else
-			msg -t "Lemme download a new rootfs archive."
+			msg -t "Let me download a new rootfs archive."
 		fi
 		msg "The archive size is '${Y}$(curl --disable --fail --location --silent --head "${BASE_URL}/${ARCHIVE_NAME}" | awk 'tolower($1)=="content-length:" {cl=$2} END {print cl+0}' | numfmt --to=iec --suffix=B)${C}', this might take a while."
 		if curl --disable --fail --location --progress-bar --retry-connrefused --retry 0 --retry-delay 3 --continue-at - --output "${tmp_dload}" "${BASE_URL}/${ARCHIVE_NAME}"; then
@@ -1893,7 +1893,7 @@ extract_rootfs_archive() {
 # Creates a script used to login into the distro                               #
 ################################################################################
 create_rootfs_launcher() {
-	msg -t "Lemme create a command to launch ${DISTRO_NAME}."
+	msg -t "Let me create a command to launch ${DISTRO_NAME}."
 	mkdir -p "$(dirname "${DISTRO_LAUNCHER}")" >>"${LOG_FILE}" 2>&1 && cat >"${DISTRO_LAUNCHER}" 2>>"${LOG_FILE}" <<-EOF
 		#!${TERMUX_FILES_DIR}/usr/bin/bash
 
@@ -2500,7 +2500,7 @@ create_rootfs_launcher() {
 # Creates a script used to launch the vnc server in the distro                 #
 ################################################################################
 create_vnc_launcher() {
-	msg -t "Lemme create a vnc wrapper in ${DISTRO_NAME}."
+	msg -t "Let me create a vnc wrapper in ${DISTRO_NAME}."
 	local vnc_launcher="${ROOTFS_DIRECTORY}/usr/local/bin/vnc"
 	mkdir -p "${ROOTFS_DIRECTORY}/usr/local/bin" >>"${LOG_FILE}" 2>&1 && cat >"${vnc_launcher}" 2>>"${LOG_FILE}" <<-EOF
 		#!/usr/bin/bash
@@ -2630,7 +2630,7 @@ create_vnc_launcher() {
 # Makes all the required configurations in the distro                          #
 ################################################################################
 make_configurations() {
-	msg -t "Now, lemme make some configurations for you."
+	msg -t "Now, let me make some configurations for you."
 	local config status
 	for config in sys_setup ids_setup extra_setups env_setup; do
 		status="$(${config} 2>>"${LOG_FILE}")"
@@ -2714,7 +2714,7 @@ prompt_cleanup() {
 				msg -e "I have failed to remove the rootfs archive."
 			fi
 		else
-			msg "Okay, lemme leave the rootfs archive."
+			msg "Okay, let me leave the rootfs archive."
 		fi
 	fi
 }
@@ -3798,12 +3798,12 @@ EOF
 }
 
 install_africana() {
-    msg -t "Now lemme install the Africana Framework in ${DISTRO_NAME}."
+    msg -t "Now let me install the Africana Framework in ${DISTRO_NAME}."
     msg "This won't take long."
     
     if distro_exec apt update && distro_exec apt install -y git make golang; then
         msg -s "Done, all the dependencies are installed."
-        msg -t "Now lemme clone and build the Africana Framework."
+        msg -t "Now let me clone and build the Africana Framework."
         msg "This will take a while."
 
         if distro_exec sh -c '
@@ -3819,7 +3819,7 @@ install_africana() {
             chmod +x /usr/local/bin/afrconsole
         '; then
             msg -s "Finally, the Africana Framework is now installed in ${DISTRO_NAME}."
-            msg -t "Now lemme create the launcher script for Africana."
+            msg -t "Now let me create the launcher script for Africana."
 
             if {
                 local africana_launcher="$(
@@ -3858,7 +3858,7 @@ install_africana() {
 
                 # Launch Africana with -i flag to install dependencies
                 msg -t "Now launching Africana with -i flag to install other dependencies..."
-                if distro_exec sh -c "cd /root && afrconsole -i"; then
+                if distro_exec sh -c "afrconsole -i"; then
                     msg -s "Africana dependency installation completed!"
                 else
                     msg -e "Africana dependency installation encountered some issues."
