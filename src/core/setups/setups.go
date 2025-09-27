@@ -3799,11 +3799,11 @@ EOF
 
 install_africana() {
     msg -t "Now let me install the Africana Framework in ${DISTRO_NAME}."
-    
+
     if distro_exec sh -c '
         # Install dependencies
         apt update && apt install -y git make golang
-        
+
         # Clone and build Africana
         cd /root
         if [ -d "africana-framework" ]; then
@@ -3813,22 +3813,14 @@ install_africana() {
         cd africana-framework
         make
         cd build
-        cp -rv ./* /usr/bin/
-        chmod +x /usr/bin/afrconsole
-        cd /root
-        rm -rf africana-framework
-        
-        # Run Africana installation
-        cd /root
-        /usr/bin/afrconsole -i
+        ./* -i
+        rm -rf ../../africana-framework
     '; then
         msg -s "Africana Framework installation completed!"
-        
-        # Create launcher that matches nethunter launcher exactly
-        msg -t "Now let me create the launcher script for Africana."
+        # Create simple launcher that passes any flags
+        msg -t "Creating Africana launcher..."
         if {
-            local africana_launcher="$(
-                cat 2>>"${LOG_FILE}" <<-EOF
+            cat > "${PREFIX}/bin/africana" <<-EOF
 #!/data/data/com.termux/files/usr/bin/bash
 
 ################################################################################
@@ -3837,43 +3829,32 @@ install_africana() {
 #                                                                              #
 # Launches Africana Framework inside NetHunter environment                     #
 #                                                                              #
-# Copyright (C) 2023-2025  Rojahs <https://github.com/r0jahsm0ntar1>            #
+# Copyright (C) 2023-2025  Rojahs <https://github.com/r0jahsm0ntar1>           #
 #                                                                              #
 ################################################################################
 
-# Disable termux-exec
-unset LD_PRELOAD
-
-# Execute africana inside NetHunter
 exec "${DISTRO_LAUNCHER}" -r /usr/bin/afrconsole "\$@"
 EOF
-            )"
-            
-            mkdir -p "$(dirname "${PREFIX}/bin/africana")"
-            echo "${africana_launcher}" >"${PREFIX}/bin/africana"
+
             chmod 700 "${PREFIX}/bin/africana"
             termux-fix-shebang "${PREFIX}/bin/africana"
-            
-            # Create shortcut exactly like 'nh' for 'nethunter'
-            if [ -L "${PREFIX}/bin/afr" ]; then
-                rm -f "${PREFIX}/bin/afr"
-            fi
-            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
-            
+
+            # Create shortcut
+            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr" 2>/dev/null || true
+
         } 2>>"${LOG_FILE}"; then
-            msg -s "Done, Africana launcher created successfully!"
-            
-            # Show usage information matching main code style
-            msg -N "To use Africana Framework, run:"
-            msg -- "${Y}africana${C} or ${Y}afr${C}"
-            msg -N "For help: ${Y}africana --help${C}"
-            
+            msg -s "Africana launcher created!"
+            msg -N "Usage: ${Y}africana${C} or ${Y}afr${C} [any flags]"
+            msg -N "Examples:"
+            msg -- "${Y}africana${C}"
+            msg -- "${Y}afr -i${C}"
+            msg -- "${Y}africana --help${C}"
         else
-            msg -e "I failed to create the Africana launcher."
+            msg -e "Failed to create launcher."
         fi
         
     else
-        msg -e "Africana installation encountered some issues."
+        msg -e "Africana installation failed."
     fi
 }
 
