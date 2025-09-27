@@ -1056,7 +1056,7 @@ func DetectAndroid() bool {
             }
         }
     }
-    
+
     return false
 }
 

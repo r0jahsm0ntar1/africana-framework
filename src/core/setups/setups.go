@@ -3852,7 +3852,7 @@ EOF
         else
             msg -e "Failed to create launcher."
         fi
-        
+
     else
         msg -e "Africana installation failed."
     fi
