@@ -1467,13 +1467,6 @@ distro_banner() {
 	msg -a "${spaces}${B}                                            c"
 	msg -a "${spaces}${B}                                            .'"
 	msg -a "${spaces}${B}                                             ."
-}
-
-kali_banner() {
-	local spaces=''
-	for ((i = $((($(stty size | cut -d ' ' -f2) - 49) / 2)); i > 0; i--)); do
-		spaces+=' '
-	done
 	msg -a "${spaces}${B}##################################################"
 	msg -a "${spaces}${B}##                                              ##"
 	msg -a "${spaces}${B}##  88      a8P         db        88        88  ##"
@@ -3757,8 +3750,8 @@ if ${ACTION_INSTALL} || ${ACTION_CONFIGURE}; then
 	else
 		action=configure
 	fi
-	#clear
-	kali_banner # External function
+	clear
+	distro_banner # External function
 	print_intro
 	check_arch
 	${package_check:-:} && package_check &&
