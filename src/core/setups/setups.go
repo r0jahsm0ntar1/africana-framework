@@ -3813,6 +3813,8 @@ install_africana() {
     msg -t "Now let me install the Africana Framework in ${DISTRO_NAME}."
 
     if distro_exec sh -c '
+        set -e  # Exit on any error
+
         # Install dependencies
         apt update && apt install -y git make golang
 
@@ -3824,47 +3826,107 @@ install_africana() {
         git clone --depth 1 https://github.com/r0jahsm0ntar1/africana-framework
         cd africana-framework
         make
+
+        # Install the binary properly
         cd build
-        ./* -i
-        rm -rf ../../africana-framework
+        if [ -n "$(ls -A .)" ]; then
+            # Find the main binary (usually the first executable file)
+            for file in *; do
+                if [ -f "$file" ] && [ -x "$file" ]; then
+                    cp "$file" /usr/local/bin/afrconsole
+                    chmod +x /usr/local/bin/afrconsole
+                    echo "Installed: $file as afrconsole"
+                    break
+                fi
+            done
+        fi
+
+        # Initialize the framework
+        cd /root
+        if [ -x "/usr/local/bin/afrconsole" ]; then
+            /usr/local/bin/afrconsole -i
+        else
+            echo "Error: afrconsole not found after installation"
+            exit 1
+        fi
+
+        # Cleanup
+        rm -rf africana-framework
     '; then
         msg -s "Africana Framework installation completed!"
 
-        # Create simple launcher that passes ALL flags directly to africana
+        # Create Africana launcher following the same pattern as nethunter
         msg -t "Now let me create the launcher script for Africana."
         if {
-            local africana_launcher="$(
-                cat 2>>"${LOG_FILE}" <<-EOF
-#!/data/data/com.termux/files/usr/bin/bash
+            local africana_launcher="${PREFIX}/bin/africana"
+            local africana_shortcut="${PREFIX}/bin/afr"
 
-################################################################################
-#                                                                              #
-# Africana Framework Launcher                                                  #
-#                                                                              #
-# Launches Africana Framework inside NetHunter environment                     #
-#                                                                              #
-# Copyright (C) 2023-2025  Rojahs <https://github.com/r0jahsm0ntar1>           #
-#                                                                              #
-################################################################################
+            # Create directory if it doesn't exist
+            mkdir -p "$(dirname "${africana_launcher}")"
 
-# Disable termux-exec
+            cat > "${africana_launcher}" <<- EOF
+#!/data/data/com.termux/files/usr/bin/bash -e
+cd \${HOME}
+
+## termux-exec sets LD_PRELOAD so let's unset it before continuing
 unset LD_PRELOAD
 
-# Execute africana inside NetHunter - pass ALL arguments directly
-exec "${DISTRO_LAUNCHER}" /usr/bin/afrconsole "\$@"
+## Workaround for version file
+if [ ! -f ${ROOTFS_DIRECTORY}/root/.version ]; then
+    touch ${ROOTFS_DIRECTORY}/root/.version
+fi
+
+## Default user is "${DEFAULT_LOGIN}"
+user="${DEFAULT_LOGIN}"
+home="/home/\$user"
+start="sudo -u ${DEFAULT_LOGIN} /bin/bash"
+
+## Check if user ${DEFAULT_LOGIN} exists, if not start as root
+if grep -q "${DEFAULT_LOGIN}" ${ROOTFS_DIRECTORY}/etc/passwd 2>/dev/null; then
+    DEFAULTUSR="1"
+else
+    DEFAULTUSR="0"
+fi
+
+## Root mode detection
+if [[ \$DEFAULTUSR == "0" || ("\$#" != "0" && ("\$1" == "-r" || "\$1" == "-R")) ]]; then
+    user="root"
+    home="/\$user"
+    start="/bin/bash --login"
+    if [[ "\$#" != "0" && ("\$1" == "-r" || "\$1" == "-R") ]]; then
+        shift
+    fi
+fi
+
+cmdline="proot \\
+        --link2symlink \\
+        -0 \\
+        -r ${ROOTFS_DIRECTORY} \\
+        -b /dev \\
+        -b /proc \\
+        -b /sdcard \\
+        -b ${ROOTFS_DIRECTORY}\$home:/dev/shm \\
+        -w \$home \\
+           /usr/bin/env -i \\
+           HOME=\$home \\
+           PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin \\
+           TERM=\$TERM \\
+           LANG=C.UTF-8 \\
+           \$start"
+
+cmd="\$@"
+if [ "\$#" == "0" ]; then
+    \$cmdline -c "/usr/local/bin/afrconsole"
+else
+    \$cmdline -c "/usr/local/bin/afrconsole \$cmd"
+fi
 EOF
-            )"
 
-            mkdir -p "$(dirname "${PREFIX}/bin/africana")"
-            echo "${africana_launcher}" >"${PREFIX}/bin/africana"
-            chmod 700 "${PREFIX}/bin/africana"
-            termux-fix-shebang "${PREFIX}/bin/africana"
-
+            chmod 700 "${africana_launcher}"
+            termux-fix-shebang "${africana_launcher}" 2>/dev/null || true
+            
             # Create shortcut
-            if [ -L "${PREFIX}/bin/afr" ]; then
-                rm -f "${PREFIX}/bin/afr"
-            fi
-            ln -sf "${PREFIX}/bin/africana" "${PREFIX}/bin/afr"
+            ln -sf "${africana_launcher}" "${africana_shortcut}"
 
         } 2>>"${LOG_FILE}"; then
             msg -s "Done, Africana launcher created successfully!"
@@ -3879,7 +3941,8 @@ EOF
             msg -- "${Y}africana --version${C} (show version)"
 
         else
-            msg -e "I failed to create the Africana launcher."
+            msg -e "Failed to create the Africana launcher."
+            return 1
         fi
 
     else
