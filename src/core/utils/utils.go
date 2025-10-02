@@ -2565,47 +2565,47 @@ func (le *LineEditor) handleEscapeSequence(scanner *bufio.Scanner) bool {
         key := scanner.Text()
         
         switch key {
-        case "A": // Up arrow - previous prediction
+        case "A":
             if le.inPredictionMode {
                 le.prevPrediction()
             } else {
                 le.historyUp()
             }
-        case "B": // Down arrow - next prediction
+        case "B":
             if le.inPredictionMode {
                 le.nextPrediction()
             } else {
                 le.historyDown()
             }
-        case "C": // Right arrow - next prediction
+        case "C":
             if le.inPredictionMode {
                 le.nextPrediction()
             } else {
                 le.moveRight()
             }
-        case "D": // Left arrow - previous prediction
+        case "D":
             if le.inPredictionMode {
                 le.prevPrediction()
             } else {
                 le.moveLeft()
             }
-        case "H": // Home - first prediction
+        case "H":
             if le.inPredictionMode {
                 le.firstPrediction()
             } else {
                 le.moveHome()
             }
-        case "F": // End - last prediction  
+        case "F":
             if le.inPredictionMode {
                 le.lastPrediction()
             } else {
                 le.moveEnd()
             }
-        case "5~": // Page Up - jump to first prediction
+        case "5~":
             if le.inPredictionMode {
                 le.firstPrediction()
             }
-        case "6~": // Page Down - jump to last prediction
+        case "6~":
             if le.inPredictionMode {
                 le.lastPrediction()
             }

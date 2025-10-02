@@ -72,7 +72,7 @@ func africanaAutoMode() {
         Input, err := utils.DisplayPrompt(subprocess.Version)
         if err != nil {
             if err.Error() == "interrupted" {
-                fmt.Printf("\n%s%s[!] %sCtrl + C detected", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+                fmt.Printf("\n%s%s[!] %sCtrl + C detected, breaking ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
                 return
             }
             return
@@ -294,7 +294,7 @@ func africanaManualMode() {
         Input, err := utils.DisplayPrompt(subprocess.Version)
         if err != nil {
             if err.Error() == "interrupted" {
-                fmt.Printf("\n\n%s%s[!] %sCtrl + C detected, breaking ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+                fmt.Printf("\n%s%s[!] %sCtrl + C detected, breaking ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
                 break
             }
             break
