@@ -26,10 +26,18 @@ type stringMatcher struct {
 
 func WirelessPentest() {
     for {
-        fmt.Printf("%s%s%safr%s%s wireless(%s%ssrc/pentest_%s.fn%s)%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.Bold, bcolors.BrightRed, Function, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        utils.Scanner.Scan()
-        Input := strings.TrimSpace(utils.Scanner.Text())
+        Input, err := utils.DisplayPrompt(subprocess.Version, "wireless", Function)
+        if err != nil {
+            if err.Error() == "interrupted" {
+                fmt.Printf("%s", "\n")
+                break
+            }
+            break
+        }
+
+        Input = strings.TrimSpace(Input)
         buildParts := strings.Fields(strings.ToLower(Input))
+
         if len(buildParts) == 0 {
             continue
         }

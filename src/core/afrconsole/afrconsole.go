@@ -39,9 +39,16 @@ func Start() {
         utils.ClearScreen()
         agreements.Covenant()
         for {
-            fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-            utils.Scanner.Scan()
-            Input := strings.TrimSpace(utils.Scanner.Text())
+            Input, err := utils.DisplayPrompt(subprocess.Version)
+            if err != nil {
+                if err.Error() == "interrupted" {
+                    fmt.Printf("\n%s%s[!] %sCtrl + C detected", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+                    break
+                }
+                break
+            }
+
+            Input = strings.TrimSpace(Input)
             switch Input {
             case "a", "k", "y", "ok", "yes", "agree":
                 utils.Sealing()
@@ -62,10 +69,18 @@ func Start() {
 func africanaAutoMode() {
     menus.MenuZero()
     for {
-        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        utils.Scanner.Scan()
-        Input := strings.TrimSpace(utils.Scanner.Text())
+        Input, err := utils.DisplayPrompt(subprocess.Version)
+        if err != nil {
+            if err.Error() == "interrupted" {
+                fmt.Printf("\n%s%s[!] %sCtrl + C detected", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+                return
+            }
+            return
+        }
+
+        Input = strings.TrimSpace(Input)
         buildParts := strings.Fields(strings.ToLower(Input))
+
         if len(buildParts) == 0 {
             continue
         }
@@ -276,9 +291,16 @@ func executeCommandAuto(cmd string) bool {
 
 func africanaManualMode() {
     for {
-        fmt.Printf("%s%s%safr%s%s%s > %s", bcolors.Endc, bcolors.Underline, bcolors.Bold, subprocess.Version, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        utils.Scanner.Scan()
-        Input := strings.TrimSpace(utils.Scanner.Text())
+        Input, err := utils.DisplayPrompt(subprocess.Version)
+        if err != nil {
+            if err.Error() == "interrupted" {
+                fmt.Printf("\n\n%s%s[!] %sCtrl + C detected, breaking ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+                break
+            }
+            break
+        }
+
+        Input = strings.TrimSpace(Input)
         buildParts := strings.Fields(strings.ToLower(Input))
         if len(buildParts) == 0 {
             continue

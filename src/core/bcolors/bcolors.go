@@ -9,6 +9,7 @@ import (
 )
 
 var (
+
     Endc   = "\033[0m"
     Bold   = "\033[1m"
     Dim    = "\033[2m"
@@ -56,6 +57,8 @@ var (
     BackBrightCyan    = "\033[106m"
     BackBrightWhite   = "\033[107m"
 
+    Background = "\033[48;5;236m"
+
     XTERM_FG    []string
     XTERM_BG    []string
     colorTaken  []string
@@ -70,6 +73,7 @@ func init() {
     }
 
     if runtime.GOOS == "windows" {
+        Background = ""
         Black, Red, Green, Yellow, Blue, Magenta, Cyan, White = "", "", "", "", "", "", "", ""
         Endc, Bold, Dim, Italic, Underline, Blink, Blink2, Invert, Hidden, Strike = "", "", "", "", "", "", "", "", "", ""
         BackBlack, BackRed, BackGreen, BackYellow, BackBlue, BackMagenta, BackCyan, BackWhite = "", "", "", "", "", "", "", ""
