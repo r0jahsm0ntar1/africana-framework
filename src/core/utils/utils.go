@@ -1,8 +1,6 @@
-//John 3:16
-
 package utils
 
-import(
+import (
     "os"
     "io"
     "net"
@@ -53,44 +51,44 @@ var (
     BuildName  = "africana_fud"
     RawBuild   = "africana_raw"
 
-    FakeDns    = "*"
-    NeMode     = "all"
-    IFace      = "eth0"
-    Spoofer    = "ettercap"
+    FakeDns = "*"
+    NeMode  = "all"
+    IFace   = "eth0"
+    Spoofer = "ettercap"
 
-    WlanIFace  = "wlan0"
-    UserName   = "admin"
-    PassWord   = "password"
-    Ssid       = "The End Times Ministries."
+    WlanIFace = "wlan0"
+    UserName  = "admin"
+    PassWord  = "password"
+    Ssid      = "The End Times Ministries."
 
-    WiMode     = "auto"
-    ExMode     = "auto"
-    SeMode     = "auto"
-    PhMode     = "all"
-    CrMode     = "online"
-    WeMode     = "recon"
-    DDosMode   = "gui"
+    WiMode   = "auto"
+    ExMode   = "auto"
+    SeMode   = "auto"
+    PhMode   = "all"
+    CrMode   = "online"
+    WeMode   = "recon"
+    DDosMode = "gui"
 
-    BeefName   = "beef"
-    BeefPass   = "Jesus"
-    PhFakeDns  = "Jesus Christ is coming soon!"
+    BeefName  = "beef"
+    BeefPass  = "Jesus"
+    PhFakeDns = "Jesus Christ is coming soon!"
 
-    CHAR            = "├──"
-    CHAR1           = "└──"
-    SPACE_PREFIX    = "   "
+    CHAR         = "├──"
+    CHAR1        = "└──"
+    SPACE_PREFIX = "   "
 
-    LHost, _ = GetDefaultIP()
-    Distro, _ = GetLinuxDistroID()
+    LHost, _   = GetDefaultIP()
+    Distro, _  = GetLinuxDistroID()
     GateWay, _ = GetDefaultGatewayIP()
-    Scanner = bufio.NewScanner(os.Stdin)
+    Scanner    = bufio.NewScanner(os.Stdin)
 
     Date = time.Now().Format("2006-01-02.15.04.05")
 
     HomeDir = os.Getenv("HOME")
-    GoPath = filepath.Join(HomeDir, ".go")
+    GoPath  = filepath.Join(HomeDir, ".go")
 
-    VenvPath = filepath.Join(BaseDir, VenvName)
-    VenvPip = filepath.Join(VenvPath, "bin", "pip")
+    VenvPath   = filepath.Join(BaseDir, VenvName)
+    VenvPip    = filepath.Join(VenvPath, "bin", "pip")
     VenvPython = filepath.Join(VenvPath, "bin", "python")
 
     WirelessTools = filepath.Join(ToolsDir, "wireless")
@@ -100,28 +98,27 @@ var (
     WeBountyTools = filepath.Join(ToolsDir, "websites")
     NetworkTools  = filepath.Join(ToolsDir, "networks")
 
-    ReconDir = filepath.Join(OutPutDir, "recondir")
-    SetupsLogs = filepath.Join(OutPutDir, "setups")
-    SecLogs = filepath.Join(OutPutDir, "securities")
-    NetworkLogs = filepath.Join(OutPutDir, "networks")
-    ExploitsLogs = filepath.Join(OutPutDir, "exploits")
-    PhishersLogs = filepath.Join(OutPutDir, "phishers")
-    CrackersLogs = filepath.Join(OutPutDir, "crackers")
-    WirelessLogs = filepath.Join(OutPutDir, "wireless")
+    ReconDir       = filepath.Join(OutPutDir, "recondir")
+    SetupsLogs     = filepath.Join(OutPutDir, "setups")
+    SecLogs        = filepath.Join(OutPutDir, "securities")
+    NetworkLogs    = filepath.Join(OutPutDir, "networks")
+    ExploitsLogs   = filepath.Join(OutPutDir, "exploits")
+    PhishersLogs   = filepath.Join(OutPutDir, "phishers")
+    CrackersLogs   = filepath.Join(OutPutDir, "crackers")
+    WirelessLogs   = filepath.Join(OutPutDir, "wireless")
     WebCrackersLogs = filepath.Join(OutPutDir, "websites")
 
-    IconsDir = filepath.Join(TemplateDir, "icons")
-    WinresDir = filepath.Join(TemplateDir, "rcedits")
-    GeneratorDir = filepath.Join(ExploitsLogs, "generator")
-    WinresInit = filepath.Join(TemplateDir, "rcedits", "winres")
-    TemplateDir = filepath.Join(ExploitsTools, "payload_templates")
-
-    OutPutBuild = filepath.Join(GeneratorDir, BuildName)
-    WListeners = filepath.Join(ExploitsTools, "windows", "listeners")
-    AListeners = filepath.Join(ExploitsTools, "androids", "listeners")
+    IconsDir      = filepath.Join(TemplateDir, "icons")
+    WinresDir     = filepath.Join(TemplateDir, "rcedits")
+    GeneratorDir  = filepath.Join(ExploitsLogs, "generator")
+    WinresInit    = filepath.Join(TemplateDir, "rcedits", "winres")
+    TemplateDir   = filepath.Join(ExploitsTools, "payload_templates")
+    OutPutBuild   = filepath.Join(GeneratorDir, BuildName)
+    WListeners    = filepath.Join(ExploitsTools, "windows", "listeners")
+    AListeners    = filepath.Join(ExploitsTools, "androids", "listeners")
     ObfusCatorsDir = filepath.Join(ExploitsTools, "windows", "obfuscators")
 
-    WordsList = filepath.Join(WordsListDir, "everything.txt")
+    WordsList     = filepath.Join(WordsListDir, "everything.txt")
     ResolversFile = filepath.Join(WordsListDir, "dns_all.txt")
 
     BaseDir, ToolsDir, CertDir, CertPath, KeyPath, OutPutDir, WordsListDir, RokyPath = subprocess.DirLocations()
@@ -174,42 +171,19 @@ var DefaultValues = map[string]string{
 }
 
 var AvailableCommands = []string{
-    "help", "exit", "version", "status", "start", "stop", "restart", 
-    "config", "log", "update", "install", "uninstall", "list",
-    "set", "get", "show", "run", "scan", "analyze", "build", "use",
+    "help", "exit", "version", "status", "start", "log", "list", "set", "show", "run", "use", "info", "option", "options",
 }
 
 var CommandWords = []string{
-    "set", "show", "run", "scan", "use", "config", "start", "stop", 
-    "help", "version", "status", "install", "uninstall", "update",
-    "exit", "restart", "log", "get", "analyze", "build", "list",
-
-    "module", "modules", "function", "functions", "target", "targets",
-    "lhost", "lport", "rhost", "rport", "proxy", "proxies", 
-    "mode", "protocol", "output", "input", "config", "settings",
-    "options", "option", "value", "values", "port", "ports",
-    "host", "hosts", "network", "networks", "scan", "scans",
-    "attack", "attacks", "exploit", "exploits", "payload", "payloads",
-    "ssid", "iface", "interface", "password", "passwd", "wordlist",
-    "gateway", "fakedns", "spoofer", "venvname", "toolsdir", "ddosmode",
-    "recondir", "listener", "listeners", "outputlog", "innericon", "outericon",
-    "buildname", "outputlogs", "obfuscator",
+    "set", "show", "run", "scan", "use", "config", "start", "stop", "help", "version", "status", "install", "uninstall", "update", "exit", "restart", "log", "get", "analyze", "build", "list", "module", "modules", "function", "functions", "target", "targets", "lhost", "lport", "rhost", "rport", "proxy", "proxies", "mode", "protocol", "output", "input", "config", "settings", "options", "option", "value", "values", "port", "ports", "host", "hosts", "network", "networks", "scan", "scans", "attack", "attacks", "exploit", "exploits", "payload", "payloads", "ssid", "iface", "interface", "password", "passwd", "wordlist", "gateway", "fakedns", "spoofer", "venvname", "toolsdir", "ddosmode", "recondir", "listener", "listeners", "outputlog", "innericon", "outericon", "buildname", "outputlogs", "obfuscator",
 }
 
 var CommandPredictions = map[string][]string{
     "show": {
-        "config", "settings", "options", "status", "version", "modules",
-        "plugins", "targets", "sessions", "history", "help", "commands",
+        "config", "settings", "options", "status", "version", "modules", "plugins", "targets", "sessions", "history", "help", "commands",
     },
     "set": {
-        "func", "funcs", "module", "ssid", "iface", "mode", "function", 
-        "lhost", "lport", "hport", "rhost", "rhosts", "functions", 
-        "target", "distro", "targets", "proxy", "script", "name", 
-        "interface", "build", "proxies", "passwd", "gateway", "fakedns", 
-        "spoofer", "output", "venvname", "toolsdir", "ddosmode", 
-        "recondir", "password", "protocol", "listener", "wordlist", 
-        "listeners", "outputlog", "innericon", "outericon", "buildname", 
-        "outputlogs", "obfuscator", "option", "value",
+        "func", "funcs", "module", "ssid", "iface", "mode", "function", "lhost", "lport", "hport", "rhost", "rhosts", "functions", "target", "distro", "targets", "proxy", "script", "name", "interface", "build", "proxies", "passwd", "gateway", "fakedns", "spoofer", "output", "venvname", "toolsdir", "ddosmode", "recondir", "password", "protocol", "listener", "wordlist", "listeners", "outputlog", "innericon", "outericon", "buildname", "outputlogs", "obfuscator", "option", "value",
     },
     "run": {
         "scan", "attack", "exploit", "recon", "bruteforce", "module",
@@ -242,14 +216,14 @@ var CommandSuggestions = map[string]string{
     "start":  " <service>",
     "stop":   " <service>",
 
-    "se":     "t <option> <value>",
-    "sh":     "ow <category>",
-    "r":      "un <module/scan>",
-    "sc":     "an <target>",
-    "co":     "nfig <action>",
-    "h":      "elp <command>",
-    "u":      "se <module>",
-    "st":     "art <service>",
+    "se": "t <option> <value>",
+    "sh": "ow <category>",
+    "r":  "un <module/scan>",
+    "sc": "an <target>",
+    "co": "nfig <action>",
+    "h":  "elp <command>",
+    "u":  "se <module>",
+    "st": "art <service>",
 }
 
 var PartialSuggestions = map[string]map[string]string{
@@ -316,24 +290,24 @@ var PartialSuggestions = map[string]map[string]string{
 }
 
 var ValueSuggestions = map[string]string{
-    "mode":      "<listen|attack|scan>",
-    "protocol":  "<tcp|udp|http>",
-    "lhost":     "<your_ip_address>",
-    "lport":     "<port_number>",
-    "rhost":     "<target_ip>",
-    "threads":   "<number>",
-    "timeout":   "<seconds>",
-    "verbose":   "<true|false>",
-    "output":    "<filename>",
+    "mode":     "<listen|attack|scan>",
+    "protocol": "<tcp|udp|http>",
+    "lhost":    "<your_ip_address>",
+    "lport":    "<port_number>",
+    "rhost":    "<target_ip>",
+    "threads":  "<number>",
+    "timeout":  "<seconds>",
+    "verbose":  "<true|false>",
+    "output":   "<filename>",
 }
 
 var CommonValues = []string{"true", "false", "on", "off", "enable", "disable", "yes", "no"}
 
 var CommandCategories = map[string][]string{
-    "Configuration":  {"set", "config", "get"},
-    "Information":    {"help", "show", "version", "status", "list"},
-    "Execution":      {"run", "scan", "start", "stop", "restart", "analyze", "build", "use"},
-    "System":         {"exit", "update", "install", "uninstall", "log"},
+    "Configuration": {"set", "config", "get"},
+    "Information":   {"help", "show", "version", "status", "list"},
+    "Execution":     {"run", "scan", "start", "stop", "restart", "analyze", "build", "use"},
+    "System":        {"exit", "update", "install", "uninstall", "log"},
 }
 
 type PromptContext struct {
@@ -345,24 +319,23 @@ type PromptContext struct {
 }
 
 type LineEditor struct {
-    history          []string
-    historyPos       int
-    currentLine      string
-    cursorPos        int
-    prompt           string
-    promptLen        int
-    historyFile      string
-    predictions      []string
-    predictionPos    int
-    showPredictions  bool
-    initialized      bool
-    predictionDrawn  bool
-    tabPressed       bool
-    predictionLines  int
-    inPredictionMode bool
-    originalLine     string
-    originalCursor   int
-    // Smart features
+    history           []string
+    historyPos        int
+    currentLine       string
+    cursorPos         int
+    prompt            string
+    promptLen         int
+    historyFile       string
+    predictions       []string
+    predictionPos     int
+    showPredictions   bool
+    initialized       bool
+    predictionDrawn   bool
+    tabPressed        bool
+    predictionLines   int
+    inPredictionMode  bool
+    originalLine      string
+    originalCursor    int
     suggestionMode    bool
     currentSuggestion string
     lastKeyTime       time.Time
@@ -373,10 +346,10 @@ type LineEditor struct {
 }
 
 type InterfaceInfo struct {
-    Name        string
+    Name         string
     HardwareAddr string
-    Flags       net.Flags
-    Addresses   []string
+    Flags        net.Flags
+    Addresses    []string
 }
 
 type Option func(*Spinner)
@@ -624,15 +597,12 @@ func (s *Spinner) Start() {
 
     s.active = true
     s.stopChan = make(chan struct{})
-    //s.hideCursor()
-
     s.wg.Add(1)
     go s.spin()
 }
 
 func (s *Spinner) spin() {
     defer s.wg.Done()
-    //defer s.showCursor()
 
     charIdx := 0
     letterPos := 0
@@ -645,7 +615,7 @@ func (s *Spinner) spin() {
             if s.clearOnStop {
                 s.clearLine()
             } else {
-                fmt.Fprint(s.writer, "\r" + s.currentText + "  \r" + s.currentText)
+                fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
             }
             return
         case <-ticker.C:
@@ -680,7 +650,6 @@ func (s *Spinner) StartWithTask(task func()) {
 
     s.active = true
     s.stopChan = make(chan struct{})
-    //s.hideCursor()
     s.mu.Unlock()
 
     s.wg.Add(1)
@@ -704,14 +673,13 @@ func (s *Spinner) Stop() {
 
     close(s.stopChan)
     s.wg.Wait()
-    
+
     if s.clearOnStop {
         s.clearLine()
     } else {
-        fmt.Fprint(s.writer, "\r" + s.currentText + "  \r" + s.currentText)
+        fmt.Fprint(s.writer, "\r"+s.currentText+"  \r"+s.currentText)
     }
-    
-    //s.showCursor()
+
     s.flush()
     s.active = false
 }
@@ -719,7 +687,7 @@ func (s *Spinner) Stop() {
 func (s *Spinner) clearLine() {
     if s.isWindows {
         width := 80
-        fmt.Fprint(s.writer, "\r" + strings.Repeat(" ", width) + "\r")
+        fmt.Fprint(s.writer, "\r"+strings.Repeat(" ", width)+"\r")
     } else {
         fmt.Fprint(s.writer, "\033[2K\r")
     }
@@ -837,9 +805,9 @@ func IFaces() ([]InterfaceInfo, error) {
 
     for _, iface := range interfaces {
         info := InterfaceInfo{
-            Name:        iface.Name,
+            Name:         iface.Name,
             HardwareAddr: iface.HardwareAddr.String(),
-            Flags:       iface.Flags,
+            Flags:        iface.Flags,
         }
 
         addrs, err := iface.Addrs()
@@ -909,14 +877,6 @@ func AskForProxy(proxyStr string) (*url.URL, error) {
         return nil, fmt.Errorf("%s%s[!] %sInvalid proxy format (eg. http://localhost:8080, socks5://127.0.0.1:9050)", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     }
 
-    //validSchemes := map[string]bool{"http": true, "https": true}
-    //if !validSchemes[proxyURL.Scheme] {
-    //    if strings.HasPrefix(proxyURL.Scheme, "socks") {
-    //        return nil, fmt.Errorf("[!] SOCKS proxy support requires external modules (golang.org/x/net/proxy). Please use an HTTP proxy")
-    //    }
-    //    return nil, fmt.Errorf("[!] Invalid proxy scheme %q (use http or https)", proxyURL.Scheme)
-    //}
-
     return proxyURL, nil
 }
 
@@ -942,7 +902,6 @@ func SetProxy(proxyStr string) error {
     validHTTPSchemes := map[string]bool{"http": true, "https": true}
     if validHTTPSchemes[proxyURL.Scheme] {
         http.DefaultTransport.(*http.Transport).Proxy = http.ProxyURL(proxyURL)
-        //fmt.Printf("%s%s[>] %sGo HTTP transport also configured for: %s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, proxyURL.String())
     } else {
         fmt.Printf("%s%s[>] %sProxy set in environment for external tools: %s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, proxyURL.String())
         fmt.Printf("%s%s[!] %sNote: Native Go HTTP calls will not use the %s proxy (requires golang.org/x/net/proxy).\n", bcolors.Bold, bcolors.Red, bcolors.Endc, proxyURL.Scheme)
@@ -989,9 +948,7 @@ func Editors(filesToReplacements map[string]map[string]string) {
         err := replaceStringsInFile(fileName, replacements)
         if err != nil {
             fmt.Printf("%s[!] %sError Configuring: %s%v", bcolors.BrightRed, bcolors.Endc, fileName, err)
-        } //else {
-            //fmt.Printf("%s[*] %sDone configuring: %s%s%s", bcolors.Green, bcolors.Endc, bcolors.BrightBlue, fileName, bcolors.Endc)
-        //}
+        }
     }
 }
 
@@ -1038,13 +995,13 @@ func StripBrackets(text string) string {
 }
 
 func GetAgreementPath() string {
-    agreementDir := filepath.Join("/root/.afr" + subprocess.Version, "agreements")
-    if !subprocess.CheckRoot(){
+    agreementDir := filepath.Join("/root/.afr"+subprocess.Version, "agreements")
+    if !subprocess.CheckRoot() {
         homeDir := subprocess.GetHomeDir()
         if homeDir == "" {
             return ""
         }
-        agreementDir = filepath.Join(homeDir, ".afr" + subprocess.Version, "agreements")
+        agreementDir = filepath.Join(homeDir, ".afr"+subprocess.Version, "agreements")
     }
     return filepath.Join(agreementDir, "covenant.txt")
 }
@@ -1107,7 +1064,7 @@ func copyDir(src, dst string, srcInfo os.FileInfo) error {
     for _, entry := range entries {
         srcPath := filepath.Join(src, entry.Name())
         dstPath := filepath.Join(dst, entry.Name())
-        
+
         if err := Copy(srcPath, dstPath); err != nil {
             return err
         }
@@ -1275,7 +1232,7 @@ func DetectTermux() bool {
     if strings.Contains(os.Getenv("PREFIX"), "com.termux") {
         return true
     }
-    
+
     return false
 }
 
@@ -1295,11 +1252,11 @@ func IsNethunter() bool {
     if _, err := os.Stat("/etc/nethunter-release"); err == nil {
         return true
     }
-    
+
     if _, err := os.Stat("/etc/kali-release"); err == nil {
         return true
     }
-    
+
     if _, err := os.Stat("/etc/debian_chroot"); err == nil {
         return true
     }
@@ -1346,7 +1303,7 @@ func DisplayPrompt(version string, args ...interface{}) (string, error) {
         value := Function
         showBrackets := true
         color := "brightred"
-        
+
         if len(args) >= 1 {
             if ctx, ok := args[0].(string); ok {
                 context = ctx
@@ -1412,7 +1369,7 @@ func getContextColor(color string) string {
         "brightblue": bcolors.BrightBlue,
         "default":    bcolors.BrightRed,
     }
-    
+
     if selected, exists := colorMap[color]; exists {
         return selected
     }
@@ -1434,7 +1391,7 @@ func SetCommandWords(words []string) {
 func NewLineEditor(prompt string) *LineEditor {
     visualLength := calculateVisualLength(prompt)
     historyFile := subprocess.HistoryFile
-    
+
     editor := &LineEditor{
         history:          []string{},
         historyPos:       0,
@@ -1513,9 +1470,9 @@ func Levenshtein(a, b string) int {
                 cost = 1
             }
             currRow[j] = min(
-                currRow[j-1] + 1,
-                prevRow[j] + 1,
-                prevRow[j-1] + cost,
+                currRow[j-1]+1,
+                prevRow[j]+1,
+                prevRow[j-1]+cost,
             )
         }
         prevRow, currRow = currRow, prevRow
@@ -1534,7 +1491,6 @@ func min(nums ...int) int {
 }
 
 func (le *LineEditor) getTerminalWidth() int {
-
     type winsize struct {
         Row    uint16
         Col    uint16
@@ -1553,7 +1509,7 @@ func (le *LineEditor) getTerminalWidth() int {
     if int(retCode) == -1 {
         return 80
     }
-    
+
     width := int(ws.Col)
     if width <= 0 {
         return 80
@@ -1567,67 +1523,199 @@ func (le *LineEditor) generatePredictions() {
 
     currentText := strings.TrimSpace(le.currentLine)
     if currentText == "" {
-
         le.predictions = AvailableCommands
-    } else {
-        parts := strings.Fields(currentText)
-        if len(parts) == 0 {
-            return
-        }
+        return
+    }
 
-        if len(parts) == 1 {
+    parts := strings.Fields(currentText)
+    if len(parts) == 0 {
+        return
+    }
 
-            cmd := strings.ToLower(parts[0])
-            if subcommands, exists := CommandPredictions[cmd]; exists {
-                le.predictions = subcommands
-            } else {
+    currentWord := parts[len(parts)-1]
+    lowerCurrentWord := strings.ToLower(currentWord)
 
-                for _, availableCmd := range AvailableCommands {
-                    lowerCmd := strings.ToLower(availableCmd)
-                    if le.isPartialMatch(cmd, lowerCmd) {
-                        le.predictions = append(le.predictions, availableCmd)
-                    }
-                }
+    var predictions []string
+    
+    if len(parts) == 1 {
+        for _, availableCmd := range AvailableCommands {
+            lowerCmd := strings.ToLower(availableCmd)
+            if le.isPartialMatch(lowerCurrentWord, lowerCmd) {
+                predictions = append(predictions, availableCmd)
             }
-        } else if len(parts) >= 2 {
-
-            cmd := strings.ToLower(parts[0])
-            currentSub := strings.ToLower(parts[len(parts)-1])
-            
+        }
+    } else {
+        cmd := strings.ToLower(parts[0])
+        
+        switch cmd {
+        case "set":
+            predictions = le.getSetPredictions(parts, currentWord)
+        case "show":
+            predictions = le.getShowPredictions(currentWord)
+        case "run":
+            predictions = le.getRunPredictions(currentWord)
+        case "use":
+            predictions = le.getUsePredictions(currentWord)
+        case "scan":
+            predictions = le.getScanPredictions(currentWord)
+        default:
             if subcommands, exists := CommandPredictions[cmd]; exists {
                 for _, subcmd := range subcommands {
-                    lowerSub := strings.ToLower(subcmd)
-                    if le.isPartialMatch(currentSub, lowerSub) {
-                        le.predictions = append(le.predictions, subcmd)
+                    if le.isPartialMatch(currentWord, subcmd) {
+                        predictions = append(predictions, subcmd)
                     }
                 }
-            }
-
-            if len(le.predictions) == 0 {
+            } else {
                 for _, val := range CommonValues {
-                    if le.isPartialMatch(currentSub, val) {
-                        le.predictions = append(le.predictions, val)
+                    if le.isPartialMatch(currentWord, val) {
+                        predictions = append(predictions, val)
                     }
                 }
             }
         }
     }
 
-    uniquePredictions := make(map[string]bool)
-    var finalPredictions []string
-    for _, p := range le.predictions {
-        if !uniquePredictions[p] {
-            uniquePredictions[p] = true
-            finalPredictions = append(finalPredictions, p)
-        }
-    }
-    sort.Strings(finalPredictions)
-    le.predictions = finalPredictions
+    le.predictions = le.sortPredictionsWithPriority(predictions, lowerCurrentWord)
 
     if len(le.predictions) > 0 {
         le.showPredictions = true
         le.predictionPos = 0
     }
+}
+
+func (le *LineEditor) sortPredictionsWithPriority(predictions []string, currentWord string) []string {
+    if currentWord == "" {
+        sort.Strings(predictions)
+        return predictions
+    }
+    
+    var prefixMatches []string
+    var otherMatches []string
+    
+    for _, pred := range predictions {
+        lowerPred := strings.ToLower(pred)
+        if strings.HasPrefix(lowerPred, currentWord) {
+            prefixMatches = append(prefixMatches, pred)
+        } else {
+            otherMatches = append(otherMatches, pred)
+        }
+    }
+
+    sort.Strings(prefixMatches)
+    sort.Strings(otherMatches)
+
+    return append(prefixMatches, otherMatches...)
+}
+
+func (le *LineEditor) getSetPredictions(parts []string, currentWord string) []string {
+    var predictions []string
+    lowerCurrentWord := strings.ToLower(currentWord)
+
+    if len(parts) == 2 {
+        setOptions := []string{
+            "lhost", "lport", "rhost", "target", "protocol", "function",
+            "module", "build", "output", "iface", "gateway", "mode",
+            "listener", "innericon", "outericon", "obfuscator", "proxy",
+        }
+
+        for _, option := range setOptions {
+            if le.isPartialMatch(currentWord, option) {
+                predictions = append(predictions, option)
+            }
+        }
+    } else if len(parts) == 3 {
+        option := strings.ToLower(parts[1])
+        predictions = le.getValuePredictions(option, currentWord)
+    }
+    
+    return le.sortPredictionsWithPriority(predictions, lowerCurrentWord)
+}
+
+func (le *LineEditor) getShowPredictions(currentWord string) []string {
+    showOptions := []string{
+        "options", "config", "settings", "status", "version",
+        "modules", "functions", "targets", "sessions", "history",
+    }
+
+    var predictions []string
+    lowerCurrentWord := strings.ToLower(currentWord)
+    
+    for _, option := range showOptions {
+        if le.isPartialMatch(currentWord, option) {
+            predictions = append(predictions, option)
+        }
+    }
+    return le.sortPredictionsWithPriority(predictions, lowerCurrentWord)
+}
+
+func (le *LineEditor) getRunPredictions(currentWord string) []string {
+    runOptions := []string{
+        "scan", "attack", "exploit", "recon", "bruteforce", "module",
+        "network-scan", "port-scan", "vulnerability-scan", "dos-attack",
+    }
+
+    var predictions []string
+    lowerCurrentWord := strings.ToLower(currentWord)
+    
+    for _, option := range runOptions {
+        if le.isPartialMatch(currentWord, option) {
+            predictions = append(predictions, option)
+        }
+    }
+    return le.sortPredictionsWithPriority(predictions, lowerCurrentWord)
+}
+
+func (le *LineEditor) getUsePredictions(currentWord string) []string {
+    useOptions := []string{
+        "scanner/network", "scanner/ports", "scanner/vulnerabilities",
+        "exploit/windows", "exploit/linux", "exploit/web",
+        "payload/generator", "listener/http", "listener/tcp",
+        "post/multi", "auxiliary/scanner", "auxiliary/gather",
+    }
+
+    var predictions []string
+    for _, option := range useOptions {
+        if le.isPartialMatch(currentWord, option) {
+            predictions = append(predictions, option)
+        }
+    }
+    return predictions
+}
+
+func (le *LineEditor) getScanPredictions(currentWord string) []string {
+    scanOptions := []string{
+        "network", "ports", "vulnerabilities", "services", "os",
+        "top-ports", "full", "quick", "comprehensive",
+    }
+
+    var predictions []string
+    for _, option := range scanOptions {
+        if le.isPartialMatch(currentWord, option) {
+            predictions = append(predictions, option)
+        }
+    }
+    return predictions
+}
+
+func (le *LineEditor) getValuePredictions(option, currentWord string) []string {
+    valueMap := map[string][]string{
+        "protocol":  {"tcp", "udp", "http", "https"},
+        "mode":      {"listen", "attack", "scan", "advanced", "simple"},
+        "function":  {"scanner", "exploit", "payload", "listener"},
+        "listener":  {"http", "https", "tcp", "udp", "multi"},
+    }
+
+    if values, exists := valueMap[option]; exists {
+        var predictions []string
+        for _, value := range values {
+            if le.isPartialMatch(currentWord, value) {
+                predictions = append(predictions, value)
+            }
+        }
+        return predictions
+    }
+
+    return []string{}
 }
 
 func (le *LineEditor) showInlinePredictions() {
@@ -1668,7 +1756,7 @@ func (le *LineEditor) redrawWithPredictions() {
 
             if le.predictionPos >= visibleCount {
                 startIdx = le.predictionPos - visibleCount + 1
-                if startIdx + visibleCount > len(le.predictions) {
+                if startIdx+visibleCount > len(le.predictions) {
                     startIdx = len(le.predictions) - visibleCount
                 }
             }
@@ -1690,7 +1778,7 @@ func (le *LineEditor) redrawWithPredictions() {
             if actualIdx >= len(le.predictions) {
                 break
             }
-            
+
             pred := le.predictions[actualIdx]
             if actualIdx == le.predictionPos {
                 predictionText += bcolors.Green + "›" + pred + bcolors.Endc
@@ -1703,12 +1791,12 @@ func (le *LineEditor) redrawWithPredictions() {
             }
         }
 
-        if startIdx + maxPredictions < len(le.predictions) {
+        if startIdx+maxPredictions < len(le.predictions) {
             remaining := len(le.predictions) - (startIdx + maxPredictions)
             predictionText += bcolors.Yellow + "|" + bcolors.Endc
             predictionText += bcolors.Magenta + "+" + fmt.Sprintf("%d", remaining) + bcolors.Endc
         }
-        
+
         predictionText += bcolors.Yellow + "]" + bcolors.Endc
         fmt.Print(predictionText)
     }
@@ -1719,9 +1807,9 @@ func (le *LineEditor) redrawWithPredictions() {
 func (le *LineEditor) applyPrediction() {
     if le.predictionPos >= 0 && le.predictionPos < len(le.predictions) {
         selected := le.predictions[le.predictionPos]
-        
+
         parts := strings.Fields(le.originalLine)
-        
+
         if len(parts) == 0 {
             le.currentLine = selected + " "
             le.cursorPos = len(le.currentLine)
@@ -1757,7 +1845,7 @@ func (le *LineEditor) applyPrediction() {
             le.cursorPos = len(le.currentLine)
         }
     }
-    
+
     le.exitPredictionMode()
 }
 
@@ -1774,21 +1862,21 @@ func (le *LineEditor) isPartialMatch(partial, full string) bool {
     }
 
     abbreviations := map[string]string{
-        "mo": "module", "mod": "module", "conf": "config", 
+        "mo": "module", "mod": "module", "conf": "config",
         "opt": "options", "set": "settings", "stat": "status",
         "ver": "version", "inst": "install", "uninst": "uninstall",
     }
-    
+
     if expanded, exists := abbreviations[partialLower]; exists {
         return expanded == fullLower
     }
-    
+
     return false
 }
 
 func (le *LineEditor) isCommandThatTakesArgs(cmd string) bool {
     commandsWithArgs := map[string]bool{
-        "set": true, "show": true, "run": true, "scan": true, 
+        "set": true, "show": true, "run": true, "scan": true,
         "use": true, "config": true, "start": true, "stop": true,
     }
 
@@ -1808,7 +1896,7 @@ func (le *LineEditor) nextPrediction() {
     if len(le.predictions) == 0 {
         return
     }
-    
+
     le.predictionPos = (le.predictionPos + 1) % len(le.predictions)
     le.showInlinePredictions()
 }
@@ -1817,7 +1905,7 @@ func (le *LineEditor) prevPrediction() {
     if len(le.predictions) == 0 {
         return
     }
-    
+
     le.predictionPos--
     if le.predictionPos < 0 {
         le.predictionPos = len(le.predictions) - 1
@@ -1829,7 +1917,7 @@ func (le *LineEditor) firstPrediction() {
     if len(le.predictions) == 0 {
         return
     }
-    
+
     le.predictionPos = 0
     le.showInlinePredictions()
 }
@@ -1838,7 +1926,7 @@ func (le *LineEditor) lastPrediction() {
     if len(le.predictions) == 0 {
         return
     }
-    
+
     le.predictionPos = len(le.predictions) - 1
     le.showInlinePredictions()
 }
@@ -1992,7 +2080,7 @@ func (le *LineEditor) looksLikeUserIsTypingValue(word string) bool {
             return true
         }
     }
-    
+
     return false
 }
 
@@ -2034,11 +2122,11 @@ func (le *LineEditor) currentLineEndsWithPartialTemplate(suggestion string) bool
         return false
     }
 
-    template := suggestion[templateStart:templateEnd+1]
+    template := suggestion[templateStart : templateEnd+1]
     currentText := le.currentLine
     if len(currentText) > 0 {
-        return strings.Contains(currentText, "<") || 
-               (len(template) > 2 && strings.Contains(currentText, template[1:2]))
+        return strings.Contains(currentText, "<") ||
+            (len(template) > 2 && strings.Contains(currentText, template[1:2]))
     }
 
     return false
@@ -2050,46 +2138,268 @@ func (le *LineEditor) handleTabCompletion() {
     now := time.Now()
     isDoubleTab := !le.tabPressTime.IsZero() && now.Sub(le.tabPressTime) < 500*time.Millisecond
 
-    if len(le.predictions) == 1 && !isDoubleTab {
-        selected := le.predictions[0]
-        parts := strings.Fields(le.currentLine)
-        
-        if len(parts) > 0 {
-            lastWord := parts[len(parts)-1]
-            if le.isPartialMatch(lastWord, selected) {
-                if len(parts) == 1 {
-                    le.currentLine = selected
-                } else {
-                    newParts := parts[:len(parts)-1]
-                    newParts = append(newParts, selected)
-                    le.currentLine = strings.Join(newParts, " ")
-                }
-                if le.isCommandThatTakesArgs(selected) {
-                    le.currentLine += " "
-                }
-                le.cursorPos = len(le.currentLine)
-                le.redraw()
-                le.tabPressTime = now
-                return
-            }
-        }
-    }
-
-    if len(le.predictions) > 0 && !isDoubleTab {
+    if isDoubleTab {
+        le.showContextHelp()
+    } else if len(le.predictions) > 0 {
         if le.inPredictionMode {
             le.nextPrediction()
         } else {
             le.enterPredictionMode()
         }
-    } else {
-        if isDoubleTab || len(le.predictions) == 0 {
-            le.showAllCommands()
-        } else {
-            le.showDoubleTabHint()
-        }
     }
 
     le.tabPressTime = now
+}
+
+func (le *LineEditor) showContextHelp() {
+    parts := strings.Fields(le.currentLine)
+
+    if len(parts) == 0 {
+        le.showAllCommands()
+        return
+    }
+
+    command := strings.ToLower(parts[0])
+
+    switch command {
+    case "set":
+        le.showSetOptions()
+    case "show":
+        le.showShowOptions()
+    case "run":
+        le.showRunOptions()
+    case "use":
+        le.showUseOptions()
+    case "scan":
+        le.showScanOptions()
+    case "start", "stop", "config", "help":
+        if subcommands, exists := CommandPredictions[command]; exists {
+            le.showCommandSpecificHelp(command, subcommands)
+        } else {
+            le.showAllCommands()
+        }
+    default:
+        le.showAllCommands()
+    }
+}
+
+func (le *LineEditor) showSetOptions() {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            SET Command Options%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s%sUsage: set <option> <value>%s\n\n", bcolors.Yellow, bcolors.Bold, bcolors.Endc)
+
+    categories := map[string][]string{
+        "Target Configuration": {
+            "lhost", "lport", "rhost", "target", "protocol", "gateway",
+        },
+        "Build Options": {
+            "build", "buildname", "innericon", "outericon", "obfuscator",
+        },
+        "Module Settings": {
+            "function", "module", "listener", "mode", "spoofer",
+        },
+        "Network Settings": {
+            "iface", "proxy", "fakedns", "venvname",
+        },
+        "Output Settings": {
+            "output", "recondir", "toolsdir",
+        },
+    }
+
+    for category, options := range categories {
+        fmt.Printf("  %s%s%s\n", bcolors.Cyan, category, bcolors.Endc)
+        fmt.Printf("  ")
+        for i, option := range options {
+            color := bcolors.Green
+            if i%2 == 1 {
+                color = bcolors.BrightGreen
+            }
+            fmt.Printf("%s%-15s%s ", color, option, bcolors.Endc)
+            if (i+1)%3 == 0 && i != len(options)-1 {
+                fmt.Printf("\n  ")
+            }
+        }
+        fmt.Printf("\n\n")
+    }
+
+    fmt.Printf("%s%sExamples:%s\n", bcolors.Magenta, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("  set lhost 192.168.1.100    set lport 4444    set function scanner\n")
+    fmt.Printf("  set protocol tcp           set output /path  set mode advanced\n\n")
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) showShowOptions() {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            SHOW Command Options%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s%sUsage: show <category>%s\n\n", bcolors.Yellow, bcolors.Bold, bcolors.Endc)
+
+    options := []string{
+        "options", "config", "settings", "status", "version",
+        "modules", "functions", "targets", "sessions", "history",
+    }
+
+    fmt.Printf("  Available categories:\n")
+    fmt.Printf("  ")
+    for i, option := range options {
+        color := bcolors.Blue
+        if i%2 == 1 {
+            color = bcolors.BrightBlue
+        }
+        fmt.Printf("%s%-12s%s ", color, option, bcolors.Endc)
+        if (i+1)%4 == 0 && i != len(options)-1 {
+            fmt.Printf("\n  ")
+        }
+    }
+    fmt.Printf("\n\n")
+
+    fmt.Printf("%s%sExamples:%s\n", bcolors.Magenta, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("  show options     show config     show status\n")
+    fmt.Printf("  show modules     show version    show targets\n\n")
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) showRunOptions() {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            RUN Command Options%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s%sUsage: run <module/scan>%s\n\n", bcolors.Yellow, bcolors.Bold, bcolors.Endc)
+
+    categories := map[string][]string{
+        "Scans": {
+            "scan", "network-scan", "port-scan", "vulnerability-scan",
+        },
+        "Attacks": {
+            "attack", "exploit", "bruteforce", "dos-attack",
+        },
+        "Modules": {
+            "module", "function", "tool",
+        },
+    }
+
+    for category, options := range categories {
+        fmt.Printf("  %s%s%s\n", bcolors.Cyan, category, bcolors.Endc)
+        fmt.Printf("  ")
+        for i, option := range options {
+            color := bcolors.Green
+            if i%2 == 1 {
+                color = bcolors.BrightGreen
+            }
+            fmt.Printf("%s%-20s%s ", color, option, bcolors.Endc)
+            if (i+1)%2 == 0 && i != len(options)-1 {
+                fmt.Printf("\n  ")
+            }
+        }
+        fmt.Printf("\n\n")
+    }
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) showUseOptions() {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            USE Command Options%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s%sUsage: use <module>%s\n\n", bcolors.Yellow, bcolors.Bold, bcolors.Endc)
+
+    moduleCategories := map[string][]string{
+        "Reconnaissance": {
+            "scanner/network", "scanner/ports", "scanner/vulnerabilities",
+        },
+        "Exploitation": {
+            "exploit/windows", "exploit/linux", "exploit/web",
+        },
+        "Post-Exploitation": {
+            "post/multi", "post/windows", "post/linux",
+        },
+        "Auxiliary": {
+            "auxiliary/scanner", "auxiliary/admin", "auxiliary/gather",
+        },
+    }
+
+    for category, modules := range moduleCategories {
+        fmt.Printf("  %s%s%s\n", bcolors.Cyan, category, bcolors.Endc)
+        for _, module := range modules {
+            fmt.Printf("  %s%s%s\n", bcolors.BrightGreen, module, bcolors.Endc)
+        }
+        fmt.Printf("\n")
+    }
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) showScanOptions() {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            SCAN Command Options%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s%sUsage: scan <type> [target]%s\n\n", bcolors.Yellow, bcolors.Bold, bcolors.Endc)
+
+    scanTypes := map[string]string{
+        "network":         "Scan entire network range",
+        "ports":           "Scan ports on specific target",
+        "vulnerabilities": "Scan for known vulnerabilities",
+        "services":        "Identify running services",
+        "os":              "Operating system detection",
+        "top-ports":       "Scan most common ports",
+        "full":            "Comprehensive scan",
+    }
+
+    fmt.Printf("  %s%-20s %s%s\n", bcolors.Cyan, "Scan Type", "Description", bcolors.Endc)
+    fmt.Printf("  %s%s%s\n", bcolors.Yellow, strings.Repeat("-", 50), bcolors.Endc)
+
+    for scanType, description := range scanTypes {
+        fmt.Printf("  %s%-20s%s %s\n",
+            bcolors.Green, scanType, bcolors.Endc,
+            bcolors.BrightBlue+description+bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s%sExamples:%s\n", bcolors.Magenta, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("  scan network 192.168.1.0/24\n")
+    fmt.Printf("  scan ports 192.168.1.100\n")
+    fmt.Printf("  scan vulnerabilities 192.168.1.100\n\n")
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) showCommandSpecificHelp(command string, subcommands []string) {
+    le.clearLine()
+    fmt.Print(le.prompt + le.currentLine)
+    fmt.Printf("\n%s%s            %s Command Options%s\n", bcolors.Green, bcolors.Bold, strings.ToUpper(command), bcolors.Endc)
+
+    usage := ""
+    if sugg, exists := CommandSuggestions[command]; exists {
+        usage = "Usage: " + command + sugg
+    } else {
+        usage = "Usage: " + command + " <subcommand>"
+    }
+
+    fmt.Printf("%s%s%s\n\n", bcolors.Yellow, bcolors.Bold, usage)
+
+    fmt.Printf("  Available subcommands:\n")
+    fmt.Printf("  ")
+    for i, subcmd := range subcommands {
+        color := bcolors.Blue
+        if i%2 == 1 {
+            color = bcolors.BrightBlue
+        }
+        fmt.Printf("%s%-15s%s ", color, subcmd, bcolors.Endc)
+        if (i+1)%4 == 0 && i != len(subcommands)-1 {
+            fmt.Printf("\n  ")
+        }
+    }
+    fmt.Printf("\n\n")
+
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) redrawPrompt() {
+    fmt.Print(le.prompt + le.currentLine)
+    if le.cursorPos < len(le.currentLine) {
+        fmt.Printf("\r\033[%dC", le.promptLen+le.cursorPos)
+    }
 }
 
 func (le *LineEditor) enterPredictionMode() {
@@ -2111,32 +2421,98 @@ func (le *LineEditor) showDoubleTabHint() {
 func (le *LineEditor) showAllCommands() {
     le.clearLine()
     fmt.Print(le.prompt + le.currentLine)
-    fmt.Printf("\n%s%s            Available commands%s\n", bcolors.Green, bcolors.Bold, bcolors.Endc)
 
-    for category, commands := range CommandCategories {
-        fmt.Printf("  %s%s%s\n", bcolors.Yellow, category, bcolors.Endc)
-        fmt.Printf("  ")
-        for i, cmd := range commands {
-            color := bcolors.Green
-            if i%2 == 1 {
-                color = bcolors.BrightGreen
+    fmt.Printf("\n\n%s%sCommands%s ", bcolors.Blue, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("%s(%d categories, %d total)%s\n\n", bcolors.DarkGray, len(CommandCategories), le.countTotalCommands(), bcolors.Endc)
+
+    categories := []struct {
+        name     string
+        indent   int
+        commands []string
+        spaces   []int
+    }{
+        {
+            "Configuration", 0,
+            []string{"set", "config", "get"},
+            []int{3, 1, 0},
+        },
+        {
+            "Information", 2,
+            []string{"help", "show", "version", "status", "list"},
+            []int{2, 3, 1, 4, 0},
+        },
+        {
+            "Execution", 4,
+            []string{"run", "scan", "start", "stop", "restart", "analyze", "build", "use"},
+            []int{3, 3, 3, 6, 1, 1, 1, 0},
+        },
+        {
+            "System", 7,
+            []string{"exit", "update", "install", "uninstall", "log"},
+            []int{2, 1, 1, 1, 0},
+        },
+    }
+
+    maxCommandStart := 0
+    for _, cat := range categories {
+        startPos := cat.indent + len(cat.name) + len(fmt.Sprintf(" (%d): ", len(cat.commands)))
+        if startPos > maxCommandStart {
+            maxCommandStart = startPos
+        }
+    }
+
+    for _, cat := range categories {
+        currentStart := cat.indent + len(cat.name) + len(fmt.Sprintf(" (%d): ", len(cat.commands)))
+        fmt.Printf("%s", strings.Repeat(" ", cat.indent))
+
+        fmt.Printf("%s%s%s %s(%d):%s ", bcolors.Yellow, bcolors.Bold, cat.name, bcolors.DarkGray, len(cat.commands), bcolors.Endc)
+
+        padding := maxCommandStart - currentStart
+        if padding > 0 {
+            fmt.Printf("%s", strings.Repeat(" ", padding))
+        }
+
+        for i, cmd := range cat.commands {
+            fmt.Printf("%s%s%s", bcolors.BrightGreen, cmd, bcolors.Endc)
+
+            if cat.spaces[i] > 0 {
+                fmt.Printf("%s", strings.Repeat(" ", cat.spaces[i]))
             }
-            fmt.Printf("%s%-12s%s ", color, cmd, bcolors.Endc)
-            if (i+1)%4 == 0 && i != len(commands)-1 {
-                fmt.Printf("\n  ")
+
+            if i < len(cat.commands)-1 {
+                fmt.Printf("%s•%s ", bcolors.DarkGray, bcolors.Endc)
             }
         }
-        fmt.Printf("%s", "\n")
-        fmt.Printf("%s", "\n")
+        fmt.Printf("\n")
     }
 
-    fmt.Printf("%s%sPro tip: Start typing and press Tab for smart completions!%s\n", bcolors.Cyan, bcolors.Bold, bcolors.Endc)
-    fmt.Printf("%s", "\n")
+    fmt.Printf("\n%s%sExamples%s\n", bcolors.Blue, bcolors.Bold, bcolors.Endc)
+    fmt.Printf("  ")
 
-    fmt.Print(le.prompt + le.currentLine)
-    if le.cursorPos < len(le.currentLine) {
-        fmt.Printf("\r\033[%dC", le.promptLen+le.cursorPos)
+    examples := []string{
+        "set lhost 192.168.1.100",
+        "show options", 
+        "run port-scan",
+        "use scanner/network",
     }
+
+    for i, example := range examples {
+        if i > 0 {
+            fmt.Printf("%s  %s", bcolors.DarkGray, bcolors.Endc)
+        }
+        fmt.Printf("%s↳%s %s%s%s", bcolors.DarkGray, bcolors.Endc, bcolors.BrightGreen, example, bcolors.Endc)
+    }
+
+    fmt.Printf("\n\n")
+    le.redrawPrompt()
+}
+
+func (le *LineEditor) countTotalCommands() int {
+    total := 0
+    for _, commands := range CommandCategories {
+        total += len(commands)
+    }
+    return total
 }
 
 func (le *LineEditor) insertChar(c rune) {
@@ -2239,19 +2615,9 @@ func (le *LineEditor) autoInsertSpace() {
 }
 
 func (le *LineEditor) shouldInsertSpaceSimple(command, commandWord, remaining string) bool {
-
     if command == "set" {
         blacklist := map[string]bool{
-            // Function names
-            "func": true, "function": true, "funcs": true, "functions": true,
-            // Module names
-            "module": true, "modules": true,
-            // Target names
-            "target": true, "targets": true,
-            // Option names
-            "option": true, "options": true, "value": true, "values": true,
-            // Script names
-            "script": true, "name": true,
+
         }
 
         if blacklist[commandWord] {
@@ -2259,11 +2625,9 @@ func (le *LineEditor) shouldInsertSpaceSimple(command, commandWord, remaining st
         }
 
         whitelist := map[string]bool{
-            "lhost": true, "lport": true, "rhost": true, "rport": true,
-            "proxy": true, "mode": true, "protocol": true, "threads": true,
-            "timeout": true, "output": true, "gateway": true, "verbose": true,
+            "script": true, "name": true, "module": true, "modules": true, "target": true, "targets": true, "lhost": true, "lport": true, "rhost": true, "rport": true, "option": true, "options": true, "value": true, "values": true, "proxy": true, "mode": true, "protocol": true, "threads": true, "function": true, "func": true, "funcs": true, "functions": true, "timeout": true, "output": true, "gateway": true, "verbose": true,
         }
-        
+
         return whitelist[commandWord]
     }
 
@@ -2276,7 +2640,7 @@ func (le *LineEditor) autoFixCommonPatternsSafe(lastPart string, lastSpaceIndex 
 
     for _, commandWord := range CommandWords {
         commandLen := len(commandWord)
-        
+
         if commandLen < 1 || commandLen >= len(lastPart) {
             continue
         }
@@ -2334,12 +2698,12 @@ func (le *LineEditor) looksLikeIPAddress(s string) bool {
     if len(s) < 7 {
         return false
     }
-    
+
     parts := strings.Split(s, ".")
     if len(parts) != 4 {
         return false
     }
-    
+
     for _, part := range parts {
         if len(part) == 0 || len(part) > 3 {
             return false
@@ -2374,7 +2738,7 @@ func (le *LineEditor) looksLikeCommonValue(s string) bool {
     if len(s) == 0 {
         return false
     }
-    
+
     commonValues := []string{"true", "false", "on", "off", "enable", "disable", "yes", "no"}
     for _, val := range commonValues {
         if len(s) >= len(val) && strings.HasPrefix(strings.ToLower(s), val) {
@@ -2400,7 +2764,7 @@ func (le *LineEditor) backspace() {
             fmt.Printf("\n%s[Recovered from backspace error]%s", bcolors.BrightRed, bcolors.Endc)
         }
     }()
-    
+
     if le.cursorPos > 0 && len(le.currentLine) > 0 {
         if le.cursorPos == len(le.currentLine) {
             if len(le.currentLine) > 0 {
@@ -2456,13 +2820,13 @@ func (le *LineEditor) moveEnd() {
 func (le *LineEditor) loadHistory() {
     dir := filepath.Dir(le.historyFile)
     os.MkdirAll(dir, 0755)
-    
+
     file, err := os.Open(le.historyFile)
     if err != nil {
         return
     }
     defer file.Close()
-    
+
     scanner := bufio.NewScanner(file)
     for scanner.Scan() {
         line := strings.TrimSpace(scanner.Text())
@@ -2476,13 +2840,13 @@ func (le *LineEditor) loadHistory() {
 func (le *LineEditor) saveHistory() {
     dir := filepath.Dir(le.historyFile)
     os.MkdirAll(dir, 0755)
-    
+
     file, err := os.OpenFile(le.historyFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
     if err != nil {
         return
     }
     defer file.Close()
-    
+
     if len(le.history) > 0 {
         lastCommand := le.history[len(le.history)-1]
         file.WriteString(lastCommand + "\n")
@@ -2505,7 +2869,7 @@ func (le *LineEditor) redraw() {
     if !le.initialized {
         return
     }
-    
+
     le.clearLine()
     fmt.Print(le.prompt + le.currentLine)
 
@@ -2557,13 +2921,13 @@ func (le *LineEditor) handleEscapeSequence(scanner *bufio.Scanner) bool {
         return false
     }
     first := scanner.Text()
-    
+
     if first == "[" {
         if !scanner.Scan() {
             return false
         }
         key := scanner.Text()
-        
+
         switch key {
         case "A":
             if le.inPredictionMode {
@@ -2694,18 +3058,18 @@ func (le *LineEditor) ReadLine() (string, error) {
     le.originalLine = ""
     le.originalCursor = 0
     le.tabPressTime = time.Time{}
-    
+
     fmt.Print(le.prompt)
-    
+
     state, err := makeRaw(uintptr(syscall.Stdin))
     if err != nil {
         return le.fallbackReadLine()
     }
     defer restoreTerminal(uintptr(syscall.Stdin), state)
-    
+
     scanner := bufio.NewScanner(os.Stdin)
     scanner.Split(bufio.ScanBytes)
-    
+
     for scanner.Scan() {
         char := scanner.Text()
         switch char {
@@ -2827,7 +3191,7 @@ func BrowserLogs() {
 }
 
 func InitiLize() {
-    for _, BaseDirs := range []string{ CertDir, OutPutDir, SetupsLogs, SecLogs, NetworkLogs, ExploitsLogs, PhishersLogs, CrackersLogs, WirelessLogs, WebCrackersLogs } {
+    for _, BaseDirs := range []string{CertDir, OutPutDir, SetupsLogs, SecLogs, NetworkLogs, ExploitsLogs, PhishersLogs, CrackersLogs, WirelessLogs, WebCrackersLogs} {
         if err := os.MkdirAll(BaseDirs, 0755); err != nil {
             fmt.Printf("%s[!] %sError creating %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, BaseDirs, err, bcolors.Endc)
             return
@@ -2842,4 +3206,3 @@ func InitiLize() {
         fmt.Printf("%s%s[>] %sPlease launch the installation process to avoid errors ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     }
 }
-

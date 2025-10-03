@@ -620,7 +620,7 @@ func handleUnsetCommand(parts []string) {
         if len(suggestions) < cols {
             cols = len(suggestions)
         }
-        
+
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
@@ -1189,7 +1189,7 @@ func convertToAndroidCmd(cmd string) string {
 func setupChocolatey() error {
     if err := subprocess.Run("choco --version"); err != nil {
         fmt.Printf("%s%s[!] %sInstalling Chocolatey ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        
+
         installCmd := `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"`
         if err := subprocess.Run(installCmd); err != nil {
             return fmt.Errorf("failed to install Chocolatey: %v", err)
@@ -4025,8 +4025,8 @@ func UpdateAfricana() {
         "cd build && mv ./* /usr/local/bin/afrconsole",
         "cd ../.. && rm -rf africana-framework",
     }
-
     subprocess.Run(strings.Join(commands, " && "))
+
     fmt.Printf("\n%s%s[*] %sSuccessfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 

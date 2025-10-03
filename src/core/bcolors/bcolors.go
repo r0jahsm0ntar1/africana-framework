@@ -30,7 +30,10 @@ var (
     Cyan    = "\033[36m"
     White   = "\033[37m"
 
-    Grey          = "\033[90m"
+    Gray          = "\033[37m"
+    DarkGray      = "\033[90m"
+    LightGray     = "\033[37m"
+
     BrightRed     = "\033[91m"
     BrightGreen   = "\033[92m"
     BrightYellow  = "\033[93m"
@@ -77,7 +80,7 @@ func init() {
         Black, Red, Green, Yellow, Blue, Magenta, Cyan, White = "", "", "", "", "", "", "", ""
         Endc, Bold, Dim, Italic, Underline, Blink, Blink2, Invert, Hidden, Strike = "", "", "", "", "", "", "", "", "", ""
         BackBlack, BackRed, BackGreen, BackYellow, BackBlue, BackMagenta, BackCyan, BackWhite = "", "", "", "", "", "", "", ""
-        Grey, BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite = "", "", "", "", "", "", "", ""
+        Gray, DarkGray, LightGray, BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite = "", "", "", "", "", "", "", "", "", ""
         BackGrey, BackBrightRed, BackBrightGreen, BackBrightYellow, BackBrightBlue, BackBrightMagenta, BackBrightCyan, BackBrightWhite = "", "", "", "", "", "", "", ""
 
         for i := range XTERM_FG {
@@ -87,20 +90,15 @@ func init() {
     }
 }
 
+func ShowGrayColors() string {
+    return fmt.Sprintf("%sDarkGray%s %sGray/LightGray%s %sBrightWhite%s", 
+        DarkGray, Endc, Gray, Endc, BrightWhite, Endc)
+}
+
 func Colors(args ...string) string {
     colors := []string{
-        BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite, Yellow, Magenta, Cyan, Green, Blue, Red,
-        XTERM_FG[9],
-        XTERM_FG[10],
-        XTERM_FG[11],
-        XTERM_FG[12],
-        XTERM_FG[13],
-        XTERM_FG[14],
-        XTERM_FG[15],
-        XTERM_FG[45],
-        XTERM_FG[51],
-        XTERM_FG[82],
-        XTERM_FG[201],
+        BrightRed, BrightGreen, BrightYellow, BrightBlue, BrightMagenta, BrightCyan, BrightWhite, Yellow, Magenta, Cyan, Green, Blue, Red, Gray, DarkGray,
+        XTERM_FG[9],  XTERM_FG[10], XTERM_FG[11], XTERM_FG[12], XTERM_FG[13], XTERM_FG[14], XTERM_FG[15], XTERM_FG[45], XTERM_FG[51], XTERM_FG[82], XTERM_FG[201], XTERM_FG[240], XTERM_FG[245], XTERM_FG[250],
     }
 
     if len(args) > 0 {
@@ -130,6 +128,11 @@ func Colors(args ...string) string {
     colorTaken = append(colorTaken, color)
     return color
 }
+
+func GrayDark() string    { return DarkGray }
+func GrayMedium() string  { return XTERM_FG[240] }
+func GrayLight() string   { return Gray }
+func GrayBright() string  { return BrightWhite }
 
 func XtermColor(index int) string {
     if index < 0 || index > 255 {
@@ -174,3 +177,7 @@ func XtermBgGrayscale(level int) string {
     }
     return XTERM_BG[232 + level]
 }
+
+func Gray10() string { return XtermGrayscale(0) }
+func Gray50() string { return XtermGrayscale(11) }
+func Gray90() string { return XtermGrayscale(22) }
