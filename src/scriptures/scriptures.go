@@ -1071,5 +1071,5 @@ func PrintVerse(verse string) {
         fmt.Print(string(char))
         time.Sleep(50 * time.Millisecond)
     }
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }

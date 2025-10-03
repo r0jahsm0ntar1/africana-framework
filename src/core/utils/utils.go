@@ -1015,7 +1015,7 @@ func ReadFileLetterByLetter(color, filename string, delay time.Duration) {
             fmt.Print(color + string(letter) + bcolors.Endc)
             time.Sleep(delay)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 
     if err := scanner.Err(); err != nil {
@@ -1068,7 +1068,7 @@ func Agreements(filePath string) {
 func Sealing() {
     filePath := GetAgreementPath()
     if filePath == "" {
-        fmt.Println("[!] Error: Could not determine agreement file path.")
+        fmt.Printf("%s%s[!] %sError: Could not determine agreement file path.", bcolors.Bold, bcolors.Red, bcolors.Endc)
         return
     }
     Agreements(filePath)
@@ -1331,15 +1331,15 @@ func AppendToShellProfile(profilePath, content string) error {
 
 func DisplayPrompt(version string, args ...interface{}) (string, error) {
     var prompt string
-    
+
     if len(args) == 0 {
-        prompt = fmt.Sprintf("%s%s%safr%s%s%s > %s", 
-            bcolors.Endc, 
-            bcolors.Underline, 
-            bcolors.Bold, 
-            version, 
-            bcolors.Endc, 
-            bcolors.BrightGreen, 
+        prompt = fmt.Sprintf("%s%s%safr%s%s%s > %s",
+            bcolors.Endc,
+            bcolors.Underline,
+            bcolors.Bold,
+            version,
+            bcolors.Endc,
+            bcolors.BrightGreen,
             bcolors.Endc)
     } else {
         context := ""
@@ -1352,46 +1352,46 @@ func DisplayPrompt(version string, args ...interface{}) (string, error) {
                 context = ctx
             }
         }
-        
+
         if len(args) >= 2 {
             if val, ok := args[1].(string); ok {
                 value = val
             }
         }
-        
+
         if len(args) >= 3 {
             if brackets, ok := args[2].(bool); ok {
                 showBrackets = brackets
             }
         }
-        
+
         if showBrackets {
-            prompt = fmt.Sprintf("%s%s%safr%s%s %s(%s%ssrc/pentest_%s.fn%s)%s > %s", 
-                bcolors.Endc, 
-                bcolors.Underline, 
-                bcolors.Bold, 
-                version, 
-                bcolors.Endc, 
+            prompt = fmt.Sprintf("%s%s%safr%s%s %s(%s%ssrc/pentest_%s.fn%s)%s > %s",
+                bcolors.Endc,
+                bcolors.Underline,
+                bcolors.Bold,
+                version,
+                bcolors.Endc,
                 context,
-                bcolors.Bold, 
-                getContextColor(color), 
-                value, 
-                bcolors.Endc, 
-                bcolors.BrightGreen, 
+                bcolors.Bold,
+                getContextColor(color),
+                value,
+                bcolors.Endc,
+                bcolors.BrightGreen,
                 bcolors.Endc)
         } else {
-            prompt = fmt.Sprintf("%s%s%safr%s%s %s%s%ssrc/pentest_%s.fn%s%s > %s", 
-                bcolors.Endc, 
-                bcolors.Underline, 
-                bcolors.Bold, 
-                version, 
-                bcolors.Endc, 
+            prompt = fmt.Sprintf("%s%s%safr%s%s %s%s%ssrc/pentest_%s.fn%s%s > %s",
+                bcolors.Endc,
+                bcolors.Underline,
+                bcolors.Bold,
+                version,
+                bcolors.Endc,
                 context,
-                bcolors.Bold, 
-                getContextColor(color), 
-                value, 
-                bcolors.Endc, 
-                bcolors.BrightGreen, 
+                bcolors.Bold,
+                getContextColor(color),
+                value,
+                bcolors.Endc,
+                bcolors.BrightGreen,
                 bcolors.Endc)
         }
     }
@@ -2040,7 +2040,7 @@ func (le *LineEditor) currentLineEndsWithPartialTemplate(suggestion string) bool
         return strings.Contains(currentText, "<") || 
                (len(template) > 2 && strings.Contains(currentText, template[1:2]))
     }
-    
+
     return false
 }
 
@@ -2126,12 +2126,12 @@ func (le *LineEditor) showAllCommands() {
                 fmt.Printf("\n  ")
             }
         }
-        fmt.Println()
-        fmt.Println()
+        fmt.Printf("%s", "\n")
+        fmt.Printf("%s", "\n")
     }
 
     fmt.Printf("%s%sPro tip: Start typing and press Tab for smart completions!%s\n", bcolors.Cyan, bcolors.Bold, bcolors.Endc)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 
     fmt.Print(le.prompt + le.currentLine)
     if le.cursorPos < len(le.currentLine) {
@@ -2192,7 +2192,7 @@ func (le *LineEditor) autoInsertSpace() {
     if lastSpaceIndex+1 >= len(currentText) {
         return
     }
-    
+
     lastPart := currentText[lastSpaceIndex+1:]
     if len(lastPart) < 2 {
         return
@@ -2520,7 +2520,7 @@ func (le *LineEditor) historyUp() {
     if len(le.history) == 0 {
         return
     }
-    
+
     if le.historyPos > 0 {
         le.historyPos--
         le.currentLine = le.history[le.historyPos]
@@ -2530,7 +2530,7 @@ func (le *LineEditor) historyUp() {
         le.historyPos = 0
         le.currentLine = le.history[0]
     }
-    
+
     le.cursorPos = len(le.currentLine)
     le.redraw()
 }
@@ -2539,7 +2539,7 @@ func (le *LineEditor) historyDown() {
     if len(le.history) == 0 {
         return
     }
-    
+
     if le.historyPos < len(le.history)-1 {
         le.historyPos++
         le.currentLine = le.history[le.historyPos]
@@ -2547,7 +2547,7 @@ func (le *LineEditor) historyDown() {
         le.historyPos = len(le.history)
         le.currentLine = ""
     }
-    
+
     le.cursorPos = len(le.currentLine)
     le.redraw()
 }
@@ -2617,13 +2617,13 @@ func (le *LineEditor) handleEscapeSequence(scanner *bufio.Scanner) bool {
         }
         key := scanner.Text()
         switch key {
-        case "H": // Home
+        case "H":
             if le.inPredictionMode {
                 le.firstPrediction()
             } else {
                 le.moveHome()
             }
-        case "F": // End
+        case "F":
             if le.inPredictionMode {
                 le.lastPrediction()
             } else {
@@ -2713,7 +2713,7 @@ func (le *LineEditor) ReadLine() (string, error) {
             if le.inPredictionMode {
                 le.applyPrediction()
             } else {
-                fmt.Println()
+                fmt.Printf("%s", "\n")
                 line := le.currentLine
                 if line != "" {
                     le.addToHistory(line)

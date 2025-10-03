@@ -294,7 +294,7 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
     }
 
     if startWithNewLine && hasAnyValue {
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 
     for _, field := range fields {
@@ -305,7 +305,7 @@ func PrintSelected(opts PrintOptions, startWithNewLine bool, endWithNewLine bool
     }
 
     if printedAny && endWithNewLine {
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 

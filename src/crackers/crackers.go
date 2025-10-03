@@ -229,9 +229,9 @@ func handleSetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -249,7 +249,7 @@ func handleSetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -343,9 +343,9 @@ func handleUnsetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -364,7 +364,7 @@ func handleUnsetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -481,22 +481,22 @@ func CrackersPenFunctions(Function string, args ...interface{}) {
 
 func AirCrackng(Pcap string) {
     subprocess.Run("aircrack-ng %s -w %s", utils.Pcap, utils.WordsList)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func JohnCrackng(Pcap string) {
     subprocess.Run("john %s --wordlist=%s", utils.Pcap, utils.WordsList)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func CyberBrute(RHost string) {
     subprocess.Run("cd %s/cyberbrute; bash cyberbrute.sh %s", utils.CrackersTools, utils.RHost)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func HashBuster(Hashes string) {
     subprocess.Run("cd %s/hash-buster; %s cracker.py -t 10 %s", utils.CrackersTools, utils.VenvPython, utils.Hashes)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func HydraSsh(RHost string) {

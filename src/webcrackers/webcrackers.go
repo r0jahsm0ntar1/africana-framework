@@ -233,9 +233,9 @@ func handleSetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -253,7 +253,7 @@ func handleSetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -342,14 +342,14 @@ func handleUnsetCommand(parts []string) {
         if len(suggestions) < cols {
             cols = len(suggestions)
         }
-        
+
         for i := 0; i < len(suggestions); i += cols {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -368,7 +368,7 @@ func handleUnsetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -939,7 +939,7 @@ func NetTacker3(RHost string) {
 func NetTacker4(RHost string) {
     fmt.Printf("\n%s[*] %sPerforming info gathering ...", bcolors.Green, bcolors.Endc)
     subprocess.Run("cd %s/nettacker/; %s nettacker.py -i %s -m information_gathering -s", utils.WeBountyTools, utils.VenvPython, utils.RHost)
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func NetTacker5(RHost string) {

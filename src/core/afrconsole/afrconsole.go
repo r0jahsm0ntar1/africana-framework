@@ -493,9 +493,9 @@ func handleSetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -513,7 +513,7 @@ func handleSetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -609,9 +609,9 @@ func handleUnsetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -630,7 +630,7 @@ func handleUnsetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 

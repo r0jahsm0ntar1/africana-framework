@@ -283,9 +283,9 @@ func handleSetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -303,7 +303,7 @@ func handleSetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -397,9 +397,9 @@ func handleUnsetCommand(parts []string) {
             for j := 0; j < cols && i+j < len(suggestions); j++ {
                 fmt.Printf(" -> %s%-*s%s", bcolors.Green, maxWidth, suggestions[i+j], bcolors.Endc)
             }
-            fmt.Println()
+            fmt.Printf("%s", "\n")
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
         return
     }
 
@@ -418,7 +418,7 @@ func handleUnsetCommand(parts []string) {
         for j := 0; j < cols && i+j < len(validKeys); j++ {
             fmt.Printf(" - %s%-*s%s", bcolors.Green, maxWidth, validKeys[i+j], bcolors.Endc)
         }
-        fmt.Println()
+        fmt.Printf("%s", "\n")
     }
 }
 
@@ -965,7 +965,7 @@ func TorCircuit() error {
         return fmt.Errorf("%s[!] Failed to reload Tor service: %v%s", bcolors.BrightRed, err, bcolors.Endc)
     }
 
-    fmt.Println(bcolors.Green + "\nScrambling Tor Nodes" + bcolors.Endc)
+    fmt.Printf("%s%s[!] %sScrambling Tor Nodes\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     fmt.Printf("%s%s[*] %sYour new IP appears to be: %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Colors(), ip, bcolors.Endc)
     return nil
 }
@@ -1153,7 +1153,7 @@ func displayTorResult(result map[string]string) {
         fmt.Printf("%s%s[+] %sFor enhanced privacy, consider using Tor network ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     }
 
-    fmt.Println()
+    fmt.Printf("%s", "\n")
 }
 
 func CheckTorStatus() (map[string]string, error) {
@@ -1732,7 +1732,7 @@ func CheckLeakTest() (*DNSLeakTestResult, error) {
         return nil, fmt.Errorf("%s%s[!] %sDNS leak test failed: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
     }
 
-    fmt.Println(result)
+    fmt.Printf("%s\n", result)
 
     cleanJSON := stripColors(result)
     var leakResult DNSLeakTestResult

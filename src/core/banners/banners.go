@@ -209,7 +209,7 @@ func GraphicsTorNet() {
                                 |___|%s
 =[ Transparent proxy through Tor.
 =[ @r0jahsm0ntar1
-`, bcolors.Colors(), bcolors.Endc); fmt.Println()
+`, bcolors.Colors(), bcolors.Endc); fmt.Printf("%s", "\n")
 }
 
 func GraphicsIntro() {
@@ -228,8 +228,8 @@ func RandomBanners() {
 
     switch rbanner {
     case 1:
-        GraphicsLarge(); fmt.Println()
+        GraphicsLarge(); fmt.Printf("%s", "\n")
     case 2:
-        GraphicsTinny(); fmt.Println()
+        GraphicsTinny(); fmt.Printf("%s", "\n")
     }
 }
