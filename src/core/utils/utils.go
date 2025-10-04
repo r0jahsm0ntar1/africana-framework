@@ -833,19 +833,41 @@ func SystemShell(Command string, args ...interface{}) {
 
 func GetDefaultGatewayIP() (string, error) {
     if runtime.GOOS == "windows" {
-        cmd = exec.Command("cmd", "/C", "route print 0.0.0.0")
+        cmd = exec.Command("cmd", "/C", "route", "print", "0.0.0.0")
+        output, err := cmd.Output()
+        if err != nil {
+            return "", err
+        }
+        
+        lines := strings.Split(string(output), "\n")
+        for _, line := range lines {
+            if strings.Contains(line, "0.0.0.0") && strings.Contains(line, "0.0.0.0") {
+                fields := strings.Fields(line)
+                if len(fields) >= 3 {
+                    for i, field := range fields {
+                        if field == "0.0.0.0" && i+2 < len(fields) {
+                            gateway := fields[i+2]
+                            if net.ParseIP(gateway) != nil {
+                                return gateway, nil
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return "", fmt.Errorf("default gateway not found")
     } else {
         cmd = exec.Command("sh", "-c", "ip route show default | awk '{print $3}'")
+        output, err := cmd.Output()
+        if err != nil {
+            return "", err
+        }
+        gatewayIP := strings.TrimSpace(string(output))
+        if gatewayIP == "" {
+            return "", fmt.Errorf("default gateway not found")
+        }
+        return gatewayIP, nil
     }
-    output, err := cmd.Output()
-    if err != nil {
-        return "", err
-    }
-    gatewayIP := strings.TrimSpace(string(output))
-    if gatewayIP == "" {
-        return "", fmt.Errorf("default gateway not found")
-    }
-    return gatewayIP, nil
 }
 
 func ValidateIPAddress(ip string) error {
@@ -1138,6 +1160,10 @@ func EncodeFileToPowerShellEncodedCommand(filePath string) (string, error) {
 }
 
 func GetLinuxDistroID() (string, error) {
+    if runtime.GOOS != "linux" {
+        return "windows", nil
+    }
+    
     if _, err := os.Stat("/etc/arch-release"); err == nil {
         return "arch", nil
     }
@@ -1164,6 +1190,10 @@ func GetLinuxDistroID() (string, error) {
 }
 
 func IsArchLinux() bool {
+    if runtime.GOOS != "linux" {
+        return false
+    }
+    
     distroID, err := GetLinuxDistroID()
     if err != nil {
         if _, err := exec.LookPath("pacman"); err == nil {
@@ -1187,6 +1217,10 @@ func IsArchLinux() bool {
 }
 
 func DetectAndroid() bool {
+    if runtime.GOOS != "linux" {
+        return false
+    }
+    
     if IsNethunter() {
         return false
     }
@@ -1221,6 +1255,10 @@ func DetectAndroid() bool {
 }
 
 func DetectTermux() bool {
+    if runtime.GOOS != "linux" {
+        return false
+    }
+    
     if os.Getenv("TERMUX_VERSION") != "" {
         return true
     }
@@ -1237,6 +1275,10 @@ func DetectTermux() bool {
 }
 
 func IsNethunter() bool {
+    if runtime.GOOS != "linux" {
+        return false
+    }
+    
     if _, err := exec.LookPath("nethunter"); err == nil {
         return true
     }
@@ -1491,6 +1533,10 @@ func min(nums ...int) int {
 }
 
 func (le *LineEditor) getTerminalWidth() int {
+    if runtime.GOOS == "windows" {
+        return 80
+    }
+    
     type winsize struct {
         Row    uint16
         Col    uint16
@@ -2490,7 +2536,7 @@ func (le *LineEditor) showAllCommands() {
     fmt.Printf("  ")
 
     examples := []string{
-        "set lhost 192.168.1.100",
+        "set lhost " + LHost,
         "show options", 
         "run port-scan",
         "use scanner/network",
@@ -3004,6 +3050,10 @@ type terminalState struct {
 }
 
 func makeRaw(fd uintptr) (*terminalState, error) {
+    if runtime.GOOS == "windows" {
+        return &terminalState{}, nil
+    }
+    
     var termios syscall.Termios
     _, _, err := syscall.Syscall6(
         syscall.SYS_IOCTL,
@@ -3037,6 +3087,10 @@ func makeRaw(fd uintptr) (*terminalState, error) {
 }
 
 func restoreTerminal(fd uintptr, state *terminalState) error {
+    if runtime.GOOS == "windows" {
+        return nil
+    }
+    
     _, _, err := syscall.Syscall6(
         syscall.SYS_IOCTL,
         fd,
@@ -3061,11 +3115,13 @@ func (le *LineEditor) ReadLine() (string, error) {
 
     fmt.Print(le.prompt)
 
-    state, err := makeRaw(uintptr(syscall.Stdin))
-    if err != nil {
-        return le.fallbackReadLine()
+    if runtime.GOOS != "windows" {
+        state, err := makeRaw(uintptr(syscall.Stdin))
+        if err != nil {
+            return le.fallbackReadLine()
+        }
+        defer restoreTerminal(uintptr(syscall.Stdin), state)
     }
-    defer restoreTerminal(uintptr(syscall.Stdin), state)
 
     scanner := bufio.NewScanner(os.Stdin)
     scanner.Split(bufio.ScanBytes)
@@ -3130,20 +3186,32 @@ func (le *LineEditor) enableSound() {
 
 func ListJunks() {
     fmt.Printf("%s[*] %sList output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Run("tree %s*", OutPutDir)
+    if runtime.GOOS == "windows" {
+        subprocess.Run("dir %s* /s", OutPutDir)
+    } else {
+        subprocess.Run("tree %s*", OutPutDir)
+    }
     return
 }
 
 func ClearJunks() {
     fmt.Printf("%s[*] %sClear output\n\n", bcolors.BrightBlue, bcolors.Endc)
-    subprocess.Run("tree %s*; rm -rf %s/*", OutPutDir, OutPutDir)
+    if runtime.GOOS == "windows" {
+        subprocess.Run("dir %s* /s; rmdir /s /q %s", OutPutDir, OutPutDir)
+    } else {
+        subprocess.Run("tree %s*; rm -rf %s/*", OutPutDir, OutPutDir)
+    }
     fmt.Printf("%s[*] %sOutput cleared ...\n", bcolors.BrightGreen, bcolors.Endc)
     return
 }
 
 func LocateTool(Tool string, args ...interface{}) error {
     if _, err := exec.LookPath(Tool); err != nil {
-        fmt.Printf("%s[!] %s%s%s %sisn't installed. Try %s'apt install %s'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
+        if runtime.GOOS == "windows" {
+            fmt.Printf("%s[!] %s%s%s %sisn't installed. Try downloading and installing %s%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
+        } else {
+            fmt.Printf("%s[!] %s%s%s %sisn't installed. Try %s'apt install %s'%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Yellow, Tool, bcolors.Endc, bcolors.Green, Tool, bcolors.Endc)
+        }
         return err
     }
     return nil
@@ -3172,6 +3240,7 @@ func GSleep(args []string) {
 }
 
 func BrowseTutorials() {
+    var Command string
     switch runtime.GOOS {
     case "linux", "darwin":
         Command = `xdg-open "https://youtube.com/@r0jahsm0ntar1/?sub_confirmation=1" 2>/dev/null`
@@ -3181,11 +3250,15 @@ func BrowseTutorials() {
         fmt.Printf("%s[!] %sUnsupported operating system.\n", bcolors.BrightRed, bcolors.Endc)
         return
     }
-    fmt.Printf("%s[*] %sLaunched youtube tutarials ...\n", bcolors.Green, bcolors.Endc)
+    fmt.Printf("%s[*] %sLaunched youtube tutorials ...\n", bcolors.Green, bcolors.Endc)
     subprocess.Run(Command)
 }
 
 func BrowserLogs() {
+    if runtime.GOOS == "windows" {
+        fmt.Printf("%s[!] %sBrowser logs feature not available on Windows\n", bcolors.BrightRed, bcolors.Endc)
+        return
+    }
     subprocess.Run("mkdir -p /var/www/html/.old/; mv /var/www/html/* /var/www/html/.old/; cd /root/.afr%s/logs/; cat *.log | aha --black > /var/www/html/index.html; xdg-open 'http://0.0.0.0:80/index.html' 2>/dev/null; php -S 0.0.0:80; rm -rf /var/www/html/*; mv /var/www/html/.old/* /var/www/html/; rm -rf /var/www/html/.old/", subprocess.Version)
     return
 }

@@ -139,6 +139,7 @@ var (
     }
 
     projectDiscoveryTools = map[string]string{
+        "pdtm":                         "github.com/projectdiscovery/pdtm/cmd/pdtm@latest",
         "anew":                         "github.com/tomnomnom/anew@latest",
         "assetfinder":                  "github.com/tomnomnom/assetfinder@latest",
         "asnmap":                       "github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
