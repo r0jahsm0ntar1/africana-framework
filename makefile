@@ -105,21 +105,50 @@ build:
 	@echo "${BrightGreen}${Bold}[*] ${Endc}Detecting system ...${Endc}"
 	@echo "${BrightBlue}${Bold}[+] ${Endc}Building ${Green}${APP_NAME}${Endc} for ${BrightCyan}${CURRENT_OS}${Endc} (${BrightYellow}${ARCHS}${Endc}) ...${Endc}"
 	@mkdir -p $(BUILD_DIR)
-	@for platform in $(PLATFORMS); do \
+	@BUILD_SUCCESS=0; \
+	BUILD_FAILED=0; \
+	BUILD_TOTAL=0; \
+	BUILD_OUTPUTS=""; \
+	for platform in $(PLATFORMS); do \
+		BUILD_TOTAL=$$((BUILD_TOTAL + 1)); \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
 		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
-		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT ...${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building ${BrightCyan}$$GOOS/$$GOARCH${Endc} -> ${BrightWhite}$$OUT${Endc}"; \
+		echo "${Magenta}${Dim}   Compiling...${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
-		if [ $$? -eq 0 ]; then \
-			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building for ${BrightCyan}${CURRENT_OS}${Endc} (${BrightYellow}${ARCHS}${Endc}) completed successfully ...${Endc}"; \
+		EXIT_CODE=$$?; \
+		if [ $$EXIT_CODE -eq 0 ]; then \
+			echo "${BrightGreen}${Bold}   ✓ Success${Endc}"; \
+			BUILD_OUTPUTS="$$BUILD_OUTPUTS $$OUT"; \
+			BUILD_SUCCESS=$$((BUILD_SUCCESS + 1)); \
 		else \
-			echo "${Red}${Bold}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
-			exit 1; \
+			echo "${BrightRed}${Bold}   ✗ Failed${Endc}"; \
+			BUILD_FAILED=$$((BUILD_FAILED + 1)); \
 		fi; \
-	done
+		echo ""; \
+	done; \
+	echo "${BrightBlue}${Bold}-------------${Endc}"; \
+	echo "${BrightGreen}${Bold}Build summary:${Endc}"; \
+	echo "  ${BrightGreen}Success: $$BUILD_SUCCESS${Endc}"; \
+	echo "  ${BrightRed}Failed:  $$BUILD_FAILED${Endc}"; \
+	echo "  ${BrightBlue}Total:   $$BUILD_TOTAL${Endc}"; \
+	echo ""; \
+	if [ $$BUILD_SUCCESS -gt 0 ]; then \
+		echo "${BrightGreen}${Bold}Built binaries ($$BUILD_SUCCESS):${Endc}"; \
+		for out in $$BUILD_OUTPUTS; do \
+			echo "  ${BrightWhite}• $$out${Endc}"; \
+		done; \
+		echo ""; \
+		$(PRINT_BANNER) \
+	fi; \
+	if [ $$BUILD_FAILED -eq 0 ]; then \
+		echo "${BrightGreen}${Bold}[✓] ${Blue}All builds completed successfully!${Endc}"; \
+	else \
+		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
+		exit 1; \
+	fi
 
 # Build for specified OS (e.g., make distro windows)
 distro:
@@ -132,27 +161,56 @@ distro:
 	fi; \
 	if [ "$$OS_NAME" = "all" ]; then \
 		PLATFORMS="$(ALL_TARGETS)"; \
-		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightGreen}${Underl}all platforms${BrightBlue} ...${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightGreen}${Underl}all platforms${Endc} ..."; \
 	else \
 		PLATFORMS="$(call expand_targets,$$OS_NAME)"; \
-		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightCyan}${Underl}$$OS_NAME${BrightBlue} ...${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building for ${BrightCyan}${Underl}$$OS_NAME${Endc} ..."; \
 	fi; \
 	mkdir -p $(BUILD_DIR); \
+	BUILD_SUCCESS=0; \
+	BUILD_FAILED=0; \
+	BUILD_TOTAL=0; \
+	BUILD_OUTPUTS=""; \
 	for platform in $$PLATFORMS; do \
+		BUILD_TOTAL=$$((BUILD_TOTAL + 1)); \
 		GOOS=$$(echo $$platform | cut -d'/' -f1); \
 		GOARCH=$$(echo $$platform | cut -d'/' -f2); \
 		EXT=$$( [ "$$GOOS" = "windows" ] && echo ".exe" || echo "" ); \
 		OUT=$(BUILD_DIR)/$(APP_NAME)-$$GOOS-$$GOARCH$$EXT; \
-		echo "${Magenta}${Dim}   >${Endc} ${BrightWhite}$$OUT${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Building ${BrightCyan}$$GOOS/$$GOARCH${Endc} -> ${BrightWhite}$$OUT${Endc}"; \
+		echo "${Magenta}${Dim}   Compiling...${Endc}"; \
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
-		if [ $$? -eq 0 ]; then \
-			$(PRINT_BANNER) \
-			echo "${Blue}${Bold}[+] ${Endc}Building for ${BrightCyan}$$OS_NAME${Endc} completed successfully ...${Endc}"; \
+		EXIT_CODE=$$?; \
+		if [ $$EXIT_CODE -eq 0 ]; then \
+			echo "${BrightGreen}${Bold}   ✓ Success${Endc}"; \
+			BUILD_OUTPUTS="$$BUILD_OUTPUTS $$OUT"; \
+			BUILD_SUCCESS=$$((BUILD_SUCCESS + 1)); \
 		else \
-			echo "${BrightRed}[!] ${Endc}${Cyan}Build failed. Please retry again ...${Endc}"; \
-			exit 1; \
+			echo "${BrightRed}${Bold}   ✗ Failed${Endc}"; \
+			BUILD_FAILED=$$((BUILD_FAILED + 1)); \
 		fi; \
-	done
+		echo ""; \
+	done; \
+	echo "${BrightBlue}${Bold}-------------${Endc}"; \
+	echo "${BrightGreen}${Bold}Build summary:${Endc}"; \
+	echo "  ${BrightGreen}Success: $$BUILD_SUCCESS${Endc}"; \
+	echo "  ${BrightRed}Failed:  $$BUILD_FAILED${Endc}"; \
+	echo "  ${BrightBlue}Total:   $$BUILD_TOTAL${Endc}"; \
+	echo ""; \
+	if [ $$BUILD_SUCCESS -gt 0 ]; then \
+		echo "${BrightGreen}${Bold}Built binaries ($$BUILD_SUCCESS):${Endc}"; \
+		for out in $$BUILD_OUTPUTS; do \
+			echo "  ${BrightWhite}• $$out${Endc}"; \
+		done; \
+		echo ""; \
+		$(PRINT_BANNER) \
+	fi; \
+	if [ $$BUILD_FAILED -eq 0 ]; then \
+		echo "${BrightGreen}${Bold}[✓] ${Blue}All builds completed successfully!${Endc}"; \
+	else \
+		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
+		exit 1; \
+	fi
 
 # Clean output
 clean:
