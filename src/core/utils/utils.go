@@ -339,6 +339,7 @@ type LineEditor struct {
     emojiEnabled      bool
     soundEnabled      bool
     tabPressTime      time.Time
+    originalMode      uint32
 }
 
 type InterfaceInfo struct {

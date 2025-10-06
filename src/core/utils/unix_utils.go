@@ -18,17 +18,7 @@ import (
     "runtime"
     "subprocess"
     "path/filepath"
-)
-
-// Platform-specific ioctl constants
-const (
-    // Linux and most Unix-like systems
-    ioctl_TCGETS = 0x5401
-    ioctl_TCSETS = 0x5402
-    
-    // BSD systems (these are the actual values)
-    ioctl_TIOCGETA = 0x40287408
-    ioctl_TIOCSETA = 0x80287409
+    "os/exec"
 )
 
 func DisplayPrompt(version string, args ...interface{}) (string, error) {
@@ -1705,82 +1695,109 @@ type terminalState struct {
     original syscall.Termios
 }
 
-// getIoctlConstants returns the appropriate ioctl constants for the current platform
-func getIoctlConstants() (get uintptr, set uintptr) {
-    switch runtime.GOOS {
-    case "darwin", "freebsd", "openbsd", "netbsd":
-        return ioctl_TIOCGETA, ioctl_TIOCSETA
-    case "linux", "android":
-        return ioctl_TCGETS, ioctl_TCSETS
-    default:
-        // Fallback for other Unix-like systems
-        return ioctl_TCGETS, ioctl_TCSETS
-    }
-}
-
-// makeRaw puts the terminal into raw mode
 func makeRaw(fd uintptr) (*terminalState, error) {
     if runtime.GOOS == "windows" {
         return &terminalState{}, nil
     }
-    
+
     var termios syscall.Termios
-    
-    ioctlGet, ioctlSet := getIoctlConstants()
-    
-    // Get current terminal settings
-    _, _, err := syscall.Syscall6(
+    var success bool
+
+    if _, _, err := syscall.Syscall6(
         syscall.SYS_IOCTL,
         fd,
-        ioctlGet,
+        uintptr(0x5401),
         uintptr(unsafe.Pointer(&termios)),
         0, 0, 0,
-    )
-    if err != 0 {
-        return nil, fmt.Errorf("failed to get terminal settings: %v", err)
+    ); err == 0 {
+        success = true
+    }
+
+    if !success {
+        if _, _, err := syscall.Syscall6(
+            syscall.SYS_IOCTL,
+            fd,
+            uintptr(0x40287408),
+            uintptr(unsafe.Pointer(&termios)),
+            0, 0, 0,
+        ); err == 0 {
+            success = true
+        }
+    }
+
+    if !success {
+        if err := setTerminalRawWithStty(); err == nil {
+            return &terminalState{}, nil
+        }
+        return nil, fmt.Errorf("could not set terminal to raw mode")
     }
 
     original := termios
 
-    // Set terminal to raw mode
     termios.Lflag &^= syscall.ECHO | syscall.ICANON | syscall.ISIG
     termios.Cc[syscall.VMIN] = 1
     termios.Cc[syscall.VTIME] = 0
 
-    // Apply new terminal settings
-    _, _, err = syscall.Syscall6(
+    if _, _, err := syscall.Syscall6(
         syscall.SYS_IOCTL,
         fd,
-        ioctlSet,
+        uintptr(0x5402),
         uintptr(unsafe.Pointer(&termios)),
         0, 0, 0,
-    )
-    if err != 0 {
-        return nil, fmt.Errorf("failed to set terminal to raw mode: %v", err)
+    ); err != 0 {
+        if _, _, err := syscall.Syscall6(
+            syscall.SYS_IOCTL,
+            fd,
+            uintptr(0x80287409),
+            uintptr(unsafe.Pointer(&termios)),
+            0, 0, 0,
+        ); err != 0 {
+            return nil, fmt.Errorf("failed to set terminal to raw mode")
+        }
     }
 
     return &terminalState{original: original}, nil
 }
 
-// restoreTerminal restores the terminal to its original state
 func restoreTerminal(fd uintptr, state *terminalState) error {
     if runtime.GOOS == "windows" {
         return nil
     }
-    
-    _, ioctlSet := getIoctlConstants()
-    
-    _, _, err := syscall.Syscall6(
-        syscall.SYS_IOCTL,
-        fd,
-        ioctlSet,
-        uintptr(unsafe.Pointer(&state.original)),
-        0, 0, 0,
-    )
-    if err != 0 {
-        return fmt.Errorf("failed to restore terminal settings: %v", err)
+
+    if state.original.Lflag != 0 {
+        if _, _, err := syscall.Syscall6(
+            syscall.SYS_IOCTL,
+            fd,
+            uintptr(0x5402),
+            uintptr(unsafe.Pointer(&state.original)),
+            0, 0, 0,
+        ); err != 0 {
+            if _, _, err := syscall.Syscall6(
+                syscall.SYS_IOCTL,
+                fd,
+                uintptr(0x80287409),
+                uintptr(unsafe.Pointer(&state.original)),
+                0, 0, 0,
+            ); err != 0 {
+                return restoreTerminalWithStty()
+            }
+        }
+        return nil
     }
-    return nil
+
+    return restoreTerminalWithStty()
+}
+
+func setTerminalRawWithStty() error {
+    cmd := exec.Command("stty", "raw", "-echo")
+    cmd.Stdin = os.Stdin
+    return cmd.Run()
+}
+
+func restoreTerminalWithStty() error {
+    cmd := exec.Command("stty", "sane")
+    cmd.Stdin = os.Stdin
+    return cmd.Run()
 }
 
 func (le *LineEditor) ReadLine() (string, error) {
@@ -1800,7 +1817,7 @@ func (le *LineEditor) ReadLine() (string, error) {
     if runtime.GOOS != "windows" {
         state, err := makeRaw(uintptr(syscall.Stdin))
         if err != nil {
-            return le.fallbackReadLine()
+            return le.simplifiedReadLine()
         }
         defer restoreTerminal(uintptr(syscall.Stdin), state)
     }
@@ -1834,6 +1851,10 @@ func (le *LineEditor) ReadLine() (string, error) {
             }
         case "\t":
             le.handleTabCompletion()
+        case "\x1b[Z":
+            if le.inPredictionMode {
+                le.prevPrediction()
+            }
         default:
             if len(char) > 0 {
                 r := rune(char[0])
@@ -1844,6 +1865,108 @@ func (le *LineEditor) ReadLine() (string, error) {
         }
     }
     return "", scanner.Err()
+}
+
+func (le *LineEditor) simplifiedReadLine() (string, error) {
+    reader := bufio.NewReader(os.Stdin)
+    var input []rune
+    cursorPos := 0
+    
+    for {
+        r, _, err := reader.ReadRune()
+        if err != nil {
+            return "", err
+        }
+        
+        switch r {
+        case '\r', '\n':
+            fmt.Println()
+            line := string(input)
+            if line != "" {
+                le.addToHistory(line)
+            }
+            return line, nil
+            
+        case 127:
+            if cursorPos > 0 && len(input) > 0 {
+                input = append(input[:cursorPos-1], input[cursorPos:]...)
+                cursorPos--
+                le.redrawSimple(input, cursorPos)
+            }
+            
+        case '\t':
+            le.currentLine = string(input)
+            le.cursorPos = cursorPos
+            le.handleTabCompletion()
+            input = []rune(le.currentLine)
+            cursorPos = le.cursorPos
+            le.redrawSimple(input, cursorPos)
+            
+        case 27:
+            next, err := reader.ReadByte()
+            if err != nil {
+                continue
+            }
+            if next == '[' {
+                arrow, err := reader.ReadByte()
+                if err != nil {
+                    continue
+                }
+                switch arrow {
+                case 'A':
+                    le.historyUp()
+                    input = []rune(le.currentLine)
+                    cursorPos = len(input)
+                    le.redrawSimple(input, cursorPos)
+                case 'B':
+                    le.historyDown()
+                    input = []rune(le.currentLine)
+                    cursorPos = len(input)
+                    le.redrawSimple(input, cursorPos)
+                case 'C':
+                    if cursorPos < len(input) {
+                        cursorPos++
+                        le.redrawSimple(input, cursorPos)
+                    }
+                case 'D':
+                    if cursorPos > 0 {
+                        cursorPos--
+                        le.redrawSimple(input, cursorPos)
+                    }
+                case 'Z':
+                    if le.inPredictionMode {
+                        le.prevPrediction()
+                        input = []rune(le.currentLine)
+                        cursorPos = le.cursorPos
+                        le.redrawSimple(input, cursorPos)
+                    }
+                }
+            }
+
+        case 3:
+            return "", fmt.Errorf("interrupted")
+        case 4:
+            if len(input) == 0 {
+                return "", fmt.Errorf("EOF")
+            }
+        default:
+            if unicode.IsPrint(r) {
+                input = append(input[:cursorPos], append([]rune{r}, input[cursorPos:]...)...)
+                cursorPos++
+                le.redrawSimple(input, cursorPos)
+            }
+        }
+    }
+}
+
+func (le *LineEditor) redrawSimple(input []rune, cursorPos int) {
+    fmt.Print("\r\033[K")
+    fmt.Print(le.prompt)
+    fmt.Print(string(input))
+
+    if cursorPos < len(input) {
+        fmt.Printf("\r\033[%dC", le.promptLen+cursorPos)
+    }
 }
 
 func (le *LineEditor) fallbackReadLine() (string, error) {
