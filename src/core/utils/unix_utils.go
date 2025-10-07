@@ -10,6 +10,7 @@ import (
     "time"
     "bufio"
     "unsafe"
+    "os/exec"
     "syscall"
     "unicode"
     "strconv"
@@ -18,7 +19,6 @@ import (
     "runtime"
     "subprocess"
     "path/filepath"
-    "os/exec"
 )
 
 func DisplayPrompt(version string, args ...interface{}) (string, error) {
@@ -228,7 +228,7 @@ func (le *LineEditor) generatePredictions() {
     lowerCurrentWord := strings.ToLower(currentWord)
 
     var predictions []string
-    
+
     if len(parts) == 1 {
         for _, availableCmd := range AvailableCommands {
             lowerCmd := strings.ToLower(availableCmd)
@@ -238,7 +238,7 @@ func (le *LineEditor) generatePredictions() {
         }
     } else {
         cmd := strings.ToLower(parts[0])
-        
+
         switch cmd {
         case "set":
             predictions = le.getSetPredictions(parts, currentWord)
@@ -280,7 +280,7 @@ func (le *LineEditor) sortPredictionsWithPriority(predictions []string, currentW
         sort.Strings(predictions)
         return predictions
     }
-    
+
     var prefixMatches []string
     var otherMatches []string
     
@@ -348,7 +348,7 @@ func (le *LineEditor) getRunPredictions(currentWord string) []string {
 
     var predictions []string
     lowerCurrentWord := strings.ToLower(currentWord)
-    
+
     for _, option := range runOptions {
         if le.isPartialMatch(currentWord, option) {
             predictions = append(predictions, option)

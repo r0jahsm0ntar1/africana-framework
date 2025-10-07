@@ -23,9 +23,9 @@ var (
     logFile *os.File
     Dversion = Version + ".0.5-dev"
     logDir = filepath.Join(BaseDir, "logs")
+    BaseDir, _, _, _, _, _, _, _ = DirLocations()
     LogFile = filepath.Join(logDir, "log_history.log")
     HistoryFile = filepath.Join(logDir, "command_history.log")
-    BaseDir, _, _, _, _, _, _, _ = DirLocations()
     flag, shell, process, baseDir, initialDir, currentDir string
 )
 

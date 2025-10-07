@@ -130,6 +130,11 @@ func executeCommand(cmd string) bool {
     for _, group := range commandGroups {
         for _, name := range group.names {
             if name == cmdLower {
+                if err := subprocess.ValidateToolsDir(); err != nil {
+                    fmt.Printf("%s%s[!] %sError: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+                    fmt.Printf("%s%s[>] %sPlease launch the installation process to avoid errors ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+                    return true
+                }
                 group.action()
                 return true
             }

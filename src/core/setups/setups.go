@@ -160,6 +160,7 @@ var (
         "waybackurls":                  "github.com/tomnomnom/waybackurls@latest",
         "nuclei":                       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
         "go-winres":                    "github.com/tc-hib/go-winres@latest",
+        "cdncheck":                     "github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest",
     }
 )
 

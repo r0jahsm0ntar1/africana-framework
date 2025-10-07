@@ -870,7 +870,7 @@ func IFaces() ([]InterfaceInfo, error) {
 }
 
 func SystemShell(Command string, args ...interface{}) {
-    fmt.Printf("%s[*] %sexec: %s\n\n", bcolors.BrightBlue, bcolors.Endc, Input)
+    fmt.Printf("%s%s[*] %s%sexec%s: %s'%s'%s\n\n", bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Yellow, bcolors.Endc, bcolors.Green, Command, bcolors.Endc)
     subprocess.Run(Command)
     return
 }
