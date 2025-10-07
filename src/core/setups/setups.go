@@ -816,7 +816,7 @@ func CheckTools() {
     spinner.Stop()
 
     if len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) == 0 {
-        fmt.Printf("%s%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
+        fmt.Printf("%s%s[✓] %sAll tools are installed and ready ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
         return
     }
 
