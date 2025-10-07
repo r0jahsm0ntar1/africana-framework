@@ -935,8 +935,8 @@ func InstallTools(tools map[string]map[string]string) {
 
                 if !isArchLinux && !isAndroid && !isMacOS && !isWindows {
                     fmt.Printf("%s%s[*] %sChecking package manager health ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-                    subprocess.Run("sudo apt --fix-broken install -y")
-                    subprocess.Run("sudo dpkg --configure -a")
+                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
                 }
 
                 for _, pkg := range systemPackages {
@@ -956,12 +956,12 @@ func InstallTools(tools map[string]map[string]string) {
                         case isMacOS:
                             err = subprocess.Run("brew install %s", pkg)
                         default:
-                            err = subprocess.Run("sudo apt-get install -y %s", pkg)
+                            err = subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", pkg)
 
                             if err != nil && attempt < maxRetries {
                                 fmt.Printf("%s%s[!] %sInstallation failed, attempting to fix broken packages ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-                                subprocess.Run("sudo apt --fix-broken install -y")
-                                subprocess.Run("sudo dpkg --configure -a")
+                                subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                                subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
                                 time.Sleep(2 * time.Second)
                                 continue
                             }
@@ -975,10 +975,10 @@ func InstallTools(tools map[string]map[string]string) {
 
                         if !isArchLinux && !isAndroid && !isMacOS && !isWindows {
                             fmt.Printf("%s%s[*] %sAttempting comprehensive repair ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-                            subprocess.Run("sudo apt --fix-broken install -y")
-                            subprocess.Run("sudo dpkg --configure -a")
-                            subprocess.Run("sudo apt-get autoremove -y")
-                            subprocess.Run("sudo apt-get autoclean -y")
+                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
+                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoremove -y")
+                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoclean -y")
                         }
                     } else {
                         fmt.Printf("%s%s[✓] %sSuccessfully installed %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
@@ -997,7 +997,7 @@ func InstallTools(tools map[string]map[string]string) {
                 } else if isMacOS {
                     subprocess.Run("brew install go")
                 } else if !isArchLinux {
-                    subprocess.Run("sudo apt-get install -y golang-go")
+                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y golang-go")
                 }
 
                 for _, pkg := range goTools {
@@ -1179,7 +1179,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
 func convertToAndroidCmd(cmd string) string {
     cmd = strings.Replace(cmd, "sudo", "", -1)
-    for _, pm := range []string{"apt install", "apt-get install", "yum install", "dnf install"} {
+    for _, pm := range []string{"NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install", "NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install", "yum install", "dnf install"} {
         if strings.Contains(cmd, pm) {
             return strings.Replace(cmd, pm, "pkg install", 1)
         }
@@ -1267,8 +1267,8 @@ func getFoundationCommands() []string {
         }
     }
     return []string{
-        "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
-        "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
+        "sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install curl wget gpg apt-transport-https -y",
         "sudo mkdir -p /usr/share/keyrings /etc/apt/sources.list.d /etc/apt/trusted.gpg.d",
         "sudo curl -fsSL https://archive.kali.org/archive-keyring.gpg -o /usr/share/keyrings/kali-archive-keyring.gpg",
         "curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null",
@@ -1277,7 +1277,7 @@ func getFoundationCommands() []string {
         "echo 'deb [arch=amd64,armhf,arm64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
         "echo 'Package: powershell\nPin: origin packages.microsoft.com\nPin-Priority: 1001' | sudo tee /etc/apt/preferences.d/powershell-pin",
         //"sudo dpkg --add-architecture i386",
-        "sudo apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
+        "sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update -y",
     }
 }
 
@@ -1612,11 +1612,11 @@ set_up_gui() {
 	fi
 	msg -t "Let me first upgrade the packages in ${DISTRO_NAME}."
 	msg "This won't take long."
-	if distro_exec apt update && distro_exec apt full-upgrade; then
+	if distro_exec NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update && NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' full-upgrade; then
 		msg -s "Done, all the ${DISTRO_NAME} packages are upgraded."
 		msg -t "Now let me install the GUI in ${DISTRO_NAME}."
 		msg "This will take very long."
-		if distro_exec apt install -y tigervnc-standalone-server dbus-x11 kali-desktop-"${selected_desktop,,}"; then
+		if distro_exec NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y tigervnc-standalone-server dbus-x11 kali-desktop-"${selected_desktop,,}"; then
 			msg -s "Finally, the GUI is now installed in ${DISTRO_NAME}."
 			msg -t "Now let me add the xstartup script for VNC."
 			if {
@@ -1672,7 +1672,7 @@ set_up_browser() {
 		verb="is"
 	fi
 	msg "Okay then, I shall install '${Y}${selected_browser}${C}'."
-	if distro_exec apt install -y "${selected_browsers[@],,}"; then
+	if distro_exec NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y "${selected_browsers[@],,}"; then
 		if [ "${selected_browsers[0]}" = "${available_browsers[0]}" ]; then
 			sed -Ei 's/^(Exec=.*chromium).*(%U)$/\1 --no-sandbox \2/' "${ROOTFS_DIRECTORY}/usr/share/applications/chromium.desktop"
 		fi
@@ -3826,7 +3826,7 @@ install_africana() {
         set -e  # Exit on any error
 
         # Install dependencies
-        apt update && apt install -y git make golang
+        sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' update && sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y git make golang
 
         # Clone and build Africana
         cd /root
