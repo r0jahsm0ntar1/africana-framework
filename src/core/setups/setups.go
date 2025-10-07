@@ -988,7 +988,7 @@ func InstallTools(tools map[string]map[string]string) {
             }
 
             if len(goTools) > 0 {
-                fmt.Printf("%s%s[*] %sInstalling %d Go tools ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(goTools))
+                fmt.Printf("\n%s%s[*] %sInstalling %d Go tools ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(goTools))
 
                 if isAndroid {
                     subprocess.Run("pkg install golang -y")
@@ -1057,7 +1057,7 @@ func SetupGoPyEnv(VenvName string) error {
 
         fmt.Printf("\n%s%s[+] %sCreating Python virtual environment ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
-        subprocess.Run("python3 -m pip install --upgrade pip; python3 -m venv %s --upgrade-deps", utils.VenvPath)
+        subprocess.Run("python3 -m venv %s --upgrade-deps", utils.VenvPath)
 
         if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); os.IsNotExist(err) {
             return fmt.Errorf("[!] Failed to create Python virtual environment at %s", utils.VenvPath)
