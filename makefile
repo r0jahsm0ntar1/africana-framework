@@ -144,7 +144,7 @@ build:
 		$(PRINT_BANNER) \
 	fi; \
 	if [ $$BUILD_FAILED -eq 0 ]; then \
-		echo "${BrightGreen}${Bold}[✓] ${Blue}All builds completed successfully!${Endc}"; \
+		echo "${BrightBlue}${Bold}[✓] ${Endc}All builds completed successfully ...${Endc}"; \
 	else \
 		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
 		exit 1; \
@@ -206,7 +206,7 @@ distro:
 		$(PRINT_BANNER) \
 	fi; \
 	if [ $$BUILD_FAILED -eq 0 ]; then \
-		echo "${BrightGreen}${Bold}[✓] ${Blue}All builds completed successfully!${Endc}"; \
+		echo "${BrightBlue}${Bold}[✓] ${Endc}All builds completed successfully ...${Endc}"; \
 	else \
 		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
 		exit 1; \

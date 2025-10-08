@@ -136,6 +136,7 @@ var (
         "wifipumpkin3":                 "wifipumpkin3",
         "wifite":                       "wifite",
         "xsser":                        "xsser",
+        "amass":                        "amass",
     }
 
     projectDiscoveryTools = map[string]string{
@@ -294,6 +295,7 @@ func getPackageName(tool, pkg string) string {
             "wifipumpkin3":                 "wifipumpkin3",
             "wifite":                       "wifite",
             "xsser":                        "xsser",
+            "amass":                        "amass",
         }
         
         if archPkg, exists := archPackages[pkg]; exists {
