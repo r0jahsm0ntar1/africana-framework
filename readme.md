@@ -57,7 +57,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; make run
+make b=1; make run
 ```
 
 ## Installation in all Arch based distros;
@@ -72,7 +72,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; make run
+make b=1; make run
 ```
 ## Installation in tmux on Android based distros;
 ```bash
@@ -87,7 +87,7 @@ sudo git clone https://github.com/r0jahsm0ntar1/africana-framework --depth 1
 cd africana-framework
 ```
 ```bash
-make; make run
+make b=1; make run
 ```
 
 ## About the Author
