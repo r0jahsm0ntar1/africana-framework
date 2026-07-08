@@ -998,7 +998,7 @@ func GetProxiedHTTPClient(proxyStr string) (*http.Client, error) {
 }
 
 func replaceStringsInFile(fileName string, replacements map[string]string) error {
-    content, err := ioutil.ReadFile(fileName)
+    content, err := os.ReadFile(fileName)
     if err != nil {
         return err
     }
@@ -1006,7 +1006,7 @@ func replaceStringsInFile(fileName string, replacements map[string]string) error
     for old, new := range replacements {
         textContent = strings.Replace(textContent, old, new, -1)
     }
-    return ioutil.WriteFile(fileName, []byte(textContent), 0644)
+    return os.WriteFile(fileName, []byte(textContent), 0644) 
 }
 
 func Editors(filesToReplacements map[string]map[string]string) {
@@ -1461,9 +1461,5 @@ func InitiLize() {
 
     if _, err := os.Stat(CertPath); os.IsNotExist(err) {
         GenerateSelfSignedCert(CertPath, KeyPath)
-    }
-    if err := subprocess.ValidateToolsDir(); err != nil {
-        fmt.Printf("%s%s[!] %sError: %s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        fmt.Printf("%s%s[>] %sPlease launch the installation process to avoid errors ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
     }
 }

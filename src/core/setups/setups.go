@@ -21,7 +21,17 @@ import(
 
 var (
     Function string
+    interruptFlag bool
+    pendingPythonModules map[string]string
+    cachedMissingModules map[string]string
 )
+
+var pythonImportToPackageMap = map[string]string{
+    "bs4":            "beautifulsoup4",
+    "jwt":            "pyjwt",
+    "win32_setctime": "win32-setctime",
+    "py3DNS":         "py3dns",
+}
 
 type stringMatcher struct {
     names  []string
@@ -40,6 +50,8 @@ var linuxTaskMap = map[string]func(){
 var (
     systemTools = map[string]string{
         "aha":                          "aha",
+        "gradle":                       "gradle",
+        "default-jdk":                  "default-jdk",
         "aircrack-ng":                  "aircrack-ng",
         "build-essential":              "build-essential",
         "checkinstall":                 "checkinstall",
@@ -162,6 +174,105 @@ var (
         "nuclei":                       "github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
         "go-winres":                    "github.com/tc-hib/go-winres@latest",
         "cdncheck":                     "github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest",
+    }
+
+    pythonModules = map[string]string{
+        "tld":                         "tld",
+        "bs4":                         "beautifulsoup4",
+        "six":                         "six",
+        "jwt":                         "pyjwt",
+        "idna":                        "idna",
+        "cmd2":                        "cmd2",
+        "pipx":                        "pipx",
+        "tqdm":                        "tqdm",
+        "lxml":                        "lxml",
+        "fire":                        "fire",
+        "wget":                        "wget",
+        "urwid":                       "urwid",
+        "ping3":                       "ping3",
+        "emoji":                       "emoji",
+        "flask":                       "flask",
+        "regex":                       "regex",
+        "numpy":                       "numpy",
+        "scapy":                       "scapy",
+        "updog":                       "updog",
+        "PyQt5":                       "PyQt5",
+        "exrex":                       "exrex",
+        "dnslib":                      "dnslib",
+        "psutil":                      "psutil",
+        "PyPDF2":                      "PyPDF2",
+        "loguru":                      "loguru",
+        "future":                      "future",
+        "pycurl":                      "pycurl",
+        "ipaddr":                      "ipaddr",
+        "flake8":                      "flake8",
+        "py3DNS":                      "py3dns",
+        "pproxy":                      "pproxy",
+        "shodan":                      "shodan",
+        "Pillow":                      "Pillow",
+        "PyYAML":                      "pyyaml",
+        "pynput":                      "pynput",
+        "pandas":                      "pandas",
+        "google":                      "google",
+        "dhcplib":                     "dhcplib",
+        "aioquic":                     "aioquic",
+        "pathlib":                     "pathlib",
+        "treelib":                     "treelib",
+        "chardet":                     "chardet",
+        "certifi":                     "certifi",
+        "asyncio":                     "asyncio",
+        "aiohttp":                     "aiohttp",
+        "colored":                     "colored",
+        "pyngrok":                     "pyngrok",
+        "blessed":                     "blessed",
+        "urllib3":                     "urllib3",
+        "netaddr":                     "netaddr",
+        "PySocks":                     "PySocks",
+        "ipython":                     "ipython",
+        "aiofiles":                    "aiofiles",
+        "tabulate":                    "tabulate",
+        "pwntools":                    "pwntools",
+        "pyfiglet":                    "pyfiglet",
+        "pydantic":                    "pydantic",
+        "impacket":                    "impacket",
+        "paramiko":                    "paramiko",
+        "rgbprint":                    "rgbprint",
+        "requests":                    "requests",
+        "selenium":                    "selenium",
+        "colorama":                    "colorama",
+        "argparse":                    "argparse",
+        "colorlog":                    "colorlog",
+        "soupsieve":                   "soupsieve",
+        "dnspython":                   "dnspython",
+        "netifaces":                   "netifaces",
+        "termcolor":                   "termcolor",
+        "pyOpenSSL":                   "pyOpenSSL",
+        "texttable":                   "texttable",
+        "enlighten":                   "enlighten",
+        "GitPython":                   "GitPython",
+        "ansi2html":                   "ansi2html",
+        "legacy-cgi":                  "legacy-cgi",
+        "tldextract":                  "tldextract",
+        "validators":                  "validators",
+        "SQLAlchemy":                  "SQLAlchemy",
+        "gnureadline":                 "gnureadline",
+        "prettytable":                 "prettytable",
+        "pyreadline3":                 "pyreadline3",
+        "pyshorteners":                "pyshorteners",
+        "cryptography":                "cryptography",
+        "minikerberos":                "minikerberos",
+        "pycryptodome":                "pycryptodome",
+        "flask_restful":               "flask-restful",
+        "humanfriendly":               "humanfriendly",
+        "pycryptodomex":               "pycryptodomex",
+        "beautifulsoup4":              "beautifulsoup4",
+        "python-libnmap":              "python-libnmap",
+        "win32_setctime":              "win32-setctime",
+        "fake-useragent":              "fake-useragent",
+        "isc_dhcp_leases":             "isc_dhcp_leases",
+        "python-Wappalyzer":           "python-Wappalyzer",
+        "virtualenvwrapper":           "virtualenvwrapper",
+        "terminable_thread":           "terminable_thread",
     }
 )
 
@@ -299,6 +410,75 @@ func getPackageName(tool, pkg string) string {
         }
         
         if archPkg, exists := archPackages[pkg]; exists {
+            return archPkg
+        }
+        return tool
+    }
+    return pkg
+}
+
+func getPythonModuleName(tool, pkg string) string {
+    if utils.DetectAndroid() {
+        androidPythonModules := map[string]string{
+            "requests":      "requests",
+            "colorama":      "colorama",
+            "tqdm":          "tqdm",
+            "scapy":         "scapy",
+            "psutil":        "psutil",
+            "pandas":        "pandas",
+            "numpy":         "numpy",
+            "flask":         "flask",
+            "paramiko":      "paramiko",
+            "cryptography":  "cryptography",
+            "pycryptodome":  "pycryptodome",
+            "beautifulsoup4": "beautifulsoup4",
+            "lxml":          "lxml",
+            "urllib3":       "urllib3",
+            "certifi":       "certifi",
+            "chardet":       "chardet",
+            "idna":          "idna",
+            "six":           "six",
+            "PyYAML":        "pyyaml",
+            "netaddr":       "netaddr",
+            "dnspython":     "dnspython",
+            "netifaces":     "netifaces",
+            "termcolor":     "termcolor",
+            "colorlog":      "colorlog",
+        }
+        if androidPkg, exists := androidPythonModules[pkg]; exists {
+            return androidPkg
+        }
+        return tool
+    }
+
+    if utils.IsArchLinux() {
+        archPythonModules := map[string]string{
+            "requests":       "python-requests",
+            "colorama":       "python-colorama",
+            "tqdm":           "python-tqdm",
+            "scapy":          "python-scapy",
+            "psutil":         "python-psutil",
+            "pandas":         "python-pandas",
+            "numpy":          "python-numpy",
+            "flask":          "python-flask",
+            "paramiko":       "python-paramiko",
+            "cryptography":   "python-cryptography",
+            "pycryptodome":   "python-pycryptodome",
+            "beautifulsoup4": "python-beautifulsoup4",
+            "lxml":           "python-lxml",
+            "urllib3":        "python-urllib3",
+            "certifi":        "python-certifi",
+            "chardet":        "python-chardet",
+            "idna":           "python-idna",
+            "six":            "python-six",
+            "PyYAML":         "python-yaml",
+            "netaddr":        "python-netaddr",
+            "dnspython":      "python-dnspython",
+            "netifaces":      "python-netifaces",
+            "termcolor":      "python-termcolor",
+            "colorlog":       "python-colorlog",
+        }
+        if archPkg, exists := archPythonModules[pkg]; exists {
             return archPkg
         }
         return tool
@@ -800,14 +980,18 @@ func CheckMissing() {
     spinner := utils.New(utils.WithStyle("circle"), utils.WithEffect("bounce"), utils.WithClearOnStop(true), utils.WithText("[+] Setup is Checking all missing tools ..."))
     spinner.Start()
     missingTools := UpsentTools()
+    missingPython := MissingPythonModules()
     spinner.Stop()
 
-    if len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) == 0 {
-        fmt.Printf("%s%s[+] %sAll tools are installed and ready!\n", bcolors.Green, bcolors.Endc)
+    totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) + len(missingPython)
+
+    if totalMissing == 0 {
+        fmt.Printf("%s%s[+] %sTools and modules are installed ...\n", bcolors.Green, bcolors.Endc)
         return
     }
 
     printMissingTools(missingTools)
+    printMissingPythonModules(missingPython)
     userChoice()
 }
 
@@ -815,14 +999,31 @@ func CheckTools() {
     spinner := utils.New(utils.WithStyle("classic"), utils.WithEffect("bounce"))
     spinner.Start()
     missingTools := UpsentTools()
+    missingPython := MissingPythonModules()
     spinner.Stop()
 
-    if len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) == 0 {
-        fmt.Printf("%s%s[✓] %sAll tools are installed and ready ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    totalMissing := len(missingTools["system"]) + len(missingTools["security"]) + len(missingTools["discovery"]) + len(missingPython)
+
+    validationErr := subprocess.ValidateToolsDir()
+    hasIssues := validationErr != nil || totalMissing > 0
+
+    if !hasIssues {
+        fmt.Printf("%s%s[&] %sTools and modules ready. Deploying afr ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
         return
     }
 
-    printMissingTools(missingTools)
+    if validationErr != nil {
+        fmt.Printf("\n%s%s[!] %sError: %s", bcolors.Bold, bcolors.Red, bcolors.Endc, validationErr)
+    }
+
+    if totalMissing > 0 {
+        if validationErr != nil {
+            fmt.Printf("\n")
+        }
+        printMissingTools(missingTools)
+        printMissingPythonModules(missingPython)
+    }
+
     userChoice()
 }
 
@@ -837,7 +1038,7 @@ func printMissingTools(missingTools map[string]map[string]string) {
 
     for _, cat := range categories {
         if len(missingTools[cat.key]) > 0 {
-            fmt.Printf("\n%s%s[!] %s%sMissing %s tools.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Bold, cat.name, bcolors.Endc)
+            fmt.Printf("\n%s%s[!] %sMissing %s%s %stools:\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Green, cat.name, bcolors.Endc)
             for tool := range missingTools[cat.key] {
                 fmt.Printf("  %s- %s%s ...\n", bcolors.Bold, bcolors.Endc, tool)
                 time.Sleep(90 * time.Millisecond)
@@ -847,7 +1048,7 @@ func printMissingTools(missingTools map[string]map[string]string) {
 }
 
 func userChoice() {
-    fmt.Printf("\n%s%s[?] %sInstall missing tools? (y/n): ", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[?] %sInstall all missing tools? %s(y/n)%s: ", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Yellow, bcolors.Endc)
     utils.Scanner.Scan()
     input := strings.ToLower(strings.TrimSpace(utils.Scanner.Text()))
 
@@ -879,6 +1080,7 @@ func UpsentTools() map[string]map[string]string {
         "system":    {},
         "security":  {},
         "discovery": {},
+        "python":    {},
     }
 
     toolSets := []struct{
@@ -899,11 +1101,16 @@ func UpsentTools() map[string]map[string]string {
         }
     }
 
+    pythonMissing := MissingPythonModules()
+    for module, pkg := range pythonMissing {
+        missing["python"][module] = pkg
+    }
+
     return missing
 }
 
 func InstallTools(tools map[string]map[string]string) {
-    categories := []struct{
+    categories := []struct {
         key, name string
     }{
         {"system", "system"},
@@ -916,29 +1123,43 @@ func InstallTools(tools map[string]map[string]string) {
     isMacOS := runtime.GOOS == "darwin"
     isWindows := runtime.GOOS == "windows"
 
+    if len(tools["discovery"]) > 0 {
+        if os.Getenv("GOPATH") == "" {
+            os.Setenv("GOPATH", utils.GoPath)
+        }
+        goBinPath := filepath.Join(os.Getenv("GOPATH"), "bin")
+        if !strings.Contains(os.Getenv("PATH"), goBinPath) {
+            os.Setenv("PATH", os.Getenv("PATH")+":"+goBinPath)
+        }
+        fmt.Printf("\n%s%s[*] %sGOPATH set to: %s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, os.Getenv("GOPATH"), bcolors.Endc)
+        fmt.Printf("%s%s[*] %sGOBIN set to: %s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, goBinPath, bcolors.Endc)
+    }
+
     for _, cat := range categories {
         if len(tools[cat.key]) > 0 {
-            fmt.Printf("\n%sInstalling %s tools%s\n", bcolors.Bold, cat.name, bcolors.Endc)
+            fmt.Printf("\n%s[<] %sInstalling %s%s %stools.\n", bcolors.Yellow, bcolors.Endc, bcolors.Red, cat.name, bcolors.Endc)
 
             var goTools []string
             var systemPackages []string
 
             for tool, pkg := range tools[cat.key] {
-                if strings.Contains(pkg, "@latest") {
+                if strings.Contains(pkg, "@latest") || strings.Contains(pkg, "github.com/") {
                     goTools = append(goTools, pkg)
+                    fmt.Printf("   %s-->%s %s- %s%s ...\n", bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Endc, tool)
                 } else {
                     systemPackages = append(systemPackages, getPackageName(tool, pkg))
+                    fmt.Printf("   %s-->%s %s- %s%s ...\n", bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.Endc, tool)
                 }
-                fmt.Printf("%s%s[+] %sQueuing %s%-20s %s ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, tool, bcolors.Endc)
+                time.Sleep(50 * time.Millisecond)
             }
 
             if len(systemPackages) > 0 {
-                fmt.Printf("%s%s[*] %sInstalling %d system packages individually ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(systemPackages))
+                fmt.Printf("\n%s[<] %sInstalling %s%d%s system packages.\n", bcolors.Yellow, bcolors.Endc, bcolors.Red, len(systemPackages), bcolors.Endc)
 
                 if !isArchLinux && !isAndroid && !isMacOS && !isWindows {
                     fmt.Printf("%s%s[*] %sChecking package manager health ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
-                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
+                    subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                    subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
                 }
 
                 for _, pkg := range systemPackages {
@@ -950,7 +1171,7 @@ func InstallTools(tools map[string]map[string]string) {
                     for attempt := 1; attempt <= maxRetries; attempt++ {
                         switch {
                         case isArchLinux:
-                            err = subprocess.Run("sudo pacman -S --noconfirm %s", pkg)
+                            err = subprocess.Run("pacman -S --noconfirm %s", pkg)
                         case isAndroid:
                             err = subprocess.Run("pkg install -y %s", pkg)
                         case isWindows:
@@ -958,12 +1179,12 @@ func InstallTools(tools map[string]map[string]string) {
                         case isMacOS:
                             err = subprocess.Run("brew install %s", pkg)
                         default:
-                            err = subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", pkg)
+                            err = subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y %s", pkg)
 
                             if err != nil && attempt < maxRetries {
                                 fmt.Printf("%s%s[!] %sInstallation failed, attempting to fix broken packages ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-                                subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
-                                subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
+                                subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                                subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
                                 time.Sleep(2 * time.Second)
                                 continue
                             }
@@ -977,21 +1198,22 @@ func InstallTools(tools map[string]map[string]string) {
 
                         if !isArchLinux && !isAndroid && !isMacOS && !isWindows {
                             fmt.Printf("%s%s[*] %sAttempting comprehensive repair ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
-                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
-                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoremove -y")
-                            subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoclean -y")
+                            subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' --fix-broken install -y")
+                            subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive dpkg --configure -a")
+                            subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoremove -y")
+                            subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' autoclean -y")
                         }
                     } else {
-                        fmt.Printf("%s%s[✓] %sSuccessfully installed %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
+                        fmt.Printf("%s%s[#] %sSuccessfully installed %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
                     }
                     time.Sleep(90 * time.Millisecond)
                 }
             }
 
             if len(goTools) > 0 {
-                fmt.Printf("\n%s%s[*] %sInstalling %d Go tools ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(goTools))
+                fmt.Printf("\n%s%s[*] %sInstalling %d Go tools to: %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, len(goTools), filepath.Join(os.Getenv("GOPATH"), "bin"), bcolors.Endc)
 
+                fmt.Printf("\n%s%s[*] %sEnsuring Go is installed ...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
                 if isAndroid {
                     subprocess.Run("pkg install golang -y")
                 } else if isWindows {
@@ -999,36 +1221,404 @@ func InstallTools(tools map[string]map[string]string) {
                 } else if isMacOS {
                     subprocess.Run("brew install go")
                 } else if !isArchLinux {
-                    subprocess.Run("sudo NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y golang-go")
+                    subprocess.Run("NEEDRESTART_MODE=a DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout='30' -o Acquire::https::Timeout='30' -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confnew' install -y golang-go")
+                } else {
+                    subprocess.Run("pacman -S --noconfirm go")
                 }
 
+                if err := subprocess.Run("go version"); err != nil {
+                    fmt.Printf("%s%s[!] %sGo is not properly installed. Skipping Go tools installation.%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Endc)
+                    continue
+                }
+
+                goBinPath := filepath.Join(os.Getenv("GOPATH"), "bin")
+                if err := os.MkdirAll(goBinPath, 0755); err != nil {
+                    fmt.Printf("%s%s[!] %sFailed to create Go bin directory: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+                    continue
+                }
+
+                successCount := 0
                 for _, pkg := range goTools {
-                    fmt.Printf("\n%s%s[>] %sInstalling Go tool%s: %s%s%s ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, bcolors.Bold, pkg, bcolors.Endc)
+                    toolName := filepath.Base(strings.Split(pkg, "@")[0])
+                    if strings.Contains(toolName, "/") {
+                        toolName = strings.Split(toolName, "/")[0]
+                    }
+                    toolName = strings.Split(toolName, "/v")[0]
+                    toolName = strings.Split(toolName, "v")[0]
+                    toolName = strings.TrimSuffix(toolName, ".go")
+                    
+                    fmt.Printf("\n%s%s[*] %sInstalling%s: %s%s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Blue, bcolors.Endc, bcolors.Bold, bcolors.Green, toolName, bcolors.Endc)
 
                     var err error
-                    if isAndroid {
-                        err = subprocess.Run("go install %s", pkg)
-                    } else if isWindows {
-                        err = subprocess.Run("go install %s", pkg)
-                    } else if isMacOS {
-                        err = subprocess.Run("go install %s", pkg)
-                    } else {
-                        err = subprocess.Run("go install %s", pkg)
+                    installCmd := fmt.Sprintf("go install %s", pkg)
+                    err = subprocess.Run(installCmd)
+
+                    if err != nil {
+                        fmt.Printf("%s%s[!] %sFailed to install %s, trying with GO111MODULE=on...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, toolName, bcolors.Endc)
+
+                        err = subprocess.Run("GO111MODULE=on go install %s", pkg)
                     }
 
                     if err != nil {
-                        fmt.Printf("%s%s[!] %sFailed to install Go tool %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, pkg, err, bcolors.Endc)
+                        fmt.Printf("%s%s[!] %sFailed to install %s: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, toolName, err, bcolors.Endc)
                     } else {
-                        fmt.Printf("%s%s[✓] %sSuccessfully installed Go tool %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, pkg, bcolors.Endc)
+                        binaryPath := filepath.Join(goBinPath, toolName)
+                        if _, err := os.Stat(binaryPath); err == nil {
+                            fmt.Printf("%s%s[#] %sSuccessfully installed %s to %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, toolName, binaryPath, bcolors.Endc)
+                            successCount++
+                        } else {
+                            found := false
+                            files, _ := os.ReadDir(goBinPath)
+                            for _, file := range files {
+                                if strings.Contains(file.Name(), toolName) {
+                                    found = true
+                                    binaryPath = filepath.Join(goBinPath, file.Name())
+                                    fmt.Printf("%s%s[#] %sSuccessfully installed %s to %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, toolName, binaryPath, bcolors.Endc)
+                                    successCount++
+                                    break
+                                }
+                            }
+                            if !found {
+                                fmt.Printf("%s%s[!] %sBinary for %s not found in %s%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, toolName, goBinPath, bcolors.Endc)
+                            }
+                        }
                     }
                     time.Sleep(90 * time.Millisecond)
                 }
+
+                fmt.Printf("\n%s%s[*] %sGo tools installation summary:%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+                fmt.Printf("  %sSuccessfully installed: %d/%d tools%s\n", bcolors.Green, successCount, len(goTools), bcolors.Endc)
+                if successCount < len(goTools) {
+                    fmt.Printf("  %sFailed: %d tools%s\n", bcolors.Red, len(goTools)-successCount, bcolors.Endc)
+                }
+
+                fmt.Printf("\n%s%s[*] %sGo tools installed in: %s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, goBinPath, bcolors.Endc)
+                subprocess.Run("ls -la %s 2>/dev/null || echo 'No binaries found'", goBinPath)
+
+                //fmt.Printf("\n%s%s[*] %sChecking PATH for Go tools...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+                //subprocess.Run("echo $PATH | tr ':' '\\n' | grep -E 'go|bin' || echo 'Go bin not in PATH'")
             }
         }
     }
 }
 
+func isPythonModuleInstalledWithCmd(module, pythonCmd string) bool {
+    importName := module
+    for importKey, packageName := range pythonImportToPackageMap {
+        if packageName == module || importKey == module {
+            importName = importKey
+            break
+        }
+    }
+
+    cmd := exec.Command(pythonCmd, "-c", fmt.Sprintf("import %s", importName))
+    if err := cmd.Run(); err == nil {
+        return true
+    }
+
+    cmd = exec.Command(pythonCmd, "-m", "pip", "list")
+    output, err := cmd.Output()
+    if err != nil {
+        return false
+    }
+    
+    lines := strings.Split(string(output), "\n")
+    for _, line := range lines {
+        line = strings.ToLower(strings.TrimSpace(line))
+        if strings.Contains(line, strings.ToLower(module)) {
+            return true
+        }
+    }
+    return false
+}
+
+func isPythonModuleInstalled(module string) bool {
+    importName := module
+    for importKey, packageName := range pythonImportToPackageMap {
+        if packageName == module || importKey == module {
+            importName = importKey
+            break
+        }
+    }
+
+    cmd := exec.Command(utils.VenvPython, "-c", fmt.Sprintf("import %s", importName))
+    if err := cmd.Run(); err == nil {
+        return true
+    }
+
+    cmd = exec.Command(utils.VenvPython, "-m", "pip", "list")
+    output, err := cmd.Output()
+    if err != nil {
+        return false
+    }
+    
+    lines := strings.Split(string(output), "\n")
+    for _, line := range lines {
+        if strings.Contains(strings.ToLower(line), strings.ToLower(module)) {
+            return true
+        }
+    }
+    return false
+}
+
+func MissingPythonModules() map[string]string {
+    if cachedMissingModules != nil {
+        return cachedMissingModules
+    }
+
+    missing := make(map[string]string)
+    
+    for module, pkg := range pythonModules {
+        importName := module
+        for importKey, packageName := range pythonImportToPackageMap {
+            if packageName == module || importKey == module {
+                importName = importKey
+                break
+            }
+        }
+        
+        if !isPythonModuleInstalled(importName) {
+            missing[module] = pkg
+        }
+    }
+
+    cachedMissingModules = missing
+    return missing
+}
+
+func printMissingPythonModules(missingModules map[string]string) {
+    if len(missingModules) > 0 {
+        fmt.Printf("\n%s%s[!] %sMissing %sPython %smodules:\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Green, bcolors.Endc)
+        for module := range missingModules {
+            fmt.Printf("  %s- %s%s ...\n", bcolors.Bold, bcolors.Endc, module)
+            time.Sleep(50 * time.Millisecond)
+        }
+    }
+}
+
+func InstallPythonModules(modules map[string]string) {
+    if len(modules) == 0 {
+        return
+    }
+
+    var pythonCmd string
+    isWindows := runtime.GOOS == "windows"
+    isAndroid := utils.DetectAndroid()
+
+    if _, err := os.Stat(utils.VenvPython); err == nil {
+        pythonCmd = utils.VenvPython
+        fmt.Printf("%s%s[*] %sUsing virtual environment: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Blue, utils.VenvPath, bcolors.Endc)
+    } else if _, err := exec.LookPath("python3"); err == nil {
+        pythonCmd = "python3"
+        fmt.Printf("%s%s[!] %sUsing system Python (python3)%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+    } else if _, err := exec.LookPath("python"); err == nil {
+        pythonCmd = "python"
+        fmt.Printf("%s%s[!] %sUsing system Python (python)%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+    } else {
+        fmt.Printf("%s%s[!] %sNo Python found, cannot install modules%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Endc)
+        return
+    }
+
+    if err := subprocess.Run(fmt.Sprintf("%s -m pip --version", pythonCmd)); err != nil {
+        fmt.Printf("%s%s[!] %sPip not found, installing pip first ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+        if isAndroid {
+            subprocess.Run("pkg install python-pip -y")
+        } else if isWindows {
+            subprocess.Run("python -m ensurepip --upgrade")
+        } else {
+            subprocess.Run(fmt.Sprintf("%s -m ensurepip --upgrade", pythonCmd))
+        }
+    }
+
+    pipPackages := make([]string, 0, len(modules))
+    for _, pkg := range modules {
+        pipPackages = append(pipPackages, pkg)
+    }
+
+    if len(pipPackages) > 0 {
+        fmt.Printf("%s%s[+] %sInstalling packages (output will show below):%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
+
+        subprocess.Run(fmt.Sprintf("%s -m pip install --upgrade pip", pythonCmd))
+
+        installCmd := fmt.Sprintf("%s -m pip install --retries 10 --timeout 360 %s", pythonCmd, strings.Join(pipPackages, " "))
+        err := subprocess.Run(installCmd)
+
+        if err != nil {
+            fmt.Printf("\n%s%s[!] %sInstallation failed: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+        } else {
+            fmt.Printf("\n%s%s[+] %sPython modules installed ...%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+            cachedMissingModules = nil
+        }
+    }
+}
+
+func installPendingPythonModules() error {
+    if len(pendingPythonModules) == 0 {
+        fmt.Printf("\n%s%s[+] %sPython modules installed in vm!", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+        return nil
+    }
+
+    if interruptFlag {
+        fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+        pendingPythonModules = nil
+        return fmt.Errorf("installation interrupted by user")
+    }
+
+    fmt.Printf("\n%s%s[*] %sInstalling %d Python modules in Env ...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, len(pendingPythonModules), bcolors.Endc)
+
+    if _, err := os.Stat(utils.VenvPython); err != nil {
+        fmt.Printf("%s%s[!] %sVirtual environment Python not found at %s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, utils.VenvPython, bcolors.Endc)
+        return fmt.Errorf("virtual environment Python not found at %s", utils.VenvPython)
+    }
+
+    count := 0
+    total := len(pendingPythonModules)
+    for module := range pendingPythonModules {
+        if interruptFlag {
+            fmt.Printf("\n%s%s[!] %sInstallation interrupted by user ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+            pendingPythonModules = nil
+            return fmt.Errorf("[!] Installation interrupted by user ...")
+        }
+        count++
+        fmt.Printf("  %s[%d/%d]%s %s- %s%s\n", bcolors.Bold, count, total, bcolors.Endc, bcolors.Bold, bcolors.Endc, module)
+        time.Sleep(50 * time.Millisecond)
+    }
+
+    if interruptFlag {
+        fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+        pendingPythonModules = nil
+        return fmt.Errorf("installation interrupted by user")
+    }
+
+    fmt.Printf("\n%s%s[*] %sUpgrading pip in virtual environment...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+
+    upgradeCmd := fmt.Sprintf("%s -m pip install --upgrade pip --quiet", utils.VenvPython)
+    if err := subprocess.Run(upgradeCmd); err != nil {
+        if interruptFlag {
+            fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+            pendingPythonModules = nil
+            return fmt.Errorf("installation interrupted by user")
+        }
+        fmt.Printf("%s%s[!] %sFailed to upgrade pip, continuing anyway...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+    }
+
+    if interruptFlag {
+        fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+        pendingPythonModules = nil
+        return fmt.Errorf("installation interrupted by user")
+    }
+
+    pipPackages := make([]string, 0, len(pendingPythonModules))
+    for _, pkg := range pendingPythonModules {
+        pipPackages = append(pipPackages, pkg)
+    }
+
+    fmt.Printf("\n%s%s[→] %sInstalling %d Python modules into venv...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, len(pipPackages))
+    fmt.Printf("%s%s[>] %sInstalling: %s%s%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Blue, bcolors.Endc, strings.Join(pipPackages, ", "), bcolors.Endc)
+
+    installCmd := fmt.Sprintf("%s -m pip install --retries 10 --timeout 360 --quiet %s", utils.VenvPython, strings.Join(pipPackages, " "))
+    if err := subprocess.Run(installCmd); err != nil {
+        if interruptFlag {
+            fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+            pendingPythonModules = nil
+            return fmt.Errorf("installation interrupted by user")
+        }
+
+        fmt.Printf("%s%s[!] %sBatch install failed, trying individual installations...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+
+        successCount := 0
+        for i, pkg := range pipPackages {
+            if interruptFlag {
+                fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+                pendingPythonModules = nil
+                return fmt.Errorf("installation interrupted by user")
+            }
+
+            fmt.Printf("  [%d/%d] Installing %s... ", i+1, len(pipPackages), pkg)
+            installCmd := fmt.Sprintf("%s -m pip install --retries 10 --timeout 360 --quiet %s", utils.VenvPython, pkg)
+            if err := subprocess.Run(installCmd); err != nil {
+                fmt.Printf("%s[FAILED]%s\n", bcolors.Red, bcolors.Endc)
+            } else {
+                fmt.Printf("%s[OK]%s\n", bcolors.Green, bcolors.Endc)
+                successCount++
+            }
+            time.Sleep(100 * time.Millisecond)
+        }
+        
+        if successCount == len(pipPackages) {
+            fmt.Printf("\n%s%s[+] %sSuccessfully verified python modules ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        } else {
+            fmt.Printf("\n%s%s[!] %sInstalled %d/%d modules. Some installations failed ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc, successCount, len(pipPackages))
+        }
+    } else {
+        fmt.Printf("%s%s[+] %sPython modules installed ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    }
+
+    if interruptFlag {
+        fmt.Printf("\n%s%s[!] %sInstallation interrupted by user.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+        pendingPythonModules = nil
+        return fmt.Errorf("installation interrupted by user")
+    }
+
+    fmt.Printf("\n%s%s[*] %sVerifying Python module installations...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+    fmt.Printf("%s%s[!] %sPress Ctrl+C to skip verification.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+    
+    failedModules := make(map[string]string)
+    verifiedCount := 0
+    totalModules := len(pendingPythonModules)
+    
+    moduleList := make([]string, 0, len(pendingPythonModules))
+    for module := range pendingPythonModules {
+        moduleList = append(moduleList, module)
+    }
+    
+    for _, module := range moduleList {
+        if interruptFlag {
+            fmt.Printf("\n%s%s[!] %sVerification interrupted by user. Skipping remaining verification.%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+            break
+        }
+
+        verifiedCount++
+        fmt.Printf("  [%d/%d] Verifying %s... ", verifiedCount, totalModules, module)
+
+        done := make(chan bool, 1)
+        go func(mod string) {
+            done <- isPythonModuleInstalledWithCmd(mod, utils.VenvPython)
+        }(module)
+
+        select {
+        case installed := <-done:
+            if installed {
+                fmt.Printf("%s[OK]%s\n", bcolors.Green, bcolors.Endc)
+            } else {
+                failedModules[module] = pendingPythonModules[module]
+                fmt.Printf("%s[FAILED]%s\n", bcolors.Red, bcolors.Endc)
+            }
+        case <-time.After(10 * time.Second):
+            fmt.Printf("%s[TIMEOUT]%s\n", bcolors.Yellow, bcolors.Endc)
+            failedModules[module] = pendingPythonModules[module]
+        }
+        time.Sleep(50 * time.Millisecond)
+    }
+
+    if len(failedModules) > 0 {
+        fmt.Printf("\n%s%s[!] %s%d Python modules failed to install. Try installing them manually:%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, len(failedModules), bcolors.Endc)
+        for _, pkg := range failedModules {
+            fmt.Printf("  %s- pip install %s%s\n", bcolors.Bold, bcolors.Endc, pkg)
+        }
+        return fmt.Errorf("some Python modules failed to install")
+    } else {
+        fmt.Printf("\n%s%s[+] %sAll Python modules verified successfully!\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        pendingPythonModules = nil
+        cachedMissingModules = nil
+    }
+
+    return nil
+}
+
 func SetupGoPyEnv(VenvName string) error {
+    fmt.Printf("\n%s%s[+] %sSetting up Python and Go environment ...%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+
     os.Setenv("GOPATH", utils.GoPath)
     os.Setenv("PATH", os.Getenv("PATH") + ":/usr/local/go/bin:" + filepath.Join(utils.GoPath, "bin"))
 
@@ -1046,26 +1636,41 @@ func SetupGoPyEnv(VenvName string) error {
         }
     }
 
-    os.Setenv("VIRTUAL_ENV", utils.VenvPath)
-    os.Setenv("PATH", filepath.Join(utils.VenvPath, "bin") + ":" + os.Getenv("PATH"))
+    if _, err := os.Stat(utils.VenvPath); err == nil {
+        fmt.Printf("\n%s%s[+] %sPython virtual environment already exists at %s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, utils.VenvPath)
 
-    if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); err == nil {
-        fmt.Printf("\n%s%s[!] %sPython virtual environment already exists\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        if _, err := os.Stat(utils.VenvPython); err != nil {
+            fmt.Printf("%s%s[!] %sVenv directory exists but Python binary not found, recreating...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
+            os.RemoveAll(utils.VenvPath)
+        } else {
+            os.Setenv("PATH", os.Getenv("PATH")+":"+filepath.Join(utils.GoPath, "bin"))
+            return nil
+        }
+    }
+
+    fmt.Printf("\n%s%s[*] %sCreating Python virtual environment at %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Green, utils.VenvPath, bcolors.Endc)
+
+    var pythonCmd string
+    if _, err := exec.LookPath("python3"); err == nil {
+        pythonCmd = "python3"
+    } else if _, err := exec.LookPath("python"); err == nil {
+        pythonCmd = "python"
     } else {
-        if err := os.MkdirAll(utils.VenvPath, 0755); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create Python venv directory %s: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, utils.VenvPath, err, bcolors.Endc)
-            return err
+        return fmt.Errorf("[!] No Python found to create virtual environment")
+    }
+
+    if err := os.MkdirAll(filepath.Dir(utils.VenvPath), 0755); err != nil {
+        return fmt.Errorf("failed to create parent directory for venv: %v", err)
+    }
+
+    if err := subprocess.Run("%s -m venv --clear %s", pythonCmd, utils.VenvPath); err != nil {
+        if err := subprocess.Run("%s -m venv %s", pythonCmd, utils.VenvPath); err != nil {
+            return fmt.Errorf("failed to create virtual environment: %v", err)
         }
+    }
 
-        fmt.Printf("\n%s%s[+] %sCreating Python virtual environment ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-        subprocess.Run("python3 -m venv %s --upgrade-deps", utils.VenvPath)
-
-        if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); os.IsNotExist(err) {
-            return fmt.Errorf("[!] Failed to create Python virtual environment at %s", utils.VenvPath)
-        }
-
-        fmt.Printf("\n%s%s[!] %sPython virtual environment created at %s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, utils.VenvPath, bcolors.Endc)
+    if _, err := os.Stat(filepath.Join(utils.VenvPath, "bin", "python")); os.IsNotExist(err) {
+        return fmt.Errorf("[!] Failed to create Python virtual environment at %s", utils.VenvPath)
     }
 
     shellProfiles := []string{
@@ -1074,14 +1679,15 @@ func SetupGoPyEnv(VenvName string) error {
     }
 
     envSetup := fmt.Sprintf(`
+# Python virtual environment
+export VIRTUAL_ENV=%s
+export PATH=$VIRTUAL_ENV/bin:$PATH
+
 # Go environment
 export GOPATH=%s
+export GOBIN=%s/bin
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
-# Python virtual environment
-#export VIRTUAL_ENV=%s
-#export PATH=$VIRTUAL_ENV/bin:$PATH
-`, utils.GoPath, utils.VenvPath)
+`, utils.VenvPath, utils.GoPath, utils.GoPath)
 
     for _, profile := range shellProfiles {
         if err := utils.AppendToShellProfile(profile, envSetup); err != nil {
@@ -1089,28 +1695,70 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         }
     }
 
+    os.Setenv("PATH", os.Getenv("PATH")+":"+filepath.Join(utils.GoPath, "bin"))
+
     return nil
 }
 
 func installThirdPartyTools() {
     isWindows := runtime.GOOS == "windows"
-    fmt.Printf("\n%s%s[*] %sInstalling third party tools\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sInstalling Base tools ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
-    gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
-    if isWindows {
-        subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+    if _, err := os.Stat(utils.ToolsDir); err == nil {
+        fmt.Printf("\n%s%s[+] %safricana-base already exists, updating ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+        UpdateAfricana()
     } else {
-        subprocess.Run(gitCloneCmd, utils.BaseDir)
+        fmt.Printf("\n%s%s[*] %sCloning africana-base ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+        gitCloneCmd := "cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1"
+        if isWindows {
+            subprocess.Run("cd %s; git clone --depth 1 --progress https://github.com/r0jahsm0ntar1/africana-base.git --depth 1", utils.BaseDir)
+        } else {
+            subprocess.Run(gitCloneCmd, utils.BaseDir)
+        }
     }
 
-    pipInstallCmd := "%s -m pip install --retries 10 --timeout 360 -r %s/requirements.txt"
-    if isWindows {
-        subprocess.Run("python -m pip install --retries 10 --timeout 360 -r %s\\requirements.txt", utils.ToolsDir)
-    } else {
-        subprocess.Run(pipInstallCmd, utils.VenvPython, utils.ToolsDir)
+    if !isWindows {
+        setupTerminalGoodies()
     }
 
-    fmt.Printf("\n%s%s[*] %sAfricana successfully installed.", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    if _, err := os.Stat(utils.VenvPython); err != nil {
+        fmt.Printf("\n%s%s[!] %sVirtual environment not found at %s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, utils.VenvPython, bcolors.Endc)
+        fmt.Printf("\n%s%s[*] %sAttempting to create virtual environment ...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
+        if err := SetupGoPyEnv(utils.VenvName); err != nil {
+            fmt.Printf("%s%s[!] %sFailed to create venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+            return
+        }
+    }
+
+    fmt.Printf("\n%s%s[*] %sChecking for missing Python modules ...%s", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
+
+    var missingModules map[string]string
+    if cachedMissingModules != nil {
+        missingModules = cachedMissingModules
+    } else {
+        missingModules = MissingPythonModules()
+    }
+
+    if pendingPythonModules != nil && len(pendingPythonModules) > 0 {
+        for module, pkg := range pendingPythonModules {
+            if _, exists := missingModules[module]; !exists {
+                missingModules[module] = pkg
+            }
+        }
+    }
+
+    if len(missingModules) > 0 {
+        fmt.Printf("\n%s%s[!] %sFound %d missing Python modules, installing ...%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, len(missingModules), bcolors.Endc)
+
+        InstallPythonModules(missingModules)
+        pendingPythonModules = nil
+        cachedMissingModules = nil
+
+    } else {
+        fmt.Printf("\n%s%s[+] %sPython modules satisfied ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s%s[+] %sAfricana framework installed ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
 func baseSetup(foundationCommands []string, missingTools ...map[string]map[string]string) {
@@ -1132,7 +1780,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
             for _, cmd := range foundationCommands {
                 androidCmd := convertToAndroidCmd(cmd)
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, androidCmd, bcolors.Endc)
                 subprocess.Run(androidCmd)
                 time.Sleep(90 * time.Millisecond)
             }
@@ -1140,7 +1788,7 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up macOS environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(90 * time.Millisecond)
             }
@@ -1148,13 +1796,13 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
             fmt.Printf("%s%s[*] %sSetting up Windows environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
 
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(90 * time.Millisecond)
             }
         } else {
             for _, cmd := range foundationCommands {
-                fmt.Printf("\n%s%s[*] %s%s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Bold, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
+                fmt.Printf("\n%s%s[*] %s%sRunning%s: %s%s%s ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.BrightBlue, bcolors.Endc, bcolors.Bold, cmd, bcolors.Endc)
                 subprocess.Run(cmd)
                 time.Sleep(90 * time.Millisecond)
             }
@@ -1166,18 +1814,17 @@ func baseSetup(foundationCommands []string, missingTools ...map[string]map[strin
 
         if isRegularLinux {
             if err := SetupGoPyEnv(utils.VenvName); err != nil {
-                fmt.Printf("\n%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+                fmt.Printf("%s%s[!] %sFailed to create Python venv: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
+            } else {
+                fmt.Printf("%s%s[+] %sPython virtual environment ready ...\n%s", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
             }
         }
-
-        //if !utils.IsArchLinux() && !isAndroid && !isWindows {
-        //    subprocess.Run("winecfg /v win11")
-        //}
 
     } else {
         UpdateAfricana()
     }
 }
+
 
 func convertToAndroidCmd(cmd string) string {
     cmd = strings.Replace(cmd, "sudo", "", -1)
@@ -1218,6 +1865,61 @@ func setupBrew() error {
         subprocess.Run(`eval "$(/opt/homebrew/bin/brew shellenv)"`)
     }
     return nil
+}
+
+func setupTerminalGoodies() {
+    fmt.Printf("\n%s%s[*] %sSetting up terminal goodies ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+
+    homeDir := os.Getenv("HOME")
+    zshDir := filepath.Join(homeDir, ".zsh")
+
+    if _, err := os.Stat(zshDir); os.IsNotExist(err) {
+        os.MkdirAll(zshDir, 0755)
+    }
+
+    powerlevelPath := filepath.Join(zshDir, "powerlevel10k")
+    if _, err := os.Stat(powerlevelPath); err == nil {
+        fmt.Printf("%s%s[!] %sP10k already exists, skipping ...\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    } else {
+        fmt.Printf("%s%s[→] %sInstalling P10k ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+        subprocess.Run("git clone --depth 1 --progress https://github.com/romkatv/powerlevel10k.git ~/.zsh/powerlevel10k")
+    }
+
+    autosuggestPath := filepath.Join(zshDir, "zsh-autosuggestions")
+    if _, err := os.Stat(autosuggestPath); err == nil {
+        fmt.Printf("%s%s[-] %szsh-autosuggestions already exists, skipping ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    } else {
+        fmt.Printf("%s%s[→] %sInstalling zsh-autosuggestions...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        subprocess.Run("git clone --depth 1 --progress https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions")
+    }
+
+    fontDir := "/usr/local/share/fonts/ubuntu/"
+    fontFile := filepath.Join(fontDir, "UbuntuSans-Regular.ttf")
+    if _, err := os.Stat(fontFile); err == nil {
+        fmt.Printf("%s%s[!] %sNecessary fonts already exists, skipping ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    } else {
+        fmt.Printf("%s%s[→] %sInstalling necessary font ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        if _, err := os.Stat(fontDir); os.IsNotExist(err) {
+            os.MkdirAll(fontDir, 0755)
+        }
+        subprocess.Run("wget -v https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/UbuntuSans.zip -O /tmp/UbuntuSans.zip")
+        subprocess.Run("unzip -o /tmp/UbuntuSans.zip -d %s", fontDir)
+        subprocess.Run("rm /tmp/UbuntuSans.zip")
+        fmt.Printf("\n%s%s[+] %sSpecial Fonts installed ...", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    }
+
+    zshrcPath := filepath.Join(homeDir, ".zshrc")
+    if content, err := os.ReadFile(zshrcPath); err == nil {
+        if strings.Contains(string(content), "powerlevel10k.zsh-theme") {
+            fmt.Printf("\n%s%s[+] %s.zshrc already configured, skipping ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+        } else {
+            fmt.Printf("%s%s[→] %sConfiguring .zshrc ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+            subprocess.Run("echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc")
+        }
+    } else {
+        fmt.Printf("%s%s[→] %sCreating and configuring .zshrc ...", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
+        subprocess.Run("echo 'source ~/.zsh/powerlevel10k.zsh-theme' >>~/.zshrc")
+    }
 }
 
 func getFoundationCommands() []string {
@@ -1275,7 +1977,7 @@ func getFoundationCommands() []string {
         "sudo curl -fsSL https://archive.kali.org/archive-keyring.gpg -o /usr/share/keyrings/kali-archive-keyring.gpg",
         "curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/playit.gpg >/dev/null",
         "echo 'deb [signed-by=/etc/apt/trusted.gpg.d/playit.gpg] https://playit-cloud.github.io/ppa/data ./' | sudo tee /etc/apt/sources.list.d/playit-cloud.list",
-        "curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg",
+        "curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --yes --dearmor -o /usr/share/keyrings/microsoft.gpg",
         "echo 'deb [arch=amd64,armhf,arm64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main' | sudo tee /etc/apt/sources.list.d/microsoft.list",
         "echo 'Package: powershell\nPin: origin packages.microsoft.com\nPin-Priority: 1001' | sudo tee /etc/apt/preferences.d/powershell-pin",
         //"sudo dpkg --add-architecture i386",
@@ -1310,24 +2012,6 @@ func AutoSetups() {
     default:
         fmt.Printf("%s%s[!] %sUnsupported OS: %s\n", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, runtime.GOOS)
     }
-}
-
-func LinuxSetups() {
-    fmt.Printf("%s%s[*] %sSetting up Linux environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-    foundationCommands := getFoundationCommands()
-    missingTools := UpsentTools()
-    baseSetup(foundationCommands, missingTools)
-    installThirdPartyTools()
-}
-
-func ArchSetups() {
-    fmt.Printf("\n%s%s[*] %sSetting up Arch Linux environment ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    foundationCommands := getFoundationCommands()
-    missingTools := UpsentTools()
-    baseSetup(foundationCommands, missingTools)
-    installThirdPartyTools()
 }
 
 func AndroidSetups() {
@@ -1375,6 +2059,24 @@ func AndroidSetups() {
         fmt.Printf("\n%s%s[!] %sNetHunter installation skipped. Some tools may not work.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
     }
 
+}
+
+func LinuxSetups() {
+    fmt.Printf("%s%s[*] %sSetting up Linux environment ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
+}
+
+func ArchSetups() {
+    fmt.Printf("\n%s%s[*] %sSetting up Arch Linux environment ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+
+    foundationCommands := getFoundationCommands()
+    missingTools := UpsentTools()
+    baseSetup(foundationCommands, missingTools)
+    installThirdPartyTools()
 }
 
 func MacosSetups() {
@@ -2129,7 +2831,7 @@ create_rootfs_launcher() {
 		            include=(.l2s bin boot captures etc home lib media mnt opt proc root run sbin snap srv sys tmp usr var)
 		            exclude=(apex data dev linkerconfig product sdcard storage system vendor "\${@}")
 		            echo "Packing ${DISTRO_NAME} into '\${file}'."
-		            echo "Including:" "\${include[@]}"
+		            echo "Including:" "\${include[@]}"require
 		            echo "Excluding:" "\${exclude[@]}"
 		            exclude_args=()
 		            for i in "\${exclude[@]}"; do
@@ -4031,7 +4733,7 @@ func UpdateAfricana() {
     }
     subprocess.Run(strings.Join(commands, " && "))
 
-    fmt.Printf("\n%s%s[*] %sSuccessfully updated africana console ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    fmt.Printf("\n%s%s[*] %sSuccessfully updated africana console ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
 }
 
 func Uninstaller() {

@@ -30,22 +30,45 @@ BrightMagenta := \033[95m
 BrightCyan    := \033[96m
 BrightWhite   := \033[97m
 
-# Define banner as a shell function
-define PRINT_BANNER
-	echo "${BrightYellow} ,__,              ${Endc}"; \
-	echo "${BrightYellow} (oo)____          ${Endc}"; \
-	echo "${BrightYellow} (__)    )\\       ${Endc}"; \
-	echo "${BrightYellow}    ||--||         ${Endc}"; \
-	echo "${BrightYellow}John 3:16          ${Endc}";
-endef
+# Banner is OFF by default (0)
+BANNER_TYPE := 0
 
-define PRINT_BANNER0
-	echo "${BrightYellow}           .--,    ${Endc}"; \
-	echo "${BrightYellow}       ,.-( (o)\\  ${Endc}"; \
-	echo "${BrightYellow}      /   .)/\\ ') ${Endc}"; \
-	echo "${BrightYellow}    .',./'/   )/   ${Endc}"; \
-	echo "${BrightYellow}()=///=))))==()    ${Endc}"; \
-	echo "${BrightYellow}  / John 3:16      ${Endc}\n";
+# Check for banner flags (case insensitive)
+ifneq ($(b),)
+    BANNER_TYPE := $(b)
+endif
+ifneq ($(B),)
+    BANNER_TYPE := $(B)
+endif
+ifneq ($(BANNER),)
+    BANNER_TYPE := $(BANNER)
+endif
+ifneq ($(banner),)
+    BANNER_TYPE := $(banner)
+endif
+ifneq ($(SHOW_BANNER),)
+    BANNER_TYPE := $(SHOW_BANNER)
+endif
+ifneq ($(show_banner),)
+    BANNER_TYPE := $(show_banner)
+endif
+
+# Generic banner printer
+define PRINT_BANNER_GENERIC
+	if [ "$(BANNER_TYPE)" = "1" ]; then \
+		echo "${BrightYellow} ,__,              ${Endc}"; \
+		echo "${BrightYellow} (oo)____          ${Endc}"; \
+		echo "${BrightYellow} (__)    )\\       ${Endc}"; \
+		echo "${BrightYellow}    ||--||         ${Endc}"; \
+		echo "${BrightYellow}John 3:16          ${Endc}"; \
+	elif [ "$(BANNER_TYPE)" = "2" ]; then \
+		echo "${BrightYellow}           .--,    ${Endc}"; \
+		echo "${BrightYellow}       ,.-( (o)\\  ${Endc}"; \
+		echo "${BrightYellow}      /   .)/\\ ') ${Endc}"; \
+		echo "${BrightYellow}    .',./'/   )/   ${Endc}"; \
+		echo "${BrightYellow}()=///=))))==()    ${Endc}"; \
+		echo "${BrightYellow}  / John 3:16      ${Endc}\n"; \
+	fi
 endef
 
 # Project name
@@ -69,7 +92,6 @@ endif
 # Detect current OS
 UNAME_S := $(shell uname -s | tr A-Z a-z)
 ifeq ($(UNAME_S),linux)
-    # Check if we're in Termux (Android)
     ifneq ($(wildcard /data/data/com.termux/files/usr/bin/termux-info),)
         CURRENT_OS := android
     else
@@ -102,6 +124,7 @@ default: build
 
 # Build for current system
 build:
+	@$(PRINT_BANNER_GENERIC)
 	@echo "${BrightGreen}${Bold}[*] ${Endc}Detecting system ...${Endc}"
 	@echo "${BrightBlue}${Bold}[+] ${Endc}Building ${Green}${APP_NAME}${Endc} for ${BrightCyan}${CURRENT_OS}${Endc} (${BrightYellow}${ARCHS}${Endc}) ...${Endc}"
 	@mkdir -p $(BUILD_DIR)
@@ -120,7 +143,7 @@ build:
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		EXIT_CODE=$$?; \
 		if [ $$EXIT_CODE -eq 0 ]; then \
-			echo "${BrightGreen}${Bold}   ✓ Success${Endc}"; \
+			echo "${BrightGreen}${Bold}   + Success${Endc}"; \
 			BUILD_OUTPUTS="$$BUILD_OUTPUTS $$OUT"; \
 			BUILD_SUCCESS=$$((BUILD_SUCCESS + 1)); \
 		else \
@@ -141,20 +164,20 @@ build:
 			echo "  ${BrightWhite}• $$out${Endc}"; \
 		done; \
 		echo ""; \
-		$(PRINT_BANNER) \
 	fi; \
 	if [ $$BUILD_FAILED -eq 0 ]; then \
-		echo "${BrightBlue}${Bold}[✓] ${Endc}All builds completed successfully ...${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}Build completed. Ready to lauch ...${Endc}"; \
 	else \
 		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
 		exit 1; \
 	fi
 
-# Build for specified OS (e.g., make distro windows)
+# Build for specified OS
 distro:
+	@$(PRINT_BANNER_GENERIC)
 	@OS_NAME=$(filter-out $@,$(MAKECMDGOALS)); \
 	if [ -z "$$OS_NAME" ]; then \
-		$(PRINT_BANNER0) \
+		$(PRINT_BANNER_GENERIC) \
 		echo "${BrightRed}${Bold}Usage:${Endc} make distro <os>"; \
 		echo "${BrightBlue}${Underl}Supported OS:${Endc} linux, windows, darwin, android, all"; \
 		exit 1; \
@@ -182,7 +205,7 @@ distro:
 		GOOS=$$GOOS GOARCH=$$GOARCH go build -o $$OUT .; \
 		EXIT_CODE=$$?; \
 		if [ $$EXIT_CODE -eq 0 ]; then \
-			echo "${BrightGreen}${Bold}   ✓ Success${Endc}"; \
+			echo "${BrightGreen}${Bold}   + Success${Endc}"; \
 			BUILD_OUTPUTS="$$BUILD_OUTPUTS $$OUT"; \
 			BUILD_SUCCESS=$$((BUILD_SUCCESS + 1)); \
 		else \
@@ -203,10 +226,9 @@ distro:
 			echo "  ${BrightWhite}• $$out${Endc}"; \
 		done; \
 		echo ""; \
-		$(PRINT_BANNER) \
 	fi; \
 	if [ $$BUILD_FAILED -eq 0 ]; then \
-		echo "${BrightBlue}${Bold}[✓] ${Endc}All builds completed successfully ...${Endc}"; \
+		echo "${BrightBlue}${Bold}[+] ${Endc}All builds completed successfully ...${Endc}"; \
 	else \
 		echo "${BrightRed}${Bold}[!] Some builds failed. Check errors above.${Endc}"; \
 		exit 1; \
@@ -214,6 +236,7 @@ distro:
 
 # Clean output
 clean:
+	@$(PRINT_BANNER_GENERIC)
 	@echo "${BrightYellow}${Bold}[!] ${Endc}Cleaning build directory ...${Endc}"
 	@go clean -cache
 	@rm -rf $(BUILD_DIR)
@@ -221,6 +244,7 @@ clean:
 
 # Native run helper
 run:
+	@$(PRINT_BANNER_GENERIC)
 	@GOOS=$(CURRENT_OS); \
 	GOARCH=$(ARCHS); \
 	EXT=; \
@@ -231,19 +255,20 @@ run:
 		echo "${BrightBlue}Run ${BrightCyan}make build${BrightBlue} first${Endc}"; \
 		exit 1; \
 	fi; \
-	echo "${BrightBlue}${Bold}[+] ${Endc}Running ${Green}$$BIN ${Endc}on ${BrightCyan}$$GOOS${Endc} (${BrightYellow}$$GOARCH${Endc}) ...${Endc}"; \
+	echo "${BrightBlue}${Bold}[>] ${Endc}Running ${Green}$$BIN ${Endc}on ${BrightCyan}$$GOOS${Endc} (${BrightYellow}$$GOARCH${Endc}) ...${Endc}"; \
 	chmod +x $$BIN; \
 	./$$BIN -a; \
 	EXIT_CODE=$$?; \
 	if [ $$EXIT_CODE -eq 0 ]; then \
+		echo ""; \
 		echo "${Blue}${Bold}[*] ${Endc}Execution on ${BrightCyan}$$GOOS${Endc} completed successfully ...${Endc}"; \
 	else \
+		echo ""; \
 		echo "${Red}${Bold}[!] ${Endc}Execution failed with exit code $$EXIT_CODE${Endc}"; \
 	fi
 
 # Help target
 help:
-	@$(PRINT_BANNER0)
 	@echo "${BrightCyan}${Bold}${Underl}Available commands:${Endc}"
 	@echo "  ${BrightGreen}make${Endc}             - Build for current system"
 	@echo "  ${BrightGreen}make build${Endc}       - Build for current system"
@@ -252,12 +277,37 @@ help:
 	@echo "  ${BrightGreen}make run${Endc}         - Run the built binary"
 	@echo "  ${BrightGreen}make help${Endc}        - Show this help"
 	@echo ""
+	@echo "${BrightYellow}${Bold} Options:${Endc}"
+	@echo "  ${BrightWhite}b=1${Endc}              - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}b=2${Endc}              - Show banner 2 (John 3:16)"
+	@echo "  ${BrightWhite}B=1${Endc}              - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}B=2${Endc}              - Show banner 2 (John 3:16)"
+	@echo "  ${BrightWhite}BANNER=1${Endc}         - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}BANNER=2${Endc}         - Show banner 2 (John 3:16)"
+	@echo "  ${BrightWhite}banner=1${Endc}         - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}banner=2${Endc}         - Show banner 2 (John 3:16)"
+	@echo "  ${BrightWhite}SHOW_BANNER=1${Endc}    - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}SHOW_BANNER=2${Endc}    - Show banner 2 (John 3:16)"
+	@echo "  ${BrightWhite}show_banner=1${Endc}    - Show banner 1 (cow)"
+	@echo "  ${BrightWhite}show_banner=2${Endc}    - Show banner 2 (John 3:16)"
+	@echo ""
+	@echo "${BrightYellow}${Bold} Banner Examples:${Endc}"
+	@echo "  ${BrightWhite}make build b=1${Endc}   - Shows banner 1:"
+	@BANNER_TYPE=1 $(PRINT_BANNER_GENERIC)
+	@echo ""
+	@echo "  ${BrightWhite}make build b=2${Endc}   - Shows banner 2:"
+	@BANNER_TYPE=2 $(PRINT_BANNER_GENERIC)
+	@echo ""
 	@echo "${BrightYellow}${Bold} Examples:${Endc}"
-	@echo "  ${BrightWhite}make distro linux${Endc}   - ${Dim}Build for Linux${Endc}"
-	@echo "  ${BrightWhite}make distro windows${Endc} - ${Dim}Build for Windows${Endc}"
-	@echo "  ${BrightWhite}make distro darwin${Endc}  - ${Dim}Build for macOS${Endc}"
-	@echo "  ${BrightWhite}make distro android${Endc} - ${Dim}Build for Android${Endc}"
-	@echo "  ${BrightWhite}make distro all${Endc}     - ${Dim}Build for all platforms${Endc}"
+	@echo "  ${BrightWhite}make build${Endc}                         - ${Dim}Build without banner (default)${Endc}"
+	@echo "  ${BrightWhite}make build b=1${Endc}                     - ${Dim}Build with cow banner${Endc}"
+	@echo "  ${BrightWhite}make build b=2${Endc}                     - ${Dim}Build with John 3:16 banner${Endc}"
+	@echo "  ${BrightWhite}make distro linux B=1${Endc}              - ${Dim}Build for Linux with cow banner${Endc}"
+	@echo "  ${BrightWhite}make distro windows B=2${Endc}            - ${Dim}Build for Windows with John 3:16 banner${Endc}"
+	@echo "  ${BrightWhite}make clean BANNER=1${Endc}                - ${Dim}Clean with cow banner${Endc}"
+	@echo "  ${BrightWhite}make run banner=2${Endc}                  - ${Dim}Run with John 3:16 banner${Endc}"
+	@echo "  ${BrightWhite}make distro all SHOW_BANNER=1${Endc}      - ${Dim}Build all with cow banner${Endc}"
+	@echo "  ${BrightWhite}make build show_banner=2${Endc}           - ${Dim}Build with John 3:16 banner${Endc}"
 	@echo ""
 	@echo "${BrightBlue}Current OS: ${BrightCyan}$(CURRENT_OS)${Endc}"
 	@echo "${BrightBlue}Current Arch: ${BrightCyan}$(shell uname -m) → $(ARCHS)${Endc}"

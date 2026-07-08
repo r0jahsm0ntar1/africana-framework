@@ -44,7 +44,7 @@ func Covenant() {
 [ tool for lawful purposes only.........................🎲]
 %s`, bcolors.Green, bcolors.BrightRed, bcolors.Endc)
     fmt.Printf(`%s
-¯\_(ツ)_/¯ %s🥥Do you agree to the terms of service ... %s(y/n)
+¯\_(ツ)_/¯ %s🥥Do you agree to the terms of service %s... %s(y/n)
 %s
-`, bcolors.Endc, bcolors.Cyan, bcolors.Yellow, bcolors.Endc)
+`, bcolors.Endc, bcolors.Cyan, bcolors.Endc, bcolors.Yellow, bcolors.Endc)
 }

@@ -36,7 +36,6 @@ type stringMatcher struct {
 
 func Start() {
     if _, err := os.Stat(utils.GetAgreementPath()); os.IsNotExist(err) {
-        utils.ClearScreen()
         agreements.Covenant()
         for {
             Input, err := utils.DisplayPrompt(subprocess.Version)
@@ -52,7 +51,6 @@ func Start() {
             switch Input {
             case "a", "k", "y", "ok", "yes", "agree":
                 utils.Sealing()
-                utils.ClearScreen()
                 Genesis()
                 return
             case "e", "n", "q", "no", "exit", "quit":

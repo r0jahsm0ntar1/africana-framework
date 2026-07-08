@@ -21,7 +21,7 @@ var (
     Version = "3"
     mu sync.Mutex
     logFile *os.File
-    Dversion = Version + ".0.5-dev"
+    Dversion = Version + ".0.7-dev"
     logDir = filepath.Join(BaseDir, "logs")
     BaseDir, _, _, _, _, _, _, _ = DirLocations()
     LogFile = filepath.Join(logDir, "log_history.log")
