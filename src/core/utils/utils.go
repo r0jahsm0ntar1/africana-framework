@@ -82,6 +82,7 @@ var (
 
     HomeDir = os.Getenv("HOME")
     GoPath  = filepath.Join(HomeDir, "go")
+    GoBin  = filepath.Join(GoPath, "bin")
 
     VenvPath   = filepath.Join(BaseDir, VenvName)
     VenvPip    = filepath.Join(VenvPath, "bin", "pip")

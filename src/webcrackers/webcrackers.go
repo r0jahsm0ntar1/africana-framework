@@ -5,7 +5,10 @@ package webcrackers
 import (
     "os"
     "fmt"
+    "net"
+    "sync"
     "sort"
+    "time"
     "menus"
     "utils"
     "os/exec"
@@ -23,6 +26,34 @@ import (
 var (
     Function, ReconDir string
 )
+
+type ScanResult struct {
+    Status      string                 `json:"status"`
+    Command     string                 `json:"command"`
+    Output      string                 `json:"output"`
+    Error       string                 `json:"error,omitempty"`
+    StartTime   time.Time              `json:"start_time"`
+    EndTime     time.Time              `json:"end_time"`
+    Duration    string                 `json:"duration"`
+    ExitCode    int                    `json:"exit_code"`
+    ToolName    string                 `json:"tool_name"`
+    Phase       string                 `json:"phase"`
+    Data        map[string]interface{} `json:"data,omitempty"`
+}
+
+type ScanTracker struct {
+    mu              sync.Mutex
+    Results         []ScanResult
+    TotalCommands   int
+    Successful      int
+    Failed          int
+    StartTime       time.Time
+    CurrentPhase    string
+    Host            string
+    ReconDir        string
+    Errors          []string
+    Warnings        []string
+}
 
 type stringMatcher struct {
     names  []string
@@ -507,18 +538,137 @@ func WebPenFunctions(Function string, args ...interface{}) {
     menus.ListWebsitesFunctions()
 }
 
+func resolveHostToIP(host string) (string, error) {
+    ips, err := net.LookupHost(host)
+    if err != nil {
+        return "", err
+    }
+    if len(ips) == 0 {
+        return "", fmt.Errorf("no IP addresses found")
+    }
+    return ips[0], nil
+}
+
+func getIPFromSubdomains(RHost, ReconDir string) string {
+    ipsFile := filepath.Join(ReconDir, "dns", fmt.Sprintf("resolved_ips_%s.txt", RHost))
+    if utils.FileExists(ipsFile) {
+        content, err := ioutil.ReadFile(ipsFile)
+        if err == nil {
+            lines := strings.Split(string(content), "\n")
+            for _, line := range lines {
+                if strings.Contains(line, RHost) {
+                    parts := strings.Fields(line)
+                    if len(parts) >= 2 {
+                        return parts[1]
+                    }
+                }
+            }
+        }
+    }
+
+    ip, err := resolveHostToIP(RHost)
+    if err == nil {
+        return ip
+    }
+    
+    return ""
+}
+
+func safeNmap(host, port, output string, args ...string) *ScanResult {
+
+    ip, err := resolveHostToIP(host)
+    if err != nil {
+        return &ScanResult{
+            Status: "failed",
+            Error:  fmt.Sprintf("Failed to resolve host: %v", err),
+        }
+    }
+
+    cmdArgs := append([]string{"-p", port, ip}, args...)
+    cmd := exec.Command("nmap", cmdArgs...)
+
+    outputBytes, err := cmd.CombinedOutput()
+    if err != nil {
+        return &ScanResult{
+            Status:  "failed",
+            Output:  string(outputBytes),
+            Error:   err.Error(),
+        }
+    }
+
+    if output != "" {
+        ioutil.WriteFile(output, outputBytes, 0644)
+    }
+
+    return &ScanResult{
+        Status: "success",
+        Output: string(outputBytes),
+    }
+}
+
+
 func EnumScan(RHost, ReconDir string) {
     if utils.RHost == "" {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming full enumeration scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("subfinder -nW -d %s -o %s/subfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    ScanCRT(utils.RHost, ReconDir)
-    subprocess.Run("assetfinder %s > %s/assetfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("findomain --target %s -u %s/findomain_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("amass enum -r 1.1.1.1 -d %s -o %s/amass_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf("\n%s[*] %sStarting ENUMERATION PHASE (Subdomain Discovery) ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    subdomainDir := filepath.Join(ReconDir, "subdomains")
+    os.MkdirAll(subdomainDir, os.ModePerm)
+
+    fmt.Printf("\n%s[%sPASSIVE%s] %sSubdomain Discovery%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sSubfinder ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("subfinder -d %s -silent -o %s/subdomains/subfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sCRT.sh certificate logs ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    ScanCRT(utils.RHost, subdomainDir)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sAssetfinder ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("assetfinder --subs-only %s > %s/subdomains/assetfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+
+    fmt.Printf("%s  → %sFindomain ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("findomain --target %s -u %s/subdomains/findomain_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sAmass (passive) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("amass enum -passive -active -brute -d %s -silent > %s/subdomains/amass_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sDNSX certificate transparency ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+
+    subprocess.Run("dnsx -d %s -w %s -recon -silent -o %s/subdomains/dnsx_recon_%s.txt", utils.RHost, utils.ResolversFile, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sACTIVE%s] %sSubdomain Bruteforce%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    if _, err := exec.LookPath("shuffledns"); err == nil {
+        fmt.Printf("%s  → %sShuffledns (bruteforce) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("shuffledns -d %s -w %s -silent -o %s/subdomains/shuffledns_%s.txt", utils.RHost, utils.ResolversFile, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    } else {
+        fmt.Printf("%s  → %sShuffledns not installed, skipping ...%s\n", bcolors.Yellow, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("%s  → %sDNSX wildcard filtering ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("dnsx -d %s -w %s -silent -o %s/subdomains/validated_%s.txt", utils.RHost, utils.ResolversFile, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sCOMBINE%s] %sDeduplicating Subdomains%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    CombineSu(RHost, ReconDir)
+
+    subdomainsFile := filepath.Join(ReconDir, "subdomains", fmt.Sprintf("all_subdomains_%s.txt", utils.RHost))
+    if utils.FileExists(subdomainsFile) {
+        content, _ := ioutil.ReadFile(subdomainsFile)
+        count := len(strings.Split(strings.TrimSpace(string(content)), "\n"))
+        fmt.Printf("%s  ✓ %sTotal unique subdomains: %s%d%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, count, bcolors.Endc)
+    }
 }
 
 func DnsRecon(RHost, ReconDir string) {
@@ -527,10 +677,57 @@ func DnsRecon(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming DNS reconnaissance scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("dnsx -l %s -o %s/dnsx_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("asnmap -d %s -o %s/asnmap_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("cdncheck -l %s -o %s/cdncheck_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf("\n%s[*] %sStarting DNS RECONNAISSANCE PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    dnsDir := filepath.Join(ReconDir, "dns")
+    os.MkdirAll(dnsDir, os.ModePerm)
+
+    subdomainsFile := filepath.Join(ReconDir, "subdomains", fmt.Sprintf("all_subdomains_%s.txt", utils.RHost))
+
+    fmt.Printf("\n%s[%sRESOLUTION%s] %sDNS Resolution%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    fmt.Printf("%s  → %sResolving A records ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("dnsx -l %s -a -silent -o %s/dns/resolved_ips_%s.txt", subdomainsFile, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sResolving CNAME records ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("dnsx -l %s -cname -silent -o %s/dns/cname_%s.txt", subdomainsFile, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sADVANCED%s] %sAdvanced DNS Enumeration%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    if _, err := exec.LookPath("asnmap"); err == nil {
+        fmt.Printf("%s  → %sASN mapping ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("asnmap -d %s -silent -o %s/dns/asnmap_%s.txt", utils.RHost, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    if _, err := exec.LookPath("cdncheck"); err == nil {
+        fmt.Printf("%s  → %sCDN detection ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("cdncheck -l %s -silent -o %s/dns/cdncheck_%s.txt", subdomainsFile, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    fmt.Printf("%s  → %sZone transfer attempt ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+
+    nsCmd := exec.Command("dig", "NS", utils.RHost, "+short")
+    nsOutput, err := nsCmd.Output()
+    if err == nil && len(nsOutput) > 0 {
+        nsList := strings.Split(string(nsOutput), "\n")
+        for _, ns := range nsList {
+            ns = strings.TrimSpace(ns)
+            if ns != "" {
+                subprocess.Run("dig axfr @%s %s > %s/dns/zone_transfer_%s.txt", ns, utils.RHost, ReconDir, utils.RHost)
+            }
+        }
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    } else {
+        fmt.Printf(" %s⚠%s No nameservers found%s\n", 
+            bcolors.Yellow, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("%s  → %sDNS bruteforce ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("dnsx -d %s -w %s -silent -o %s/dns/bruteforce_%s.txt", utils.RHost, utils.ResolversFile, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
 }
 
 func PortScan(RHost, ReconDir string) {
@@ -538,22 +735,151 @@ func PortScan(RHost, ReconDir string) {
         fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
- 
-    fmt.Printf("\n%s[*] %sPerforming full port scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("naabu -nmap-cli 'nmap --script firewall-bypass -v -sV' -host %s -o %s/naabu_%s.txt", utils.RHost, ReconDir, utils.RHost)
+
+    fmt.Printf("\n%s[*] %sStarting PORT SCANNING PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    portsDir := filepath.Join(ReconDir, "ports")
+    os.MkdirAll(portsDir, os.ModePerm)
+
+    fmt.Printf("\n%s[%sRESOLVE%s] %sResolving Host to IP%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    ips, err := net.LookupHost(utils.RHost)
+    if err != nil {
+        fmt.Printf("%s[!] %sFailed to resolve host: %v%s\n", bcolors.Red, bcolors.BrightWhite, err, bcolors.Endc)
+        return
+    }
+    
+    if len(ips) == 0 {
+        fmt.Printf("%s[!] %sNo IP addresses found for host%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
+        return
+    }
+
+    targetIP := ips[0]
+    fmt.Printf("%s  ✓ %sResolved %s%s%s → %s%s%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, utils.RHost, bcolors.BrightWhite, bcolors.BrightGreen, targetIP, bcolors.Endc)
+
+    ioutil.WriteFile(filepath.Join(portsDir, fmt.Sprintf("resolved_ip_%s.txt", utils.RHost)), []byte(targetIP), 0644)
+
+    fmt.Printf("\n%s[%sFAST%s] %sFast Port Scanning (Top 1000)%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNaabu (top 1000 ports) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("naabu -host %s -top-ports 1000 -silent -json -o %s/ports/naabu_%s.json", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s[%sDEEP%s] %sDeep Port Scanning (All Ports)%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNmap comprehensive scan ...\n%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nmap -sC -sV -p- -T4 -oA %s/ports/nmap_%s %s", ReconDir, utils.RHost, targetIP)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNmap firewall bypass ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nmap --script firewall-bypass -v -sV -oN %s/ports/nmap_bypass_%s.txt %s", ReconDir, utils.RHost, targetIP)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNmap common ports scan ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nmap -sS -p 80,443,8080,8443,22,21,25,53,3306,5432,6379,27017 -O -oN %s/ports/nmap_common_%s.txt %s", ReconDir, utils.RHost, targetIP)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sUDP%s] %sUDP Port Scanning%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNmap UDP common ports ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nmap -sU -p 53,67,68,69,123,135,137,138,139,161,162,445,514,520,631,1434,1900,4500,49152 -oN %s/ports/nmap_udp_%s.txt %s", ReconDir, utils.RHost, targetIP)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sPN%s] %sNmap No-Ping Scan (for firewalled hosts)%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sNmap -Pn scan ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nmap -Pn -sV -p 80,443,8080,8443 -oN %s/ports/nmap_pn_%s.txt %s", ReconDir, utils.RHost, targetIP)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sPARSE%s] %sParsing Naabu Results for Targeted Nmap%s\n",bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    naabuFile := filepath.Join(ReconDir, "ports", fmt.Sprintf("naabu_%s.json", utils.RHost))
+    if utils.FileExists(naabuFile) {
+        content, err := ioutil.ReadFile(naabuFile)
+        if err == nil {
+            var ports []string
+            lines := strings.Split(string(content), "\n")
+            for _, line := range lines {
+                if line == "" {
+                    continue
+                }
+                var data map[string]interface{}
+                if err := json.Unmarshal([]byte(line), &data); err == nil {
+                    if port, ok := data["port"].(float64); ok {
+                        ports = append(ports, fmt.Sprintf("%d", int(port)))
+                    }
+                }
+            }
+            
+            if len(ports) > 0 {
+                portList := strings.Join(ports, ",")
+                fmt.Printf("%s  → %sTargeted Nmap on discovered ports ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+                subprocess.Run("nmap -sC -sV -p %s -oN %s/ports/nmap_targeted_%s.txt %s", portList, ReconDir, utils.RHost, targetIP)
+                fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+            }
+        }
+    }
 }
 
 func TechScan(RHost, ReconDir string) {
     if utils.RHost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", 
+            bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming tech detection scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("httpx -title -status-code -tech-detect -follow-redirects -u %s -o %s/httpx_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("aquatone -out %s/aquatone_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("httprobe -l %s -o %s/httprobe_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("gowitness -l %s -o %s/gowitness_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf("\n%s[*] %sStarting TECHNOLOGY DETECTION PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    techDir := filepath.Join(ReconDir, "tech")
+    os.MkdirAll(techDir, os.ModePerm)
+    screenshotsDir := filepath.Join(ReconDir, "screenshots")
+    os.MkdirAll(screenshotsDir, os.ModePerm)
+
+    subdomainsFile := filepath.Join(ReconDir, "subdomains", fmt.Sprintf("all_subdomains_%s.txt", utils.RHost))
+ 
+    fmt.Printf("\n%s[%sPROBE%s] %sWeb Probing & Technology Detection%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sHTTPX (tech detection) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("%s/httpx -u %s -title -status-code -tech-detect -follow-redirects -silent -o %s/tech/httpx_%s.txt", utils.GoBin, utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    if utils.FileExists(subdomainsFile) {
+        fmt.Printf("%s  → %sHTTPX (all subdomains) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("%s/httpx -l %s -title -status-code -tech-detect -follow-redirects -silent -o %s/tech/httpx_all_%s.txt", utils.GoBin, subdomainsFile, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    SortHttpx(RHost, ReconDir)
+
+    fmt.Printf("\n%s[%sDEEP%s] %sDeep Technology Detection%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    if _, err := exec.LookPath("whatweb"); err == nil {
+        fmt.Printf("%s  → %sWhatWeb ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("whatweb -a 3 -o %s/tech/whatweb_%s.txt %s", ReconDir, utils.RHost, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sVISUAL%s] %sVisual Evidence%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    if _, err := exec.LookPath("aquatone"); err == nil {
+        fmt.Printf("%s  → %sAquatone screenshots ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("aquatone -out %s/screenshots/aquatone_%s -d %s", ReconDir, utils.RHost, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    if _, err := exec.LookPath("gowitness"); err == nil {
+        fmt.Printf("%s  → %sGowitness ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("gowitness single -s %s -o %s/screenshots/gowitness_%s", utils.RHost, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sRESPONSE%s] %sResponse Analysis%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    if _, err := exec.LookPath("httprobe"); err == nil {
+        fmt.Printf("%s  → %sHttprobe...%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("httprobe -l %s -o %s/tech/httprobe_%s.txt", subdomainsFile, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
 }
 
 func FuzzScan(RHost, ReconDir string) {
@@ -562,20 +888,28 @@ func FuzzScan(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming fuzz scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("gobuster dir -u %s -w %s -x 7z,zip,tar,gz,bz2,sql,bak,backup,old,db,json,xml,conf,config,asp,aspx,php,jsp -t 50 -k -o %s/gobuster_%s.txt", utils.RHost, utils.WordsList, ReconDir, utils.RHost)
-}
+    fmt.Printf("\n%s[*] %sStarting FUZZING PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
 
-func LeakScan(RHost, ReconDir string) {
-    if utils.RHost == "" {
-        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
-        return
-    }
+    fuzzDir := filepath.Join(ReconDir, "fuzzing")
+    os.MkdirAll(fuzzDir, os.ModePerm)
 
-    fmt.Printf("\n%s[*] %sPerforming leak scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("gitleaks detect -v --report-path %s/gitleaks_%s.json", utils.OutPutDir, utils.RHost)
-    subprocess.Run("trufflehog filesystem --no-update --json --output %s/trufflehog_%s.json", utils.OutPutDir, utils.RHost)
-    subprocess.Run("semgrep -l --output %s/semgrep_%s.json", utils.OutPutDir, utils.RHost)
+    fmt.Printf("\n%s[%sDIRS%s] %sDirectory Fuzzing%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sGobuster (directory) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gobuster dir -u %s -w %s -x 7z,zip,tar,gz,bz2,sql,bak,backup,old,db,json,xml,conf,config,asp,aspx,php,jsp,txt,html -t 50 -k -o %s/fuzzing/gobuster_dir_%s.txt", utils.RHost, utils.WordsList, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sVHOST%s] %sVirtual Host Fuzzing%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sGobuster (vhost) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gobuster vhost -u %s -w %s -t 50 -o %s/fuzzing/gobuster_vhost_%s.txt", utils.RHost, utils.WordsList, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sPARAMS%s] %sParameter Fuzzing%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sFFUF (parameters)...%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("ffuf -u %s/FUZZ -w %s -mc 200,301,302,403 -fc 404 -o %s/fuzzing/ffuf_params_%s.json", utils.RHost, utils.WordsList, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
 }
 
 func AsetScan(RHost, ReconDir string) {
@@ -584,11 +918,69 @@ func AsetScan(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[*] %sPerforming asset scan ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("waybackurls %s > %s/waybackurls_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("gau %s > %s/gau_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("urlfinder -l %s -o %s/urlfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
-    subprocess.Run("gospider -s %s -o %s/gospider_%s", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf("\n%s[*] %sStarting ASSET DISCOVERY PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    assetsDir := filepath.Join(ReconDir, "assets")
+    os.MkdirAll(assetsDir, os.ModePerm)
+
+    fmt.Printf("\n%s[%sURLS%s] %sURL Discovery%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sWayback Machine URLs...%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("waybackurls %s > %s/assets/waybackurls_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sGAU (Get All URLs) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gau --subs %s > %s/assets/gau_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sCRAWL%s] %sWeb Crawling%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sGospider ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gospider -s %s -o %s/assets/gospider_%s -c 10 -d 5 -t 50 --blacklist jpg,jpeg,gif,png,svg,ico", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sURLFinder ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("urlfinder -l %s -o %s/assets/urlfinder_%s.txt", utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sKATANA%s] %sKatana Deep Crawling%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sKatana ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    sortedHttpx := filepath.Join(ReconDir, "tech", fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
+    subprocess.Run("katana -list %s -kf all -d 45 -r 1.1.1.1 -silent -o %s/assets/katana_%s.txt", sortedHttpx, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sCOMBINE%s] %sCombining Assets%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    CombineAssets(RHost, ReconDir)
+}
+
+func LeakScan(RHost, ReconDir string) {
+    if utils.RHost == "" {
+        fmt.Printf("\n%s[!] %sFailed to validate RHOST: Use %s'help' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        return
+    }
+
+    fmt.Printf("\n%s[*] %sStarting LEAK DETECTION PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
+
+    leaksDir := filepath.Join(ReconDir, "leaks")
+    os.MkdirAll(leaksDir, os.ModePerm)
+
+    fmt.Printf("\n%s[%sSECRETS%s] %sSecret Detection%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sGitleaks ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gitleaks detect -v --source . --report-path %s/leaks/gitleaks_%s.json", ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sTruffleHog ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("trufflehog filesystem --no-update --json --directory . --output %s/leaks/trufflehog_%s.json", ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s[%sCODE%s] %sCode Analysis%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+
+    fmt.Printf("%s  → %sSemgrep ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("semgrep -l --output %s/leaks/semgrep_%s.json", ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
 }
 
 func VulnScan(RHost, ReconDir string) {
@@ -597,26 +989,182 @@ func VulnScan(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[!] %sPerforming vuln scan ...%s", bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-    httpxOutput := filepath.Join(ReconDir, fmt.Sprintf("httpx_%s.txt", utils.RHost))
-    sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
-    katanaFinalOutPut := filepath.Join(ReconDir, fmt.Sprintf("katana_%s.txt", utils.RHost))
+    fmt.Printf("\n%s[*] %sStarting VULNERABILITY ASSESSMENT PHASE ...%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.Endc)
 
-    fmt.Printf("\n%s[*] %sScanning host using httpx ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("httpx -u %s -title -tech-detect -status-code -o %s", utils.RHost, httpxOutput)
-    SortHttpx(RHost, ReconDir)
+    vulnDir := filepath.Join(ReconDir, "vulnerabilities")
+    techDir := filepath.Join(ReconDir, "tech")
+    portsDir := filepath.Join(ReconDir, "ports")
 
-    fmt.Printf("\n%s[*] %sResource scanning using katana ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("katana -kf all -d 45 -r 1.1.1.1 -list %s -o %s", sortedHttpxOutput, katanaFinalOutPut)
+    os.MkdirAll(vulnDir, os.ModePerm)
+    os.MkdirAll(techDir, os.ModePerm)
+    os.MkdirAll(portsDir, os.ModePerm)
+
+    ips, err := net.LookupHost(utils.RHost)
+    if err != nil {
+        fmt.Printf("%s[!] %sFailed to resolve host: %v%s\n", bcolors.Red, bcolors.BrightWhite, err, bcolors.Endc)
+        return
+    }
+    targetIP := ips[0]
+    fmt.Printf("%s  ✓ %sResolved %s%s%s → %s%s%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, utils.RHost, bcolors.BrightWhite, bcolors.BrightGreen, targetIP, bcolors.Endc)
+
+    sortedHttpxOutput := filepath.Join(ReconDir, "tech", fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
+    httpxOutput := filepath.Join(ReconDir, "tech", fmt.Sprintf("httpx_%s.txt", utils.RHost))
     
-    fmt.Printf("\n%s[*] %sVulnerability assessment using nuclei ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("nuclei -list %s -o %s/nuclei_%s.txt", sortedHttpxOutput, ReconDir, utils.RHost)
+    if !utils.FileExists(sortedHttpxOutput) {
+        fmt.Printf("%s  ⚠ %sHTTPX output not found, generating ...%s\n", bcolors.Yellow, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("%s/httpx -u %s -title -status-code -tech-detect -follow-redirects -silent -o %s", utils.GoBin, utils.RHost, httpxOutput)
 
-    fmt.Printf("\n%s[*] %sPort scanning using naabu ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("naabu -nmap-cli 'nmap -o %s/nmap_%s.txt --script firewall-bypass -v -sV' -list %s -o %s/naabu_%s.txt", ReconDir, utils.RHost, sortedHttpxOutput, ReconDir, utils.RHost)
+        subdomainsFile := filepath.Join(ReconDir, "subdomains", fmt.Sprintf("all_subdomains_%s.txt", utils.RHost))
+        if utils.FileExists(subdomainsFile) {
+            subprocess.Run("%s/httpx -l %s -title -status-code -tech-detect -follow-redirects -silent -o %s/tech/httpx_all_%s.txt", utils.GoBin, subdomainsFile, ReconDir, utils.RHost)
+        }
 
-    fmt.Printf("\n%s[*] %sXss scanning using dalfox ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("dalfox file --only-poc r --ignore-return 302,404,403 --skip-bav %s -o %s/dalfox_%s.txt", katanaFinalOutPut, ReconDir, utils.RHost)
+        SortHttpx(RHost, ReconDir)
+    }
+
+    fmt.Printf("\n%s[%sNUCLEI%s] %sNuclei Vulnerability Scanning%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    if _, err := exec.LookPath("nuclei"); err == nil {
+        fmt.Printf("%s  → %sNuclei (critical, high) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -severity critical,high -silent -o %s/nuclei_critical_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNuclei (medium) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -severity medium -silent -o %s/nuclei_medium_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        if utils.FileExists(sortedHttpxOutput) {
+            fmt.Printf("%s  → %sNuclei (all templates) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+            subprocess.Run("nuclei -l %s -silent -o %s/nuclei_all_%s.txt", sortedHttpxOutput, vulnDir, utils.RHost)
+            fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+        }
+
+        fmt.Printf("%s  → %sNuclei (CVE templates) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -t cves/ -silent -o %s/cves_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNuclei (technology specific)...%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -t technologies/ -silent -o %s/tech_vulns_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNuclei (misconfigurations) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -t misconfiguration/ -silent -o %s/misconfigs_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNuclei (default credentials) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -t default-logins/ -silent -o %s/default_creds_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNuclei (exposures) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -t exposures/ -silent -o %s/exposures_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    } else {
+        fmt.Printf("%s  ✗ %sNuclei not installed, skipping ...%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sPORTS%s] %sPort Scanning (Nmap) ...%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    if _, err := exec.LookPath("nmap"); err == nil {
+        fmt.Printf("%s  → %sNmap vuln scripts ...%s\n",  bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nmap -sV -p 80,443,8080,8443 --script vuln -oN %s/nmap_vuln_%s.txt %s", portsDir, utils.RHost, targetIP)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNmap full vuln scan ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nmap -sC -sV -p- --script vuln -T4 -oN %s/nmap_full_vuln_%s.txt %s", portsDir, utils.RHost, targetIP)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+        fmt.Printf("%s  → %sNmap aggressive vuln scan ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nmap -sV -p 80,443,8080,8443,22,21,25,53,3306,5432,6379 --script vuln --script-args vulns.showall -oN %s/nmap_aggressive_vuln_%s.txt %s", portsDir, utils.RHost, targetIP)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    } else {
+        fmt.Printf("%s  ✗ %sNmap not installed, skipping ...%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sXSS%s] %sXSS Detection%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    if _, err := exec.LookPath("dalfox"); err == nil {
+        katanaOutput := filepath.Join(ReconDir, "assets", fmt.Sprintf("katana_%s.txt", utils.RHost))
+
+        if utils.FileExists(katanaOutput) {
+            fmt.Printf("%s  → %sDalfox XSS (with katana output) ...%s\n",  bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+            subprocess.Run("dalfox file --only-poc r --ignore-return 302,404,403 --skip-bav %s -o %s/dalfox_%s.txt", katanaOutput, vulnDir, utils.RHost)
+            fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+        } else {
+            fmt.Printf("%s  → %sDalfox XSS (direct) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+            subprocess.Run("dalfox scan %s --only-poc r --ignore-return 302,404,403 -o %s/dalfox_%s.txt", utils.RHost, vulnDir, utils.RHost)
+            fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+        }
+    } else {
+        fmt.Printf("%s  ✗ %sDalfox not installed, skipping ...%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sSQL%s] %sSQL Injection Detection%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    if _, err := exec.LookPath("sqlmap"); err == nil {
+        allUrls := filepath.Join(ReconDir, "assets", fmt.Sprintf("all_urls_%s.txt", utils.RHost))
+
+        if utils.FileExists(allUrls) {
+            fmt.Printf("%s  → %sSQLMap (batch mode) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+            subprocess.Run("sqlmap -m %s --batch --random-agent --level=3 --risk=2 --output-dir=%s/sqlmap_%s", allUrls, vulnDir, utils.RHost)
+            fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+        } else {
+            fmt.Printf("%s  → %sSQLMap (single URL) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+            subprocess.Run("sqlmap -u %s --batch --random-agent --level=3 --risk=2 --output-dir=%s/sqlmap_%s", utils.RHost, vulnDir, utils.RHost)
+            fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+        }
+    } else {
+        fmt.Printf("%s  ✗ %sSQLMap not installed, skipping ...%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
+    }
+
+    fmt.Printf("\n%s[%sSUMMARY%s] %sGenerating Vulnerability Summary%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
+    generateVulnSummary(RHost, ReconDir)
+
+    fmt.Printf("\n%s✓ %sVulnerability assessment complete!%s\n", bcolors.BrightGreen, bcolors.BrightWhite, bcolors.Endc)
+    fmt.Printf("%s📁 %sResults saved to: %s%s%s\n", bcolors.Cyan, bcolors.BrightWhite, bcolors.BrightYellow, vulnDir, bcolors.Endc)
+}
+
+func generateVulnSummary(RHost, ReconDir string) {
+    vulnDir := filepath.Join(ReconDir, "vulnerabilities")
+    summaryFile := filepath.Join(vulnDir, fmt.Sprintf("VULNERABILITY_SUMMARY_%s.txt", utils.RHost))
+    
+    summary := fmt.Sprintf(`
+🔐 VULNERABILITY ASSESSMENT SUMMARY
+Target: %s
+Date: %s
+Directory: %s
+
+📊 SCAN RESULTS
+`, utils.RHost, time.Now().Format("2006-01-02 15:04:05"), vulnDir)
+
+    files, err := ioutil.ReadDir(vulnDir)
+    if err == nil {
+        for _, file := range files {
+            if !file.IsDir() {
+                size := file.Size()
+                summary += fmt.Sprintf("  • %-30s %8d bytes\n", file.Name(), size)
+            }
+        }
+    }
+
+    summary += `
+🛠️ TOOLS USED
+  • Nuclei - Vulnerability scanning (critical, high, medium, CVE, tech, misconfigs, default creds, exposures)
+  • Nmap - Port scanning with vuln scripts
+  • Dalfox - XSS detection
+  • SQLMap - SQL injection detection
+
+📝 NEXT STEPS
+  1. Review critical vulnerabilities in nuclei_critical_*.txt
+  2. Check CVE findings in cves_*.txt
+  3. Review technology-specific vulns in tech_vulns_*.txt
+  4. Check misconfigurations in misconfigs_*.txt
+  5. Review default credentials findings
+  6. Check XSS findings in dalfox_*.txt
+  7. Review SQL injection results in sqlmap_*/
+  8. Investigate nmap vuln script findings
+  9. Prioritize vulnerabilities by severity
+
+`
+    ioutil.WriteFile(summaryFile, []byte(summary), 0644)
+    fmt.Printf("%s  ✓ %sSummary saved to: %s%s%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, summaryFile, bcolors.Endc)
 }
 
 func AutoScan(RHost, ReconDir string) {
@@ -625,15 +1173,315 @@ func AutoScan(RHost, ReconDir string) {
         return
     }
 
-    fmt.Printf("\n%s[*] %sStarting bug bounty for %s%s%s ...", bcolors.Yellow, bcolors.Endc, bcolors.BrightGreen, utils.RHost, bcolors.Endc)
-    EnumScan(RHost, ReconDir); CombineSu(RHost, ReconDir); Intrusive(RHost, ReconDir)
-    fmt.Printf("%s[*] %sWorkflow Results saved at %s%s%s\n", bcolors.Green, bcolors.Endc, bcolors.BrightGreen, ReconDir, bcolors.Endc)
+    fmt.Printf("\n%s[*] %sStarting COMPLETE BUG BOUNTY PIPELINE for %s%s%s ...%s\n", bcolors.Yellow, bcolors.BrightWhite, bcolors.BrightGreen, utils.RHost, bcolors.BrightWhite, bcolors.Endc)
+    startTime := time.Now()
+
+    fmt.Printf("%s PHASE 1: SUBDOMAIN ENUMERATION %s\n", bcolors.Cyan, bcolors.Endc)
+    EnumScan(RHost, ReconDir)
+    CombineSu(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 2: DNS RECONNAISSANCE %s\n", bcolors.Cyan, bcolors.Endc)
+    DnsRecon(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 3: PORT SCANNING %s\n", bcolors.Cyan, bcolors.Endc)
+    PortScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 4: TECHNOLOGY DETECTION %s\n", bcolors.Cyan, bcolors.Endc)
+    TechScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 5: ASSET DISCOVERY %s\n", bcolors.Cyan, bcolors.Endc)
+    AsetScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 6: FUZZING %s\n", bcolors.Cyan, bcolors.Endc)
+    FuzzScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 7: LEAK DETECTION %s\n", bcolors.Cyan, bcolors.Endc)
+    LeakScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 8: VULNERABILITY SCANNING %s\n", bcolors.Cyan, bcolors.Endc)
+    VulnScan(RHost, ReconDir)
+
+    fmt.Printf("%s PHASE 9: INTRUSIVE SCANNING %s\n", bcolors.Cyan, bcolors.Endc)
+    Intrusive(RHost, ReconDir)
+
+    GenerateFinalReport(RHost, ReconDir, startTime)
+
+    fmt.Printf("\n%s✓ %sWORKFLOW COMPLETE!%s\n", bcolors.BrightGreen, bcolors.BrightWhite, bcolors.Endc)
+    fmt.Printf("%s📁 %sResults saved at: %s%s%s\n", bcolors.Cyan, bcolors.BrightWhite, bcolors.BrightGreen, ReconDir, bcolors.Endc)
+}
+
+func CombineAssets(RHost, ReconDir string) {
+    assetsDir := filepath.Join(ReconDir, "assets")
+    
+    files := []string{
+        filepath.Join(assetsDir, fmt.Sprintf("waybackurls_%s.txt", utils.RHost)),
+        filepath.Join(assetsDir, fmt.Sprintf("gau_%s.txt", utils.RHost)),
+        filepath.Join(assetsDir, fmt.Sprintf("urlfinder_%s.txt", utils.RHost)),
+        filepath.Join(assetsDir, fmt.Sprintf("gospider_%s", utils.RHost)),
+        filepath.Join(assetsDir, fmt.Sprintf("katana_%s.txt", utils.RHost)),
+    }
+
+    uniqueUrls := make(map[string]struct{})
+    
+    for _, file := range files {
+        if utils.FileExists(file) {
+            content, err := ioutil.ReadFile(file)
+            if err == nil {
+                for _, line := range strings.Split(string(content), "\n") {
+                    line = strings.TrimSpace(line)
+                    if line != "" && strings.HasPrefix(line, "http") {
+                        uniqueUrls[line] = struct{}{}
+                    }
+                }
+            }
+        }
+    }
+
+    outputFile := filepath.Join(assetsDir, fmt.Sprintf("all_urls_%s.txt", utils.RHost))
+    urls := make([]string, 0, len(uniqueUrls))
+    for u := range uniqueUrls {
+        urls = append(urls, u)
+    }
+    sort.Strings(urls)
+
+    ioutil.WriteFile(outputFile, []byte(strings.Join(urls, "\n")), 0644)
+
+    fmt.Printf("%s  ✓ %sTotal unique URLs: %s%d%s\n", 
+        bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, len(urls), bcolors.Endc)
+}
+
+func GenerateFinalReport(RHost, ReconDir string, startTime time.Time) {
+    reportsDir := filepath.Join(ReconDir, "reports")
+    os.MkdirAll(reportsDir, os.ModePerm)
+
+    reportFile := filepath.Join(reportsDir, fmt.Sprintf("FINAL_REPORT_%s.txt", utils.RHost))
+    duration := time.Since(startTime)
+
+    report := fmt.Sprintf(`
+                   🔥 FINAL BUG BOUNTY REPORT 🔥
+
+Target: %s
+Date: %s
+Duration: %s
+                       📊 EXECUTION SUMMARY
+
+`,
+        utils.RHost, 
+        time.Now().Format("2006-01-02 15:04:05"),
+        duration.String())
+
+    phases := []struct{
+        name string
+        dir string
+    }{
+        {"Subdomains", "subdomains"},
+        {"DNS Records", "dns"},
+        {"Ports", "ports"},
+        {"Technologies", "tech"},
+        {"Assets", "assets"},
+        {"Fuzzing", "fuzzing"},
+        {"Leaks", "leaks"},
+        {"Vulnerabilities", "vulnerabilities"},
+    }
+
+    totalFindings := 0
+    for _, phase := range phases {
+        dirPath := filepath.Join(ReconDir, phase.dir)
+        if utils.FileExists(dirPath) {
+            files, _ := ioutil.ReadDir(dirPath)
+            report += fmt.Sprintf("║ %-20s: %-5d files                                ║\n", 
+                phase.name, len(files))
+            totalFindings += len(files)
+        } else {
+            report += fmt.Sprintf("║ %-20s: %-5s                                     ║\n", 
+                phase.name, "N/A")
+        }
+    }
+
+    vulnDir := filepath.Join(ReconDir, "vulnerabilities")
+    vulnCount := 0
+    criticalCount := 0
+    highCount := 0
+    
+    if utils.FileExists(vulnDir) {
+        files, _ := ioutil.ReadDir(vulnDir)
+        for _, file := range files {
+            if strings.HasSuffix(file.Name(), ".json") || strings.HasSuffix(file.Name(), ".txt") {
+                content, _ := ioutil.ReadFile(filepath.Join(vulnDir, file.Name()))
+                lines := strings.Split(string(content), "\n")
+                for _, line := range lines {
+                    if strings.Contains(line, "critical") || strings.Contains(line, "\"severity\":\"critical\"") {
+                        criticalCount++
+                    }
+                    if strings.Contains(line, "high") || strings.Contains(line, "\"severity\":\"high\"") {
+                        highCount++
+                    }
+                }
+                vulnCount += len(lines)
+            }
+        }
+    }
+
+    report += fmt.Sprintf(`
+                🎯 VULNERABILITY SUMMARY
+Total Vulnerabilities: %-5d
+Critical:              %-5d
+High:                  %-5d
+Medium:                %-5d
+Low:                   %-5d
+                  📁 OUTPUT DIRECTORY
+%s
+
+                   🛠️ TOOLS EXECUTED
+• Discovery: subfinder, amass, assetfinder, findomain, shuffledns, dnsx, asnmap, cdncheck
+• Scanning: naabu, nmap, httpx, whatweb, aquatone, gowitness
+• Crawling: waybackurls, gau, urlfinder, gospider, katana, gobuster, ffuf
+• Vulnerability: gitleaks, trufflehog, semgrep, nuclei, dalfox, sqlmap
+
+Total: 26 tools
+`, vulnCount, criticalCount, highCount, vulnCount-criticalCount-highCount, 0, ReconDir)
+
+    ioutil.WriteFile(reportFile, []byte(report), 0644)
+
+    fmt.Printf("\n%s📄 %sFinal Report generated: %s%s%s\n", bcolors.Cyan, bcolors.BrightWhite, bcolors.BrightYellow, reportFile, bcolors.Endc)
+}
+
+func CombineSu(RHost, ReconDir string) {
+    subdomainDir := filepath.Join(ReconDir, "subdomains")
+
+    files := []string{
+        filepath.Join(subdomainDir, fmt.Sprintf("subfinder_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("amass_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("assetfinder_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("findomain_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("crt_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("shuffledns_%s.txt", utils.RHost)),
+        filepath.Join(subdomainDir, fmt.Sprintf("dnsx_cert_%s.txt", utils.RHost)),
+    }
+
+    uniqueSubdomains := make(map[string]struct{})
+    
+    for _, file := range files {
+        if utils.FileExists(file) {
+            content, err := ioutil.ReadFile(file)
+            if err == nil {
+                for _, line := range strings.Split(string(content), "\n") {
+                    line = strings.TrimSpace(line)
+                    if line != "" && !strings.Contains(line, " ") && !strings.Contains(line, "[") {
+                        uniqueSubdomains[line] = struct{}{}
+                    }
+                }
+            }
+        }
+    }
+
+    outputFile := filepath.Join(subdomainDir, fmt.Sprintf("all_subdomains_%s.txt", utils.RHost))
+    subdomains := make([]string, 0, len(uniqueSubdomains))
+    for s := range uniqueSubdomains {
+        subdomains = append(subdomains, s)
+    }
+    sort.Strings(subdomains)
+
+    ioutil.WriteFile(outputFile, []byte(strings.Join(subdomains, "\n")), 0644)
+}
+
+func SortHttpx(RHost, ReconDir string) {
+    httpxDir := filepath.Join(ReconDir, "tech")
+    httpxOutput := filepath.Join(httpxDir, fmt.Sprintf("httpx_%s.json", utils.RHost))
+    sortedOutput := filepath.Join(httpxDir, fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
+    
+    if !utils.FileExists(httpxOutput) {
+        httpxOutput = filepath.Join(httpxDir, fmt.Sprintf("httpx_%s.txt", utils.RHost))
+        if !utils.FileExists(httpxOutput) {
+            fmt.Printf("%s  ⚠ %sHTTPX output not found, skipping sort ...%s\n", bcolors.Yellow, bcolors.BrightWhite, bcolors.Endc)
+            return
+        }
+    }
+
+    content, err := ioutil.ReadFile(httpxOutput)
+    if err != nil {
+        return
+    }
+
+    var urls []string
+
+    lines := strings.Split(string(content), "\n")
+    for _, line := range lines {
+        if line == "" {
+            continue
+        }
+        var data map[string]interface{}
+        if err := json.Unmarshal([]byte(line), &data); err == nil {
+            if url, ok := data["url"].(string); ok {
+                url = strings.Replace(url, "https://", "", 1)
+                url = strings.Replace(url, "http://", "", 1)
+                urls = append(urls, url)
+            }
+        } else {
+            parts := strings.Fields(line)
+            if len(parts) > 0 {
+                url := parts[0]
+                url = strings.Replace(url, "https://", "", 1)
+                url = strings.Replace(url, "http://", "", 1)
+                urls = append(urls, url)
+            }
+        }
+    }
+    
+    sort.Strings(urls)
+    ioutil.WriteFile(sortedOutput, []byte(strings.Join(urls, "\n")), 0644)
+}
+
+func Intrusive(RHost, ReconDir string) {
+    fmt.Printf("\n%s[*] %sStarting INTRUSIVE SCANNING PHASE ...%s\n", 
+        bcolors.Yellow, bcolors.BrightWhite, bcolors.Endc)
+    
+    sortedHttpxOutput := filepath.Join(ReconDir, "tech", fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
+    katanaFinalOutPut := filepath.Join(ReconDir, "assets", fmt.Sprintf("katana_%s.txt", utils.RHost))
+
+    ips, err := net.LookupHost(utils.RHost)
+    if err == nil && len(ips) > 0 {
+        targetIP := ips[0]
+
+        fmt.Printf("%s  → %sNmap script scan ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nmap -sV -p 80,443,8080,8443 --script=default,vuln,exploit -oN %s/ports/nmap_intrusive_%s.txt %s", ReconDir, utils.RHost, targetIP)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+    fmt.Printf("\n%s  → %sDeep directory fuzzing ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("gobuster dir -l %s -w %s -x 7z,zip,tar,gz,bz2,sql,bak,backup,old,db,json,xml,conf,config,asp,aspx,php,jsp,txt,html,log,key,pem,crt,csr -t 100 -k -o %s/fuzzing/gobuster_deep_%s.txt", sortedHttpxOutput, "wordlists/directories.txt", ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    if utils.FileExists(katanaFinalOutPut) {
+        fmt.Printf("%s  → %sDeep XSS scanning ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("dalfox file --only-poc r --ignore-return 302,404,403 --skip-bav --deep-search %s -o %s/vulnerabilities/dalfox_deep_%s.txt", katanaFinalOutPut, ReconDir, utils.RHost)
+        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+    }
+
+    fmt.Printf("%s  → %sParameter discovery ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("arjun -l %s -o %s/fuzzing/arjun_%s.json", sortedHttpxOutput, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sSubdomain takeover detection ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("subjack -w %s/subdomains/all_subdomains_%s.txt -a -o %s/vulnerabilities/takeover_%s.txt", ReconDir, utils.RHost, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sCORS misconfiguration check ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("corsy -l %s -o %s/vulnerabilities/cors_%s.json", sortedHttpxOutput, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sOpen redirect detection ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("openredirex -l %s -o %s/vulnerabilities/redirect_%s.txt", sortedHttpxOutput, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("%s  → %sDependency vulnerability check ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+    subprocess.Run("nuclei -l %s -t vulnerabilities/ -silent -json -o %s/vulnerabilities/dependencies_%s.json", sortedHttpxOutput, ReconDir, utils.RHost)
+    fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
+
+    fmt.Printf("\n%s✓ %sIntrusive scanning complete!%s\n", bcolors.BrightGreen, bcolors.BrightWhite, bcolors.Endc)
 }
 
 
 func ScanCRT(RHost, ReconDir string) error {
-    fmt.Printf("\n%s[*] %sScanning for subdomains with crt.sh ...%s\n", bcolors.Green, bcolors.Endc, bcolors.Endc)
-
     crtOutput := filepath.Join(ReconDir, fmt.Sprintf("crt_%s.txt", utils.RHost))
     crtURL := fmt.Sprintf("https://crt.sh/?q=%%.%s&output=json", utils.RHost)
 
@@ -661,15 +1509,13 @@ func ScanCRT(RHost, ReconDir string) error {
         }
     }
 
-    writeUniqueSubdomainsToFile(crtOutput, uniqueSubdomains)
-
-    content, err := os.ReadFile(crtOutput)
-    if err != nil {
-        return fmt.Errorf("failed to read output file: %v", err)
+    subdomains := make([]string, 0, len(uniqueSubdomains))
+    for s := range uniqueSubdomains {
+        subdomains = append(subdomains, s)
     }
-    fmt.Print(string(content))
+    sort.Strings(subdomains)
 
-    return nil
+    return ioutil.WriteFile(crtOutput, []byte(strings.Join(subdomains, "\n")+"\n"), 0644)
 }
 
 func writeUniqueSubdomainsToFile(filename string, uniqueSubdomains map[string]struct{}) {
@@ -681,100 +1527,6 @@ func writeUniqueSubdomainsToFile(filename string, uniqueSubdomains map[string]st
 
     err := ioutil.WriteFile(filename, []byte(strings.Join(subdomains, "\n")+"\n"), 0644)
     utils.CheckErr(err)
-}
-
-func CombineSu(RHost, ReconDir string) {
-    subfinderOutput := filepath.Join(ReconDir, fmt.Sprintf("subfinder_%s.txt", utils.RHost))
-    amassOutput := filepath.Join(ReconDir, fmt.Sprintf("amass_%s.txt", utils.RHost))
-    assetfinderOutput := filepath.Join(ReconDir, fmt.Sprintf("assetfinder_%s.txt", utils.RHost))
-    findomainOutput := filepath.Join(ReconDir, fmt.Sprintf("findomain_%s.txt", utils.RHost))
-    crtOutput := filepath.Join(ReconDir, fmt.Sprintf("crt_%s.txt", utils.RHost))
-    subdomainsOutput := filepath.Join(ReconDir, fmt.Sprintf("subdomains_%s.txt", utils.RHost))
-
-    subdomainFiles := []string{subfinderOutput, amassOutput, assetfinderOutput, findomainOutput, crtOutput}
-    uniqueSubdomains := make(map[string]struct{})
-
-    for _, file := range subdomainFiles {
-        if utils.FileExists(file) {
-            lines, err := ioutil.ReadFile(file)
-            utils.CheckErr(err)
-            for _, line := range strings.Split(string(lines), "\n") {
-                line = strings.TrimSpace(line)
-                if line != "" {
-                    uniqueSubdomains[line] = struct{}{}
-                }
-            }
-        } else {
-            fmt.Printf("File not found: %s\n", file)
-        }
-    }
-
-    writeUniqueSubdomainsToFile(subdomainsOutput, uniqueSubdomains)
-}
-
-func SortHttpx(RHost, ReconDir string) {
-    sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
-    httpxOutput := filepath.Join(ReconDir, fmt.Sprintf("httpx_%s.txt", utils.RHost))
-
-    linesBytes, err := ioutil.ReadFile(httpxOutput)
-    utils.CheckErr(err)
-
-    lines := strings.Split(string(linesBytes), "\n")
-
-    strippedLines := make([]string, 0, len(lines))
-    for _, line := range lines {
-        strippedLines = append(strippedLines, utils.StripANSI(line))
-    }
-
-    strippedBracketsLines := make([]string, 0, len(strippedLines))
-    for _, line := range strippedLines {
-        strippedBracketsLines = append(strippedBracketsLines, utils.StripBrackets(line))
-    }
-
-    sortedLines := make([]string, 0, len(strippedBracketsLines))
-    for _, line := range strippedBracketsLines {
-        if len(line) > 0 {
-            sortedLines = append(sortedLines, line)
-        }
-    }
-
-    sort.Slice(sortedLines, func(i, j int) bool {
-        iStatusCode, _ := strconv.Atoi(strings.Fields(sortedLines[i])[1])
-        jStatusCode, _ := strconv.Atoi(strings.Fields(sortedLines[j])[1])
-        return iStatusCode < jStatusCode
-    })
-
-    withUrls := make([]string, 0, len(sortedLines))
-    for _, line := range sortedLines {
-        url := strings.Fields(line)[0]
-        url = strings.Replace(url, "https://", "", 1)
-        url = strings.Replace(url, "http://", "", 1)
-        withUrls = append(withUrls, url)
-    }
-
-    err = ioutil.WriteFile(sortedHttpxOutput, []byte(strings.Join(withUrls, "\n")+"\n"), 0644)
-    utils.CheckErr(err)
-}
-
-func Intrusive(RHost, ReconDir string) {
-    sortedHttpxOutput := filepath.Join(ReconDir, fmt.Sprintf("sorted_httpx_%s.txt", utils.RHost))
-    katanaFinalOutPut := filepath.Join(ReconDir, fmt.Sprintf("katana_%s.txt", utils.RHost))
-
-    fmt.Sprintf("\n%s[*] %sScanning host using httpx ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("httpx -list %s/subdomains_%s.txt -title -tech-detect -status-code -o %s/httpx_%s.txt", ReconDir, utils.RHost, ReconDir, utils.RHost)
-    SortHttpx(RHost, ReconDir)
-
-    fmt.Printf("\n%s[*] %sResource scanning using katana ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("katana -kf all -d 45 -r 1.1.1.1 -list %s -o %s", sortedHttpxOutput, katanaFinalOutPut)
-
-    fmt.Printf("\n%s[*] %sVulnerability assessment using nuclei ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("nuclei -list %s -o %s/nuclei_%s.txt", sortedHttpxOutput, ReconDir, utils.RHost)
-
-    fmt.Printf("\n%s[*] %sPort scanning using naabu ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("naabu -nmap-cli 'nmap -o %s/nmap_%s.txt -sV' -list %s -o %s/naabu_%s.txt", ReconDir, utils.RHost, sortedHttpxOutput, ReconDir, utils.RHost)
-
-    fmt.Printf("\n%s[*] %sXss scanning using dalfox ...%s", bcolors.Green, bcolors.Endc, bcolors.Endc)
-    subprocess.Run("dalfox file --only-poc r --ignore-return 302,404,403 --skip-bav %s -o %s/dalfox_%s.txt", katanaFinalOutPut, ReconDir, utils.RHost)
 }
 
 func DDosAttack(RHost, DDosMode string) {

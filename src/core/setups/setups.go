@@ -64,6 +64,7 @@ var (
         "gawk":                         "gawk",
         "gcc":                          "gcc",
         "gdb":                          "gdb",
+        "libpostal_data":               "libpostal_data",
         //"github-desktop":               "github-desktop",
         "golang-go":                    "golang-go",
         "gstreamer1.0-libav":           "gstreamer1.0-libav",
