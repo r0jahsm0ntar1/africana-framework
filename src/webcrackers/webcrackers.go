@@ -1024,12 +1024,8 @@ func VulnScan(RHost, ReconDir string) {
 
     fmt.Printf("\n%s[%sNUCLEI%s] %sNuclei Vulnerability Scanning%s\n", bcolors.Cyan, bcolors.BrightYellow, bcolors.Cyan, bcolors.BrightWhite, bcolors.Endc)
     if _, err := exec.LookPath("nuclei"); err == nil {
-        fmt.Printf("%s  → %sNuclei (critical, high) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -severity critical,high -silent -o %s/nuclei_critical_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
-
-        fmt.Printf("%s  → %sNuclei (medium) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -severity medium -silent -o %s/nuclei_medium_%s.txt", utils.RHost, vulnDir, utils.RHost)
+        fmt.Printf("%s  → %sNuclei (Automation) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
+        subprocess.Run("nuclei -u %s -o %s/nuclei_medium_%s.txt", utils.RHost, vulnDir, utils.RHost)
         fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
 
         if utils.FileExists(sortedHttpxOutput) {
@@ -1037,26 +1033,6 @@ func VulnScan(RHost, ReconDir string) {
             subprocess.Run("nuclei -l %s -silent -o %s/nuclei_all_%s.txt", sortedHttpxOutput, vulnDir, utils.RHost)
             fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
         }
-
-        fmt.Printf("%s  → %sNuclei (CVE templates) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -t cves/ -silent -o %s/cves_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
-
-        fmt.Printf("%s  → %sNuclei (technology specific)...%s", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -t technologies/ -silent -o %s/tech_vulns_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
-
-        fmt.Printf("%s  → %sNuclei (misconfigurations) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -t misconfiguration/ -silent -o %s/misconfigs_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
-
-        fmt.Printf("%s  → %sNuclei (default credentials) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -t default-logins/ -silent -o %s/default_creds_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
-
-        fmt.Printf("%s  → %sNuclei (exposures) ...%s\n", bcolors.Blue, bcolors.BrightWhite, bcolors.Endc)
-        subprocess.Run("nuclei -u %s -t exposures/ -silent -o %s/exposures_%s.txt", utils.RHost, vulnDir, utils.RHost)
-        fmt.Printf(" %s✓%s\n", bcolors.Green, bcolors.Endc)
 
     } else {
         fmt.Printf("%s  ✗ %sNuclei not installed, skipping ...%s\n", bcolors.Red, bcolors.BrightWhite, bcolors.Endc)
