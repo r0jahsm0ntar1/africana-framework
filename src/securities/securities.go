@@ -1268,7 +1268,7 @@ DNSPort 5353
         return fmt.Errorf("failed to write torrc: %v", err)
     }
 
-    Notify(NOTIFY_TOR, "Torrc configured successfully")
+    Notify(NOTIFY_TOR, "Torrc configured ...")
     return nil
 }
 
@@ -1329,7 +1329,7 @@ options attempts:2      # 2 attempts per nameserver
         return fmt.Errorf("failed to create resolv.conf: %v", err)
     }
 
-    Notify(NOTIFY_SUCCESS, "resolv.conf created successfully")
+    Notify(NOTIFY_SUCCESS, "resolv.conf created ...")
     return nil
 }
 
@@ -2266,7 +2266,7 @@ func FixDNSLeaks() error {
         return fmt.Errorf("DNS through Tor returned empty response")
     }
     
-    Notify(NOTIFY_SUCCESS, "DNS leaks fixed successfully")
+    Notify(NOTIFY_SUCCESS, "DNS leaks fixed ...")
     return nil
 }
 
@@ -2829,7 +2829,7 @@ func RestoreOriginalConfigs() error {
         return fmt.Errorf("failed to restore %d files", len(failedFiles))
     }
 
-    Notify(NOTIFY_SUCCESS, "Original configurations restored successfully")
+    Notify(NOTIFY_SUCCESS, "Original configurations restored ...")
     return nil
 }
 
