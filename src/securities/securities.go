@@ -8,6 +8,7 @@ import (
     "net"
     "time"
     "menus"
+    "net/url"
     "utils"
     "regexp"
     "setups"
@@ -20,6 +21,7 @@ import (
     "scriptures"
     "subprocess"
     "encoding/json"
+    "path/filepath"
 )
 
 var Function string
@@ -39,6 +41,13 @@ var IpServices = []string{
     "https://checkip.amazonaws.com",
 }
 
+type ConfigBackup struct {
+    OriginalPath string
+    BackupPath   string
+    ServiceName  string
+    RestartCmd   string
+}
+
 type IPGeoInfo struct {
     IP        string  `json:"ip"`
     ISP       string  `json:"isp"`
@@ -52,12 +61,12 @@ type IPGeoInfo struct {
 }
 
 type DNSLeakTestResult struct {
-    Timestamp  string     `json:"timestamp"`
-    Status     string     `json:"status"`
-    TestType   string     `json:"test_type"`
-    DNSServers []DNSServer `json:"dns_servers"`
-    LeakDetected bool     `json:"leak_detected"`
-    TorCheck   TorResult  `json:"tor_check"`
+    Timestamp    string     `json:"timestamp"`
+    Status       string     `json:"status"`
+    TestType     string     `json:"test_type"`
+    DNSServers   []DNSServer `json:"dns_servers"`
+    LeakDetected bool       `json:"leak_detected"`
+    TorCheck     TorResult  `json:"tor_check"`
 }
 
 type DNSServer struct {
@@ -69,15 +78,312 @@ type DNSServer struct {
 }
 
 type TorResult struct {
-    IsUsingTor bool   `json:"is_using_tor"`
-    ExitIP     string `json:"exit_ip,omitempty"`
+    IsUsingTor  bool   `json:"is_using_tor"`
+    ExitIP      string `json:"exit_ip,omitempty"`
     ExitCountry string `json:"exit_country,omitempty"`
 }
-
 
 type stringMatcher struct {
     names  []string
     action func()
+}
+
+const (
+    NOTIFY_INFO    = "INFO"
+    NOTIFY_WARNING = "WARN"
+    NOTIFY_ERROR   = "ERR"
+    NOTIFY_SUCCESS = "OK"
+    NOTIFY_DEBUG   = "DBG"
+    NOTIFY_TOR     = "TOR"
+    NOTIFY_DNS     = "DNS"
+    NOTIFY_FW      = "FW"
+    NOTIFY_PROXY   = "PROXY"
+    NOTIFY_SQL     = "SQL"
+    NOTIFY_NET     = "NET"
+    NOTIFY_CONFIG  = "CFG"
+)
+
+func Notify(module, message string, args ...interface{}) {
+    timestamp := time.Now().Format("15:04:05")
+    
+    moduleColors := map[string]string{
+        NOTIFY_INFO:    bcolors.BrightBlue,
+        NOTIFY_WARNING: bcolors.BrightYellow,
+        NOTIFY_ERROR:   bcolors.BrightRed,
+        NOTIFY_SUCCESS: bcolors.BrightGreen,
+        NOTIFY_DEBUG:   bcolors.BrightCyan,
+        NOTIFY_TOR:     bcolors.BrightMagenta,
+        NOTIFY_DNS:     bcolors.BrightCyan,
+        NOTIFY_FW:      bcolors.BrightRed,
+        NOTIFY_PROXY:   bcolors.BrightBlue,
+        NOTIFY_SQL:     bcolors.BrightYellow,
+        NOTIFY_NET:     bcolors.BrightGreen,
+        NOTIFY_CONFIG:  bcolors.BrightWhite,
+    }
+    
+    color := moduleColors[module]
+    if color == "" {
+        color = bcolors.White
+    }
+
+    fmt.Printf("\n%s[%s%s%s] %s[%s%s%s] %s%s%s", bcolors.DarkGray, bcolors.White, timestamp, bcolors.DarkGray, bcolors.DarkGray, color, module, bcolors.DarkGray, bcolors.White, message, bcolors.Endc)
+}
+
+func NotifyShort(module, message string, args ...interface{}) {
+    moduleColors := map[string]string{
+        NOTIFY_INFO:    bcolors.BrightBlue,
+        NOTIFY_WARNING: bcolors.BrightYellow,
+        NOTIFY_ERROR:   bcolors.BrightRed,
+        NOTIFY_SUCCESS: bcolors.BrightGreen,
+        NOTIFY_DEBUG:   bcolors.BrightCyan,
+        NOTIFY_TOR:     bcolors.BrightMagenta,
+        NOTIFY_DNS:     bcolors.BrightCyan,
+        NOTIFY_FW:      bcolors.BrightRed,
+        NOTIFY_PROXY:   bcolors.BrightBlue,
+        NOTIFY_SQL:     bcolors.BrightYellow,
+        NOTIFY_NET:     bcolors.BrightGreen,
+        NOTIFY_CONFIG:  bcolors.BrightWhite,
+    }
+    
+    color := moduleColors[module]
+    if color == "" {
+        color = bcolors.White
+    }
+
+    fmt.Printf("\n%s[%s%s%s] %s%s%s", bcolors.DarkGray, color, module, bcolors.DarkGray, bcolors.White, message, bcolors.Endc)
+}
+
+func NotifyStatus(module, message string, success bool) {
+    moduleColors := map[string]string{
+        NOTIFY_INFO:    bcolors.BrightBlue,
+        NOTIFY_WARNING: bcolors.BrightYellow,
+        NOTIFY_ERROR:   bcolors.BrightRed,
+        NOTIFY_SUCCESS: bcolors.BrightGreen,
+        NOTIFY_DEBUG:   bcolors.BrightCyan,
+        NOTIFY_TOR:     bcolors.BrightMagenta,
+        NOTIFY_DNS:     bcolors.BrightCyan,
+        NOTIFY_FW:      bcolors.BrightRed,
+        NOTIFY_PROXY:   bcolors.BrightBlue,
+        NOTIFY_SQL:     bcolors.BrightYellow,
+        NOTIFY_NET:     bcolors.BrightGreen,
+        NOTIFY_CONFIG:  bcolors.BrightWhite,
+    }
+    
+    color := moduleColors[module]
+    if color == "" {
+        color = bcolors.White
+    }
+    
+    icon := "✓"
+    iconColor := bcolors.Green
+    if !success {
+        icon = "✗"
+        iconColor = bcolors.Red
+    }
+    
+    fmt.Printf("\n%s[%s%s%s] %s[%s%s%s] %s%s%s", bcolors.DarkGray, color, module, bcolors.DarkGray, bcolors.DarkGray, iconColor, icon, bcolors.DarkGray, bcolors.White, message, bcolors.Endc)
+}
+
+func NotifyProgress(module, message string, current, total int) {
+    moduleColors := map[string]string{
+        NOTIFY_INFO:    bcolors.BrightBlue,
+        NOTIFY_WARNING: bcolors.BrightYellow,
+        NOTIFY_ERROR:   bcolors.BrightRed,
+        NOTIFY_SUCCESS: bcolors.BrightGreen,
+        NOTIFY_DEBUG:   bcolors.BrightCyan,
+        NOTIFY_TOR:     bcolors.BrightMagenta,
+        NOTIFY_DNS:     bcolors.BrightCyan,
+        NOTIFY_FW:      bcolors.BrightRed,
+        NOTIFY_PROXY:   bcolors.BrightBlue,
+        NOTIFY_SQL:     bcolors.BrightYellow,
+        NOTIFY_NET:     bcolors.BrightGreen,
+        NOTIFY_CONFIG:  bcolors.BrightWhite,
+    }
+    
+    color := moduleColors[module]
+    if color == "" {
+        color = bcolors.White
+    }
+    
+    percent := (current * 100) / total
+    bar := strings.Repeat("█", percent/5)
+    bar += strings.Repeat("░", 20-percent/5)
+    
+    fmt.Printf("\r%s[%s%s%s] %s%s %s[%s%s%s] %s%d%%%s", 
+        bcolors.DarkGray, color, module, bcolors.DarkGray,
+        bcolors.White, message,
+        bcolors.DarkGray, bcolors.Green, bar, bcolors.DarkGray,
+        bcolors.White, percent, bcolors.Endc)
+}
+
+func NotifyBoxed(module, message string, args ...interface{}) {
+    moduleColors := map[string]string{
+        NOTIFY_INFO:    bcolors.BrightBlue,
+        NOTIFY_WARNING: bcolors.BrightYellow,
+        NOTIFY_ERROR:   bcolors.BrightRed,
+        NOTIFY_SUCCESS: bcolors.BrightGreen,
+        NOTIFY_DEBUG:   bcolors.BrightCyan,
+        NOTIFY_TOR:     bcolors.BrightMagenta,
+        NOTIFY_DNS:     bcolors.BrightCyan,
+        NOTIFY_FW:      bcolors.BrightRed,
+        NOTIFY_PROXY:   bcolors.BrightBlue,
+        NOTIFY_SQL:     bcolors.BrightYellow,
+        NOTIFY_NET:     bcolors.BrightGreen,
+        NOTIFY_CONFIG:  bcolors.BrightWhite,
+    }
+    
+    color := moduleColors[module]
+    if color == "" {
+        color = bcolors.White
+    }
+
+    msgLen := len(message) + 6 + len(module) + 2
+    if msgLen < 50 {
+        msgLen = 50
+    }
+    border := strings.Repeat("─", msgLen)
+    
+    fmt.Printf("\n%s┌%s┐%s\n", bcolors.DarkGray, border, bcolors.Endc)
+    fmt.Printf("%s│ %s[%s%s%s] %s%-*s %s│%s\n", bcolors.DarkGray, bcolors.DarkGray, color, module, bcolors.DarkGray, bcolors.White, msgLen-6-len(module), message, bcolors.DarkGray, bcolors.Endc)
+    fmt.Printf("%s└%s┘%s\n", bcolors.DarkGray, border, bcolors.Endc)
+}
+
+func getActiveInterface() string {
+    methods := []string{
+        "ip route show default | awk '{print $5}'",
+        "route -n | grep '^0.0.0.0' | awk '{print $8}'",
+        "netstat -rn | grep '^0.0.0.0' | awk '{print $8}'",
+        "ip -o link show | grep -v 'lo' | grep 'state UP' | awk -F': ' '{print $2}' | head -1",
+    }
+
+    for _, method := range methods {
+        cmd := exec.Command("bash", "-c", method)
+        output, err := cmd.Output()
+        if err == nil {
+            iface := strings.TrimSpace(string(output))
+            if iface != "" && iface != "lo" {
+                if err := exec.Command("ip", "link", "show", iface).Run(); err == nil {
+                    return iface
+                }
+            }
+        }
+    }
+
+    files, err := os.ReadDir("/sys/class/net")
+    if err == nil {
+        for _, file := range files {
+            iface := file.Name()
+            if iface != "lo" {
+                cmd := exec.Command("ip", "addr", "show", iface)
+                output, _ := cmd.Output()
+                if strings.Contains(string(output), "inet ") {
+                    return iface
+                }
+            }
+        }
+    }
+
+    commonInterfaces := []string{"ens33", "ens3", "eth0", "wlan0", "enp0s3", "enp0s8"}
+    for _, iface := range commonInterfaces {
+        if err := exec.Command("ip", "link", "show", iface).Run(); err == nil {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Using fallback interface: %s", iface))
+            return iface
+        }
+    }
+
+    Notify(NOTIFY_WARNING, "No active interface found, defaulting to eth0")
+    return "eth0"
+}
+
+func getTorUserID() string {
+    torUsers := []string{"debian-tor", "tor", "_tor"}
+    
+    for _, user := range torUsers {
+        cmd := exec.Command("id", "-u", user)
+        output, err := cmd.Output()
+        if err == nil {
+            uid := strings.TrimSpace(string(output))
+            if uid != "" {
+                return uid
+            }
+        }
+    }
+
+    Notify(NOTIFY_WARNING, "Tor user not found! Defaulting to debian-tor")
+    return "debian-tor"
+}
+
+func getDNSUserID() string {
+    dnsUsers := []string{"dnsmasq", "nobody", "systemd-resolve"}
+    
+    for _, user := range dnsUsers {
+        cmd := exec.Command("id", "-u", user)
+        output, err := cmd.Output()
+        if err == nil {
+            uid := strings.TrimSpace(string(output))
+            if uid != "" {
+                return uid
+            }
+        }
+    }
+
+    Notify(NOTIFY_WARNING, "DNS user not found, using nobody (UID 65534)")
+    return "65534"
+}
+
+func isTorRunning() bool {
+    cmd := exec.Command("systemctl", "is-active", "tor@default.service")
+    output, err := cmd.Output()
+    if err != nil {
+        cmd = exec.Command("systemctl", "is-active", "tor.service")
+        output, err = cmd.Output()
+        if err != nil {
+            return false
+        }
+    }
+    return strings.TrimSpace(string(output)) == "active"
+}
+
+func waitForService(service string, maxAttempts int) error {
+    for i := 0; i < maxAttempts; i++ {
+        cmd := exec.Command("systemctl", "is-active", service)
+        output, err := cmd.Output()
+        if err == nil && strings.TrimSpace(string(output)) == "active" {
+            return nil
+        }
+        time.Sleep(2 * time.Second)
+    }
+    return fmt.Errorf("service %s not ready after %d attempts", service, maxAttempts)
+}
+
+func getSquidConfigPath() string {
+    possiblePaths := []string{
+        "/etc/squid/squid.conf",
+        "/etc/squid3/squid.conf",
+        "/usr/local/etc/squid/squid.conf",
+        "/usr/local/squid/etc/squid.conf",
+        "/opt/squid/etc/squid.conf",
+    }
+
+    for _, path := range possiblePaths {
+        if _, err := os.Stat(path); err == nil {
+            return path
+        }
+    }
+
+    defaultPath := "/etc/squid/squid.conf"
+    if err := os.MkdirAll("/etc/squid", 0755); err != nil {
+        Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to create squid directory: %v", err))
+        return defaultPath
+    }
+    return defaultPath
+}
+
+func checkRootPrivileges() error {
+    if os.Geteuid() != 0 {
+        return fmt.Errorf("this function requires root privileges. Please run with sudo or as root")
+    }
+    return nil
 }
 
 func Torsocks() {
@@ -200,47 +506,46 @@ func handleSetCommand(parts []string) {
     }
     key, value := parts[1], parts[2]
     setValues := map[string]*string{
-
-      "func": &Function,
-      "funcs": &Function,
-      "module": &Function,
-      "ssid": &utils.Ssid,
-      "mode": &utils.NeMode,
-      "function": &Function,
-      "lhost": &utils.LHost,
-      "lport": &utils.LPort,
-      "hport": &utils.HPort,
-      "rhost": &utils.RHost,
-      "rhosts": &utils.RHost,
-      "functions": &Function,
-      "target": &utils.RHost,
-      "distro": &utils.Distro,
-      "targets": &utils.RHost,
-      "proxy": &utils.Proxies,
-      "script": &utils.Script,
-      "output": &utils.SecLogs,
-       "name": &utils.BeefName,
-      "build": &utils.BuildName,
-      "proxies": &utils.Proxies,
-      "passwd": &utils.BeefPass,
-      "gateway": &utils.GateWay,
-      "fakedns": &utils.FakeDns,
-      "spoofer": &utils.Spoofer,
-      "outputlog": &utils.SecLogs,
-      "toolsdir": &utils.ToolsDir,
-      "ddosmode": &utils.DDosMode,
-      "recondir": &utils.ReconDir,
-      "password": &utils.PassWord,
-      "protocol": &utils.Protocol,
-      "listener": &utils.Listener,
-      "outputlogs": &utils.SecLogs,
-      "wordlist": &utils.WordsList,
-      "listeners": &utils.Listener,
-      "venvname": &utils.VenvName,
-      "innericon": &utils.InnerIcon,
-      "outericon": &utils.OuterIcon,
-      "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
+        "func": &Function,
+        "funcs": &Function,
+        "module": &Function,
+        "ssid": &utils.Ssid,
+        "mode": &utils.NeMode,
+        "function": &Function,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
+        "rhost": &utils.RHost,
+        "rhosts": &utils.RHost,
+        "functions": &Function,
+        "target": &utils.RHost,
+        "distro": &utils.Distro,
+        "targets": &utils.RHost,
+        "proxy": &utils.Proxies,
+        "script": &utils.Script,
+        "output": &utils.SecLogs,
+        "name": &utils.BeefName,
+        "build": &utils.BuildName,
+        "proxies": &utils.Proxies,
+        "passwd": &utils.BeefPass,
+        "gateway": &utils.GateWay,
+        "fakedns": &utils.FakeDns,
+        "spoofer": &utils.Spoofer,
+        "outputlog": &utils.SecLogs,
+        "toolsdir": &utils.ToolsDir,
+        "ddosmode": &utils.DDosMode,
+        "recondir": &utils.ReconDir,
+        "password": &utils.PassWord,
+        "protocol": &utils.Protocol,
+        "listener": &utils.Listener,
+        "outputlogs": &utils.SecLogs,
+        "wordlist": &utils.WordsList,
+        "listeners": &utils.Listener,
+        "venvname": &utils.VenvName,
+        "innericon": &utils.InnerIcon,
+        "outericon": &utils.OuterIcon,
+        "buildname": &utils.BuildName,
+        "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(setValues))
@@ -314,47 +619,46 @@ func handleUnsetCommand(parts []string) {
     }
     key := parts[1]
     unsetValues := map[string]*string{
-
-      "func": &Function,
-      "funcs": &Function,
-      "module": &Function,
-      "ssid": &utils.Ssid,
-      "mode": &utils.NeMode,
-      "function": &Function,
-      "lhost": &utils.LHost,
-      "lport": &utils.LPort,
-      "hport": &utils.HPort,
-      "rhost": &utils.RHost,
-      "rhosts": &utils.RHost,
-      "functions": &Function,
-      "target": &utils.RHost,
-      "distro": &utils.Distro,
-      "targets": &utils.RHost,
-      "proxy": &utils.Proxies,
-      "script": &utils.Script,
-      "output": &utils.SecLogs,
-       "name": &utils.BeefName,
-      "build": &utils.BuildName,
-      "proxies": &utils.Proxies,
-      "passwd": &utils.BeefPass,
-      "gateway": &utils.GateWay,
-      "fakedns": &utils.FakeDns,
-      "spoofer": &utils.Spoofer,
-      "outputlog": &utils.SecLogs,
-      "toolsdir": &utils.ToolsDir,
-      "ddosmode": &utils.DDosMode,
-      "recondir": &utils.ReconDir,
-      "password": &utils.PassWord,
-      "protocol": &utils.Protocol,
-      "listener": &utils.Listener,
-      "outputlogs": &utils.SecLogs,
-      "wordlist": &utils.WordsList,
-      "listeners": &utils.Listener,
-      "venvname": &utils.VenvName,
-      "innericon": &utils.InnerIcon,
-      "outericon": &utils.OuterIcon,
-      "buildname": &utils.BuildName,
-      "obfuscator": &utils.Obfuscator,
+        "func": &Function,
+        "funcs": &Function,
+        "module": &Function,
+        "ssid": &utils.Ssid,
+        "mode": &utils.NeMode,
+        "function": &Function,
+        "lhost": &utils.LHost,
+        "lport": &utils.LPort,
+        "hport": &utils.HPort,
+        "rhost": &utils.RHost,
+        "rhosts": &utils.RHost,
+        "functions": &Function,
+        "target": &utils.RHost,
+        "distro": &utils.Distro,
+        "targets": &utils.RHost,
+        "proxy": &utils.Proxies,
+        "script": &utils.Script,
+        "output": &utils.SecLogs,
+        "name": &utils.BeefName,
+        "build": &utils.BuildName,
+        "proxies": &utils.Proxies,
+        "passwd": &utils.BeefPass,
+        "gateway": &utils.GateWay,
+        "fakedns": &utils.FakeDns,
+        "spoofer": &utils.Spoofer,
+        "outputlog": &utils.SecLogs,
+        "toolsdir": &utils.ToolsDir,
+        "ddosmode": &utils.DDosMode,
+        "recondir": &utils.ReconDir,
+        "password": &utils.PassWord,
+        "protocol": &utils.Protocol,
+        "listener": &utils.Listener,
+        "outputlogs": &utils.SecLogs,
+        "wordlist": &utils.WordsList,
+        "listeners": &utils.Listener,
+        "venvname": &utils.VenvName,
+        "innericon": &utils.InnerIcon,
+        "outericon": &utils.OuterIcon,
+        "buildname": &utils.BuildName,
+        "obfuscator": &utils.Obfuscator,
     }
 
     validKeys := make([]string, 0, len(unsetValues))
@@ -424,13 +728,24 @@ func handleUnsetCommand(parts []string) {
 
 func executeFunction() {
     if Function == "" {
-        fmt.Printf("\n%s[!] %sNo MODULE was set. Use %s'show modules' %sfor details.\n", bcolors.BrightRed, bcolors.Endc, bcolors.BrightGreen, bcolors.Endc)
+        Notify(NOTIFY_ERROR, "No MODULE was set. Use 'show modules' for details.")
         return
     }
     AnonimityFunctions(Function)
 }
 
 func AnonimityFunctions(functionName string, args ...interface{}) {
+    rootFunctions := []string{"vanish", "2", "stop", "9", "restore", "8", "reload", "6", "exitnode", "7"}
+    for _, fn := range rootFunctions {
+        if functionName == fn {
+            if err := checkRootPrivileges(); err != nil {
+                Notify(NOTIFY_ERROR, err.Error())
+                return
+            }
+            break
+        }
+    }
+
     if utils.Proxies != "" {
         menus.PrintSelected(menus.PrintOptions{
             IFACE:       utils.IFace,
@@ -441,7 +756,7 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
         }, true, false)
 
         if err := utils.SetProxy(utils.Proxies); err != nil {
-            //
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to set proxy: %v", err))
         }
     } else {
         menus.PrintSelected(menus.PrintOptions{
@@ -452,26 +767,121 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
         }, true, false)
     }
 
-    commands := map[string]func(){
-        "setups":   func() { banners.GraphicsTorNet(); setups.CheckMissing() },
-        "vanish":   func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
-        "status":   func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
-        "torip":    func() { banners.GraphicsTorNet(); CheckIP(); CheckLeakTest(); TorStatus(0) },
-        "exitnode": func() { banners.GraphicsTorNet(); TorCircuit() },
-        "restore":  func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
-        "chains":   func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
-        "reload":   func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
-        "stop":     func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
+    activeInterface := getActiveInterface()
+    Notify(NOTIFY_INFO, fmt.Sprintf("Using interface: %s", activeInterface))
 
-        "1": func() { banners.GraphicsTorNet(); setups.CheckMissing() },
-        "2": func() { banners.GraphicsTorNet(); ConfigureResolv(); ConfigChangeMac(); ConfigDhclient(); ConfigDnsmasq(); ConfigSquid(); ConfigPrivoxy(); ConfigTorrc(); ConfigFirewall(); StartTorServices(); CheckServiceStatus(); CheckIP(); CheckLeakTest(); TorStatus(0) },
-        "3": func() { banners.GraphicsTorNet(); CheckServiceStatus(); TorStatus(0) },
-        "4": func() { banners.GraphicsTorNet(); CheckIP(); CheckLeakTest(); TorStatus(0) },
-        "5": func() { banners.GraphicsTorNet(); TorCircuit() },
-        "6": func() { banners.GraphicsTorNet(); ResetToDefault(false, false) },
-        "7": func() { banners.GraphicsTorNet(); subprocess.Run("tail -vf /var/log/privoxy/logfile") },
-        "8": func() { banners.GraphicsTorNet(); ConfigTorrc(); ConfigFirewall(); CheckIP() },
-        "9": func() { banners.GraphicsTorNet(); KillTor(); CheckServiceStatus(); TorStatus(0)},
+    commands := map[string]func(){
+        "setups": func() { 
+            banners.GraphicsTorNet()
+            setups.CheckMissing() 
+        },
+        "vanish": func() { 
+            banners.GraphicsTorNet()
+
+            if err := CreateConfigBackups(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to create backups: %v", err))
+            }
+            
+            if err := configureTorNetwork(activeInterface); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure Tor network: %v", err))
+            }
+        },
+        "status": func() { 
+            banners.GraphicsTorNet()
+            CheckServiceStatus()
+            TorStatus(0) 
+        },
+        "torip": func() { 
+            banners.GraphicsTorNet()
+            CheckIP()
+            CheckLeakTest()
+            TorStatus(0) 
+        },
+        "exitnode": func() { 
+            banners.GraphicsTorNet()
+            TorCircuit() 
+        },
+        "restore": func() { 
+            banners.GraphicsTorNet()
+            if err := ResetToDefault(false, false); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to reset: %v", err))
+            }
+        },
+        "chains": func() { 
+            banners.GraphicsTorNet()
+            subprocess.Run("tail -vf /var/log/privoxy/logfile") 
+        },
+        "reload": func() { 
+            banners.GraphicsTorNet()
+            if err := ConfigTorrc(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure torrc: %v", err))
+            }
+            if err := ConfigFirewall(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure firewall: %v", err))
+            }
+            CheckIP() 
+        },
+        "stop": func() { 
+            banners.GraphicsTorNet()
+            if err := KillTor(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to stop Tor: %v", err))
+            }
+            CheckServiceStatus()
+            TorStatus(0)
+        },
+        "1": func() { 
+            banners.GraphicsTorNet()
+            setups.CheckMissing() 
+        },
+        "2": func() { 
+            banners.GraphicsTorNet()
+            if err := configureTorNetwork(activeInterface); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure Tor network: %v", err))
+            }
+        },
+        "3": func() { 
+            banners.GraphicsTorNet()
+            CheckServiceStatus()
+            TorStatus(0) 
+        },
+        "4": func() { 
+            banners.GraphicsTorNet()
+            CheckIP()
+            CheckLeakTest()
+            TorStatus(0) 
+        },
+        "5": func() { 
+            banners.GraphicsTorNet()
+            TorCircuit() 
+        },
+        "6": func() { 
+            banners.GraphicsTorNet()
+            if err := ResetToDefault(false, false); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to reset: %v", err))
+            }
+        },
+        "7": func() { 
+            banners.GraphicsTorNet()
+            subprocess.Run("tail -vf /var/log/privoxy/logfile") 
+        },
+        "8": func() { 
+            banners.GraphicsTorNet()
+            if err := ConfigTorrc(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure torrc: %v", err))
+            }
+            if err := ConfigFirewall(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to configure firewall: %v", err))
+            }
+            CheckIP() 
+        },
+        "9": func() { 
+            banners.GraphicsTorNet()
+            if err := KillTor(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to stop Tor: %v", err))
+            }
+            CheckServiceStatus()
+            TorStatus(0)
+        },
     }
 
     textCommands := []string{"setups", "vanish", "status", "exitnode", "torip", "restore", "chains", "reload", "stop"}
@@ -482,7 +892,7 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     }
 
     if num, err := strconv.Atoi(functionName); err == nil {
-        fmt.Printf("%s[!] %sNumber %s%d%s is invalid. Valid numbers are 1-10.\n", bcolors.Yellow, bcolors.Endc, bcolors.Red, num, bcolors.Endc)
+        Notify(NOTIFY_ERROR, fmt.Sprintf("Number %d is invalid. Valid numbers are 1-10.", num))
         menus.ListTorsocksFunctions(Function)
         return
     }
@@ -491,178 +901,360 @@ func AnonimityFunctions(functionName string, args ...interface{}) {
     for _, cmd := range textCommands {
         lowerCmd := strings.ToLower(cmd)
         if strings.HasPrefix(lowerCmd, lowerInput) || strings.Contains(lowerCmd, lowerInput) || utils.Levenshtein(lowerInput, lowerCmd) <= 2 {
-            fmt.Printf("%s[!] %sFunction '%s%s%s' is invalid. Did you mean %s'%s'%s?\n", bcolors.Yellow, bcolors.Endc, bcolors.Bold, functionName, bcolors.Endc, bcolors.Green, cmd, bcolors.Endc)
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Function '%s' is invalid. Did you mean '%s'?", functionName, cmd))
             return
         }
     }
 
-    fmt.Printf("\n%s[!] %sModule '%s' is invalid. Available commands:\n", bcolors.Yellow, bcolors.Endc, functionName)
+    Notify(NOTIFY_ERROR, fmt.Sprintf("Module '%s' is invalid.", functionName))
     menus.ListTorsocksFunctions(Function)
 }
 
-func ConfigChangeMac() {
-    if err := utils.LocateTool("macchanger"); err != nil {
-        fmt.Printf("%sError: macchanger not found: %v%s\n", bcolors.Red, err, bcolors.Endc)
-        return
-    }
-    content := `
-# Generated by africana-framework. Delete at your own risk!
-[Unit]
-Description=changes mac for %I
-Wants=network.target
-Before=network.target
-BindsTo=sys-subsystem-net-devices-%i.device
-After=sys-subsystem-net-devices-%i.device
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/macchanger -r %I
-RemainAfterExit=yes
-[Install]
-WantedBy=multi-user.target
-`
-    filePath := "/etc/systemd/system/changemac@.service"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        err = os.WriteFile(filePath, []byte(content), 0644)
-        if err != nil {
-            fmt.Printf("%s[!] %sError writing to file: %s ...", bcolors.Red, bcolors.Endc, err)
-            return
-        }
-        fmt.Printf("%s[*] %sCreated macchanger systemd service: %s ...", bcolors.Green, bcolors.Endc, filePath)
-    }// else {
-        //fmt.Printf("%s[!] %sService file already exists: %s ...", bcolors.Yellow, bcolors.Endc, filePath)
-    //}
-}
+func configureTorNetwork(interfaceName string) error {
+    Notify(NOTIFY_TOR, fmt.Sprintf("Configuring Tor network on interface: %s", interfaceName))
 
-func ConfigDhclient() {
-    if err := utils.LocateTool("dhclient"); err != nil {
-        fmt.Printf("%sError: dhclient not found: %v%s\n", bcolors.Red, err, bcolors.Endc)
-        return
+    if err := ConfigureResolv(); err != nil {
+        return fmt.Errorf("failed to configure resolv.conf: %v", err)
     }
 
-    filePath := "/etc/dhcp/dhclient.conf.bak_africana"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Run("cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana")
-        filesToReplacements := map[string]map[string]string{
-            "/etc/dhcp/dhclient.conf": {
-                "#prepend domain-name-servers 127.0.0.1;": "prepend domain-name-servers 127.0.0.1, 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4;",
-            },
-        }
-        utils.Editors(filesToReplacements)
-    }
-}
-
-func ConfigDnsmasq() {
-    if err := utils.LocateTool("dnsmasq"); err != nil {
-        fmt.Printf("%sError: dnsmasq not found: %v%s\n", bcolors.Red, err, bcolors.Endc)
-        return
-    }
-
-    filePath := "/etc/dnsmasq.conf.bak_africana"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Run("cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana")
-        filesToReplacements := map[string]map[string]string{
-            "/etc/dnsmasq.conf": {
-                "#port=5353": "port=5353",
-            },
-        }
-        utils.Editors(filesToReplacements)
-    }
-}
-
-func ConfigPrivoxy() {
-    if err := utils.LocateTool("privoxy"); err != nil {
-        fmt.Printf("%sError: privoxy not found: %v%s\n", bcolors.Red, err, bcolors.Endc)
-        return
-    }
-
-    filePath := "/etc/privoxy/config.bak_africana"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Run("cp -r /etc/privoxy/config /etc/privoxy/config.bak_africana")
-        filesToReplacements := map[string]map[string]string{
-            "/etc/privoxy/config": {
-                "#debug     1": "debug   1",
-                "#debug     2": "debug   2",
-                "#debug  1024": "debug   1024",
-                "#debug  4096": "debug   4096",
-                "#        forward-socks5t   /               127.0.0.1:9050 .": "forward-socks5t   /               127.0.0.1:9050 .",
-            },
-        }
-        utils.Editors(filesToReplacements)
-    }
-}
-
-func ConfigSquid() {
-    if err := utils.LocateTool("squid"); err != nil {
-        fmt.Printf("%sError: squid not found: %v%s\n", bcolors.Red, err, bcolors.Endc)
-        return
-    }
-    filePath := "/etc/squid/squid.conf.bak_africana"
-    if _, err := os.Stat(filePath); os.IsNotExist(err) {
-        subprocess.Run("cp -r /etc/squid/squid.conf /etc/squid/squid.conf.bak_africana")
-        filesToReplacements := map[string]map[string]string{
-            "/etc/squid/squid.conf": {
-                "http_port 3128": "http_port 3129\nnever_direct allow all\nshutdown_lifetime 0 seconds\ncache_peer localhost parent 8118 7 no-digest no-query",
-            },
-        }
-        utils.Editors(filesToReplacements)
-    }
-}
-
-func ConfigTorrc() error {
-    if err := utils.LocateTool("tor"); err != nil {
-        return err
-    }
-
-    if _, err := os.Stat("/etc/resolv.conf"); os.IsNotExist(err) {
-        if err := CreateResolvConf(); err != nil {
-            return err
+    if err := ConfigChangeMac(interfaceName); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("MAC changer issue (non-critical): %v", err))
+        if err := ChangeMacDirect(interfaceName); err != nil {
+            Notify(NOTIFY_WARNING, "MAC randomization disabled (non-critical)")
         }
     }
 
-    return configureTorrc()
-}
-
-func CreateResolvConf() error {
-    fmt.Printf("\n%s%s[!] %sMissing resolv.conf. Create it? [Y/n]: ", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-
-    utils.Scanner.Scan()
-    input := strings.TrimSpace(strings.ToLower(utils.Scanner.Text()))
-
-    if input == "n" || input == "no" {
-        return fmt.Errorf("resolv.conf required but user declined creation")
+    if err := ConfigDhclient(); err != nil {
+        return fmt.Errorf("failed to configure dhclient: %v", err)
     }
 
-    content := `# Generated by africana-framework. Delete at your own risk!
-nameserver 127.0.0.1    # Local DNS (dnsmasq/Tor)
-nameserver 1.1.1.1      # Cloudflare DNS
-nameserver 1.0.0.1      # Cloudflare DNS
-nameserver 8.8.8.8      # Google DNS
-nameserver 8.8.4.4      # Google DNS
-options rotate          # Rotate between nameservers
-options timeout:1       # 1 second timeout
-options attempts:2      # 2 attempts per nameserver
-`
-    if _, err := os.Stat("/etc/resolv.conf"); err == nil {
-        backupCmd := exec.Command("cp", "/etc/resolv.conf", "/etc/resolv.conf.backup_africana")
-        if err := backupCmd.Run(); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to create backup: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err, bcolors.Endc)
-        }
+    if err := ConfigDnsmasq(); err != nil {
+        return fmt.Errorf("failed to configure dnsmasq: %v", err)
     }
 
-    if err := os.WriteFile("/etc/resolv.conf", []byte(content), 0644); err != nil {
-        return fmt.Errorf("failed to create resolv.conf: %v", err)
+    if err := ConfigSquid(); err != nil {
+        return fmt.Errorf("failed to configure squid: %v", err)
     }
 
-    if err := os.Chmod("/etc/resolv.conf", 0644); err != nil {
-        fmt.Printf("%s%s[!] %sWarning: Failed to set permissions: %v%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, err, bcolors.Endc)
+    if err := ConfigPrivoxy(); err != nil {
+        return fmt.Errorf("failed to configure privoxy: %v", err)
     }
 
-    fmt.Printf("%s%s[+] %sresolv.conf created successfully%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
+    if err := ConfigTorrc(); err != nil {
+        return fmt.Errorf("failed to configure torrc: %v", err)
+    }
+
+    if err := StartTorServices(); err != nil {
+        return fmt.Errorf("failed to start Tor services: %v", err)
+    }
+
+    if err := ConfigFirewall(); err != nil {
+        return fmt.Errorf("failed to configure firewall: %v", err)
+    }
+
+    if err := CheckServiceStatus(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Service status check warning: %v", err))
+    }
+
+    CheckIP()
+    CheckLeakTest()
+    TorStatus(0)
 
     return nil
 }
 
-func configureTorrc() error {
+func ChangeMacDirect(interfaceName string) error {
+    if interfaceName == "" {
+        interfaceName = getActiveInterface()
+    }
+
+    if err := utils.LocateTool("macchanger"); err != nil {
+        return fmt.Errorf("macchanger not found: %v", err)
+    }
+
+    commands := []string{
+        fmt.Sprintf("sudo ip link set %s down", interfaceName),
+        fmt.Sprintf("sudo macchanger -r %s", interfaceName),
+        fmt.Sprintf("sudo ip link set %s up", interfaceName),
+    }
+    
+    for _, cmdStr := range commands {
+        cmd := exec.Command("bash", "-c", cmdStr)
+        output, err := cmd.CombinedOutput()
+        if err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("MAC changer command failed: %s", cmdStr))
+            return fmt.Errorf("failed to change MAC: %v", err)
+        }
+        Notify(NOTIFY_INFO, string(output))
+        time.Sleep(200 * time.Millisecond)
+    }
+    
+    Notify(NOTIFY_SUCCESS, fmt.Sprintf("MAC address changed for interface %s", interfaceName))
+    return nil
+}
+
+func ConfigChangeMac(interfaceName string) error {
+    if err := utils.LocateTool("macchanger"); err != nil {
+        Notify(NOTIFY_WARNING, "macchanger not found, MAC address randomization disabled")
+        return nil
+    }
+
+    if interfaceName == "" {
+        interfaceName = getActiveInterface()
+    }
+
+    cmd := exec.Command("ip", "link", "show", interfaceName)
+    if err := cmd.Run(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Interface %s not found, using fallback", interfaceName))
+        interfaceName = getActiveInterface()
+        if interfaceName == "eth0" {
+            if err := exec.Command("ip", "link", "show", "eth0").Run(); err != nil {
+                Notify(NOTIFY_WARNING, "No valid interface found, MAC changer will be skipped")
+                return nil
+            }
+        }
+    }
+
+    content := fmt.Sprintf(`
+# Generated by africana-framework. Delete at your own risk!
+[Unit]
+Description=changes mac for %%I
+Wants=network.target
+Before=network.target
+BindsTo=sys-subsystem-net-devices-%%i.device
+After=sys-subsystem-net-devices-%%i.device
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/macchanger -r %%I
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
+`)
+    
+    filePath := "/etc/systemd/system/changemac@.service"
+    
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if err := os.WriteFile(filePath, []byte(content), 0644); err != nil {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to create macchanger service: %v", err))
+            return nil
+        }
+        Notify(NOTIFY_SUCCESS, fmt.Sprintf("Created macchanger systemd service: %s", filePath))
+
+        exec.Command("sudo", "systemctl", "daemon-reload").Run()
+    }
+
+    specificService := fmt.Sprintf("/etc/systemd/system/changemac@%s.service", interfaceName)
+    if _, err := os.Stat(specificService); os.IsNotExist(err) {
+        if err := exec.Command("ln", "-sf", filePath, specificService).Run(); err != nil {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Could not create service link: %v", err))
+        }
+    }
+    
+    return nil
+}
+
+func ConfigDhclient() error {
+    if err := utils.LocateTool("dhclient"); err != nil {
+        Notify(NOTIFY_WARNING, "dhclient not found, skipping configuration")
+        return nil
+    }
+
+    filePath := "/etc/dhcp/dhclient.conf.bak_africana"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if _, err := os.Stat("/etc/dhcp/dhclient.conf"); err == nil {
+            subprocess.Run("cp -r /etc/dhcp/dhclient.conf /etc/dhcp/dhclient.conf.bak_africana")
+            
+            if err := os.MkdirAll("/etc/dhcp", 0755); err != nil {
+                return fmt.Errorf("failed to create dhcp directory: %v", err)
+            }
+            
+            filesToReplacements := map[string]map[string]string{
+                "/etc/dhcp/dhclient.conf": {
+                    "#prepend domain-name-servers 127.0.0.1;": "prepend domain-name-servers 127.0.0.1, 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4;",
+                },
+            }
+            utils.Editors(filesToReplacements)
+            Notify(NOTIFY_SUCCESS, "Dhclient configured")
+        } else {
+            content := `# Generated by africana-framework
+prepend domain-name-servers 127.0.0.1, 1.1.1.1, 8.8.8.8;
+`
+            if err := os.MkdirAll("/etc/dhcp", 0755); err != nil {
+                return fmt.Errorf("failed to create dhcp directory: %v", err)
+            }
+            if err := os.WriteFile("/etc/dhcp/dhclient.conf", []byte(content), 0644); err != nil {
+                return fmt.Errorf("failed to write dhclient.conf: %v", err)
+            }
+        }
+    }
+    return nil
+}
+
+func ConfigDnsmasq() error {
+    if err := utils.LocateTool("dnsmasq"); err != nil {
+        Notify(NOTIFY_WARNING, "dnsmasq not found, skipping configuration")
+        return nil
+    }
+
+    filePath := "/etc/dnsmasq.conf.bak_africana"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if _, err := os.Stat("/etc/dnsmasq.conf"); err == nil {
+            subprocess.Run("cp -r /etc/dnsmasq.conf /etc/dnsmasq.conf.bak_africana")
+        }
+        
+        content := `# Generated by africana-framework. Delete at your own risk!
+port=5353
+listen-address=127.0.0.1
+bind-interfaces
+no-resolv
+no-poll
+server=127.0.0.1#9053
+cache-size=1000
+`
+        if err := os.WriteFile("/etc/dnsmasq.conf", []byte(content), 0644); err != nil {
+            return fmt.Errorf("failed to write dnsmasq.conf: %v", err)
+        }
+        Notify(NOTIFY_DNS, "Dnsmasq configured to use Tor for DNS")
+    }
+    return nil
+}
+
+func ConfigPrivoxy() error {
+    if err := utils.LocateTool("privoxy"); err != nil {
+        Notify(NOTIFY_WARNING, "privoxy not found, skipping configuration")
+        return nil
+    }
+
+    possiblePaths := []string{
+        "/etc/privoxy/config",
+        "/usr/local/etc/privoxy/config",
+        "/opt/privoxy/etc/config",
+    }
+    
+    configPath := ""
+    for _, path := range possiblePaths {
+        if _, err := os.Stat(path); err == nil {
+            configPath = path
+            break
+        }
+    }
+    
+    if configPath == "" {
+        if err := os.MkdirAll("/etc/privoxy", 0755); err != nil {
+            return fmt.Errorf("failed to create privoxy directory: %v", err)
+        }
+        configPath = "/etc/privoxy/config"
+    }
+
+    filePath := configPath + ".bak_africana"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if _, err := os.Stat(configPath); err == nil {
+            subprocess.Run("cp -r " + configPath + " " + filePath)
+        }
+        
+        content := `# Generated by africana-framework. Delete at your own risk!
+listen-address 127.0.0.1:8118
+forward-socks5t / 127.0.0.1:9050 .
+debug 1
+debug 2
+debug 1024
+debug 4096
+`
+        if err := os.WriteFile(configPath, []byte(content), 0644); err != nil {
+            return fmt.Errorf("failed to write privoxy config: %v", err)
+        }
+        Notify(NOTIFY_PROXY, "Privoxy configured to use Tor (127.0.0.1:9050)")
+    }
+    return nil
+}
+
+func ConfigSquid() error {
+    if err := utils.LocateTool("squid"); err != nil {
+        Notify(NOTIFY_WARNING, "squid not found, skipping configuration")
+        return nil
+    }
+
+    configPath := getSquidConfigPath()
+    filePath := configPath + ".bak_africana"
+    
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        if _, err := os.Stat(configPath); err == nil {
+            subprocess.Run("cp -r " + configPath + " " + filePath)
+        }
+        
+        content := `http_port 3129
+cache_peer 127.0.0.1 parent 8118 0 no-query default
+never_direct allow all
+
+# ACLs
+acl localnet src 127.0.0.0/8
+acl localnet src 10.0.0.0/8
+acl localnet src 172.16.0.0/12
+acl localnet src 192.168.0.0/16
+acl SSL_ports port 443
+acl Safe_ports port 80
+acl Safe_ports port 443
+acl Safe_ports port 8080
+acl CONNECT method CONNECT
+
+# Allow local networks
+http_access allow localnet
+http_access allow localhost
+
+# Deny rest
+http_access deny all
+
+# Settings
+shutdown_lifetime 0 seconds
+forwarded_for off
+request_header_access X-Forwarded-For deny all
+`
+        if err := os.MkdirAll(filepath.Dir(configPath), 0755); err != nil {
+            return fmt.Errorf("failed to create squid directory: %v", err)
+        }
+        
+        if err := os.WriteFile(configPath, []byte(content), 0644); err != nil {
+            return fmt.Errorf("failed to write squid config: %v", err)
+        }
+        Notify(NOTIFY_PROXY, "Squid configured to use Privoxy (127.0.0.1:8118)")
+    }
+    return nil
+}
+
+func ConfigTorrc() error {
+    if err := utils.LocateTool("tor"); err != nil {
+        return fmt.Errorf("tor not found: %v", err)
+    }
+
+    possiblePaths := []string{
+        "/etc/tor/torrc",
+        "/usr/local/etc/tor/torrc",
+        "/opt/tor/etc/torrc",
+    }
+    
+    torrcPath := ""
+    for _, path := range possiblePaths {
+        if _, err := os.Stat(path); err == nil {
+            torrcPath = path
+            break
+        }
+    }
+    
+    if torrcPath == "" {
+        if err := os.MkdirAll("/etc/tor", 0755); err != nil {
+            return fmt.Errorf("failed to create tor directory: %v", err)
+        }
+        torrcPath = "/etc/tor/torrc"
+    }
+
+    Notify(NOTIFY_TOR, fmt.Sprintf("Configuring torrc at %s", torrcPath))
+
+    if _, err := os.Stat(torrcPath); err == nil {
+        if err := exec.Command("cp", torrcPath, torrcPath+".bak_torsocks").Run(); err != nil {
+            return fmt.Errorf("failed to create backup: %v", err)
+        }
+    }
+
     content := `# Generated by africana-framework. Delete at your own risk!
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsOnResolve 1
@@ -671,29 +1263,55 @@ TransPort 9040
 SocksPort 9050
 DNSPort 5353
 `
-    filePath := "/etc/tor/torrc"
-    fmt.Printf("%s%s[*] %sConfiguring torrc.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
 
-    if _, err := os.Stat(filePath); err == nil {
-        if err := exec.Command("cp", filePath, filePath+".bak_torsocks").Run(); err != nil {
-            return fmt.Errorf("failed to create backup: %v", err)
-        }
-    }
-
-    if err := os.MkdirAll("/etc/tor", 0755); err != nil {
-        return fmt.Errorf("failed to create tor directory: %v", err)
-    }
-
-    if err := os.WriteFile(filePath, []byte(content), 0644); err != nil {
+    if err := os.WriteFile(torrcPath, []byte(content), 0644); err != nil {
         return fmt.Errorf("failed to write torrc: %v", err)
     }
 
-    fmt.Printf("%s%s[+] %sTorrc configured successfully", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    Notify(NOTIFY_TOR, "Torrc configured successfully")
     return nil
 }
 
 func ConfigureResolv() error {
-    resolvContent := `# Generated by africana-framework. Delete at your own risk!
+    resolvContent := `# Generated by africana-framework - DNS forced through Tor
+nameserver 127.0.0.1    # Local DNS (dnsmasq/Tor)
+nameserver 127.0.0.53   # systemd-resolved (fallback)
+options rotate
+options timeout:1
+options attempts:2
+`
+    content, err := os.ReadFile("/etc/resolv.conf")
+    if err != nil {
+        return CreateResolvConf()
+    }
+
+    if strings.Contains(string(content), "DNS forced through Tor") {
+        Notify(NOTIFY_DNS, "Resolv.conf already configured for Tor DNS")
+        return nil
+    }
+
+    Notify(NOTIFY_DNS, "Configuring resolv.conf to force DNS through Tor")
+    if err := exec.Command("cp", "/etc/resolv.conf", "/etc/resolv.conf.backup_torsocks").Run(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to create backup: %v", err))
+    }
+
+    if err := os.WriteFile("/etc/resolv.conf", []byte(resolvContent), 0644); err != nil {
+        return fmt.Errorf("failed to write resolv.conf: %v", err)
+    }
+
+    if _, err := os.Stat("/run/systemd/resolve/resolv.conf"); err == nil {
+        exec.Command("sudo", "systemctl", "restart", "systemd-resolved").Run()
+        Notify(NOTIFY_DNS, "Restarted systemd-resolved")
+    }
+
+    Notify(NOTIFY_SUCCESS, "Resolv.conf configured to use Tor DNS")
+    return nil
+}
+
+func CreateResolvConf() error {
+    Notify(NOTIFY_CONFIG, "Missing resolv.conf. Creating default...")
+
+    content := `# Generated by africana-framework. Delete at your own risk!
 nameserver 127.0.0.1    # Local DNS (dnsmasq/Tor)
 nameserver 1.1.1.1      # Cloudflare DNS
 nameserver 1.0.0.1      # Cloudflare DNS
@@ -703,57 +1321,544 @@ options rotate          # Rotate between nameservers
 options timeout:1       # 1 second timeout
 options attempts:2      # 2 attempts per nameserver
 `
-    content, err := os.ReadFile("/etc/resolv.conf")
-    if err != nil {
-        return fmt.Errorf("failed to read resolv.conf: %v", err)
+    if err := os.MkdirAll("/etc", 0755); err != nil {
+        return fmt.Errorf("failed to create /etc directory: %v", err)
     }
 
-    if strings.Contains(string(content), "Generated by africana-framework") {
-        fmt.Printf("%s%s[!] %sResolv.conf already configured.\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        return nil
+    if err := os.WriteFile("/etc/resolv.conf", []byte(content), 0644); err != nil {
+        return fmt.Errorf("failed to create resolv.conf: %v", err)
     }
 
-    fmt.Printf("%s%s[*] %sConfiguring resolv.conf.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    if err := exec.Command("cp", "/etc/resolv.conf", "/etc/resolv.conf.backup_torsocks").Run(); err != nil {
-        return fmt.Errorf("failed to create backup: %v", err)
-    }
-
-    if err := os.WriteFile("/etc/resolv.conf", []byte(resolvContent), 0644); err != nil {
-        return fmt.Errorf("failed to write resolv.conf: %v", err)
-    }
-
-    fmt.Printf("%s%s[+] %sDone configuring Resolv.conf ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    Notify(NOTIFY_SUCCESS, "resolv.conf created successfully")
     return nil
 }
 
-func IsServiceActive(service string) (bool, error) {
-    cmd := exec.Command("systemctl", "is-active", service)
-    output, err := cmd.Output()
-    if err != nil {
-        if _, ok := err.(*exec.ExitError); ok {
-            return false, nil
-        }
-        return false, err
+func StartTorServices() error {
+    Notify(NOTIFY_TOR, "Starting Tor services...")
+    
+    activeInterface := getActiveInterface()
+    Notify(NOTIFY_INFO, fmt.Sprintf("Active interface detected: %s", activeInterface))
+
+    macchangerInstalled := true
+    if err := utils.LocateTool("macchanger"); err != nil {
+        macchangerInstalled = false
+        Notify(NOTIFY_WARNING, "macchanger not found, skipping MAC address randomization")
     }
-    return strings.TrimSpace(string(output)) == "active", nil
+    
+    services := []string{
+        "dnsmasq.service",
+        "tor@default.service",
+        "privoxy.service",
+        "squid.service",
+    }
+
+    if macchangerInstalled {
+        macService := fmt.Sprintf("changemac@%s.service", activeInterface)
+        if _, err := os.Stat("/etc/systemd/system/changemac@.service"); err == nil {
+            services = append(services, macService)
+        } else {
+            Notify(NOTIFY_WARNING, "macchanger service not configured, skipping")
+        }
+    }
+
+    for _, service := range services {
+        if err := exec.Command("sudo", "systemctl", "stop", service).Run(); err != nil {
+            if !strings.Contains(err.Error(), "not-found") {
+                Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to stop %s: %v", service, err))
+            }
+        }
+        time.Sleep(100 * time.Millisecond)
+    }
+    for _, service := range services {
+        cmd := exec.Command("systemctl", "list-unit-files", service)
+        output, _ := cmd.Output()
+        if !strings.Contains(string(output), service) {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Service %s not found, skipping", service))
+            continue
+        }
+
+        cmd = exec.Command("sudo", "systemctl", "restart", service)
+        if err := cmd.Run(); err != nil {
+            if strings.Contains(service, "changemac") {
+                Notify(NOTIFY_WARNING, fmt.Sprintf("MAC changer service failed (non-critical): %v", err))
+                continue
+            }
+            return fmt.Errorf("failed to start %s: %v", service, err)
+        }
+
+        if !strings.Contains(service, "changemac") {
+            if err := waitForService(service, 10); err != nil {
+                return fmt.Errorf("%s%s[!] %sService %s failed to start ...\n", 
+                    bcolors.Bold, bcolors.Red, bcolors.Endc, service)
+            }
+        }
+        time.Sleep(500 * time.Millisecond)
+    }
+    
+    Notify(NOTIFY_TOR, "Waiting for Tor to fully initialize (10 seconds)...")
+    time.Sleep(10 * time.Second)
+    
+    if !isTorRunning() {
+        return fmt.Errorf("Tor is not running properly after startup")
+    }
+    
+    Notify(NOTIFY_SUCCESS, "Tor services Up and running...")
+    return nil
 }
 
-func CheckIptables() string {
-    cmd := exec.Command("iptables", "-t", "nat", "-L", "-n")
+func CheckServiceStatus() error {
+    activeInterface := getActiveInterface()
+    
+    services := []string{
+        "dnsmasq.service",
+        "squid.service",
+        "privoxy.service",
+        "tor@default.service",
+        fmt.Sprintf("changemac@%s.service", activeInterface),
+    }
+
+    Notify(NOTIFY_INFO, "Checking service status...")
+
+    var failedServices []string
+    for _, service := range services {
+        cmd := exec.Command("systemctl", "is-active", service)
+        output, _ := cmd.Output()
+        status := strings.TrimSpace(string(output))
+
+        if status == "active" {
+            NotifyStatus(NOTIFY_INFO, fmt.Sprintf("%s is running ...", service), true)
+        } else {
+            NotifyStatus(NOTIFY_ERROR, fmt.Sprintf("%s is not running ...", service), false)
+            failedServices = append(failedServices, service)
+        }
+    }
+
+    if len(failedServices) > 0 {
+        return fmt.Errorf("Following services are not running: %s ...", strings.Join(failedServices, ", "))
+    }
+    return nil
+}
+
+func ConfigFirewall() error {
+    Notify(NOTIFY_FW, "Backing up Iptables")
+
+    FirewallOff, FirewallOn := CheckDefaultRules()
+    if FirewallOn != "" {
+        return fmt.Errorf("%s\nCan't execute %siptables-save%s. See the reason below.\n%s%s%s", 
+            bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, FirewallOn, bcolors.Endc)
+    }
+
+    if strings.TrimSpace(FirewallOff) == "0" {
+        Notify(NOTIFY_FW, "Default rules are configured, skipping backup")
+    } else {
+        Notify(NOTIFY_FW, "Saving default firewall rules...")
+
+        cmd := exec.Command("bash", "-c", "sudo iptables-save > /etc/iptables_rules_torsocks.bak")
+        if err := cmd.Run(); err != nil {
+            return fmt.Errorf("%s%s[!] %sFailed to save iptables rules: %v%s", 
+                bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
+        }
+
+        Notify(NOTIFY_SUCCESS, "Done saving firewall rules")
+    }
+
+    Notify(NOTIFY_FW, "Setting up firewall rules...")
+
+    Notify(NOTIFY_SUCCESS, "Done setting up firewall rules")
+    return nil
+}
+
+func SetTorIptablesRules() error {
+    torUID := getTorUserID()
+    dnsmasqUID := getDNSUserID()
+    
+    transPort := "9040"
+    dnsPort := "5353"
+    virtAddr := "10.192.0.0/10"
+
+    Notify(NOTIFY_FW, "Setting up Tor iptables rules...")
+
+    commands := []string{
+        "iptables -P INPUT ACCEPT",
+        "iptables -P FORWARD ACCEPT",
+        "iptables -P OUTPUT ACCEPT",
+        "iptables -F",
+        "iptables -X",
+        "iptables -Z",
+        "iptables -t nat -F",
+        "iptables -t nat -X",
+        "iptables -t mangle -F",
+        "iptables -t mangle -X",
+        "iptables -t raw -F",
+        "iptables -t raw -X",
+
+        fmt.Sprintf("iptables -t nat -A OUTPUT -m owner --uid-owner %s -j RETURN", torUID),
+        fmt.Sprintf("iptables -A OUTPUT -m owner --uid-owner %s -j ACCEPT", torUID),
+
+        fmt.Sprintf("iptables -A OUTPUT -p udp --dport 53 -m owner --uid-owner %s -j ACCEPT", dnsmasqUID),
+        fmt.Sprintf("iptables -A OUTPUT -p tcp --dport 53 -m owner --uid-owner %s -j ACCEPT", dnsmasqUID),
+
+        "iptables -A INPUT -i lo -j ACCEPT",
+        "iptables -A OUTPUT -o lo -j ACCEPT",
+        "iptables -A FORWARD -i lo -j ACCEPT",
+        "iptables -A FORWARD -o lo -j ACCEPT",
+
+        "iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+        "iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+        "iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT",
+
+        fmt.Sprintf("iptables -t nat -A OUTPUT -p tcp --dport %s -j RETURN", transPort),
+        "iptables -t nat -A OUTPUT -p tcp --dport 9050 -j RETURN",
+        "iptables -t nat -A OUTPUT -p tcp --dport 9051 -j RETURN",
+        "iptables -t nat -A OUTPUT -p tcp --dport 5353 -j RETURN",
+        "iptables -t nat -A OUTPUT -p udp --dport 5353 -j RETURN",
+
+        fmt.Sprintf("iptables -A OUTPUT -p tcp -m owner --uid-owner %s -j ACCEPT", torUID),
+
+        fmt.Sprintf("iptables -A OUTPUT -p udp --dport 53 -m owner --uid-owner %s -j ACCEPT", torUID),
+        fmt.Sprintf("iptables -A OUTPUT -p tcp --dport 53 -m owner --uid-owner %s -j ACCEPT", torUID),
+
+        "iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 172.16.0.0/12 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 169.254.0.0/16 -j RETURN",
+        "iptables -t nat -A OUTPUT -d " + virtAddr + " -j RETURN",
+        "iptables -t nat -A OUTPUT -d 224.0.0.0/4 -j RETURN",
+        "iptables -t nat -A OUTPUT -d 240.0.0.0/4 -j RETURN",
+
+        "iptables -t nat -A OUTPUT -p udp --dport 53 -j REDIRECT --to-ports " + dnsPort,
+        "iptables -t nat -A OUTPUT -p tcp --dport 53 -j REDIRECT --to-ports " + dnsPort,
+
+        "iptables -t nat -A OUTPUT -p tcp --syn -j REDIRECT --to-ports " + transPort,
+
+        "iptables -A OUTPUT -p udp -j ACCEPT",
+        "iptables -A INPUT -p udp -j ACCEPT",
+
+        "iptables -A OUTPUT -p icmp -j ACCEPT",
+        "iptables -A INPUT -p icmp -j ACCEPT",
+
+        "iptables -A OUTPUT -m state --state INVALID -j DROP",
+        "iptables -A FORWARD -m state --state INVALID -j DROP",
+
+        "iptables -A INPUT -p udp --sport 53 -j ACCEPT",
+        "iptables -A INPUT -p tcp --sport 53 -j ACCEPT",
+
+        "iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT",
+        "iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT",
+        "iptables -A OUTPUT -p tcp --dport 9030 -j ACCEPT",
+        "iptables -A OUTPUT -p tcp --dport 9001 -j ACCEPT",
+        "iptables -A OUTPUT -p tcp --dport 9040 -j ACCEPT",
+
+        "iptables -P INPUT DROP",
+        "iptables -P FORWARD DROP",
+        "iptables -P OUTPUT DROP",
+    }
+
+    if _, err := os.Stat("/proc/net/if_inet6"); err == nil {
+        Notify(NOTIFY_FW, "IPv6 detected, adding IPv6 rules")
+        
+        ipv6Commands := []string{
+            "ip6tables -P INPUT ACCEPT",
+            "ip6tables -P FORWARD ACCEPT",
+            "ip6tables -P OUTPUT ACCEPT",
+            "ip6tables -F",
+            "ip6tables -X",
+            "ip6tables -t nat -F",
+            "ip6tables -t nat -X",
+
+            fmt.Sprintf("ip6tables -A OUTPUT -m owner --uid-owner %s -j ACCEPT", torUID),
+
+            fmt.Sprintf("ip6tables -A OUTPUT -p udp --dport 53 -m owner --uid-owner %s -j ACCEPT", dnsmasqUID),
+            fmt.Sprintf("ip6tables -A OUTPUT -p tcp --dport 53 -m owner --uid-owner %s -j ACCEPT", dnsmasqUID),
+
+            "ip6tables -A INPUT -i lo -j ACCEPT",
+            "ip6tables -A OUTPUT -o lo -j ACCEPT",
+
+            "ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+            "ip6tables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT",
+
+            fmt.Sprintf("ip6tables -t nat -A OUTPUT -p tcp --dport %s -j RETURN", transPort),
+            "ip6tables -t nat -A OUTPUT -p tcp --dport 9050 -j RETURN",
+            "ip6tables -t nat -A OUTPUT -p tcp --dport 9051 -j RETURN",
+            "ip6tables -t nat -A OUTPUT -p udp --dport 5353 -j RETURN",
+
+            "ip6tables -t nat -A OUTPUT -d ::1/128 -j RETURN",
+            "ip6tables -t nat -A OUTPUT -d fe80::/64 -j RETURN",
+            "ip6tables -t nat -A OUTPUT -d fc00::/7 -j RETURN",
+            "ip6tables -t nat -A OUTPUT -d ff00::/8 -j RETURN",
+
+            "ip6tables -t nat -A OUTPUT -p udp --dport 53 -j REDIRECT --to-ports " + dnsPort,
+            "ip6tables -t nat -A OUTPUT -p tcp --dport 53 -j REDIRECT --to-ports " + dnsPort,
+
+            "ip6tables -t nat -A OUTPUT -p tcp --syn -j REDIRECT --to-ports " + transPort,
+
+            "ip6tables -A OUTPUT -p udp -j ACCEPT",
+            "ip6tables -A INPUT -p udp -j ACCEPT",
+
+            "ip6tables -A OUTPUT -p icmpv6 -j ACCEPT",
+            "ip6tables -A INPUT -p icmpv6 -j ACCEPT",
+
+            "ip6tables -A INPUT -m state --state INVALID -j DROP",
+            "ip6tables -A OUTPUT -m state --state INVALID -j DROP",
+
+            "ip6tables -A INPUT -p udp --sport 53 -j ACCEPT",
+            "ip6tables -A INPUT -p tcp --sport 53 -j ACCEPT",
+
+            "ip6tables -P INPUT DROP",
+            "ip6tables -P FORWARD DROP",
+            "ip6tables -P OUTPUT DROP",
+        }
+        commands = append(commands, ipv6Commands...)
+    }
+
+    var lastError error
+    successCount := 0
+    totalCommands := len(commands)
+
+    for i, cmdStr := range commands {
+        if strings.TrimSpace(cmdStr) == "" {
+            continue
+        }
+        
+        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
+        output, err := cmd.CombinedOutput()
+        if err != nil {
+            if !strings.Contains(string(output), "No chain/target/match") && 
+               !strings.Contains(string(output), "Bad rule") &&
+               !strings.Contains(string(output), "No such file") &&
+               !strings.Contains(string(output), "Protocol not supported") &&
+               !strings.Contains(string(output), "No such process") {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed command %d/%d: %s", i+1, totalCommands, cmdStr))
+                if string(output) != "" {
+                    fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
+                }
+                lastError = err
+            }
+        } else {
+            successCount++
+        }
+        
+        if i%10 == 0 {
+            NotifyProgress(NOTIFY_FW, "Configuring iptables rules", i, totalCommands)
+        }
+        time.Sleep(30 * time.Millisecond)
+    }
+
+    fmt.Printf("\n")
+    Notify(NOTIFY_INFO, fmt.Sprintf("Completed: %d/%d commands executed successfully", successCount, totalCommands))
+
+    if lastError != nil {
+        return fmt.Errorf("some iptables commands failed during Tor setup")
+    }
+
+    successMsg := `
+    ALL TRAFFIC IS NOW FORCED THROUGH TOR!
+    TCP  ✅ Redirected through Tor
+    UDP  ✅ Allowed (Tor doesn't support UDP)
+    DNS  ✅ Redirected through Tor
+    ICMP ✅ Allowed for testing
+    IPv6 ✅ Protected against leaks`
+
+    fmt.Printf("%s%s%s\n", bcolors.Green, successMsg, bcolors.Endc)
+
+    return nil
+}
+
+func verifyIptablesRules() error {
+    cmd := exec.Command("iptables", "-t", "nat", "-L", "OUTPUT", "-n")
+    output, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("failed to verify NAT rules: %v", err)
+    }
+    
+    if !strings.Contains(string(output), "REDIRECT") {
+        return fmt.Errorf("REDIRECT rules not found in iptables")
+    }
+
+    if !strings.Contains(string(output), "9040") {
+        return fmt.Errorf("Tor TransPort (9040) not found in rules")
+    }
+
+    if !strings.Contains(string(output), "5353") {
+        return fmt.Errorf("DNS redirect (5353) not found in rules")
+    }
+    
+    return nil
+}
+
+func getNonLoopbackInterfaces() []string {
+    var interfaces []string
+    
+    files, err := os.ReadDir("/sys/class/net")
+    if err != nil {
+        return []string{"eth0", "wlan0"}
+    }
+    
+    for _, file := range files {
+        iface := file.Name()
+        if iface != "lo" {
+            interfaces = append(interfaces, iface)
+        }
+    }
+    
+    return interfaces
+}
+
+func saveFirewallRules() error {
+    backupFile := "/etc/iptables_rules_original_" + time.Now().Format("2006-01-02_15-04-05") + ".bak"
+    cmd := exec.Command("bash", "-c", "sudo iptables-save > "+backupFile)
+    if err := cmd.Run(); err != nil {
+        return fmt.Errorf("failed to save iptables rules: %v", err)
+    }
+    Notify(NOTIFY_SUCCESS, fmt.Sprintf("Firewall rules saved to: %s", backupFile))
+    return nil
+}
+
+func RestoreIptablesDefault() error {
+    commands := []string{
+        "iptables -P INPUT ACCEPT",
+        "iptables -P FORWARD ACCEPT",
+        "iptables -P OUTPUT ACCEPT",
+        "iptables -F",
+        "iptables -X",
+        "iptables -Z",
+        "iptables -t nat -F",
+        "iptables -t nat -X",
+        "iptables -t mangle -F",
+        "iptables -t mangle -X",
+        "iptables -t raw -F",
+        "iptables -t raw -X",
+    }
+
+    Notify(NOTIFY_FW, "Restoring default iptables rules...")
+    
+    var lastError error
+    for _, cmdStr := range commands {
+        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
+        if err := cmd.Run(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed: %s", cmdStr))
+            lastError = err
+        }
+        time.Sleep(50 * time.Millisecond)
+    }
+    
+    if lastError != nil {
+        return fmt.Errorf("failed to restore default rules")
+    }
+    
+    Notify(NOTIFY_SUCCESS, "Default iptables rules restored")
+    return nil
+}
+
+func CheckDefaultRules() (string, string) {
+    cmd := exec.Command("bash", "-c", "iptables-save | grep '^\\-' | wc -l")
     output, err := cmd.CombinedOutput()
     if err != nil {
-        fmt.Printf("\n%s[!] %sError while checking the iptables details ...\n", bcolors.BrightRed, bcolors.Endc)
+        return "", string(output)
     }
-    return string(output)
+    return string(output), ""
+}
+
+func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
+    if !overridePass {
+        if err := saveFirewallRules(); err != nil {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Could not save rules: %v", err))
+        }
+        
+        fmt.Printf("%s\nThis will overwrite all of your existing rules %sY(do it)%s/%sN(exit)%s: ", 
+            bcolors.Colors(), bcolors.Green, bcolors.Endc, bcolors.BrightRed, bcolors.Endc)
+        
+        var resetConsent string
+        fmt.Scanln(&resetConsent)
+
+        if strings.ToLower(resetConsent) == "n" {
+            fmt.Printf("%sCopy that..\n%s", bcolors.BrightRed, bcolors.Endc)
+            return nil
+        } else if strings.ToLower(resetConsent) != "y" {
+            return fmt.Errorf("invalid input, aborting reset")
+        }
+    }
+
+    if err := RestoreIptablesDefault(); err != nil {
+        Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to restore iptables: %v", err))
+        commands := []string{
+            "iptables -F",
+            "iptables -X",
+            "iptables -t nat -F",
+            "iptables -t nat -X",
+            "iptables -t mangle -F",
+            "iptables -t mangle -X",
+            "iptables -t raw -F",
+            "iptables -t raw -X",
+            "iptables -P INPUT ACCEPT",
+            "iptables -P OUTPUT ACCEPT",
+            "iptables -P FORWARD ACCEPT",
+        }
+
+        for _, cmdStr := range commands {
+            cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
+            if err := cmd.Run(); err != nil {
+                Notify(NOTIFY_ERROR, fmt.Sprintf("Failed: %s", cmdStr))
+            }
+            time.Sleep(50 * time.Millisecond)
+        }
+    }
+
+    if !resetAsChildFunc {
+        Notify(NOTIFY_SUCCESS, "Successfully reset Iptables to default")
+    }
+
+    return nil
+}
+
+func StopServices() error {
+    activeInterface := getActiveInterface()
+    Notify(NOTIFY_INFO, fmt.Sprintf("Killing: macchanger, dnsmasq, privoxy, squid, tor"))
+    
+    services := []string{
+        fmt.Sprintf("changemac@%s.service", activeInterface),
+        "dnsmasq.service",
+        "squid.service",
+        "privoxy.service",
+        "tor@default.service",
+    }
+
+    var stoppedServices []string
+    var failedServices []string
+
+    for _, service := range services {
+        cmd := exec.Command("systemctl", "stop", service)
+        if err := cmd.Run(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to stop %s: %v", service, err))
+            failedServices = append(failedServices, service)
+        } else {
+            stoppedServices = append(stoppedServices, service)
+        }
+        time.Sleep(100 * time.Millisecond)
+    }
+
+    if len(stoppedServices) > 0 {
+        Notify(NOTIFY_SUCCESS, fmt.Sprintf("Stopped: %s", strings.Join(stoppedServices, ", ")))
+    }
+
+    if len(failedServices) > 0 {
+        Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to stop: %s", strings.Join(failedServices, ", ")))
+    }
+
+    if len(failedServices) > 0 {
+        return fmt.Errorf("failed to stop %d services", len(failedServices))
+    }
+    return nil
 }
 
 func CheckIP() {
-    fmt.Printf("%s%s[*] %sGetting your public IP address ...", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    fmt.Printf("\n%s%s[+] %sGetting your system geolocation ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
+    Notify(NOTIFY_NET, "Getting your public IP address...")
+    Notify(NOTIFY_NET, "Getting your system geolocation...")
+    
     ip := getPublicIP()
     if ip == "" {
-        fmt.Printf("%s%s[!] %sError: Could not retrieve public IP address.\n", bcolors.Bold, bcolors.Red, bcolors.Endc)
+        Notify(NOTIFY_ERROR, "Could not retrieve public IP address.")
         return
     }
 
@@ -788,7 +1893,7 @@ func getPublicIP() string {
 func getIPGeolocation(ip string) {
     info, err := getIPInfo(ip)
     if err != nil {
-        fmt.Printf("%sError: Could not retrieve geolocation data%s\n", bcolors.Red, bcolors.Endc)
+        Notify(NOTIFY_ERROR, "Could not retrieve geolocation data")
         return
     }
 
@@ -879,663 +1984,13 @@ func SystemIP() (string, error) {
     return "", fmt.Errorf("%sAll IP services failed%s", bcolors.BrightRed, bcolors.Endc)
 }
 
-func StartServices() error {
-    fmt.Printf("\n%s%s[*] %sStarting %smacchanger, dnsmasq, privoxy, squid, tor.%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Cyan, bcolors.Endc)
-
-    services := []string{
-        "tor@default.service",
-        "dnsmasq.service",
-        "privoxy.service",
-        "squid.service",
-        "changemac@eth0.service",
-    }
-
-    var startedServices []string
-    var failedServices []string
-
-    for _, service := range services {
-        fmt.Printf("    %s[!] %sStarted: %s%s%s\n", bcolors.Bold, bcolors.Endc, bcolors.Cyan, service, bcolors.Endc)
-
-        cmd := exec.Command("systemctl", "restart", service)
-        if err := cmd.Run(); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to start %s: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, service, err)
-            failedServices = append(failedServices, service)
-        } else {
-            startedServices = append(startedServices, service)
-            time.Sleep(500 * time.Millisecond)
-        }
-    }
-
-    fmt.Printf("%s%s[+] %sVerifying services ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    time.Sleep(1 * time.Second)
-
-    var runningServices []string
-    var notRunningServices []string
-
-    for _, service := range startedServices {
-        cmd := exec.Command("systemctl", "is-active", service)
-        output, err := cmd.Output()
-        if err == nil && strings.TrimSpace(string(output)) == "active" {
-            runningServices = append(runningServices, service)
-        } else {
-            notRunningServices = append(notRunningServices, service)
-        }
-    }
-
-    if len(runningServices) > 0 {
-        fmt.Printf("%s[!] %sRunning services: %s%s%s\n", bcolors.Yellow, bcolors.Endc, bcolors.Cyan, strings.Join(runningServices, ", "), bcolors.Endc)
-    }
-
-    if len(notRunningServices) > 0 {
-        fmt.Printf("%s%s[!] %sStarted but not running: %s%s%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Yellow, strings.Join(notRunningServices, ", "), bcolors.Endc)
-    }
-
-    if len(failedServices) > 0 {
-        fmt.Printf("%s[!] %sFailed to start: %s%s%s\n", bcolors.BrightRed, bcolors.Endc, bcolors.Red, strings.Join(failedServices, ", "), bcolors.Endc)
-    }
-
-    fmt.Printf("%s%s[*] %sEnabling services to start on boot ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    for _, service := range runningServices {
-        exec.Command("systemctl", "enable", service).Run()
-    }
-
-    if len(failedServices) > 0 {
-        return fmt.Errorf("failed to start %d services: %s", len(failedServices), strings.Join(failedServices, ", "))
-    }
-
-    if len(notRunningServices) > 0 {
-        return fmt.Errorf("%d services started but not running: %s", len(notRunningServices), strings.Join(notRunningServices, ", "))
-    }
-
-    fmt.Printf("%s%s[*] %sAll services started successfully ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    return nil
-}
-
-func TorCircuit() error {
-    ip, err := SystemIP()
-    if err != nil {
-        return fmt.Errorf("%sFailed to get IP address: %v%s", bcolors.BrightRed, err, bcolors.Endc)
-    }
-
-    if !strings.Contains(CheckIptables(), "torsocks") {
-        return fmt.Errorf("\n%s[!] Torsocks not started yet ...%s", bcolors.Colors(), bcolors.Endc)
-    }
-
-    if err := exec.Command("service", "tor", "reload").Run(); err != nil {
-        return fmt.Errorf("%s[!] Failed to reload Tor service: %v%s", bcolors.BrightRed, err, bcolors.Endc)
-    }
-
-    fmt.Printf("%s%s[!] %sScrambling Tor Nodes\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-    fmt.Printf("%s%s[*] %sYour new IP appears to be: %s%s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Colors(), ip, bcolors.Endc)
-    return nil
-}
-
-func KillTor() error {
-    defer StopServices()
-
-    trigger := 0
-    fmt.Printf("\n%s%s[*] %sReverting to default resolv.conf ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    if _, err := os.Stat("/etc/resolv.conf.backup_torsocks"); err == nil {
-        trigger++
-        if err := exec.Command("mv", "/etc/resolv.conf.backup_torsocks", "/etc/resolv.conf").Run(); err != nil {
-            return fmt.Errorf("failed to restore resolv.conf: %v", err)
-        }
-    }
-
-    fmt.Printf("%s%s[*] %sDropping torrc file & restoring default ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    if _, err := os.Stat("/etc/tor/torrc.bak_torsocks"); err == nil {
-        trigger++
-        if err := exec.Command("mv", "/etc/tor/torrc.bak_torsocks", "/etc/tor/torrc").Run(); err != nil {
-            return fmt.Errorf("%s%s[!] %sFailed to restore torrc: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        }
-    }
-
-    trigger++
-    fmt.Printf("%s%s[*] %sRestoring Default Iptables rules ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    if _, err := os.Stat("/etc/iptables_rules_torsocks.bak"); err == nil {
-        cmd := exec.Command("bash", "-c", "sudo iptables-restore < /etc/iptables_rules_torsocks.bak")
-        if output, err := cmd.CombinedOutput(); err != nil {
-            fmt.Printf("%s%s[!] %sFailed to restore iptables from backup: %v\nOutput: %s%s\n", 
-                bcolors.Bold, bcolors.Red, bcolors.Endc, err, string(output), bcolors.Endc)
-            fmt.Printf("%s%s[*] %sFalling back to default reset...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-            if err := ResetToDefault(true, true); err != nil {
-                return fmt.Errorf("%s%s[!] %sFailed to reset to default: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-            }
-        } else {
-            fmt.Printf("%s%s[*] %sSuccessfully restored from backup%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
-            os.Remove("/etc/iptables_rules_torsocks.bak")
-        }
-    } else {
-        fmt.Printf("%s%s[*] %sNo backup found, resetting to default rules...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        if err := ResetToDefault(true, true); err != nil {
-            return fmt.Errorf("%s%s[!] %sFailed to reset to default: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        }
-    }
-    time.Sleep(1 * time.Second)
-
-    if trigger == 0 {
-        return fmt.Errorf("%s%sNo instances of torsocks have been executed%s", bcolors.BrightRed, bcolors.Bold, bcolors.Endc)
-    } else {
-        fmt.Printf("%s%s[*] %sEverything completed... \n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    }
-
-    fmt.Printf("%s%s[*] %sPreparing to stop all services... \n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    return nil
-}
-
-
-func StopServices() error {
-    fmt.Printf("%s%s[+] %sKilling: %smacchanger, dnsmasq, privoxy, squid, tor.%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Cyan, bcolors.Endc)
-    services := []string{
-        "changemac@eth0.service",
-        "dnsmasq.service",
-        "squid.service",
-        "privoxy.service",
-        "tor@default.service",
-    }
-
-    var stoppedServices []string
-    var failedServices []string
-
-    for _, service := range services {
-        cmd := exec.Command("systemctl", "stop", service)
-        if err := cmd.Run(); err != nil {
-            fmt.Printf("%s[!] %sFailed to stop %s: %v%s\n", bcolors.BrightRed, bcolors.Endc, service, err, bcolors.Endc)
-            failedServices = append(failedServices, service)
-        } else {
-            stoppedServices = append(stoppedServices, service)
-        }
-        time.Sleep(100 * time.Millisecond)
-    }
-
-    if len(stoppedServices) > 0 {
-        fmt.Printf("%s%s[>] %sStopped: %s%s%s\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Cyan, strings.Join(stoppedServices, ", "), bcolors.Endc)
-    }
-
-    if len(failedServices) > 0 {
-        fmt.Printf("%s%s[!] %sFailed to stop: %s%s%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Yellow, strings.Join(failedServices, ", "), bcolors.Endc)
-    }
-
-    if len(failedServices) > 0 {
-        return fmt.Errorf("failed to stop %d services", len(failedServices))
-    }
-    return nil
-}
-
-func StartTorServices() error {
-    fmt.Printf("%s%s[*] %sStarting Tor services ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    services := []string{
-        "changemac@eth0.service",
-        "dnsmasq.service",
-        "squid.service",
-        "privoxy.service",
-        "tor@default.service",
-    }
-
-    for _, service := range services {
-        exec.Command("sudo", "systemctl", "stop", service).Run()
-        time.Sleep(100 * time.Millisecond)
-
-        cmd := exec.Command("sudo", "systemctl", "restart", service)
-        if err := cmd.Run(); err != nil {
-            return fmt.Errorf("failed to start %s: %v", service, err)
-        }
-
-        time.Sleep(1 * time.Second)
-        checkCmd := exec.Command("sudo", "systemctl", "is-active", service)
-        output, err := checkCmd.Output()
-        if err != nil || strings.TrimSpace(string(output)) != "active" {
-            return fmt.Errorf("%s%s[!] %sService %s failed to start ...\n", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Cyan, service, bcolors.Endc)
-        }
-    }
-    fmt.Printf("%s%s[+] %sTor services Up and running...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-    return nil
-}
-
-func CheckServiceStatus() {
-    services := []string{
-        "dnsmasq.service",
-        "squid.service",
-        "privoxy.service",
-        "tor@default.service",
-        "changemac@eth0.service",
-    }
-
-    fmt.Printf("%s%s[*] %sChecking service status ...\n\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    for _, service := range services {
-        cmd := exec.Command("systemctl", "is-active", service)
-        output, _ := cmd.Output()
-        status := strings.TrimSpace(string(output))
-
-        var statusColor string
-        if status == "active" {
-            statusColor = bcolors.Green
-        } else {
-            statusColor = bcolors.Red
-        }
-        fmt.Printf("    %s[+] %s%s%s%s: %s%s%s\n", bcolors.Bold, bcolors.Endc, statusColor, status, bcolors.Endc, bcolors.Cyan, service, bcolors.Endc)
-    }
-    fmt.Printf("\n%s%s[+] %sCompleted Checking service status ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-}
-
-func TorStatus(retryCount int) {
-    fmt.Printf("\n%s%s[!] %sChecking Tor network status ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-
-    result, err := CheckTorStatus()
-    if err != nil {
-        if retryCount < 3 {
-            fmt.Printf("%s%s[!] %sNetwork issue detected, retrying in 9 seconds ...\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-            time.Sleep(9 * time.Second)
-            TorStatus(retryCount + 1)
-            return
-        }
-        fmt.Printf("%s%s[!] %sFailed after multiple attempts: %v\n", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-        fmt.Printf("%s%s[>] %sCheck your internet connection and try again ...\n", bcolors.Bold, bcolors.BrightYellow, bcolors.Endc)
-        return
-    }
-    displayTorResult(result)
-}
-
-func displayTorResult(result map[string]string) {
-    fmt.Printf("%s%s[>] %s%sYour IP address: %s%s%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Yellow, bcolors.Cyan, result["ip"], bcolors.Endc)
-
-    if strings.Contains(result["title"], "Congratulations") {
-        fmt.Printf("%s%s[*] %s%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, result["title"])
-        fmt.Printf("%s%s[+] %sYour connection is secured through Tor ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    } else {
-        fmt.Printf("%s%s[!] %s%s..\n", bcolors.Bold, bcolors.Red, bcolors.Endc, result["title"])
-        fmt.Printf("%s%s[>] %sWarning: You are NOT using the Tor network!\n", bcolors.Bold, bcolors.Yellow, bcolors.Endc)
-        fmt.Printf("%s%s[+] %sFor enhanced privacy, consider using Tor network ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    }
-
-    fmt.Printf("%s", "\n")
-}
-
-func CheckTorStatus() (map[string]string, error) {
-    client := &http.Client{Timeout: 15 * time.Second}
-    resp, err := client.Get("https://check.torproject.org")
-    if err != nil {
-        return nil, fmt.Errorf("network error: %v", err)
-    }
-    defer resp.Body.Close()
-
-    if resp.StatusCode != http.StatusOK {
-        return nil, fmt.Errorf("server returned status: %s", resp.Status)
-    }
-
-    body, err := io.ReadAll(resp.Body)
-    if err != nil {
-        return nil, fmt.Errorf("failed to read response: %v", err)
-    }
-
-    result := map[string]string{
-        "ip":    extractIP(string(body)),
-        "title": extractTitle(string(body)),
-    }
-
-    return result, nil
-}
-
-func extractIP(body string) string {
-    ipRegex := regexp.MustCompile(`IP address[^0-9]*([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)`)
-    if matches := ipRegex.FindStringSubmatch(body); len(matches) > 1 {
-        return matches[1]
-    }
-
-    fallbackRegex := regexp.MustCompile(`\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b`)
-    if ip := fallbackRegex.FindString(body); ip != "" {
-        return ip
-    }
-    return "[!] Not detected"
-}
-
-func extractTitle(body string) string {
-    titleRegex := regexp.MustCompile(`<title[^>]*>([^<]+)</title>`)
-    if matches := titleRegex.FindStringSubmatch(body); len(matches) > 1 {
-        return strings.TrimSpace(matches[1])
-    }
-    return "Unknown Status"
-}
-
-func CheckDefaultRules() (string, string) {
-    cmd := exec.Command("bash", "-c", "iptables-save | grep '^\\-' | wc -l")
+func CheckIptables() string {
+    cmd := exec.Command("iptables", "-t", "nat", "-L", "-n")
     output, err := cmd.CombinedOutput()
     if err != nil {
-        return "", string(output)
+        Notify(NOTIFY_ERROR, "Error while checking the iptables details...")
     }
-    return string(output), ""
-}
-
-func ConfigFirewall() error {
-    fmt.Printf("\n%s%s[*] %sBacking up Iptables.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    FirewallOff, FirewallOn := CheckDefaultRules()
-    if FirewallOn != "" {
-        return fmt.Errorf("%s\nCan't execute %siptables-save%s. See the reason below.\n%s%s%s", bcolors.BrightRed, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, FirewallOn, bcolors.Endc)
-    }
-
-    if strings.TrimSpace(FirewallOff) == "0" {
-        fmt.Printf("%s%s[*] %sDefault rules are configured, skipping backup.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    } else {
-        fmt.Printf("%s%s[+] %sSaving default firewall rules ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-        cmd := exec.Command("bash", "-c", "sudo iptables-save > /etc/iptables_rules_torsocks.bak")
-        if err := cmd.Run(); err != nil {
-            return fmt.Errorf("%s%s[!] %sFailed to save iptables rules: %v%s", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
-        }
-
-        fmt.Printf("%s%s[+] %sDone saving firewall rules.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    }
-
-    fmt.Printf("\n%s%s[*] %sSetting up firewall rules ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-
-    if err := SetTorIptablesRules(); err != nil {
-        return fmt.Errorf("%s%s[!] %sFailed to set up firewall rules: %v%s", bcolors.Bold, bcolors.BrightRed, bcolors.Endc, err, bcolors.Endc)
-    }
-
-    fmt.Printf("%s%s[+] %sDone setting up firewall rules ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-    return nil
-}
-
-func SetTorIptablesRules() error {
-    cmd := exec.Command("id", "-u", "debian-tor")
-    uidBytes, err := cmd.Output()
-    if err != nil {
-        return fmt.Errorf("[!] Failed to get tor UID: %v", err)
-    }
-    torUID := strings.TrimSpace(string(uidBytes))
-
-    transPort := "9040"
-    dnsPort := "5353"
-    virtAddr := "10.192.0.0/10"
-
-    commands := []string{
-        "iptables -P INPUT ACCEPT",
-        "iptables -P FORWARD ACCEPT",
-        "iptables -P OUTPUT ACCEPT",
-        "iptables -F",
-        "iptables -X",
-        "iptables -Z",
-        "iptables -t nat -F",
-        "iptables -t nat -X",
-        "iptables -t mangle -F",
-        "iptables -t mangle -X",
-        "iptables -t raw -F",
-        "iptables -t raw -X",
-
-        "iptables -t nat -A OUTPUT -d " + virtAddr + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
-
-        "iptables -t nat -A OUTPUT -d 127.0.0.1/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports " + dnsPort + " -m comment --comment \"neutron_triggered\"",
-
-        "iptables -t nat -A OUTPUT -m owner --uid-owner " + torUID + " -j RETURN",
-        "iptables -t nat -A OUTPUT -o lo -j RETURN",
-
-        "iptables -t nat -A OUTPUT -d 127.0.0.0/8 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 10.0.0.0/8 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 172.16.0.0/12 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 192.168.0.0/16 -j RETURN",
-
-        "iptables -t nat -A OUTPUT -d 0.0.0.0/8 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 100.64.0.0/10 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 169.254.0.0/16 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 192.0.0.0/24 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 192.0.2.0/24 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 192.88.99.0/24 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 198.18.0.0/15 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 198.51.100.0/24 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 203.0.113.0/24 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 224.0.0.0/4 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 240.0.0.0/4 -j RETURN",
-        "iptables -t nat -A OUTPUT -d 255.255.255.255/32 -j RETURN",
-
-        "iptables -t nat -A OUTPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -j REDIRECT --to-ports " + transPort,
-
-        "iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT",
-        "iptables -A INPUT -i lo -j ACCEPT",
-        "iptables -A INPUT -j DROP",
-
-        "iptables -A FORWARD -j DROP",
-
-        "iptables -A OUTPUT -m conntrack --ctstate INVALID -j DROP",
-        "iptables -A OUTPUT -m state --state INVALID -j DROP",
-
-        "iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT",
-
-        "iptables -A OUTPUT -m owner --uid-owner " + torUID + " -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j ACCEPT",
-
-        "iptables -A OUTPUT -d 127.0.0.1/32 -o lo -j ACCEPT",
-
-        "iptables -A OUTPUT -d 127.0.0.1/32 -p tcp -m tcp --dport " + transPort + " --tcp-flags FIN,SYN,RST,ACK SYN -j ACCEPT",
-
-        "iptables -A OUTPUT -j DROP",
-
-        "iptables -P INPUT DROP",
-        "iptables -P FORWARD DROP",
-        "iptables -P OUTPUT DROP",
-    }
-    
-    fmt.Printf("%s%s[*] %sSetting up Tor iptables rules...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
-
-    var lastError error
-    successCount := 0
-
-    for i, cmdStr := range commands {
-        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
-        output, err := cmd.CombinedOutput()
-        if err != nil {
-            fmt.Printf("%s%s[!] %sFailed command %d: %s - Error: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, i + 1, cmdStr, err, bcolors.Endc)
-            if string(output) != "" {
-                fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
-            }
-            lastError = err
-        } else {
-            successCount++
-        }
-        time.Sleep(50 * time.Millisecond)
-    }
-    
-    fmt.Printf("%s%s[*] %sCompleted: %d/%d commands executed successfully%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, successCount, len(commands), bcolors.Endc)
-
-    if lastError != nil {
-        return fmt.Errorf("%s%s[!] %sSome iptables commands failed during Tor setup%s", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Endc)
-    }
-
-    fmt.Printf("%s%s[+] %sTor iptables rules configured successfully!%s\n", bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
-    return nil
-}
-
-func ResetToDefault(overridePass bool, resetAsChildFunc bool) error {
-    if !overridePass {
-        var resetConsent string
-        fmt.Printf("%s\nThis will overwrite all of your existing rules %sY(do it)%s/%sN(exit)%s: ", bcolors.Colors(), bcolors.Green, bcolors.Endc, bcolors.BrightRed, bcolors.Endc)
-        fmt.Scanln(&resetConsent)
-
-        if strings.ToLower(resetConsent) == "n" {
-            fmt.Printf("%sCopy that..\n%s", bcolors.BrightRed, bcolors.Endc)
-            return nil
-        } else if strings.ToLower(resetConsent) != "y" {
-            return fmt.Errorf("invalid input, aborting reset")
-        }
-
-        time.Sleep(1 * time.Second)
-        fmt.Printf("%sBacking up current rules, just in case..%s\n", bcolors.Magenta, bcolors.Endc)
-
-        FirewallOff, FirewallOn := CheckDefaultRules()
-        if FirewallOn != "" {
-            return fmt.Errorf("%sError while checking existing rules; %sexiting..\n%sError message: %s%s%s", bcolors.BrightRed, bcolors.BrightYellow, bcolors.Yellow, bcolors.Colors(), FirewallOn, bcolors.Endc)
-        }
-
-        if strings.TrimSpace(FirewallOff) != "0" {
-            fileNameID := time.Now().Format("01_02_2006-15:04:05")
-            backupFile := "/tmp/iptables_" + fileNameID + ".rules"
-            cmd := exec.Command("bash", "-c", "sudo iptables-save > "+backupFile)
-            if err := cmd.Run(); err != nil {
-                return fmt.Errorf("%sFailed to save iptables rules: %v%s", bcolors.BrightRed, err, bcolors.Endc)
-            }
-            fmt.Printf("%sSaved in %s/tmp%s as %siptables_%s.rules%s\n", bcolors.BrightCyan, bcolors.BrightBlue, bcolors.Endc, bcolors.BrightRed, fileNameID, bcolors.Endc)
-        } else {
-            fmt.Printf("%s Default rules are set, backup not required :)%s\n", bcolors.BrightYellow, bcolors.Endc)
-        }
-
-        fmt.Printf("%s%sResetting Iptables%s\n", bcolors.BrightYellow, bcolors.Bold, bcolors.Endc)
-    }
-
-    commands := []string{
-        "iptables -F",
-        "iptables -X",
-        "iptables -t nat -F",
-        "iptables -t nat -X",
-        "iptables -t mangle -F",
-        "iptables -t mangle -X",
-        "iptables -t raw -F",
-        "iptables -t raw -X",
-        "iptables -P INPUT ACCEPT",
-        "iptables -P OUTPUT ACCEPT",
-        "iptables -P FORWARD ACCEPT",
-    }
-
-    fmt.Printf("%s%s[*] %sFlushing iptables rules...%s\n", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Endc)
-
-    var lastError error
-    for _, cmdStr := range commands {
-        cmd := exec.Command("bash", "-c", "sudo " + cmdStr)
-        if output, err := cmd.CombinedOutput(); err != nil {
-            fmt.Printf("%s%s[!] %sCommand failed: %s - Error: %v%s\n", bcolors.Bold, bcolors.Red, bcolors.Endc, cmdStr, err, bcolors.Endc)
-            if string(output) != "" {
-                fmt.Printf("%sOutput: %s%s\n", bcolors.Yellow, string(output), bcolors.Endc)
-            }
-            lastError = err
-        }
-        time.Sleep(100 * time.Millisecond)
-    }
-
-    time.Sleep(500 * time.Millisecond)
-
-    checkCmd := exec.Command("bash", "-c", "sudo iptables -L -n | head -10")
-    if output, err := checkCmd.CombinedOutput(); err == nil {
-        lines := strings.Count(string(output), "\n")
-        if lines <= 8 {
-            fmt.Printf("%s%s[*] %sIptables successfully reset to default%s\n", 
-                bcolors.Bold, bcolors.Green, bcolors.Endc, bcolors.Endc)
-        } else {
-            fmt.Printf("%s%s[!] %sIptables may not have been fully reset%s\n", 
-                bcolors.Bold, bcolors.Yellow, bcolors.Endc, bcolors.Endc)
-        }
-    }
-
-    if lastError != nil {
-        return fmt.Errorf("%s%s[!] %sSome iptables commands failed during reset ...", bcolors.Bold, bcolors.BrightRed, bcolors.Endc)
-    }
-
-    if !resetAsChildFunc {
-        fmt.Printf("%s%s[*] %sSuccessfully reset Iptables to default ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    }
-
-    return nil
-}
-
-func checkTorUsage() (TorResult, error) {
-    result := TorResult{}
-
-    cmd := exec.Command("timeout", "10", "torify", "curl", "-s", "https://check.torproject.org/api/ip")
-    output, err := cmd.Output()
-    if err != nil {
-        return result, fmt.Errorf("tor check failed: %v", err)
-    }
-
-    var torResponse struct {
-        IP      string `json:"IP"`
-        IsTor   bool   `json:"IsTor"`
-        Country string `json:"Country"`
-    }
-
-    if err := json.Unmarshal(output, &torResponse); err != nil {
-        return result, fmt.Errorf("[!] Failed to parse tor response: %v", err)
-    }
-
-    result.IsUsingTor = torResponse.IsTor
-    result.ExitIP = torResponse.IP
-    result.ExitCountry = torResponse.Country
-
-    return result, nil
-}
-
-func performDNSLeakTests() ([]DNSServer, bool) {
-    var servers []DNSServer
-    leakDetected := false
-
-    testDomains := []string{
-        "google.com",
-        "facebook.com",
-        "amazon.com",
-        "microsoft.com",
-    }
-
-    dnsProviders := []struct {
-        name string
-        ip   string
-    }{
-        {"Google DNS", "8.8.8.8"},
-        {"Cloudflare", "1.1.1.1"},
-        {"OpenDNS", "208.67.222.222"},
-        {"Quad9", "9.9.9.9"},
-    }
-
-    uniqueServers := make(map[string]DNSServer)
-
-    for _, domain := range testDomains {
-        for _, provider := range dnsProviders {
-            server, err := testDNSResolution(domain, provider.ip)
-            if err == nil && server.IP != "" {
-                if !isTorExitNode(server.IP) {
-                    server.ViaTor = false
-                    leakDetected = true
-                } else {
-                    server.ViaTor = true
-                }
-                uniqueServers[server.IP] = server
-            }
-            time.Sleep(100 * time.Millisecond)
-        }
-    }
-
-    for _, server := range uniqueServers {
-        servers = append(servers, server)
-    }
-
-    return servers, leakDetected
-}
-
-func testDNSResolution(domain, dnsServer string) (DNSServer, error) {
-    server := DNSServer{IP: dnsServer}
-
-    cmd := exec.Command("dig", "+short", domain, "@"+dnsServer)
-    output, err := cmd.Output()
-    if err != nil {
-        return server, err
-    }
-
-    if strings.TrimSpace(string(output)) == "" {
-        return server, fmt.Errorf("no DNS response from %s", dnsServer)
-    }
-
-    ipInfo, err := getIPInfo(dnsServer)
-    if err == nil {
-        server.ISP = ipInfo.ISP
-        server.Country = ipInfo.Country
-        server.ASN = ipInfo.ASN
-    } else {
-        server.ISP = "Unknown"
-        server.Country = "Unknown"
-        server.ASN = "Unknown"
-    }
-
-    return server, nil
+    return string(output)
 }
 
 func getIPInfo(ip string) (IPGeoInfo, error) {
@@ -1585,13 +2040,277 @@ func getIPInfo(ip string) (IPGeoInfo, error) {
     return info, fmt.Errorf("could not retrieve geolocation data")
 }
 
-func isTorExitNode(ip string) bool {
-    conn, err := net.DialTimeout("tcp", net.JoinHostPort(ip, "53"), 2*time.Second)
+func CheckLeakTest() (*DNSLeakTestResult, error) {
+    Notify(NOTIFY_DNS, "Testing DNS leaks...")
+
+    if err := FixDNSLeaks(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Auto-fix failed: %v", err))
+    }
+
+    Notify(NOTIFY_DNS, "Please be patient. Getting results...")
+
+    result, err := TestDNSLeak()
     if err != nil {
+        return nil, fmt.Errorf("%s%s[!] %sDNS leak test failed: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+    }
+
+    fmt.Printf("%s\n", result)
+
+    cleanJSON := stripColors(result)
+    var leakResult DNSLeakTestResult
+    if err := json.Unmarshal([]byte(cleanJSON), &leakResult); err != nil {
+        return nil, fmt.Errorf("%s%s[!] %sFailed to parse DNS leak results: %v", 
+            bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+    }
+
+    if leakResult.LeakDetected {
+        Notify(NOTIFY_ERROR, fmt.Sprintf("DNS LEAK DETECTED! Found %d non-Tor DNS servers!", len(leakResult.DNSServers)))
+
+        for _, server := range leakResult.DNSServers {
+            if !server.ViaTor {
+                Notify(NOTIFY_WARNING, fmt.Sprintf("Leaked DNS: %s (ISP: %s, Country: %s)", 
+                    server.IP, server.ISP, server.Country))
+            }
+        }
+        
+        Notify(NOTIFY_INFO, "Attempting to fix DNS leaks...")
+        if err := FixDNSLeaks(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to fix DNS leaks: %v", err))
+        } else {
+            Notify(NOTIFY_SUCCESS, "DNS leaks fixed! Please run the test again.")
+        }
+        
+        return &leakResult, fmt.Errorf("%s%s[!] %sDNS leak detected", bcolors.Bold, bcolors.Red, bcolors.Endc)
+    } else {
+        Notify(NOTIFY_SUCCESS, "No DNS leaks detected. All DNS queries are going through Tor.")
+        return &leakResult, nil
+    }
+}
+
+func TestDNSLeak() (string, error) {
+    result := DNSLeakTestResult{
+        Timestamp: time.Now().Format(time.RFC3339),
+        Status:    "completed",
+        TestType:  "comprehensive",
+    }
+
+    torResult, err := checkTorUsage()
+    if err != nil {
+        result.Status = "partial"
+        result.TorCheck.IsUsingTor = false
+    } else {
+        result.TorCheck = torResult
+    }
+
+    dnsServers, leakDetected := performDNSLeakTests()
+    result.DNSServers = dnsServers
+    result.LeakDetected = leakDetected
+
+    coloredJSON := formatDNSLeakResultColored(result)
+    return coloredJSON, nil
+}
+
+func checkTorUsage() (TorResult, error) {
+    result := TorResult{}
+
+    cmd := exec.Command("timeout", "10", "torify", "curl", "-s", "https://check.torproject.org/api/ip")
+    output, err := cmd.Output()
+    if err != nil {
+        return result, fmt.Errorf("tor check failed: %v", err)
+    }
+
+    var torResponse struct {
+        IP      string `json:"IP"`
+        IsTor   bool   `json:"IsTor"`
+        Country string `json:"Country"`
+    }
+
+    if err := json.Unmarshal(output, &torResponse); err != nil {
+        return result, fmt.Errorf("[!] Failed to parse tor response: %v", err)
+    }
+
+    result.IsUsingTor = torResponse.IsTor
+    result.ExitIP = torResponse.IP
+    result.ExitCountry = torResponse.Country
+
+    return result, nil
+}
+
+func performDNSLeakTests() ([]DNSServer, bool) {
+    var servers []DNSServer
+    leakDetected := false
+
+    testMethods := []struct {
+        name string
+        dns  string
+    }{
+        {"System DNS", ""},
+        {"Google DNS", "8.8.8.8"},
+        {"Cloudflare DNS", "1.1.1.1"},
+        {"OpenDNS", "208.67.222.222"},
+    }
+
+    testDomains := []string{
+        "google.com",
+        "facebook.com",
+        "amazon.com",
+        "microsoft.com",
+    }
+
+    systemDNS, err := getSystemDNSServers()
+    if err == nil {
+        for _, dnsIP := range systemDNS {
+            isTor := isDNSThroughTor(dnsIP)
+            server := DNSServer{
+                IP:     dnsIP,
+                ViaTor: isTor,
+            }
+            ipInfo, err := getIPInfo(dnsIP)
+            if err == nil {
+                server.ISP = ipInfo.ISP
+                server.Country = ipInfo.Country
+                server.ASN = ipInfo.ASN
+            }
+            
+            servers = append(servers, server)
+            if !isTor {
+                leakDetected = true
+                Notify(NOTIFY_WARNING, fmt.Sprintf("DNS leak detected: %s (ISP: %s)", dnsIP, server.ISP))
+            }
+        }
+    }
+
+    for _, method := range testMethods {
+        if method.dns == "" {
+            continue
+        }
+        
+        for _, domain := range testDomains {
+            server, err := testDNSResolution(domain, method.dns)
+            if err == nil && server.IP != "" {
+                isTor := isTorExitNode(server.IP)
+                server.ViaTor = isTor
+                
+                if !isTor {
+                    leakDetected = true
+                    Notify(NOTIFY_WARNING, fmt.Sprintf("DNS leak detected via %s: %s", method.name, server.IP))
+                }
+                exists := false
+                for _, s := range servers {
+                    if s.IP == server.IP {
+                        exists = true
+                        break
+                    }
+                }
+                if !exists {
+                    servers = append(servers, server)
+                }
+            }
+            time.Sleep(100 * time.Millisecond)
+        }
+    }
+
+    return servers, leakDetected
+}
+
+func isDNSThroughTor(dnsIP string) bool {
+    if dnsIP == "127.0.0.1" || dnsIP == "::1" {
         return true
     }
-    conn.Close()
+    if isTorExitNode(dnsIP) {
+        return true
+    }
+    cmd := exec.Command("timeout", "5", "dig", "+short", "google.com", "@"+dnsIP, "-p", "5353")
+    output, err := cmd.Output()
+    if err == nil && len(strings.TrimSpace(string(output))) > 0 {
+        return true
+    }
+
+    if strings.HasPrefix(dnsIP, "10.192.") {
+        return true
+    }
+    
     return false
+}
+
+func FixDNSLeaks() error {
+    Notify(NOTIFY_DNS, "Fixing DNS leaks...")
+    if err := ConfigDnsmasq(); err != nil {
+        return fmt.Errorf("failed to configure dnsmasq: %v", err)
+    }
+
+    if err := ConfigureResolv(); err != nil {
+        return fmt.Errorf("failed to configure resolv.conf: %v", err)
+    }
+
+    services := []string{
+        "systemd-resolved",
+        "dnsmasq",
+        "tor@default",
+    }
+    
+    for _, service := range services {
+        if err := exec.Command("sudo", "systemctl", "restart", service).Run(); err != nil {
+            Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to restart %s: %v", service, err))
+        }
+        time.Sleep(500 * time.Millisecond)
+    }
+
+    cmd := exec.Command("dig", "+short", "google.com", "@127.0.0.1", "-p", "5353")
+    output, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("DNS through Tor failed: %v", err)
+    }
+    
+    if len(strings.TrimSpace(string(output))) == 0 {
+        return fmt.Errorf("DNS through Tor returned empty response")
+    }
+    
+    Notify(NOTIFY_SUCCESS, "DNS leaks fixed successfully")
+    return nil
+}
+
+func testDNSResolution(domain, dnsServer string) (DNSServer, error) {
+    server := DNSServer{IP: dnsServer}
+
+    cmd := exec.Command("dig", "+short", domain, "@"+dnsServer)
+    output, err := cmd.Output()
+    if err != nil {
+        return server, err
+    }
+
+    if strings.TrimSpace(string(output)) == "" {
+        return server, fmt.Errorf("no DNS response from %s", dnsServer)
+    }
+
+    ipInfo, err := getIPInfo(dnsServer)
+    if err == nil {
+        server.ISP = ipInfo.ISP
+        server.Country = ipInfo.Country
+        server.ASN = ipInfo.ASN
+    } else {
+        server.ISP = "Unknown"
+        server.Country = "Unknown"
+        server.ASN = "Unknown"
+    }
+
+    return server, nil
+}
+
+func isTorExitNode(ip string) bool {
+    client := &http.Client{Timeout: 5 * time.Second}
+    resp, err := client.Get("https://check.torproject.org/torbulkexitlist")
+    if err != nil {
+        return false
+    }
+    defer resp.Body.Close()
+
+    body, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return false
+    }
+
+    return strings.Contains(string(body), ip)
 }
 
 func testSystemDNS() ([]DNSServer, bool) {
@@ -1649,29 +2368,6 @@ func getSystemDNSServers() ([]string, error) {
     return servers, nil
 }
 
-func TestDNSLeak() (string, error) {
-    result := DNSLeakTestResult{
-        Timestamp: time.Now().Format(time.RFC3339),
-        Status:    "completed",
-        TestType:  "comprehensive",
-    }
-
-    torResult, err := checkTorUsage()
-    if err != nil {
-        result.Status = "partial"
-        result.TorCheck.IsUsingTor = false
-    } else {
-        result.TorCheck = torResult
-    }
-
-    dnsServers, leakDetected := performDNSLeakTests()
-    result.DNSServers = dnsServers
-    result.LeakDetected = leakDetected
-
-    coloredJSON := formatDNSLeakResultColored(result)
-    return coloredJSON, nil
-}
-
 func formatDNSLeakResultColored(result DNSLeakTestResult) string {
     dnsServersStr := "null"
     if result.DNSServers != nil && len(result.DNSServers) > 0 {
@@ -1723,33 +2419,713 @@ func formatDNSServersColored(servers []DNSServer) string {
     return builder.String()
 }
 
-func CheckLeakTest() (*DNSLeakTestResult, error) {
-    fmt.Printf("\n%s%s[*] %sTesting DNS leaks ...\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-    fmt.Printf("%s%s[+] %sPleas be patient. Geting results ...\n", bcolors.Bold, bcolors.Blue, bcolors.Endc)
-
-    result, err := TestDNSLeak()
-    if err != nil {
-        return nil, fmt.Errorf("%s%s[!] %sDNS leak test failed: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-    }
-
-    fmt.Printf("%s\n", result)
-
-    cleanJSON := stripColors(result)
-    var leakResult DNSLeakTestResult
-    if err := json.Unmarshal([]byte(cleanJSON), &leakResult); err != nil {
-        return nil, fmt.Errorf("%s%s[!] %sFailed to parse DNS leak results: %v", bcolors.Bold, bcolors.Red, bcolors.Endc, err)
-    }
-
-    if leakResult.LeakDetected {
-        fmt.Printf("%s%s[!] %s%s%sDNS LEAK DETECTED! %sFound %d non-Tor DNS servers!", bcolors.Bold, bcolors.Red, bcolors.Endc, bcolors.Yellow, bcolors.Blink, bcolors.Endc, len(leakResult.DNSServers))
-        return &leakResult, fmt.Errorf("%s%s[!] %sDNS leak detected", bcolors.Bold, bcolors.Red, bcolors.Endc)
-    } else {
-        fmt.Printf("%s%s[*] %sCongratualion. No DNS leaks detected.\n", bcolors.Bold, bcolors.Green, bcolors.Endc)
-        return &leakResult, nil
-    }
-}
-
 func stripColors(text string) string {
     re := regexp.MustCompile(`\x1b\[[0-9;]*m`)
     return re.ReplaceAllString(text, "")
+}
+
+// ============= TOR STATUS FUNCTIONS =============
+
+func TorStatus(retryCount int) {
+    Notify(NOTIFY_TOR, "Checking Tor network status...")
+
+    if retryCount >= 3 {
+        Notify(NOTIFY_ERROR, "Failed to check Tor status after 3 attempts")
+        // Try to diagnose the issue
+        if err := testTorConnectivity(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Diagnosis: %v", err))
+        }
+        return
+    }
+
+    // First test connectivity
+    if err := testTorConnectivity(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Connectivity issue: %v, retrying...", err))
+        time.Sleep(9 * time.Second)
+        TorStatus(retryCount + 1)
+        return
+    }
+
+    result, err := CheckTorStatus()
+    if err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Status check failed: %v, retrying...", err))
+        time.Sleep(9 * time.Second)
+        TorStatus(retryCount + 1)
+        return
+    }
+    displayTorResult(result)
+}
+
+func CheckTorStatus() (map[string]string, error) {
+    // Try multiple methods to check Tor status
+    
+    // Method 1: Check Tor's control port
+    cmd := exec.Command("timeout", "5", "torify", "curl", "-s", "https://check.torproject.org/api/ip")
+    output, err := cmd.Output()
+    if err == nil {
+        var result map[string]interface{}
+        if err := json.Unmarshal(output, &result); err == nil {
+            if isTor, ok := result["IsTor"].(bool); ok && isTor {
+                return map[string]string{
+                    "ip":    result["IP"].(string),
+                    "title": "Congratulations. You are using Tor.",
+                }, nil
+            }
+        }
+    }
+    
+    // Method 2: Try direct HTTP with proxy
+    client := &http.Client{
+        Timeout: 15 * time.Second,
+        Transport: &http.Transport{
+            Proxy: http.ProxyURL(&url.URL{
+                Scheme: "socks5",
+                Host:   "127.0.0.1:9050",
+            }),
+        },
+    }
+    
+    resp, err := client.Get("https://check.torproject.org/api/ip")
+    if err == nil {
+        defer resp.Body.Close()
+        body, err := io.ReadAll(resp.Body)
+        if err == nil {
+            var result map[string]interface{}
+            if err := json.Unmarshal(body, &result); err == nil {
+                if isTor, ok := result["IsTor"].(bool); ok && isTor {
+                    return map[string]string{
+                        "ip":    result["IP"].(string),
+                        "title": "Congratulations. You are using Tor.",
+                    }, nil
+                }
+            }
+        }
+    }
+    
+    // Method 3: Check if Tor is running locally
+    if isTorRunning() {
+        // Get IP from Tor via SOCKS
+        cmd = exec.Command("timeout", "5", "torsocks", "curl", "-s", "https://check.torproject.org/api/ip")
+        output, err = cmd.Output()
+        if err == nil {
+            var result map[string]interface{}
+            if err := json.Unmarshal(output, &result); err == nil {
+                if isTor, ok := result["IsTor"].(bool); ok && isTor {
+                    return map[string]string{
+                        "ip":    result["IP"].(string),
+                        "title": "Congratulations. You are using Tor.",
+                    }, nil
+                }
+            }
+        }
+    }
+    
+    // Method 4: Get IP from local Tor
+    ip := getPublicIP()
+    if ip != "" {
+        return map[string]string{
+            "ip":    ip,
+            "title": "Unknown - Tor may not be working properly",
+        }, nil
+    }
+    
+    return nil, fmt.Errorf("could not verify Tor status")
+}
+
+func testTorConnectivity() error {
+    Notify(NOTIFY_TOR, "Testing Tor connectivity ...")
+    
+    // Test 1: Check if Tor is running
+    if !isTorRunning() {
+        return fmt.Errorf("Tor service is not running ...")
+    }
+    
+    // Test 2: Test SOCKS proxy
+    conn, err := net.DialTimeout("tcp", "127.0.0.1:9050", 5*time.Second)
+    if err != nil {
+        return fmt.Errorf("Tor SOCKS proxy not responding: %v", err)
+    }
+    conn.Close()
+    
+    // Test 3: Test DNS through Tor
+    cmd := exec.Command("timeout", "5", "dig", "+short", "google.com", "@127.0.0.1", "-p", "5353")
+    output, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("DNS through Tor failed: %v", err)
+    }
+    if len(strings.TrimSpace(string(output))) == 0 {
+        return fmt.Errorf("DNS through Tor returned empty response")
+    }
+    
+    Notify(NOTIFY_SUCCESS, "Tor connectivity test passed")
+    return nil
+}
+
+func extractIP(body string) string {
+    ipRegex := regexp.MustCompile(`IP address[^0-9]*([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)`)
+    if matches := ipRegex.FindStringSubmatch(body); len(matches) > 1 {
+        return matches[1]
+    }
+
+    fallbackRegex := regexp.MustCompile(`\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b`)
+    if ip := fallbackRegex.FindString(body); ip != "" {
+        return ip
+    }
+    return "[!] Not detected"
+}
+
+func extractTitle(body string) string {
+    titleRegex := regexp.MustCompile(`<title[^>]*>([^<]+)</title>`)
+    if matches := titleRegex.FindStringSubmatch(body); len(matches) > 1 {
+        return strings.TrimSpace(matches[1])
+    }
+    return "Unknown Status"
+}
+
+func displayTorResult(result map[string]string) {
+    fmt.Printf("\n%s%s[>] %s%sYour IP address: %s%s%s", bcolors.Bold, bcolors.Blue, bcolors.Endc, bcolors.Yellow, bcolors.Cyan, result["ip"], bcolors.Endc)
+
+    if strings.Contains(result["title"], "Congratulations") {
+        Notify(NOTIFY_SUCCESS, result["title"])
+        Notify(NOTIFY_SUCCESS, "Your connection is secured through Tor...")
+    } else {
+        Notify(NOTIFY_ERROR, result["title"])
+        Notify(NOTIFY_WARNING, "Warning: You are NOT using the Tor network!")
+        Notify(NOTIFY_INFO, "For enhanced privacy, consider using Tor network...")
+    }
+
+    fmt.Printf("%s", "\n")
+}
+
+func TorCircuit() error {
+    ip, err := SystemIP()
+    if err != nil {
+        return fmt.Errorf("%sFailed to get IP address: %v%s", bcolors.BrightRed, err, bcolors.Endc)
+    }
+
+    if !strings.Contains(CheckIptables(), "torsocks") {
+        return fmt.Errorf("\n%s[!] Torsocks not started yet ...%s", bcolors.Colors(), bcolors.Endc)
+    }
+
+    if err := exec.Command("service", "tor", "reload").Run(); err != nil {
+        return fmt.Errorf("%s[!] Failed to reload Tor service: %v%s", bcolors.BrightRed, err, bcolors.Endc)
+    }
+
+    Notify(NOTIFY_TOR, "Scrambling Tor Nodes")
+    Notify(NOTIFY_TOR, fmt.Sprintf("Your new IP appears to be: %s", ip))
+    return nil
+}
+
+// ============= ADDITIONAL FUNCTIONS =============
+
+func StartServices() error {
+    Notify(NOTIFY_INFO, fmt.Sprintf("Starting macchanger, dnsmasq, privoxy, squid, tor"))
+
+    services := []string{
+        "tor@default.service",
+        "dnsmasq.service",
+        "privoxy.service",
+        "squid.service",
+        "changemac@eth0.service",
+    }
+
+    var startedServices []string
+    var failedServices []string
+
+    for _, service := range services {
+        fmt.Printf("    %s[!] %sStarted: %s%s%s\n", bcolors.Bold, bcolors.Endc, bcolors.Cyan, service, bcolors.Endc)
+
+        cmd := exec.Command("systemctl", "restart", service)
+        if err := cmd.Run(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to start %s: %v", service, err))
+            failedServices = append(failedServices, service)
+        } else {
+            startedServices = append(startedServices, service)
+            time.Sleep(500 * time.Millisecond)
+        }
+    }
+
+    Notify(NOTIFY_INFO, "Verifying services...")
+    time.Sleep(1 * time.Second)
+
+    var runningServices []string
+    var notRunningServices []string
+
+    for _, service := range startedServices {
+        cmd := exec.Command("systemctl", "is-active", service)
+        output, err := cmd.Output()
+        if err == nil && strings.TrimSpace(string(output)) == "active" {
+            runningServices = append(runningServices, service)
+        } else {
+            notRunningServices = append(notRunningServices, service)
+        }
+    }
+
+    if len(runningServices) > 0 {
+        Notify(NOTIFY_INFO, fmt.Sprintf("Running services: %s", strings.Join(runningServices, ", ")))
+    }
+
+    if len(notRunningServices) > 0 {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Started but not running: %s", strings.Join(notRunningServices, ", ")))
+    }
+
+    if len(failedServices) > 0 {
+        Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to start: %s", strings.Join(failedServices, ", ")))
+    }
+
+    Notify(NOTIFY_INFO, "Enabling services to start on boot...")
+    for _, service := range runningServices {
+        exec.Command("systemctl", "enable", service).Run()
+    }
+
+    if len(failedServices) > 0 {
+        return fmt.Errorf("failed to start %d services: %s", len(failedServices), strings.Join(failedServices, ", "))
+    }
+
+    if len(notRunningServices) > 0 {
+        return fmt.Errorf("%d services started but not running: %s", len(notRunningServices), strings.Join(notRunningServices, ", "))
+    }
+
+    Notify(NOTIFY_SUCCESS, "All services started successfully...")
+    return nil
+}
+
+func ConfigProxyEnv() {
+    filePath := "/etc/profile.d/proxy.sh"
+    if _, err := os.Stat(filePath); os.IsNotExist(err) {
+        proxyContent := `# Generated by africana-framework
+export http_proxy="http://127.0.0.1:3129"
+export https_proxy="http://127.0.0.1:3129"
+export ftp_proxy="http://127.0.0.1:3129"
+export all_proxy="socks5://127.0.0.1:9050"
+export no_proxy="localhost,127.0.0.1"
+`
+        err := os.WriteFile(filePath, []byte(proxyContent), 0644)
+        if err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to write proxy environment: %v", err))
+            return
+        }
+        Notify(NOTIFY_SUCCESS, "Proxy environment variables configured")
+    }
+}
+
+func WaitForDNS() error {
+    maxAttempts := 10
+    for i := 0; i < maxAttempts; i++ {
+        cmd := exec.Command("dig", "+short", "google.com", "@127.0.0.1", "-p", "5353")
+        output, err := cmd.Output()
+        if err == nil && len(strings.TrimSpace(string(output))) > 0 {
+            Notify(NOTIFY_SUCCESS, fmt.Sprintf("DNS is ready after %d attempts", i+1))
+            return nil
+        }
+        Notify(NOTIFY_INFO, fmt.Sprintf("Waiting for DNS to be ready... (%d/%d)", i+1, maxAttempts))
+        time.Sleep(2 * time.Second)
+    }
+    return fmt.Errorf("DNS service not ready after %d attempts", maxAttempts)
+}
+
+func IsServiceActive(service string) (bool, error) {
+    cmd := exec.Command("systemctl", "is-active", service)
+    output, err := cmd.Output()
+    if err != nil {
+        if _, ok := err.(*exec.ExitError); ok {
+            return false, nil
+        }
+        return false, err
+    }
+    return strings.TrimSpace(string(output)) == "active", nil
+}
+
+func CheckDNSmasq() error {
+    cmd := exec.Command("dig", "+short", "google.com", "@127.0.0.1", "-p", "5353")
+    output, err := cmd.Output()
+    if err != nil {
+        return fmt.Errorf("dnsmasq not responding: %v", err)
+    }
+    if len(strings.TrimSpace(string(output))) == 0 {
+        return fmt.Errorf("dnsmasq returned empty response")
+    }
+    Notify(NOTIFY_SUCCESS, "DNSmasq is working properly")
+    return nil
+}
+
+func RestoreOriginalConfigs() error {
+    var restoredFiles []string
+    var failedFiles []string
+
+    // Define all configuration files to restore
+    backups := []ConfigBackup{
+        {
+            OriginalPath: "/etc/resolv.conf",
+            BackupPath:   "/etc/resolv.conf.backup_torsocks",
+            ServiceName:  "systemd-resolved",
+            RestartCmd:   "systemctl restart systemd-resolved",
+        },
+        {
+            OriginalPath: "/etc/tor/torrc",
+            BackupPath:   "/etc/tor/torrc.bak_torsocks",
+            ServiceName:  "tor",
+            RestartCmd:   "systemctl restart tor",
+        },
+        {
+            OriginalPath: "/etc/privoxy/config",
+            BackupPath:   "/etc/privoxy/config.bak_africana",
+            ServiceName:  "privoxy",
+            RestartCmd:   "systemctl restart privoxy",
+        },
+        {
+            OriginalPath: "/etc/squid/squid.conf",
+            BackupPath:   "/etc/squid/squid.conf.bak_africana",
+            ServiceName:  "squid",
+            RestartCmd:   "systemctl restart squid",
+        },
+        {
+            OriginalPath: "/etc/dnsmasq.conf",
+            BackupPath:   "/etc/dnsmasq.conf.bak_africana",
+            ServiceName:  "dnsmasq",
+            RestartCmd:   "systemctl restart dnsmasq",
+        },
+        {
+            OriginalPath: "/etc/dhcp/dhclient.conf",
+            BackupPath:   "/etc/dhcp/dhclient.conf.bak_africana",
+            ServiceName:  "dhclient",
+            RestartCmd:   "systemctl restart networking",
+        },
+    }
+
+    for _, backup := range backups {
+        Notify(NOTIFY_CONFIG, fmt.Sprintf("Restoring %s...", filepath.Base(backup.OriginalPath)))
+
+        if err := restoreSingleConfig(backup); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed: %v", err))
+            failedFiles = append(failedFiles, filepath.Base(backup.OriginalPath))
+        } else {
+            Notify(NOTIFY_SUCCESS, fmt.Sprintf("Restored %s successfully", filepath.Base(backup.OriginalPath)))
+            restoredFiles = append(restoredFiles, filepath.Base(backup.OriginalPath))
+        }
+        time.Sleep(200 * time.Millisecond)
+    }
+
+    // Remove proxy environment variables
+    if err := removeProxyEnv(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to remove proxy env: %v", err))
+    }
+
+    // Restart services that were modified
+    if err := restartModifiedServices(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Failed to restart services: %v", err))
+    }
+
+    // Print summary
+    fmt.Printf(`
+  %s✅ Restored%s : %s%d%s files
+  %s❌ Failed%s   : %s%d%s files
+
+`,
+        bcolors.Green, bcolors.Endc, bcolors.Cyan, len(restoredFiles), bcolors.Endc,
+        bcolors.Red, bcolors.Endc, bcolors.Cyan, len(failedFiles), bcolors.Endc)
+
+    if len(failedFiles) > 0 {
+        return fmt.Errorf("failed to restore %d files", len(failedFiles))
+    }
+
+    Notify(NOTIFY_SUCCESS, "Original configurations restored successfully")
+    return nil
+}
+
+func restoreSingleConfig(backup ConfigBackup) error {
+    // Check if backup exists
+    if _, err := os.Stat(backup.BackupPath); os.IsNotExist(err) {
+        // Backup doesn't exist, try to restore from system default
+        return restoreFromSystemDefault(backup.OriginalPath)
+    }
+
+    // Read backup content
+    backupContent, err := os.ReadFile(backup.BackupPath)
+    if err != nil {
+        return fmt.Errorf("failed to read backup: %v", err)
+    }
+
+    // Check if original exists and is different
+    if _, err := os.Stat(backup.OriginalPath); err == nil {
+        originalContent, err := os.ReadFile(backup.OriginalPath)
+        if err == nil && string(originalContent) == string(backupContent) {
+            // Files are identical, no need to restore
+            return nil
+        }
+    }
+
+    // Restore the backup
+    if err := os.WriteFile(backup.OriginalPath, backupContent, 0644); err != nil {
+        return fmt.Errorf("failed to restore file: %v", err)
+    }
+
+    // Remove backup after successful restore
+    if err := os.Remove(backup.BackupPath); err != nil {
+        // Non-critical error, just log it
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Could not remove backup: %v", err))
+    }
+
+    return nil
+}
+
+func restoreFromSystemDefault(filePath string) error {
+    // Try to get default configuration from system
+    var defaultContent string
+
+    switch filePath {
+    case "/etc/resolv.conf":
+        defaultContent = `# Generated by systemd-resolved
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+`
+    case "/etc/tor/torrc":
+        defaultContent = `## Configuration file for Tor
+## See 'man tor' for more options
+
+SocksPort 9050
+`
+    case "/etc/privoxy/config":
+        defaultContent = `# Privoxy configuration
+listen-address 127.0.0.1:8118
+forward-socks5t / 127.0.0.1:9050 .
+`
+    case "/etc/squid/squid.conf":
+        defaultContent = `# Squid configuration
+http_port 3128
+http_access allow localnet
+http_access allow localhost
+http_access deny all
+`
+    case "/etc/dnsmasq.conf":
+        defaultContent = `# Dnsmasq configuration
+port=53
+listen-address=127.0.0.1
+`
+    case "/etc/dhcp/dhclient.conf":
+        defaultContent = `# Dhclient configuration
+`
+    default:
+        return fmt.Errorf("no default template for %s", filePath)
+    }
+
+    if err := os.WriteFile(filePath, []byte(defaultContent), 0644); err != nil {
+        return fmt.Errorf("failed to write default config: %v", err)
+    }
+
+    return nil
+}
+
+func removeProxyEnv() error {
+    proxyFiles := []string{
+        "/etc/profile.d/proxy.sh",
+        "/etc/profile.d/proxy.csh",
+        "/etc/environment",
+    }
+
+    for _, file := range proxyFiles {
+        if _, err := os.Stat(file); err == nil {
+            content, err := os.ReadFile(file)
+            if err == nil {
+                // Remove proxy lines
+                lines := strings.Split(string(content), "\n")
+                var newLines []string
+                for _, line := range lines {
+                    if !strings.Contains(line, "proxy") && 
+                       !strings.Contains(line, "PROXY") &&
+                       !strings.Contains(line, "socks") &&
+                       !strings.Contains(line, "Socks") {
+                        newLines = append(newLines, line)
+                    }
+                }
+                if len(newLines) != len(lines) {
+                    if err := os.WriteFile(file, []byte(strings.Join(newLines, "\n")), 0644); err != nil {
+                        return fmt.Errorf("failed to remove proxy from %s: %v", file, err)
+                    }
+                }
+            }
+        }
+    }
+    return nil
+}
+
+func restartModifiedServices() error {
+    services := []string{
+        "systemd-resolved",
+        "tor",
+        "privoxy",
+        "squid",
+        "dnsmasq",
+        "networking",
+    }
+
+    Notify(NOTIFY_INFO, "Restarting modified services...")
+
+    var restarted []string
+    var failed []string
+
+    for _, service := range services {
+        // Check if service exists
+        cmd := exec.Command("systemctl", "list-unit-files", service+".service")
+        output, _ := cmd.Output()
+        if !strings.Contains(string(output), service+".service") {
+            continue
+        }
+
+        cmd = exec.Command("systemctl", "restart", service)
+        if err := cmd.Run(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to restart %s: %v", service, err))
+            failed = append(failed, service)
+        } else {
+            Notify(NOTIFY_SUCCESS, fmt.Sprintf("Restarted %s", service))
+            restarted = append(restarted, service)
+        }
+        time.Sleep(100 * time.Millisecond)
+    }
+
+    if len(failed) > 0 {
+        return fmt.Errorf("failed to restart: %s", strings.Join(failed, ", "))
+    }
+    return nil
+}
+
+// ============= CHECK CURRENT CONFIGURATION STATUS =============
+
+func CheckConfigStatus() error {
+
+    configs := map[string]string{
+        "/etc/resolv.conf":       "DNS Configuration",
+        "/etc/tor/torrc":         "Tor Configuration",
+        "/etc/privoxy/config":    "Privoxy Configuration",
+        "/etc/squid/squid.conf":  "Squid Configuration",
+        "/etc/dnsmasq.conf":      "Dnsmasq Configuration",
+    }
+
+    Notify(NOTIFY_INFO, "Checking configuration status...")
+
+    for path, name := range configs {
+        if _, err := os.Stat(path); err == nil {
+            content, err := os.ReadFile(path)
+            if err == nil {
+                // Check if it's our config
+                isAfricana := strings.Contains(string(content), "africana-framework")
+                isTorsocks := strings.Contains(string(content), "torsocks")
+                
+                status := "Default"
+                color := bcolors.Green
+                if isAfricana || isTorsocks {
+                    status = "Modified by Tor"
+                    color = bcolors.Yellow
+                }
+                
+                fmt.Printf("  %s•%s %-25s : %s%s%s\n", 
+                    bcolors.Cyan, bcolors.Endc, 
+                    name, 
+                    color, status, bcolors.Endc)
+            }
+        } else {
+            fmt.Printf("  %s•%s %-25s : %s[NOT FOUND]%s\n", 
+                bcolors.Cyan, bcolors.Endc, 
+                name, 
+                bcolors.Red, bcolors.Endc)
+        }
+    }
+
+    // Check iptables status
+    cmd := exec.Command("iptables", "-L", "-n")
+    output, err := cmd.Output()
+    if err == nil {
+        isTorRedirect := strings.Contains(string(output), "REDIRECT") && 
+                         strings.Contains(string(output), "9040")
+        if isTorRedirect {
+            fmt.Printf("  %s•%s %-25s : %s%s%s\n", 
+                bcolors.Cyan, bcolors.Endc,
+                "Firewall Rules",
+                bcolors.Yellow, "Modified for Tor", bcolors.Endc)
+        } else {
+            fmt.Printf("  %s•%s %-25s : %s%s%s\n", 
+                bcolors.Cyan, bcolors.Endc,
+                "Firewall Rules",
+                bcolors.Green, "Default", bcolors.Endc)
+        }
+    }
+
+    fmt.Printf("\n")
+    return nil
+}
+
+// ============= UPDATE KillTor to use RestoreOriginalConfigs =============
+
+func KillTor() error {
+    defer StopServices()
+
+    trigger := 0
+    Notify(NOTIFY_CONFIG, "Reverting to default configurations...")
+
+    // Restore all original configurations
+    if err := RestoreOriginalConfigs(); err != nil {
+        Notify(NOTIFY_WARNING, fmt.Sprintf("Some configurations could not be restored: %v", err))
+    }
+
+    trigger++
+    Notify(NOTIFY_FW, "Restoring Default Iptables rules...")
+
+    if _, err := os.Stat("/etc/iptables_rules_torsocks.bak"); err == nil {
+        cmd := exec.Command("bash", "-c", "sudo iptables-restore < /etc/iptables_rules_torsocks.bak")
+        if output, err := cmd.CombinedOutput(); err != nil {
+            Notify(NOTIFY_ERROR, fmt.Sprintf("Failed to restore iptables from backup: %v\nOutput: %s", err, string(output)))
+            Notify(NOTIFY_WARNING, "Falling back to default reset...")
+            if err := ResetToDefault(true, true); err != nil {
+                return fmt.Errorf("%s%s[!] %sFailed to reset to default: %v\n", 
+                    bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+            }
+        } else {
+            Notify(NOTIFY_SUCCESS, "Successfully restored from backup")
+            os.Remove("/etc/iptables_rules_torsocks.bak")
+        }
+    } else {
+        Notify(NOTIFY_WARNING, "No backup found, resetting to default rules...")
+        if err := ResetToDefault(true, true); err != nil {
+            return fmt.Errorf("%s%s[!] %sFailed to reset to default: %v\n", 
+                bcolors.Bold, bcolors.Red, bcolors.Endc, err)
+        }
+    }
+    time.Sleep(1 * time.Second)
+
+    if trigger == 0 {
+        return fmt.Errorf("%s%sNo instances of torsocks have been executed%s", 
+            bcolors.BrightRed, bcolors.Bold, bcolors.Endc)
+    } else {
+        Notify(NOTIFY_SUCCESS, "Everything completed...")
+    }
+
+    Notify(NOTIFY_INFO, "Preparing to stop all services...")
+
+    return nil
+}
+
+func CreateConfigBackups() error {
+    Notify(NOTIFY_CONFIG, "Creating backups of current configurations...")
+
+    configs := []string{
+        "/etc/resolv.conf",
+        "/etc/tor/torrc",
+        "/etc/privoxy/config",
+        "/etc/squid/squid.conf",
+        "/etc/dnsmasq.conf",
+        "/etc/dhcp/dhclient.conf",
+    }
+
+    for _, config := range configs {
+        if _, err := os.Stat(config); err == nil {
+            backup := config + ".backup_torsocks"
+            if _, err := os.Stat(backup); os.IsNotExist(err) {
+                if err := exec.Command("cp", config, backup).Run(); err != nil {
+                    return fmt.Errorf("failed to backup %s: %v", config, err)
+                }
+                Notify(NOTIFY_SUCCESS, fmt.Sprintf("Backed up %s", filepath.Base(config)))
+            }
+        }
+    }
+    return nil
 }

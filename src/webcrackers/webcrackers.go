@@ -1222,8 +1222,7 @@ func CombineAssets(RHost, ReconDir string) {
 
     ioutil.WriteFile(outputFile, []byte(strings.Join(urls, "\n")), 0644)
 
-    fmt.Printf("%s  ✓ %sTotal unique URLs: %s%d%s\n", 
-        bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, len(urls), bcolors.Endc)
+    fmt.Printf("%s  ✓ %sTotal unique URLs: %s%d%s\n", bcolors.Green, bcolors.BrightWhite, bcolors.BrightYellow, len(urls), bcolors.Endc)
 }
 
 func GenerateFinalReport(RHost, ReconDir string, startTime time.Time) {
